@@ -1,0 +1,101 @@
+var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+
+module.exports = {
+	entry: {
+		'angular2':          './src/angular2.ts',
+        'logo':              './src/logo.ts',
+        'todo':              './src/todo/todo.ts',
+        'vision/list':       './src/plan/vision/public/list.ts',
+        'vision/item':       './src/plan/vision/public/item.ts',
+        'vision/draft':      './src/plan/vision/draft/draft.ts',
+        'vision/review':     './src/plan/vision/review/review.ts',
+        'scheme/list':       './src/plan/scheme/public/list.ts',
+        'scheme/item':       './src/plan/scheme/public/item.ts',
+        'scheme/draft':      './src/plan/scheme/draft/draft.ts',
+        'scheme/review':     './src/plan/scheme/review/review.ts',
+	},
+
+	output: {
+		path: __dirname + '/dist/dev',
+		filename: 'js/app/[name].js'
+	},
+
+    module: {
+        preLoaders: [
+            { test: /\.ts$/, loader: 'tslint'}
+        ],
+		loaders: [
+			{test: /\.ts$/,   loader: 'ts'},
+            {test: /\.html$/, loader: 'raw'},
+            {test: /\.scss$/, loader: 'raw!sass'}
+		]
+	},
+
+	plugins: [
+		new webpack.optimize.CommonsChunkPlugin({name: 'angular2', fileName: 'angular2.js', minChunks: Infinity}),
+        new webpack.optimize.CommonsChunkPlugin({name: 'common', fileName: 'common.js', minChunk: 2}),
+        new CopyWebpackPlugin([
+            {to:'js/lib',    from: './node_modules/moment/min/moment-with-locales.min.js'},
+            {to:'js/lib',    from: './node_modules/markdown-it/dist/markdown-it.min.js'},
+            {to:'js/lib',    from: './node_modules/jquery/dist/jquery.min.js'},
+            {to:'js/lib',    from: './node_modules/tether/dist/js/tether.min.js'},
+            {to:'js/lib',    from: './node_modules/bootstrap/dist/js/bootstrap.min.js'},
+            {to:'css/lib',   from: './node_modules/bootstrap/dist/css/bootstrap.min.css'},
+            {to:'js/lib',    from: './node_modules/bootstrap-submenu/dist/js/bootstrap-submenu.min.js'},
+            {to:'css/lib',   from: './node_modules/bootstrap-submenu/dist/css/bootstrap-submenu.min.css'},
+            {to:'js/lib',    from: './node_modules/select2/dist/js/select2.min.js'},
+            {to:'css/lib',   from: './node_modules/select2/dist/css/select2.min.css'},
+            {to:'css/lib',   from: './node_modules/font-awesome/css/font-awesome.min.css'},
+            {to:'css/fonts', from: './node_modules/font-awesome/fonts'},
+            {to:'js/app',    from: './src/ts-runtime.js'},
+            {to:'js/app',    from: './src/menu.js'},
+            {to:'css/app',   from: './src/main.css'}
+        ]),
+
+        /*
+        new UglifyJsPlugin({
+            beautify: false,
+            mangle: {
+                screw_ie8 : true,
+                keep_fnames: true
+            },
+            compress: {
+                screw_ie8: true
+            },
+            comments: false
+        })
+        */
+    ],
+
+	resolve: {
+		extensions: ['', '.js', '.ts', '.html', '.scss']
+	},
+
+    externals: [
+        'moment',
+        'markdown-it'
+    ],
+
+	devServer: {
+		inline: true,
+		colors: true,
+		progress: true,
+		displayErrorDetails: true,
+		displayCached: true,
+		port: 3000,
+		contentBase: './src',
+		historyApiFallback: true
+	},
+
+	node: {
+		crypto: 'empty' // we need this for 'reflect-metadata' polyfill
+	},
+
+    tslint: {
+        emitErrors: false,
+        failOnHint: false,
+        resourcePath: 'src'
+    },
+}

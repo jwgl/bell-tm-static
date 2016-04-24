@@ -1,0 +1,31 @@
+import {Pipe} from 'angular2/core';
+
+@Pipe({name: 'fromNow'})
+export class FromNowPipe {
+    constructor() {
+        moment.locale('zh-cn');
+    }
+
+    transform(value: any, args: any[]) {
+        return moment(value).fromNow();
+    }
+}
+
+@Pipe({name: 'momentFormat'})
+export class MomentFormatPipe {
+    constructor() {
+        moment.locale('zh-cn');
+    }
+
+    transform(value: any, args: any[]) {
+        let format: string;
+
+        if (args && args[0]) {
+            format = args[0];
+        } else {
+            format = `YYYY-MM-DD HH:mm:ss`;
+        }
+
+        return moment(value).format(format);
+    }
+}

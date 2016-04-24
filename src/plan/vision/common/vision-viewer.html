@@ -1,0 +1,14 @@
+<plan-title [title]="vision.title" [program]="vision.programId" [version]="vision.versionNumber"></plan-title>
+<h2>一、培养目标</h2>
+<div [markdown]="vision.objective"></div>
+<h2>二、培养要求</h2>
+<div [markdown]="vision.specification"></div>
+<h2>三、学制</h2>
+<p>实行学分制和弹性学制，修业年限为3~8年（至少3年，最多8年），基本学习年限4年。</p>
+<div [markdown]="vision.schoolingLength"></div>
+<h2>四、授予学位</h2>
+<p>在规定的年限内，修满规定学分者，可取得毕业证书，符合学位授予条件者可以授予{{vision.degreeName}}学士学位。</p>
+<div [markdown]="vision.awardedDegree"></div>
+<h2>五、课程教学安排表</h2>
+<p *ngIf="vision.schemeId"><a [href]="'/schemes/' + vision.schemeId">查看</a></p>
+<p *ngIf="!vision.schemeId">[空]</p>

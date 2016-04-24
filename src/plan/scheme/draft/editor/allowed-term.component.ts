@@ -1,0 +1,94 @@
+import {
+    Component,
+    Directive,
+    Input,
+    Output,
+    EventEmitter,
+    Provider,
+    SimpleChange,
+    forwardRef,
+} from 'angular2/core';
+import {
+    Control,
+    ControlArray,
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+} from 'angular2/common';
+
+import {getBit, setBit, clearBit} from '../../../../core/utils';
+import {SchemeTermTitlePipe} from '../../../common/pipes';
+
+
+@Component({
+    selector: 'allowed-term',
+    styles: [require('./allowed-term.scss')],
+    template: require('./allowed-term.html'),
+    pipes: [
+        SchemeTermTitlePipe,
+    ],
+})
+export class AllowedTermComponent {
+    @Input() value: number;
+    @Input() suggestedTerm: number;
+    @Input() terms: number[];
+
+    @Output() valueChange: EventEmitter<number>;
+
+    controls: ControlArray;
+
+    constructor() {
+        this.valueChange = new EventEmitter();
+    }
+
+    ngOnInit() {
+        this.controls = new ControlArray(this.terms.map(term => new Control(getBit(this.value, term - 1))));
+        this.controls.valueChanges.subscribe((values: boolean[]) => {
+            this.value = values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0);
+            this.valueChange.emit(this.value);
+        });
+    }
+
+    ngOnChanges(changes: {[key: string]: SimpleChange}) {
+        /* tslint:disable:no-string-literal */
+        let suggestedTermChange = changes['suggestedTerm'];
+        /* tslint:enable:no-string-literal */
+
+        if (suggestedTermChange && !suggestedTermChange.isFirstChange()) {
+            let value = this.value;
+            value = clearBit(value, suggestedTermChange.previousValue - 1);
+            value = setBit(value, suggestedTermChange.currentValue - 1);
+            this.setValue(value);
+            this.valueChange.emit(this.value);
+        }
+    }
+
+    setValue(value: number) {
+        this.value = value;
+        this.terms.forEach((term, i) => (<Control>this.controls.at(i)).updateValue(getBit(this.value, term - 1), {emitEvent: false}));
+    }
+}
+
+const CUSTOM_VALUE_ACCESSOR = new Provider(
+    NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AllowedTermAccessor), multi: true});
+
+@Directive({
+    selector: 'allowed-term',
+    host: {'(valueChange)': 'onChange($event)'},
+    providers: [CUSTOM_VALUE_ACCESSOR],
+})
+export class AllowedTermAccessor implements ControlValueAccessor {
+    /* tslint:disable:no-empty */
+    onChange = (_: any) => {};
+    onTouched = () => {};
+    /* tslint:enable:no-empty */
+
+    constructor(private host: AllowedTermComponent) {
+    }
+
+    writeValue(value: any): void {
+        this.host.setValue(value);
+    }
+
+    registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
+    registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+}

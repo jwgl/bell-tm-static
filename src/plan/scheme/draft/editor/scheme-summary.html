@@ -1,0 +1,6 @@
+<td colspan="2">合计</td>
+<td>{{scheme.credit}}<br>{{scheme.totalCredit}}</td>
+<td></td>
+<td></td>
+<td *ngFor="#term of scheme.terms" [class.short-term]="term>=17"></td>
+<td></td>

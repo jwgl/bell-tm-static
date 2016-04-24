@@ -1,0 +1,23 @@
+body {
+    overflow-y: scroll;
+}
+
+header {
+    margin-bottom: 1rem;
+}
+
+.logo {
+    width: 31px;
+    height: 31px;
+    display: inline-block;
+    margin: 3px 15px 3px 15px;
+    padding-left: 1px;
+    padding-top: 1px;
+    background-color: #333;
+}
+
+@media (min-width: 768px) {
+    .logo {
+        margin: 3px 15px 3px 0px;
+    }
+}

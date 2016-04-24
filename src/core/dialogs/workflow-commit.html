@@ -1,0 +1,39 @@
+<modal-dialog title="提交">
+    <modal-body>
+        <div *ngIf="!options.whoUrl">
+            <form>
+                <div class="form-group">
+                    <p class="form-control-static">《{{options.what}}》通过{{options.does}}。</p>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="6" placeholder="处理意见" ngControl="comment" [(ngModel)]="result.comment"></textarea>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="options.whoUrl">
+            <div class="form-static" *ngIf="options.data?.length == 0">
+                <p class="form-control-static">未设置{{options.does}}人，请与管理员联系。</p>
+            </div>
+            <form *ngIf="options.data?.length >= 1">
+                <div class="form-group" *ngIf="options.data.length == 1">
+                    <p class="form-control-static">《{{options.what}}》将发送至 <b>{{options.data[0].name}}</b> 进行{{options.does}}。</p>
+                </div>
+                <div class="form-group" *ngIf="options.data.length > 1">
+                    <p class="form-control-static">提交《{{options.what}}》 进行{{options.does}}。<br>
+                        请选择{{options.does}}人：
+                        <select ngControl="selected" [(ngModel)]="result.to">
+                            <option *ngFor="#person of options.data" value="{{person.id}}">{{person.name}}</option>
+                        </select>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="6" placeholder="处理意见" ngControl="comment" [(ngModel)]="result.comment"></textarea>
+                </div>
+            </form>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="options.whoUrl && options.data?.length == 0">确定</button>
+    </modal-footer>
+</modal-dialog>

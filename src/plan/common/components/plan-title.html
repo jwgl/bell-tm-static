@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+<div>
+教学计划号：{{program}}
+&nbsp;&nbsp;
+版本：<span
+*ngIf="!editable">{{version | versionNumber}}</span><button
+*ngIf="editable" (click)="editVersion()" class="btn btn-secondary btn-sm">{{version | versionNumber}}</button>
+</div>

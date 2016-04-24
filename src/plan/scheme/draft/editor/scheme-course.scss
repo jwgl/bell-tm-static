@@ -1,0 +1,30 @@
+@import '../../common/scheme-viewer.scss';
+
+$prevCreated: #eaffea;
+$prevDeleted: #ffecec;
+$currCreated: darken(#eaffea, 10%);
+$currDeleted: darken(#ffecec, 10%);
+
+:host {
+    &.PrevCreated {
+        background-color: $prevCreated;
+        &.CurrReverted {
+            background-color: $currDeleted;
+        }
+        &.CurrUpdated {
+            background-color: $currCreated;
+        }
+    }
+    &.PrevDeleted {
+        background-color: $prevDeleted;
+        &.CurrReverted {
+            background-color: $currCreated;
+        }
+    }
+    &.CurrCreated {
+        background-color: $currCreated;
+    }
+    &.CurrDeleted {
+        background-color: $currDeleted;
+    }
+}

@@ -1,0 +1,21 @@
+h2 {
+    font-size: 1.25rem;
+}
+
+:host {
+    p {
+        text-indent: 2em;
+        -webkit-margin-before: 0em;
+        -webkit-margin-after: 1rem;
+        -webkit-margin-start: 0px;
+        -webkit-margin-end: 0px;
+    }
+
+    ol, ul {
+        -webkit-padding-start: 2rem;
+    }
+}
+
+textarea {
+    margin-bottom: 1rem;
+}

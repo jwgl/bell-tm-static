@@ -1,0 +1,21 @@
+<div *ngIf="subjects">
+    <template ngFor #subject [ngForOf]="subjects">
+        <h1>{{subject.name}}</h1>
+        <ul>
+            <li *ngFor="#program of subject.programs">
+                <h2>{{program.grade}}级{{program.type | programType}}</h2>
+                <ul>
+                    <li *ngFor="#scheme of program.schemes">
+                        <template [ngIf]="scheme.id">
+                            <a [routerLink]="['/Item', {id: scheme.id}]">v{{scheme.versionNumber | versionNumber}}</a>
+                            <audit-status [status]="scheme.status"></audit-status>
+                        </template>
+                        <template [ngIf]="!scheme.id">
+                            <a [routerLink]="['/Create', {program: program.id}]">新建</a>
+                        </template>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </template>
+</div>

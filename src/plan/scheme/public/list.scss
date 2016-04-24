@@ -1,0 +1,18 @@
+table {
+    th {
+        text-align: center;
+    }
+    
+    td {
+        &.grade {
+            text-align: center;
+            &.empty::after {
+                content: '-';
+            }    
+        } 
+    }
+
+    .label {
+        padding : .2em .6em
+    }
+}

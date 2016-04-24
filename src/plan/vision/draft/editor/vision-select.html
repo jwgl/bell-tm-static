@@ -1,0 +1,11 @@
+<modal-dialog title="选择导入的培养方案">
+    <modal-body>
+        <select class="form-control" size="10" multiple (change)="selectChanged($event.target.value)">
+            <option *ngFor="#item of options.data" value="{{item.id}}">{{item.grade}}级{{item.subjectName}}</option>
+        </select>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!result">确定</button>
+    </modal-footer>
+</modal-dialog>

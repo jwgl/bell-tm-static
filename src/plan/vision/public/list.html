@@ -1,0 +1,22 @@
+<table class="table" *ngIf="departments">
+    <thead>
+        <tr>
+            <th>学院</th>
+            <th>专业</th>
+            <th [colSpan]="grades.length">年级</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template ngFor #department [ngForOf]="departments" #i="index">
+            <template ngFor #subject [ngForOf]="department.subjects" #j="index">
+                <tr>
+                    <td *ngIf="j == 0" [rowSpan]="department.subjects.length">{{department.name}}</td>
+                    <td>{{subject.id}} {{subject.name}}</td>
+                    <td *ngFor="#grade of grades" class="grade" [class.empty]="!subject.grades[grade]">
+                        <a *ngIf="subject.grades[grade]" href="visions/{{subject.grades[grade]}}">{{grade}}</a>
+                    </td>
+                </tr>
+            </template>
+        </template>
+    </tbody>
+</table>

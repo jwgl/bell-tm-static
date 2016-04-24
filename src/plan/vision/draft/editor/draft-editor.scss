@@ -1,0 +1,14 @@
+@import '../../common/vision-viewer.scss';
+
+:host {
+    textarea {
+        resize: vertical;
+    }
+
+    h2 {
+        button {
+            margin-left: 1rem;
+            float: right;
+        }
+    }
+}

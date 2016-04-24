@@ -1,0 +1,21 @@
+<div class='scheme' *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group btn-group pull-xs-right">
+            <button class="btn btn-secondary" (click)="cancel()">取消</button>
+            <button class="btn btn-primary" (click)="save()">保存</button>
+        </div>
+    </div>
+    <plan-title [title]="vm.title"
+                [program]="vm.programId"
+                [version]="vm.versionNumber"
+                [editable]="canEditVersion"
+                [previousVersion]="vm.previousVersionNumber"
+                (versionChanged)="versionChanged($event)"></plan-title>
+    <scheme-table [scheme]="vm" [editMode]="editMode"
+        (add)="addCourse($event)"
+        (import)="importCourses($event)"
+        (edit)="editCourse($event)"
+        (delete)="deleteCourse($event)"
+        (restore)="restoreCourse($event)">
+    </scheme-table>
+</div>

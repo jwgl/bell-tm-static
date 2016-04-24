@@ -1,0 +1,22 @@
+<td>{{schemeCourse.courseId}}</td>
+<td class='course-name'>{{schemeCourse.courseName}}</td>
+<td>{{schemeCourse.credit}}</td>
+<td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
+<td class="total-period">{{schemeCourse.totalPeriod | zeroEmpty}}<div
+    *ngIf="schemeCourse.showPeriodWeeks" class="text-info period-weeks">{{schemeCourse.periodWeeks | zeroEmpty}}</div></td>
+<td *ngFor="#term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>
+<td>
+    <template [ngIf]="schemeCourse.canEdit()">
+        <button type="button" class="btn btn-secondary btn-sm"
+                (click)="edit.emit(schemeCourse)"
+                [disabled]="schemeCourse.locked">编辑</button>
+        <button type="button" class="btn btn-secondary btn-sm"
+                (click)="delete.emit(schemeCourse)"
+                [disabled]="schemeCourse.locked">删除</button>
+    </template>
+    <template [ngIf]="schemeCourse.canRevert()">
+        <button type="button" class="btn btn-secondary btn-sm"
+                (click)="restore.emit(schemeCourse)"
+                [disabled]="schemeCourse.locked">还原</button>
+    </template>
+</td>

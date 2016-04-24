@@ -1,0 +1,86 @@
+@mixin short-term() {
+    background-color: rgba(240, 240, 240, 0.5);
+}
+
+.scheme {
+    .btn-toolbar {
+        margin-bottom: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .h1p {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    h2 {
+        font-size: 1.25Rem;
+    }
+
+    .table {
+        th {
+            text-align: center;
+            vertical-align: middle;
+            padding: 4px;
+            white-space: nowrap;
+            &.short-term {
+                @include short-term();
+            }
+        }
+
+        td {
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            padding: 4px;
+            &.course-name {
+                text-align: left;
+                white-space: normal;
+            }
+            &.short-term {
+                @include short-term();
+            }
+        }
+
+        tr {
+            &.group {
+                background-color: #fafafa;
+            }
+        }
+    }
+
+    .vertical {
+        width: 1rem;
+        line-height: 1.25rem;
+        letter-spacing: 1rem;
+        margin: auto;
+        white-space: normal;
+    }
+
+    .direction {
+        line-height: 1.25rem;
+    }
+
+    .total-period {
+        position: relative;
+    }
+
+    .period-weeks {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding-left: 1px;
+        padding-right: 1px;
+        font-size: 12px;
+    }
+
+    scheme-table {
+        display: block;
+        margin-bottom: 1rem;
+    }
+}

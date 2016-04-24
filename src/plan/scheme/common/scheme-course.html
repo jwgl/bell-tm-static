@@ -1,0 +1,13 @@
+<td *ngIf="first1 && first2" [attr.rowspan]="group2.rowspan">
+    <div class="vertical">{{group2.name}}</div>
+</td>
+<td *ngIf="first1" [attr.colspan]="group2 ? 1 : 2" [attr.rowspan]="group1.rowspan">
+    <div class="vertical">{{group1.name}}</div>
+</td>
+<td>{{schemeCourse.courseId}}</td>
+<td class="course-name">{{schemeCourse.courseName}}</td>
+<td>{{schemeCourse.credit | zeroEmpty}}</td>
+<td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
+<td class="total-period">{{schemeCourse.totalPeriod | zeroEmpty}}<div
+    *ngIf="schemeCourse.showPeriodWeeks" class="text-info period-weeks">{{schemeCourse.periodWeeks | zeroEmpty}}</div></td>
+<td *ngFor="#term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>

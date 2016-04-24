@@ -1,0 +1,13 @@
+<template [ngIf]="!group.directions">
+    <td colspan="2">小计<span *ngIf="group.isResidual">{{group.directionResidualCredits}}</span></td>
+    <td>{{group.totalCredit | zeroEmpty}}</td>
+    <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
+    <td>{{group.totalPeriod | zeroEmpty}}</td>
+    <td *ngFor="#term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
+    <td>
+        <button type="button" class="btn btn-secondary btn-sm" (click)="add.emit(group)" [disabled]="group.locked">添加</button>
+        <!--
+        <button type="button" class="btn btn-secondary btn-sm" (click)="import.emit(group)" [disabled]="group.locked">导入</button>
+        -->
+    </td>
+</template>

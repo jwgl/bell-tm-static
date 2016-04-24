@@ -1,0 +1,12 @@
+th {
+    text-align: center;
+}
+
+td {
+    &.grade {
+        text-align: center;
+        &.empty::after {
+            content: '-';
+        }    
+    } 
+}

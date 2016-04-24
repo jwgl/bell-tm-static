@@ -1,0 +1,24 @@
+<div #dropdown class="dropdown input-group">
+    <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" readonly [value]="result" placeholder="点击选择">
+    <div class="dropdown-menu" style="width: 100%; padding: 5px;">
+        <div style="margin-bottom: 5px;">
+            <input type="text" #search class="form-control" style="float:none">
+        </div>
+        <div class="table-wrapper" *ngIf="courses?.length > 0">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="#course of courses" (click)="select.emit(course)">
+                        <td>{{course.isTempCourse ? 'T' : ''}}{{course.id}}</td>
+                        <td class="name" [innerHTML]="highlight(course.name, search.value)"></td>
+                        <td>{{course.credit}}学分</td>
+                        <td>{{course.department}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="help-block" *ngIf="!(courses?.length > 0)">输入课号或课程名称进行查询</div>
+    </div>
+    <div class="input-group-btn">
+        <button type="button" class="btn btn-secondary" (click)="clearCourse()">清除</button>
+    </div>
+</div>
