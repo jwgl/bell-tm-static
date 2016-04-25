@@ -49,7 +49,6 @@ module.exports = {
             {to:'css/lib',   from: './node_modules/select2/dist/css/select2.min.css'},
             {to:'css/lib',   from: './node_modules/font-awesome/css/font-awesome.min.css'},
             {to:'css/fonts', from: './node_modules/font-awesome/fonts'},
-            {to:'js/app',    from: './src/ts-runtime.js'},
             {to:'js/app',    from: './src/menu.js'},
             {to:'css/app',   from: './src/main.css'}
         ]),
