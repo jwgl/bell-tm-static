@@ -9,7 +9,6 @@ import {PlanTitleComponent} from '../../../common/components';
 import {PLAN_PIPES} from '../../../common/pipes';
 import {Vision} from '../../common/vision.model';
 import {VisionDraftService} from '../draft.service';
-import {VisionSelectDialog} from './vision-select.dialog';
 
 @Component({
     selector: 'vision-draft-editor',
@@ -130,7 +129,10 @@ export class VisionDraftEditorComponent implements OnInit {
     }
 
     import() {
-        this.dialog.open(VisionSelectDialog, {departmentId: '01'}).then(id => {
+        this.dialog.open(SimpleListSelectDialog, {
+            url: `/api/departments/${this.vm.departmentId}/visions`,
+            labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
+        }).then(id => {
             this.draftService.loadDataForImport(id).subscribe(vision => {
                this.vm.objective = vision.objective;
                this.vm.specification = vision.specification;
