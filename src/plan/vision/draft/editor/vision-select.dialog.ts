@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 import {BOOTSTRAP_DIRECTIVES} from '../../../../core/bootstrap';
 import {MODAL_DIRECTIVES} from '../../../../core/directives';
@@ -16,8 +16,8 @@ import {Rest, Observable} from '../../../../core/http';
 export class VisionSelectDialog extends BaseDialog {
     result: string;
 
-    constructor(elementRef: ElementRef, private rest: Rest) {
-        super(elementRef);
+    constructor(private rest: Rest) {
+        super();
     }
 
     protected onOpening(): Observable<any> {

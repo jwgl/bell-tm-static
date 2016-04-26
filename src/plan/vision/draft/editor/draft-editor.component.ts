@@ -3,7 +3,7 @@ import {FormBuilder, ControlGroup} from 'angular2/common';
 import {Router, RouteParams, RouteData} from 'angular2/router';
 
 import {Select2} from '../../../../core/directives';
-import {Dialog} from '../../../../core/dialogs';
+import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
 import {PlanTitleComponent} from '../../../common/components';
 import {PLAN_PIPES} from '../../../common/pipes';

@@ -3,7 +3,6 @@ import {
     Injectable,
     DynamicComponentLoader,
     Type,
-    ElementRef,
     EventEmitter,
     OnInit,
     ApplicationRef,
@@ -23,16 +22,18 @@ export class Dialog {
     open(dialogType: Type, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
             /* tslint:disable:no-string-literal */
-            let elementRef = this.appRef['_rootComponents'][0].location;
+            let viewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
             /* tslint:enable:no-string-literal */
 
-            this.loader.loadNextToLocation(dialogType, elementRef).then((componentRef) => {
-                document.body.appendChild(componentRef.location.nativeElement);
+            this.loader.loadNextToLocation(dialogType, viewContainerRef).then((componentRef) => {
+                let nativeElement = componentRef.location.nativeElement;
+                document.body.appendChild(nativeElement);
 
                 let instance = <DynamicDialog>componentRef.instance;
+                instance.nativeElement = nativeElement;
                 instance.options = options;
                 instance.closed.subscribe((value: any) => {
-                    componentRef.dispose();
+                    componentRef.destroy();
                 });
                 instance.confirm.subscribe((value: any) => {
                     resolve(value);
@@ -47,25 +48,27 @@ export class Dialog {
 }
 
 export interface DynamicDialog {
+    nativeElement: any;
     closed: EventEmitter<any>;
     confirm: EventEmitter<any>;
     options: any;
 }
 
 export class BaseDialog implements DynamicDialog, OnInit {
+    nativeElement: any;
     $modal: JQuery;
     confirm: EventEmitter<any>;
     confirmed: boolean;
     closed: EventEmitter<void>;
     options: any;
 
-    constructor(private elementRef: ElementRef) {
+    constructor() {
         this.confirm = new EventEmitter();
         this.closed = new EventEmitter<void>();
     }
 
     ngOnInit() {
-        this.$modal = $(this.elementRef.nativeElement).find('.modal');
+        this.$modal = $(this.nativeElement).find('.modal');
 
         this.$modal.on('show.bs.modal', () => {
             this.confirmed = false;

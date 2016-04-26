@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {BaseDialog} from './dialog';
 import {MODAL_DIRECTIVES} from '../directives';
 
@@ -13,8 +13,8 @@ import {MODAL_DIRECTIVES} from '../directives';
 export class WorkflowRejectDialog extends BaseDialog {
     comment: string;
 
-    constructor(elementRef: ElementRef) {
-        super(elementRef);
+    constructor() {
+        super();
     }
 
     protected onConfirmed(): string {

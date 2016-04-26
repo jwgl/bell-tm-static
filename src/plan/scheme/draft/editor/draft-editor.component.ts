@@ -129,7 +129,7 @@ export class SchemeDraftEditorComponent {
             this.draftService.loadPropertyCourses(id, property.id).subscribe(courses => {
                 console.log(courses);
             });
-        })
+        });
     }
 
     importDirectionCourses(direction: Direction) {

@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {BaseDialog} from './dialog';
 import {Rest, Observable} from '../http';
 import {FromNowPipe, ActionNamePipe, ActionClassPipe} from '../pipes';
@@ -14,8 +14,8 @@ import {MODAL_DIRECTIVES} from '../directives';
     pipes: [FromNowPipe, ActionNamePipe, ActionClassPipe],
 })
 export class WorkflowWorkitemsDialog extends BaseDialog {
-    constructor(elementRef: ElementRef, private rest: Rest) {
-        super(elementRef);
+    constructor(private rest: Rest) {
+        super();
     }
 
     protected onOpening(): Observable<any> {

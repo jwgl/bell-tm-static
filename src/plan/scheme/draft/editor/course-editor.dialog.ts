@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 
 import {BOOTSTRAP_DIRECTIVES} from '../../../../core/bootstrap';
@@ -35,8 +35,8 @@ export class CourseEditorDialog extends BaseDialog {
     lastPeriodWeeks: number;
 
 
-    constructor(elementRef: ElementRef) {
-        super(elementRef);
+    constructor() {
+        super();
     }
 
     protected onOpening(): Observable<any> {

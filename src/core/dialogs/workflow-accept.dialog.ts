@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {BaseDialog} from './dialog';
 import {Rest, Observable} from '../http';
 import {MODAL_DIRECTIVES} from '../directives';
@@ -14,8 +14,8 @@ import {MODAL_DIRECTIVES} from '../directives';
 export class WorkflowAcceptDialog extends BaseDialog {
     result: {to: string, comment: string};
 
-    constructor(elementRef: ElementRef, private rest: Rest) {
-        super(elementRef);
+    constructor(private rest: Rest) {
+        super();
         this.result = {to: null, comment: null};
     }
 

@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {BaseDialog} from './dialog';
 import {MODAL_DIRECTIVES} from '../directives';
 
@@ -11,7 +11,7 @@ import {MODAL_DIRECTIVES} from '../directives';
  * options: {title: string, content: string}
  */
 export class ConfirmDialog extends BaseDialog {
-    constructor(elementRef: ElementRef) {
-        super(elementRef);
+    constructor() {
+        super();
     }
 }

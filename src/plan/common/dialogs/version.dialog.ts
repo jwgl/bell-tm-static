@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {FormBuilder, ControlGroup} from 'angular2/common';
 import {Observable} from 'rxjs/Observable';
 
@@ -24,8 +24,8 @@ export class VersionDialog extends BaseDialog {
 
     form: ControlGroup;
 
-    constructor(elementRef: ElementRef, fb: FormBuilder) {
-        super(elementRef);
+    constructor(fb: FormBuilder) {
+        super();
 
         this.form = fb.group({
             a: [''],

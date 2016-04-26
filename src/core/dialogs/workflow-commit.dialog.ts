@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import 'rxjs/add/operator/do';
 
 import {BaseDialog} from './dialog';
@@ -16,8 +16,8 @@ import {MODAL_DIRECTIVES} from '../directives';
 export class WorkflowCommitDialog extends BaseDialog {
     result: {to: string, comment: string};
 
-    constructor(elementRef: ElementRef, private rest: Rest) {
-        super(elementRef);
+    constructor(private rest: Rest) {
+        super();
         this.result = {to: null, comment: null};
     }
 

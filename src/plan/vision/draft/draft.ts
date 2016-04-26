@@ -1,12 +1,7 @@
 import {bootstrap} from 'angular2/platform/browser';
+import {LocationStrategy, HashLocationStrategy} from 'angular2/platform/common';
 import {Component, ElementRef, provide} from 'angular2/core';
-import {
-    ROUTER_PROVIDERS,
-    ROUTER_DIRECTIVES,
-    LocationStrategy,
-    HashLocationStrategy,
-    RouteConfig,
-} from 'angular2/router';
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
 import {REST_PROVIDERS, API_URL, API_URL_FIELDS} from '../../../core/http';
 import {EditMode} from '../../../core/constants';

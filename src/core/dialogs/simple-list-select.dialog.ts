@@ -1,4 +1,4 @@
-import {Component, ElementRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 
 import {BOOTSTRAP_DIRECTIVES} from '../bootstrap';
 import {MODAL_DIRECTIVES} from '../directives';
@@ -18,8 +18,8 @@ export class SimpleListSelectDialog extends BaseDialog {
     valueFn: Function;
     labelFn: Function;
 
-    constructor(elementRef: ElementRef, private rest: Rest) {
-        super(elementRef);
+    constructor(private rest: Rest) {
+        super();
         this.valueFn = (item: any) => item.id;
         this.labelFn = (item: any) => item.toString();
     }
