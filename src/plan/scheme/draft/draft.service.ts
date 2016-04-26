@@ -1,10 +1,16 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, Inject} from 'angular2/core';
 
 import {ApiUrl, Rest, Observable} from '../../../core/http';
 
 @Injectable()
 export class SchemeDraftService {
-    constructor(private rest: Rest, private api: ApiUrl) {}
+    private publicSchemeApi: ApiUrl;
+    constructor(
+        private rest: Rest,
+        private api: ApiUrl,
+        @Inject('PUBLIC_SCHEME_URL') publicSchemeUrl: string) {
+        this.publicSchemeApi = new ApiUrl(publicSchemeUrl);
+    }
 
     get userId(): string {
         return this.api.userId;
@@ -32,6 +38,14 @@ export class SchemeDraftService {
 
     loadDataForCreate(program: string): Observable<any> {
         return this.rest.get(this.api.dataForCreate({program}));
+    }
+
+    loadPropertyCourses(id: string, propertyId: number): Observable<any> {
+        return this.rest.get(`${this.publicSchemeApi.item(id)}/properties/${propertyId}/courses`);
+    }
+
+    loadDirectionCourses(id: string, directionId: number): Observable<any> {
+        return this.rest.get(`${this.publicSchemeApi.item(id)}/directions/${directionId}/courses`);
     }
 
     create(value: any): Observable<string> {

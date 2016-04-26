@@ -5,11 +5,11 @@ import {
 } from 'angular2/core';
 import {Router, RouteParams, RouteData} from 'angular2/router';
 
-import {Dialog} from '../../../../core/dialogs';
+import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
 import {PlanTitleComponent} from '../../../common/components';
 import {SchemeDraftService} from '../draft.service';
-import {Scheme, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
+import {Scheme, Property, Direction, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
 import './draft-editor.model';
 import {SchemeDraftTableComponent} from './scheme-table.component';
 import {CourseEditorDialog} from './course-editor.dialog';
@@ -114,8 +114,35 @@ export class SchemeDraftEditorComponent {
     }
 
     importCourses(group: AbstractGroup): void {
-        console.log('import courses:');
-        console.log(group);
+        if (group instanceof Property) {
+            this.importPropertyCourses(group);
+        } else if (group instanceof Direction) {
+            this.importDirectionCourses(group);
+        }
+    }
+
+    importPropertyCourses(property: Property) {
+        this.dialog.open(SimpleListSelectDialog, {
+            url: `/api/departments/01/schemes`,
+            labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
+        }).then(id => {
+            this.draftService.loadPropertyCourses(id, property.id).subscribe(courses => {
+                console.log(courses);
+            });
+        })
+    }
+
+    importDirectionCourses(direction: Direction) {
+        this.dialog.open(SimpleListSelectDialog, {
+            url: `/api/departments/${this.vm.departmentId}/schemeDirections`,
+            valueFn: (item: any) => `${item.schemeId}:${item.directionId}`,
+            labelFn: (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
+        }).then(result => {
+            let arr = result.split(':');
+            this.draftService.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
+                console.log(courses);
+            });
+        });
     }
 
     save() {

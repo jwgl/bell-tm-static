@@ -40,6 +40,7 @@ bootstrap(SchemeDraft, [
     ROUTER_PROVIDERS,
     provide(LocationStrategy, {useClass: HashLocationStrategy}),
     provide(API_URL, {useValue: '/api/users/${userId}/schemes'}),
+    provide('PUBLIC_SCHEME_URL', {useValue: '/api/schemes'}),
     REST_PROVIDERS,
     SchemeDraftService,
 ]);
