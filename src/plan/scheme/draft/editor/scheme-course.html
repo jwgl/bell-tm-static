@@ -4,7 +4,7 @@
 <td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
 <td class="total-period">{{schemeCourse.totalPeriod | zeroEmpty}}<div
     *ngIf="schemeCourse.showPeriodWeeks" class="text-info period-weeks">{{schemeCourse.periodWeeks | zeroEmpty}}</div></td>
-<td *ngFor="#term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>
+<td *ngFor="let term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>
 <td>
     <template [ngIf]="schemeCourse.canEdit()">
         <button type="button" class="btn btn-secondary btn-sm"

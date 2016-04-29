@@ -22,7 +22,7 @@
                     <p class="form-control-static">提交《{{options.what}}》 进行{{options.does}}。<br>
                         请选择{{options.does}}人：
                         <select ngControl="selected" [(ngModel)]="result.to">
-                            <option *ngFor="#person of options.data" value="{{person.id}}">{{person.name}}</option>
+                            <option *ngFor="let person of options.data" value="{{person.id}}">{{person.name}}</option>
                         </select>
                     </p>
                 </div>

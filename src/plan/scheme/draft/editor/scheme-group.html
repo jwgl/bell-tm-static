@@ -3,7 +3,7 @@
     <td>{{group.totalCredit | zeroEmpty}}</td>
     <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
     <td>{{group.totalPeriod | zeroEmpty}}</td>
-    <td *ngFor="#term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
+    <td *ngFor="let term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
     <td>
         <button type="button" class="btn btn-secondary btn-sm" (click)="add.emit(group)" [disabled]="group.locked">添加</button>
         <button type="button" class="btn btn-secondary btn-sm" (click)="import.emit(group)" [disabled]="group.locked">导入</button>

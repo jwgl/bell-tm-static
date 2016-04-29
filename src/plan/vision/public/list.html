@@ -7,12 +7,12 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor #department [ngForOf]="departments" #i="index">
-            <template ngFor #subject [ngForOf]="department.subjects" #j="index">
+        <template ngFor let-department [ngForOf]="departments" let-i="index">
+            <template ngFor let-subject [ngForOf]="department.subjects" let-j="index">
                 <tr>
                     <td *ngIf="j == 0" [rowSpan]="department.subjects.length">{{department.name}}</td>
                     <td>{{subject.id}} {{subject.name}}</td>
-                    <td *ngFor="#grade of grades" class="grade" [class.empty]="!subject.grades[grade]">
+                    <td *ngFor="let grade of grades" class="grade" [class.empty]="!subject.grades[grade]">
                         <a *ngIf="subject.grades[grade]" href="visions/{{subject.grades[grade]}}">{{grade}}</a>
                     </td>
                 </tr>

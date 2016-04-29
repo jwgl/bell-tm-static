@@ -10,13 +10,13 @@
             <th [attr.colspan]="scheme.terms.length">开课学期和周学时数</th>
         </tr>
         <tr>
-            <th *ngFor="#term of scheme.terms" [class.short-term]="term >= 17">{{term | termTitle}}</th>
+            <th *ngFor="let term of scheme.terms" [class.short-term]="term >= 17">{{term | termTitle}}</th>
         </tr>
     </thead>
     <tbody>
-        <template ngFor #property [ngForOf]="scheme.properties">
-            <template ngFor #direction [ngForOf]="property.directions" #i="index">
-                <tr *ngFor="#sc of direction.courses; #j=index"
+        <template ngFor let-property [ngForOf]="scheme.properties">
+            <template ngFor let-direction [ngForOf]="property.directions" let-i="index">
+                <tr *ngFor="let sc of direction.courses; let j = index"
                     [scheme-course]="sc"
                     [terms]="scheme.terms"
                     [group1]="direction"
@@ -26,7 +26,7 @@
                 <tr [scheme-group]="direction"
                     [terms]="scheme.terms"></tr>
             </template>
-            <tr *ngFor="#sc of property.courses; #i=index"
+            <tr *ngFor="let sc of property.courses; let i = index"
                 [scheme-course]="sc"
                 [terms]="scheme.terms"
                 [group1]="property"

@@ -10,7 +10,7 @@
   "author": "Yang Lin <todoubaba@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "angular2": "^2.0.0-beta.16",
+    "angular2": "^2.0.0-beta.17",
     "bootstrap": "git+https://github.com/twbs/bootstrap.git#v4-dev",
     "bootstrap-submenu": "^2.0.4",
     "es6-shim": "^0.35.0",
@@ -19,7 +19,7 @@
     "markdown-it": "^6.0.1",
     "moment": "^2.12.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.4",
+    "rxjs": "^5.0.0-beta.6",
     "select2": "^4.0.2",
     "tether": "^1.2.0",
     "zone.js": "^0.6.12"
@@ -31,7 +31,7 @@
     "sass-loader": "^3.2.0",
     "ts-helpers": "^1.1.1",
     "ts-loader": "^0.8.2",
-    "tslint": "^3.8.0",
+    "tslint": "^3.8.1",
     "tslint-loader": "^2.1.4",
     "typescript": "^1.8.9",
     "typings": "^0.8.1",

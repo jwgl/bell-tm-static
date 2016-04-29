@@ -1,11 +1,11 @@
 <table class="table table-sm table-bordered">
     <tr>
-        <td *ngFor="#term of terms">
+        <td *ngFor="let term of terms">
             {{term | termTitle}}
         </td>
     </tr>
     <tr>
-        <td *ngFor="#term of terms; #i=index">
+        <td *ngFor="let term of terms; let i = index">
             <label class="checkbox-inline"><input type="checkbox" [ngFormControl]="controls.at(i)" [disabled]="suggestedTerm==term"></label>
         </td>
     </tr>

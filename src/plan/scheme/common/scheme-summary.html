@@ -2,4 +2,4 @@
 <td>{{scheme.credit}}</td>
 <td></td>
 <td></td>
-<td *ngFor="#term of scheme.terms" [class.short-term]="term>=17"></td>
+<td *ngFor="let term of scheme.terms" [class.short-term]="term>=17"></td>

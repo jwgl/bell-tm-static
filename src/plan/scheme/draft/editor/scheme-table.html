@@ -10,15 +10,15 @@
             <th rowspan="2">操作</th>
         </tr>
         <tr>
-            <th *ngFor="#term of scheme.terms">{{term | termTitle}}</th>
+            <th *ngFor="let term of scheme.terms">{{term | termTitle}}</th>
         </tr>
     </thead>
     <tbody>
-        <template ngFor #property [ngForOf]="scheme.properties">
+        <template ngFor let-property [ngForOf]="scheme.properties">
             <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
-            <template ngFor #direction [ngForOf]="property.directions">
+            <template ngFor let-direction [ngForOf]="property.directions">
                 <tr [scheme-direction]="direction" [terms]="scheme.terms"></tr>
-                <tr *ngFor="#sc of direction.courses"
+                <tr *ngFor="let sc of direction.courses"
                     [scheme-course]="sc"
                     [terms]="scheme.terms"
                     [editMode]="editMode"
@@ -30,7 +30,7 @@
                     (add)="add.emit($event)"
                     (import)="import.emit($event)"></tr>
             </template>
-            <tr *ngFor="#sc of property.courses"
+            <tr *ngFor="let sc of property.courses"
                 [scheme-course]="sc"
                 [terms]="scheme.terms"
                 [editMode]="editMode"

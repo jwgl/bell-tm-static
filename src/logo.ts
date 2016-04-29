@@ -57,7 +57,7 @@ const COLORS = [
         height: 9px;
     }`,
     ],
-    template: `<i *ngFor="#i of tm" [style.background-color]="i == 1 ? t : m"></i>`,
+    template: `<i *ngFor="let i of tm" [style.background-color]="i == 1 ? t : m"></i>`,
 })
 class Logo {
     next = true;

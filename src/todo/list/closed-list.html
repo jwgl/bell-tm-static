@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="#todo of todos | async">
+        <tr *ngFor="let todo of todos | async">
             <td>{{todo.type}}</td>
             <td><a href="{{baseUrl}}/{{todo.id}}">{{todo.title}}</a></td>
             <td>{{todo.fromUser}}</td>

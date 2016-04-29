@@ -64,14 +64,14 @@
                             ngControl="suggestedTerm"
                             [(ngModel)]="schemeCourse.suggestedTerm"
                             (change)="onChangeSuggestedTerm(st.value)" #st>
-                        <option *ngFor="#term of options.terms" [value]="term">{{term | termName}}</option>
+                        <option *ngFor="let term of options.terms" [value]="term">{{term | termName}}</option>
                     </select>
                 </form-field>
                 <form-field label="开课周数">
                     <select class="form-control" col="4"
                             ngControl="periodWeeks"
                             [(ngModel)]="schemeCourse.periodWeeks">
-                        <option *ngFor="#pw of periodWeekOptions" [value]="pw.value">{{pw.label}}</option>
+                        <option *ngFor="let pw of periodWeekOptions" [value]="pw.value">{{pw.label}}</option>
                     </select>
                 </form-field>
             </div>
