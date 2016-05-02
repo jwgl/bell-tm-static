@@ -1,6 +1,7 @@
 import {Injectable, Inject} from 'angular2/core';
 
 import {ApiUrl, Rest, Observable} from '../../../core/http';
+import {SchemeCourseDto} from '../common/scheme.model';
 
 @Injectable()
 export class SchemeDraftService {
@@ -40,11 +41,11 @@ export class SchemeDraftService {
         return this.rest.get(this.api.dataForCreate({program}));
     }
 
-    loadPropertyCourses(id: string, propertyId: number): Observable<any> {
+    loadPropertyCourses(id: string, propertyId: number): Observable<SchemeCourseDto[]> {
         return this.rest.get(`${this.publicSchemeApi.item(id)}/properties/${propertyId}/courses`);
     }
 
-    loadDirectionCourses(id: string, directionId: number): Observable<any> {
+    loadDirectionCourses(id: string, directionId: number): Observable<SchemeCourseDto[]> {
         return this.rest.get(`${this.publicSchemeApi.item(id)}/directions/${directionId}/courses`);
     }
 

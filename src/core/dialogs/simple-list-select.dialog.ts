@@ -15,13 +15,12 @@ import {BaseDialog} from './dialog';
 })
 export class SimpleListSelectDialog extends BaseDialog {
     result: string;
-    valueFn: Function;
-    labelFn: Function;
+    title: string;
+    valueFn = (item: any) => item.id;
+    labelFn = (item: any) => item.toString();
 
     constructor(private rest: Rest) {
         super();
-        this.valueFn = (item: any) => item.id;
-        this.labelFn = (item: any) => item.toString();
     }
 
     selectChanged(id: string) {
@@ -29,6 +28,7 @@ export class SimpleListSelectDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
+        this.title = this.options.title;
         this.valueFn = this.options.valueFn || this.valueFn;
         this.labelFn = this.options.labelFn || this.labelFn;
         return this.rest.get(this.options.url);

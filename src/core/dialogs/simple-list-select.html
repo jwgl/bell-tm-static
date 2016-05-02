@@ -1,4 +1,4 @@
-<modal-dialog title="选择导入的培养方案">
+<modal-dialog [title]="title">
     <modal-body>
         <select class="form-control" size="10" multiple (change)="selectChanged($event.target.value)">
             <option *ngFor="let item of options.data" value="{{valueFn(item)}}">{{labelFn(item)}}</option>

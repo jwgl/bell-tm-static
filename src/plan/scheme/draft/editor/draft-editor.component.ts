@@ -123,24 +123,34 @@ export class SchemeDraftEditorComponent {
 
     importPropertyCourses(property: Property) {
         this.dialog.open(SimpleListSelectDialog, {
-            url: `/api/departments/01/schemes`,
+            title: '选择导入的专业',
+            url: `/api/departments/${this.vm.departmentId}/schemes`,
             labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
         }).then(id => {
             this.draftService.loadPropertyCourses(id, property.id).subscribe(courses => {
-                console.log(courses);
+                courses.forEach(course => {
+                    if (!property.contains(course.courseId)) {
+                        property.add(course);
+                    }
+                });
             });
         });
     }
 
     importDirectionCourses(direction: Direction) {
         this.dialog.open(SimpleListSelectDialog, {
+            title: '选择导入的专业及方向',
             url: `/api/departments/${this.vm.departmentId}/schemeDirections`,
             valueFn: (item: any) => `${item.schemeId}:${item.directionId}`,
             labelFn: (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
         }).then(result => {
             let arr = result.split(':');
             this.draftService.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
-                console.log(courses);
+                courses.forEach(course => {
+                    if (!direction.contains(course.courseId)) {
+                        direction.add(course);
+                    }
+                });
             });
         });
     }
