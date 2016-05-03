@@ -1,5 +1,5 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {provide, Component, ElementRef, OnInit} from 'angular2/core';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {provide, Component, ElementRef, OnInit} from '@angular/core';
 
 import {REST_PROVIDERS, API_URL} from '../../../core/http';
 import {SchemeViewerComponent} from '../common/scheme-viewer.component';

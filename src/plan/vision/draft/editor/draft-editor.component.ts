@@ -1,6 +1,6 @@
-import {Component, OnInit} from 'angular2/core';
-import {FormBuilder, ControlGroup} from 'angular2/common';
-import {Router, RouteParams, RouteData} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, ControlGroup} from '@angular/common';
+import {Router, RouteSegment} from '@angular/router';
 
 import {Select2} from '../../../../core/directives';
 import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
@@ -29,13 +29,21 @@ export class VisionDraftEditorComponent implements OnInit {
     constructor(
         private draftService: VisionDraftService,
         private router: Router,
-        private routeParams: RouteParams,
-        private routeData: RouteData,
+        private segment: RouteSegment,
         private formBuilder: FormBuilder,
         private dialog: Dialog
     ) {
-        this.id = routeParams.get('id');
-        this.editMode = routeData.get('mode');
+        this.id = segment.getParam('id');
+
+        if (this.segment.urlSegments[0].toString() === 'create') {
+            this.editMode = EditMode.Create;
+        } else if (this.segment.urlSegments[1].toString() === 'edit') {
+            this.editMode = EditMode.Edit;
+        } else if (this.segment.urlSegments[1].toString() === 'revise') {
+            this.editMode = EditMode.Revise;
+        } else {
+            throw new Error('Unsupported url');
+        }
 
         this.form = this.formBuilder.group({
             objective: [],
@@ -54,7 +62,7 @@ export class VisionDraftEditorComponent implements OnInit {
                 this.draftService.loadItemForEdit(this.id).subscribe(model => this.vm = model);
                 break;
             default:
-                this.draftService.loadDataForCreate(this.routeParams.get('program')).subscribe(model => this.vm = model);
+                this.draftService.loadDataForCreate(this.segment.getParam('program')).subscribe(model => this.vm = model);
                 break;
         }
     }
@@ -76,7 +84,7 @@ export class VisionDraftEditorComponent implements OnInit {
     }
 
     cancel() {
-        this.router.navigate(['Item', {id: this.id}]);
+        this.router.navigate([this.id]);
     }
 
     save() {
@@ -107,7 +115,7 @@ export class VisionDraftEditorComponent implements OnInit {
             programId:       this.vm.programId,
             versionNumber:   this.vm.versionNumber,
         }).subscribe(id => {
-            this.router.navigate(['Item', {id}]);
+            this.router.navigate([id]);
         }, error => {
             alert(error);
         });
@@ -122,7 +130,7 @@ export class VisionDraftEditorComponent implements OnInit {
             awardedDegree:   this.form.value.awardedDegree,
             programId:       this.vm.programId,
         }).subscribe(id => {
-            this.router.navigate(['Item', {id}]);
+            this.router.navigate([id]);
         }, error => {
             alert(error);
         });
@@ -130,6 +138,7 @@ export class VisionDraftEditorComponent implements OnInit {
 
     import() {
         this.dialog.open(SimpleListSelectDialog, {
+            title: '选择导入的专业',
             url: `/api/departments/${this.vm.departmentId}/visions`,
             labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
         }).then(id => {

@@ -1,10 +1,9 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {LocationStrategy, HashLocationStrategy} from 'angular2/platform/common';
-import {Component, ElementRef, provide} from 'angular2/core';
-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {Component, ElementRef, provide} from '@angular/core';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Routes, Route} from '@angular/router';
 
 import {REST_PROVIDERS, API_URL, API_URL_FIELDS} from '../../../core/http';
-import {EditMode} from '../../../core/constants';
 import {VisionDraftService} from './draft.service';
 import {VisionDraftListComponent} from './list/draft-list.component';
 import {VisionDraftItemComponent} from './item/draft-item.component';
@@ -12,15 +11,15 @@ import {VisionDraftEditorComponent} from './editor/draft-editor.component';
 
 @Component({
     selector: 'vision-draft-container',
-    template: '<router-outlet></router-outlet>',
+    template: `<a [routerLink]="['/']"></a><router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES],
 })
-@RouteConfig([
-    {path: '/', component: VisionDraftListComponent, name: 'Index'},
-    {path: '/:id', component: VisionDraftItemComponent, name: 'Item'},
-    {path: '/:id/edit', component: VisionDraftEditorComponent, name: 'Edit', data: {mode: EditMode.Edit}},
-    {path: '/:id/revise', component: VisionDraftEditorComponent, name: 'Revise', data: {mode: EditMode.Revise}},
-    {path: '/create/:program', component: VisionDraftEditorComponent, name: 'Create', data: {mode: EditMode.Create}},
+@Routes([
+    new Route({path: '/', component: VisionDraftListComponent}),
+    new Route({path: '/create/:program', component: VisionDraftEditorComponent}),
+    new Route({path: '/:id/edit', component: VisionDraftEditorComponent}),
+    new Route({path: '/:id/revise', component: VisionDraftEditorComponent}),
+    new Route({path: '/:id', component: VisionDraftItemComponent}),
 ])
 class VisionDraft {
     constructor(

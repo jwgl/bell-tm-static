@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 import {BOOTSTRAP_DIRECTIVES} from '../bootstrap';
 import {MODAL_DIRECTIVES} from '../directives';

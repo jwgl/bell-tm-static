@@ -7,11 +7,11 @@
                 <ul>
                     <li *ngFor="let scheme of program.schemes">
                         <template [ngIf]="scheme.id">
-                            <a [routerLink]="['/Item', {id: scheme.id}]">v{{scheme.versionNumber | versionNumber}}</a>
+                            <a [routerLink]="[scheme.id]">v{{scheme.versionNumber | versionNumber}}</a>
                             <audit-status [status]="scheme.status"></audit-status>
                         </template>
                         <template [ngIf]="!scheme.id">
-                            <a [routerLink]="['/Create', {program: program.id}]">新建</a>
+                            <a [routerLink]="['/create', program.id]">新建</a>
                         </template>
                     </li>
                 </ul>

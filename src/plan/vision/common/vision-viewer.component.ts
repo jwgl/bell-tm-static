@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input} from '@angular/core';
 
 import {Markdown} from '../../../core/directives';
 import {MarkdownPipe} from '../../../core/pipes';

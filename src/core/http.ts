@@ -1,4 +1,4 @@
-import {HTTP_PROVIDERS} from 'angular2/http';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {Rest} from './http/rest';
 import {ApiUrl} from './http/api-url';
 

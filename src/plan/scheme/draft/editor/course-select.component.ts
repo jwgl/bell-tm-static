@@ -1,4 +1,4 @@
-import {Component, ElementRef, ViewChild, EventEmitter, Output, Input} from 'angular2/core';
+import {Component, ElementRef, ViewChild, EventEmitter, Output, Input} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/combineLatest';

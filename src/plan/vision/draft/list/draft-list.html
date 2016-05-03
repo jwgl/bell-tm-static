@@ -7,11 +7,11 @@
                 <ul>
                     <li *ngFor="let vision of program.visions">
                         <template [ngIf]="vision.id">
-                            <a [routerLink]="['/Item', {id: vision.id}]">v{{vision.versionNumber | versionNumber}}</a>
+                            <a [routerLink]="[vision.id]">v{{vision.versionNumber | versionNumber}}</a>
                             <audit-status [status]="vision.status"></audit-status>
                         </template>
                         <template [ngIf]="!vision.id">
-                            <a [routerLink]="['/Create', {program: program.id}]">新建</a>
+                            <a [routerLink]="['/create', program.id]">新建</a>
                         </template>
                     </li>
                 </ul>

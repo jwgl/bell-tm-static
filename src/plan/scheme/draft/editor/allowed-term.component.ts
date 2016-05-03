@@ -7,13 +7,13 @@ import {
     Provider,
     SimpleChange,
     forwardRef,
-} from 'angular2/core';
+} from '@angular/core';
 import {
     Control,
     ControlArray,
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
-} from 'angular2/common';
+} from '@angular/common';
 
 import {getBit, setBit, clearBit} from '../../../../core/utils';
 import {SchemeTermTitlePipe} from '../../../common/pipes';

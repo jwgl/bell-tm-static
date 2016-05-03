@@ -1,4 +1,4 @@
-import {Component, Input} from 'angular2/core';
+import {Component, Input} from '@angular/core';
 
 import {ZeroEmptyPipe} from '../../../common/pipes';
 import {Property} from '../../common/scheme.model';

@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {BaseDialog} from './dialog';
 import {Rest, Observable} from '../http';
 import {FromNowPipe, ActionNamePipe, ActionClassPipe} from '../pipes';

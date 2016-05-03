@@ -1,6 +1,7 @@
-import {Component} from 'angular2/core';
+import {Component, Inject} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
+import {BASE_URL} from '../../core/http';
 import {FromNowComponent} from '../../core/components';
 import {TodoService} from '../todo.service';
 
@@ -12,7 +13,7 @@ import {TodoService} from '../todo.service';
 export class OpenTodoListComponent {
     todos: Observable<any[]>;
 
-    constructor(private todoService: TodoService) {
+    constructor(@Inject(BASE_URL) private baseUrl: string, private todoService: TodoService) {
         this.todos = this.todoService.loadList({is: 'open'});
     }
 }

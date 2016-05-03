@@ -1,4 +1,6 @@
-import {Pipe} from 'angular2/core';
+import {Pipe} from '@angular/core';
+
+let moment = (<any>window).moment;
 
 @Pipe({name: 'fromNow'})
 export class FromNowPipe {

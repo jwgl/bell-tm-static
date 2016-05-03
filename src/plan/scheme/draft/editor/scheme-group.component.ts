@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-} from 'angular2/core';
+} from '@angular/core';
 
 import {ZeroEmptyPipe} from '../../../common/pipes';
 import {AbstractGroup} from '../../common/scheme.model';

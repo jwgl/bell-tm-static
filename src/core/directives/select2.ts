@@ -4,11 +4,11 @@ import {
     QueryList,
     ContentChildren,
     AfterContentInit,
-} from 'angular2/core';
+} from '@angular/core';
 import {
     NgControlName,
     NgSelectOption,
-} from 'angular2/common';
+} from '@angular/common';
 
 @Directive({
     selector: '[select2]',

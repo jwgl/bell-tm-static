@@ -1,7 +1,7 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {LocationStrategy, HashLocationStrategy} from 'angular2/platform/common';
-import {provide} from 'angular2/core';
-import {ROUTER_PROVIDERS} from 'angular2/router';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {provide} from '@angular/core';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {ROUTER_PROVIDERS} from '@angular/router';
 
 import {REST_PROVIDERS, API_URL, BASE_URL} from '../core/http';
 import {TodoService} from './todo.service';

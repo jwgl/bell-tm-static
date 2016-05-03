@@ -1,4 +1,4 @@
-import {Injectable, Inject, Optional} from 'angular2/core';
+import {Injectable, Inject, Optional} from '@angular/core';
 
 import {groupBy} from '../../../core/pipes';
 import {ApiUrl, Rest, Observable, API_URL_FIELDS} from '../../../core/http';

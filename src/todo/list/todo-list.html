@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-3">
         <div class="list-group" *ngIf="counts">
-            <a #open [routerLink]="['Open']" class="list-group-item" [ngClass]="openPageActive(open)">
+            <a #open [routerLink]="['open']" class="list-group-item" [ngClass]="openPageActive(open)">
                 <span class="tag tag-info tag-pill pull-xs-right">{{counts.open}}</span>待处理
             </a>
-            <a #close [routerLink]="['Closed']" class="list-group-item" [ngClass]="closedPageActive(close)">
+            <a #close [routerLink]="['closed']" class="list-group-item" [ngClass]="closedPageActive(close)">
                 <span class="tag tag-info tag-pill pull-xs-right">{{counts.closed}}</span>已处理
             </a>
         </div>

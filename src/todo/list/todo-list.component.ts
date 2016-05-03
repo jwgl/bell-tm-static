@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Component} from '@angular/core';
+import {ROUTER_DIRECTIVES, Router, Routes, Route} from '@angular/router';
 
 import {OpenTodoListComponent} from './open-list.component';
 import {ClosedTodoListComponent} from './closed-list.component';
@@ -10,17 +10,18 @@ import {TodoService} from '../todo.service';
     template: require('./todo-list.html'),
     directives: [ROUTER_DIRECTIVES],
 })
-@RouteConfig([
-    {path: '/open', component: OpenTodoListComponent, as: 'Open', useAsDefault: true},
-    {path: '/closed', component: ClosedTodoListComponent, as: 'Closed'},
+@Routes([
+    new Route({path: 'open', component: OpenTodoListComponent}),
+    new Route({path: 'closed', component: ClosedTodoListComponent}),
 ])
 export class TodoListComponent {
     counts: { open: number, closed: number };
     openActive = {active: false};
     closedActive = {active: false};
 
-    constructor(private todoService: TodoService) {
+    constructor(private router: Router, private todoService: TodoService) {
         this.todoService.loadCounts().subscribe(counts => this.counts = counts);
+        this.router.navigate(['/open']);
     }
 
     openPageActive(a: any) {

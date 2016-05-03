@@ -1,4 +1,4 @@
-import {Pipe} from 'angular2/core';
+import {Pipe} from '@angular/core';
 import {toVersionString} from '../utils/version-utils';
 
 @Pipe({name: 'versionNumber'})

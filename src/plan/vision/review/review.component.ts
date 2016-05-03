@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from 'angular2/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 
 import {
     Dialog,

@@ -2,8 +2,8 @@ import {
     Component,
     ElementRef,
     ViewEncapsulation,
-} from 'angular2/core';
-import {Router, RouteParams, RouteData} from 'angular2/router';
+} from '@angular/core';
+import {Router, RouteSegment} from '@angular/router';
 
 import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
@@ -34,27 +34,35 @@ export class SchemeDraftEditorComponent {
 
     constructor(
         private router: Router,
-        private routeParams: RouteParams,
-        private routeData: RouteData,
+        private segment: RouteSegment,
         private elementRef: ElementRef,
         private dialog: Dialog,
         private draftService: SchemeDraftService
     ) {
-        this.editMode = routeData.get('mode');
+        if (this.segment.urlSegments[0].toString() === 'create') {
+            this.editMode = EditMode.Create;
+        } else if (this.segment.urlSegments[1].toString() === 'edit') {
+            this.editMode = EditMode.Edit;
+        } else if (this.segment.urlSegments[1].toString() === 'revise') {
+            this.editMode = EditMode.Revise;
+        } else {
+            throw new Error('Unsupported url');
+        }
+        console.log(this.editMode);
 
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.loadDataForCreate(routeParams.get('program')).subscribe(data => {
+                this.draftService.loadDataForCreate(segment.getParam('program')).subscribe(data => {
                     this.vm = new Scheme(data);
                 });
                 break;
             case EditMode.Revise:
-                this.draftService.loadItemForRevise(routeParams.get('id')).subscribe(data => {
+                this.draftService.loadItemForRevise(segment.getParam('id')).subscribe(data => {
                     this.vm = new Scheme(data);
                 });
                 break;
             case EditMode.Edit:
-                this.draftService.loadItemForEdit(routeParams.get('id')).subscribe(data => {
+                this.draftService.loadItemForEdit(segment.getParam('id')).subscribe(data => {
                     this.vm = new Scheme(data);
                     this.vm.rebuildStatus();
                 });
@@ -73,11 +81,11 @@ export class SchemeDraftEditorComponent {
     cancel() {
         switch (this.editMode) {
             case EditMode.Create:
-                this.router.navigate(['Index']);
+                this.router.navigate(['/']);
                 break;
             case EditMode.Revise:
             case EditMode.Edit:
-                this.router.navigate(['Item', {id: this.routeParams.get('id')}]);
+                this.router.navigate([this.segment.getParam('id')]);
                 break;
         }
     }
@@ -170,14 +178,14 @@ export class SchemeDraftEditorComponent {
     }
 
     create() {
-        this.draftService.create(this.vm.toServerDto()).subscribe(id => this.router.navigate(['Item', {id}]), error => alert(error));
+        this.draftService.create(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
     }
 
     revise() {
-        this.draftService.revise(this.vm.toServerDto()).subscribe(id => this.router.navigate(['Item', {id}]), error => alert(error));
+        this.draftService.revise(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
     }
 
     update() {
-        this.draftService.update(this.vm.toServerDto()).subscribe(id => this.router.navigate(['Item', {id}]), error => alert(error));
+        this.draftService.update(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
     }
 }

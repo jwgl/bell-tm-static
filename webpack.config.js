@@ -1,10 +1,11 @@
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
 	entry: {
-		'angular2':          './src/angular2.ts',
+		'angular':           './src/angular.ts',
         'logo':              './src/logo.ts',
         'todo':              './src/todo/todo.ts',
         'vision/list':       './src/plan/vision/public/list.ts',
@@ -34,8 +35,8 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.optimize.CommonsChunkPlugin({name: 'angular2', fileName: 'angular2.js', minChunks: Infinity}),
-        new webpack.optimize.CommonsChunkPlugin({name: 'common', fileName: 'common.js', minChunk: 2}),
+		new CommonsChunkPlugin({name: 'angular', fileName: 'angular.js', minChunks: Infinity}),
+        new CommonsChunkPlugin({name: 'common', fileName: 'common.js', minChunk: 2}),
         new CopyWebpackPlugin([
             {to:'js/lib',    from: './node_modules/moment/min/moment-with-locales.min.js'},
             {to:'js/lib',    from: './node_modules/markdown-it/dist/markdown-it.min.js'},
@@ -52,18 +53,11 @@ module.exports = {
             {to:'js/app',    from: './src/menu.js'},
             {to:'css/app',   from: './src/main.css'}
         ]),
-
         /*
         new UglifyJsPlugin({
-            beautify: false,
-            mangle: {
-                screw_ie8 : true,
-                keep_fnames: true
-            },
             compress: {
-                screw_ie8: true
-            },
-            comments: false
+                warnings: false
+            }
         })
         */
     ],

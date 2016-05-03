@@ -3,7 +3,7 @@ import {
     Input,
     Output,
     EventEmitter,
-} from 'angular2/core';
+} from '@angular/core';
 
 import {EditMode} from '../../../../core/constants';
 import {SchemeTermTitlePipe} from '../../../common/pipes';

@@ -1,5 +1,5 @@
-import {Component, OnInit} from 'angular2/core';
-import {Router, RouteParams} from 'angular2/router';
+import {Component, OnInit} from '@angular/core';
+import {Router, RouteSegment} from '@angular/router';
 
 import {
     Dialog,
@@ -29,12 +29,12 @@ export class SchemeDraftItemComponent implements OnInit {
     private workitems: any[];
 
     constructor(
-        private params: RouteParams,
+        private segment: RouteSegment,
         private router: Router,
         private dialog: Dialog,
         private draftService: SchemeDraftService
     ) {
-        this.id = this.params.get('id');
+        this.id = this.segment.getParam('id');
     }
 
     ngOnInit() {
@@ -48,7 +48,7 @@ export class SchemeDraftItemComponent implements OnInit {
     }
 
     edit() {
-        this.router.navigate(['Edit', {id: this.id}]);
+        this.router.navigate([this.id, 'edit']);
     }
 
     remove() {
@@ -57,7 +57,7 @@ export class SchemeDraftItemComponent implements OnInit {
             content: '确定要删除吗？',
         }).then(() => {
             this.draftService.delete(this.id).subscribe(() => {
-                this.router.navigate(['Index']);
+                this.router.navigate(['/']);
             });
         });
     }
@@ -76,11 +76,11 @@ export class SchemeDraftItemComponent implements OnInit {
     }
 
     revise() {
-        this.router.navigate(['Revise', {id: this.id}]);
+        this.router.navigate([this.id, 'revise']);
     }
 
     returnList() {
-        this.router.navigate(['Index']);
+        this.router.navigate(['/']);
     }
 
     showWorkitems() {

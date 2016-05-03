@@ -1,4 +1,4 @@
-import {Component, Directive, Attribute, Input} from 'angular2/core';
+import {Component, Directive, Attribute, Input} from '@angular/core';
 
 @Component({
     selector: 'modal-dialog',

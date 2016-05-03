@@ -1,5 +1,5 @@
-import {Component} from 'angular2/core';
-import {FormBuilder, ControlGroup} from 'angular2/common';
+import {Component} from '@angular/core';
+import {FormBuilder, ControlGroup} from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 
 import {MODAL_DIRECTIVES} from '../../../core/directives';
