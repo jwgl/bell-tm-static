@@ -7,7 +7,7 @@
                 <ul>
                     <li *ngFor="let scheme of program.schemes">
                         <template [ngIf]="scheme.id">
-                            <a [routerLink]="[scheme.id]">v{{scheme.versionNumber | versionNumber}}</a>
+                            <a [routerLink]="['/', scheme.id]">v{{scheme.versionNumber | versionNumber}}</a>
                             <audit-status [status]="scheme.status"></audit-status>
                         </template>
                         <template [ngIf]="!scheme.id">

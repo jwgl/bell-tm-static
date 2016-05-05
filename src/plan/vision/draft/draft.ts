@@ -11,7 +11,7 @@ import {VisionDraftEditorComponent} from './editor/draft-editor.component';
 
 @Component({
     selector: 'vision-draft-container',
-    template: `<a [routerLink]="['/']"></a><router-outlet></router-outlet>`,
+    template: `<a [routerLink]="'/'"></a><router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES],
 })
 @Routes([

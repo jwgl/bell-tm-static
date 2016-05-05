@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Location} from '@angular/common';
 import {ROUTER_DIRECTIVES, Router, Routes, Route} from '@angular/router';
 
 import {OpenTodoListComponent} from './open-list.component';
@@ -15,22 +16,20 @@ import {TodoService} from '../todo.service';
     new Route({path: 'closed', component: ClosedTodoListComponent}),
 ])
 export class TodoListComponent {
-    counts: { open: number, closed: number };
-    openActive = {active: false};
-    closedActive = {active: false};
+    counts: { open: number, closed: number } = {open: 0, closed: 0};
 
-    constructor(private router: Router, private todoService: TodoService) {
+    constructor(private router: Router, private location: Location, private todoService: TodoService) {
         this.todoService.loadCounts().subscribe(counts => this.counts = counts);
-        this.router.navigate(['/open']);
+        if (location.path() === '') {
+            this.router.navigate(['/open']);
+        }
     }
 
-    openPageActive(a: any) {
-        this.openActive.active = a.classList.contains('router-link-active');
-        return this.openActive;
+    get openPageActive() {
+        return this.location.path() === '/open';
     }
 
-    closedPageActive(a: any) {
-        this.closedActive.active = a.classList.contains('router-link-active');
-        return this.closedActive;
+    get closedPageActive() {
+        return this.location.path() === '/closed';
     }
 }
