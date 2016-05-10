@@ -42,8 +42,8 @@ Scheme.prototype.normalize = function() {
     for (let i = that.properties.length - 1; i >= 0; i--) {
         let property = that.properties[i];
         property.normalize();
-        // 无方向的删除方向课
-        if (property.courses.length === 0) {
+        // 删除可包含方向课，但实际不包含课程的课程性质
+        if (property.hasDirections && (!property.directions || property.directions.length === 0)) {
             that.properties.splice(i, 1);
         }
     };

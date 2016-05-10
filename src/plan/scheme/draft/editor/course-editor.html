@@ -5,6 +5,7 @@
                 <form-field label="课程代码">
                     <course-select [courseId]="schemeCourse.courseId"
                                    [group]="options.group"
+                                   [editMode]="options.editMode"
                                    [isTempCourse]="schemeCourse.isTempCourse"
                                    (select)="onCourseSelected($event)"></course-select>
                 </form-field>

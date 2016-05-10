@@ -65,8 +65,8 @@ export class SchemeDraftService {
         return this.rest.delete(this.api.item(id)).map(res => id);
     }
 
-    findCourses(query: string): Observable<any> {
-        return this.rest.get(`${this.api.list()}/courses?q=${query}`);
+    findCourses(query: string, type: number): Observable<any> {
+        return this.rest.get(`${this.api.list()}/courses?q=${query}&t=${type}`);
     }
 
     commit(id: string, title: string, to: string, comment: string): Observable<any> {

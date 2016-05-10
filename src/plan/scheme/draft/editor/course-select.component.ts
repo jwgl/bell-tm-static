@@ -10,8 +10,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import {SchemeDraftService} from '../draft.service';
+import {EditMode} from '../../../../core/constants';
 import {CourseSelectDto, AbstractGroup} from '../../common/scheme.model';
+import {SchemeDraftService} from '../draft.service';
 
 @Component({
     selector: 'course-select',
@@ -22,6 +23,7 @@ export class CourseSelectComponent {
     @ViewChild('search') input: ElementRef;
     @ViewChild('dropdown') dropdown: ElementRef;
 
+    @Input() editMode: EditMode;
     @Input() courseId: string;
     @Input() isTempCourse: boolean;
     @Input() group: AbstractGroup;
@@ -58,7 +60,8 @@ export class CourseSelectComponent {
     }
 
     search(query: string): Observable<{query: string, result: CourseSelectDto[]}> {
-        return this.draftService.findCourses(query).map(result => ({query: query, result: result}));
+        let type = this.editMode === EditMode.Create ? 0 : (this.isTempCourse ? 2 : 1);
+        return this.draftService.findCourses(query, type).map(result => ({query: query, result: result}));
     }
 
     clearCourse() {
@@ -75,5 +78,9 @@ export class CourseSelectComponent {
         } else {
             return this.isTempCourse ? `临时课程（${this.courseId}）` : `${this.courseId}`;
         }
+    }
+
+    get clearable(): boolean {
+        return this.editMode === EditMode.Create;
     }
 }

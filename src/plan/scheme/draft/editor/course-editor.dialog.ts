@@ -71,6 +71,8 @@ export class CourseEditorDialog extends BaseDialog {
             this.schemeCourse.isTempCourse = course.isTempCourse;
         } else {
             this.schemeCourse.courseId = null;
+            this.schemeCourse.courseName = null;
+            this.schemeCourse.isTempCourse = true;
         }
     }
 

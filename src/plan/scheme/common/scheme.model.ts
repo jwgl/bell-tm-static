@@ -471,6 +471,7 @@ export class SchemeCourse {
     schemeId: number; // 课程可能来自不同的版本
     previousId: number; // 来自服务端的ref
     reviseVersion: number; // 被修改或删除的版本
+    highlight: boolean; // 引用加亮
     /**
      * 引用的记录，当修改记录时，原记录被标记为RecordStatus.Deleted，
      * 插入新记录标记为RecordStatus.Created，新记录的ref引用原记录。

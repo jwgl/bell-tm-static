@@ -13,6 +13,9 @@ import {SchemeCourse, RecordStatus} from '../../common/scheme.model';
     template: require('./scheme-course.html'),
     host: {
         '[class]': 'statusClasses',
+        '[class.highlight]': 'schemeCourse.highlight',
+        '(mouseenter)': 'mouseenter()',
+        '(mouseleave)': 'mouseleave()',
     },
     pipes: [ZeroEmptyPipe],
 })
@@ -38,5 +41,18 @@ export class SchemeCourseComponent {
             classes.push('Curr' + RecordStatus[this.schemeCourse.currStatus]);
         }
         return classes.join(' ');
+    }
+
+    mouseenter() {
+        if (this.schemeCourse.ref) {
+            this.schemeCourse.ref.highlight = true;
+
+        }
+    }
+
+    mouseleave() {
+        if (this.schemeCourse.ref) {
+            this.schemeCourse.ref.highlight = false;
+        }
     }
 }

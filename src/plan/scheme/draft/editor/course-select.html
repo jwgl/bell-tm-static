@@ -18,7 +18,7 @@
         </div>
         <div class="help-block" *ngIf="!(courses?.length > 0)">输入课号或课程名称进行查询</div>
     </div>
-    <div class="input-group-btn">
+    <div class="input-group-btn" *ngIf="clearable">
         <button type="button" class="btn btn-secondary" (click)="clearCourse()">清除</button>
     </div>
 </div>

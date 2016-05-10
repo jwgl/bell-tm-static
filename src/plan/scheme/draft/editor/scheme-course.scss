@@ -2,8 +2,8 @@
 
 $prevCreated: #eaffea;
 $prevDeleted: #ffecec;
-$currCreated: darken(#eaffea, 10%);
-$currDeleted: darken(#ffecec, 10%);
+$currCreated: darken($prevCreated, 10%);
+$currDeleted: darken($prevDeleted, 10%);
 
 :host {
     &.PrevCreated {
@@ -26,5 +26,8 @@ $currDeleted: darken(#ffecec, 10%);
     }
     &.CurrDeleted {
         background-color: $currDeleted;
+    }
+    &.highlight {
+        color: red;
     }
 }
