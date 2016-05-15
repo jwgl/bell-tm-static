@@ -1,0 +1,25 @@
+<table class="table" *ngIf="departments">
+    <thead>
+        <tr>
+            <th>学院</th>
+            <th>专业</th>
+            <th>最近招生年级</th>
+            <th>专业负责人</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template ngFor let-department [ngForOf]="departments" let-i="index">
+            <template ngFor let-subject [ngForOf]="department.subjects" let-j="index">
+                <tr>
+                    <td *ngIf="j == 0" [rowSpan]="department.subjects.length">{{department.name}}</td>
+                    <td>{{subject.subjectId}} {{subject.subjectName}}</td>
+                    <td>{{subject.maxGrade}}</td>
+                    <td>
+                        <a href="#" class="open-dialog" (click)="selectTeacher($event.target, subject);false;">{{format(subject)}}</a>
+                        <i [spinning]="subject.processing"></i>
+                    </td>
+                </tr>
+            </template>
+        </template>
+    </tbody>
+</table>

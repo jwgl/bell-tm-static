@@ -8,6 +8,7 @@ module.exports = {
         'angular': './src/angular.ts',
         'logo': './src/logo.ts',
         'todo': './src/todo/todo.ts',
+        'setting/subject': './src/plan/settings/subject/subject.ts',
         'vision/list': './src/plan/vision/public/list.ts',
         'vision/item': './src/plan/vision/public/item.ts',
         'vision/draft': './src/plan/vision/draft/draft.ts',

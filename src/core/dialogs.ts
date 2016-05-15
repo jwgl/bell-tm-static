@@ -5,3 +5,4 @@ export {WorkflowAcceptDialog} from './dialogs/workflow-accept.dialog';
 export {WorkflowRejectDialog} from './dialogs/workflow-reject.dialog';
 export {WorkflowWorkitemsDialog} from './dialogs/workflow-workitems.dialog';
 export {SimpleListSelectDialog} from './dialogs/simple-list-select.dialog';
+export {TeacherSelectDialog} from './dialogs/teacher-select.dialog';

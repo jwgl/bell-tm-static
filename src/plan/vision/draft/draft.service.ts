@@ -1,6 +1,5 @@
 import {Injectable, Inject, Optional} from '@angular/core';
 
-import {groupBy} from '../../../core/pipes';
 import {ApiUrl, Rest, Observable, API_URL_FIELDS} from '../../../core/http';
 import {Vision} from '../common/vision.model';
 
@@ -48,18 +47,6 @@ export class VisionDraftService {
 
     loadDataForImport(id: string): Observable<any> {
         return this.rest.get(`${this.importUrl}/${id}`);
-    }
-
-    getFields(): Observable<any> {
-        return this.rest.get(this.fieldUrl)
-            .map(values => groupBy(values, [{
-                groupBy: 'fieldClass',
-                into: 'fields',
-                mappings: {
-                    discipline: 'discipline',
-                    fieldClass: 'name',
-                },
-            }]));
     }
 
     create(value: any): Observable<string> {
