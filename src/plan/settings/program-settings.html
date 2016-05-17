@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="form-group col-xs-2">
+        <select class="form-control" (change)="onGradeChanged($event.target.value)">
+            <option *ngFor="let grade of grades" [value]="grade">{{grade}}级</option>
+        </select>
+    </div>
+</div>
+<table class="table" *ngIf="departments">
+    <thead>
+        <tr>
+            <th rowspan="2">学院</th>
+            <th rowspan="2">专业</th>
+            <th rowspan="2">执行计划</th>
+            <th>培养方案</th>
+            <th colspan="3" class="center">教学安排</th>
+            <th rowspan="2"></th>
+        </tr>
+        <tr>
+            <th>能否修订</th>
+            <th>模板</th>
+            <th>锁定模板</th>
+            <th>能否修订</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template ngFor let-department [ngForOf]="departments" let-i="index">
+            <template ngFor let-program [ngForOf]="department.programs" let-j="index">
+                <tr>
+                    <td *ngIf="j == 0" [rowSpan]="department.programs.length">{{department.name}}</td>
+                    <td class="name">{{program.subjectId}} {{program.subjectName}}</td>
+                    <td>{{program.programId}} {{program.programType | programType: true}}</td>
+                    <td class="center"><input type="checkbox" [checked]="program.visionRevisible" (change)="valueChanged(program, 'visionRevisible')"></td>
+                    <td><a href="#" (click)="selectTemplate(program);false;">{{program.templateName}}</a></td>
+                    <td class="center"><input type="checkbox" [checked]="program.templateLocked" (change)="valueChanged(program, 'templateLocked')"></td>
+                    <td class="center"><input type="checkbox" [checked]="program.schemeRevisible" (change)="valueChanged(program, 'schemeRevisible')"></td>
+                    <td><i [spinning]="program.processing"></i></td>
+                </tr>
+            </template>
+        </template>
+    </tbody>
+</table>

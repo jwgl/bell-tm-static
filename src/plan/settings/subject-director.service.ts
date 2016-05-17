@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ApiUrl, Rest, Observable} from '../../../core/http';
+import {ApiUrl, Rest, Observable} from '../../core/http';
 @Injectable()
-export class SubjectSetupService {
+export class SubjectDirectorService {
     constructor(
         private rest: Rest,
         private api: ApiUrl

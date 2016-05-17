@@ -1,0 +1,21 @@
+.table {
+    td {
+        white-space: nowrap;
+        &.center {
+            text-align: center;
+        }
+        &.name {
+            white-space: normal;
+        }
+    }
+
+    th {
+        white-space: nowrap;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        vertical-align: middle;
+        &.center {
+            text-align: center;
+        }
+    }
+}

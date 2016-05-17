@@ -5,18 +5,19 @@ var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 
 module.exports = {
     entry: {
-        'angular': './src/angular.ts',
-        'logo': './src/logo.ts',
-        'todo': './src/todo/todo.ts',
-        'setting/subject': './src/plan/settings/subject/subject.ts',
-        'vision/list': './src/plan/vision/public/list.ts',
-        'vision/item': './src/plan/vision/public/item.ts',
-        'vision/draft': './src/plan/vision/draft/draft.ts',
-        'vision/review': './src/plan/vision/review/review.ts',
-        'scheme/list': './src/plan/scheme/public/list.ts',
-        'scheme/item': './src/plan/scheme/public/item.ts',
-        'scheme/draft': './src/plan/scheme/draft/draft.ts',
-        'scheme/review': './src/plan/scheme/review/review.ts',
+        'angular':          './src/angular.ts',
+        'logo':             './src/logo.ts',
+        'todo':             './src/todo/todo.ts',
+        'settings/subject': './src/plan/settings/subject-director.ts',
+        'settings/program': './src/plan/settings/program-settings.ts',
+        'vision/list':      './src/plan/vision/public/list.ts',
+        'vision/item':      './src/plan/vision/public/item.ts',
+        'vision/draft':     './src/plan/vision/draft/draft.ts',
+        'vision/review':    './src/plan/vision/review/review.ts',
+        'scheme/list':      './src/plan/scheme/public/list.ts',
+        'scheme/item':      './src/plan/scheme/public/item.ts',
+        'scheme/draft':     './src/plan/scheme/draft/draft.ts',
+        'scheme/review':    './src/plan/scheme/review/review.ts',
     },
 
     output: {

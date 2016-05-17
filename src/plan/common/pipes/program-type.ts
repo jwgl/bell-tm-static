@@ -4,8 +4,12 @@ const SCHEME_TYPES = ['', '辅修', '专升本'];
 
 @Pipe({name: 'programType'})
 export class ProgramTypePipe {
-    transform(type: any, args: any[]) {
-        return SCHEME_TYPES[type];
+    transform(type: any, showPrimary: boolean) {
+        if (showPrimary && type === 0) {
+            return '主修';
+        } else {
+            return SCHEME_TYPES[type];
+        }
     }
 }
 

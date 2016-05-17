@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 
-import {Dialog, TeacherSelectDialog} from '../../../../core/dialogs';
-import {Spinning} from '../../../../core/directives';
-import {groupBy} from '../../../../core/utils';
-import {SubjectSetupService} from '../subject.service';
+import {Dialog, TeacherSelectDialog} from '../../core/dialogs';
+import {Spinning} from '../../core/directives';
+import {groupBy} from '../../core/utils';
+import {SubjectDirectorService} from './subject-director.service';
 
 @Component({
-    selector: 'subject-director',
+    selector: 'subject-director-list',
     template: require('./subject-director.html'),
     directives: [Spinning],
     providers: [Dialog],
@@ -16,7 +16,7 @@ export class SubjectDirectorComponent {
 
     constructor(
         private dialog: Dialog,
-        private service: SubjectSetupService) {
+        private service: SubjectDirectorService) {
         this.service.loadList().map(items => {
             let departments: {
                 id: string,

@@ -14,17 +14,13 @@ import {BaseDialog} from './dialog';
     ],
 })
 export class SimpleListSelectDialog extends BaseDialog {
-    result: string;
+    result: any;
     title: string;
     valueFn = (item: any) => item.id;
     labelFn = (item: any) => item.toString();
 
     constructor(private rest: Rest) {
         super();
-    }
-
-    selectChanged(id: string) {
-        this.result = id;
     }
 
     protected onOpening(): Observable<any> {
