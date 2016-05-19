@@ -1,6 +1,6 @@
 <modal-dialog [title]="title">
     <modal-body>
-        <select class="form-control" size="10" multiple [(ngModel)]="result">
+        <select class="form-control" size="10" [(ngModel)]="result" style="overflow-y: auto">
             <option *ngFor="let item of options.data" [ngValue]="valueFn(item)">{{labelFn(item)}}</option>
         </select>
     </modal-body>
