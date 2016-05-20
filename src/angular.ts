@@ -1,6 +1,5 @@
 import 'ts-helpers';
 import 'core-js';
-import 'reflect-metadata';
 import 'zone.js/dist/zone';
 
 import '@angular/platform-browser-dynamic';

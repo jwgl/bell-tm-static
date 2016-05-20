@@ -1,12 +1,11 @@
 {
   "name": "bell-tm-static",
   "dependencies": {},
-  "devDependencies": {},
-  "ambientDependencies": {
-    "bootstrap": "github:DefinitelyTyped/DefinitelyTyped/bootstrap/bootstrap.d.ts#76534619dd2e00ef7575225fec70eec5bd67a62a",
-    "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
-    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#fab0b336b0414fac23963bde83f7d7077f6cf14c",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#366b936e62a6244a15f011e0ee0559b903d1dd65",
-    "select2": "github:DefinitelyTyped/DefinitelyTyped/select2/select2.d.ts#3da6ba8845524ccc975369792772f232dad80f0a"
+  "globalDependencies": {
+    "bootstrap": "registry:dt/bootstrap#3.3.5+20160316155526",
+    "core-js": "registry:dt/core-js#0.0.0+20160317120654",
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "node": "registry:dt/node#6.0.0+20160514165920",
+    "select2": "registry:dt/select2#4.0.1+20160501141734"
   }
 }
