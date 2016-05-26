@@ -102,7 +102,18 @@ export class VisionDraftEditorComponent implements OnInit {
     }
 
     create() {
-        throw new Error('no implement');
+        this.draftService.create({
+            objective:       this.form.value.objective,
+            specification:   this.form.value.specification,
+            schoolingLength: this.form.value.schoolingLength,
+            awardedDegree:   this.form.value.awardedDegree,
+            programId:       this.vm.programId,
+            versionNumber:   this.vm.versionNumber,
+        }).subscribe(id => {
+            this.router.navigate([id]);
+        }, error => {
+            alert(error);
+        });
     }
 
     revise() {
