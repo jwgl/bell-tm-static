@@ -6,11 +6,8 @@ import {
 } from '@angular/core';
 
 import {EditMode} from '../../../../core/constants';
-import {SchemeTermTitlePipe} from '../../../common/pipes';
-
 import {Scheme, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
 import {SchemePropertyComponent} from './scheme-property.component';
-import {SchemeDirectionComponent} from './scheme-direction.component';
 import {SchemeGroupComponent} from './scheme-group.component';
 import {SchemeCourseComponent} from './scheme-course.component';
 import {SchemeSummaryComponent} from './scheme-summary.component';
@@ -23,13 +20,9 @@ import {SchemeSummaryComponent} from './scheme-summary.component';
     template: require('./scheme-table.html'),
     directives: [
         SchemePropertyComponent,
-        SchemeDirectionComponent,
         SchemeGroupComponent,
         SchemeCourseComponent,
         SchemeSummaryComponent,
-    ],
-    pipes: [
-        SchemeTermTitlePipe,
     ],
 })
 export class SchemeDraftTableComponent {

@@ -1,23 +1,19 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th rowspan="2">课程编码</th>
-            <th rowspan="2">课程名称</th>
-            <th rowspan="2">学分</th>
-            <th rowspan="2">实践<br>学分</th>
-            <th rowspan="2">总<br>学时</th>
+            <th>课程编码</th>
+            <th>课程名称</th>
+            <th>学分</th>
+            <th>实践<br>学分</th>
+            <th>总<br>学时</th>
             <th [attr.colspan]="scheme.terms.length">开课学期和周学时数</th>
-            <th rowspan="2">操作</th>
-        </tr>
-        <tr>
-            <th *ngFor="let term of scheme.terms">{{term | termTitle}}</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
         <template ngFor let-property [ngForOf]="scheme.properties">
             <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
             <template ngFor let-direction [ngForOf]="property.directions">
-                <tr [scheme-direction]="direction" [terms]="scheme.terms"></tr>
                 <tr *ngFor="let sc of direction.courses"
                     [scheme-course]="sc"
                     [terms]="scheme.terms"

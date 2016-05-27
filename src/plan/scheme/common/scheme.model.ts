@@ -142,7 +142,7 @@ export class Scheme {
                 `${d.name.replace('方向','')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`
             );
             if (results.length) {
-                return `(${results.join(',')})`;
+                return `（${results.join(',')}）`;
             } else {
                 return null;
             }

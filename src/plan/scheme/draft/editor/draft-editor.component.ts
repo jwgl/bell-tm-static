@@ -123,7 +123,7 @@ export class SchemeDraftEditorComponent {
 
     importPropertyCourses(property: Property) {
         this.dialog.open(SimpleListSelectDialog, {
-            title: '选择导入的专业',
+            title: `导入课程 - ${property.name}`,
             url: `/api/departments/${this.vm.departmentId}/schemes`,
             labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
         }).then(id => {
@@ -139,7 +139,7 @@ export class SchemeDraftEditorComponent {
 
     importDirectionCourses(direction: Direction) {
         this.dialog.open(SimpleListSelectDialog, {
-            title: '选择导入的专业及方向',
+            title: `导入课程 - ${direction.name}`,
             url: `/api/departments/${this.vm.departmentId}/schemeDirections`,
             valueFn: (item: any) => `${item.schemeId}:${item.directionId}`,
             labelFn: (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
@@ -158,17 +158,25 @@ export class SchemeDraftEditorComponent {
     save() {
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.create(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
+                this.draftService.create(this.vm.toServerDto()).subscribe(
+                    id => this.router.navigate([id]),
+                    error => alert(JSON.stringify(error))
+                );
                 break;
             case EditMode.Revise:
-                this.draftService.revise(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
+                this.draftService.revise(this.vm.toServerDto()).subscribe(
+                    id => this.router.navigate([id]),
+                    error => alert(JSON.stringify(error))
+                );
                 break;
             case EditMode.Edit:
-                this.draftService.update(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
+                this.draftService.update(this.vm.toServerDto()).subscribe(
+                    id => this.router.navigate([id]),
+                    error => alert(JSON.stringify(error))
+                );
                 break;
         }
     }
-
 
     private onLoadData(data: any) {
         this.vm = new Scheme(data);

@@ -9,7 +9,7 @@ import {SchemeTermNamePipe} from '../../../common/pipes';
 import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../common/utils';
 import {CourseSelectComponent} from './course-select.component';
 import {AllowedTermComponent, AllowedTermAccessor} from './allowed-term.component';
-import {SchemeCourseDto, CourseSelectDto, AbstractGroup} from '../../common/scheme.model';
+import {SchemeCourseDto, CourseSelectDto} from '../../common/scheme.model';
 
 
 @Component({
@@ -29,23 +29,19 @@ import {SchemeCourseDto, CourseSelectDto, AbstractGroup} from '../../common/sche
 export class CourseEditorDialog extends BaseDialog {
     title: string;
     schemeCourse: SchemeCourseDto = <any>{};
-    group: AbstractGroup;
-
     periodWeekOptions: [{label: string, value: number}] = <any>[];
     lastPeriodWeeks: number;
-
 
     constructor() {
         super();
     }
 
     protected onOpening(): Observable<any> {
-        this.title = this.options.editMode === EditMode.Create ? '添加课程' : '编辑课程';
         if (this.options.editMode === EditMode.Create) {
-            this.title = '添加课程';
+            this.title = `添加课程 - ${this.options.group.name}`;
             this.schemeCourse = this.defaultCourse();
         } else {
-            this.title = '编辑课程';
+            this.title = `编辑课程 - ${this.options.group.name}`;
             this.schemeCourse = this.options.dto;
         }
 
