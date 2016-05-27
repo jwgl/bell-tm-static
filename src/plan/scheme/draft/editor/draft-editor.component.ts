@@ -62,11 +62,6 @@ export class SchemeDraftEditorComponent {
         }
     }
 
-    onLoadData(data: any) {
-        this.vm = new Scheme(data);
-        this.vm.onInit(this.editMode);
-    }
-
     get canEditVersion(): boolean {
         return this.editMode === EditMode.Create || this.editMode === EditMode.Revise;
     }
@@ -163,26 +158,20 @@ export class SchemeDraftEditorComponent {
     save() {
         switch (this.editMode) {
             case EditMode.Create:
-                this.create();
+                this.draftService.create(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
                 break;
             case EditMode.Revise:
-                this.revise();
+                this.draftService.revise(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
                 break;
             case EditMode.Edit:
-                this.update();
+                this.draftService.update(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(JSON.stringify(error)));
                 break;
         }
     }
 
-    create() {
-        this.draftService.create(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
-    }
 
-    revise() {
-        this.draftService.revise(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
-    }
-
-    update() {
-        this.draftService.update(this.vm.toServerDto()).subscribe(id => this.router.navigate([id]), error => alert(error));
+    private onLoadData(data: any) {
+        this.vm = new Scheme(data);
+        this.vm.onInit(this.editMode);
     }
 }
