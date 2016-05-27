@@ -121,6 +121,35 @@ export class Scheme {
     get residualCredit(): number {
         return this.credit - this.properties.filter(p => !p.isResidual).reduce((acc, p) => acc + p.minTotalCredit, 0);
     }
+
+    /**
+     * 获取不同方向的残余学分，用于显示。
+     */
+    get directionResidualCredits(): string {
+        if (this.directions.length > 0) {
+            let residualCredit = this.residualCredit;
+            // 获取具有方向的属性
+            let property = this.properties.find(p => p.hasDirections);
+            // 可能计划中不包含专业方向课程性质
+            if (!property) {
+                return null;
+            }
+
+            // 该属性的最小学分
+            let minTotalCredit = property.minTotalCredit;
+            // 获取不等于最小学分的方向。
+            let results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d =>
+                `${d.name.replace('方向','')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`
+            );
+            if (results.length) {
+                return `(${results.join(',')})`;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 }
 
 export abstract class AbstractGroup {
@@ -301,29 +330,7 @@ export class Property extends AbstractGroup {
         return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
     }
 
-    /**
-     * 获取不同方向的残余学分，用于显示。
-     */
-    get directionResidualCredits(): string {
-        if (this.isResidual) {
-            let residualCredit = this.scheme.residualCredit;
-            // 获取具有方向的属性
-            let property = this.scheme.properties.find(p => !!p.directions);
-            // 该属性的最小学分
-            let minTotalCredit = property.minTotalCredit;
-            // 获取不等于最小学分的方向。
-            let results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d =>
-                `${d.name.replace('方向','')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`
-            );
-            if (results.length) {
-                return `(${results.join(',')})`;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
+
 
     getScheme() {
         return this.scheme;

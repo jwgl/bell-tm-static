@@ -48,26 +48,23 @@ export class SchemeDraftEditorComponent {
         } else {
             throw new Error('Unsupported url');
         }
-        console.log(this.editMode);
 
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.loadDataForCreate(segment.getParam('program')).subscribe(data => {
-                    this.vm = new Scheme(data);
-                });
+                this.draftService.loadDataForCreate(segment.getParam('program')).subscribe(data => this.onLoadData(data));
                 break;
             case EditMode.Revise:
-                this.draftService.loadItemForRevise(segment.getParam('id')).subscribe(data => {
-                    this.vm = new Scheme(data);
-                });
+                this.draftService.loadItemForRevise(segment.getParam('id')).subscribe(data => this.onLoadData(data));
                 break;
             case EditMode.Edit:
-                this.draftService.loadItemForEdit(segment.getParam('id')).subscribe(data => {
-                    this.vm = new Scheme(data);
-                    this.vm.rebuildStatus();
-                });
+                this.draftService.loadItemForEdit(segment.getParam('id')).subscribe(data => this.onLoadData(data));
                 break;
         }
+    }
+
+    onLoadData(data: any) {
+        this.vm = new Scheme(data);
+        this.vm.onInit(this.editMode);
     }
 
     get canEditVersion(): boolean {

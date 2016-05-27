@@ -1,4 +1,5 @@
 import {equalsTo} from '../../../../core/utils';
+import {EditMode} from '../../../../core/constants';
 
 import {
     Scheme,
@@ -12,6 +13,14 @@ import {
 
 declare module '../../common/scheme.model' {
     interface Scheme {
+        /**
+         *
+         */
+        onInit(editMode: EditMode): void;
+
+        /**
+         * 转换为Server DTO
+         */
         toServerDto(): any;
 
         /**
@@ -81,6 +90,21 @@ declare module '../../common/scheme.model' {
         canRevert(): boolean;
     }
 }
+
+Scheme.prototype.onInit = function(editMode: EditMode) {
+    let that = <Scheme>this;
+
+    for (let i = that.properties.length - 1; i >= 0; i--) {
+        let property = that.properties[i];
+        if (property.hasDirections && property.directions === undefined) {
+            that.properties.splice(i, 1);
+        }
+    }
+
+    if (editMode === EditMode.Edit) {
+        that.rebuildStatus();
+    }
+};
 
 Scheme.prototype.toServerDto = function() {
     let that = <Scheme>this;
