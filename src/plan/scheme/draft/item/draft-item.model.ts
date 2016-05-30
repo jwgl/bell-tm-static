@@ -20,8 +20,10 @@ Scheme.prototype.checkCredit = function() {
             return {
                 id: d.id,
                 name: d.name,
-                total: compulsories.reduce((sum, s) => sum += s.directions ? s.directions.find(sd => sd.id == d.id).credit : s.credit, 0),
-                practiceCredit: compulsories.reduce((sum, s) => sum += s.directions ? s.directions.find(sd => sd.id == d.id).practiceCredit : s.practiceCredit, 0),
+                total: compulsories.reduce((sum, s) =>
+                    sum += s.directions ? s.directions.find(sd => sd.id === d.id).credit : s.credit, 0),
+                practiceCredit: compulsories.reduce((sum, s) =>
+                    sum += s.directions ? s.directions.find(sd => sd.id === d.id).practiceCredit : s.practiceCredit, 0),
             };
         });
 
@@ -48,4 +50,4 @@ Scheme.prototype.checkCredit = function() {
     }
 
     return errors;
-}
+};

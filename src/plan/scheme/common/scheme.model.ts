@@ -155,11 +155,11 @@ export class Scheme {
 
     get creditStatis() {
         return this.properties.map(p => {
-            let cs : CreditStatis = <CreditStatis>{};
+            let cs: CreditStatis = <CreditStatis>{};
             cs.id = p.id;
             cs.name = p.name;
             cs.credit = p.totalCredit;
-            cs.practiceCredit = p.totalPracticeCredit
+            cs.practiceCredit = p.totalPracticeCredit;
             if (p.isCompulsory) {
                 cs.electiveCredit = cs.credit;
                 cs.electivePracticeCredit = cs.practiceCredit;
@@ -178,8 +178,8 @@ export class Scheme {
                         id: d.id,
                         name: d.name,
                         credit: direction ? direction.totalCredit : 0,
-                        practiceCredit: direction ? direction.totalPracticeCredit: 0,
-                    }
+                        practiceCredit: direction ? direction.totalPracticeCredit : 0,
+                    };
                 });
             }
             return cs;
