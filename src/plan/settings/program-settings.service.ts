@@ -19,7 +19,7 @@ export class ProgramSettingsService {
         return this.rest.get(`${this.api.list()}/grades`);
     }
 
-    update(programId: number, field: string, value: any): Observable<void> {
-        return this.rest.patch(this.api.item(programId), {field, value});
+    update(programId: number, options: any): Observable<void> {
+        return this.rest.put(this.api.item(programId), options);
     }
 }

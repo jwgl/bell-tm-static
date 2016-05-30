@@ -1,0 +1,18 @@
+<div class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title">错误</h4>
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li *ngFor="let error of options.errors" class="text-danger">{{error}}</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button modalCancel>关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

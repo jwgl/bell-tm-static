@@ -6,6 +6,7 @@ import {
     ConfirmDialog,
     WorkflowWorkitemsDialog,
     WorkflowCommitDialog,
+    ErrorMessageDialog,
 } from '../../../../core/dialogs';
 import {toVersionString} from '../../../common/utils';
 import {SchemeViewerComponent} from '../../common/scheme-viewer.component';
@@ -63,16 +64,21 @@ export class SchemeDraftItemComponent implements OnInit {
     }
 
     commit() {
-        let what = `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
-        this.dialog.open(WorkflowCommitDialog, {
-            whoUrl: this.draftService.getCheckersUrl(this.id),
-            does: '审核',
-            what: what,
-        }).then(result => {
-            this.draftService.commit(this.id, what, result.to, result.comment).subscribe(() => {
-                this.ngOnInit();
+        let errors = this.vm.checkCredit();
+        if (errors.length > 0) {
+            this.dialog.open(ErrorMessageDialog, {errors});
+        } else {
+            let what = `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
+            this.dialog.open(WorkflowCommitDialog, {
+                whoUrl: this.draftService.getCheckersUrl(this.id),
+                does: '审核',
+                what: what,
+            }).then(result => {
+                this.draftService.commit(this.id, what, result.to, result.comment).subscribe(() => {
+                    this.ngOnInit();
+                });
             });
-        });
+        }
     }
 
     revise() {

@@ -1,0 +1,51 @@
+<modal-dialog [title]="title">
+    <modal-body>
+        <form class="form-horizontal" #f="ngForm">
+            <fieldset>
+                <legend>培养方案</legend>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"
+                            ngControl="visionRevisible"
+                            [(ngModel)]= "programSetting.visionRevisible"> 能否修订
+                    </label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>课程安排</legend>
+                <div class="form-group">
+                    <form-field label="计划模板">
+                        <select class="form-control" col="4" min="0"
+                            ngControl="schemeTemplate"
+                            [(ngModel)]= "template">
+                            <option *ngFor="let template of options.data" [ngValue]="template">{{template.name}}</option>
+                        </select>
+                    </form-field>
+                    <form-field label="实践比例">
+                        <input type="number" class="form-control" col="4" min="0" max="1" step="0.01"
+                            ngControl="practiceCreditRatio"
+                            [(ngModel)]= "programSetting.practiceCreditRatio">
+                    </form-field>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"
+                            ngControl="templateLocked"
+                            [(ngModel)]= "programSetting.templateLocked"> 是否锁定
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"
+                            ngControl="schemeRevisible"
+                            [(ngModel)]= "programSetting.schemeRevisible"> 能否修订
+                    </label>
+                </div>
+            </fieldset>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()" [disabled]="!f.valid">确定</button>
+    </modal-footer>
+</modal-dialog>

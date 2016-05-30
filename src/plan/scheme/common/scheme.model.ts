@@ -52,6 +52,7 @@ export class Scheme {
     properties: Property[];
     terms: number[];
     directions: DirectionDto[];
+    practiceCreditRatio: number;
 
     constructor(dto: SchemeDto) {
         this.id                    = dto.id;
@@ -68,6 +69,7 @@ export class Scheme {
         this.workflowInstanceId    = dto.workflowInstanceId;
         this.directions            = dto.directions;
         this.terms                 = dto.template.terms;
+        this.practiceCreditRatio   = dto.template.practiceCreditRatio;
 
         this.properties = dto.template.properties.map(tp => {
             tp.locked = tp.locked && dto.template.schemeTemplateLocked;
@@ -149,6 +151,39 @@ export class Scheme {
         } else {
             return null;
         }
+    }
+
+    get creditStatis() {
+        return this.properties.map(p => {
+            let cs : CreditStatis = <CreditStatis>{};
+            cs.id = p.id;
+            cs.name = p.name;
+            cs.credit = p.totalCredit;
+            cs.practiceCredit = p.totalPracticeCredit
+            if (p.isCompulsory) {
+                cs.electiveCredit = cs.credit;
+                cs.electivePracticeCredit = cs.practiceCredit;
+            } else {
+                cs.electiveCredit = p.courses.filter(c => c.isActive).reduce((sum, c) => sum += c.credit, 0);
+                cs.electivePracticeCredit = p.courses.filter(c => c.isActive).reduce((sum, c) => sum += c.practiceCredit, 0);
+            }
+
+            if (p.hasDirections) {
+                cs.directions = this.directions.map(d => {
+                    let direction = <Direction>null;
+                    if (p.directions) {
+                        direction = p.directions.find(pd => pd.id === d.id);
+                    }
+                    return {
+                        id: d.id,
+                        name: d.name,
+                        credit: direction ? direction.totalCredit : 0,
+                        practiceCredit: direction ? direction.totalPracticeCredit: 0,
+                    }
+                });
+            }
+            return cs;
+        });
     }
 }
 
@@ -249,6 +284,7 @@ export class Direction extends AbstractGroup {
 
         let schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
+        schemeCourse.displayOrder = this.getDisplayOrder(sc);
         // 编辑时由外部函数更新prevStatus
         schemeCourse.prevStatus = RecordStatus.None;
         schemeCourse.currStatus = RecordStatus.None;
@@ -265,6 +301,7 @@ export class Direction extends AbstractGroup {
 
         let schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
+        schemeCourse.displayOrder = this.getDisplayOrder(sc);
         schemeCourse.prevStatus = RecordStatus.None;
         schemeCourse.currStatus = RecordStatus.Created;
         this.courses.push(schemeCourse);
@@ -277,6 +314,13 @@ export class Direction extends AbstractGroup {
      */
     get rowspan(): number {
         return this.courses.length + 1;
+    }
+
+    /**
+     * 获取显示顺序
+     */
+    private getDisplayOrder(sc: SchemeCourseDto): number {
+        return this.property.scheme.terms.indexOf(sc.suggestedTerm);
     }
 }
 
@@ -329,7 +373,6 @@ export class Property extends AbstractGroup {
     get minTotalCredit(): number {
         return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
     }
-
 
 
     getScheme() {
@@ -646,6 +689,7 @@ export interface TemplateDto {
     properties: TemplatePropertyDto[];
     terms: number[];
     courses: SchemeCourseDto[];
+    practiceCreditRatio: number;
 }
 
 export interface TemplatePropertyDto {
@@ -677,4 +721,19 @@ export interface CourseSelectDto {
     assessType: number;
     department: string;
     isTempCourse: boolean;
+}
+
+export interface CreditStatis {
+    id: number;                     // 课程性质ID
+    name: string;                   // 课程性质名称
+    credit: number;                 // 要求总学分
+    practiceCredit: number;         // 要求总实践学分
+    electiveCredit: number;         // 可选总学分
+    electivePracticeCredit: number; // 可选总实践学分
+    directions: {
+        id: number;                 // 方向ID
+        name: string;               // 方向名称
+        credit: number;             // 要求总学分
+        practiceCredit: number;     // 要求总实践学分
+    }[];
 }

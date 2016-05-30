@@ -1,10 +1,11 @@
 import {Component} from '@angular/core';
 
-import {Dialog, SimpleListSelectDialog} from '../../core/dialogs';
+import {Dialog} from '../../core/dialogs';
 import {Spinning} from '../../core/directives';
 import {groupBy} from '../../core/utils';
 import {ProgramTypePipe, VersionNumberPipe} from '../common/pipes';
 import {ProgramSettingsService} from './program-settings.service';
+import {ProgramSettingsDialog} from './program-settings-editor.dialog';
 
 @Component({
     selector: 'program-settings-list',
@@ -47,32 +48,23 @@ export class ProgramSettingsComponent {
         this.service.loadGrades().subscribe(grades => this.grades = grades);
     }
 
-    valueChanged(program: any, field: string) {
-        let newValue = !program[field];
-        program.processing = true;
-        this.service.update(program.programId, field, newValue).subscribe(_ => {
-            program.processing = false;
-            program[field] = newValue;
-        });
-    }
-
-    selectTemplate(program: any) {
-        this.dialog.open(SimpleListSelectDialog, {
-            title: '选择教学计划模板',
-            url: '/api/schemeTemplates',
-            valueFn: (item: any) => item,
-            labelFn: (item: any) => item.name,
-        }).then(result => {
-            program.processing = true;
-            this.service.update(program.programId, 'schemeTemplate', result.id).subscribe(_ => {
-                program.processing = false;
-                program.templateId = result.id;
-                program.templateName = result.name;
-            });
-        });
-    }
-
     onGradeChanged(grade: number) {
         this.loadData(grade);
+    }
+
+    edit(program: any) {
+        this.dialog.open(ProgramSettingsDialog, {
+            programSetting: program,
+            url: '/api/schemeTemplates',
+        }).then(result => {
+            this.service.update(program.programId, result).subscribe(_ => {
+                program.visionRevisible = result.visionRevisible;
+                program.practiceCreditRatio = result.practiceCreditRatio;
+                program.templateLocked = result.templateLocked;
+                program.schemeRevisible = result.schemeRevisible;
+                program.templateId = result.templateId;
+                program.templateName = result.templateName;
+            });
+        });
     }
 }
