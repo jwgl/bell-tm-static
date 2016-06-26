@@ -22,7 +22,7 @@
         font-size: 1.25Rem;
     }
 
-    .table {
+    table {
         th {
             text-align: center;
             vertical-align: middle;
@@ -57,7 +57,6 @@
     .vertical {
         width: 1rem;
         line-height: 1.25rem;
-        letter-spacing: 1rem;
         margin: auto;
         white-space: normal;
     }
@@ -66,21 +65,32 @@
         line-height: 1.25rem;
     }
 
-    .total-period {
-        position: relative;
-    }
-
-    .period-weeks {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        padding-left: 1px;
-        padding-right: 1px;
-        font-size: 12px;
-    }
-
     scheme-table {
         display: block;
         margin-bottom: 1rem;
+    }
+}
+
+@media print {
+    @page {
+        margin-top: 3cm;
+        margin-bottom: 2.5cm;
+        margin-left: 2.5cm;
+        margin-right: 2.5cm;
+    }
+
+    body {
+        font-size: 10px;
+    }
+
+    .scheme {
+        th {
+            border-color: #000 !important;
+            border-top-width: 2px !important;
+        }
+        td {
+            border-color: #000 !important;
+            pading: 2px!important;
+        }
     }
 }

@@ -10,5 +10,7 @@
 <p>在规定的年限内，修满规定学分者，可取得毕业证书，符合学位授予条件者可以授予{{vision.degreeName}}学士学位。</p>
 <div [markdown]="vision.awardedDegree"></div>
 <h2>五、课程教学安排表</h2>
-<p *ngIf="vision.schemeId"><a [href]="'/schemes/' + vision.schemeId">查看</a></p>
-<p *ngIf="!vision.schemeId">[空]</p>
+<div class="no-print">
+    <p *ngIf="vision.schemeId"><a [href]="'/schemes/' + vision.schemeId">查看</a></p>
+    <p *ngIf="!vision.schemeId">[空]</p>
+</div>
