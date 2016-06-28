@@ -1,4 +1,5 @@
 import {bootstrap} from '@angular/platform-browser-dynamic';
+import {Title} from '@angular/platform-browser';
 import {provide, Component, ElementRef, OnInit} from '@angular/core';
 
 import {REST_PROVIDERS, API_URL} from '../../../core/http';
@@ -20,7 +21,8 @@ export class VisionPublicItemComponent implements OnInit {
 
     constructor(
         public elementRef: ElementRef,
-        private publicService: VisionPublicService) {
+        private publicService: VisionPublicService,
+        private title: Title) {
         // TODO: see https://github.com/angular/angular/issues/1858
         this.id = elementRef.nativeElement.getAttribute('id');
     }
@@ -28,6 +30,7 @@ export class VisionPublicItemComponent implements OnInit {
     ngOnInit() {
         this.publicService.getItem(this.id).subscribe(vision => {
             this.vm = vision;
+            this.title.setTitle(vision.title);
         });
     }
 }
@@ -36,4 +39,5 @@ bootstrap(VisionPublicItemComponent, [
     provide(API_URL, {useValue: '/api/visions'}),
     REST_PROVIDERS,
     VisionPublicService,
+    Title,
 ]);

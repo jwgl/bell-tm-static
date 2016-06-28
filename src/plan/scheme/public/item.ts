@@ -1,4 +1,5 @@
 import {bootstrap} from '@angular/platform-browser-dynamic';
+import {Title} from '@angular/platform-browser';
 import {provide, Component, ElementRef, OnInit} from '@angular/core';
 
 import {REST_PROVIDERS, API_URL} from '../../../core/http';
@@ -21,7 +22,8 @@ class SchemePublicItemComponent implements OnInit {
 
     constructor(
         private elementRef: ElementRef,
-        private publicService: SchemePublicService) {
+        private publicService: SchemePublicService,
+        private title: Title) {
         // TODO: see https://github.com/angular/angular/issues/1858
         this.id = elementRef.nativeElement.getAttribute('id');
     }
@@ -30,6 +32,7 @@ class SchemePublicItemComponent implements OnInit {
         this.publicService.getItem(this.id).subscribe(scheme => {
             this.vm = scheme;
             this.vm.normalize();
+            this.title.setTitle(this.vm.title);
         });
     }
 }
@@ -38,4 +41,5 @@ bootstrap(SchemePublicItemComponent, [
     provide(API_URL, {useValue: '/api/schemes'}),
     REST_PROVIDERS,
     SchemePublicService,
+    Title,
 ]);

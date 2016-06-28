@@ -52,6 +52,27 @@
                 background-color: #fafafa;
             }
         }
+
+        thead {
+            tr.fix {
+                th {
+                    padding: 0 !important;
+                    line-height: 0;
+                    border-top-width: 1px !important;
+                    border-bottom-style: hidden !important;
+                }
+            }
+        }
+
+        tfoot {
+            tr.fix {
+                td {
+                    padding: 0 !important;
+                    border-bottom-width: 1px !important;
+                    border-top: none !important;
+                }
+            }
+        }
     }
 
     .vertical {
@@ -59,10 +80,6 @@
         line-height: 1.25rem;
         margin: auto;
         white-space: normal;
-    }
-
-    .direction {
-        line-height: 1.25rem;
     }
 
     scheme-table {
@@ -84,13 +101,24 @@
     }
 
     .scheme {
-        th {
-            border-color: #000 !important;
-            border-top-width: 2px !important;
+        table {
+            border-top: solid 2px #000;
+
+            th {
+                border-color: #000 !important;
+                border-top-width: 1px !important;
+                border-bottom: none !important;
+                padding: 2px!important;
+            }
+
+            td {
+                border-color: #000 !important;
+                padding: 2px!important;
+            }
         }
-        td {
-            border-color: #000 !important;
-            pading: 2px!important;
+
+        .vertical {
+            line-height: 1.2em;
         }
     }
 }
