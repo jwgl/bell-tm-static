@@ -55,6 +55,7 @@ export class CourseEditorDialog extends BaseDialog {
     }
 
     onCourseSelected(course: CourseSelectDto): void {
+        console.log(course);
         if (course) {
             this.schemeCourse.courseId = course.id;
             this.schemeCourse.courseName = course.name;

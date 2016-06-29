@@ -7,7 +7,7 @@
         <div class="table-wrapper" *ngIf="courses?.length > 0">
             <table class="table table-hover">
                 <tbody>
-                    <tr *ngFor="let course of courses" (click)="select.emit(course)">
+                    <tr *ngFor="let course of courses" (click)="selectCourse.emit(course)">
                         <td>{{course.isTempCourse ? 'T' : ''}}{{course.id}}</td>
                         <td class="name" [innerHTML]="highlight(course.name, search.value)"></td>
                         <td>{{course.credit}}学分</td>

@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouteSegment} from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {
     Dialog,
@@ -24,21 +24,23 @@ import {SchemeDraftService} from '../draft.service';
     template: require('./draft-item.html'),
     directives: [SchemeViewerComponent],
 })
-export class SchemeDraftItemComponent implements OnInit {
+export class SchemeDraftItemComponent {
     private id: string;
     private vm: Scheme;
     private workitems: any[];
 
     constructor(
-        private segment: RouteSegment,
         private router: Router,
+        private route: ActivatedRoute,
         private dialog: Dialog,
-        private draftService: SchemeDraftService
-    ) {
-        this.id = this.segment.getParam('id');
+        private draftService: SchemeDraftService) {
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.loadData();
+        });
     }
 
-    ngOnInit() {
+    loadData() {
         this.draftService.loadItem(this.id).subscribe(dto => {
             this.vm = new Scheme(dto);
             this.vm.normalize();
@@ -49,7 +51,7 @@ export class SchemeDraftItemComponent implements OnInit {
     }
 
     edit() {
-        this.router.navigate([this.id, 'edit']);
+        this.router.navigate(['/', this.id, 'edit']);
     }
 
     remove() {
@@ -75,14 +77,14 @@ export class SchemeDraftItemComponent implements OnInit {
                 what: what,
             }).then(result => {
                 this.draftService.commit(this.id, what, result.to, result.comment).subscribe(() => {
-                    this.ngOnInit();
+                    this.loadData();
                 });
             });
         }
     }
 
     revise() {
-        this.router.navigate([this.id, 'revise']);
+        this.router.navigate(['/', this.id, 'revise']);
     }
 
     returnList() {

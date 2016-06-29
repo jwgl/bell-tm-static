@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, ControlGroup} from '@angular/common';
-import {Router, RouteSegment} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
-import {Select2} from '../../../../core/directives';
 import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
 import {PlanTitleComponent} from '../../../common/components';
@@ -15,11 +14,10 @@ import {VisionDraftService} from '../draft.service';
     providers: [FormBuilder, Dialog],
     styles: [require('./draft-editor.scss')],
     template: require('./draft-editor.html'),
-    directives: [Select2, PlanTitleComponent],
+    directives: [PlanTitleComponent],
     pipes: [PLAN_PIPES],
 })
-export class VisionDraftEditorComponent implements OnInit {
-    private id: string;
+export class VisionDraftEditorComponent {
     private editMode: EditMode;
     private vm: Vision;
 
@@ -27,23 +25,39 @@ export class VisionDraftEditorComponent implements OnInit {
     private _showSchoolingLength = false;
     private _showAwardedDegree = false;
     constructor(
-        private draftService: VisionDraftService,
         private router: Router,
-        private segment: RouteSegment,
+        private route: ActivatedRoute,
         private formBuilder: FormBuilder,
-        private dialog: Dialog
+        private dialog: Dialog,
+        private draftService: VisionDraftService
     ) {
-        this.id = segment.getParam('id');
+        this.route.url.subscribe(urls => {
+            if (urls[0].path === 'create') {
+                this.editMode = EditMode.Create;
+            } else if (urls[1].path === 'edit') {
+                this.editMode = EditMode.Edit;
+            } else if (urls[1].path === 'revise') {
+                this.editMode = EditMode.Revise;
+            } else {
+                throw new Error('Unsupported url');
+            }
 
-        if (this.segment.urlSegments[0].toString() === 'create') {
-            this.editMode = EditMode.Create;
-        } else if (this.segment.urlSegments[1].toString() === 'edit') {
-            this.editMode = EditMode.Edit;
-        } else if (this.segment.urlSegments[1].toString() === 'revise') {
-            this.editMode = EditMode.Revise;
-        } else {
-            throw new Error('Unsupported url');
-        }
+            this.route.params.subscribe(params => {
+                switch (this.editMode) {
+                    case EditMode.Create:
+                        this.draftService.loadDataForCreate(params['program']).subscribe(model => this.vm = model);
+                        break;
+                    case EditMode.Revise:
+                        this.draftService.loadItemForRevise(params['id']).subscribe(model => this.vm = model);
+                        break;
+                    case EditMode.Edit:
+                        this.draftService.loadItemForEdit(params['id']).subscribe(model => this.vm = model);
+                        break;
+                    default:
+
+                }
+            });
+        });
 
         this.form = this.formBuilder.group({
             objective: [],
@@ -51,20 +65,6 @@ export class VisionDraftEditorComponent implements OnInit {
             schoolingLength: [],
             awardedDegree: [],
         });
-    }
-
-    ngOnInit() {
-        switch (this.editMode) {
-            case EditMode.Revise:
-                this.draftService.loadItemForRevise(this.id).subscribe(model => this.vm = model);
-                break;
-            case EditMode.Edit:
-                this.draftService.loadItemForEdit(this.id).subscribe(model => this.vm = model);
-                break;
-            default:
-                this.draftService.loadDataForCreate(this.segment.getParam('program')).subscribe(model => this.vm = model);
-                break;
-        }
     }
 
     get showSchoolingLength(): boolean {
@@ -84,7 +84,17 @@ export class VisionDraftEditorComponent implements OnInit {
     }
 
     cancel() {
-        this.router.navigate([this.id]);
+        switch (this.editMode) {
+            case EditMode.Create:
+                this.router.navigate(['/']);
+                break;
+            case EditMode.Revise:
+                this.router.navigate(['/', this.vm.previousId]);
+                break;
+            case EditMode.Edit:
+                this.router.navigate(['/', this.vm.id]);
+                break;
+        }
     }
 
     save() {
@@ -110,7 +120,7 @@ export class VisionDraftEditorComponent implements OnInit {
             programId:       this.vm.programId,
             versionNumber:   this.vm.versionNumber,
         }).subscribe(id => {
-            this.router.navigate([id]);
+            this.router.navigate(['/', id]);
         }, error => {
             alert(error);
         });
@@ -126,7 +136,7 @@ export class VisionDraftEditorComponent implements OnInit {
             programId:       this.vm.programId,
             versionNumber:   this.vm.versionNumber,
         }).subscribe(id => {
-            this.router.navigate([id]);
+            this.router.navigate(['/', id]);
         }, error => {
             alert(error);
         });
@@ -141,7 +151,7 @@ export class VisionDraftEditorComponent implements OnInit {
             awardedDegree:   this.form.value.awardedDegree,
             programId:       this.vm.programId,
         }).subscribe(id => {
-            this.router.navigate([id]);
+            this.router.navigate(['/', id]);
         }, error => {
             alert(error);
         });

@@ -37,7 +37,7 @@ export class AllowedTermComponent {
     controls: ControlArray;
 
     constructor() {
-        this.valueChange = new EventEmitter();
+        this.valueChange = new EventEmitter<number>();
     }
 
     ngOnInit() {
@@ -49,10 +49,7 @@ export class AllowedTermComponent {
     }
 
     ngOnChanges(changes: {[key: string]: SimpleChange}) {
-        /* tslint:disable:no-string-literal */
         let suggestedTermChange = changes['suggestedTerm'];
-        /* tslint:enable:no-string-literal */
-
         if (suggestedTermChange && !suggestedTermChange.isFirstChange()) {
             let value = this.value;
             value = clearBit(value, suggestedTermChange.previousValue - 1);

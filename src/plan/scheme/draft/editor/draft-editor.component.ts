@@ -3,7 +3,7 @@ import {
     ElementRef,
     ViewEncapsulation,
 } from '@angular/core';
-import {Router, RouteSegment} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
@@ -34,32 +34,36 @@ export class SchemeDraftEditorComponent {
 
     constructor(
         private router: Router,
-        private segment: RouteSegment,
+        private route: ActivatedRoute,
         private elementRef: ElementRef,
         private dialog: Dialog,
         private draftService: SchemeDraftService
     ) {
-        if (this.segment.urlSegments[0].toString() === 'create') {
-            this.editMode = EditMode.Create;
-        } else if (this.segment.urlSegments[1].toString() === 'edit') {
-            this.editMode = EditMode.Edit;
-        } else if (this.segment.urlSegments[1].toString() === 'revise') {
-            this.editMode = EditMode.Revise;
-        } else {
-            throw new Error('Unsupported url');
-        }
+        this.route.url.subscribe(urls => {
+            if (urls[0].path === 'create') {
+                this.editMode = EditMode.Create;
+            } else if (urls[1].path === 'edit') {
+                this.editMode = EditMode.Edit;
+            } else if (urls[1].path === 'revise') {
+                this.editMode = EditMode.Revise;
+            } else {
+                throw new Error('Unsupported url');
+            }
 
-        switch (this.editMode) {
-            case EditMode.Create:
-                this.draftService.loadDataForCreate(segment.getParam('program')).subscribe(data => this.onLoadData(data));
-                break;
-            case EditMode.Revise:
-                this.draftService.loadItemForRevise(segment.getParam('id')).subscribe(data => this.onLoadData(data));
-                break;
-            case EditMode.Edit:
-                this.draftService.loadItemForEdit(segment.getParam('id')).subscribe(data => this.onLoadData(data));
-                break;
-        }
+            this.route.params.subscribe(params => {
+                switch (this.editMode) {
+                    case EditMode.Create:
+                        this.draftService.loadDataForCreate(params['program']).subscribe(data => this.onLoadData(data));
+                        break;
+                    case EditMode.Revise:
+                        this.draftService.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
+                        break;
+                    case EditMode.Edit:
+                        this.draftService.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
+                        break;
+                }
+            });
+        });
     }
 
     get canEditVersion(): boolean {
@@ -76,8 +80,10 @@ export class SchemeDraftEditorComponent {
                 this.router.navigate(['/']);
                 break;
             case EditMode.Revise:
+                this.router.navigate(['/', this.vm.previousId]);
+                break;
             case EditMode.Edit:
-                this.router.navigate([this.segment.getParam('id')]);
+                this.router.navigate(['/', this.vm.id]);
                 break;
         }
     }
@@ -159,19 +165,19 @@ export class SchemeDraftEditorComponent {
         switch (this.editMode) {
             case EditMode.Create:
                 this.draftService.create(this.vm.toServerDto()).subscribe(
-                    id => this.router.navigate([id]),
+                    id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );
                 break;
             case EditMode.Revise:
                 this.draftService.revise(this.vm.toServerDto()).subscribe(
-                    id => this.router.navigate([id]),
+                    id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );
                 break;
             case EditMode.Edit:
                 this.draftService.update(this.vm.toServerDto()).subscribe(
-                    id => this.router.navigate([id]),
+                    id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );
                 break;

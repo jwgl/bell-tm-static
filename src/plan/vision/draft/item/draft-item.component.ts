@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, RouteSegment} from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {
     Dialog,
@@ -19,21 +19,23 @@ import './draft-item.model';
     template: require('./draft-item.html'),
     directives: [VisionViewerComponent],
 })
-export class VisionDraftItemComponent implements OnInit {
+export class VisionDraftItemComponent {
     id: string;
     vm: Vision;
     workitems: any[];
 
     constructor(
-        private segment: RouteSegment,
         private router: Router,
+        private route: ActivatedRoute,
         private dialog: Dialog,
         private draftService: VisionDraftService) {
-
-        this.id = segment.getParam('id');
+        this.route.params.subscribe(params => {
+            this.id = params['id'];
+            this.loadData();
+        });
     }
 
-    ngOnInit() {
+    loadData() {
         this.draftService.loadItem(this.id).subscribe(dto => {
             this.vm = new Vision(dto);
             this.vm.editable = dto.editable;
@@ -43,7 +45,7 @@ export class VisionDraftItemComponent implements OnInit {
     }
 
     edit() {
-        this.router.navigate([this.id, 'edit']);
+        this.router.navigate(['/', this.id, 'edit']);
     }
 
     remove() {
@@ -65,13 +67,13 @@ export class VisionDraftItemComponent implements OnInit {
             what: what,
         }).then(result => {
             this.draftService.commit(this.id, what, result.to, result.comment).subscribe(() => {
-                this.ngOnInit();
+                this.loadData();
             });
         });
     }
 
     revise() {
-        this.router.navigate([this.id, 'revise']);
+        this.router.navigate(['/', this.id, 'revise']);
     }
 
     returnList() {

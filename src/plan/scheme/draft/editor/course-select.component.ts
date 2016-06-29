@@ -27,7 +27,7 @@ export class CourseSelectComponent {
     @Input() courseId: string;
     @Input() isTempCourse: boolean;
     @Input() group: AbstractGroup;
-    @Output() select: EventEmitter<any> = new EventEmitter<any>();
+    @Output() selectCourse: EventEmitter<any> = new EventEmitter<any>();
 
     courses: any;
     query: any;
@@ -65,7 +65,7 @@ export class CourseSelectComponent {
     }
 
     clearCourse() {
-        this.select.emit(null);
+        this.selectCourse.emit(null);
     }
 
     highlight(str: string, key: string): string {

@@ -21,9 +21,7 @@ export class Dialog {
 
     open(dialogType: Type, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
-            /* tslint:disable:no-string-literal */
             let viewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
-            /* tslint:enable:no-string-literal */
 
             this.loader.loadNextToLocation(dialogType, viewContainerRef).then((componentRef) => {
                 let nativeElement = componentRef.location.nativeElement;
