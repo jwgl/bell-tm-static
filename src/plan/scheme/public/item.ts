@@ -32,7 +32,7 @@ class SchemePublicItemComponent implements OnInit {
         this.publicService.getItem(this.id).subscribe(scheme => {
             this.vm = scheme;
             this.vm.normalize();
-            this.title.setTitle(this.vm.title);
+            this.title.setTitle(`${this.vm.departmentName} - ${this.vm.title}`);
         });
     }
 }

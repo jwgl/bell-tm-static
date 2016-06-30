@@ -45,6 +45,7 @@ export class Scheme {
     programType: number;
     subjectName: string;
     departmentId: string;
+    departmentName: string;
     grade: number;
     credit: number;
     status: string;
@@ -63,6 +64,7 @@ export class Scheme {
         this.programType           = dto.programType;
         this.subjectName           = dto.subjectName;
         this.departmentId          = dto.departmentId;
+        this.departmentName        = dto.departmentName;
         this.grade                 = dto.grade;
         this.credit                = dto.credit;
         this.status                = dto.status;
@@ -647,6 +649,7 @@ export interface SchemeDto {
     programType: number;
     subjectName: string;
     departmentId: string;
+    departmentName: string;
     grade: number;
     credit: number;
     status: string;

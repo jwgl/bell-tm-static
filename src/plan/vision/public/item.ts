@@ -30,7 +30,7 @@ export class VisionPublicItemComponent implements OnInit {
     ngOnInit() {
         this.publicService.getItem(this.id).subscribe(vision => {
             this.vm = vision;
-            this.title.setTitle(vision.title);
+            this.title.setTitle(`${vision.departmentName} - ${vision.title}`);
         });
     }
 }

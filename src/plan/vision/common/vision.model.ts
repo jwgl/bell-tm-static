@@ -5,6 +5,7 @@ export class Vision {
     grade: number;
     subjectName: string;
     departmentId: string;
+    departmentName: string;
     programId: number;
     programType: number;
     schemeId: number;
@@ -24,6 +25,7 @@ export class Vision {
         this.grade = dto.grade;
         this.subjectName = dto.subjectName;
         this.departmentId = dto.departmentId;
+        this.departmentName = dto.departmentName;
         this.programId = dto.programId;
         this.programType = dto.programType;
         this.schemeId = dto.schemeId;
