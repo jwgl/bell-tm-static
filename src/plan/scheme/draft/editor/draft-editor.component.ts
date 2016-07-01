@@ -39,31 +39,19 @@ export class SchemeDraftEditorComponent {
         private dialog: Dialog,
         private draftService: SchemeDraftService
     ) {
-        this.route.url.subscribe(urls => {
-            if (urls[0].path === 'create') {
-                this.editMode = EditMode.Create;
-            } else if (urls[1].path === 'edit') {
-                this.editMode = EditMode.Edit;
-            } else if (urls[1].path === 'revise') {
-                this.editMode = EditMode.Revise;
-            } else {
-                throw new Error('Unsupported url');
-            }
-
-            this.route.params.subscribe(params => {
-                switch (this.editMode) {
-                    case EditMode.Create:
-                        this.draftService.loadDataForCreate(params['program']).subscribe(data => this.onLoadData(data));
-                        break;
-                    case EditMode.Revise:
-                        this.draftService.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
-                        break;
-                    case EditMode.Edit:
-                        this.draftService.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
-                        break;
-                }
-            });
-        });
+        this.editMode = this.route.snapshot.data['mode'];
+        let params = this.route.snapshot.params;
+        switch (this.editMode) {
+            case EditMode.Create:
+                this.draftService.loadDataForCreate(params['program']).subscribe(data => this.onLoadData(data));
+                break;
+            case EditMode.Revise:
+                this.draftService.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
+                break;
+            case EditMode.Edit:
+                this.draftService.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
+                break;
+        }
     }
 
     get canEditVersion(): boolean {
