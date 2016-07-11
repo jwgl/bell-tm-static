@@ -89,19 +89,13 @@
 }
 
 @media print {
-    @page {
-        margin-top: 3cm;
-        margin-bottom: 2.5cm;
-        margin-left: 2.5cm;
-        margin-right: 2.5cm;
-    }
-
     body {
         font-size: 10px;
     }
 
     .scheme {
         table {
+            font-family: '宋体';
             border-top: solid 2px #000;
 
             th {

@@ -10,8 +10,38 @@ h2 {
         -webkit-margin-start: 0px;
         -webkit-margin-end: 0px;
     }
+}
 
-    ol, ul {
-        -webkit-padding-start: 2rem;
+@media print {
+    :host {
+        font-family: '宋体';
+
+        h1 {
+            font-weight: bold;
+        }
+
+        h2 {
+            text-indent: 2em;
+            font-family: '黑体';
+            margin-top: 0.5em;
+            margin-bottom: 0.5em;
+        }
+
+        ol {
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: 1em;
+        }
+
+        ul {
+            li {
+                margin-left: -1.5em;
+            }
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
     }
 }
