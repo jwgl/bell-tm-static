@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
-import {ApiUrl, Rest, Observable} from '../../core/http';
+import {Observable} from 'rxjs/Observable';
+
+import {ApiUrl, Rest} from '../../core/http';
 @Injectable()
 export class ProgramSettingsService {
     constructor(

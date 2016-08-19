@@ -1,20 +1,36 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {provide} from '@angular/core';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule, provide} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL, BASE_URL} from '../core/http';
-import {TodoService} from './todo.service';
+import {FromNowComponent} from '../core/components';
+import {RestModule, BASE_URL} from '../core/http';
 import {TodoListComponent} from './list/todo-list.component';
-import {TODO_ROUTER_PROVIDERS} from './todo.routes';
+import {OpenTodoListComponent} from './list/open-list.component';
+import {ClosedTodoListComponent} from './list/closed-list.component';
+import {TodoService} from './todo.service';
+import {routing} from './todo.routes';
 
 let match = window.location.href.match(/\/users\/([^\/]+)\//);
 let userId = match[1];
 
-bootstrap(TodoListComponent, [
-    TODO_ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy}),
-    provide(API_URL, {useValue: `/api/users/${userId}/works`}),
-    provide(BASE_URL, {useValue: `/users/${userId}/works`}),
-    REST_PROVIDERS,
-    TodoService,
-]);
+@NgModule({
+    bootstrap: [TodoListComponent],
+    declarations: [
+        TodoListComponent,
+        OpenTodoListComponent,
+        ClosedTodoListComponent,
+        FromNowComponent,
+    ],
+    imports: [
+        BrowserModule,
+        routing,
+        RestModule.for(`/api/users/${userId}/works`),
+    ],
+    providers: [
+        provide(BASE_URL, {useValue: `/users/${userId}/works`}),
+        TodoService,
+    ],
+})
+class MainModule {}
+
+platformBrowserDynamic().bootstrapModule(MainModule);

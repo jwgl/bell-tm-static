@@ -8,6 +8,9 @@ import {BaseDialog} from './dialog';
     template: require('./error-message.html'),
     directives: [MODAL_DIRECTIVES],
 })
+/**
+ * options: {errors: string[]}
+ */
 export class ErrorMessageDialog extends BaseDialog {
     constructor() {
         super();

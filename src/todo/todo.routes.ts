@@ -1,13 +1,11 @@
-import {provideRouter, RouterConfig} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {OpenTodoListComponent} from './list/open-list.component';
 import {ClosedTodoListComponent} from './list/closed-list.component';
 
-const routes: RouterConfig = [
+const ROUTER_CONFIG: any = [
     {path: '', redirectTo: 'open', terminal: true},
     {path: 'open', component: OpenTodoListComponent},
     {path: 'closed', component: ClosedTodoListComponent},
 ];
 
-export const TODO_ROUTER_PROVIDERS = [
-    provideRouter(routes),
-];
+export const routing = RouterModule.forRoot(ROUTER_CONFIG, {useHash: true});

@@ -1,11 +1,11 @@
 import {
-    Injector,
     Injectable,
-    DynamicComponentLoader,
     Type,
     EventEmitter,
     OnInit,
     ApplicationRef,
+    Compiler,
+    ViewContainerRef,
 } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
@@ -13,17 +13,18 @@ import 'rxjs/add/observable/empty';
 
 @Injectable()
 export class Dialog {
-    constructor(
-        private loader: DynamicComponentLoader,
-        private appRef: ApplicationRef,
-        private injector: Injector) {
-    }
+    ngModule: Type = null;
+
+    constructor(private appRef: ApplicationRef, private compiler: Compiler) {}
 
     open(dialogType: Type, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
-            let viewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
+            let location: ViewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
+            this.compiler.compileComponentAsync(<any>dialogType, this.ngModule).then(componentFactory => {
+                let contextInjector = location.parentInjector;
+                let childInjector = contextInjector;
+                let componentRef = location.createComponent(componentFactory, location.length, childInjector);
 
-            this.loader.loadNextToLocation(dialogType, viewContainerRef).then((componentRef) => {
                 let nativeElement = componentRef.location.nativeElement;
                 document.body.appendChild(nativeElement);
 

@@ -1,7 +1,6 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 import {EditMode} from '../../../../core/constants';
-import {ZeroEmptyPipe} from '../../../common/pipes';
 import {SchemeCourse, RecordStatus} from '../../common/scheme.model';
 
 /**
@@ -17,7 +16,6 @@ import {SchemeCourse, RecordStatus} from '../../common/scheme.model';
         '(mouseenter)': 'mouseenter()',
         '(mouseleave)': 'mouseleave()',
     },
-    pipes: [ZeroEmptyPipe],
 })
 export class SchemeCourseComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;

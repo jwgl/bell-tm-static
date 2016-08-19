@@ -1,17 +1,12 @@
 import {Component} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import {BOOTSTRAP_DIRECTIVES} from '../bootstrap';
-import {MODAL_DIRECTIVES} from '../directives';
-import {Rest, Observable} from '../http';
+import {Rest} from '../http';
 import {BaseDialog} from './dialog';
 
 @Component({
     selector: 'simple-list-select-dialog',
     template: require('./simple-list-select.html'),
-    directives: [
-        MODAL_DIRECTIVES,
-        BOOTSTRAP_DIRECTIVES,
-    ],
 })
 export class SimpleListSelectDialog extends BaseDialog {
     result: any;

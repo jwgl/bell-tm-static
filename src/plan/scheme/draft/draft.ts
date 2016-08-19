@@ -1,31 +1,34 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {Component, ElementRef, provide} from '@angular/core';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL} from '../../../core/http';
+import {RestModule} from '../../../core/http';
+import {SchemeDraftComponent} from './draft.component';
 import {SchemeDraftService} from './draft.service';
-import {DRAFT_ROUTER_PROVIDERS} from './draft.routes';
+import {DraftListModule} from './list/draft-list.module';
+import {DraftItemModule} from './item/draft-item.module';
+import {DraftEditorModule} from './editor/draft-editor.module';
+import {routing} from './draft.routes';
 
-@Component({
-    selector: 'scheme-draft-container',
-    template: `<a [routerLink]="'/'"></a><router-outlet></router-outlet>`,
-    directives: [ROUTER_DIRECTIVES],
+@NgModule({
+    bootstrap: [SchemeDraftComponent],
+    declarations: [
+        SchemeDraftComponent,
+    ],
+    imports: [
+        BrowserModule,
+        RestModule.for('/api/users/${userId}/schemes'),
+        routing,
+        DraftEditorModule,
+        DraftItemModule,
+        DraftListModule,
+    ],
+    providers: [
+        SchemeDraftService,
+        {provide: 'PUBLIC_SCHEME_URL', useValue: '/api/schemes'},
+    ],
 })
-class SchemeDraft {
-    constructor(
-        private elementRef: ElementRef,
-        private draftService: SchemeDraftService) {
-        let userId = elementRef.nativeElement.getAttribute('user');
-        this.draftService.userId = userId;
-    }
-}
+class MainModule {}
 
-bootstrap(SchemeDraft, [
-    DRAFT_ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy}),
-    provide(API_URL, {useValue: '/api/users/${userId}/schemes'}),
-    provide('PUBLIC_SCHEME_URL', {useValue: '/api/schemes'}),
-    REST_PROVIDERS,
-    SchemeDraftService,
-]);
+platformBrowserDynamic().bootstrapModule(MainModule);
+

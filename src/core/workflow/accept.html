@@ -1,4 +1,4 @@
-<modal-dialog title="提交">
+<modal-dialog title="同意">
     <modal-body>
         <div *ngIf="!options.whoUrl">
             <form>
@@ -6,7 +6,7 @@
                     <p class="form-control-static">《{{options.what}}》通过{{options.does}}。</p>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="6" placeholder="处理意见" ngControl="comment" [(ngModel)]="result.comment"></textarea>
+                    <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment"></textarea>
                 </div>
             </form>
         </div>
@@ -21,13 +21,13 @@
                 <div class="form-group" *ngIf="options.data.length > 1">
                     <p class="form-control-static">提交《{{options.what}}》 进行{{options.does}}。<br>
                         请选择{{options.does}}人：
-                        <select ngControl="selected" [(ngModel)]="result.to">
+                        <select name="selected" [(ngModel)]="result.to">
                             <option *ngFor="let person of options.data" value="{{person.id}}">{{person.name}}</option>
                         </select>
                     </p>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="6" placeholder="处理意见" ngControl="comment" [(ngModel)]="result.comment"></textarea>
+                    <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment"></textarea>
                 </div>
             </form>
         </div>

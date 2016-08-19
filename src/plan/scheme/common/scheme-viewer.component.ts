@@ -1,8 +1,5 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 
-import {SchemeTermTitlePipe} from '../../common/pipes';
-import {PlanTitleComponent} from '../../common/components';
-import {ZeroEmptyPipe} from '../../common/pipes';
 import {Scheme} from './scheme.model';
 
 /**
@@ -11,7 +8,6 @@ import {Scheme} from './scheme.model';
 @Component({
     selector: '[scheme-course]',
     template: require('./scheme-course.html'),
-    pipes: [ZeroEmptyPipe],
 })
 class SchemeCourse {
     @Input('scheme-course') schemeCourse: any;
@@ -37,7 +33,6 @@ class SchemeCourse {
     selector: '[scheme-group]',
     template: require('./scheme-group.html'),
     host: {'[class]': "'group'"},
-    pipes: [ZeroEmptyPipe],
 })
 class SchemeGroup {
     @Input('scheme-group') group: any;
@@ -67,23 +62,20 @@ export class SchemeSummary {
         SchemeCourse,
         SchemeSummary,
     ],
-    pipes: [
-        ZeroEmptyPipe,
-        SchemeTermTitlePipe,
-    ],
 })
 class SchemeTable {
     @Input() scheme: Scheme;
 }
 
-
+/**
+ * 查看器
+ */
 @Component({
     selector: 'scheme-viewer',
     styles: [require('./scheme-viewer.scss')],
     template: require('./scheme-viewer.html'),
     directives: [
         SchemeTable,
-        PlanTitleComponent,
     ],
     encapsulation: ViewEncapsulation.None,
 })

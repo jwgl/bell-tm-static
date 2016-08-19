@@ -8,7 +8,7 @@
             <button class="btn btn-secondary" (click)="import()">导入</button>
         </div>
     </div>
-    <form class="vision" [ngFormModel]="form">
+    <form class="vision">
         <plan-title [title]="vm.title"
                     [program]="vm.programId"
                     [version]="vm.versionNumber"
@@ -16,16 +16,16 @@
                     [previousVersion]="vm.previousVersionNumber"
                     (versionChanged)="versionChanged($event)"></plan-title>
         <h2>一、培养目标</h2>
-        <textarea class="form-control" rows="8" ngControl="objective" [(ngModel)]="vm.objective"></textarea>
+        <textarea class="form-control" rows="8" name="objective" [(ngModel)]="vm.objective"></textarea>
         <h2>二、培养要求</h2>
-        <textarea class="form-control" rows="8" ngControl="specification" [(ngModel)]="vm.specification"></textarea>
+        <textarea class="form-control" rows="8" name="specification" [(ngModel)]="vm.specification"></textarea>
         <h2>三、学制 <button *ngIf="!vm.schoolingLength" (click)="_showSchoolingLength=!_showSchoolingLength" class="btn btn-sm btn-secondary">补充说明</button></h2>
-        <p *ngIf="vision.title.indexOf('2+2')==-1">实行学分制和弹性学制，修业年限为3～8年（至少3年，最多8年），基本学习年限4年。</p>
-        <p *ngIf="vision.title.indexOf('2+2')!=-1">实行学分制和弹性学制，修业年限为4～8年（至少4年，最多8年），基本学习年限4年。</p>
-        <textarea [hidden]="!showSchoolingLength" class="form-control" rows="4" ngControl="schoolingLength" [(ngModel)]="vm.schoolingLength"></textarea>
+        <p *ngIf="vm.title.indexOf('2+2')==-1">实行学分制和弹性学制，修业年限为3～8年（至少3年，最多8年），基本学习年限4年。</p>
+        <p *ngIf="vm.title.indexOf('2+2')!=-1">实行学分制和弹性学制，修业年限为4～8年（至少4年，最多8年），基本学习年限4年。</p>
+        <textarea [hidden]="!showSchoolingLength" class="form-control" rows="4" name="schoolingLength" [(ngModel)]="vm.schoolingLength"></textarea>
         <h2>四、授予学位 <button *ngIf="!vm.awardedDegree" (click)="_showAwardedDegree=!_showAwardedDegree" class="btn btn-sm btn-secondary">补充说明</button></h2>
         <p>在规定的年限内，修满规定学分者，可取得毕业证书，符合学位授予条件者可以授予{{vm.degreeName}}学士学位。</p>
-        <textarea [hidden]="!showAwardedDegree" class="form-control" rows="4" ngControl="awardedDegree" [(ngModel)]="vm.awardedDegree"></textarea>
+        <textarea [hidden]="!showAwardedDegree" class="form-control" rows="4" name="awardedDegree" [(ngModel)]="vm.awardedDegree"></textarea>
         <h2>五、课程教学安排表</h2>
         <div>
             <p *ngIf="vm.schemeId"><a [href]="'/schemes/' + vm.schemeId">查看</a></p>

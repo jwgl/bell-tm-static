@@ -3,6 +3,7 @@ import {ProgramTypePipe, getProgramType} from './pipes/program-type';
 import {VersionNumberPipe} from './pipes/version-number';
 import {ZeroEmptyPipe} from './pipes/zero-empty';
 import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
+import {GradeFilterPipe} from './pipes/grade-filter';
 
 export {
     PrimaryCoursesPipe,
@@ -12,6 +13,7 @@ export {
     ZeroEmptyPipe,
     SchemeTermNamePipe,
     SchemeTermTitlePipe,
+    GradeFilterPipe,
 };
 
 export const PLAN_PIPES = [

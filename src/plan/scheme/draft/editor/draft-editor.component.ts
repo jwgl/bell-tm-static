@@ -1,31 +1,23 @@
 import {
     Component,
-    ElementRef,
     ViewEncapsulation,
 } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
+import {CommonDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
-import {PlanTitleComponent} from '../../../common/components';
 import {SchemeDraftService} from '../draft.service';
 import {Scheme, Property, Direction, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
 import './draft-editor.model';
-import {SchemeDraftTableComponent} from './scheme-table.component';
-import {CourseEditorDialog} from './course-editor.dialog';
+import {CourseEditorService} from './course-editor/course-editor.module';
 
 /**
  * 教学计划编辑器
  */
 @Component({
     selector: 'scheme-draft-editor',
-    providers: [Dialog],
     styles: [require('./draft-editor.scss')],
     template: require('./draft-editor.html'),
-    directives: [
-        SchemeDraftTableComponent,
-        PlanTitleComponent,
-    ],
     encapsulation: ViewEncapsulation.None,
 })
 export class SchemeDraftEditorComponent {
@@ -35,8 +27,8 @@ export class SchemeDraftEditorComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private elementRef: ElementRef,
-        private dialog: Dialog,
+        private dialog: CommonDialog,
+        private courseEditor: CourseEditorService,
         private draftService: SchemeDraftService
     ) {
         this.editMode = this.route.snapshot.data['mode'];
@@ -77,7 +69,7 @@ export class SchemeDraftEditorComponent {
     }
 
     addCourse(group: AbstractGroup): void {
-        this.dialog.open(CourseEditorDialog, {
+        this.courseEditor.open({
             editMode: EditMode.Create,
             terms: this.vm.terms,
             group: group,
@@ -88,7 +80,7 @@ export class SchemeDraftEditorComponent {
     }
 
     editCourse(schemeCourse: SchemeCourse): void {
-        this.dialog.open(CourseEditorDialog, {
+        this.courseEditor.open({
             editMode: EditMode.Edit,
             terms: this.vm.terms,
             group: schemeCourse.group,
@@ -116,11 +108,11 @@ export class SchemeDraftEditorComponent {
     }
 
     importPropertyCourses(property: Property) {
-        this.dialog.open(SimpleListSelectDialog, {
-            title: `导入课程 - ${property.name}`,
-            url: `/api/departments/${this.vm.departmentId}/schemes`,
-            labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
-        }).then(id => {
+        this.dialog.list(
+            `导入课程 - ${property.name}`,
+             `/api/departments/${this.vm.departmentId}/schemes`,
+            (item: any) => `${item.grade}级${item.subjectName}`
+        ).then(id => {
             this.draftService.loadPropertyCourses(id, property.id).subscribe(courses => {
                 courses.forEach(course => {
                     if (!property.contains(course.courseId)) {
@@ -132,12 +124,12 @@ export class SchemeDraftEditorComponent {
     }
 
     importDirectionCourses(direction: Direction) {
-        this.dialog.open(SimpleListSelectDialog, {
-            title: `导入课程 - ${direction.name}`,
-            url: `/api/departments/${this.vm.departmentId}/schemeDirections`,
-            valueFn: (item: any) => `${item.schemeId}:${item.directionId}`,
-            labelFn: (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
-        }).then(result => {
+        this.dialog.list(
+            `导入课程 - ${direction.name}`,
+            `/api/departments/${this.vm.departmentId}/schemeDirections`,
+            (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
+            (item: any) => `${item.schemeId}:${item.directionId}`
+        ).then(result => {
             let arr = result.split(':');
             this.draftService.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
                 courses.forEach(course => {

@@ -1,7 +1,6 @@
 import {Injectable, Inject, OpaqueToken} from '@angular/core';
 
 export const API_URL = new OpaqueToken('API_URL');
-export const API_URL_FIELDS = new OpaqueToken('API_URL_FIELDS');
 export const BASE_URL = new OpaqueToken('BASE_URL');
 
 @Injectable()

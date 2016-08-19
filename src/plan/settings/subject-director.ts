@@ -1,12 +1,23 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {provide} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL} from '../../core/http';
+import {RestModule} from '../../core/http';
+import {SubjectDirectorComponent} from './subject-director/subject-director.component';
+import {SubjectDirectorModule} from './subject-director/subject-director.module';
 import {SubjectDirectorService} from './subject-director.service';
-import {SubjectDirectorComponent} from './subject-director.component';
 
-bootstrap(SubjectDirectorComponent, [
-    provide(API_URL, {useValue: '/api/subjectDirectors'}),
-    REST_PROVIDERS,
-    SubjectDirectorService,
-]);
+@NgModule({
+    bootstrap: [SubjectDirectorComponent],
+    imports: [
+        BrowserModule,
+        SubjectDirectorModule,
+        RestModule.for('/api/subjectDirectors'),
+    ],
+    providers: [
+        SubjectDirectorService,
+    ],
+})
+class MainModule {}
+
+platformBrowserDynamic().bootstrapModule(MainModule);

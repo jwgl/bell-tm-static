@@ -5,7 +5,7 @@
                 <p class="form-control-static">退回《{{options.what}}》，请填写{{options.does}}意见。</p>
             </div>
             <div class="form-group">
-                <textarea class="form-control" rows="6" placeholder="处理意见" ngControl="comment" [(ngModel)]="comment" required></textarea>
+                <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment" required></textarea>
             </div>
         </form>
     </modal-body>

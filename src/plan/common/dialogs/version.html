@@ -3,18 +3,18 @@
         <p class="form-control-static">上一版本号：{{prev | versionNumber}}</p>
         <p class="form-control-static">当前版本号：{{curr | versionNumber}}</p>
         <p class="form-control-static">请输入新的版本号（a.b.c.d）：</p>
-        <form class="row" [ngFormModel]="form" #f="ngForm">
+        <form class="row" [formGroup]="versionForm" #f="ngForm">
             <div class="col-xs-3">
-                <input name="a" class="form-control" type="number" min="0" max="255" ngControl="a" [(ngModel)]="a" required>
+                <input name="a" class="form-control" type="number" min="0" max="255" formControlName="a" required>
             </div>
             <div class="col-xs-3">
-                <input name="b" class="form-control" type="number" min="0" max="255" ngControl="b" [(ngModel)]="b" required>
+                <input name="b" class="form-control" type="number" min="0" max="255" formControlName="b" required>
             </div>
             <div class="col-xs-3">
-                <input name="c" class="form-control" type="number" min="0" max="255" ngControl="c" [(ngModel)]="c" required>
+                <input name="c" class="form-control" type="number" min="0" max="255" formControlName="c" required>
             </div>
             <div class=" col-xs-3">
-                <input name="d" class="form-control" type="number" min="0" max="255" ngControl="d" [(ngModel)]="d" required>
+                <input name="d" class="form-control" type="number" min="0" max="255" formControlName="d" required>
             </div>
         </form>
         <div *ngIf="f.errors" class="row">

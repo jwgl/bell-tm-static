@@ -5,7 +5,6 @@ import {
     EventEmitter,
 } from '@angular/core';
 
-import {ZeroEmptyPipe} from '../../../common/pipes';
 import {AbstractGroup, Property, Direction} from '../../common/scheme.model';
 
 /**
@@ -15,7 +14,6 @@ import {AbstractGroup, Property, Direction} from '../../common/scheme.model';
     selector: '[scheme-group]',
     host: {'[class]': "'group'"},
     template: require('./scheme-group.html'),
-    pipes: [ZeroEmptyPipe],
 })
 export class SchemeGroupComponent {
     @Input('scheme-group') group: AbstractGroup;

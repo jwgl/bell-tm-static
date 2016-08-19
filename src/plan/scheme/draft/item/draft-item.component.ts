@@ -1,15 +1,9 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {
-    Dialog,
-    ConfirmDialog,
-    WorkflowWorkitemsDialog,
-    WorkflowCommitDialog,
-    ErrorMessageDialog,
-} from '../../../../core/dialogs';
+import {CommonDialog} from '../../../../core/dialogs';
+import {Workflow} from '../../../../core/workflow';
 import {toVersionString} from '../../../common/utils';
-import {SchemeViewerComponent} from '../../common/scheme-viewer.component';
 import {Scheme} from '../../common/scheme.model';
 import '../../common/scheme-viewer.model';
 import './draft-item.model';
@@ -20,19 +14,17 @@ import {SchemeDraftService} from '../draft.service';
  */
 @Component({
     selector: 'scheme-draft-item',
-    providers: [Dialog],
     template: require('./draft-item.html'),
-    directives: [SchemeViewerComponent],
 })
 export class SchemeDraftItemComponent {
     private id: string;
     private vm: Scheme;
-    private workitems: any[];
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private dialog: Dialog,
+        private workflow: Workflow,
+        private dialog: CommonDialog,
         private draftService: SchemeDraftService) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -46,7 +38,6 @@ export class SchemeDraftItemComponent {
             this.vm.normalize();
             this.vm.editable = dto.editable;
             this.vm.revisable = dto.revisable;
-            this.workitems = dto.workitems;
         });
     }
 
@@ -55,10 +46,7 @@ export class SchemeDraftItemComponent {
     }
 
     remove() {
-        this.dialog.open(ConfirmDialog, {
-            title: '删除',
-            content: '确定要删除吗？',
-        }).then(() => {
+        this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.draftService.delete(this.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
@@ -68,15 +56,14 @@ export class SchemeDraftItemComponent {
     commit() {
         let errors = this.vm.checkCredit();
         if (errors.length > 0) {
-            this.dialog.open(ErrorMessageDialog, {errors});
+            this.dialog.error(errors);
         } else {
-            let what = `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
-            this.dialog.open(WorkflowCommitDialog, {
+            this.workflow.commit({
                 whoUrl: this.draftService.getCheckersUrl(this.id),
                 does: '审核',
-                what: what,
+                what: `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`,
             }).then(result => {
-                this.draftService.commit(this.id, what, result.to, result.comment).subscribe(() => {
+                this.draftService.commit(this.id, result.what, result.to, result.comment).subscribe(() => {
                     this.loadData();
                 });
             });
@@ -92,6 +79,6 @@ export class SchemeDraftItemComponent {
     }
 
     showWorkitems() {
-        this.dialog.open(WorkflowWorkitemsDialog, {instance: this.vm.workflowInstanceId});
+        this.workflow.workitems(this.vm.workflowInstanceId);
     }
 }

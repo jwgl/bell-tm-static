@@ -1,32 +1,33 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {Component, ElementRef, provide} from '@angular/core';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL, API_URL_FIELDS} from '../../../core/http';
+import {RestModule} from '../../../core/http';
+import {VisionDraftComponent} from './draft.component';
 import {VisionDraftService} from './draft.service';
-import {DRAFT_ROUTER_PROVIDERS} from './draft.routes';
+import {DraftListModule} from './list/draft-list.module';
+import {DraftItemModule} from './item/draft-item.module';
+import {DraftEditorModule} from './editor/draft-editor.module';
+import {routing} from './draft.routes';
 
-@Component({
-    selector: 'vision-draft-container',
-    template: `<a [routerLink]="'/'"></a><router-outlet></router-outlet>`,
-    directives: [ROUTER_DIRECTIVES],
+@NgModule({
+    bootstrap: [VisionDraftComponent],
+    declarations: [
+        VisionDraftComponent,
+    ],
+    imports: [
+        BrowserModule,
+        RestModule.for('/api/users/${userId}/visions'),
+        routing,
+        DraftEditorModule,
+        DraftItemModule,
+        DraftListModule,
+    ],
+    providers: [
+        VisionDraftService,
+        {provide: 'API_URL_IMPORT', useValue: '/api/visions'},
+    ],
 })
-class VisionDraft {
-    constructor(
-        private elementRef: ElementRef,
-        private draftService: VisionDraftService) {
-        let userId = elementRef.nativeElement.getAttribute('user');
-        this.draftService.userId = userId;
-    }
-}
+class MainModule {}
 
-bootstrap(VisionDraft, [
-    DRAFT_ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy}),
-    provide(API_URL, {useValue: '/api/users/${userId}/visions'}),
-    provide(API_URL_FIELDS, {useValue: '/api/fields'}),
-    provide('API_URL_IMPORT', {useValue: '/api/visions'}),
-    REST_PROVIDERS,
-    VisionDraftService,
-]);
+platformBrowserDynamic().bootstrapModule(MainModule);

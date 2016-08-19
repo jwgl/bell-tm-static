@@ -1,6 +1,7 @@
 import {Injectable, Inject, Optional} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest, Observable, API_URL_FIELDS} from '../../../core/http';
+import {ApiUrl, Rest} from '../../../core/http';
 import {Vision} from '../common/vision.model';
 
 @Injectable()
@@ -10,7 +11,6 @@ export class VisionDraftService {
     constructor(
         private rest: Rest,
         private api: ApiUrl,
-        @Optional() @Inject(API_URL_FIELDS) private fieldUrl: string,
         @Optional() @Inject('API_URL_IMPORT') private importUrl: string
     ) {}
 

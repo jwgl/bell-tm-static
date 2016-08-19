@@ -1,29 +1,20 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {BOOTSTRAP_DIRECTIVES} from '../../../../core/bootstrap';
-import {BaseDialog} from '../../../../core/dialogs';
-import {MODAL_DIRECTIVES} from '../../../../core/directives';
-import {EditMode} from '../../../../core/constants';
-import {SchemeTermNamePipe} from '../../../common/pipes';
-import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../common/utils';
+import {BaseDialog} from '../../../../../core/dialogs';
+import {EditMode} from '../../../../../core/constants';
+import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../../common/utils';
+import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
 import {CourseSelectComponent} from './course-select.component';
 import {AllowedTermComponent, AllowedTermAccessor} from './allowed-term.component';
-import {SchemeCourseDto, CourseSelectDto} from '../../common/scheme.model';
-
 
 @Component({
     selector: 'course-editor-dialog',
     template: require('./course-editor.html'),
     directives: [
-        MODAL_DIRECTIVES,
-        BOOTSTRAP_DIRECTIVES,
         CourseSelectComponent,
         AllowedTermComponent,
         AllowedTermAccessor,
-    ],
-    pipes: [
-        SchemeTermNamePipe,
     ],
 })
 export class CourseEditorDialog extends BaseDialog {

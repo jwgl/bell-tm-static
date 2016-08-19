@@ -1,16 +1,13 @@
 import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import {MODAL_DIRECTIVES} from '../directives';
-import {Rest, Observable} from '../http';
+import {Rest} from '../http';
 import {BaseDialog} from './dialog';
 import {typeahead} from '../utils/typeahead';
 
 @Component({
     selector: 'teacher-select-dialog',
     template: require('./teacher-select.html'),
-    directives: [
-        MODAL_DIRECTIVES,
-    ],
 })
 export class TeacherSelectDialog extends BaseDialog {
     @ViewChild('search') input: ElementRef;

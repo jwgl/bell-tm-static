@@ -1,12 +1,29 @@
+import {NgModule, ModuleWithProviders} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {Rest} from './http/rest';
-import {ApiUrl} from './http/api-url';
+import {ApiUrl, API_URL, BASE_URL} from './http/api-url';
 
-export const REST_PROVIDERS: any[] = [
-    ...HTTP_PROVIDERS,
+export {
     Rest,
     ApiUrl,
-];
+    API_URL,
+    BASE_URL,
+}
 
-export * from './http/rest';
-export * from './http/api-url';
+@NgModule({
+    providers: [
+        HTTP_PROVIDERS,
+        Rest,
+    ],
+})
+export class RestModule {
+    static for(apiUrl: string): ModuleWithProviders {
+        return {
+            ngModule: RestModule,
+            providers: [{
+                provide: ApiUrl,
+                useFactory: () => new ApiUrl(apiUrl),
+            }],
+        };
+    }
+}

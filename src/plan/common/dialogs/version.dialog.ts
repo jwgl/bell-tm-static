@@ -1,60 +1,31 @@
 import {Component} from '@angular/core';
-import {FormBuilder, ControlGroup} from '@angular/common';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-
-import {MODAL_DIRECTIVES} from '../../../core/directives';
 import {BaseDialog} from '../../../core/dialogs';
-import {PLAN_PIPES} from '../pipes';
+import {toVersionString} from '../utils';
 
 @Component({
     selector: 'version-dialog',
-    providers: [FormBuilder],
     template: require('./version.html'),
     styles: [require('./version.scss')],
-    directives: [MODAL_DIRECTIVES],
-    pipes: [PLAN_PIPES],
 })
 export class VersionDialog extends BaseDialog {
     prev: number;
     curr: number;
-    a: number;
-    b: number;
-    c: number;
-    d: number;
 
-    form: ControlGroup;
+    versionForm: FormGroup;
 
-    constructor(fb: FormBuilder) {
+    constructor(private fb: FormBuilder) {
         super();
-
-        this.form = fb.group({
-            a: [''],
-            b: [''],
-            c: [''],
-            d: [''],
-        }, {validator: this.validate.bind(this)});
     }
 
-    validate(form: ControlGroup): any {
+    validate(form: FormGroup): any {
         if (!this.prev) {
             return null;
         }
-        /* tslint:disable:no-string-literal */
-        let a = form.controls['a'].value;
-        let b = form.controls['b'].value;
-        let c = form.controls['c'].value;
-        let d = form.controls['d'].value;
-        /* tslint:enable:no-string-literal */
 
-        /* tslint:disable:no-bitwise */
-        let newVersion = (a << 24) + (b << 16) + (c << 8) + (d << 0);
-        let pa = (this.curr >> 24) & 255;
-        let pb = (this.curr >> 16) & 255;
-        let pc = (this.curr >>  8) & 255;
-        let pd = (this.curr >>  0) & 255;
-        /* tslint:enable:no-bitwise */
-
-        return newVersion <= this.prev ? {mustGreatThan: {value: `${pa}.${pb}.${pc}.${pd}`}} : null;
+        let newVersion = this.getValue(form);
+        return newVersion <= this.prev ? {mustGreatThan: {value: toVersionString(this.prev)}} : null;
     }
 
     /**
@@ -65,17 +36,27 @@ export class VersionDialog extends BaseDialog {
         this.curr = this.options.curr;
 
         /* tslint:disable:no-bitwise */
-        this.a = (this.curr >> 24) & 255;
-        this.b = (this.curr >> 16) & 255;
-        this.c = (this.curr >>  8) & 255;
-        this.d = (this.curr >>  0) & 255;
+        this.versionForm = this.fb.group({
+            a: [(this.curr >> 24) & 255],
+            b: [(this.curr >> 16) & 255],
+            c: [(this.curr >>  8) & 255],
+            d: [(this.curr >>  0) & 255],
+        }, {validator: this.validate.bind(this)});
         /* tslint:enable:no-bitwise */
         return null;
     }
 
     protected onConfirmed(): number {
+        return this.getValue(this.versionForm);
+    }
+
+    private getValue(form: FormGroup): number {
+        let a = form.controls['a'].value;
+        let b = form.controls['b'].value;
+        let c = form.controls['c'].value;
+        let d = form.controls['d'].value;
         /* tslint:disable:no-bitwise */
-        return (this.a << 24) + (this.b << 16) + (this.c << 8) + (this.d << 0);
+        return (a << 24) + (b << 16) + (c << 8) + (d << 0);
         /* tslint:enable:no-bitwise */
     }
 }

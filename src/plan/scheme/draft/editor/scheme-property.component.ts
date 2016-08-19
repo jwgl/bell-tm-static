@@ -1,6 +1,5 @@
 import {Component, Input} from '@angular/core';
 
-import {ZeroEmptyPipe, SchemeTermTitlePipe} from '../../../common/pipes';
 import {Property} from '../../common/scheme.model';
 
 /**
@@ -14,10 +13,6 @@ import {Property} from '../../common/scheme.model';
     ],
     template: require('./scheme-property.html'),
     host: {'[class]': "'property'"},
-    pipes: [
-        ZeroEmptyPipe,
-        SchemeTermTitlePipe,
-    ],
 })
 export class SchemePropertyComponent {
     @Input('scheme-property') property: Property;

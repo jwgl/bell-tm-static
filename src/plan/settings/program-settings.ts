@@ -1,12 +1,23 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {provide} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL} from '../../core/http';
+import {RestModule} from '../../core/http';
+import {ProgramSettingsComponent} from './program/program-settings.component';
+import {ProgramSettingsModule} from './program/program-settings.module';
 import {ProgramSettingsService} from './program-settings.service';
-import {ProgramSettingsComponent} from './program-settings.component';
 
-bootstrap(ProgramSettingsComponent, [
-    provide(API_URL, {useValue: '/api/programSettings'}),
-    REST_PROVIDERS,
-    ProgramSettingsService,
-]);
+@NgModule({
+    bootstrap: [ProgramSettingsComponent],
+    imports: [
+        BrowserModule,
+        ProgramSettingsModule,
+        RestModule.for('/api/programSettings'),
+    ],
+    providers: [
+        ProgramSettingsService,
+    ],
+})
+class MainModule {}
+
+platformBrowserDynamic().bootstrapModule(MainModule);

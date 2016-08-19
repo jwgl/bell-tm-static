@@ -1,19 +1,14 @@
 import {Component} from '@angular/core';
 
-import {Dialog} from '../../core/dialogs';
-import {Spinning} from '../../core/directives';
-import {groupBy} from '../../core/utils';
-import {ProgramTypePipe, VersionNumberPipe} from '../common/pipes';
-import {ProgramSettingsService} from './program-settings.service';
-import {ProgramSettingsDialog} from './program-settings-editor.dialog';
+import {Dialog} from '../../../core/dialogs';
+import {groupBy} from '../../../core/utils';
+import {ProgramSettingsService} from '../program-settings.service';
+import {ProgramEditorDialog} from './program-editor.dialog';
 
 @Component({
     selector: 'program-settings-list',
     styles: [require('./program-settings.scss')],
     template: require('./program-settings.html'),
-    directives: [Spinning],
-    providers: [Dialog],
-    pipes: [ProgramTypePipe, VersionNumberPipe],
 })
 export class ProgramSettingsComponent {
     departments: any[];
@@ -53,7 +48,7 @@ export class ProgramSettingsComponent {
     }
 
     edit(program: any) {
-        this.dialog.open(ProgramSettingsDialog, {
+        this.dialog.open(ProgramEditorDialog, {
             programSetting: program,
             url: '/api/schemeTemplates',
         }).then(result => {

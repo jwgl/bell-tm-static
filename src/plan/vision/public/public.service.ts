@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest, Observable} from '../../../core/http';
+import {ApiUrl, Rest} from '../../../core/http';
 import {Vision} from '../common/vision.model';
 
 @Injectable()

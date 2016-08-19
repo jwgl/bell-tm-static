@@ -9,23 +9,18 @@ import {
     forwardRef,
 } from '@angular/core';
 import {
-    Control,
-    ControlArray,
+    FormControl,
+    FormArray,
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
-} from '@angular/common';
+} from '@angular/forms';
 
-import {getBit, setBit, clearBit} from '../../../../core/utils';
-import {SchemeTermTitlePipe} from '../../../common/pipes';
-
+import {getBit, setBit, clearBit} from '../../../../../core/utils';
 
 @Component({
     selector: 'allowed-term',
     styles: [require('./allowed-term.scss')],
     template: require('./allowed-term.html'),
-    pipes: [
-        SchemeTermTitlePipe,
-    ],
 })
 export class AllowedTermComponent {
     @Input() value: number;
@@ -34,14 +29,14 @@ export class AllowedTermComponent {
 
     @Output() valueChange: EventEmitter<number>;
 
-    controls: ControlArray;
+    controls: FormArray;
 
     constructor() {
         this.valueChange = new EventEmitter<number>();
     }
 
     ngOnInit() {
-        this.controls = new ControlArray(this.terms.map(term => new Control(getBit(this.value, term - 1))));
+        this.controls = new FormArray(this.terms.map(term => new FormControl(getBit(this.value, term - 1))));
         this.controls.valueChanges.subscribe((values: boolean[]) => {
             this.value = values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0);
             this.valueChange.emit(this.value);
@@ -61,7 +56,7 @@ export class AllowedTermComponent {
 
     setValue(value: number) {
         this.value = value;
-        this.terms.forEach((term, i) => (<Control>this.controls.at(i)).updateValue(getBit(this.value, term - 1), {emitEvent: false}));
+        this.terms.forEach((term, i) => (<FormControl>this.controls.at(i)).updateValue(getBit(this.value, term - 1), {emitEvent: false}));
     }
 }
 

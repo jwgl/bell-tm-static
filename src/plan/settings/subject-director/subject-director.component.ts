@@ -1,21 +1,20 @@
 import {Component} from '@angular/core';
 
-import {Dialog, TeacherSelectDialog} from '../../core/dialogs';
-import {Spinning} from '../../core/directives';
-import {groupBy} from '../../core/utils';
-import {SubjectDirectorService} from './subject-director.service';
+import {CommonDialog} from '../../../core/dialogs';
+import {Spinning} from '../../../core/directives';
+import {groupBy} from '../../../core/utils';
+import {SubjectDirectorService} from '../subject-director.service';
 
 @Component({
     selector: 'subject-director-list',
     template: require('./subject-director.html'),
     directives: [Spinning],
-    providers: [Dialog],
 })
 export class SubjectDirectorComponent {
     departments: any[];
 
     constructor(
-        private dialog: Dialog,
+        private dialog: CommonDialog,
         private service: SubjectDirectorService) {
         this.service.loadList().map(items => {
             let departments: {
@@ -38,7 +37,7 @@ export class SubjectDirectorComponent {
     }
 
     selectTeacher(target: any, subject: any) {
-        this.dialog.open(TeacherSelectDialog, {title: `选择${subject.subjectName}专业负责人`}).then(result => {
+        this.dialog.teacher(`选择${subject.subjectName}专业负责人`).then(result => {
             subject.processing = true;
             this.service.save(subject.subjectId, result.id).subscribe(_ => {
                 subject.processing = false;

@@ -10,9 +10,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import {EditMode} from '../../../../core/constants';
-import {CourseSelectDto, AbstractGroup} from '../../common/scheme.model';
-import {SchemeDraftService} from '../draft.service';
+import {EditMode} from '../../../../../core/constants';
+import {CourseSelectDto, AbstractGroup} from '../../../common/scheme.model';
+import {SchemeDraftService} from '../../draft.service';
 
 @Component({
     selector: 'course-select',

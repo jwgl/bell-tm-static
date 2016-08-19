@@ -1,34 +1,27 @@
 import {Component} from '@angular/core';
-import {FormBuilder, ControlGroup} from '@angular/common';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {Dialog, SimpleListSelectDialog} from '../../../../core/dialogs';
+import {CommonDialog} from '../../../../core/dialogs';
 import {EditMode} from '../../../../core/constants';
-import {PlanTitleComponent} from '../../../common/components';
-import {PLAN_PIPES} from '../../../common/pipes';
+
 import {Vision} from '../../common/vision.model';
 import {VisionDraftService} from '../draft.service';
 
 @Component({
     selector: 'vision-draft-editor',
-    providers: [FormBuilder, Dialog],
     styles: [require('./draft-editor.scss')],
     template: require('./draft-editor.html'),
-    directives: [PlanTitleComponent],
-    pipes: [PLAN_PIPES],
 })
 export class VisionDraftEditorComponent {
     private editMode: EditMode;
     private vm: Vision;
 
-    private form: ControlGroup;
     private _showSchoolingLength = false;
     private _showAwardedDegree = false;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private formBuilder: FormBuilder,
-        private dialog: Dialog,
+        private dialog: CommonDialog,
         private draftService: VisionDraftService
     ) {
         this.editMode = this.route.snapshot.data['mode'];
@@ -44,13 +37,6 @@ export class VisionDraftEditorComponent {
                 this.draftService.loadItemForEdit(params['id']).subscribe(model => this.vm = model);
                 break;
         }
-
-        this.form = this.formBuilder.group({
-            objective: [],
-            specification: [],
-            schoolingLength: [],
-            awardedDegree: [],
-        });
     }
 
     get showSchoolingLength(): boolean {
@@ -99,10 +85,10 @@ export class VisionDraftEditorComponent {
 
     create() {
         this.draftService.create({
-            objective:       this.form.value.objective,
-            specification:   this.form.value.specification,
-            schoolingLength: this.form.value.schoolingLength,
-            awardedDegree:   this.form.value.awardedDegree,
+            objective:       this.vm.objective,
+            specification:   this.vm.specification,
+            schoolingLength: this.vm.schoolingLength,
+            awardedDegree:   this.vm.awardedDegree,
             programId:       this.vm.programId,
             versionNumber:   this.vm.versionNumber,
         }).subscribe(id => {
@@ -115,10 +101,10 @@ export class VisionDraftEditorComponent {
     revise() {
         this.draftService.revise({
             previousId:      this.vm.previousId,
-            objective:       this.form.value.objective,
-            specification:   this.form.value.specification,
-            schoolingLength: this.form.value.schoolingLength,
-            awardedDegree:   this.form.value.awardedDegree,
+            objective:       this.vm.objective,
+            specification:   this.vm.specification,
+            schoolingLength: this.vm.schoolingLength,
+            awardedDegree:   this.vm.awardedDegree,
             programId:       this.vm.programId,
             versionNumber:   this.vm.versionNumber,
         }).subscribe(id => {
@@ -131,10 +117,10 @@ export class VisionDraftEditorComponent {
     update() {
         this.draftService.update({
             id:              this.vm.id,
-            objective:       this.form.value.objective,
-            specification:   this.form.value.specification,
-            schoolingLength: this.form.value.schoolingLength,
-            awardedDegree:   this.form.value.awardedDegree,
+            objective:       this.vm.objective,
+            specification:   this.vm.specification,
+            schoolingLength: this.vm.schoolingLength,
+            awardedDegree:   this.vm.awardedDegree,
             programId:       this.vm.programId,
         }).subscribe(id => {
             this.router.navigate(['/', id]);
@@ -144,11 +130,11 @@ export class VisionDraftEditorComponent {
     }
 
     import() {
-        this.dialog.open(SimpleListSelectDialog, {
-            title: '选择导入的专业',
-            url: `/api/departments/${this.vm.departmentId}/visions`,
-            labelFn: (item: any) => `${item.grade}级${item.subjectName}`,
-        }).then(id => {
+        this.dialog.list(
+            '选择导入的专业',
+            `/api/departments/${this.vm.departmentId}/visions`,
+            (item: any) => `${item.grade}级${item.subjectName}`
+        ).then(id => {
             this.draftService.loadDataForImport(id).subscribe(vision => {
                this.vm.objective = vision.objective;
                this.vm.specification = vision.specification;

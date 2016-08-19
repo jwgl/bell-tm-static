@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-import {BaseDialog} from './dialog';
-import {Rest, Observable} from '../http';
+import {Observable} from 'rxjs/Observable';
+
+import {BaseDialog} from '../dialogs';
+import {Rest} from '../http';
 import {FromNowPipe, ActionNamePipe, ActionClassPipe} from '../pipes';
-import {MODAL_DIRECTIVES} from '../directives';
 
 /**
  * options: {instance: string}
  */
 @Component({
     selector: 'workflow-workitems-dialog',
-    template: require('./workflow-workitems.html'),
-    directives: [MODAL_DIRECTIVES],
+    template: require('./workitems.html'),
     pipes: [FromNowPipe, ActionNamePipe, ActionClassPipe],
 })
 export class WorkflowWorkitemsDialog extends BaseDialog {

@@ -1,12 +1,30 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {provide} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import {REST_PROVIDERS, API_URL} from '../../../core/http';
-import {SchemeReviewService} from './review.service';
+import {RestModule} from '../../../core/http';
+import {WorkflowModule} from '../../../core/workflow';
+import {PlanCommonModule} from '../../common/module';
 import {SchemeReviewComponent} from './review.component';
+import {SchemeViewerComponent} from '../common/scheme-viewer.component';
+import {SchemeReviewService} from './review.service';
 
-bootstrap(SchemeReviewComponent, [
-    provide(API_URL, {useValue: '/api/schemes'}),
-    REST_PROVIDERS,
-    SchemeReviewService,
-]);
+@NgModule({
+    bootstrap: [SchemeReviewComponent],
+    declarations: [
+        SchemeReviewComponent,
+        SchemeViewerComponent,
+    ],
+    imports: [
+        BrowserModule,
+        RestModule.for('/api/schemes'),
+        PlanCommonModule,
+        WorkflowModule,
+    ],
+    providers: [
+        SchemeReviewService,
+    ],
+})
+class MainModule {}
+
+platformBrowserDynamic().bootstrapModule(MainModule);

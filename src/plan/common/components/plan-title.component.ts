@@ -2,14 +2,11 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 import {Dialog} from '../../../core/dialogs';
 import {VersionDialog} from '../dialogs';
-import {VersionNumberPipe} from '../pipes';
 
 @Component({
     selector: 'plan-title',
     styles: [require('./plan-title.scss')],
     template: require('./plan-title.html'),
-    pipes: [VersionNumberPipe],
-    providers: [Dialog],
 })
 export class PlanTitleComponent {
     @Input() title: string;
@@ -27,6 +24,8 @@ export class PlanTitleComponent {
             curr: this.version,
         }).then((newValue) => {
             this.versionChanged.emit(newValue);
+        }).catch((error) => {
+            console.log(error);
         });
     }
 }

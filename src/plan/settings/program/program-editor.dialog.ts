@@ -2,20 +2,14 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 
-import {BOOTSTRAP_DIRECTIVES} from '../../core/bootstrap';
-import {Rest} from '../../core/http';
-import {BaseDialog} from '../../core/dialogs';
-import {MODAL_DIRECTIVES} from '../../core/directives';
+import {Rest} from '../../../core/http';
+import {BaseDialog} from '../../../core/dialogs';
 
 @Component({
     selector: 'program-setting-dialog',
-    template: require('./program-settings-editor.html'),
-    directives: [
-        MODAL_DIRECTIVES,
-        BOOTSTRAP_DIRECTIVES,
-    ],
+    template: require('./program-editor.html'),
 })
-export class ProgramSettingsDialog extends BaseDialog {
+export class ProgramEditorDialog extends BaseDialog {
     title: string;
     programSetting: any;
     template: {id: number, name: string};

@@ -1,1 +1,1 @@
-export * from './dialogs/version.dialog';
+export {VersionDialog} from './dialogs/version.dialog';

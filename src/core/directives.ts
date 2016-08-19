@@ -1,3 +1,5 @@
+import {NgModule} from '@angular/core';
+
 export {Select2} from './directives/select2';
 export {Markdown} from './directives/markdown';
 export {Spinning} from './directives/spinning';
@@ -13,3 +15,9 @@ export const MODAL_DIRECTIVES: any[] = [
     ModalCancelButtonDirective,
     ModalOkButtonDirective,
 ];
+
+@NgModule({
+    declarations: [MODAL_DIRECTIVES],
+    exports: [MODAL_DIRECTIVES],
+})
+export class ModalDirectivesModule {}
