@@ -5,7 +5,7 @@ import {FormControlDirective} from './form-control.directive';
 @Component({
     selector: 'form-field',
     template: `
-    <label [attr.for]="controlId" class="col-sm-{{labelCol}} form-control-label">{{label}}</label>
+    <label [attr.for]="controlId" class="col-sm-{{labelCol}} col-form-label">{{label}}</label>
     <div class="col-sm-{{controlCol}}">
         <ng-content></ng-content>
     </div>
