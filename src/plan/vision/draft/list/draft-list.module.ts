@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {AuditStatusComponent} from '../../../../core/components';
+import {CommonDirectivesModule} from '../../../../core/common-directives';
 import {PlanCommonModule} from '../../../common/module';
 import {VisionDraftListComponent} from './draft-list.component';
-import {RouterModule, RouterConfig} from '@angular/router';
+import {RouterModule} from '@angular/router';
 
-const ROUTER_CONFIG: RouterConfig = [
+const ROUTER_CONFIG = [
     {path: '', component: VisionDraftListComponent},
 ];
 
@@ -15,9 +15,9 @@ const ROUTER_CONFIG: RouterConfig = [
         CommonModule,
         PlanCommonModule,
         RouterModule.forChild(ROUTER_CONFIG),
+        CommonDirectivesModule,
     ],
     declarations: [
-        AuditStatusComponent,
         VisionDraftListComponent,
     ],
     exports: [VisionDraftListComponent],

@@ -1,5 +1,5 @@
 <modal-dialog [title]="title">
-    <modal-body>
+    <div modalBody>
         <form>
             <div class="form-group" nolabel>
                 <input #search type="text" class="form-control" placeholder="输入教师工号、姓名或单位进行查询">
@@ -10,9 +10,9 @@
                 </select>
             </div>
         </form>
-    </modal-body>
-    <modal-footer>
+    </div>
+    <div modalFooter>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="!result">确定</button>
-    </modal-footer>
+    </div>
 </modal-dialog>

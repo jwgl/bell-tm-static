@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import {CommonDialogModule} from '../../../../core/dialogs';
+import {CommonDialogsModule} from '../../../../core/common-dialogs';
 import {PlanCommonModule} from '../../../common/module';
 import {VisionDraftEditorComponent} from './draft-editor.component';
 
@@ -11,7 +11,7 @@ import {VisionDraftEditorComponent} from './draft-editor.component';
         CommonModule,
         FormsModule,
         PlanCommonModule,
-        CommonDialogModule,
+        CommonDialogsModule,
     ],
     declarations: [
         VisionDraftEditorComponent,

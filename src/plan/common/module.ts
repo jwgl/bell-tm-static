@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {Dialog} from '../../core/dialogs';
-import {ModalDirectivesModule} from '../../core/directives';
+import {CommonDirectivesModule} from '../../core/common-directives';
 import {PlanTitleComponent} from './components/plan-title.component';
 import {VersionDialog} from './dialogs/version.dialog';
 import {PrimaryCoursesPipe} from './pipes/primary-courses';
@@ -18,7 +18,7 @@ import {GradeFilterPipe} from './pipes/grade-filter';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        ModalDirectivesModule,
+        CommonDirectivesModule,
     ],
     declarations: [
         PlanTitleComponent,
@@ -36,7 +36,6 @@ import {GradeFilterPipe} from './pipes/grade-filter';
     ],
     exports: [
         PlanTitleComponent,
-        VersionDialog,
         PrimaryCoursesPipe,
         ProgramTypePipe,
         VersionNumberPipe,
@@ -44,6 +43,9 @@ import {GradeFilterPipe} from './pipes/grade-filter';
         SchemeTermNamePipe,
         SchemeTermTitlePipe,
         GradeFilterPipe,
+    ],
+    entryComponents: [
+        VersionDialog,
     ],
 })
 export class PlanCommonModule {}

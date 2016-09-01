@@ -3,7 +3,6 @@ import {Observable} from 'rxjs/Observable';
 
 import {BaseDialog} from '../dialogs';
 import {Rest} from '../http';
-import {FromNowPipe, ActionNamePipe, ActionClassPipe} from '../pipes';
 
 /**
  * options: {instance: string}
@@ -11,7 +10,6 @@ import {FromNowPipe, ActionNamePipe, ActionClassPipe} from '../pipes';
 @Component({
     selector: 'workflow-workitems-dialog',
     template: require('./workitems.html'),
-    pipes: [FromNowPipe, ActionNamePipe, ActionClassPipe],
 })
 export class WorkflowWorkitemsDialog extends BaseDialog {
     constructor(private rest: Rest) {

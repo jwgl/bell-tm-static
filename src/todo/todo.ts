@@ -1,8 +1,8 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, provide} from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import {FromNowComponent} from '../core/components';
+import {CommonDirectivesModule} from '../core/common-directives';
 import {RestModule, BASE_URL} from '../core/http';
 import {TodoListComponent} from './list/todo-list.component';
 import {OpenTodoListComponent} from './list/open-list.component';
@@ -19,15 +19,15 @@ let userId = match[1];
         TodoListComponent,
         OpenTodoListComponent,
         ClosedTodoListComponent,
-        FromNowComponent,
     ],
     imports: [
         BrowserModule,
         routing,
         RestModule.for(`/api/users/${userId}/works`),
+        CommonDirectivesModule,
     ],
     providers: [
-        provide(BASE_URL, {useValue: `/users/${userId}/works`}),
+        {provide: BASE_URL, useValue: `/users/${userId}/works`},
         TodoService,
     ],
 })

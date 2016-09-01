@@ -4,8 +4,8 @@ import {
     EventEmitter,
     OnInit,
     ApplicationRef,
-    Compiler,
     ViewContainerRef,
+    ComponentFactoryResolver,
 } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
@@ -13,37 +13,32 @@ import 'rxjs/add/observable/empty';
 
 @Injectable()
 export class Dialog {
-    ngModule: Type = null;
+    constructor(private appRef: ApplicationRef, private componentFactoryResolver: ComponentFactoryResolver) {}
 
-    constructor(private appRef: ApplicationRef, private compiler: Compiler) {}
-
-    open(dialogType: Type, options: any = {}): Promise<any> {
+    open(dialogType: Type<any>, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
             let location: ViewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
-            this.compiler.compileComponentAsync(<any>dialogType, this.ngModule).then(componentFactory => {
-                let contextInjector = location.parentInjector;
-                let childInjector = contextInjector;
-                let componentRef = location.createComponent(componentFactory, location.length, childInjector);
+            let componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
+            let contextInjector = location.parentInjector;
+            let childInjector = contextInjector;
+            let componentRef = location.createComponent(componentFactory, location.length, childInjector);
 
-                let nativeElement = componentRef.location.nativeElement;
-                document.body.appendChild(nativeElement);
+            let nativeElement = componentRef.location.nativeElement;
+            document.body.appendChild(nativeElement);
 
-                let instance = <DynamicDialog>componentRef.instance;
-                instance.nativeElement = nativeElement;
-                instance.options = options;
-                instance.closed.subscribe((value: any) => {
-                    componentRef.destroy();
-                });
-                instance.confirm.subscribe((value: any) => {
-                    resolve(value);
-                }, (error: any) => {
-                    reject(error);
-                });
+            let instance = <DynamicDialog>componentRef.instance;
+            instance.nativeElement = nativeElement;
+            instance.options = options;
+            instance.closed.subscribe((value: any) => {
+                componentRef.destroy();
             });
-        }).catch(reason => {
-            throw reason;
+            instance.confirm.subscribe((value: any) => {
+                resolve(value);
+            }, (error: any) => {
+                reject(error);
+            });
         });
-    }
+    };
 }
 
 export interface DynamicDialog {

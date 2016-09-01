@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 
 import {RestModule} from '../../../../core/http';
 import {PlanCommonModule} from '../../../common/module';
-import {VisionViewerComponent} from '../../common/vision-viewer.component';
+import {VisionViewerModule} from '../../common/vision-viewer.module';
 import {VisionPublicItemComponent} from './public-item.component';
 
 @NgModule({
@@ -12,10 +12,10 @@ import {VisionPublicItemComponent} from './public-item.component';
         CommonModule,
         PlanCommonModule,
         RestModule.for('/api/visions'),
+        VisionViewerModule,
     ],
     declarations: [
         VisionPublicItemComponent,
-        VisionViewerComponent,
     ],
     exports: [
         VisionPublicItemComponent,

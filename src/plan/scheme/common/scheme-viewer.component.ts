@@ -9,7 +9,7 @@ import {Scheme} from './scheme.model';
     selector: '[scheme-course]',
     template: require('./scheme-course.html'),
 })
-class SchemeCourse {
+export class SchemeCourse {
     @Input('scheme-course') schemeCourse: any;
     @Input() terms: number[];
 
@@ -34,7 +34,7 @@ class SchemeCourse {
     template: require('./scheme-group.html'),
     host: {'[class]': "'group'"},
 })
-class SchemeGroup {
+export class SchemeGroup {
     @Input('scheme-group') group: any;
     @Input() terms: number[];
 }
@@ -57,13 +57,8 @@ export class SchemeSummary {
 @Component({
     selector: 'scheme-table',
     template: require('./scheme-table.html'),
-    directives: [
-        SchemeGroup,
-        SchemeCourse,
-        SchemeSummary,
-    ],
 })
-class SchemeTable {
+export class SchemeTable {
     @Input() scheme: Scheme;
 }
 
@@ -74,9 +69,6 @@ class SchemeTable {
     selector: 'scheme-viewer',
     styles: [require('./scheme-viewer.scss')],
     template: require('./scheme-viewer.html'),
-    directives: [
-        SchemeTable,
-    ],
     encapsulation: ViewEncapsulation.None,
 })
 export class SchemeViewerComponent {

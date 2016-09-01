@@ -1,19 +1,18 @@
-import {NgModule, Injectable, Inject, OpaqueToken} from '@angular/core';
+import {NgModule, Injectable} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Dialog, provideDialog} from '../../../../../core/dialogs';
-import {ModalDirectivesModule} from '../../../../../core/directives';
-import {BootstrapFormModule} from '../../../../../core/bootstrap';
+import {Dialog} from '../../../../../core/dialogs';
+import {CommonDirectivesModule} from '../../../../../core/common-directives';
 import {PlanCommonModule} from '../../../../common/module';
 
 import {CourseEditorDialog} from './course-editor.dialog';
-
-const COURSE_EDITOR_DIALOG = new OpaqueToken('Course editor dialog');
+import {CourseSelectComponent} from './course-select.component';
+import {AllowedTermComponent, AllowedTermAccessor} from './allowed-term.component';
 
 @Injectable()
 export class CourseEditorService {
-    constructor(@Inject(COURSE_EDITOR_DIALOG) private dialog: Dialog) {}
+    constructor(private dialog: Dialog) {}
 
     open(options: any): Promise<any> {
         return this.dialog.open(CourseEditorDialog, options);
@@ -25,18 +24,23 @@ export class CourseEditorService {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        ModalDirectivesModule,
-        BootstrapFormModule,
+        CommonDirectivesModule,
         PlanCommonModule,
     ],
     declarations: [
         CourseEditorDialog,
+        CourseSelectComponent,
+        AllowedTermComponent,
+        AllowedTermAccessor,
     ],
     providers: [
-        provideDialog(COURSE_EDITOR_DIALOG, CourseEditorModule),
+        Dialog,
         CourseEditorService,
     ],
     exports: [
+        CourseEditorDialog,
+    ],
+    entryComponents: [
         CourseEditorDialog,
     ],
 })

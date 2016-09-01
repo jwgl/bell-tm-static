@@ -1,5 +1,5 @@
 <modal-dialog [title]="title">
-    <modal-body>
+    <div modalBody>
         <form class="form-horizontal" #f="ngForm">
             <fieldset>
                 <legend>培养方案</legend>
@@ -43,9 +43,9 @@
                 </div>
             </fieldset>
         </form>
-    </modal-body>
-    <modal-footer>
+    </div>
+    <div modalFooter>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="!f.valid">确定</button>
-    </modal-footer>
+    </div>
 </modal-dialog>

@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 import {Dialog} from '../../../core/dialogs';
-import {VersionDialog} from '../dialogs';
+import {VersionDialog} from '../dialogs/version.dialog';
 
 @Component({
     selector: 'plan-title',

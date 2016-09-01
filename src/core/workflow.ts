@@ -1,21 +1,19 @@
-import {NgModule, Injectable, Inject, OpaqueToken} from '@angular/core';
+import {NgModule, Injectable} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 
 import {Rest, ApiUrl} from './http';
-import {Dialog, provideDialog} from './dialogs';
-import {ModalDirectivesModule} from './directives';
+import {Dialog} from './dialogs';
+import {CommonDirectivesModule} from './common-directives';
 import {WorkflowCommitDialog} from './workflow/commit.dialog';
 import {WorkflowAcceptDialog} from './workflow/accept.dialog';
 import {WorkflowRejectDialog} from './workflow/reject.dialog';
 import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
 
-const WORKFLOW_DIALOG = new OpaqueToken('Workflow Dialog');
-
 @Injectable()
 export class Workflow {
-    constructor(@Inject(WORKFLOW_DIALOG)private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
+    constructor(/*@Inject(WORKFLOW_DIALOG)*/private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
     commit(id: string, what: string): Promise<void> {
         const whoUrl = this.api.checkers(id);
@@ -45,27 +43,31 @@ export class Workflow {
     }
 }
 
+const WORKFLOW_DIALOGS: any[] = [
+    WorkflowCommitDialog,
+    WorkflowAcceptDialog,
+    WorkflowRejectDialog,
+    WorkflowWorkitemsDialog,
+];
+
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        ModalDirectivesModule,
+        CommonDirectivesModule,
     ],
     declarations: [
-        WorkflowCommitDialog,
-        WorkflowAcceptDialog,
-        WorkflowRejectDialog,
-        WorkflowWorkitemsDialog,
+        WORKFLOW_DIALOGS,
     ],
     providers: [
-        provideDialog(WORKFLOW_DIALOG, WorkflowModule),
+        Dialog,
         Workflow,
     ],
     exports: [
-        WorkflowCommitDialog,
-        WorkflowAcceptDialog,
-        WorkflowRejectDialog,
-        WorkflowWorkitemsDialog,
+        WORKFLOW_DIALOGS,
+    ],
+    entryComponents: [
+        WORKFLOW_DIALOGS,
     ],
 })
 export class WorkflowModule {}

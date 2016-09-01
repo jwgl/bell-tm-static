@@ -1,4 +1,7 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+
 import {Component} from '@angular/core';
 
 const COLORS = [
@@ -85,4 +88,12 @@ class Logo {
     }
 }
 
-bootstrap(Logo);
+@NgModule({
+    bootstrap: [Logo],
+    declarations: [Logo],
+    imports: [BrowserModule],
+})
+class MainModule {}
+
+platformBrowserDynamic().bootstrapModule(MainModule);
+

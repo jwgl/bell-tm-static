@@ -11,10 +11,10 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
                     <h4 class="modal-title">{{title}}</h4>
                 </div>
                 <div class="modal-body">
-                    <ng-content select="modal-body"></ng-content>
+                    <ng-content select="[modalBody]"></ng-content>
                 </div>
                 <div class="modal-footer">
-                    <ng-content select="modal-footer"></ng-content>
+                    <ng-content select="[modalFooter]"></ng-content>
                 </div>
             </div>
         </div>

@@ -4,19 +4,18 @@ import {CommonModule} from '@angular/common';
 
 import {RestModule} from '../../../../core/http';
 import {PlanCommonModule} from '../../../common/module';
-import {SchemeViewerComponent} from '../../common/scheme-viewer.component';
+import {SchemeViewerModule} from '../../common/scheme-viewer.module';
 import {SchemePublicItemComponent} from './public-item.component';
-
 
 @NgModule({
     imports: [
         CommonModule,
         PlanCommonModule,
         RestModule.for('/api/schemes'),
+        SchemeViewerModule,
     ],
     declarations: [
         SchemePublicItemComponent,
-        SchemeViewerComponent,
     ],
     exports: [
         SchemePublicItemComponent,

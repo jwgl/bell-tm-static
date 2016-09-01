@@ -5,17 +5,10 @@ import {BaseDialog} from '../../../../../core/dialogs';
 import {EditMode} from '../../../../../core/constants';
 import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../../common/utils';
 import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
-import {CourseSelectComponent} from './course-select.component';
-import {AllowedTermComponent, AllowedTermAccessor} from './allowed-term.component';
 
 @Component({
     selector: 'course-editor-dialog',
     template: require('./course-editor.html'),
-    directives: [
-        CourseSelectComponent,
-        AllowedTermComponent,
-        AllowedTermAccessor,
-    ],
 })
 export class CourseEditorDialog extends BaseDialog {
     title: string;

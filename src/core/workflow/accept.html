@@ -1,5 +1,5 @@
 <modal-dialog title="同意">
-    <modal-body>
+    <div modalBody>
         <div *ngIf="!options.whoUrl">
             <form>
                 <div class="form-group">
@@ -31,9 +31,9 @@
                 </div>
             </form>
         </div>
-    </modal-body>
-    <modal-footer>
+    </div>
+    <div modalFooter>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="options.whoUrl && options.data?.length == 0">确定</button>
-    </modal-footer>
+    </div>
 </modal-dialog>

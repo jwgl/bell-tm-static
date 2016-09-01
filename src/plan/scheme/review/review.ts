@@ -4,21 +4,19 @@ import {NgModule} from '@angular/core';
 
 import {RestModule} from '../../../core/http';
 import {WorkflowModule} from '../../../core/workflow';
-import {PlanCommonModule} from '../../common/module';
 import {SchemeReviewComponent} from './review.component';
-import {SchemeViewerComponent} from '../common/scheme-viewer.component';
+import {SchemeViewerModule} from '../common/scheme-viewer.module';
 
 @NgModule({
     bootstrap: [SchemeReviewComponent],
-    declarations: [
-        SchemeReviewComponent,
-        SchemeViewerComponent,
-    ],
     imports: [
         BrowserModule,
         RestModule.for('/api/schemes'),
-        PlanCommonModule,
         WorkflowModule,
+        SchemeViewerModule,
+    ],
+    declarations: [
+        SchemeReviewComponent,
     ],
 })
 class MainModule {}

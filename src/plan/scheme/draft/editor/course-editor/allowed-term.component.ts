@@ -4,7 +4,6 @@ import {
     Input,
     Output,
     EventEmitter,
-    Provider,
     SimpleChange,
     forwardRef,
 } from '@angular/core';
@@ -56,17 +55,14 @@ export class AllowedTermComponent {
 
     setValue(value: number) {
         this.value = value;
-        this.terms.forEach((term, i) => (<FormControl>this.controls.at(i)).updateValue(getBit(this.value, term - 1), {emitEvent: false}));
+        this.terms.forEach((term, i) => (<FormControl>this.controls.at(i)).setValue(getBit(this.value, term - 1), {emitEvent: false}));
     }
 }
-
-const CUSTOM_VALUE_ACCESSOR = new Provider(
-    NG_VALUE_ACCESSOR, {useExisting: forwardRef(() => AllowedTermAccessor), multi: true});
 
 @Directive({
     selector: 'allowed-term',
     host: {'(valueChange)': 'onChange($event)'},
-    providers: [CUSTOM_VALUE_ACCESSOR],
+    providers: [{provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => AllowedTermAccessor), multi: true}],
 })
 export class AllowedTermAccessor implements ControlValueAccessor {
     /* tslint:disable:no-empty */

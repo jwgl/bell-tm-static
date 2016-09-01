@@ -1,5 +1,5 @@
 <modal-dialog title="设置版本号">
-    <modal-body>
+    <div modalBody>
         <p class="form-control-static">上一版本号：{{prev | versionNumber}}</p>
         <p class="form-control-static">当前版本号：{{curr | versionNumber}}</p>
         <p class="form-control-static">请输入新的版本号（a.b.c.d）：</p>
@@ -22,9 +22,9 @@
                 <p class="form-control-static text-danger">新版本号必须大于上一版本号。</p>
             </div>
         </div>
-    </modal-body>
-    <modal-footer>
+    </div>
+    <div modalFooter>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="f.errors">确定</button>
-    </modal-footer>
+    </div>
 </modal-dialog>

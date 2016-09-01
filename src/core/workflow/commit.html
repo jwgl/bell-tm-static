@@ -1,5 +1,5 @@
 <modal-dialog title="提交">
-    <modal-body>
+    <div modalBody>
         <div class="form-static" *ngIf="options.data?.length == 0">
             <p class="form-control-static">未设置{{options.does}}人，请与管理员联系。</p>
         </div>
@@ -18,9 +18,9 @@
                 <textarea class="form-control" rows="6" placeholder="提交说明" name="comment" [(ngModel)]="result.comment"></textarea>
             </div>
         </form>
-    </modal-body>
-    <modal-footer>
+    </div>
+    <div modalFooter>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="options.data?.length == 0">确定</button>
-    </modal-footer>
+    </div>
 </modal-dialog>

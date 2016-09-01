@@ -2,9 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
-import {provideDialog} from '../../../core/dialogs';
-import {ModalDirectivesModule} from '../../../core/directives';
-import {BootstrapFormModule} from '../../../core/bootstrap';
+import {Dialog} from '../../../core/dialogs';
+import {CommonDirectivesModule} from '../../../core/common-directives';
 
 import {PlanCommonModule} from '../../common/module';
 import {ProgramSettingsComponent} from './program-settings.component';
@@ -14,8 +13,7 @@ import {ProgramEditorDialog} from './program-editor.dialog';
     imports: [
         CommonModule,
         FormsModule,
-        BootstrapFormModule,
-        ModalDirectivesModule,
+        CommonDirectivesModule,
         PlanCommonModule,
     ],
     declarations: [
@@ -23,10 +21,13 @@ import {ProgramEditorDialog} from './program-editor.dialog';
         ProgramEditorDialog,
     ],
     providers: [
-        provideDialog(null, ProgramSettingsModule),
+        Dialog,
     ],
     exports: [
         ProgramSettingsComponent,
+    ],
+    entryComponents: [
+        ProgramEditorDialog,
     ],
 })
 export class ProgramSettingsModule {}
