@@ -5,12 +5,22 @@
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
     "removeComments": true,
-    "rootDir": ".",
     "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
-    "noEmitHelpers": true
+    "noEmitHelpers": true,
+    "baseUrl": "./src",
+    "lib": [
+      "dom",
+      "es5"
+    ],
+    "types": [
+      "bootstrap",
+      "core-js",
+      "jquery",
+      "node"
+    ]
   },
   "exclude": [
     "dist",
