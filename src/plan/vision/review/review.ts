@@ -7,7 +7,6 @@ import {WorkflowModule} from '../../../core/workflow';
 import {PlanCommonModule} from '../../common/module';
 import {VisionViewerComponent} from '../common/vision-viewer.component';
 import {VisionReviewComponent} from './review.component';
-import {VisionReviewService} from './review.service';
 
 @NgModule({
     bootstrap: [VisionReviewComponent],
@@ -20,9 +19,6 @@ import {VisionReviewService} from './review.service';
         RestModule.for('/api/visions'),
         PlanCommonModule,
         WorkflowModule,
-    ],
-    providers: [
-        VisionReviewService,
     ],
 })
 class MainModule {}

@@ -1,8 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 
+import {ApiUrl, Rest} from '../../../core/http';
 import {Workflow} from '../../../core/workflow';
 import {toVersionString} from '../../common/utils';
-import {VisionReviewService} from './review.service';
 import {Vision} from '../common/vision.model';
 import './review.model';
 
@@ -17,45 +17,43 @@ export class VisionReviewComponent implements OnInit {
 
     constructor(
         elementRef: ElementRef,
-        private reviewService: VisionReviewService,
-        private workflow: Workflow) {
-        this.reviewService.id = elementRef.nativeElement.getAttribute('id');
-        this.reviewService.wi = elementRef.nativeElement.getAttribute('wi');
+        private workflow: Workflow,
+        private rest: Rest,
+        private api: ApiUrl) {
+        this.id = elementRef.nativeElement.getAttribute('id');
+        this.wi = elementRef.nativeElement.getAttribute('wi');
     }
 
     ngOnInit() {
-        this.reviewService.loadItem().subscribe(dto => {
+        this.rest.get(this.api.review(this.id, this.wi)).subscribe(dto => {
             this.vm = new Vision(dto);
             this.vm.reviewType = dto.reviewType;
         });
     }
 
     accept() {
-        this.workflow.accept(
-            this.vm.reviewType === 'check' ? this.reviewService.getApproversUrl() : null,
-            this.vm.reviewType === 'check' ? '审核' : '审批',
-            `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`
-        ).then(result => {
-            this.reviewService.accept(result.what, result.to, result.comment).subscribe(() => {
-                this.ngOnInit();
-            });
+        this.workflow.accept(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+            this.ngOnInit();
+        }, (error) => {
+            alert(error.json().message);
         });
     }
 
     reject(title: string) {
-        this.workflow.reject(
-            this.vm.reviewType === 'check' ? '审核' : '审批',
-            `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`
-        ).then(result => {
-            this.reviewService.reject(result.what, result.comment).subscribe(() => {
-                this.ngOnInit();
-            });
+        this.workflow.reject(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+            this.ngOnInit();
+        }, (error) => {
+            alert(error.json().message);
         });
     }
 
     get reviewable(): boolean {
         return (this.vm.status === 'COMMITTED' && this.vm.reviewType === 'check')
             || (this.vm.status === 'CHECKED' && this.vm.reviewType === 'approve');
+    }
+
+    get title(): string {
+        return `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
     }
 
     showWorkitems() {

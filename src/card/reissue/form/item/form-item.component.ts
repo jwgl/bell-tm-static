@@ -3,28 +3,21 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import {CommonDialog} from '../../../../core/dialogs';
 import {Workflow} from '../../../../core/workflow';
-import {toVersionString} from '../../../common/utils';
-import {Vision} from '../../common/vision.model';
-import './draft-item.model';
-import {VisionDraftService} from '../draft.service';
+import {ReissueFormService} from '../form.service';
 
-/**
- * 所有者培养方案。
- */
 @Component({
-    selector: 'vision-draft-item',
-    template: require('./draft-item.html'),
+    selector: 'reissue-form-item',
+    template: require('./form-item.html'),
 })
-export class VisionDraftItemComponent {
+export class ReissueFormItemComponent {
     id: string;
-    vm: Vision;
-
+    vm: any;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private workflow: Workflow,
         private dialog: CommonDialog,
-        private draftService: VisionDraftService) {
+        private service: ReissueFormService) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.loadData();
@@ -32,10 +25,8 @@ export class VisionDraftItemComponent {
     }
 
     loadData() {
-        this.draftService.loadItem(this.id).subscribe(dto => {
-            this.vm = new Vision(dto);
-            this.vm.editable = dto.editable;
-            this.vm.revisable = dto.revisable;
+        this.service.loadItem(this.id).subscribe(dto => {
+            this.vm = dto;
         });
     }
 
@@ -45,22 +36,18 @@ export class VisionDraftItemComponent {
 
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.draftService.delete(this.id).subscribe(() => {
+            this.service.delete(this.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });
     }
 
     commit() {
-        this.workflow.commit(this.id, this.title).then(() => {
+        this.workflow.commit(this.id, '补办学生证申请').then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);
         });
-    }
-
-    revise() {
-        this.router.navigate(['/', this.id, 'revise']);
     }
 
     returnList() {
@@ -69,9 +56,5 @@ export class VisionDraftItemComponent {
 
     showWorkitems() {
         this.workflow.workitems(this.vm.workflowInstanceId);
-    }
-
-    get title(): string {
-        return `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
     }
 }

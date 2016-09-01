@@ -3,23 +3,21 @@ import {CommonModule} from '@angular/common';
 
 import {CommonDialogModule} from '../../../../core/dialogs';
 import {WorkflowModule} from '../../../../core/workflow';
-import {PlanCommonModule} from '../../../common/module';
-import {VisionViewerComponent} from '../../common/vision-viewer.component';
-import {VisionDraftItemComponent} from './draft-item.component';
+import {ReissueCommonModule} from '../../common/reissue-common.module';
+import {ReissueFormItemComponent} from './form-item.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        PlanCommonModule,
         CommonDialogModule,
         WorkflowModule,
+        ReissueCommonModule,
     ],
     declarations: [
-        VisionViewerComponent,
-        VisionDraftItemComponent,
+        ReissueFormItemComponent,
     ],
     exports: [
-        VisionDraftItemComponent,
+        ReissueFormItemComponent,
     ],
 })
-export class VisionDraftItemModule {}
+export class ReissueFormItemModule {}

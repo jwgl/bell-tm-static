@@ -18,6 +18,7 @@ module.exports = {
         'scheme/item':      './src/plan/scheme/public/item.ts',
         'scheme/draft':     './src/plan/scheme/draft/draft.ts',
         'scheme/review':    './src/plan/scheme/review/review.ts',
+        'cardReissue/form': './src/card/reissue/form/form.ts',
     },
 
     output: {

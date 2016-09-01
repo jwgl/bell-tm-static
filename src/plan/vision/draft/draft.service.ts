@@ -64,12 +64,4 @@ export class VisionDraftService {
     delete(id: string): Observable<string> {
         return this.rest.delete(this.api.item(id)).map(res => id);
     }
-
-    commit(id: string, title: string, to: string, comment: string): Observable<any> {
-        return this.rest.patch(this.api.commit(id), {title, to, comment});
-    }
-
-    getCheckerUrl(id: string): string {
-        return this.api.checkers(id);
-    }
  }

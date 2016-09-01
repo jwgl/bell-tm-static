@@ -5,9 +5,9 @@ import {NgModule} from '@angular/core';
 import {RestModule} from '../../../core/http';
 import {VisionDraftComponent} from './draft.component';
 import {VisionDraftService} from './draft.service';
-import {DraftListModule} from './list/draft-list.module';
-import {DraftItemModule} from './item/draft-item.module';
-import {DraftEditorModule} from './editor/draft-editor.module';
+import {VisionDraftListModule} from './list/draft-list.module';
+import {VisionDraftItemModule} from './item/draft-item.module';
+import {VisionDraftEditorModule} from './editor/draft-editor.module';
 import {routing} from './draft.routes';
 
 @NgModule({
@@ -19,9 +19,9 @@ import {routing} from './draft.routes';
         BrowserModule,
         RestModule.for('/api/users/${userId}/visions'),
         routing,
-        DraftEditorModule,
-        DraftItemModule,
-        DraftListModule,
+        VisionDraftEditorModule,
+        VisionDraftItemModule,
+        VisionDraftListModule,
     ],
     providers: [
         VisionDraftService,

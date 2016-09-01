@@ -1,0 +1,26 @@
+<div *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group pull-xs-right">
+            <button class='btn btn-secondary' (click)="cancel()">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="!reason.valid || saving">保存</button>
+        </div>
+    </div>
+    <form class="frame">
+        <student-info [student]="vm.student"></student-info>
+        <div class="form-group row" [class.has-danger]="!reason.valid">
+            <label class="col-sm-3 col-form-lable">补办理由</label>
+            <div class="col-sm-9">
+                <textarea class="form-control" rows="8" name="reason"
+                    [(ngModel)]="vm.reason"
+                    maxlength="250"
+                    minlength="10"
+                    required #reason="ngModel"></textarea>
+                <p class="form-control-feedback" [hidden]="reason.valid">
+                    <span *ngIf="reason.errors?.required">补办理由不能为空。</span>
+                    <span *ngIf="reason.errors?.minlength">补办理由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                    <span *ngIf="reason.errors?.maxlength">补办理由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+                </p>
+            </div>
+        </div>
+    </form>
+</div>

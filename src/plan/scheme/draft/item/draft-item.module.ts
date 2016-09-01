@@ -22,4 +22,4 @@ import {SchemeDraftItemComponent} from './draft-item.component';
         SchemeDraftItemComponent,
     ],
 })
-export class DraftItemModule {}
+export class SchemeDraftItemModule {}

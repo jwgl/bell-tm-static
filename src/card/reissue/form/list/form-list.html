@@ -1,0 +1,30 @@
+<div *ngIf="student">
+    <div class="alert alert-warning" *ngIf="!canApply()">
+        <span *ngIf="!student.atSchool">非在读学生，不符合申请条件。</span>
+        <span *ngIf="!student.picture">照片不存在，请携带存有电子照片（一寸彩色）的移动设备找教务处姜老师（理工4号楼一层）导入照片。</span>
+        <span *ngIf="forms.length > 0">
+            你已经有{{forms.length}}次补办学生证申请：
+            <template ngFor let-form [ngForOf]="forms"><a [routerLink]="['/', form.id]">查看</a></template>
+        </span>
+    </div>
+    <div *ngIf="canApply()">
+        <div class="btn-toolbar">
+            <div class="btn-group pull-xs-right">
+                <button class="btn btn-primary" (click)="create()" >申请</button>
+            </div>
+        </div>
+        <div>
+            <h3>补办学生证注意事项</h3>
+            <ol >
+                <li>学生在校期间只能补办一次学生证。</li>
+                <li>每学期受理两次补办学生证业务：
+                    <ul>
+                        <li>第5教学周前（含）申请补办学生证的学生，在第9教学周到学生所在学院（部）领取补办的学生证；</li>
+                        <li>第13教学周前（含）申请补办学生证的学生，在第17教学周到学生所在学院（部）领取补办的学生证。</li>
+                    </ul>
+                </li>
+                <li>补办学生证满半年后可申请补办火车票乘车优惠卡。</li>
+            </ol>
+        </div>
+    </div>
+</div>

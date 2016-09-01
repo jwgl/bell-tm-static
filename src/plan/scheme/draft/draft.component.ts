@@ -10,7 +10,6 @@ export class SchemeDraftComponent {
     constructor(
         private elementRef: ElementRef,
         private draftService: SchemeDraftService) {
-        let userId = elementRef.nativeElement.getAttribute('user');
-        this.draftService.userId = userId;
+        this.draftService.userId = elementRef.nativeElement.getAttribute('user');
     }
 }

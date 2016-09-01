@@ -3,21 +3,21 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 import {CommonDialogModule} from '../../../../core/dialogs';
-import {PlanCommonModule} from '../../../common/module';
-import {VisionDraftEditorComponent} from './draft-editor.component';
+import {ReissueCommonModule} from '../../common/reissue-common.module';
+import {ReissueFormEditorComponent} from './form-editor.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        PlanCommonModule,
         CommonDialogModule,
+        ReissueCommonModule,
     ],
     declarations: [
-        VisionDraftEditorComponent,
+        ReissueFormEditorComponent,
     ],
     exports: [
-        VisionDraftEditorComponent,
+        ReissueFormEditorComponent,
     ],
 })
-export class VisionDraftEditorModule {}
+export class ReissueFormEditorModule {}

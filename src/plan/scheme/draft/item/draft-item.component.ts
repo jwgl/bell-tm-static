@@ -58,14 +58,10 @@ export class SchemeDraftItemComponent {
         if (errors.length > 0) {
             this.dialog.error(errors);
         } else {
-            this.workflow.commit({
-                whoUrl: this.draftService.getCheckersUrl(this.id),
-                does: '审核',
-                what: `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`,
-            }).then(result => {
-                this.draftService.commit(this.id, result.what, result.to, result.comment).subscribe(() => {
-                    this.loadData();
-                });
+            this.workflow.commit(this.id, this.title).then(() => {
+                this.loadData();
+            }, (error) => {
+                alert(error.json().message);
             });
         }
     }
@@ -80,5 +76,9 @@ export class SchemeDraftItemComponent {
 
     showWorkitems() {
         this.workflow.workitems(this.vm.workflowInstanceId);
+    }
+
+    get title(): string {
+        return `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
     }
 }

@@ -22,4 +22,4 @@ const ROUTER_CONFIG: RouterConfig = [
     ],
     exports: [SchemeDraftListComponent],
 })
-export class DraftListModule {}
+export class SchemeDraftListModule {}

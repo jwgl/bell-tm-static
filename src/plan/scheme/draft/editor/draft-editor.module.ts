@@ -31,4 +31,4 @@ import {SchemeSummaryComponent} from './scheme-summary.component';
         SchemeDraftEditorComponent,
     ],
 })
-export class DraftEditorModule {}
+export class SchemeDraftEditorModule {}

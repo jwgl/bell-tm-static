@@ -5,9 +5,9 @@ import {NgModule} from '@angular/core';
 import {RestModule} from '../../../core/http';
 import {SchemeDraftComponent} from './draft.component';
 import {SchemeDraftService} from './draft.service';
-import {DraftListModule} from './list/draft-list.module';
-import {DraftItemModule} from './item/draft-item.module';
-import {DraftEditorModule} from './editor/draft-editor.module';
+import {SchemeDraftListModule} from './list/draft-list.module';
+import {SchemeDraftItemModule} from './item/draft-item.module';
+import {SchemeDraftEditorModule} from './editor/draft-editor.module';
 import {routing} from './draft.routes';
 
 @NgModule({
@@ -19,9 +19,9 @@ import {routing} from './draft.routes';
         BrowserModule,
         RestModule.for('/api/users/${userId}/schemes'),
         routing,
-        DraftEditorModule,
-        DraftItemModule,
-        DraftListModule,
+        SchemeDraftEditorModule,
+        SchemeDraftItemModule,
+        SchemeDraftListModule,
     ],
     providers: [
         SchemeDraftService,

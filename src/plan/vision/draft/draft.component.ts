@@ -4,13 +4,12 @@ import {VisionDraftService} from './draft.service';
 
 @Component({
     selector: 'vision-draft-container',
-    template: `<router-outlet></router-outlet>`,
+    template: '<router-outlet></router-outlet>',
 })
 export class VisionDraftComponent {
     constructor(
         private elementRef: ElementRef,
         private draftService: VisionDraftService) {
-        let userId = elementRef.nativeElement.getAttribute('user');
-        this.draftService.userId = userId;
+        this.draftService.userId = elementRef.nativeElement.getAttribute('user');
     }
 }

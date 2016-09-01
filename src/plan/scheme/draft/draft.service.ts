@@ -69,12 +69,4 @@ export class SchemeDraftService {
     findCourses(query: string, type: number): Observable<any> {
         return this.rest.get(`${this.api.list()}/courses?q=${query}&t=${type}`);
     }
-
-    commit(id: string, title: string, to: string, comment: string): Observable<any> {
-        return this.rest.patch(this.api.commit(id), {title, to, comment});
-    }
-
-    getCheckersUrl(id: string): string {
-        return this.api.checkers(id);
-    }
 }
