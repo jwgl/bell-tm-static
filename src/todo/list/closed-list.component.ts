@@ -1,6 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {BASE_URL} from '../../core/http';
+
+import {BASE_URL} from 'core/rest';
+
 import {TodoService} from '../todo.service';
 
 @Component({

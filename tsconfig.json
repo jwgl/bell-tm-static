@@ -25,5 +25,8 @@
   "exclude": [
     "dist",
     "node_modules"
-  ]
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true
+  }
 }

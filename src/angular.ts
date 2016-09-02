@@ -7,3 +7,4 @@ import '@angular/core';
 import '@angular/common';
 import '@angular/router';
 import '@angular/http';
+import '@angular/forms';

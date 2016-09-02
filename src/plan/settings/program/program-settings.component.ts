@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 
-import {Dialog} from '../../../core/dialogs';
-import {groupBy} from '../../../core/utils';
+import {Dialog} from 'core/dialogs';
+import {groupBy} from 'core/utils';
+
 import {ProgramSettingsService} from '../program-settings.service';
 import {ProgramEditorDialog} from './program-editor.dialog';
 

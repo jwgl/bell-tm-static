@@ -4,8 +4,9 @@ import {
 } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {CommonDialog} from '../../../../core/common-dialogs';
-import {EditMode} from '../../../../core/constants';
+import {CommonDialog} from 'core/common-dialogs';
+import {EditMode} from 'core/constants';
+
 import {SchemeDraftService} from '../draft.service';
 import {Scheme, Property, Direction, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
 import './draft-editor.model';

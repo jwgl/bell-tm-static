@@ -2,13 +2,14 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {RestModule} from '../../../core/http';
+import {RestModule} from 'core/rest';
+
 import {SchemeDraftComponent} from './draft.component';
 import {SchemeDraftService} from './draft.service';
+import {routing} from './draft.routes';
 import {SchemeDraftListModule} from './list/draft-list.module';
 import {SchemeDraftItemModule} from './item/draft-item.module';
 import {SchemeDraftEditorModule} from './editor/draft-editor.module';
-import {routing} from './draft.routes';
 
 @NgModule({
     bootstrap: [SchemeDraftComponent],

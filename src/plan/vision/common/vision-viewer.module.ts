@@ -1,8 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
+import {CommonDirectivesModule} from 'core/common-directives';
+
 import {PlanCommonModule} from '../../common/module';
-import {CommonDirectivesModule} from '../../../core/common-directives';
 import {VisionViewerComponent} from './vision-viewer.component';
 
 @NgModule({

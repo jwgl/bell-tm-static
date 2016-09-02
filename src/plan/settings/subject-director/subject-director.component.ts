@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 
-import {CommonDialog} from '../../../core/common-dialogs';
-import {groupBy} from '../../../core/utils';
+import {CommonDialog} from 'core/common-dialogs';
+import {groupBy} from 'core/utils';
+
 import {SubjectDirectorService} from '../subject-director.service';
 
 @Component({

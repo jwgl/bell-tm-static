@@ -1,5 +1,5 @@
-import {equalsTo} from '../../../../core/utils';
-import {EditMode} from '../../../../core/constants';
+import {equalsTo} from 'core/utils';
+import {EditMode} from 'core/constants';
 
 import {
     Scheme,

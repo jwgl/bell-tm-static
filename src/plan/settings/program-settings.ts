@@ -2,7 +2,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
-import {RestModule} from '../../core/http';
+import {RestModule} from 'core/rest';
+
 import {ProgramSettingsComponent} from './program/program-settings.component';
 import {ProgramSettingsModule} from './program/program-settings.module';
 import {ProgramSettingsService} from './program-settings.service';

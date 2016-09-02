@@ -2,8 +2,8 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 
-import {Rest} from '../../../core/http';
-import {BaseDialog} from '../../../core/dialogs';
+import {Rest} from 'core/rest';
+import {BaseDialog} from 'core/dialogs';
 
 @Component({
     selector: 'program-setting-dialog',

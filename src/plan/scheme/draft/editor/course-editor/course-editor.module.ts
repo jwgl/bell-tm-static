@@ -2,8 +2,9 @@ import {NgModule, Injectable} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Dialog} from '../../../../../core/dialogs';
-import {CommonDirectivesModule} from '../../../../../core/common-directives';
+import {Dialog} from 'core/dialogs';
+import {CommonDirectivesModule} from 'core/common-directives';
+
 import {PlanCommonModule} from '../../../../common/module';
 
 import {CourseEditorDialog} from './course-editor.dialog';

@@ -1,4 +1,4 @@
-import {SHORT_TERM_WEEKS, NORMAL_TERM_WEEKS} from '../../../core/constants';
+import {SHORT_TERM_WEEKS, NORMAL_TERM_WEEKS} from 'core/constants';
 
 export function getPeriodWeeks(term: number) {
     return term >= 17 ? SHORT_TERM_WEEKS : NORMAL_TERM_WEEKS;

@@ -1,5 +1,6 @@
 import {Pipe} from '@angular/core';
-import {numberToChinese} from '../../../core/utils';
+
+import {numberToChinese} from 'core/utils';
 
 @Pipe({name: 'termName'})
 export class SchemeTermNamePipe {

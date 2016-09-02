@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/do';
 
 import {BaseDialog} from '../dialogs';
-import {Rest} from '../http';
-import 'rxjs/add/operator/do';
+import {Rest} from '../rest';
 
 /**
  * options: {whoUrl: string, does: string, what: string}

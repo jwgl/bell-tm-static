@@ -3,7 +3,8 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import 'rxjs/add/operator/toPromise';
 
-import {Rest, ApiUrl} from './http';
+import {Rest, ApiUrl} from './rest';
+
 import {Dialog} from './dialogs';
 import {CommonDirectivesModule} from './common-directives';
 import {WorkflowCommitDialog} from './workflow/commit.dialog';

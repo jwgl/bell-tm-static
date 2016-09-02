@@ -1,6 +1,7 @@
 import {Component, Input, Output, EventEmitter} from '@angular/core';
 
-import {EditMode} from '../../../../core/constants';
+import {EditMode} from 'core/constants';
+
 import {Scheme, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
 
 

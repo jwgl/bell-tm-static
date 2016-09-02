@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {ApiUrl, Rest, EditService} from '../../../core/http';
+import {ApiUrl, Rest, EditService} from 'core/rest';
 
 @Injectable()
 export class ReissueFormService extends EditService {

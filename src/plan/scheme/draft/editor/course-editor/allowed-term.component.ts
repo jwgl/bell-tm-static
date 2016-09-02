@@ -14,7 +14,7 @@ import {
     NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 
-import {getBit, setBit, clearBit} from '../../../../../core/utils';
+import {getBit, setBit, clearBit} from 'core/utils';
 
 @Component({
     selector: 'allowed-term',

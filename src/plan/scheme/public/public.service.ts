@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest} from '../../../core/http';
+import {ApiUrl, Rest} from 'core/rest';
+
 import {Scheme} from '../common/scheme.model';
 
 @Injectable()

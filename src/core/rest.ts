@@ -1,8 +1,8 @@
 import {NgModule, ModuleWithProviders} from '@angular/core';
 import {HttpModule} from '@angular/http';
-import {Rest} from './http/rest';
-import {ApiUrl, API_URL, BASE_URL} from './http/api-url';
-import {EditService} from './http/edit-service';
+import {Rest} from './rest/rest';
+import {ApiUrl, API_URL, BASE_URL} from './rest/api-url';
+import {EditService} from './rest/edit-service';
 
 export {
     Rest,

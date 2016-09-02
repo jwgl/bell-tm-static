@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {BaseDialog} from '../dialogs';
-import {Rest} from '../http';
+import {Rest} from '../rest';
 
 /**
  * options: {instance: string}

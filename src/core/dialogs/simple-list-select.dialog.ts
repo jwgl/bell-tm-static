@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {Rest} from '../http';
+import {Rest} from '../rest';
 import {BaseDialog} from './dialog';
 
 @Component({

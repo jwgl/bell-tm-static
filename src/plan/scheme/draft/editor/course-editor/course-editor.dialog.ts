@@ -1,8 +1,9 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {BaseDialog} from '../../../../../core/dialogs';
-import {EditMode} from '../../../../../core/constants';
+import {BaseDialog} from 'core/dialogs';
+import {EditMode} from 'core/constants';
+
 import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../../common/utils';
 import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
 

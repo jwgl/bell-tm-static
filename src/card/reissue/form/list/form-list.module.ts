@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {CommonDirectivesModule} from '../../../../core/common-directives';
+import {CommonDirectivesModule} from 'core/common-directives';
+
 import {ReissueFormListComponent} from './form-list.component';
 import {RouterModule} from '@angular/router';
 

@@ -1,7 +1,8 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
 
-import {ApiUrl, Rest} from '../../../core/http';
-import {Workflow} from '../../../core/workflow';
+import {ApiUrl, Rest} from 'core/rest';
+import {Workflow} from 'core/workflow';
+
 import {toVersionString} from '../../common/utils';
 import {Vision} from '../common/vision.model';
 import './review.model';

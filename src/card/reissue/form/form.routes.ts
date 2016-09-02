@@ -1,6 +1,7 @@
 import {RouterModule} from '@angular/router';
 
-import {EditMode} from '../../../core/constants';
+import {EditMode} from 'core/constants';
+
 import {ReissueFormListComponent} from './list/form-list.component';
 import {ReissueFormItemComponent} from './item/form-item.component';
 import {ReissueFormEditorComponent} from './editor/form-editor.component';

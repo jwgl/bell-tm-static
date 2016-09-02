@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {CommonDialog} from '../../../../core/common-dialogs';
-import {EditMode} from '../../../../core/constants';
+import {CommonDialog} from 'core/common-dialogs';
+import {EditMode} from 'core/constants';
 
 import {ReissueFormService} from '../form.service';
 

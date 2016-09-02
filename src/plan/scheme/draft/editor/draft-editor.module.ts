@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {CommonDialogsModule} from '../../../../core/common-dialogs';
+import {CommonDialogsModule} from 'core/common-dialogs';
+
 import {PlanCommonModule} from '../../../common/module';
 import {CourseEditorModule} from './course-editor/course-editor.module';
-
 import {SchemeDraftEditorComponent} from './draft-editor.component';
 import {SchemeDraftTableComponent} from './scheme-table.component';
 import {SchemePropertyComponent} from './scheme-property.component';

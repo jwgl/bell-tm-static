@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Observable} from 'rxjs/Observable';
-import {BaseDialog} from '../../../core/dialogs';
+
+import {BaseDialog} from 'core/dialogs';
+
 import {toVersionString} from '../utils';
 
 @Component({

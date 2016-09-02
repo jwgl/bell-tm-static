@@ -2,6 +2,9 @@ var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+var ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+var TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const path = require("path");
 
 module.exports = {
     entry: {
@@ -22,7 +25,7 @@ module.exports = {
     },
 
     output: {
-        path: __dirname + '/dist/dev',
+        path: path.join(__dirname, '/dist/dev'),
         filename: 'js/app/[name].js'
     },
 
@@ -31,7 +34,7 @@ module.exports = {
             { test: /\.ts$/, loader: 'tslint' }
         ],
         loaders: [
-            { test: /\.ts$/, loader: 'ts' },
+            { test: /\.ts$/, loader: 'awesome-typescript' },
             { test: /\.html$/, loader: 'raw' },
             { test: /\.scss$/, loader: 'raw!sass' }
         ]
@@ -63,10 +66,14 @@ module.exports = {
             }
         })
         */
+        new ForkCheckerPlugin(),
     ],
 
     resolve: {
-        extensions: ['', '.js', '.ts', '.html', '.scss']
+        extensions: ['', '.js', '.ts', '.html', '.scss'],
+        plugins: [
+            new TsConfigPathsPlugin()
+        ]
     },
 
     externals: [

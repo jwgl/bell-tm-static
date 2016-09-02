@@ -2,8 +2,9 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Dialog} from '../../core/dialogs';
-import {CommonDirectivesModule} from '../../core/common-directives';
+import {Dialog} from 'core/dialogs';
+import {CommonDirectivesModule} from 'core/common-directives';
+
 import {PlanTitleComponent} from './components/plan-title.component';
 import {VersionDialog} from './dialogs/version.dialog';
 import {PrimaryCoursesPipe} from './pipes/primary-courses';

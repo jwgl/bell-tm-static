@@ -1,4 +1,5 @@
-import {getBit} from '../../../core/utils';
+import {getBit} from 'core/utils';
+
 import {getProgramType} from '../../common/pipes';
 
 const courseComparer = (a: SchemeCourse, b: SchemeCourse): number => {

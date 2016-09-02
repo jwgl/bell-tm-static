@@ -1,6 +1,6 @@
 import {RouterModule} from '@angular/router';
 
-import {EditMode} from '../../../core/constants';
+import {EditMode} from 'core/constants';
 import {SchemeDraftListComponent} from './list/draft-list.component';
 import {SchemeDraftItemComponent} from './item/draft-item.component';
 import {SchemeDraftEditorComponent} from './editor/draft-editor.component';
