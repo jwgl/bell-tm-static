@@ -1,11 +1,11 @@
 <modal-dialog [title]="title">
-    <div modalBody>
+    <modal-body>
         <select class="form-control" size="10" name="result" [(ngModel)]="result" style="overflow-y: auto">
             <option *ngFor="let item of options.data" [ngValue]="valueFn(item)">{{labelFn(item)}}</option>
         </select>
-    </div>
-    <div modalFooter>
+    </modal-body>
+    <modal-footer>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="!result">确定</button>
-    </div>
+    </modal-footer>
 </modal-dialog>

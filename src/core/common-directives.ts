@@ -6,7 +6,6 @@ import {FromNowComponent} from './components/from-now';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {FormDirective} from './bootstrap/form.directive';
-import {FormGroupDirective} from './bootstrap/form-group.directive';
 import {FormFieldComponent} from './bootstrap/form-field.component';
 import {FormControlDirective} from './bootstrap/form-control.directive';
 import {GroupByPipe} from './pipes/group-by';
@@ -17,7 +16,9 @@ import {
     ModalDialogDirective,
     ModalCancelButtonDirective,
     ModalOkButtonDirective,
-} from './directives/modal-dialog.directive';
+    ModalBodyDirective,
+    ModalFooterDirective,
+} from './bootstrap/modal-dialog.directive';
 
 const CORE_DIRECTIVES: any[] = [
     // common commponent
@@ -25,13 +26,14 @@ const CORE_DIRECTIVES: any[] = [
     FromNowComponent,
     // bootstrap form directives
     FormDirective,
-    FormGroupDirective,
     FormFieldComponent,
     FormControlDirective,
     // bootstrap modal directives
     ModalDialogDirective,
     ModalCancelButtonDirective,
     ModalOkButtonDirective,
+    ModalBodyDirective,
+    ModalFooterDirective,
     // other directives
     Markdown,
     Spinning,

@@ -13,7 +13,7 @@ import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
 
 @Injectable()
 export class Workflow {
-    constructor(/*@Inject(WORKFLOW_DIALOG)*/private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
+    constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
     commit(id: string, what: string): Promise<void> {
         const whoUrl = this.api.checkers(id);

@@ -1,5 +1,5 @@
 <modal-dialog [title]="title">
-    <div modalBody>
+    <modal-body>
         <form class="form-horizontal" #f="ngForm">
             <fieldset>
                 <legend>培养方案</legend>
@@ -13,7 +13,7 @@
             </fieldset>
             <fieldset>
                 <legend>课程安排</legend>
-                <div class="form-group">
+                <div class="form-group row">
                     <form-field label="计划模板">
                         <select class="form-control" col="4" min="0"
                             name="schemeTemplate"
@@ -43,9 +43,9 @@
                 </div>
             </fieldset>
         </form>
-    </div>
-    <div modalFooter>
+    </modal-body>
+    <modal-footer>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="!f.valid">确定</button>
-    </div>
+    </modal-footer>
 </modal-dialog>

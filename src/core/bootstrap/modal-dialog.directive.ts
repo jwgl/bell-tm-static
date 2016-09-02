@@ -11,10 +11,10 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
                     <h4 class="modal-title">{{title}}</h4>
                 </div>
                 <div class="modal-body">
-                    <ng-content select="[modalBody]"></ng-content>
+                    <ng-content select="modal-body"></ng-content>
                 </div>
                 <div class="modal-footer">
-                    <ng-content select="[modalFooter]"></ng-content>
+                    <ng-content select="modal-footer"></ng-content>
                 </div>
             </div>
         </div>
@@ -41,9 +41,7 @@ export class ModalDialogDirective {
         '[attr.data-dismiss]': "'modal'",
     },
 })
-export class ModalCancelButtonDirective {
-
-}
+export class ModalCancelButtonDirective {}
 
 /**
  * <button type="button" class="btn btn-primary" (click)="ok()">确定</button>
@@ -56,6 +54,10 @@ export class ModalCancelButtonDirective {
         '[class.btn-primary]': 'true',
     },
 })
-export class ModalOkButtonDirective {
+export class ModalOkButtonDirective {}
 
-}
+@Directive({selector: 'modal-body'})
+export class ModalBodyDirective {}
+
+@Directive({selector: 'modal-footer'})
+export class ModalFooterDirective {}

@@ -1,5 +1,5 @@
 <modal-dialog title="退回">
-    <div modalBody>
+    <modal-body>
         <form #f="ngForm">
             <div class="form-group">
                 <p class="form-control-static">退回《{{options.what}}》，请填写{{options.does}}意见。</p>
@@ -8,9 +8,9 @@
                 <textarea class="form-control" rows="6" placeholder="处理意见" name="comment" [(ngModel)]="result.comment" required></textarea>
             </div>
         </form>
-    </div>
-    <div modalFooter>
+    </modal-body>
+    <modal-footer>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="!f.valid">确定</button>
-    </div>
+    </modal-footer>
 </modal-dialog>
