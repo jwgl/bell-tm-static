@@ -8,7 +8,7 @@ import {Vision} from '../common/vision.model';
 import './review.model';
 
 @Component({
-    selector: 'review-vision',
+    selector: 'vision-review',
     template: require('./review.html'),
 })
 export class VisionReviewComponent implements OnInit {

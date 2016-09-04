@@ -9,7 +9,7 @@ import '../common/scheme-viewer.model';
 import './review.model';
 
 @Component({
-    selector: 'review-scheme',
+    selector: 'scheme-review',
     template: require('./review.html'),
 })
 export class SchemeReviewComponent implements OnInit {
