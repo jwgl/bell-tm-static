@@ -16,35 +16,31 @@ declare module './scheme.model' {
     }
 }
 
-Property.prototype.normalize = function() {
-    let that = <Property>this;
-
-    if (that.directions) {
+Property.prototype.normalize = function(this: Property) {
+    if (this.directions) {
         // 清除没有课程的方向
-        for (let i = that.directions.length - 1; i >= 0; i--) {
-            if (that.directions[i].courses.length === 0) {
-                that.directions.splice(i, 1);
+        for (let i = this.directions.length - 1; i >= 0; i--) {
+            if (this.directions[i].courses.length === 0) {
+                this.directions.splice(i, 1);
             }
         }
     } else {
         // 没有数据的性质增加空课程，如果是方向课则不增加
-        if (!that.hasDirections && that.courses.length === 0) {
+        if (!this.hasDirections && this.courses.length === 0) {
             for (let i = 0; i < 3; i++) {
-                that.courses.push(new EmptyCourse());
+                this.courses.push(new EmptyCourse());
             }
         }
     }
 };
 
-Scheme.prototype.normalize = function() {
-    let that = <Scheme>this;
-
-    for (let i = that.properties.length - 1; i >= 0; i--) {
-        let property = that.properties[i];
+Scheme.prototype.normalize = function(this: Scheme) {
+    for (let i = this.properties.length - 1; i >= 0; i--) {
+        let property = this.properties[i];
         property.normalize();
         // 删除可包含方向课，但实际不包含课程的课程性质
         if (property.hasDirections && (!property.directions || property.directions.length === 0)) {
-            that.properties.splice(i, 1);
+            this.properties.splice(i, 1);
         }
     };
 };

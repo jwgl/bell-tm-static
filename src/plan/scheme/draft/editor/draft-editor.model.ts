@@ -91,39 +91,35 @@ declare module '../../common/scheme.model' {
     }
 }
 
-Scheme.prototype.onInit = function(editMode: EditMode) {
-    let that = <Scheme>this;
-
-    for (let i = that.properties.length - 1; i >= 0; i--) {
-        let property = that.properties[i];
+Scheme.prototype.onInit = function(this: Scheme, editMode: EditMode) {
+    for (let i = this.properties.length - 1; i >= 0; i--) {
+        let property = this.properties[i];
         if (property.hasDirections && property.directions === undefined) {
-            that.properties.splice(i, 1);
+            this.properties.splice(i, 1);
         }
     }
 
     if (editMode === EditMode.Edit) {
-        that.rebuildStatus();
+        this.rebuildStatus();
     }
 };
 
-Scheme.prototype.toServerDto = function() {
-    let that = <Scheme>this;
-
+Scheme.prototype.toServerDto = function(this: Scheme) {
     return {
-        id: that.id,
-        versionNumber: that.versionNumber,
-        previousId: that.previousId,
-        programId: that.programId,
-        courses: that.properties
+        id: this.id,
+        versionNumber: this.versionNumber,
+        previousId: this.previousId,
+        programId: this.programId,
+        courses: this.properties
             .reduce((acc, p) => acc.concat(p.getModifiedCourses()), <SchemeCourse[]>[])
             .map(sc => sc.toServerDto()),
     };
 };
 
-Scheme.prototype.rebuildStatus = function() {
-    let that = <Scheme>this;
+Scheme.prototype.rebuildStatus = function(this: Scheme) {
+    const that = this;
 
-    that.properties.forEach(p => {
+    this.properties.forEach(p => {
         if (p.directions) {
             p.directions.forEach(d => {
                 updateStatus(d.courses);
@@ -151,13 +147,10 @@ Scheme.prototype.rebuildStatus = function() {
     }
 };
 
-AbstractGroup.prototype.remove = function(sc: SchemeCourse) {
-    // TODO https://github.com/Microsoft/TypeScript/issues/6018
-    let that = <AbstractGroup>this;
-
-    let index = that.courses.indexOf(sc);
+AbstractGroup.prototype.remove = function(this: AbstractGroup, sc: SchemeCourse) {
+    let index = this.courses.indexOf(sc);
     if (index > -1) {
-        that.courses.splice(index, 1);
+        this.courses.splice(index, 1);
         if (sc.ref) { // 修改 -> 删除, 还原引用
             if (sc.ref.prevStatus === RecordStatus.None) {
                 sc.ref.currStatus = RecordStatus.None;
@@ -168,15 +161,13 @@ AbstractGroup.prototype.remove = function(sc: SchemeCourse) {
     }
 };
 
-AbstractGroup.prototype.restore = function(sc: SchemeCourse) {
-    let that = <AbstractGroup>this;
-
-    for (let i = 0; i < that.courses.length; i++) {
-        if (that.courses[i].ref === sc) {
+AbstractGroup.prototype.restore = function(this: AbstractGroup, sc: SchemeCourse) {
+    for (let i = 0; i < this.courses.length; i++) {
+        if (this.courses[i].ref === sc) {
             if (sc.prevStatus === RecordStatus.None) {
-                that.courses.splice(i, 1);
+                this.courses.splice(i, 1);
             } else {
-                that.courses[i].currStatus = RecordStatus.Reverted;
+                this.courses[i].currStatus = RecordStatus.Reverted;
             }
             break;
         }
@@ -189,37 +180,33 @@ AbstractGroup.prototype.restore = function(sc: SchemeCourse) {
     }
 };
 
-Property.prototype.getModifiedCourses = function(): SchemeCourse[] {
-    let that = <Property>this;
-
+Property.prototype.getModifiedCourses = function(this: Property): SchemeCourse[] {
     const EMPTY = <SchemeCourse[]>[];
-    return (that.directions ? that.directions.reduce((acc, d) => acc.concat(d.courses), EMPTY) : EMPTY)
+    return (this.directions ? this.directions.reduce((acc, d) => acc.concat(d.courses), EMPTY) : EMPTY)
             .concat(this.courses)
             .filter(sc => sc.currStatus !== RecordStatus.None);
 };
 
-SchemeCourse.prototype.update = function(dto: SchemeCourseDto, level = 0) {
-    let that = <SchemeCourse>this;
-
-    if (equalsTo(dto, that.toClientDto())) {
+SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDto, level = 0) {
+    if (equalsTo(dto, this.toClientDto())) {
         return;
     }
 
     switch (this.prevStatus) {
         case RecordStatus.None:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.None:
                     dto.id = null;
-                    that.currStatus = RecordStatus.Deleted;
-                    let schemeCourse = that.group.add(dto);
-                    schemeCourse.ref = that;
+                    this.currStatus = RecordStatus.Deleted;
+                    let schemeCourse = this.group.add(dto);
+                    schemeCourse.ref = this;
                     break;
                 case RecordStatus.Created:
-                    that.group.remove(that);
-                    if (that.ref) { // 修改 -> 修改
-                        that.ref.update(dto, level + 1);
+                    this.group.remove(this);
+                    if (this.ref) { // 修改 -> 修改
+                        this.ref.update(dto, level + 1);
                     } else { // 新建 -> 修改
-                        that.group.add(dto);
+                        this.group.add(dto);
                     }
                     break;
                 default:
@@ -227,15 +214,15 @@ SchemeCourse.prototype.update = function(dto: SchemeCourseDto, level = 0) {
             }
             break;
         case RecordStatus.Created:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.None:
                 case RecordStatus.Updated:
                 case RecordStatus.Reverted:
-                    that.group.remove(that);
-                    if (that.ref) { // 修改 -> 修改
-                        that.ref.update(dto, level + 1);
+                    this.group.remove(this);
+                    if (this.ref) { // 修改 -> 修改
+                        this.ref.update(dto, level + 1);
                     } else { // 新建 -> 修改
-                        let schemeCourse = that.group.add(dto);
+                        let schemeCourse = this.group.add(dto);
                         schemeCourse.prevStatus = RecordStatus.Created;
                         schemeCourse.currStatus = RecordStatus.Updated;
                     }
@@ -245,11 +232,11 @@ SchemeCourse.prototype.update = function(dto: SchemeCourseDto, level = 0) {
             }
             break;
         case RecordStatus.Deleted:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.Reverted:
                     if (level === 0) {
                         // 第0层，直接更新Deleted状态项
-                        let referencedBy = that.findReferencedBy();
+                        let referencedBy = this.findReferencedBy();
                         if (referencedBy) {
                             // 删除(修改) -> 还原 -> 修改
                             dto.id = referencedBy.id;
@@ -257,18 +244,18 @@ SchemeCourse.prototype.update = function(dto: SchemeCourseDto, level = 0) {
                         } else {
                             // 删除(直接) -> 还原 -> 修改
                             dto.id = null;
-                            let schemeCourse = that.group.add(dto);
-                            schemeCourse.ref = that;
+                            let schemeCourse = this.group.add(dto);
+                            schemeCourse.ref = this;
                         }
                     } else {
                         // 其它层，通过更新操作Deleted状态项
                         // 新增(修改) -> REF -> 修改
-                        let schemeCourse = that.group.add(dto);
-                        schemeCourse.ref = that;
+                        let schemeCourse = this.group.add(dto);
+                        schemeCourse.ref = this;
                         schemeCourse.prevStatus = RecordStatus.Created;
                         schemeCourse.currStatus = RecordStatus.Updated;
                     }
-                    that.currStatus = RecordStatus.None;
+                    this.currStatus = RecordStatus.None;
                     break;
                 default:
                     throw new Error('Unsupported operation');
@@ -279,28 +266,27 @@ SchemeCourse.prototype.update = function(dto: SchemeCourseDto, level = 0) {
     }
 };
 
-SchemeCourse.prototype.remove = function() {
-    let that = <SchemeCourse>this;
+SchemeCourse.prototype.remove = function(this: SchemeCourse) {
     switch (this.prevStatus) {
         case RecordStatus.None:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.None:
-                    that.currStatus = RecordStatus.Deleted;
+                    this.currStatus = RecordStatus.Deleted;
                     break;
                 case RecordStatus.Created:
-                    that.group.remove(that);
+                    this.group.remove(this);
                     break;
                 default:
                     throw new Error('Unsupported operation');
             }
             break;
         case RecordStatus.Created:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.None:
                 case RecordStatus.Updated:
-                    that.currStatus = RecordStatus.Reverted;
-                    if (that.ref) {
-                        that.ref.currStatus = RecordStatus.Reverted;
+                    this.currStatus = RecordStatus.Reverted;
+                    if (this.ref) {
+                        this.ref.currStatus = RecordStatus.Reverted;
                     }
                     break;
                 default:
@@ -308,10 +294,10 @@ SchemeCourse.prototype.remove = function() {
             }
             break;
         case RecordStatus.Deleted:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.Reverted:
-                    that.currStatus = RecordStatus.None;
-                    let referencedBy = that.findReferencedBy();
+                    this.currStatus = RecordStatus.None;
+                    let referencedBy = this.findReferencedBy();
                     if (referencedBy) {
                         referencedBy.currStatus = RecordStatus.Updated;
                     }
@@ -325,26 +311,23 @@ SchemeCourse.prototype.remove = function() {
     }
 };
 
-
-SchemeCourse.prototype.restore = function() {
-    let that = <SchemeCourse>this;
-
+SchemeCourse.prototype.restore = function(this: SchemeCourse) {
     switch (this.prevStatus) {
         case RecordStatus.None:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.Deleted:
-                    that.group.restore(that);
+                    this.group.restore(this);
                     break;
                 default:
                     throw new Error('Unsupported operation');
             }
             break;
         case RecordStatus.Created:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.Reverted:
-                    that.currStatus = RecordStatus.Updated;
-                    if (that.ref) {
-                        that.ref.currStatus = RecordStatus.None;
+                    this.currStatus = RecordStatus.Updated;
+                    if (this.ref) {
+                        this.ref.currStatus = RecordStatus.None;
                     }
                     break;
                 default:
@@ -352,9 +335,9 @@ SchemeCourse.prototype.restore = function() {
             }
             break;
         case RecordStatus.Deleted:
-            switch (that.currStatus) {
+            switch (this.currStatus) {
                 case RecordStatus.None:
-                    that.group.restore(that);
+                    this.group.restore(this);
                     break;
                 default:
                     throw new Error('Unsupported operation');
@@ -365,87 +348,78 @@ SchemeCourse.prototype.restore = function() {
     }
 };
 
-SchemeCourse.prototype.findReferencedBy = function(): SchemeCourse {
-    let that = <SchemeCourse>this;
-
-    for (let i = 0; i < that.group.courses.length; i++) {
-        if (that.group.courses[i].ref === that) {
-            return that.group.courses[i];
+SchemeCourse.prototype.findReferencedBy = function(this: SchemeCourse): SchemeCourse {
+    for (let i = 0; i < this.group.courses.length; i++) {
+        if (this.group.courses[i].ref === this) {
+            return this.group.courses[i];
         }
     }
     return null;
 };
 
-SchemeCourse.prototype.toClientDto = function(): SchemeCourseDto {
-    let that = <SchemeCourse>this;
-
+SchemeCourse.prototype.toClientDto = function(this: SchemeCourse): SchemeCourseDto {
     return {
-        id               : that.id,
-        courseId         : that._courseId,
-        courseName       : that._courseName,
-        credit           : that.credit,
-        isTempCourse     : that.isTempCourse,
-        propertyId       : that.propertyId,
-        directionId      : that.directionId,
-        practiceCredit   : that.practiceCredit,
-        theoryPeriod     : that.theoryPeriod,
-        experimentPeriod : that.experimentPeriod,
-        periodWeeks      : that._periodWeeks,
-        assessType       : that.assessType,
-        suggestedTerm    : that.suggestedTerm,
-        allowedTerm      : that.allowedTerm,
-        courseGroup      : that.courseGroup,
-        displayOrder     : that.displayOrder,
-        locked           : that.locked,
-        schemeId         : that.schemeId,
-        previousId       : that.previousId,
-        reviseVersion    : that.reviseVersion,
+        id               : this.id,
+        courseId         : this._courseId,
+        courseName       : this._courseName,
+        credit           : this.credit,
+        isTempCourse     : this.isTempCourse,
+        propertyId       : this.propertyId,
+        directionId      : this.directionId,
+        practiceCredit   : this.practiceCredit,
+        theoryPeriod     : this.theoryPeriod,
+        experimentPeriod : this.experimentPeriod,
+        periodWeeks      : this._periodWeeks,
+        assessType       : this.assessType,
+        suggestedTerm    : this.suggestedTerm,
+        allowedTerm      : this.allowedTerm,
+        courseGroup      : this.courseGroup,
+        displayOrder     : this.displayOrder,
+        locked           : this.locked,
+        schemeId         : this.schemeId,
+        previousId       : this.previousId,
+        reviseVersion    : this.reviseVersion,
     };
 };
 
-
-SchemeCourse.prototype.toServerDto = function() {
-    let that = <SchemeCourse>this;
-
+SchemeCourse.prototype.toServerDto = function(this: SchemeCourse) {
     let dto: any = {
-        id               : that.id,
-        isTempCourse     : that.isTempCourse,
-        courseId         : that._courseId,
-        practiceCredit   : that.practiceCredit,
-        theoryPeriod     : that.theoryPeriod,
-        experimentPeriod : that.experimentPeriod,
-        periodWeeks      : that._periodWeeks,
-        assessType       : that.assessType,
-        suggestedTerm    : that.suggestedTerm,
-        allowedTerm      : that.allowedTerm,
-        courseGroup      : that.courseGroup,
-        propertyId       : that.propertyId,
-        directionId      : that.directionId,
-        status           : that.currStatus,
-        previousId       : that.ref ? that.ref.id : null,
-        schemeId         : that.schemeId,
+        id               : this.id,
+        isTempCourse     : this.isTempCourse,
+        courseId         : this._courseId,
+        practiceCredit   : this.practiceCredit,
+        theoryPeriod     : this.theoryPeriod,
+        experimentPeriod : this.experimentPeriod,
+        periodWeeks      : this._periodWeeks,
+        assessType       : this.assessType,
+        suggestedTerm    : this.suggestedTerm,
+        allowedTerm      : this.allowedTerm,
+        courseGroup      : this.courseGroup,
+        propertyId       : this.propertyId,
+        directionId      : this.directionId,
+        status           : this.currStatus,
+        previousId       : this.ref ? this.ref.id : null,
+        schemeId         : this.schemeId,
     };
 
     if (dto.isTempCourse && !dto.courseId) {
         dto.tempCourse = {
-            name:   that.courseName,
-            credit: that.credit,
+            name:   this.courseName,
+            credit: this.credit,
         };
     }
 
     return dto;
 };
 
-SchemeCourse.prototype.canEdit = function(): boolean {
-    let that = <SchemeCourse>this;
-    return that.prevStatus === RecordStatus.None && (that.currStatus === RecordStatus.None || that.currStatus === RecordStatus.Created)
-        || that.prevStatus === RecordStatus.Created && (that.currStatus === RecordStatus.None || that.currStatus === RecordStatus.Updated)
-        || that.prevStatus === RecordStatus.Deleted && that.currStatus === RecordStatus.Reverted;
+SchemeCourse.prototype.canEdit = function(this: SchemeCourse): boolean {
+    return this.prevStatus === RecordStatus.None && (this.currStatus === RecordStatus.None || this.currStatus === RecordStatus.Created)
+        || this.prevStatus === RecordStatus.Created && (this.currStatus === RecordStatus.None || this.currStatus === RecordStatus.Updated)
+        || this.prevStatus === RecordStatus.Deleted && this.currStatus === RecordStatus.Reverted;
 };
 
-SchemeCourse.prototype.canRevert = function(): boolean {
-    let that = <SchemeCourse>this;
-    return that.prevStatus === RecordStatus.None && that.currStatus === RecordStatus.Deleted
-        || that.prevStatus === RecordStatus.Created && that.currStatus === RecordStatus.Reverted
-        || that.prevStatus === RecordStatus.Deleted && that.currStatus === RecordStatus.None;
+SchemeCourse.prototype.canRevert = function(this: SchemeCourse): boolean {
+    return this.prevStatus === RecordStatus.None && this.currStatus === RecordStatus.Deleted
+        || this.prevStatus === RecordStatus.Created && this.currStatus === RecordStatus.Reverted
+        || this.prevStatus === RecordStatus.Deleted && this.currStatus === RecordStatus.None;
 };
