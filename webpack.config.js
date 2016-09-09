@@ -21,8 +21,9 @@ module.exports = {
         'scheme/item':        './src/plan/scheme/public/item.ts',
         'scheme/draft':       './src/plan/scheme/draft/draft.ts',
         'scheme/review':      './src/plan/scheme/review/review.ts',
+        'cardReissue/admin':   './src/card/reissue/admin/admin.ts',
         'cardReissue/form':   './src/card/reissue/form/form.ts',
-        'cardReissue/review': './src/card/reissue/review/review.ts',
+        'cardReissue/order':  './src/card/reissue/order/order.ts',
     },
 
     output: {

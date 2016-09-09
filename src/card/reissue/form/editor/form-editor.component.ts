@@ -26,13 +26,10 @@ export class ReissueFormEditorComponent {
         let params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.service.loadDataForCreate(null).subscribe(dto => this.vm = dto);
-                break;
-            case EditMode.Revise:
-                this.service.loadItemForRevise(params['id']).subscribe(model => this.vm = model);
+                this.service.loadDataForCreate().subscribe(dto => this.vm = dto);
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(model => this.vm = model);
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.vm = dto);
                 break;
         }
     }
@@ -73,8 +70,7 @@ export class ReissueFormEditorComponent {
 
     update() {
         this.saving = true;
-        this.service.update({
-            id:     this.vm.id,
+        this.service.update(this.vm.id, {
             reason: this.vm.reason,
         }).subscribe(id => {
             this.router.navigate(['/', id]);

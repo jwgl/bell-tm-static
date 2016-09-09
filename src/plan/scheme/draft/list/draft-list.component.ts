@@ -13,7 +13,7 @@ import {SchemeDraftService} from '../draft.service';
 export class SchemeDraftListComponent {
     private subjects: any[];
 
-    constructor(private draftService: SchemeDraftService) {
-        this.draftService.loadList().subscribe(data => this.subjects = data);
+    constructor(private service: SchemeDraftService) {
+        this.service.loadList().subscribe(data => this.subjects = data);
     }
 }

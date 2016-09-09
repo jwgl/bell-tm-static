@@ -16,7 +16,7 @@ import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
 export class Workflow {
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
-    commit(id: string, what: string): Promise<void> {
+    commit(id: any, what: string): Promise<void> {
         const whoUrl = this.api.checkers(id);
         const does = '审核';
         return this.dialog.open(WorkflowCommitDialog, {whoUrl, does, what}).then(result => {
@@ -24,7 +24,7 @@ export class Workflow {
         });
     }
 
-    accept(id: string, wi: string, type: string, what: string): Promise<void> {
+    accept(id: any, wi: string, type: string, what: string): Promise<void> {
         const whoUrl = type === 'check' ? this.api.approvers(id, wi) : null;
         const does = type === 'check' ? '审核' : '审批';
         return this.dialog.open(WorkflowAcceptDialog, {whoUrl, does, what}).then(result => {
@@ -32,7 +32,7 @@ export class Workflow {
         });
     }
 
-    reject(id: string, wi: string, type: string, what: string): Promise<void> {
+    reject(id: any, wi: string, type: string, what: string): Promise<void> {
         const does = type === 'check' ? '审核' : '审批';
         return this.dialog.open(WorkflowRejectDialog, {does, what}).then(result => {
             return this.rest.patch(this.api.reject(id, wi), {title: result.what, comment: result.comment}).toPromise();

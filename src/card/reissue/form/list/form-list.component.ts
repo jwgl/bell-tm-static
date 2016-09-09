@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {ReissueFormService} from '../form.service';
 
 /**
- * 所有者培养方案列表。
+ * 补办学生证申请列表。
  */
 @Component({
     selector: 'reissue-form-list',
@@ -16,9 +16,9 @@ export class ReissueFormListComponent {
     private student: any;
 
     constructor(
-        private formServce: ReissueFormService,
+        private service: ReissueFormService,
         private router: Router) {
-        this.formServce.loadList().subscribe(data => {
+        this.service.loadList().subscribe(data => {
             this.student = data.student;
             this.forms = data.forms;
         });

@@ -8,7 +8,7 @@
     <form class="frame">
         <student-info [student]="vm.student"></student-info>
         <div class="form-group row" [class.has-danger]="!reason.valid">
-            <label class="col-sm-3 col-form-lable">补办理由</label>
+            <label class="col-sm-3 col-form-label">补办理由</label>
             <div class="col-sm-9">
                 <textarea class="form-control" rows="8" name="reason"
                     [(ngModel)]="vm.reason"

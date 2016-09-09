@@ -1,9 +1,9 @@
 <form class="frame">
     <student-info [student]="vm.student"></student-info>
     <div class="form-group row">
-        <label class="col-sm-3 col-form-lable">补办理由</label>
+        <label class="col-sm-3 col-form-label">补办理由</label>
         <div class="col-sm-9">
-            <p class="form-control-static">{{vm.reason}}</p>
+            <textarea class="form-control" rows="8" readonly>{{vm.reason}}</textarea>
         </div>
     </div>
 </form>

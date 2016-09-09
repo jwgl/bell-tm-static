@@ -26,7 +26,7 @@ export class SchemeDraftItemComponent {
         private route: ActivatedRoute,
         private workflow: Workflow,
         private dialog: CommonDialog,
-        private draftService: SchemeDraftService) {
+        private service: SchemeDraftService) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.loadData();
@@ -34,7 +34,7 @@ export class SchemeDraftItemComponent {
     }
 
     loadData() {
-        this.draftService.loadItem(this.id).subscribe(dto => {
+        this.service.loadItem(this.id).subscribe(dto => {
             this.vm = new Scheme(dto);
             this.vm.normalize();
             this.vm.editable = dto.editable;
@@ -48,7 +48,7 @@ export class SchemeDraftItemComponent {
 
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.draftService.delete(this.id).subscribe(() => {
+            this.service.delete(this.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });

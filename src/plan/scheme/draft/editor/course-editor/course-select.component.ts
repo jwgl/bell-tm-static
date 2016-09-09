@@ -33,7 +33,7 @@ export class CourseSelectComponent {
     courses: any;
     query: any;
 
-    constructor(private draftService: SchemeDraftService) {}
+    constructor(private service: SchemeDraftService) {}
 
     ngAfterViewInit() {
         $(this.dropdown.nativeElement).on('shown.bs.dropdown', () => {
@@ -62,7 +62,7 @@ export class CourseSelectComponent {
 
     search(query: string): Observable<{query: string, result: CourseSelectDto[]}> {
         let type = this.editMode === EditMode.Create ? 0 : (this.isTempCourse ? 2 : 1);
-        return this.draftService.findCourses(query, type).map(result => ({query: query, result: result}));
+        return this.service.findCourses(query, type).map(result => ({query: query, result: result}));
     }
 
     clearCourse() {

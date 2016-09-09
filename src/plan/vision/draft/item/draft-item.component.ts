@@ -25,7 +25,7 @@ export class VisionDraftItemComponent {
         private route: ActivatedRoute,
         private workflow: Workflow,
         private dialog: CommonDialog,
-        private draftService: VisionDraftService) {
+        private service: VisionDraftService) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.loadData();
@@ -33,7 +33,7 @@ export class VisionDraftItemComponent {
     }
 
     loadData() {
-        this.draftService.loadItem(this.id).subscribe(dto => {
+        this.service.loadItem(this.id).subscribe(dto => {
             this.vm = new Vision(dto);
             this.vm.editable = dto.editable;
             this.vm.revisable = dto.revisable;
@@ -46,7 +46,7 @@ export class VisionDraftItemComponent {
 
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.draftService.delete(this.id).subscribe(() => {
+            this.service.delete(this.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });

@@ -16,10 +16,10 @@ export class VisionPublicListComponent {
     private grades: number[];
     private selectedGrade = 0;
 
-    constructor(private publicService: VisionPublicService) {
-        this.publicService.getList().subscribe(departments => {
-            this.departments = departments;
-            this.grades = findGradeRange(departments);
+    constructor(private service: VisionPublicService) {
+        this.service.loadList().subscribe(dto => {
+            this.departments = dto;
+            this.grades = findGradeRange(dto);
         });
     }
 

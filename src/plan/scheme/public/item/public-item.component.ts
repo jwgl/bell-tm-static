@@ -16,12 +16,12 @@ export class SchemePublicItemComponent {
 
     constructor(
         private elementRef: ElementRef,
-        private publicService: SchemePublicService,
+        private service: SchemePublicService,
         private title: Title) {
         // TODO: see https://github.com/angular/angular/issues/1858
         let id = elementRef.nativeElement.getAttribute('id');
-        this.publicService.getItem(id).subscribe(scheme => {
-            this.vm = scheme;
+        this.service.loadItem(id).subscribe(dto => {
+            this.vm = new Scheme(dto);
             this.vm.normalize();
             this.title.setTitle(`${this.vm.departmentName} - ${this.vm.title}`);
         });

@@ -1,0 +1,36 @@
+<div class="col-md-3">
+    <div class="list-group" *ngIf="counts">
+        <a *ngFor="let item of statuses" [routerLink]="['/list', item.status]" class="list-group-item" routerLinkActive="active">
+            <span class="tag tag-pill pull-xs-right" [ngClass]="item.class">
+                {{counts[item.status] ? counts[item.status] : 0}}
+            </span>
+            {{item.label}}
+        </a>
+    </div>
+</div>
+<div class="col-md-9">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>申请时间</th>
+                <th>申请次序</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of forms; let i = index">
+                <td><a [routerLink]="['/', form.id]">{{form.studentId}}</a></td>
+                <td>{{form.name}}</td>
+                <td>{{form.department}}</td>
+                <td>{{form.subject}}</td>
+                <td>{{form.applyDate | date:'y-MM-dd HH:mm:ss'}}</td>
+                <td>第{{form.rank}}次</td>
+            </tr>
+        </tbody>
+    </table>
+    <pager *ngIf="counts" [total]="counts[status]" [max]="max" [length]="forms.length"
+        (prev)="loadData($event)" (next)="loadData($event)"></pager>
+</div>

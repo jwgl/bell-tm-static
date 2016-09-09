@@ -1,0 +1,28 @@
+<modal-dialog title="添加申请单">
+    <modal-body>
+        <table class="table table-hover table-sm"  *ngIf="options.data">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>学院</th>
+                    <th>申请时间</th>
+                </tr>
+            </thead>
+            <tbody #tbody>
+                <tr *ngFor="let form of options.data.forms">
+                    <td><checkbox-selector [data]="form"></checkbox-selector></td>
+                    <td>{{form.studentId}}</td>
+                    <td>{{form.name}}</td>
+                    <td>{{form.department}}</td>
+                    <td>{{form.applyDate | date : 'y-MM-dd HH:mm:ss'}}</td>
+                </tr>
+            </tbody>
+	    </table>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

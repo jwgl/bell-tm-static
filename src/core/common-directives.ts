@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 
 import {AuditStatusComponent} from './components/audit-status';
 import {FromNowComponent} from './components/from-now';
+import {CheckboxSelectorComponent} from './components/checkbox-selector';
+import {PagerComponent} from './components/pager';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {FormDirective} from './bootstrap/form.directive';
@@ -20,10 +22,16 @@ import {
     ModalFooterDirective,
 } from './bootstrap/modal-dialog.directive';
 
+export {
+    CheckboxSelectorComponent,
+}
+
 const CORE_DIRECTIVES: any[] = [
     // common commponent
     AuditStatusComponent,
     FromNowComponent,
+    CheckboxSelectorComponent,
+    PagerComponent,
     // bootstrap form directives
     FormDirective,
     FormFieldComponent,

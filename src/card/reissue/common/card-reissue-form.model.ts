@@ -3,6 +3,7 @@ export class CardReissueForm {
     reason: string;
     status: string;
     workflowInstanceId: string;
+
     student: {
         id: string,
         name: string,

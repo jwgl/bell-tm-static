@@ -1,20 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest} from 'core/rest';
-
-import {Scheme} from '../common/scheme.model';
+import {ApiUrl, Rest, ShowService} from 'core/rest';
 
 @Injectable()
-export class SchemePublicService {
-    constructor(private rest: Rest, private api: ApiUrl) {
-    }
-
-    getList(): Observable<any> {
-        return this.rest.get(this.api.list());
-    }
-
-    getItem(id: string): Observable<Scheme> {
-        return this.rest.get(this.api.item(id)).map(dto => new Scheme(dto));
+export class SchemePublicService extends ShowService {
+    constructor(rest: Rest, api: ApiUrl) {
+        super(rest, api);
     }
 }

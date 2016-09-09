@@ -15,10 +15,10 @@ export class SchemePublicListComponent {
     private departments: any;
     private grades: number[];
     private selectedGrade = 0;
-    constructor(private publicService: SchemePublicService) {
-        this.publicService.getList().subscribe(departments => {
-            this.departments = departments;
-            this.grades = findGradeRange(departments);
+    constructor(private service: SchemePublicService) {
+        this.service.loadList().subscribe(dto => {
+            this.departments = dto;
+            this.grades = findGradeRange(dto);
         });
     }
 

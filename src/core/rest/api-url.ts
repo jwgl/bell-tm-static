@@ -5,12 +5,16 @@ export const BASE_URL = new OpaqueToken('BASE_URL');
 
 @Injectable()
 export class ApiUrl {
-    userId: string;
-    constructor(@Inject(API_URL) private baseUrl: string) {}
+    constructor(@Inject(API_URL) private baseUrl: string) {
+        let match = window.location.href.match(/\/users\/([^\/]+)\//);
+        if (match) {
+            this.baseUrl = this.baseUrl.replace('${userId}', match[1]);
+        }
+    }
 
-    list() {
-        if (this.userId) {
-            return this.baseUrl.replace('${userId}', this.userId);
+    list(options: {[key: string]: any} = {}) {
+        if (Object.keys(options).length !== 0) {
+            return `${this.baseUrl}?${this.buildQueryString(options)}`;
         } else {
             return this.baseUrl;
         }
@@ -30,9 +34,8 @@ export class ApiUrl {
     }
 
     dataForCreate(options: {[key: string]: any} = {}): string {
-        let queryString = this.buildQueryString(options);
-        if (queryString) {
-            return `${this.list()}/create?${queryString}`;
+        if (Object.keys(options).length !== 0) {
+            return `${this.list()}/create?${this.buildQueryString(options)}`;
         } else {
             return `${this.list()}/create`;
         }

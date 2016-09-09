@@ -6,31 +6,23 @@ import {Rest} from './rest';
 export abstract class EditService {
     constructor(public rest: Rest, public api: ApiUrl) {}
 
-    get userId(): string {
-        return this.api.userId;
+    loadList(options: {[key: string]: any} = {}): Observable<any> {
+        return this.rest.get(this.api.list(options));
     }
 
-    set userId(value: string) {
-        this.api.userId = value;
-    }
-
-    loadList(): Observable<any> {
-        return this.rest.get(this.api.list());
-    }
-
-    loadItem(id: string): Observable<any> {
+    loadItem(id: any): Observable<any> {
         return this.rest.get(this.api.item(id));
     }
 
-    loadDataForCreate(options: {[key: string]: any}): Observable<any> {
+    loadDataForCreate(options: {[key: string]: any} = {}): Observable<any> {
         return this.rest.get(this.api.dataForCreate(options));
     }
 
-    loadItemForEdit(id: string): Observable<any> {
+    loadItemForEdit(id: any): Observable<any> {
         return this.rest.get(this.api.itemForEdit(id));
     }
 
-    loadItemForRevise(id: string): Observable<any> {
+    loadItemForRevise(id: any): Observable<any> {
         return this.rest.get(this.api.itemForRevise(id));
     }
 
@@ -42,11 +34,11 @@ export abstract class EditService {
         return this.rest.post(this.api.revise(), value).map(data => data.id);
     }
 
-    update(value: any): Observable<string> {
-        return this.rest.put(this.api.item(value.id), value).map(res => value.id);
+    update(id: any, value: any): Observable<string> {
+        return this.rest.put(this.api.item(id), value).map(res => id);
     }
 
-    delete(id: string): Observable<string> {
+    delete(id: any): Observable<string> {
         return this.rest.delete(this.api.item(id)).map(res => id);
     }
 }

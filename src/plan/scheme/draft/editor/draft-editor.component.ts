@@ -30,19 +30,19 @@ export class SchemeDraftEditorComponent {
         private route: ActivatedRoute,
         private dialog: CommonDialog,
         private courseEditor: CourseEditorService,
-        private draftService: SchemeDraftService
+        private service: SchemeDraftService
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.loadDataForCreate(params['program']).subscribe(data => this.onLoadData(data));
+                this.service.loadDataForCreate({program: params['program']}).subscribe(data => this.onLoadData(data));
                 break;
             case EditMode.Revise:
-                this.draftService.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
+                this.service.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
                 break;
             case EditMode.Edit:
-                this.draftService.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
+                this.service.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
                 break;
         }
     }
@@ -114,7 +114,7 @@ export class SchemeDraftEditorComponent {
              `/api/departments/${this.vm.departmentId}/schemes`,
             (item: any) => `${item.grade}级${item.subjectName}`
         ).then(id => {
-            this.draftService.loadPropertyCourses(id, property.id).subscribe(courses => {
+            this.service.loadPropertyCourses(id, property.id).subscribe(courses => {
                 courses.forEach(course => {
                     if (!property.contains(course.courseId)) {
                         property.add(course);
@@ -132,7 +132,7 @@ export class SchemeDraftEditorComponent {
             (item: any) => `${item.schemeId}:${item.directionId}`
         ).then(result => {
             let arr = result.split(':');
-            this.draftService.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
+            this.service.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
                 courses.forEach(course => {
                     if (!direction.contains(course.courseId)) {
                         direction.add(course);
@@ -145,19 +145,19 @@ export class SchemeDraftEditorComponent {
     save() {
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.create(this.vm.toServerDto()).subscribe(
+                this.service.create(this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );
                 break;
             case EditMode.Revise:
-                this.draftService.revise(this.vm.toServerDto()).subscribe(
+                this.service.revise(this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );
                 break;
             case EditMode.Edit:
-                this.draftService.update(this.vm.toServerDto()).subscribe(
+                this.service.update(this.vm.id, this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
                     error => alert(JSON.stringify(error))
                 );

@@ -5,6 +5,7 @@ import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
 import {Vision} from '../../common/vision.model';
+import './draft-editor.model';
 import {VisionDraftService} from '../draft.service';
 
 @Component({
@@ -22,19 +23,19 @@ export class VisionDraftEditorComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private draftService: VisionDraftService
+        private service: VisionDraftService
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.draftService.loadDataForCreate(params['program']).subscribe(model => this.vm = model);
+                this.service.loadDataForCreate({program: params['program']}).subscribe(dto => this.vm = new Vision(dto));
                 break;
             case EditMode.Revise:
-                this.draftService.loadItemForRevise(params['id']).subscribe(model => this.vm = model);
+                this.service.loadItemForRevise(params['id']).subscribe(dto => this.vm = new Vision(dto));
                 break;
             case EditMode.Edit:
-                this.draftService.loadItemForEdit(params['id']).subscribe(model => this.vm = model);
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.vm = new Vision(dto));
                 break;
         }
     }
@@ -84,14 +85,7 @@ export class VisionDraftEditorComponent {
     }
 
     create() {
-        this.draftService.create({
-            objective:       this.vm.objective,
-            specification:   this.vm.specification,
-            schoolingLength: this.vm.schoolingLength,
-            awardedDegree:   this.vm.awardedDegree,
-            programId:       this.vm.programId,
-            versionNumber:   this.vm.versionNumber,
-        }).subscribe(id => {
+        this.service.create(this.vm.toCreateDto()).subscribe(id => {
             this.router.navigate(['/', id]);
         }, error => {
             alert(error);
@@ -99,15 +93,7 @@ export class VisionDraftEditorComponent {
     }
 
     revise() {
-        this.draftService.revise({
-            previousId:      this.vm.previousId,
-            objective:       this.vm.objective,
-            specification:   this.vm.specification,
-            schoolingLength: this.vm.schoolingLength,
-            awardedDegree:   this.vm.awardedDegree,
-            programId:       this.vm.programId,
-            versionNumber:   this.vm.versionNumber,
-        }).subscribe(id => {
+        this.service.revise(this.vm.toReviseDto()).subscribe(id => {
             this.router.navigate(['/', id]);
         }, error => {
             alert(error);
@@ -115,14 +101,7 @@ export class VisionDraftEditorComponent {
     }
 
     update() {
-        this.draftService.update({
-            id:              this.vm.id,
-            objective:       this.vm.objective,
-            specification:   this.vm.specification,
-            schoolingLength: this.vm.schoolingLength,
-            awardedDegree:   this.vm.awardedDegree,
-            programId:       this.vm.programId,
-        }).subscribe(id => {
+        this.service.update(this.vm.id, this.vm.toUpdateDto()).subscribe(id => {
             this.router.navigate(['/', id]);
         }, error => {
             alert(error);
@@ -135,7 +114,7 @@ export class VisionDraftEditorComponent {
             `/api/departments/${this.vm.departmentId}/visions`,
             (item: any) => `${item.grade}级${item.subjectName}`
         ).then(id => {
-            this.draftService.loadDataForImport(id).subscribe(vision => {
+            this.service.loadDataForImport(id).subscribe(vision => {
                this.vm.objective = vision.objective;
                this.vm.specification = vision.specification;
                this.vm.schoolingLength = vision.schoolingLength;

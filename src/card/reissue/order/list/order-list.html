@@ -1,0 +1,27 @@
+<div class="btn-toolbar" style="text-align:right">
+    <a [routerLink]="['/create']" class="btn btn-primary">新建订单</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>订单编号</th>
+            <th>申请数量</th>
+            <th>完成数量</th>
+            <th>创建人</th>
+            <th>创建时间</th>
+            <th>修改人</th>
+            <th>修改时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td><a [routerLink]="['/', order.id]">{{order.id}}</a></td>
+            <td>{{order.totalCount}}</td>
+            <td>{{order.finishedCount}}</td>
+            <td>{{order.creatorName}}</td>
+            <td>{{order.dateCreated | date:'y-MM-dd HH:mm:ss'}}</td>
+            <td>{{order.modifierName}}</td>
+            <td>{{order.dateModified | date:'y-MM-dd HH:mm:ss'}}</td>
+        </tr>
+    </tbody>
+</table>
