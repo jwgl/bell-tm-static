@@ -10,6 +10,7 @@ import {routing} from './order.routes';
 import {ReissueOrderListModule} from './list/order-list.module';
 import {ReissueOrderItemModule} from './item/order-item.module';
 import {ReissueOrderEditorModule} from './editor/order-editor.module';
+import {ReissueOrderReceiveModule} from './receive/order-receive.module';
 
 @NgModule({
     bootstrap: [ReissueOrderComponent],
@@ -20,9 +21,10 @@ import {ReissueOrderEditorModule} from './editor/order-editor.module';
         BrowserModule,
         RestModule.for('/api/cardReissueOrders'),
         routing,
-        ReissueOrderEditorModule,
-        ReissueOrderItemModule,
         ReissueOrderListModule,
+        ReissueOrderItemModule,
+        ReissueOrderEditorModule,
+        ReissueOrderReceiveModule,
     ],
     providers: [
         ReissueOrderService,

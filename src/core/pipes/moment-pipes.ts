@@ -13,7 +13,7 @@ export class FromNowPipe {
     }
 }
 
-@Pipe({name: 'momentFormat'})
+@Pipe({name: 'moment'})
 export class MomentFormatPipe {
     constructor() {
         moment.locale('zh-cn');

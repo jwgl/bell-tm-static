@@ -19,9 +19,9 @@
             <td>{{order.totalCount}}</td>
             <td>{{order.finishedCount}}</td>
             <td>{{order.creatorName}}</td>
-            <td>{{order.dateCreated | date:'y-MM-dd HH:mm:ss'}}</td>
+            <td>{{order.dateCreated | moment}}</td>
             <td>{{order.modifierName}}</td>
-            <td>{{order.dateModified | date:'y-MM-dd HH:mm:ss'}}</td>
+            <td>{{order.dateModified | moment}}</td>
         </tr>
     </tbody>
 </table>

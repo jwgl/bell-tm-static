@@ -5,7 +5,7 @@ import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
 
 import {ReissueCommonModule} from '../../common/reissue-common.module';
-import {ReissueOrderItemComponent} from './order-item.component';
+import {ReissueOrderReceiveComponent} from './order-receive.component';
 
 @NgModule({
     imports: [
@@ -15,10 +15,10 @@ import {ReissueOrderItemComponent} from './order-item.component';
         ReissueCommonModule,
     ],
     declarations: [
-        ReissueOrderItemComponent,
+        ReissueOrderReceiveComponent,
     ],
     exports: [
-        ReissueOrderItemComponent,
+        ReissueOrderReceiveComponent,
     ],
 })
-export class ReissueOrderItemModule {}
+export class ReissueOrderReceiveModule {}

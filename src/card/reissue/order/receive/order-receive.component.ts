@@ -7,11 +7,11 @@ import {ReissueOrderService} from '../order.service';
 import {ReissueOrder} from '../common/reissue-order.model';
 
 @Component({
-    selector: 'reissue-order-item',
-    styles: [require('./order-item.scss')],
-    template: require('./order-item.html'),
+    selector: 'reissue-order-receive',
+    styles: [require('./order-receive.scss')],
+    template: require('./order-receive.html'),
 })
-export class ReissueOrderItemComponent {
+export class ReissueOrderReceiveComponent {
     id: string;
     vm: ReissueOrder;
     constructor(
@@ -31,23 +31,15 @@ export class ReissueOrderItemComponent {
         });
     }
 
-    edit() {
-        this.router.navigate(['/', this.id, 'edit']);
-    }
-
-    remove() {
-        this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.service.delete(this.id).subscribe(() => {
-                this.router.navigate(['/']);
-            });
+    receive(item: any, checked: boolean) {
+        this.service.receive(this.id, item.formId, checked).subscribe(result => {
+            item.status = result.status;
         });
     }
 
-    receive() {
-        this.router.navigate(['/', this.id, 'receive']);
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
+    receiveAll(items: any[], checked: boolean) {
+        this.service.receiveAll(this.id, checked).subscribe(result => {
+            items.forEach(item => item.status = result.status);
+        });
     }
 }

@@ -29,6 +29,10 @@ export class ReissueOrder {
         return order;
     }
 
+    get allFinished(): boolean {
+        return this.items.every(item => item.status === 'FINISHED');
+    }
+
     addItem(form: any): void {
         let index = _.findIndex(this.items, (item) => item.formId === form.id);
         let removedIndex = _.findIndex(this.removedItems, item => item.formId === form.id);

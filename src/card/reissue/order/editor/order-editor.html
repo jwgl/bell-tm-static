@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label>创建时间</label>
-            <p class="form-control-static">{{vm.dateCreated | date:'y-MM-dd HH:mm:ss'}}</p>
+            <p class="form-control-static">{{vm.dateCreated | moment}}</p>
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改人</label>
@@ -33,19 +33,19 @@
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改时间</label>
-            <p class="form-control-static">{{vm.dateModified | date:'y-MM-dd HH:mm:ss'}}</p>
+            <p class="form-control-static">{{vm.dateModified | moment}}</p>
         </div>
     </div>
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
-                <th class="studentId">学号</th>
-                <th class="name">姓名</th>
-                <th class="sex">性别</th>
-                <th class="department">学院</th>
-                <th class="major">专业</th>
-                <th class="applyDate">申请时间</th>
-                <th class="status">状态</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>申请时间</th>
+                <th>状态</th>
                 <th class="text-xs-center">操作</th>
             </tr>
         </thead>
@@ -56,7 +56,7 @@
                 <td>{{item.sex}}</td>
                 <td>{{item.department}}</td>
                 <td>{{item.subject}}</td>
-                <td>{{item.applyDate | date:'y-MM-dd HH:mm:ss'}}</td>
+                <td>{{item.applyDate | moment}}</td>
                 <td>{{item.status | formStatus}}</td>
                 <td class="text-xs-center" (click)="removeItem(item.formId)">
                     <button class="btn btn-secondary btn-sm" [disabled]="item.status!='APPROVED' && item.status!='MAKING'">

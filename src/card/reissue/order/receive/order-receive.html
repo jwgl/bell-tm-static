@@ -3,19 +3,6 @@
         <div class="btn-group">
             <button class="btn btn-secondary" (click)="returnList()">返回</button>
         </div>
-        <div class="btn-group pull-xs-right">
-            <button class="btn btn-secondary" (click)="edit()">编辑</button>
-            <button class="btn btn-secondary" (click)="remove()">删除</button>
-            <button class="btn btn-secondary" (click)="receive()">入库</button>
-            <div class="btn-group">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">导出</button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" download href="/rpt/cardReissueOrders/{{id}}/pictures">学生照片</a>
-                    <a class="dropdown-item" download href="/rpt/cardReissueOrders/{{id}}" >制作清单</a>
-                    <a class="dropdown-item" download href="/rpt/cardReissueOrders/{{id}}/distribute">分发清单</a>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="form-inline">
         <div class="form-group">
@@ -49,6 +36,11 @@
                 <th>专业</th>
                 <th>申请时间</th>
                 <th>状态</th>
+                <th class="text-xs-center">
+                    <input type="checkbox"
+                           (change)="receiveAll(vm.items, $event.target.checked)"
+                           [checked]="vm.allFinished">
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -60,6 +52,9 @@
                 <td>{{item.subject}}</td>
                 <td>{{item.applyDate | moment}}</td>
                 <td>{{item.status | formStatus}}</td>
+                <td class="text-xs-center">
+                    <input type="checkbox" (change)="receive(item, $event.target.checked)" [checked]="item.status == 'FINISHED'">
+                </td>
             </tr>
         </tbody>
     </table>

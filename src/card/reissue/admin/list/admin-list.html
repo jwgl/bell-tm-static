@@ -26,7 +26,7 @@
                 <td>{{form.name}}</td>
                 <td>{{form.department}}</td>
                 <td>{{form.subject}}</td>
-                <td>{{form.applyDate | date:'y-MM-dd HH:mm:ss'}}</td>
+                <td>{{form.applyDate | moment}}</td>
                 <td>第{{form.rank}}次</td>
             </tr>
         </tbody>
