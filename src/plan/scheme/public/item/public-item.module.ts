@@ -2,8 +2,6 @@ import {NgModule} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 
-import {RestModule} from 'core/rest';
-
 import {PlanCommonModule} from '../../../common/module';
 import {SchemeViewerModule} from '../../common/scheme-viewer.module';
 import {SchemePublicItemComponent} from './public-item.component';
@@ -12,7 +10,6 @@ import {SchemePublicItemComponent} from './public-item.component';
     imports: [
         CommonModule,
         PlanCommonModule,
-        RestModule.for('/api/schemes'),
         SchemeViewerModule,
     ],
     declarations: [

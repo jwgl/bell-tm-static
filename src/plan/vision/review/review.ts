@@ -13,13 +13,16 @@ import {VisionReviewComponent} from './review.component';
     bootstrap: [VisionReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/visions'),
+        RestModule.for('/api/plan/visions'),
         CommonDirectivesModule,
         WorkflowModule,
         VisionViewerModule,
     ],
     declarations: [
         VisionReviewComponent,
+    ],
+    providers: [
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/schemes'},
     ],
 })
 class MainModule {}

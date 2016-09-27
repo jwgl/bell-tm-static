@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 
 import {Dialog} from 'core/dialogs';
 import {groupBy} from 'core/utils';
@@ -17,7 +17,9 @@ export class ProgramSettingsComponent {
 
     constructor(
         private dialog: Dialog,
-        private service: ProgramSettingsService) {
+        private service: ProgramSettingsService,
+        @Inject('SCHEME_TEMPLATES_URL') private schemeTemplatesUrl: string,
+    ) {
         this.loadData();
     }
 
@@ -51,7 +53,7 @@ export class ProgramSettingsComponent {
     edit(program: any) {
         this.dialog.open(ProgramEditorDialog, {
             programSetting: program,
-            url: '/api/schemeTemplates',
+            url: this.schemeTemplatesUrl,
         }).then(result => {
             this.service.update(program.programId, result).subscribe(_ => {
                 program.visionRevisible = result.visionRevisible;

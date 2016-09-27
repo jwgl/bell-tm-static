@@ -9,7 +9,7 @@ const path = require("path");
 module.exports = {
     entry: {
         'angular':            './src/angular.ts',
-        'logo':               './src/logo.ts',
+        'navbar':             './src/navbar/index.ts',
         'todo':               './src/todo/todo.ts',
         'settings/subject':   './src/plan/settings/subject-director.ts',
         'settings/program':   './src/plan/settings/program-settings.ts',
@@ -21,7 +21,7 @@ module.exports = {
         'scheme/item':        './src/plan/scheme/public/item.ts',
         'scheme/draft':       './src/plan/scheme/draft/draft.ts',
         'scheme/review':      './src/plan/scheme/review/review.ts',
-        'cardReissue/admin':   './src/card/reissue/admin/admin.ts',
+        'cardReissue/admin':  './src/card/reissue/admin/admin.ts',
         'cardReissue/form':   './src/card/reissue/form/form.ts',
         'cardReissue/order':  './src/card/reissue/order/order.ts',
     },
@@ -45,7 +45,7 @@ module.exports = {
         new CopyWebpackPlugin([
             { to: 'js/lib', from: './node_modules/moment/min/moment-with-locales.min.js' },
             { to: 'js/lib', from: './node_modules/markdown-it/dist/markdown-it.min.js' },
-            { to: 'js/lib', from: './node_modules/jquery/dist/jquery.min.js' },
+            { to: 'js/lib', from: './node_modules/jquery/dist/jquery.slim.min.js' },
             { to: 'js/lib', from: './node_modules/tether/dist/js/tether.min.js' },
             { to: 'js/lib', from: './node_modules/bootstrap/dist/js/bootstrap.min.js' },
             { to: 'css/lib', from: './node_modules/bootstrap/dist/css/bootstrap.min.css' },
@@ -55,8 +55,8 @@ module.exports = {
             { to: 'css/lib', from: './node_modules/select2/dist/css/select2.min.css' },
             { to: 'css/lib', from: './node_modules/font-awesome/css/font-awesome.min.css' },
             { to: 'css/fonts', from: './node_modules/font-awesome/fonts' },
-            { to: 'js/app', from: './src/menu.js' },
-            { to: 'css/app', from: './src/main.css' }
+            { to: 'css/app', from: './src/main.css' },
+            { to: 'images', from: './images/favicon.ico' }
         ]),
         /*
         new UglifyJsPlugin({

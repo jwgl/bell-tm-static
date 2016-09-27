@@ -13,7 +13,7 @@ import {SubjectDirectorService} from './subject-director.service';
     imports: [
         BrowserModule,
         SubjectDirectorModule,
-        RestModule.for('/api/subjectDirectors'),
+        RestModule.for('/api/plan/subjectDirectors'),
     ],
     providers: [
         SubjectDirectorService,

@@ -31,7 +31,7 @@ export class TeacherSelectDialog extends BaseDialog {
 
     ngAfterViewInit() {
         typeahead(this.input)
-        .switchMap(value => this.rest.get(`/api/teachers?q=${value}`))
+        .switchMap(value => this.rest.get(`/api/core/teachers?q=${value}`))
         .subscribe(value => this.teachers = value);
     }
 }

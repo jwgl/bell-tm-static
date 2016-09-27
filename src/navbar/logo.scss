@@ -1,0 +1,23 @@
+:host {
+    width: 31px;
+    height: 31px;
+    display: inline-block;
+    margin: 3px 15px 3px 0px;
+    padding-left: 1px;
+    padding-top: 1px;
+    background-color: #333;
+}
+
+@media (max-width: 543px) {
+    :host {
+        display: none;
+    }
+}
+
+i {
+    float: left;
+    display: inline-block;
+    margin: 0px 1px 1px 0px;
+    width: 9px;
+    height: 9px;
+}

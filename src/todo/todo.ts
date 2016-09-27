@@ -19,11 +19,11 @@ import {TodoListComponent} from './list/todo-list.component';
     imports: [
         BrowserModule,
         routing,
-        RestModule.for('/api/users/${userId}/works'),
+        RestModule.for('/api/core/users/${userId}/works'),
         CommonDirectivesModule,
     ],
     providers: [
-        {provide: BASE_URL, useValue: '/users/${userId}/works'},
+        {provide: BASE_URL, useValue: '/web/core/users/${userId}/works'},
         TodoService,
     ],
 })

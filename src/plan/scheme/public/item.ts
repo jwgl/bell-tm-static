@@ -2,6 +2,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
+import {RestModule} from 'core/rest';
+
 import {SchemePublicItemComponent} from './item/public-item.component';
 import {SchemePublicItemModule} from './item/public-item.module';
 import {SchemePublicService} from './public.service';
@@ -10,6 +12,7 @@ import {SchemePublicService} from './public.service';
     bootstrap: [SchemePublicItemComponent],
     imports: [
         BrowserModule,
+        RestModule.for('/api/plan/schemes'),
         SchemePublicItemModule,
     ],
     providers: [

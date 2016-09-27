@@ -11,7 +11,7 @@ export class SchemeDraftService extends EditService {
     constructor(
         rest: Rest,
         api: ApiUrl,
-        @Inject('PUBLIC_SCHEME_URL') publicSchemeUrl: string,
+        @Inject('PUBLIC_SCHEMES_URL') publicSchemeUrl: string,
     ) {
         super(rest, api);
         this.publicSchemeApi = new ApiUrl(publicSchemeUrl);

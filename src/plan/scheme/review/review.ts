@@ -12,7 +12,7 @@ import {SchemeViewerModule} from '../common/scheme-viewer.module';
     bootstrap: [SchemeReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/schemes'),
+        RestModule.for('/api/plan/schemes'),
         WorkflowModule,
         SchemeViewerModule,
     ],

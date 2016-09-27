@@ -19,7 +19,7 @@ import {ReissueOrderReceiveModule} from './receive/order-receive.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/cardReissueOrders'),
+        RestModule.for('/api/card/cardReissueOrders'),
         routing,
         ReissueOrderListModule,
         ReissueOrderItemModule,

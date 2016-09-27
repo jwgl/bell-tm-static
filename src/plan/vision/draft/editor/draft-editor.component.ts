@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
@@ -23,7 +23,8 @@ export class VisionDraftEditorComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: VisionDraftService
+        private service: VisionDraftService,
+        @Inject('DEPARTMENT_VISIONS_URL') private departmentVisionsUrl: string,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
@@ -111,7 +112,7 @@ export class VisionDraftEditorComponent {
     import() {
         this.dialog.list(
             '选择导入的专业',
-            `/api/departments/${this.vm.departmentId}/visions`,
+            this.departmentVisionsUrl.replace('${departmentId}', this.vm.departmentId),
             (item: any) => `${item.grade}级${item.subjectName}`
         ).then(id => {
             this.service.loadDataForImport(id).subscribe(vision => {

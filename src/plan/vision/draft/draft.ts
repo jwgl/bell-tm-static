@@ -18,7 +18,7 @@ import {VisionDraftEditorModule} from './editor/draft-editor.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/users/${userId}/visions'),
+        RestModule.for('/api/plan/users/${userId}/visions'),
         routing,
         VisionDraftEditorModule,
         VisionDraftItemModule,
@@ -26,7 +26,8 @@ import {VisionDraftEditorModule} from './editor/draft-editor.module';
     ],
     providers: [
         VisionDraftService,
-        {provide: 'API_URL_IMPORT', useValue: '/api/visions'},
+        {provide: 'DEPARTMENT_VISIONS_URL', useValue: '/api/plan/departments/${departmentId}/visions'},
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/schemes'},
     ],
 })
 class MainModule {}

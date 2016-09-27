@@ -13,10 +13,11 @@ import {ProgramSettingsService} from './program-settings.service';
     imports: [
         BrowserModule,
         ProgramSettingsModule,
-        RestModule.for('/api/programSettings'),
+        RestModule.for('/api/plan/programSettings'),
     ],
     providers: [
         ProgramSettingsService,
+        {provide: 'SCHEME_TEMPLATES_URL', useValue: '/api/plan/schemeTemplates'},
     ],
 })
 class MainModule {}

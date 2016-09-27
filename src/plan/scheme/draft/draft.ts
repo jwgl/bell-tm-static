@@ -18,7 +18,7 @@ import {SchemeDraftEditorModule} from './editor/draft-editor.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/users/${userId}/schemes'),
+        RestModule.for('/api/plan/users/${userId}/schemes'),
         routing,
         SchemeDraftEditorModule,
         SchemeDraftItemModule,
@@ -26,7 +26,7 @@ import {SchemeDraftEditorModule} from './editor/draft-editor.module';
     ],
     providers: [
         SchemeDraftService,
-        {provide: 'PUBLIC_SCHEME_URL', useValue: '/api/schemes'},
+        {provide: 'PUBLIC_SCHEMES_URL', useValue: '/api/plan/schemes'},
     ],
 })
 class MainModule {}

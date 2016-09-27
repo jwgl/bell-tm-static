@@ -12,6 +12,6 @@
 <div [markdown]="vision.awardedDegree"></div>
 <h2>五、课程教学安排表</h2>
 <div class="no-print">
-    <p *ngIf="vision.schemeId"><a [href]="'/schemes/' + vision.schemeId">查看</a></p>
+    <p *ngIf="vision.schemeId"><a [href]="publicSchemesWebUrl + '/' + vision.schemeId">查看</a></p>
     <p *ngIf="!vision.schemeId">[空]</p>
 </div>

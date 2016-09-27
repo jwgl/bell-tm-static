@@ -1,7 +1,3 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
 import {Component} from '@angular/core';
 
 const COLORS = [
@@ -51,18 +47,10 @@ const COLORS = [
     host: {
         '[class.navbar-brand]': 'true',
     },
-    styles: [
-    `i {
-        float: left;
-        display: inline-block;
-        margin: 0px 1px 1px 0px;
-        width: 9px;
-        height: 9px;
-    }`,
-    ],
+    styles: [require('./logo.scss')],
     template: `<i *ngFor="let i of tm" [style.background-color]="i == 1 ? t : m"></i>`,
 })
-class Logo {
+export class LogoComponent {
     next = true;
     t = 'red';
     m = 'green';
@@ -87,13 +75,3 @@ class Logo {
         return color;
     }
 }
-
-@NgModule({
-    bootstrap: [Logo],
-    declarations: [Logo],
-    imports: [BrowserModule],
-})
-class MainModule {}
-
-platformBrowserDynamic().bootstrapModule(MainModule);
-

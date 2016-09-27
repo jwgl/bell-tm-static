@@ -26,6 +26,8 @@ export class TodoListComponent {
         private service: TodoService,
         @Inject(BASE_URL) private baseUrl: string,
     ) {
+        let match = window.location.href.match(/\/users\/([^\/]+)\//);
+        this.baseUrl = this.baseUrl.replace('${userId}', match[1]);
         this.route.params.subscribe(params => {
             this.status = params['status'];
             this.loadData(0);

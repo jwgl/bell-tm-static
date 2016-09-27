@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, Inject} from '@angular/core';
 
 import {Vision} from './vision.model';
 
@@ -9,4 +9,6 @@ import {Vision} from './vision.model';
 })
 export class VisionViewerComponent {
     @Input() vision: Vision;
+
+    constructor(@Inject('PUBLIC_SCHEMES_WEB_URL') private publicSchemesWebUrl: string) {}
 }

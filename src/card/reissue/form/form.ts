@@ -18,7 +18,7 @@ import {ReissueFormEditorModule} from './editor/form-editor.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/users/${userId}/cardReissues'),
+        RestModule.for('/api/card/users/${userId}/cardReissues'),
         routing,
         ReissueFormEditorModule,
         ReissueFormItemModule,
