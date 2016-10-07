@@ -17,6 +17,6 @@ export class WorkflowWorkitemsDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get(`/api/workflows/${this.options.instance}/workitems`);
+        return this.rest.get(`/api/core/workflows/${this.options.instance}/workitems`);
     }
 }

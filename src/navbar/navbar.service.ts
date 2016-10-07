@@ -10,6 +10,11 @@ export class NavbarService extends ShowService {
         super(rest, api);
     }
 
+    loadList(groups: string[]): Observable<any> {
+        let queryString = groups.map(group => `group=${group}`).join('&');
+        return this.rest.get(`${this.api.list()}?${queryString}`);
+    }
+
     logout(): Observable<void> {
         return  this.http.post('/uaa/logout', null, {withCredentials: true}).map(response => null);
     }

@@ -1,4 +1,4 @@
-import {Component, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {Component, ViewChildren, QueryList, Inject} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import * as _ from 'lodash';
@@ -14,12 +14,16 @@ import {CheckboxSelectorComponent} from 'core/common-directives';
 export class ReissueFormSelectDialog extends BaseDialog {
     @ViewChildren(CheckboxSelectorComponent) selectors: QueryList<CheckboxSelectorComponent>;
 
-    constructor(private rest: Rest, private elementRef: ElementRef) {
+    constructor(
+        private rest: Rest,
+        @Inject('REISSUE_FORM_API_URL')
+        private reissueFormApiUrl: String,
+    ) {
         super();
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get('/api/cardReissues?status=APPROVED').do(result => {
+        return this.rest.get(`${this.reissueFormApiUrl}?status=APPROVED`).do(result => {
             // 删除已添加的申请
             result.forms = _.differenceWith(result.forms, this.options.order.items, (form: any, item: any) => form.id === item.formId);
         });

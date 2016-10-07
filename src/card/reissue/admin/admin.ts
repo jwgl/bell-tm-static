@@ -24,7 +24,7 @@ import {ReissueAdminItemComponent} from './item/admin-item.component';
         BrowserModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/card/cardReissues'),
+        RestModule.for('/api/card/reissueForms'),
         routing,
         ReissueCommonModule,
     ],

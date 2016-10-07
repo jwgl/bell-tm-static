@@ -7,7 +7,8 @@ import {NavbarService} from './navbar.service';
     template: `
     <template ngFor let-menu [ngForOf]="menus">
         <template [ngIf]="!menu.items">
-            <a class="dropdown-item" href="{{menu.url}}">{{menu.label}}</a>
+            <a *ngIf="menu.label != '---'" class="dropdown-item" href="{{menu.url}}">{{menu.label}}</a>
+            <div *ngIf="menu.label == '---'" class="dropdown-divider"></div>
         </template>
         <template [ngIf]="menu.items">
             <div class="dropdown dropdown-submenu">
@@ -80,7 +81,7 @@ export class NavbarComponent {
         if (sessionStorage && sessionStorage.getItem('menu')) {
             this.menus = JSON.parse(sessionStorage.getItem('menu'));
         } else {
-            this.service.loadList().subscribe(menus => {
+            this.service.loadList(['main', 'user']).subscribe(menus => {
                 this.menus = menus;
                 sessionStorage.setItem('menu', JSON.stringify(menus));
             });

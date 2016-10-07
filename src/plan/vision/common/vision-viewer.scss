@@ -1,15 +1,6 @@
 h2 {
     font-size: 1.25rem;
-}
-
-:host {
-    p {
-        text-indent: 2em;
-        -webkit-margin-before: 0em;
-        -webkit-margin-after: 1rem;
-        -webkit-margin-start: 0px;
-        -webkit-margin-end: 0px;
-    }
+    margin-bottom: 1rem;
 }
 
 @media print {
@@ -23,8 +14,7 @@ h2 {
         h2 {
             text-indent: 2em;
             font-family: '黑体';
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
+            margin-bottom: 1em;
         }
 
         ol {

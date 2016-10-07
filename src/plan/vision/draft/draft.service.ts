@@ -8,7 +8,7 @@ export class VisionDraftService extends EditService {
     constructor(
         rest: Rest,
         api: ApiUrl,
-        @Inject('API_URL_IMPORT') private importUrl: string,
+        @Inject('VISION_IMPORT_API_URL') private importUrl: string,
     ) {
         super(rest, api);
     }

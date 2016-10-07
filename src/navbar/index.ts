@@ -12,7 +12,7 @@ import {NavbarService} from './navbar.service';
     bootstrap: [NavbarComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/core/menus'),
+        RestModule.for('/menus'),
     ],
     declarations: [
         NavbarComponent,

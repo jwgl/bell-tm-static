@@ -16,7 +16,8 @@ export class ReissueOrderListComponent {
 
     constructor(
         private service: ReissueOrderService,
-        private router: Router) {
+        private router: Router,
+    ) {
         this.service.loadList().subscribe(data => {
             this.orders = data;
         });

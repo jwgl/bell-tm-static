@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {Dialog} from 'core/dialogs';
@@ -22,7 +22,9 @@ export class ReissueOrderEditorComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: Dialog,
-        private service: ReissueOrderService
+        private service: ReissueOrderService,
+        @Inject('REISSUE_FORM_WEB_URL')
+        private reissueFormWebUrl: String,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;

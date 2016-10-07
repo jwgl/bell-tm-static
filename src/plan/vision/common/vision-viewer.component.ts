@@ -4,7 +4,9 @@ import {Vision} from './vision.model';
 
 @Component({
     selector: 'vision-viewer',
-    styles: [require('./vision-viewer.scss')],
+    styles: [require('./vision-viewer.scss'),
+        `:host /deep/ p {text-indent: 2em;}`,
+    ],
     template: require('./vision-viewer.html'),
 })
 export class VisionViewerComponent {

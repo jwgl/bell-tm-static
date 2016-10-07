@@ -19,7 +19,7 @@ import {ReissueOrderReceiveModule} from './receive/order-receive.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/card/cardReissueOrders'),
+        RestModule.for('/api/card/reissueOrders'),
         routing,
         ReissueOrderListModule,
         ReissueOrderItemModule,
@@ -28,6 +28,8 @@ import {ReissueOrderReceiveModule} from './receive/order-receive.module';
     ],
     providers: [
         ReissueOrderService,
+        {provide: 'REISSUE_FORM_WEB_URL', useValue: '/web/card/reissueForms'},
+        {provide: 'REISSUE_FORM_API_URL', useValue: '/api/card/reissueForms'},
     ],
 })
 class MainModule {}

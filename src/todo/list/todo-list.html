@@ -1,6 +1,6 @@
-<div class="row">
+<div class="row" *ngIf="counts">
     <div class="col-md-3">
-        <div class="list-group" *ngIf="counts">
+        <div class="list-group">
             <a *ngFor="let item of statuses" [routerLink]="['/', item.status]" class="list-group-item" routerLinkActive="active">
                 <span class="tag tag-pill pull-xs-right" [ngClass]="item.class">
                     {{counts[item.status] ? counts[item.status] : 0}}
@@ -28,7 +28,7 @@
                 </tr>
             </tbody>
         </table>
-        <pager *ngIf="counts" [total]="counts[status]" [max]="max" [length]="todos.length"
+        <pager [total]="counts[status]" [max]="max" [length]="todos.length"
             (prev)="loadData($event)" (next)="loadData($event)"></pager>
     </div>
 </div>
