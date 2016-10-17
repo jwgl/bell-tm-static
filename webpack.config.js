@@ -24,6 +24,7 @@ module.exports = {
         'card/reissue/admin':    './src/card/reissue/admin/admin.ts',
         'card/reissue/form':     './src/card/reissue/form/form.ts',
         'card/reissue/order':    './src/card/reissue/order/order.ts',
+        'place/booking/form':    './src/place/booking/form/index.ts'
     },
 
     output: {

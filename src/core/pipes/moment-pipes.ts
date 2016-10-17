@@ -1,6 +1,5 @@
 import {Pipe} from '@angular/core';
-
-let moment = (<any>window).moment;
+import * as moment from 'moment';
 
 @Pipe({name: 'fromNow'})
 export class FromNowPipe {
@@ -29,5 +28,16 @@ export class MomentFormatPipe {
         }
 
         return moment(value).format(format);
+    }
+}
+
+@Pipe({name: 'dayOfWeek'})
+export class DayOfWeekPipe {
+    constructor() {
+        moment.locale('zh-cn');
+    }
+
+    transform(value: number) {
+        return moment.weekdays(value);
     }
 }

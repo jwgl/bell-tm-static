@@ -1,0 +1,36 @@
+<div *ngIf="user">
+    <div class="alert alert-warning" *ngIf="!user.phoneNumber">
+        你的手机号码为空，请补充完整个人信息。
+    </div>
+    <div *ngIf="canApply()">
+        <div class="btn-toolbar">
+            <div class="btn-group pull-xs-right">
+                <button class="btn btn-primary" (click)="create()" >申请</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>查看</th>
+                    <th>申请单位</th>
+                    <th>类型</th>
+                    <th>事由</th>
+                    <th>提交时间</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let form of forms">
+                    <td><a [routerLink]="['/', form.id]">查看</a></td>
+                    <td>{{form.department}}</td>
+                    <td>{{form.type}}</td>
+                    <td><div class="reason">{{form.reason}}</div></td>
+                    <td>{{form.dateModified | moment}}</td>
+                    <td>{{form.status}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <pager [total]="count" [max]="max" [length]="forms.length"
+            (prev)="loadData($event)" (next)="loadData($event)"></pager>
+    </div>
+</div>

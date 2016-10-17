@@ -23,7 +23,7 @@ export class ReissueAdminListComponent {
     private forms: any[];
     private status = 'COMMITTED';
     private offset: number;
-    private max = 3;
+    private max = 10;
 
     constructor(
         private router: Router,

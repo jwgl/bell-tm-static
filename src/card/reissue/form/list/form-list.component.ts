@@ -3,9 +3,6 @@ import {Router} from '@angular/router';
 
 import {ReissueFormService} from '../form.service';
 
-/**
- * 补办学生证申请列表。
- */
 @Component({
     selector: 'reissue-form-list',
     styles: [require('./form-list.scss')],

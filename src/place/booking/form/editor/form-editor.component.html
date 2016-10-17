@@ -1,0 +1,76 @@
+<div *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group pull-xs-right">
+            <button class='btn btn-secondary' (click)="cancel()">取消</button>
+            <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
+        </div>
+         <div class="btn-group pull-xs-right">
+            <button class='btn btn-secondary' (click)="findPlace()">选择教室</button>
+        </div>
+    </div>
+    <h3><span>教室借用单<ng-container *ngIf="form.formId">{{form.formId}}</ng-container></span></h3>
+    <form class="form-horizontal row offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
+        <div class="form-group row">
+            <form-field label="借用人">
+                <p class="form-control-static" col="4">{{form.userName}}</p>
+            </form-field>
+            <form-field label="联系电话">
+                <p class="form-control-static" col="4">{{form.phoneNumber}}</p>
+            </form-field>
+        </div>
+        <div class="form-group row">
+            <form-field label="借用单位">
+                <select class="form-control" col="4" name="department" [(ngModel)]="form.departmentId" (ngModelChange)="onDepartmentChanged($event)">
+                    <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}</option>
+                </select>
+            </form-field>
+            <form-field label="借用类别">
+                <select class="form-control" col="4" name="bookingType" [(ngModel)]="form.bookingTypeId">
+                    <option *ngFor="let bookingType of bookingTypes" [ngValue]="bookingType.id">{{bookingType.name}} ({{bookingType.checker}})</option>
+                </select>
+            </form-field>
+        </div>
+        <div class="form-group row" [class.has-danger]="!reason.pristine && !reason.valid">
+            <form-field label="借用事由">
+                <textarea class="form-control" name="reason" rows="4"
+                    [(ngModel)]="form.reason"
+                    placeholder="请注明借用单位下属部门（班级或社团名称）、使用人数和用途。"
+                    maxlength="100" minlength="10"
+                    required
+                    #reason="ngModel"></textarea>
+                <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
+                    <span *ngIf="reason.errors?.required">借用事由不能为空。</span>
+                    <span *ngIf="reason.errors?.minlength">借用事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                    <span *ngIf="reason.errors?.maxlength">借用事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+                </p>
+            </form-field>
+        </div>
+        <div class="form-group row">
+            <form-field label="借用明细">
+                <p *ngIf="form.items.length == 0" class="form-control-static text-muted">
+                    一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。
+                </p>
+                <table *ngIf="form.items.length > 0" class="table table-bordered table-sm form-control-static">
+                    <thead>
+                        <tr>
+                            <th>时间段</th>
+                            <th>教室名称</th>
+                            <th>教室类型</th>
+                            <th>座位数</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of form.items">
+                            <td>{{item.weeks}} {{item.dayOfWeek | dayOfWeek}} {{item.section.name}}</td>
+                            <td>{{item.place.name}}</td>
+                            <td>{{item.place.type}}</td>
+                            <td>{{item.place.seat}}</td>
+                            <td><button class="btn btn-secondary btn-sm" type="button" (click)="form.removeItem(item)">删除</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form-field>
+        </div>
+    </form>
+</div>

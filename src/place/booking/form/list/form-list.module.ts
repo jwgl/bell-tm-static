@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {ReissueFormListComponent} from './form-list.component';
+import {BookingFormListComponent} from './form-list.component';
 import {RouterModule} from '@angular/router';
 
 const ROUTER_CONFIG = [
-    {path: '', component: ReissueFormListComponent},
+    {path: '', component: BookingFormListComponent},
 ];
 
 @NgModule({
@@ -17,10 +17,10 @@ const ROUTER_CONFIG = [
         RouterModule.forChild(ROUTER_CONFIG),
     ],
     declarations: [
-        ReissueFormListComponent,
+        BookingFormListComponent,
     ],
     exports: [
-        ReissueFormListComponent
+        BookingFormListComponent
     ],
 })
-export class ReissueFormListModule {}
+export class BookingFormListModule {}

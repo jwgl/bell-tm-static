@@ -11,7 +11,11 @@ import {FormDirective} from './bootstrap/form.directive';
 import {FormFieldComponent} from './bootstrap/form-field.component';
 import {FormControlDirective} from './bootstrap/form-control.directive';
 import {GroupByPipe} from './pipes/group-by';
-import {FromNowPipe, MomentFormatPipe} from './pipes/moment-pipes';
+import {
+    FromNowPipe,
+    MomentFormatPipe,
+    DayOfWeekPipe,
+} from './pipes/moment-pipes';
 import {ActionNamePipe, ActionClassPipe} from './pipes/audit-action';
 import {MarkdownPipe} from './pipes/markdown';
 import {
@@ -49,6 +53,7 @@ const CORE_DIRECTIVES: any[] = [
     GroupByPipe,
     FromNowPipe,
     MomentFormatPipe,
+    DayOfWeekPipe,
     ActionNamePipe,
     ActionClassPipe,
     MarkdownPipe,

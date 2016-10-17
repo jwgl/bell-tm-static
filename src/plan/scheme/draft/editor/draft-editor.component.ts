@@ -111,7 +111,7 @@ export class SchemeDraftEditorComponent {
     importPropertyCourses(property: Property) {
         this.dialog.list(
             `导入课程 - ${property.name}`,
-             `/api/departments/${this.vm.departmentId}/schemes`,
+             `/api/plan/departments/${this.vm.departmentId}/schemes`,
             (item: any) => `${item.grade}级${item.subjectName}`
         ).then(id => {
             this.service.loadPropertyCourses(id, property.id).subscribe(courses => {

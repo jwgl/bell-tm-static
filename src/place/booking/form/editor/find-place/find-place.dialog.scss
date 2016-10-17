@@ -1,0 +1,52 @@
+.date {
+    margin-left: 1rem;
+}
+
+table {
+    &.table {
+        width: inherit;
+    }
+    thead {
+        tr {
+            display: block;
+            th {
+                text-align: center;
+                &:nth-child(1) {
+                    width: 60px;
+                }
+                &:nth-child(2) {
+                    width: 160px;
+                }
+                &:nth-child(3) {
+                    width: 70px;
+                }
+                &:nth-child(4) {
+                    width: 77px;
+                }
+            }
+        }
+    }
+
+    tbody {
+        display: block;
+        overflow-x: hidden;
+        overflow-y: auto;
+
+        td {
+            &:nth-child(1) {
+                width: 60px;
+                text-align: center;
+            }
+            &:nth-child(2) {
+                width: 160px;
+            }
+            &:nth-child(3) {
+                width: 70px;
+                text-align: right;
+            }
+            &:nth-child(4) {
+                width: 60px;
+            }
+        }
+    }
+}

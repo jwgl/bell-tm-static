@@ -1,0 +1,10 @@
+@import '../../common/form-viewer.component.scss';
+
+table {
+    td {
+        &:nth-child(5) {
+            text-align: center;
+            padding: 0.1rem;
+        }
+    }
+}

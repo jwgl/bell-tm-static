@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let form of forms; let i = index">
+                <tr *ngFor="let form of forms">
                     <td><a [routerLink]="['/', form.id]">{{form.studentId}}</a></td>
                     <td>{{form.name}}</td>
                     <td>{{form.department}}</td>

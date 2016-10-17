@@ -1,7 +1,7 @@
 import {Directive, Attribute, ElementRef} from '@angular/core';
 
 @Directive({
-    selector: '.form-control',
+    selector: '.form-control,.form-control-static',
 })
 export class FormControlDirective {
     constructor(
