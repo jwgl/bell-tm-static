@@ -2,8 +2,8 @@ import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'reissue-form-viewer',
-    styles: [require('./form-viewer.scss')],
-    template: require('./form-viewer.html'),
+    styleUrls: ['form-viewer.component.scss'],
+    templateUrl: 'form-viewer.component.html',
 })
 export class ReissueFormViewerComponent {
     @Input() vm: any;

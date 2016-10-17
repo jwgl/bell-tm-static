@@ -10,7 +10,7 @@ import './form-item.model';
 
 @Component({
     selector: 'booking-form-item',
-    template: require('./form-item.html'),
+    templateUrl: 'form-item.component.html',
 })
 export class BookingFormItemComponent {
     form: BookingForm;

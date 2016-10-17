@@ -8,7 +8,7 @@ import {BaseDialog} from '../dialogs';
  */
 @Component({
     selector: 'workflow-reject-dialog',
-    template: require('./reject.html'),
+    templateUrl: 'reject.dialog.html',
 })
 export class WorkflowRejectDialog extends BaseDialog {
     result: {what: string, comment: string};

@@ -17,8 +17,8 @@ import {CourseEditorService} from './course-editor/course-editor.module';
  */
 @Component({
     selector: 'scheme-draft-editor',
-    styles: [require('./draft-editor.scss')],
-    template: require('./draft-editor.html'),
+    styleUrls: ['draft-editor.component.scss'],
+    templateUrl: 'draft-editor.component.html',
     encapsulation: ViewEncapsulation.None,
 })
 export class SchemeDraftEditorComponent {

@@ -11,7 +11,7 @@ import {Property} from '../../common/scheme.model';
         ':host { background-color: #ddd; }',
         'td.name { text-align: left;}',
     ],
-    template: require('./scheme-property.html'),
+    templateUrl: 'scheme-property.component.html',
     host: {'[class]': "'property'"},
 })
 export class SchemePropertyComponent {

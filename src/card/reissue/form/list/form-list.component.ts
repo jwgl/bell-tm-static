@@ -5,8 +5,8 @@ import {ReissueFormService} from '../form.service';
 
 @Component({
     selector: 'reissue-form-list',
-    styles: [require('./form-list.scss')],
-    template: require('./form-list.html'),
+    styleUrls: ['form-list.component.scss'],
+    templateUrl: 'form-list.component.html',
 })
 export class ReissueFormListComponent {
     private forms: any[];

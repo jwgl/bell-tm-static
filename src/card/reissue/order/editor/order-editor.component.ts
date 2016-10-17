@@ -10,8 +10,8 @@ import {ReissueFormSelectDialog} from './form-select.dialog';
 
 @Component({
     selector: 'reissue-order-editor',
-    styles: [require('./order-editor.scss')],
-    template: require('./order-editor.html'),
+    styleUrls: ['order-editor.component.scss'],
+    templateUrl: 'order-editor.component.html',
 })
 export class ReissueOrderEditorComponent {
     private editMode: EditMode;

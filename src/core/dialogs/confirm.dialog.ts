@@ -3,7 +3,7 @@ import {BaseDialog} from './dialog';
 
 @Component({
     selector: 'confirm-dialog',
-    template: require('./confirm.html'),
+    templateUrl: 'confirm.dialog.html',
 })
 /**
  * options: {title: string, content: string}

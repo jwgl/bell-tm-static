@@ -10,7 +10,7 @@ import {Rest} from '../rest';
  */
 @Component({
     selector: 'workflow-accept-dialog',
-    template: require('./accept.html'),
+    templateUrl: 'accept.dialog.html',
 })
 export class WorkflowAcceptDialog extends BaseDialog {
     result: {what: string, to: string, comment: string};

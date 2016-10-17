@@ -31,13 +31,13 @@ export class DropdownMenu {
         '[class.dropdown]': 'menu.items',
     },
     template: `
-        <template [ngIf]="!menu.items">
-            <a class="nav-link" href="{{menu.url}}">{{menu.label}}</a>
-        </template>
-        <template [ngIf]="menu.items">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-submenu>{{menu.label}}</a>
-            <div class="dropdown-menu" [menus]="menu.items"></div>
-        </template>
+    <template [ngIf]="!menu.items">
+        <a class="nav-link" href="{{menu.url}}">{{menu.label}}</a>
+    </template>
+    <template [ngIf]="menu.items">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-submenu>{{menu.label}}</a>
+        <div class="dropdown-menu" [menus]="menu.items"></div>
+    </template>
     `,
 })
 export class NavitemComponent {
@@ -47,29 +47,29 @@ export class NavitemComponent {
 @Component({
     selector: 'header',
     template: `
-        <div class="container">
-            <nav>
-                <div class="clearfix">
-                    <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button"
-                        data-toggle="collapse" data-target="#bd-main-nav">
-                        &#9776;
-                    </button>
-                </div>
-                <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-                    <div class="navbar-brand logo"></div>
-                    <ul class="nav navbar-nav" *ngIf="menus">
-                        <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
-                    </ul>
-                    <ul class="nav navbar-nav pull-xs-right" *ngIf="menus">
-                        <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
-                        <li class="nav-item">
-                            <form #logoutForm action="/logout" method="post"></form>
-                            <a class="nav-link" href="#" (click)="logout($event)">退出</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
+    <div class="container">
+        <nav>
+            <div class="clearfix">
+                <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button"
+                    data-toggle="collapse" data-target="#bd-main-nav">
+                    &#9776;
+                </button>
+            </div>
+            <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
+                <div class="navbar-brand logo"></div>
+                <ul class="nav navbar-nav" *ngIf="menus">
+                    <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
+                </ul>
+                <ul class="nav navbar-nav pull-xs-right" *ngIf="menus">
+                    <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
+                    <li class="nav-item">
+                        <form #logoutForm action="/logout" method="post"></form>
+                        <a class="nav-link" href="#" (click)="logout($event)">退出</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     `,
 })
 export class NavbarComponent {

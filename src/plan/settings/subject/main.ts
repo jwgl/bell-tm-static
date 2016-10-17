@@ -4,8 +4,8 @@ import {NgModule} from '@angular/core';
 
 import {RestModule} from 'core/rest';
 
-import {SubjectDirectorComponent} from './subject-director/subject-director.component';
-import {SubjectDirectorModule} from './subject-director/subject-director.module';
+import {SubjectDirectorComponent} from './subject-director.component';
+import {SubjectDirectorModule} from './subject-director.module';
 import {SubjectDirectorService} from './subject-director.service';
 
 @NgModule({

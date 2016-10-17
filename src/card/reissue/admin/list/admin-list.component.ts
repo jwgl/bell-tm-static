@@ -8,8 +8,8 @@ import {ReissueAdminService} from '../admin.service';
  */
 @Component({
     selector: 'reissue-admin-list',
-    styles: [require('./admin-list.scss')],
-    template: require('./admin-list.html'),
+    styleUrls: ['admin-list.component.scss'],
+    templateUrl: 'admin-list.component.html',
 })
 export class ReissueAdminListComponent {
     statuses: any[] = [

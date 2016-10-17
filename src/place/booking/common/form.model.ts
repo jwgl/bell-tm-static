@@ -1,5 +1,5 @@
 export interface BookingSection {
-    id: string;
+    id: number;
     name: string;
     start: number;
     total: number;

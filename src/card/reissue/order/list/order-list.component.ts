@@ -8,8 +8,8 @@ import {ReissueOrderService} from '../order.service';
  */
 @Component({
     selector: 'reissue-order-list',
-    styles: [require('./order-list.scss')],
-    template: require('./order-list.html'),
+    styleUrls: ['order-list.component.scss'],
+    templateUrl: 'order-list.component.html',
 })
 export class ReissueOrderListComponent {
     private orders: any[];

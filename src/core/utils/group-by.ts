@@ -11,7 +11,7 @@ export function groupBy(data: any, conditions: any[]) {
         return condition(data);
     } else {
         let result: any[] = [];
-        let groups = {};
+        let groups: any = {};
         for (let i = 0; i < data.length; i++) {
             let row = data[i];
             // groupBy 可以是属性名或映射函数
@@ -36,7 +36,7 @@ export function groupBy(data: any, conditions: any[]) {
                 groups[groupValue] = obj;
             }
 
-            let newRow = {};
+            let newRow: any = {};
             // 除去映射字段的新数据
             for (let p in row) {
                 if (row.hasOwnProperty(p)) {

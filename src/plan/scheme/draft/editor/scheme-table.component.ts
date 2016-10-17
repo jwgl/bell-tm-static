@@ -10,7 +10,7 @@ import {Scheme, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
  */
 @Component({
     selector: 'scheme-table',
-    template: require('./scheme-table.html'),
+    templateUrl: 'scheme-table.component.html',
 })
 export class SchemeDraftTableComponent {
     @Input() scheme: Scheme;

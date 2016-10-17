@@ -7,7 +7,7 @@ import {TodoService} from '../todo.service';
 
 @Component({
     selector: 'todo-list',
-    template: require('./todo-list.html'),
+    templateUrl: 'todo-list.component.html',
 })
 export class TodoListComponent {
     statuses: any[] = [

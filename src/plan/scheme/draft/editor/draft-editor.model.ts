@@ -1,5 +1,5 @@
-import {equalsTo} from 'core/utils';
 import {EditMode} from 'core/constants';
+import * as _ from 'lodash';
 
 import {
     Scheme,
@@ -188,7 +188,7 @@ Property.prototype.getModifiedCourses = function(this: Property): SchemeCourse[]
 };
 
 SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDto, level = 0) {
-    if (equalsTo(dto, this.toClientDto())) {
+    if (_.isEqual(dto, this.toClientDto())) {
         return;
     }
 

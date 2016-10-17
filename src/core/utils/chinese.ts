@@ -17,10 +17,10 @@ export function numberToChinese (num: number): string {
 
     // 大于100
     let str = num.toString();
-    let result = DIGITS[str[str.length - 1]];
+    let result = DIGITS[parseInt(str[str.length - 1], 10)];
 
     for (let i = str.length - 2; i >= 0; i--) {
-      result = DIGITS[str[i]] + UNITS[(str.length - i - 2) % (UNITS.length)] + result;
+      result = DIGITS[parseInt(str[i], 10)] + UNITS[(str.length - i - 2) % (UNITS.length)] + result;
     }
 
     result = result

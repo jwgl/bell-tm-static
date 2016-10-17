@@ -9,8 +9,8 @@ import {SchemeCourse, RecordStatus} from '../../common/scheme.model';
  */
 @Component({
     selector: '[scheme-course]',
-    styles: [require('./scheme-course.scss')],
-    template: require('./scheme-course.html'),
+    styleUrls: ['scheme-course.component.scss'],
+    templateUrl: 'scheme-course.component.html',
     host: {
         '[class]': 'statusClasses',
         '[class.highlight]': 'schemeCourse.highlight',

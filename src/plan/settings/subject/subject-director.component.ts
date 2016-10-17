@@ -3,11 +3,11 @@ import {Component} from '@angular/core';
 import {CommonDialog} from 'core/common-dialogs';
 import {groupBy} from 'core/utils';
 
-import {SubjectDirectorService} from '../subject-director.service';
+import {SubjectDirectorService} from './subject-director.service';
 
 @Component({
     selector: 'subject-director-list',
-    template: require('./subject-director.html'),
+    templateUrl: 'subject-director.component.html',
 })
 export class SubjectDirectorComponent {
     departments: any[];

@@ -17,8 +17,8 @@ import {SchemeDraftService} from '../../draft.service';
 
 @Component({
     selector: 'course-select',
-    styles: [require('./course-select.scss')],
-    template: require('./course-select.html'),
+    styleUrls: ['course-select.component.scss'],
+    templateUrl: 'course-select.component.html',
 })
 export class CourseSelectComponent {
     @ViewChild('search') input: ElementRef;

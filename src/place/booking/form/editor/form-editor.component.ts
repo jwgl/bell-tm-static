@@ -11,8 +11,8 @@ import {FindPlaceDialogService} from './find-place/find-place.module';
 
 @Component({
     selector: 'booking-form-editor',
-    styles: [require('./form-editor.component.scss')],
-    template: require('./form-editor.component.html'),
+    styleUrls: ['form-editor.component.scss'],
+    templateUrl: 'form-editor.component.html',
 })
 export class BookingFormEditorComponent {
     private editMode: EditMode;

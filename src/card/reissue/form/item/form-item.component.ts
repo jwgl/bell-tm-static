@@ -8,7 +8,7 @@ import {ReissueFormService} from '../form.service';
 
 @Component({
     selector: 'reissue-form-item',
-    template: require('./form-item.html'),
+    templateUrl: 'form-item.component.html',
 })
 export class ReissueFormItemComponent {
     id: string;

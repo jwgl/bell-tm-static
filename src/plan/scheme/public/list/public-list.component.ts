@@ -8,8 +8,8 @@ import {SchemePublicService} from '../public.service';
  */
 @Component({
     selector: 'public-scheme-list',
-    styles: [require('./public-list.scss')],
-    template: require('./public-list.html'),
+    styleUrls: ['public-list.component.scss'],
+    templateUrl: 'public-list.component.html',
 })
 export class SchemePublicListComponent {
     private departments: any;

@@ -17,7 +17,7 @@ export class Dialog {
 
     open(dialogType: Type<any>, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
-            let location: ViewContainerRef = this.appRef['_rootComponents'][0]._hostElement.vcRef;
+            let location: ViewContainerRef = (<any>this.appRef)['_rootComponents'][0]._hostElement.vcRef;
             let componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
             let contextInjector = location.parentInjector;
             let childInjector = contextInjector;

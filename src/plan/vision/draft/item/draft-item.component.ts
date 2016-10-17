@@ -14,7 +14,7 @@ import {VisionDraftService} from '../draft.service';
  */
 @Component({
     selector: 'vision-draft-item',
-    template: require('./draft-item.html'),
+    templateUrl: 'draft-item.component.html',
 })
 export class VisionDraftItemComponent {
     id: string;

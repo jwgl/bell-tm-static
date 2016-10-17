@@ -9,7 +9,7 @@ import {Rest} from '../rest';
  */
 @Component({
     selector: 'workflow-workitems-dialog',
-    template: require('./workitems.html'),
+    templateUrl: 'workitems.dialog.html',
 })
 export class WorkflowWorkitemsDialog extends BaseDialog {
     constructor(private rest: Rest) {

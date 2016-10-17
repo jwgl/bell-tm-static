@@ -13,7 +13,7 @@ import {AbstractGroup, Property, Direction} from '../../common/scheme.model';
 @Component({
     selector: '[scheme-group]',
     host: {'[class]': "'group'"},
-    template: require('./scheme-group.html'),
+    templateUrl: 'scheme-group.component.html',
 })
 export class SchemeGroupComponent {
     @Input('scheme-group') group: AbstractGroup;

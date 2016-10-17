@@ -8,8 +8,8 @@ import {ReissueOrder} from '../common/reissue-order.model';
 
 @Component({
     selector: 'reissue-order-item',
-    styles: [require('./order-item.scss')],
-    template: require('./order-item.html'),
+    styleUrls: ['order-item.component.scss'],
+    templateUrl: 'order-item.component.html',
 })
 export class ReissueOrderItemComponent {
     id: string;

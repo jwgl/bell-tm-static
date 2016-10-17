@@ -1,6 +1,6 @@
 import {Pipe} from '@angular/core';
 
-const FORM_STATUS = {
+const FORM_STATUS: {[key: string]: string} = {
     CREATED  : '新建',
     COMMITTED: '待审核',
     APPROVED : '已审核',

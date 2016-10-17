@@ -11,7 +11,7 @@ import {ReissueAdminService} from '../admin.service';
  */
 @Component({
     selector: 'reissue-form',
-    template: require('./admin-item.html'),
+    templateUrl: 'admin-item.component.html',
 
 })
 export class ReissueAdminItemComponent {

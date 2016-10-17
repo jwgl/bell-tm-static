@@ -8,8 +8,8 @@ import {toVersionString} from '../utils';
 
 @Component({
     selector: 'version-dialog',
-    template: require('./version.html'),
-    styles: [require('./version.scss')],
+    styleUrls: ['version.dialog.scss'],
+    templateUrl: 'version.dialog.html',
 })
 export class VersionDialog extends BaseDialog {
     prev: number;

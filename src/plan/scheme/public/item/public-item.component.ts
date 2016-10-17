@@ -9,7 +9,7 @@ import {SchemePublicService} from '../public.service';
  */
 @Component({
     selector: 'public-scheme',
-    template: require('./public-item.html'),
+    templateUrl: 'public-item.component.html',
 })
 export class SchemePublicItemComponent {
     private vm: Scheme;

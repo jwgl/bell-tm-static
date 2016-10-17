@@ -18,8 +18,8 @@ import {getBit, setBit, clearBit} from 'core/utils';
 
 @Component({
     selector: 'allowed-term',
-    styles: [require('./allowed-term.scss')],
-    template: require('./allowed-term.html'),
+    styleUrls: ['allowed-term.component.scss'],
+    templateUrl: 'allowed-term.component.html',
 })
 export class AllowedTermComponent {
     @Input() value: number;

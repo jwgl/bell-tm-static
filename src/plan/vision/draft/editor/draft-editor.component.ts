@@ -10,8 +10,8 @@ import {VisionDraftService} from '../draft.service';
 
 @Component({
     selector: 'vision-draft-editor',
-    styles: [require('./draft-editor.scss')],
-    template: require('./draft-editor.html'),
+    styleUrls: ['draft-editor.component.scss'],
+    templateUrl: 'draft-editor.component.html',
 })
 export class VisionDraftEditorComponent {
     private editMode: EditMode;

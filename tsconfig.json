@@ -1,23 +1,21 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
     "target": "es5",
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "removeComments": true,
-    "sourceMap": false,
+    "module": "commonjs",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "sourceMap": true,
     "noEmitHelpers": true,
+    "strictNullChecks": false,
+    "noImplicitAny": true,
     "baseUrl": "./src",
     "lib": [
       "dom",
-      "es5"
+      "es6"
     ],
     "types": [
       "bootstrap",
-      "core-js",
       "jquery",
       "node"
     ]
@@ -27,6 +25,7 @@
     "node_modules"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true
+    "forkChecker": true,
+    "useWebpackText": true
   }
 }

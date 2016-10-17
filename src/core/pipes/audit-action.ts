@@ -18,9 +18,8 @@ const ACTION_INFO = {
 
 @Pipe({name: 'actionName'})
 export class ActionNamePipe {
-    transform(value: any, args: any[]) {
-        if (args.length > 0) {
-            let arg: string = args[0];
+    transform(value: String, arg: string) {
+        if (arg) {
             if (value === 'ACCEPT') {
                 if (arg === 'CHECKED' || arg.endsWith('.view')) {
                     return '审批';
@@ -29,13 +28,13 @@ export class ActionNamePipe {
                 }
             }
         }
-        return ACTION_INFO[AuditAction[value]].label;
+        return ACTION_INFO[<any>AuditAction[<any>value]].label;
     }
 }
 
 @Pipe({name: 'actionClass'})
 export class ActionClassPipe {
     transform(value: any, args: any[]) {
-        return ACTION_INFO[AuditAction[value]].class;
+        return ACTION_INFO[<any>AuditAction[<any>value]].class;
     }
 }

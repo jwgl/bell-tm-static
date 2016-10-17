@@ -4,7 +4,7 @@ import {BaseDialog} from './dialog';
 
 @Component({
     selector: 'error-message-dialog',
-    template: require('./error-message.html'),
+    templateUrl: 'error-message.dialog.html',
 })
 /**
  * options: {errors: string[]}

@@ -7,7 +7,7 @@ import {Scheme} from './scheme.model';
  */
 @Component({
     selector: '[scheme-course]',
-    template: require('./scheme-course.html'),
+    templateUrl: 'scheme-course.html',
 })
 export class SchemeCourse {
     @Input('scheme-course') schemeCourse: any;
@@ -31,7 +31,7 @@ export class SchemeCourse {
  */
 @Component({
     selector: '[scheme-group]',
-    template: require('./scheme-group.html'),
+    templateUrl: 'scheme-group.html',
     host: {'[class]': "'group'"},
 })
 export class SchemeGroup {
@@ -45,7 +45,7 @@ export class SchemeGroup {
 @Component({
     selector: '[scheme-summary]',
     styles: [':host {background-color: #ddd}'],
-    template: require('./scheme-summary.html'),
+    templateUrl: 'scheme-summary.html',
 })
 export class SchemeSummary {
     @Input('scheme-summary') scheme: Scheme;
@@ -56,7 +56,7 @@ export class SchemeSummary {
  */
 @Component({
     selector: 'scheme-table',
-    template: require('./scheme-table.html'),
+    templateUrl: 'scheme-table.html',
 })
 export class SchemeTable {
     @Input() scheme: Scheme;
@@ -67,8 +67,8 @@ export class SchemeTable {
  */
 @Component({
     selector: 'scheme-viewer',
-    styles: [require('./scheme-viewer.scss')],
-    template: require('./scheme-viewer.html'),
+    styleUrls: ['scheme-viewer.component.scss'],
+    templateUrl: 'scheme-viewer.component.html',
     encapsulation: ViewEncapsulation.None,
 })
 export class SchemeViewerComponent {

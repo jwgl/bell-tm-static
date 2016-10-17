@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 import {AuditStatus} from '../constants/audit-status';
 
-const STATUS_INFO = {
+const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
     [AuditStatus.CREATED]:   {class: 'tag-default', label: '未提交'},
     [AuditStatus.COMMITTED]: {class: 'tag-info',    label: '待审核'},
     [AuditStatus.CHECKED]:   {class: 'tag-info',    label: '待审批'},
@@ -21,10 +21,10 @@ export class AuditStatusComponent {
     @Input() status: string;
 
     get class(): string {
-        return STATUS_INFO[AuditStatus[this.status]].class;
+        return STATUS_INFO[<any>AuditStatus[<any>this.status]].class;
     }
 
     get label(): string {
-        return STATUS_INFO[AuditStatus[this.status]].label;
+        return STATUS_INFO[<any>AuditStatus[<any>this.status]].label;
     }
 }

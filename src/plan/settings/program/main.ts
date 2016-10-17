@@ -4,8 +4,8 @@ import {NgModule} from '@angular/core';
 
 import {RestModule} from 'core/rest';
 
-import {ProgramSettingsComponent} from './program/program-settings.component';
-import {ProgramSettingsModule} from './program/program-settings.module';
+import {ProgramSettingsComponent} from './program-settings.component';
+import {ProgramSettingsModule} from './program-settings.module';
 import {ProgramSettingsService} from './program-settings.service';
 
 @NgModule({

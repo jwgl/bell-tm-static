@@ -3,13 +3,13 @@ import {Component, Inject} from '@angular/core';
 import {Dialog} from 'core/dialogs';
 import {groupBy} from 'core/utils';
 
-import {ProgramSettingsService} from '../program-settings.service';
+import {ProgramSettingsService} from './program-settings.service';
 import {ProgramEditorDialog} from './program-editor.dialog';
 
 @Component({
     selector: 'program-settings-list',
-    styles: [require('./program-settings.scss')],
-    template: require('./program-settings.html'),
+    styleUrls: ['program-settings.component.scss'],
+    templateUrl: 'program-settings.component.html',
 })
 export class ProgramSettingsComponent {
     departments: any[];

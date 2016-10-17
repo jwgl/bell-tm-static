@@ -6,8 +6,8 @@ import {VersionDialog} from '../dialogs/version.dialog';
 
 @Component({
     selector: 'plan-title',
-    styles: [require('./plan-title.scss')],
-    template: require('./plan-title.html'),
+    styleUrls: ['plan-title.component.scss'],
+    templateUrl: 'plan-title.component.html',
 })
 export class PlanTitleComponent {
     @Input() title: string;

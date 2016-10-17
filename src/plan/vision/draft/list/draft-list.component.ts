@@ -7,8 +7,8 @@ import {VisionDraftService} from '../draft.service';
  */
 @Component({
     selector: 'vision-draft-list',
-    styles: [require('./draft-list.scss')],
-    template: require('./draft-list.html'),
+    styleUrls: ['draft-list.component.scss'],
+    templateUrl: 'draft-list.component.html',
 })
 export class VisionDraftListComponent {
     private subjects: any[];

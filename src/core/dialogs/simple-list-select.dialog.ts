@@ -6,7 +6,7 @@ import {BaseDialog} from './dialog';
 
 @Component({
     selector: 'simple-list-select-dialog',
-    template: require('./simple-list-select.html'),
+    templateUrl: 'simple-list-select.dialog.html',
 })
 export class SimpleListSelectDialog extends BaseDialog {
     result: any;

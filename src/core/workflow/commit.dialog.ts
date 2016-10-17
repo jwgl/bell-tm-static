@@ -10,7 +10,7 @@ import {Rest} from '../rest';
  */
 @Component({
     selector: 'workflow-commit-dialog',
-    template: require('./commit.html'),
+    templateUrl: 'commit.dialog.html',
 })
 export class WorkflowCommitDialog extends BaseDialog {
     result: {what: string, to: string, comment: string};

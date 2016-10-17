@@ -25,11 +25,8 @@ interface QueryOptions {
 
 @Component({
     selector: 'find-place-dialog',
-    styles: [
-        require('./find-place.dialog.scss'),
-        ':host /deep/ .modal-body {padding-bottom: 0;}',
-    ],
-    template: require('./find-place.dialog.html'),
+    styleUrls: ['find-place.dialog.scss'],
+    templateUrl: 'find-place.dialog.html',
 })
 export class FindPlaceDialog extends BaseDialog {
     term: {

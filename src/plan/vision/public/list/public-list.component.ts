@@ -8,8 +8,8 @@ import {VisionPublicService} from '../public.service';
  */
 @Component({
     selector: 'public-vision-list',
-    styles: [require('./public-list.scss')],
-    template: require('./public-list.html'),
+    styleUrls: ['public-list.component.scss'],
+    templateUrl: 'public-list.component.html',
 })
 export class VisionPublicListComponent {
     private departments: any;

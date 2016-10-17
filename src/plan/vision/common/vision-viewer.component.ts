@@ -4,10 +4,8 @@ import {Vision} from './vision.model';
 
 @Component({
     selector: 'vision-viewer',
-    styles: [require('./vision-viewer.scss'),
-        `:host /deep/ p {text-indent: 2em;}`,
-    ],
-    template: require('./vision-viewer.html'),
+    styleUrls: ['vision-viewer.component.scss'],
+    templateUrl: 'vision-viewer.component.html',
 })
 export class VisionViewerComponent {
     @Input() vision: Vision;

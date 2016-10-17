@@ -9,7 +9,7 @@ import {CheckboxSelectorComponent} from 'core/common-directives';
 
 @Component({
     selector: 'reissue-form-select-dialog',
-    template: require('./form-select.html'),
+    templateUrl: 'form-select.dialog.html',
 })
 export class ReissueFormSelectDialog extends BaseDialog {
     @ViewChildren(CheckboxSelectorComponent) selectors: QueryList<CheckboxSelectorComponent>;

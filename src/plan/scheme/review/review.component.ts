@@ -10,7 +10,7 @@ import './review.model';
 
 @Component({
     selector: 'scheme-review',
-    template: require('./review.html'),
+    templateUrl: 'review.component.html',
 })
 export class SchemeReviewComponent implements OnInit {
     id: string;

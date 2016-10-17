@@ -7,7 +7,7 @@ import {typeahead} from '../utils/typeahead';
 
 @Component({
     selector: 'teacher-select-dialog',
-    template: require('./teacher-select.html'),
+    templateUrl: 'teacher-select.dialog.html',
 })
 export class TeacherSelectDialog extends BaseDialog {
     @ViewChild('search') input: ElementRef;

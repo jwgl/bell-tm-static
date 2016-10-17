@@ -7,8 +7,8 @@ import {SchemeDraftService} from '../draft.service';
  */
 @Component({
     selector: 'scheme-draft-list',
-    styles: [require('./draft-list.scss')],
-    template: require('./draft-list.html'),
+    styleUrls: ['draft-list.component.scss'],
+    templateUrl: 'draft-list.component.html',
 })
 export class SchemeDraftListComponent {
     private subjects: any[];

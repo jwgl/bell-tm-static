@@ -9,7 +9,7 @@ import './review.model';
 
 @Component({
     selector: 'vision-review',
-    template: require('./review.html'),
+    templateUrl: 'review.component.html',
 })
 export class VisionReviewComponent implements OnInit {
     id: string;

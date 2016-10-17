@@ -9,7 +9,7 @@ import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
 
 @Component({
     selector: 'course-editor-dialog',
-    template: require('./course-editor.html'),
+    templateUrl: 'course-editor.dialog.html',
 })
 export class CourseEditorDialog extends BaseDialog {
     title: string;

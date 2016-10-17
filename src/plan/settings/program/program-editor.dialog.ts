@@ -7,7 +7,7 @@ import {BaseDialog} from 'core/dialogs';
 
 @Component({
     selector: 'program-setting-dialog',
-    template: require('./program-editor.html'),
+    templateUrl: 'program-editor.dialog.html',
 })
 export class ProgramEditorDialog extends BaseDialog {
     title: string;

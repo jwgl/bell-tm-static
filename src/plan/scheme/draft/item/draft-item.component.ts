@@ -15,7 +15,7 @@ import {SchemeDraftService} from '../draft.service';
  */
 @Component({
     selector: 'scheme-draft-item',
-    template: require('./draft-item.html'),
+    templateUrl: 'draft-item.component.html',
 })
 export class SchemeDraftItemComponent {
     private id: string;

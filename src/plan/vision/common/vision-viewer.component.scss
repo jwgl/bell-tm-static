@@ -3,6 +3,10 @@ h2 {
     margin-bottom: 1rem;
 }
 
+:host /deep/ p {
+    text-indent: 2em;
+}
+
 @media print {
     :host {
         font-family: '宋体';

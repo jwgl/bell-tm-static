@@ -8,7 +8,7 @@ import {VisionPublicService} from '../public.service';
  */
 @Component({
     selector: 'public-vision',
-    template: require('./public-item.html'),
+    templateUrl: 'public-item.component.html',
 
 })
 export class VisionPublicItemComponent {

@@ -8,8 +8,8 @@ import {ReissueFormService} from '../form.service';
 
 @Component({
     selector: 'reissue-form-editor',
-    styles: [require('./form-editor.scss')],
-    template: require('./form-editor.html'),
+    styleUrls: ['form-editor.component.scss'],
+    templateUrl: 'form-editor.component.html',
 })
 export class ReissueFormEditorComponent {
     private editMode: EditMode;
