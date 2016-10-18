@@ -23,7 +23,7 @@ export class WorkflowAcceptDialog extends BaseDialog {
     protected onOpening(): Observable<any> {
         this.result.what = this.options.what;
         if (this.options.whoUrl) {
-            return this.rest.get(this.options.whoUrl).do(value => {
+            return this.rest.get(this.options.whoUrl).do((value: any[]) => {
                 if (value.length >= 1) {
                     this.result.to = value[0].id;
                 }

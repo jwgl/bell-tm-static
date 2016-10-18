@@ -22,7 +22,7 @@ export class WorkflowCommitDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.result.what = this.options.what;
-        return this.rest.get(this.options.whoUrl).do(value => {
+        return this.rest.get(this.options.whoUrl).do((value: any[]) => {
             if (value.length >= 1) {
                 this.result.to = value[0].id;
             }

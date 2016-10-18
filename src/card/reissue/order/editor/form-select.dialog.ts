@@ -23,9 +23,13 @@ export class ReissueFormSelectDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get(`${this.reissueFormApiUrl}?status=APPROVED`).do(result => {
+        return this.rest.get(`${this.reissueFormApiUrl}?status=APPROVED`).do((result: any) => {
             // 删除已添加的申请
-            result.forms = _.differenceWith(result.forms, this.options.order.items, (form: any, item: any) => form.id === item.formId);
+            result.forms = _.differenceWith(
+                result.forms,
+                this.options.order.items,
+                (form: any, item: any) => form.id === item.formId
+            );
         });
     }
 

@@ -27,7 +27,7 @@ export class ProgramEditorDialog extends BaseDialog {
             templateName: this.options.programSetting.templateName,
         };
         this.title = `设置 - ${this.options.programSetting.grade}级${this.options.programSetting.subjectName}`;
-        return this.rest.get(this.options.url).do(data => {
+        return this.rest.get(this.options.url).do((data: any[]) => {
             for (let i = 0; i < data.length; i++) {
                 if (data[i].id === this.programSetting.templateId) {
                     this.template = data[i];
