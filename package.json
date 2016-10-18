@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/bootstrap": "^3.3.32",
     "@types/core-js": "^0.9.34",
-    "@types/jquery": "^1.10.31",
+    "@types/jquery": "^2.0.33",
     "@types/lodash": "^4.14.37",
     "@types/node": "^6.0.45",
     "@types/webpack": "^1.12.35",
