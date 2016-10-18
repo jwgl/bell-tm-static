@@ -1,6 +1,6 @@
 <div *ngIf="vm">
     <div class="btn-toolbar">
-        <div class="btn-group pull-xs-right">
+        <div class="btn-group float-xs-right">
             <button class='btn btn-secondary' (click)="cancel()">取消</button>
             <button class='btn btn-primary' (click)="save()" [disabled]="!reason.valid || saving">保存</button>
         </div>

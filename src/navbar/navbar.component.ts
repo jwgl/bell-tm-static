@@ -50,7 +50,7 @@ export class NavitemComponent {
     <div class="container">
         <nav>
             <div class="clearfix">
-                <button class="navbar-toggler pull-xs-right hidden-sm-up" type="button"
+                <button class="navbar-toggler float-xs-right hidden-sm-up" type="button"
                     data-toggle="collapse" data-target="#bd-main-nav">
                     &#9776;
                 </button>
@@ -60,7 +60,7 @@ export class NavitemComponent {
                 <ul class="nav navbar-nav" *ngIf="menus">
                     <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
                 </ul>
-                <ul class="nav navbar-nav pull-xs-right" *ngIf="menus">
+                <ul class="nav navbar-nav float-xs-right" *ngIf="menus">
                     <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
                     <li class="nav-item">
                         <form #logoutForm action="/logout" method="post"></form>

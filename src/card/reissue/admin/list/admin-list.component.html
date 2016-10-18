@@ -2,7 +2,7 @@
     <div class="col-md-3">
         <div class="list-group" >
             <a *ngFor="let item of statuses" [routerLink]="['/list', item.status]" class="list-group-item" routerLinkActive="active">
-                <span class="tag tag-pill pull-xs-right" [ngClass]="item.class">
+                <span class="tag tag-pill float-xs-right" [ngClass]="item.class">
                     {{counts[item.status] ? counts[item.status] : 0}}
                 </span>
                 {{item.label}}
