@@ -27,7 +27,7 @@
     "@angular/platform-browser-dynamic": "^2.1.0",
     "@angular/router": "^3.1.0",
     "awesome-typescript-loader": "^2.2.1",
-    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v4-dev",
+    "bootstrap": "^4.0.0-alpha.5",
     "bootstrap-submenu": "^2.0.4",
     "core-js": "^2.4.1",
     "font-awesome": "^4.6.3",

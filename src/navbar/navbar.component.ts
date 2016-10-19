@@ -51,16 +51,15 @@ export class NavitemComponent {
         <nav>
             <div class="clearfix">
                 <button class="navbar-toggler float-xs-right hidden-sm-up" type="button"
-                    data-toggle="collapse" data-target="#bd-main-nav">
-                    &#9776;
-                </button>
+                        data-toggle="collapse" data-target="#bd-main-nav"></button>
+                <a class="navbar-brand hidden-sm-up" href="/">TM</a>
             </div>
             <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-                <div class="navbar-brand logo"></div>
+                <div class="navbar-brand logo hidden-xs-down"></div>
                 <ul class="nav navbar-nav" *ngIf="menus">
                     <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
                 </ul>
-                <ul class="nav navbar-nav float-xs-right" *ngIf="menus">
+                <ul class="nav navbar-nav float-sm-right" *ngIf="menus">
                     <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
                     <li class="nav-item">
                         <form #logoutForm action="/logout" method="post"></form>
