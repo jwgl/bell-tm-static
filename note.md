@@ -1,1 +1,0 @@
-npm install https://github.com/twbs/bootstrap.git#v4-dev
