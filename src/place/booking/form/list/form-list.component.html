@@ -5,7 +5,7 @@
     <div *ngIf="canApply()">
         <div class="btn-toolbar">
             <div class="btn-group float-xs-right">
-                <button class="btn btn-primary" (click)="create()" >申请</button>
+                <button class="btn btn-primary" (click)="create()" >新建</button>
             </div>
         </div>
         <table class="table">
@@ -21,12 +21,12 @@
             </thead>
             <tbody>
                 <tr *ngFor="let form of forms">
-                    <td><a [routerLink]="['/', form.id]">查看</a></td>
+                    <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
                     <td>{{form.department}}</td>
                     <td>{{form.type}}</td>
                     <td><div class="reason">{{form.reason}}</div></td>
                     <td>{{form.dateModified | moment}}</td>
-                    <td>{{form.status}}</td>
+                    <td><audit-status [status]="form.status"></audit-status></td>
                 </tr>
             </tbody>
         </table>

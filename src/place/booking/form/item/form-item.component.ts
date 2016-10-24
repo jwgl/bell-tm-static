@@ -21,7 +21,7 @@ export class BookingFormItemComponent {
         private dialog: CommonDialog,
         private service: BookingFormService) {
         this.route.params.subscribe(params => {
-            this.loadData(parseInt(params['id']));
+            this.loadData(parseInt(params['id'], 10));
         });
     }
 
@@ -45,7 +45,7 @@ export class BookingFormItemComponent {
     }
 
     commit() {
-        this.workflow.commit(this.form.id, '借用教室申请').then(() => {
+        this.workflow.commit(this.form.id, this.form.title).then(() => {
             this.loadData(this.form.id);
         }, (error) => {
             alert(error.json().message);

@@ -8,7 +8,7 @@
             <button class='btn btn-secondary' (click)="findPlace()">选择教室</button>
         </div>
     </div>
-    <h3><span>教室借用单<ng-container *ngIf="form.formId">{{form.formId}}</ng-container></span></h3>
+    <h3><span>{{form.title}}</span></h3>
     <form class="form-horizontal row offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
         <div class="form-group row">
             <form-field label="借用人">

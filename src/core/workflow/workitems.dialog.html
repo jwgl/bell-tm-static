@@ -1,8 +1,9 @@
 <modal-dialog title="处理流程">
     <modal-body>
         <ul *ngIf="options.data" style="max-height: 400px; overflow-y: auto">
+            <li *ngIf="last && !last.dateProcessed"><b>{{last.toUser}}</b>{{lastStatus}}</li>
             <li *ngFor="let item of options.data">
-                <div><b>{{item.fromUser}}</b>于{{item.dateCreated | fromNow}}<span class="{{item.action | actionClass}}">{{item.action | actionName:item.activity}}</span></div>
+                <div><b>{{item.fromUser}}</b>于{{item.dateCreated | fromNow}}<span class="{{item.event | actionClass}}">{{item.event | actionName:item.activity}}</span></div>
                 <div *ngIf="item.note">{{item.note}}</div>
             </li>
         </ul>

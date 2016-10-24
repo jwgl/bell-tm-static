@@ -7,29 +7,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
+const entry = require('../webpack.entry');
+
 module.exports = function(options) {
     isProd = options.env == 'production';
     return {
-        entry: {
-            'polyfills':             './src/polyfills.browser.ts',
-            'vendor':                './src/vendor.browser.ts',
-            'navbar':                './src/navbar/main.ts',
-            'todo':                  './src/todo/main.ts',
-            'plan/settings/subject': './src/plan/settings/subject/main.ts',
-            'plan/settings/program': './src/plan/settings/program/main.ts',
-            'plan/vision/list':      './src/plan/vision/public/list.ts',
-            'plan/vision/item':      './src/plan/vision/public/item.ts',
-            'plan/vision/draft':     './src/plan/vision/draft/main.ts',
-            'plan/vision/review':    './src/plan/vision/review/main.ts',
-            'plan/scheme/list':      './src/plan/scheme/public/list.ts',
-            'plan/scheme/item':      './src/plan/scheme/public/item.ts',
-            'plan/scheme/draft':     './src/plan/scheme/draft/main.ts',
-            'plan/scheme/review':    './src/plan/scheme/review/main.ts',
-            'card/reissue/admin':    './src/card/reissue/admin/main.ts',
-            'card/reissue/form':     './src/card/reissue/form/main.ts',
-            'card/reissue/order':    './src/card/reissue/order/main.ts',
-            'place/booking/form':    './src/place/booking/form/main.ts'
-        },
+        entry: entry,
         resolve: {
             extensions: ['.ts', '.js', '.json'],
             modules: [helpers.root('src'), 'node_modules'],

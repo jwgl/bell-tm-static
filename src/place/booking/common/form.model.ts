@@ -40,6 +40,14 @@ export class BookingForm {
         this.items = dto.items.map ((item: any) => new BookingItem(this, item));
         this.removedItems = [];
     }
+
+    get title(): string {
+        if (this.id) {
+            return `教室借用单#${this.id}`;
+        } else {
+            return '教室借用单';
+        }
+    }
 }
 
 export class BookingItem {
