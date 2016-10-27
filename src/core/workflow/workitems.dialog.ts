@@ -20,26 +20,21 @@ export class WorkflowWorkitemsDialog extends BaseDialog {
         return this.rest.get(`/api/core/workflows/${this.options.instance}/workitems`);
     }
 
-    get last(): any {
-        if (!this.options.data) {
-            return null;
-        } else {
-            return this.options.data[0];
-        }
+    get showLast(): boolean {
+        return this.options.data[0].toUser && !this.options.data[0].dateProcessed;
+    }
+
+    get lastToUser(): any {
+        return this.options.data[0].toUser;
     }
 
     get lastStatus(): any {
-        const last = this.last;
-        if (!last) {
-            return null;
+        if (!this.options.data[0].dateReceived) {
+            return '未收未办';
+        } else if (!this.options.data[0].dateProcessed) {
+            return '已收未办';
         } else {
-            if (!last.dateReceived) {
-                return '未收未办';
-            } else if (!last.dateProcessed) {
-                return '已收未办';
-            } else {
-                return '已处理';
-            }
+            return '已处理';
         }
     }
 }

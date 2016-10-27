@@ -9,6 +9,8 @@ const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
     [AuditStatus.REJECTED]:  {class: 'tag-warning', label: '退回'},
     [AuditStatus.APPROVED]:  {class: 'tag-success', label: '完成'},
     [AuditStatus.REVOKED]:   {class: 'tag-danger',  label: '回收'},
+    [AuditStatus.PROGRESS]:  {class: 'tag-primary', label: '处理中'},
+    [AuditStatus.FINISHED]:  {class: 'tag-success', label: '完成'},
     [AuditStatus.CLOSED]:    {class: 'tag-danger',  label: '关闭'},
     [AuditStatus.DELETED]:   {class: 'tag-danger',  label: '删除'},
 };

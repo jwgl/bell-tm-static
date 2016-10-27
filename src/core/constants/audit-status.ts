@@ -6,5 +6,7 @@ export enum AuditStatus {
     APPROVED,
     CLOSED,
     REVOKED,
+    PROGRESS,
+    FINISHED,
     DELETED,
 }

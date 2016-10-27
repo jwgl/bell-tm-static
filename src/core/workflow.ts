@@ -11,6 +11,7 @@ import {WorkflowCommitDialog} from './workflow/commit.dialog';
 import {WorkflowAcceptDialog} from './workflow/accept.dialog';
 import {WorkflowRejectDialog} from './workflow/reject.dialog';
 import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
+import {WorkitemStatusComponent} from './workflow/workitem-status.component';
 
 @Injectable()
 export class Workflow {
@@ -59,6 +60,7 @@ const WORKFLOW_DIALOGS: any[] = [
     ],
     declarations: [
         WORKFLOW_DIALOGS,
+        WorkitemStatusComponent,
     ],
     providers: [
         Dialog,

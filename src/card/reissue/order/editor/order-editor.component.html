@@ -59,7 +59,7 @@
                 <td>{{item.applyDate | moment}}</td>
                 <td>{{item.status | formStatus}}</td>
                 <td class="text-xs-center" (click)="removeItem(item.formId)">
-                    <button class="btn btn-secondary btn-sm" [disabled]="item.status!='APPROVED' && item.status!='MAKING'">
+                    <button class="btn btn-secondary btn-sm" [disabled]="item.status=='FINISHED'">
                         <i class="fa fa-remove"></i>
                     </button>
                 </td>

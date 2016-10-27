@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
@@ -18,7 +18,10 @@ export class ReissueOrderReceiveComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: ReissueOrderService) {
+        private service: ReissueOrderService,
+        @Inject('REISSUE_FORM_WEB_URL')
+        private reissueFormWebUrl: String,
+    ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.loadData();

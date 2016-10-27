@@ -14,8 +14,8 @@ import {ReissueAdminService} from '../admin.service';
 export class ReissueAdminListComponent {
     statuses: any[] = [
         {status: 'COMMITTED', label: '待审核', class: 'tag-success'},
-        {status: 'APPROVED',  label: '已审核', class: 'tag-info'},
-        {status: 'MAKING',    label: '制作中', class: 'tag-info'},
+        {status: 'CHECKED',   label: '已审核', class: 'tag-info'},
+        {status: 'PROGRESS',  label: '制作中', class: 'tag-info'},
         {status: 'FINISHED',  label: '已完成', class: 'tag-danger'},
     ];
 
