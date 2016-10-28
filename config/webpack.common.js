@@ -60,8 +60,6 @@ module.exports = function(options) {
                 { to: 'css/lib',   from: './node_modules/bootstrap/dist/css/bootstrap.min.css' },
                 { to: 'js/lib',    from: './node_modules/bootstrap-submenu/dist/js/bootstrap-submenu.min.js' },
                 { to: 'css/lib',   from: './node_modules/bootstrap-submenu/dist/css/bootstrap-submenu.min.css' },
-                { to: 'js/lib',    from: './node_modules/select2/dist/js/select2.min.js' },
-                { to: 'css/lib',   from: './node_modules/select2/dist/css/select2.min.css' },
                 { to: 'js/lib',    from: './node_modules/lodash/lodash.min.js' },
                 { to: 'css/lib',   from: './node_modules/font-awesome/css/font-awesome.min.css' },
                 { to: 'css/fonts', from: './node_modules/font-awesome/fonts' },
