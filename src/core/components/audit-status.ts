@@ -17,7 +17,8 @@ const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
 
 @Component({
     selector: 'audit-status',
-    template: '<label class="tag" [ngClass]="class" style="font-weight:initial">{{label}}</label>',
+    styles: ['label { font-weight:initial; margin-bottom:0; }'],
+    template: '<label class="tag" [ngClass]="class">{{label}}</label>',
 })
 export class AuditStatusComponent {
     @Input() status: string;

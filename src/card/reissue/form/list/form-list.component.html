@@ -25,12 +25,11 @@
             </ol>
         </div>
     </div>
-    <div class="alert alert-warning">
-        <span *ngIf="forms.length > 0">你已经有{{forms.length}}次补办学生证申请：
-            <ng-container *ngFor="let form of forms;let i = index">
-                <a [routerLink]="['/', form.id]">第{{i+1}}次</a>
-                <audit-status [status]="form.status"></audit-status>
-            </ng-container>
-        </span>
+    <div class="alert alert-warning" *ngIf="forms.length > 0">
+        你已经有{{forms.length}}次补办学生证申请：
+        <ng-container *ngFor="let form of forms;let i = index">
+            <a [routerLink]="['/', form.id]">第{{i+1}}次</a>
+            <audit-status [status]="form.status"></audit-status>
+        </ng-container>
     </div>
 </div>
