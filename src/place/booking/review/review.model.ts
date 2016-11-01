@@ -4,6 +4,6 @@ import {BookingForm} from '../common/form.model';
 
 declare module '../common/form.model' {
     interface BookingForm {
-        reviewType: string;
+        activity: string;
     }
 }

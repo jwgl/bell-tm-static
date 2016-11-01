@@ -13,7 +13,7 @@ import {ReissueAdminService} from '../admin.service';
 })
 export class ReissueAdminListComponent {
     statuses: any[] = [
-        {status: 'COMMITTED', label: '待审核', class: 'tag-success'},
+        {status: 'SUBMITTED', label: '待审核', class: 'tag-success'},
         {status: 'CHECKED',   label: '已审核', class: 'tag-info'},
         {status: 'PROGRESS',  label: '制作中', class: 'tag-info'},
         {status: 'FINISHED',  label: '已完成', class: 'tag-danger'},
@@ -21,7 +21,7 @@ export class ReissueAdminListComponent {
 
     private counts: {[key: string]: number};
     private forms: any[];
-    private status = 'COMMITTED';
+    private status = 'SUBMITTED';
     private offset: number;
     private max = 10;
 

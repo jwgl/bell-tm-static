@@ -127,7 +127,7 @@ export class SchemeDraftEditorComponent {
     importDirectionCourses(direction: Direction) {
         this.dialog.list(
             `导入课程 - ${direction.name}`,
-            `/api/departments/${this.vm.departmentId}/schemeDirections`,
+            `/api/plan/departments/${this.vm.departmentId}/directions`,
             (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
             (item: any) => `${item.schemeId}:${item.directionId}`
         ).then(result => {

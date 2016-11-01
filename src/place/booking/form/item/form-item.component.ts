@@ -44,8 +44,8 @@ export class BookingFormItemComponent {
         });
     }
 
-    commit() {
-        this.workflow.commit(this.form.id, this.form.title).then(() => {
+    submit() {
+        this.workflow.submit(this.form.id, this.form.title).then(() => {
             this.loadData(this.form.id);
         }, (error) => {
             alert(error.json().message);

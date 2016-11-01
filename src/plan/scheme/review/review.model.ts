@@ -4,6 +4,6 @@ import {Scheme} from '../common/scheme.model';
 
 declare module '../common/scheme.model' {
     interface Scheme {
-        reviewType: string;
+        activity: string;
     }
 }

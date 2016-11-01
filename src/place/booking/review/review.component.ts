@@ -28,12 +28,12 @@ export class BookingReviewComponent {
     loadData() {
         this.rest.get(this.api.review(this.id, this.wi)).subscribe(dto => {
             this.form = new BookingForm(dto);
-            this.form.reviewType = dto.reviewType;
+            this.form.activity = dto.activity;
         });
     }
 
     accept() {
-        this.workflow.accept(this.id, this.wi, this.form.reviewType, this.form.title).then(() => {
+        this.workflow.accept(this.id, this.wi, this.form.activity, this.form.title).then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);
@@ -41,7 +41,7 @@ export class BookingReviewComponent {
     }
 
     reject() {
-        this.workflow.reject(this.id, this.wi, this.form.reviewType, this.form.title).then(() => {
+        this.workflow.reject(this.id, this.wi, this.form.activity, this.form.title).then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);
@@ -49,8 +49,8 @@ export class BookingReviewComponent {
     }
 
     get reviewable(): boolean {
-        return this.form.status === 'COMMITTED' && this.form.reviewType === 'check'
-            || this.form.status === 'CHECKED' && this.form.reviewType === 'approve';
+        return this.form.status === 'SUBMITTED' && this.form.activity === 'check'
+            || this.form.status === 'CHECKED' && this.form.activity === 'approve';
     }
 
     showWorkitems() {

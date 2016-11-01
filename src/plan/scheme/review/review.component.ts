@@ -30,12 +30,12 @@ export class SchemeReviewComponent implements OnInit {
         this.rest.get(this.api.review(this.id, this.wi)).subscribe(item => {
             this.vm = new Scheme(item);
             this.vm.normalize();
-            this.vm.reviewType = item.reviewType;
+            this.vm.activity = item.activity;
         });
     }
 
     accept() {
-        this.workflow.accept(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+        this.workflow.accept(this.id, this.wi, this.vm.activity, this.title).then(() => {
             this.ngOnInit();
         }, (error) => {
             alert(error.json().message);
@@ -43,7 +43,7 @@ export class SchemeReviewComponent implements OnInit {
     }
 
     reject() {
-        this.workflow.reject(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+        this.workflow.reject(this.id, this.wi, this.vm.activity, this.title).then(() => {
             this.ngOnInit();
         }, (error) => {
             alert(error.json().message);
@@ -51,8 +51,8 @@ export class SchemeReviewComponent implements OnInit {
     }
 
     get reviewable(): boolean {
-        return (this.vm.status === 'COMMITTED' && this.vm.reviewType === 'check')
-            || (this.vm.status === 'CHECKED' && this.vm.reviewType === 'approve');
+        return (this.vm.status === 'SUBMITTED' && this.vm.activity === 'check')
+            || (this.vm.status === 'CHECKED' && this.vm.activity === 'approve');
     }
 
     get title(): string {

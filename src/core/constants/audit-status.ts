@@ -1,6 +1,6 @@
 export enum AuditStatus {
     CREATED,
-    COMMITTED,
+    SUBMITTED,
     CHECKED,
     REJECTED,
     APPROVED,

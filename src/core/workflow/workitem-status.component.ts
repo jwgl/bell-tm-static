@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 import {AuditStatus} from '../constants/audit-status';
 
 const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
-    [AuditStatus.COMMITTED]: {class: 'text-primary', label: '提交'},
+    [AuditStatus.SUBMITTED]: {class: 'text-primary', label: '提交'},
     [AuditStatus.CHECKED]:   {class: 'text-primary', label: '审核'},
     [AuditStatus.REJECTED]:  {class: 'text-warning', label: '退回'},
     [AuditStatus.APPROVED]:  {class: 'text-success', label: '审批'},

@@ -61,7 +61,7 @@ export class ReissueAdminItemComponent {
     }
 
     get reviewable(): boolean {
-        return this.vm.status === 'COMMITTED' && this.wi !== undefined;
+        return this.vm.status === 'SUBMITTED' && this.wi !== undefined;
     }
 
     showWorkitems() {

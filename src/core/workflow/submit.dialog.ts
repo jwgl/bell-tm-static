@@ -9,10 +9,10 @@ import {Rest} from '../rest';
  * options: {whoUrl: string, does: string, what: string}
  */
 @Component({
-    selector: 'workflow-commit-dialog',
-    templateUrl: 'commit.dialog.html',
+    selector: 'workflow-submit-dialog',
+    templateUrl: 'submit.dialog.html',
 })
-export class WorkflowCommitDialog extends BaseDialog {
+export class WorkflowSubmitDialog extends BaseDialog {
     result: {what: string, to: string, comment: string};
 
     constructor(private rest: Rest) {

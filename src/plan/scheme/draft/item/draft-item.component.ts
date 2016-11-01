@@ -54,12 +54,12 @@ export class SchemeDraftItemComponent {
         });
     }
 
-    commit() {
+    submit() {
         let errors = this.vm.checkCredit();
         if (errors.length > 0) {
             this.dialog.error(errors);
         } else {
-            this.workflow.commit(this.id, this.title).then(() => {
+            this.workflow.submit(this.id, this.title).then(() => {
                 this.loadData();
             }, (error) => {
                 alert(error.json().message);

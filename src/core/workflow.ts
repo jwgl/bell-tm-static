@@ -7,7 +7,7 @@ import {Rest, ApiUrl} from './rest';
 
 import {Dialog} from './dialogs';
 import {CommonDirectivesModule} from './common-directives';
-import {WorkflowCommitDialog} from './workflow/commit.dialog';
+import {WorkflowSubmitDialog} from './workflow/submit.dialog';
 import {WorkflowAcceptDialog} from './workflow/accept.dialog';
 import {WorkflowRejectDialog} from './workflow/reject.dialog';
 import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
@@ -17,11 +17,11 @@ import {WorkitemStatusComponent} from './workflow/workitem-status.component';
 export class Workflow {
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
-    commit(id: any, what: string): Promise<void> {
+    submit(id: any, what: string): Promise<void> {
         const whoUrl = this.api.checkers(id);
         const does = '审核';
-        return this.dialog.open(WorkflowCommitDialog, {whoUrl, does, what}).then(result => {
-            return this.rest.patch(this.api.commit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();
+        return this.dialog.open(WorkflowSubmitDialog, {whoUrl, does, what}).then(result => {
+            return this.rest.patch(this.api.submit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();
         });
     }
 
@@ -46,7 +46,7 @@ export class Workflow {
 }
 
 const WORKFLOW_DIALOGS: any[] = [
-    WorkflowCommitDialog,
+    WorkflowSubmitDialog,
     WorkflowAcceptDialog,
     WorkflowRejectDialog,
     WorkflowWorkitemsDialog,

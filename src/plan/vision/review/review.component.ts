@@ -28,12 +28,12 @@ export class VisionReviewComponent implements OnInit {
     ngOnInit() {
         this.rest.get(this.api.review(this.id, this.wi)).subscribe(dto => {
             this.vm = new Vision(dto);
-            this.vm.reviewType = dto.reviewType;
+            this.vm.activity = dto.activity;
         });
     }
 
     accept() {
-        this.workflow.accept(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+        this.workflow.accept(this.id, this.wi, this.vm.activity, this.title).then(() => {
             this.ngOnInit();
         }, (error) => {
             alert(error.json().message);
@@ -41,7 +41,7 @@ export class VisionReviewComponent implements OnInit {
     }
 
     reject(title: string) {
-        this.workflow.reject(this.id, this.wi, this.vm.reviewType, this.title).then(() => {
+        this.workflow.reject(this.id, this.wi, this.vm.activity, this.title).then(() => {
             this.ngOnInit();
         }, (error) => {
             alert(error.json().message);
@@ -49,8 +49,8 @@ export class VisionReviewComponent implements OnInit {
     }
 
     get reviewable(): boolean {
-        return (this.vm.status === 'COMMITTED' && this.vm.reviewType === 'check')
-            || (this.vm.status === 'CHECKED' && this.vm.reviewType === 'approve');
+        return (this.vm.status === 'SUBMITTED' && this.vm.activity === 'check')
+            || (this.vm.status === 'CHECKED' && this.vm.activity === 'approve');
     }
 
     get title(): string {

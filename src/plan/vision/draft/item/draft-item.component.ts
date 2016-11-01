@@ -52,8 +52,8 @@ export class VisionDraftItemComponent {
         });
     }
 
-    commit() {
-        this.workflow.commit(this.id, this.title).then(() => {
+    submit() {
+        this.workflow.submit(this.id, this.title).then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);

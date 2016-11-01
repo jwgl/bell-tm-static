@@ -45,8 +45,8 @@ export class ApiUrl {
         return `${this.list()}?type=revise`;
     }
 
-    commit(id: any): string {
-        return `${this.item(id)}?op=COMMIT`;
+    submit(id: any): string {
+        return `${this.item(id)}?op=SUBMIT`;
     }
 
     checkers(id: any): string {
