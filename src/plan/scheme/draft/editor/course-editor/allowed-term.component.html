@@ -6,7 +6,7 @@
     </tr>
     <tr>
         <td *ngFor="let term of terms; let i = index">
-            <label class="checkbox-inline"><input type="checkbox" [formControl]="controls.at(i)" [disabled]="suggestedTerm==term"></label>
+            <label class="checkbox-inline"><input type="checkbox" [formControl]="controls.at(i)"></label>
         </td>
     </tr>
 </table>

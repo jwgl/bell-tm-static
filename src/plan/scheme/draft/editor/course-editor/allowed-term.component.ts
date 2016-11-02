@@ -35,7 +35,11 @@ export class AllowedTermComponent {
     }
 
     ngOnInit() {
-        this.controls = new FormArray(this.terms.map(term => new FormControl(getBit(this.value, term - 1))));
+        this.controls = new FormArray(this.terms.map(term => new FormControl({
+            value: getBit(this.value, term - 1),
+            disabled: this.suggestedTerm === term,
+        })));
+
         this.controls.valueChanges.subscribe((values: boolean[]) => {
             this.value = values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0);
             this.valueChange.emit(this.value);
@@ -48,6 +52,16 @@ export class AllowedTermComponent {
             let value = this.value;
             value = clearBit(value, suggestedTermChange.previousValue - 1);
             value = setBit(value, suggestedTermChange.currentValue - 1);
+
+            this.terms.forEach((term, i) => {
+                const control = this.controls.at(i);
+                if (suggestedTermChange.currentValue === term) {
+                    control.disable();
+                } else {
+                    control.enable();
+                }
+            });
+
             this.setValue(value);
             this.valueChange.emit(this.value);
         }
@@ -55,7 +69,7 @@ export class AllowedTermComponent {
 
     setValue(value: number) {
         this.value = value;
-        this.terms.forEach((term, i) => (<FormControl>this.controls.at(i)).setValue(getBit(this.value, term - 1), {emitEvent: false}));
+        this.terms.forEach((term, i) => this.controls.at(i).setValue(getBit(this.value, term - 1), {emitEvent: false}));
     }
 }
 

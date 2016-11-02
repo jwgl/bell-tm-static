@@ -9,8 +9,11 @@ import '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
+import {enableProdMode} from '@angular/core';
+
 if ('production' === ENV) {
     // Production
+    enableProdMode();
 } else {
     // Development
 }
