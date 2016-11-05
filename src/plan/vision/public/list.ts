@@ -12,12 +12,12 @@ import {VisionPublicService} from './public.service';
     bootstrap: [VisionPublicListComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/plan/visions'),
+        RestModule.for('/api/plan/public/visions'),
         VisionPublicListModule,
     ],
     providers: [
         VisionPublicService,
-        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/api/plan/schemes'},
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/api/plan/public/schemes'},
     ],
 })
 class MainModule {}

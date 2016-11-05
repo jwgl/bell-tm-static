@@ -26,7 +26,9 @@ import {SchemeDraftEditorModule} from './editor/draft-editor.module';
     ],
     providers: [
         SchemeDraftService,
-        {provide: 'PUBLIC_SCHEMES_URL', useValue: '/api/plan/schemes'},
+        {provide: 'DEPARTMENT_SCHEMES_API_URL', useValue: '/api/plan/departments/${departmentId}/schemes'},
+        {provide: 'DEPARTMENT_DIRECTIONS_API_URL', useValue: '/api/plan/departments/${departmentId}/directions'},
+        {provide: 'SCHEME_IMPORT_API_URL', useValue: '/api/plan/public/schemes'},
     ],
 })
 class MainModule {}

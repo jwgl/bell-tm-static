@@ -7,22 +7,22 @@ import {SchemeCourseDto} from '../common/scheme.model';
 
 @Injectable()
 export class SchemeDraftService extends EditService {
-    private publicSchemeApi: ApiUrl;
+    private importSchemeApi: ApiUrl;
     constructor(
         rest: Rest,
         api: ApiUrl,
-        @Inject('PUBLIC_SCHEMES_URL') publicSchemeUrl: string,
+        @Inject('SCHEME_IMPORT_API_URL') schemeImportApiUrl: string,
     ) {
         super(rest, api);
-        this.publicSchemeApi = new ApiUrl(publicSchemeUrl);
+        this.importSchemeApi = new ApiUrl(schemeImportApiUrl);
     }
 
     loadPropertyCourses(id: string, propertyId: number): Observable<SchemeCourseDto[]> {
-        return this.rest.get(`${this.publicSchemeApi.item(id)}/properties/${propertyId}/courses`);
+        return this.rest.get(`${this.importSchemeApi.item(id)}/properties/${propertyId}/courses`);
     }
 
     loadDirectionCourses(id: string, directionId: number): Observable<SchemeCourseDto[]> {
-        return this.rest.get(`${this.publicSchemeApi.item(id)}/directions/${directionId}/courses`);
+        return this.rest.get(`${this.importSchemeApi.item(id)}/directions/${directionId}/courses`);
     }
 
     findCourses(query: string, type: number): Observable<any> {

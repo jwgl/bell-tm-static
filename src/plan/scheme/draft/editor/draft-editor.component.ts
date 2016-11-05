@@ -1,6 +1,7 @@
 import {
     Component,
     ViewEncapsulation,
+    Inject,
 } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
@@ -30,7 +31,9 @@ export class SchemeDraftEditorComponent {
         private route: ActivatedRoute,
         private dialog: CommonDialog,
         private courseEditor: CourseEditorService,
-        private service: SchemeDraftService
+        private service: SchemeDraftService,
+        @Inject('DEPARTMENT_SCHEMES_API_URL') private departmentSchemesApiUrl: string,
+        @Inject('DEPARTMENT_DIRECTIONS_API_URL') private departmentDeirectionsApiUrl: string,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
@@ -111,7 +114,7 @@ export class SchemeDraftEditorComponent {
     importPropertyCourses(property: Property) {
         this.dialog.list(
             `导入课程 - ${property.name}`,
-             `/api/plan/departments/${this.vm.departmentId}/schemes`,
+            this.departmentSchemesApiUrl.replace('${departmentId}', this.vm.departmentId),
             (item: any) => `${item.grade}级${item.subjectName}`
         ).then(id => {
             this.service.loadPropertyCourses(id, property.id).subscribe(courses => {
@@ -127,7 +130,7 @@ export class SchemeDraftEditorComponent {
     importDirectionCourses(direction: Direction) {
         this.dialog.list(
             `导入课程 - ${direction.name}`,
-            `/api/plan/departments/${this.vm.departmentId}/directions`,
+            this.departmentDeirectionsApiUrl.replace('${departmentId}', this.vm.departmentId),
             (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
             (item: any) => `${item.schemeId}:${item.directionId}`
         ).then(result => {
