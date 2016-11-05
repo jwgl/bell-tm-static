@@ -1,4 +1,5 @@
 import {BookingForm, BookingItem} from '../../common/form.model';
+import * as _ from 'lodash';
 
 declare module '../../common/form.model' {
     interface BookingForm {
