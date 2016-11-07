@@ -109,7 +109,17 @@ export class Scheme {
             });
         }
 
+        // 删除可包含方向课，但实际不包含课程的课程性质
+        for (let i = this.properties.length - 1; i >= 0; i--) {
+            let property = this.properties[i];
+            if (property.hasDirections &&  (!property.directions || property.directions.length === 0)) {
+                this.properties.splice(i, 1);
+            }
+        }
+
         this.properties.forEach(p => p.sort());
+
+        this.rebuildStatus();
     }
 
     getDirection(directionId: number): DirectionDto {
@@ -188,6 +198,20 @@ export class Scheme {
             return cs;
         });
     }
+
+    /**
+     * 重构状态
+     */
+    rebuildStatus(): void {
+        this.properties.forEach(p => {
+            if (p.directions) {
+                p.directions.forEach(d => {
+                    d.rebuildStatus();
+                });
+            }
+            p.rebuildStatus();
+        });
+    }
 }
 
 export abstract class AbstractGroup {
@@ -257,6 +281,30 @@ export abstract class AbstractGroup {
             }
         }
         return false;
+    }
+
+    /**
+     * 重构状态
+     */
+    rebuildStatus(): void {
+        const deleted = <{[key: string]: SchemeCourse}>{};
+        const scheme = this.getScheme();
+
+        this.courses.forEach(c => {
+            if (c.reviseVersion === scheme.versionNumber) {
+                c.prevStatus = RecordStatus.Deleted;
+                deleted[c.id] = c;
+            }
+        });
+
+        this.courses.forEach(c => {
+            if (c.schemeId === scheme.id) {
+                if (c.previousId) {
+                    c.ref = deleted[c.previousId];
+                }
+                c.prevStatus = RecordStatus.Created;
+            }
+        });
     }
 }
 

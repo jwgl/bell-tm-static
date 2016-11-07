@@ -1,11 +1,12 @@
-import {RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
 import {SchemeDraftListComponent} from './list/draft-list.component';
 import {SchemeDraftItemComponent} from './item/draft-item.component';
 import {SchemeDraftEditorComponent} from './editor/draft-editor.component';
 
-const ROUTER_CONFIG = [
+const routes: Routes = [
     {path: '', component: SchemeDraftListComponent},
     {path: 'create/:program', component: SchemeDraftEditorComponent, data: {mode: EditMode.Create}},
     {path: ':id/edit', component: SchemeDraftEditorComponent, data: {mode: EditMode.Edit}},
@@ -13,4 +14,8 @@ const ROUTER_CONFIG = [
     {path: ':id', component: SchemeDraftItemComponent},
 ];
 
-export const routing = RouterModule.forRoot(ROUTER_CONFIG, {useHash: true});
+@NgModule({
+    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    exports: [RouterModule],
+})
+export class SchemeDraftRoutingModule {}

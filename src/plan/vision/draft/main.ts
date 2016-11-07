@@ -26,7 +26,7 @@ import {VisionDraftEditorModule} from './editor/draft-editor.module';
     ],
     providers: [
         VisionDraftService,
-        {provide: 'DEPARTMENT_VISIONS_URL', useValue: '/api/plan/departments/${departmentId}/visions'},
+        {provide: 'DEPARTMENT_VISIONS_URL', useValue: '/api/plan/departments/${departmentId}/visions/latest'},
         {provide: 'VISION_IMPORT_API_URL', useValue: '/api/plan/public/visions'},
         {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/public/schemes'},
     ],

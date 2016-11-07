@@ -1,0 +1,30 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>课程编码</th>
+            <th>课程名称</th>
+            <th>学分</th>
+            <th>实践<br>学分</th>
+            <th>总<br>学时</th>
+            <th [attr.colspan]="scheme.terms.length">开课学期和周学时数</th>
+        </tr>
+    </thead>
+    <tbody>
+        <template ngFor let-property [ngForOf]="scheme.properties">
+            <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
+            <template ngFor let-direction [ngForOf]="property.directions">
+                <tr *ngFor="let sc of direction.courses"
+                    [scheme-course]="sc"
+                    [terms]="scheme.terms"></tr>
+                <tr [scheme-group]="direction"
+                    [terms]="scheme.terms"></tr>
+            </template>
+            <tr *ngFor="let sc of property.courses"
+                [scheme-course]="sc"
+                [terms]="scheme.terms"></tr>
+            <tr [scheme-group]="property"
+                [terms]="scheme.terms"></tr>
+        </template>
+        <tr [scheme-summary]="scheme"></tr>
+    </tbody>
+</table>

@@ -1,0 +1,7 @@
+<template [ngIf]="!group.directions">
+    <td colspan="2">小计</td>
+    <td>{{group.totalCredit | zeroEmpty}}</td>
+    <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
+    <td>{{group.totalPeriod | zeroEmpty}}</td>
+    <td *ngFor="let term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
+</template>

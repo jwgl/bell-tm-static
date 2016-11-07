@@ -1,4 +1,3 @@
-import {EditMode} from 'core/constants';
 import * as _ from 'lodash';
 
 import {
@@ -14,19 +13,9 @@ import {
 declare module '../../common/scheme.model' {
     interface Scheme {
         /**
-         *
-         */
-        onInit(editMode: EditMode): void;
-
-        /**
          * 转换为Server DTO
          */
         toServerDto(): any;
-
-        /**
-         * 编辑时，重新构建记录状态
-         */
-        rebuildStatus(): void;
     }
 
     interface AbstractGroup {
@@ -91,19 +80,6 @@ declare module '../../common/scheme.model' {
     }
 }
 
-Scheme.prototype.onInit = function(this: Scheme, editMode: EditMode) {
-    for (let i = this.properties.length - 1; i >= 0; i--) {
-        let property = this.properties[i];
-        if (property.hasDirections && property.directions === undefined) {
-            this.properties.splice(i, 1);
-        }
-    }
-
-    if (editMode === EditMode.Edit) {
-        this.rebuildStatus();
-    }
-};
-
 Scheme.prototype.toServerDto = function(this: Scheme) {
     return {
         id: this.id,
@@ -114,37 +90,6 @@ Scheme.prototype.toServerDto = function(this: Scheme) {
             .reduce((acc, p) => acc.concat(p.getModifiedCourses()), <SchemeCourse[]>[])
             .map(sc => sc.toServerDto()),
     };
-};
-
-Scheme.prototype.rebuildStatus = function(this: Scheme) {
-    const that = this;
-
-    this.properties.forEach(p => {
-        if (p.directions) {
-            p.directions.forEach(d => {
-                updateStatus(d.courses);
-            });
-        }
-        updateStatus(p.courses);
-    });
-
-    function updateStatus(courses: SchemeCourse[]) {
-        let deleted = <{[key: string]: SchemeCourse}>{};
-        courses.forEach(c => {
-            if (c.reviseVersion === that.versionNumber) {
-                c.prevStatus = RecordStatus.Deleted;
-                deleted[c.id] = c;
-            }
-        });
-        courses.forEach(c => {
-            if (c.schemeId === that.id) {
-                if (c.previousId) {
-                    c.ref = deleted[c.previousId];
-                }
-                c.prevStatus = RecordStatus.Created;
-            }
-        });
-    }
 };
 
 AbstractGroup.prototype.remove = function(this: AbstractGroup, sc: SchemeCourse) {

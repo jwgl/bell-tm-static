@@ -6,9 +6,18 @@ export const BASE_URL = new OpaqueToken('BASE_URL');
 @Injectable()
 export class ApiUrl {
     constructor(@Inject(API_URL) private apiUrl: string) {
-        let match = window.location.href.match(/\/users\/([^\/]+)\//);
-        if (match) {
-            this.apiUrl = this.apiUrl.replace('${userId}', match[1]);
+        if (apiUrl.indexOf('${userId}') !== -1) {
+            const match = window.location.href.match(/\/users\/([^\/]+)\//);
+            if (match) {
+                this.apiUrl = this.apiUrl.replace('${userId}', match[1]);
+            }
+        }
+
+        if (apiUrl.indexOf('${departmentId}') !== -1) {
+            const match = window.location.href.match(/\/departments\/([^\/]+)\//);
+            if (match) {
+                this.apiUrl = this.apiUrl.replace('${departmentId}', match[1]);
+            }
         }
     }
 

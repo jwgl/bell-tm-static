@@ -1,7 +1,7 @@
 import {Title} from '@angular/platform-browser';
 import {Component, ElementRef} from '@angular/core';
 import {Scheme} from '../../common/scheme.model';
-import '../../common/scheme-viewer.model';
+import '../../common/public-viewer/scheme-viewer.model';
 import {SchemePublicService} from '../public.service';
 
 /**

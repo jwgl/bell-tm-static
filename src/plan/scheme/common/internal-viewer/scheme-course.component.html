@@ -1,0 +1,6 @@
+<td>{{schemeCourse.courseId}}</td>
+<td class='course-name'>{{schemeCourse.courseName}}</td>
+<td>{{schemeCourse.credit}}</td>
+<td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
+<td>{{schemeCourse.totalPeriod | zeroEmpty}}<sup *ngIf="schemeCourse.showPeriodWeeks" class="text-info">{{schemeCourse.periodWeeks | zeroEmpty}}</sup></td>
+<td *ngFor="let term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>

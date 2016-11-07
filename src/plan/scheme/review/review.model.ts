@@ -5,5 +5,8 @@ import {Scheme} from '../common/scheme.model';
 declare module '../common/scheme.model' {
     interface Scheme {
         activity: string;
+
+        initReview(): void;
     }
 }
+

@@ -6,7 +6,7 @@ import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
 import {SchemeReviewComponent} from './review.component';
-import {SchemeViewerModule} from '../common/scheme-viewer.module';
+import {SchemeInternalViewerModule} from '../common/internal-viewer/scheme-viewer.module';
 
 @NgModule({
     bootstrap: [SchemeReviewComponent],
@@ -14,7 +14,7 @@ import {SchemeViewerModule} from '../common/scheme-viewer.module';
         BrowserModule,
         RestModule.for('/api/plan/schemes'),
         WorkflowModule,
-        SchemeViewerModule,
+        SchemeInternalViewerModule,
     ],
     declarations: [
         SchemeReviewComponent,

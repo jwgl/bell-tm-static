@@ -3,14 +3,14 @@ import {Title} from '@angular/platform-browser';
 import {CommonModule} from '@angular/common';
 
 import {PlanCommonModule} from '../../../common/module';
-import {SchemeViewerModule} from '../../common/scheme-viewer.module';
+import {SchemePublicViewerModule} from '../../common/public-viewer/scheme-viewer.module';
 import {SchemePublicItemComponent} from './public-item.component';
 
 @NgModule({
     imports: [
         CommonModule,
         PlanCommonModule,
-        SchemeViewerModule,
+        SchemePublicViewerModule,
     ],
     declarations: [
         SchemePublicItemComponent,

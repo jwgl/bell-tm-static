@@ -14,6 +14,9 @@
         <div class="btn-group float-xs-right" *ngIf="vm.revisable">
             <button class="btn btn-primary" (click)="revise()">修订</button>
         </div>
+        <div class="btn-group float-xs-right" *ngIf="vm.previousId">
+            <button class="btn btn-secondary" data-toggle="button" (click)="toggleShowDiff()">{{showDiffLabel}}</button>
+        </div>
     </div>
-    <scheme-viewer [scheme]="vm"></scheme-viewer>
+    <scheme-viewer [scheme]="vm" [showDiff]="showDiff"></scheme-viewer>
 </div>

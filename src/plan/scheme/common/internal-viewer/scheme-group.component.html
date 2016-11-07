@@ -1,5 +1,5 @@
 <template [ngIf]="!group.directions">
-    <td colspan="2">小计</td>
+    <td colspan="2">{{summary}}</td>
     <td>{{group.totalCredit | zeroEmpty}}</td>
     <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
     <td>{{group.totalPeriod | zeroEmpty}}</td>

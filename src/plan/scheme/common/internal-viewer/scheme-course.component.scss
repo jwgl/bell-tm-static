@@ -1,0 +1,38 @@
+$prevCreated: #eaffea;
+$prevDeleted: #ffecec;
+$currCreated: darken($prevCreated, 10%);
+$currDeleted: darken($prevDeleted, 10%);
+
+:host() {
+    &.PrevDeleted {
+        display: none;
+    }
+}
+
+:host-context(.show-diff) {
+    &.PrevCreated {
+        background-color: $prevCreated;
+        &.CurrReverted {
+            background-color: $currDeleted;
+        }
+        &.CurrUpdated {
+            background-color: $currCreated;
+        }
+    }
+    &.PrevDeleted {
+        display: table-row;
+        background-color: $prevDeleted;
+        &.CurrReverted {
+            background-color: $currCreated;
+        }
+    }
+    &.CurrCreated {
+        background-color: $currCreated;
+    }
+    &.CurrDeleted {
+        background-color: $currDeleted;
+    }
+    &.highlight {
+        color: red;
+    }
+}

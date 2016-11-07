@@ -15,4 +15,8 @@ header {
     .no-print, .no-print * {
         display: none !important;
     }
+
+    .btn-toolbar {
+        display: none !important;
+    }
 }

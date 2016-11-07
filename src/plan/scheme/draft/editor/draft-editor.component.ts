@@ -39,13 +39,13 @@ export class SchemeDraftEditorComponent {
         let params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.service.loadDataForCreate({program: params['program']}).subscribe(data => this.onLoadData(data));
+                this.service.loadDataForCreate({program: params['program']}).subscribe(data => this.vm = new Scheme(data));
                 break;
             case EditMode.Revise:
-                this.service.loadItemForRevise(params['id']).subscribe(data => this.onLoadData(data));
+                this.service.loadItemForRevise(params['id']).subscribe(data => this.vm = new Scheme(data));
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(data => this.onLoadData(data));
+                this.service.loadItemForEdit(params['id']).subscribe(data => this.vm = new Scheme(data));
                 break;
         }
     }
@@ -166,10 +166,5 @@ export class SchemeDraftEditorComponent {
                 );
                 break;
         }
-    }
-
-    private onLoadData(data: any) {
-        this.vm = new Scheme(data);
-        this.vm.onInit(this.editMode);
     }
 }

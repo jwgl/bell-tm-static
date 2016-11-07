@@ -1,6 +1,6 @@
-import {Scheme, Property, SchemeCourse} from './scheme.model';
+import {Scheme, Property, SchemeCourse} from '../scheme.model';
 
-declare module './scheme.model' {
+declare module '../scheme.model' {
     /**
      * 课程清理。对于无方向的课程性质，如果课程为空，则增加三行空课程。
      */
@@ -38,10 +38,6 @@ Scheme.prototype.normalize = function(this: Scheme) {
     for (let i = this.properties.length - 1; i >= 0; i--) {
         let property = this.properties[i];
         property.normalize();
-        // 删除可包含方向课，但实际不包含课程的课程性质
-        if (property.hasDirections && (!property.directions || property.directions.length === 0)) {
-            this.properties.splice(i, 1);
-        }
     };
 };
 

@@ -5,7 +5,7 @@ import {Workflow} from 'core/workflow';
 
 import {toVersionString} from '../../common/utils';
 import {Scheme} from '../common/scheme.model';
-import '../common/scheme-viewer.model';
+import '../common/scheme.model';
 import './review.model';
 
 @Component({
@@ -29,7 +29,6 @@ export class SchemeReviewComponent implements OnInit {
     ngOnInit() {
         this.rest.get(this.api.review(this.id, this.wi)).subscribe(item => {
             this.vm = new Scheme(item);
-            this.vm.normalize();
             this.vm.activity = item.activity;
         });
     }
