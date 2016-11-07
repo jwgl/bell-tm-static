@@ -26,6 +26,6 @@ export class SchemeDraftService extends EditService {
     }
 
     findCourses(query: string, type: number): Observable<any> {
-        return this.rest.get(`${this.api.list()}/courses?q=${query}&t=${type}`);
+        return this.rest.get(`${this.api.list()}/courses?q=${encodeURI(query)}&t=${type}`);
     }
 }

@@ -5,17 +5,13 @@
 <td>{{schemeCourse.totalPeriod | zeroEmpty}}<sup *ngIf="schemeCourse.showPeriodWeeks" class="text-info">{{schemeCourse.periodWeeks | zeroEmpty}}</sup></td>
 <td *ngFor="let term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>
 <td>
-    <template [ngIf]="schemeCourse.canEdit()">
-        <button type="button" class="btn btn-secondary btn-sm"
-                (click)="edit.emit(schemeCourse)"
-                [disabled]="schemeCourse.locked">编辑</button>
-        <button type="button" class="btn btn-secondary btn-sm"
-                (click)="delete.emit(schemeCourse)"
-                [disabled]="schemeCourse.locked">删除</button>
-    </template>
-    <template [ngIf]="schemeCourse.canRevert()">
-        <button type="button" class="btn btn-secondary btn-sm"
-                (click)="restore.emit(schemeCourse)"
-                [disabled]="schemeCourse.locked">还原</button>
-    </template>
+    <button type="button" class="btn btn-secondary btn-sm" *ngIf="!schemeCourse.isTempCourse && schemeCourse.canEdit()"
+            (click)="edit.emit(schemeCourse)"
+            [disabled]="schemeCourse.locked">编辑</button>
+    <button type="button" class="btn btn-secondary btn-sm" *ngIf="schemeCourse.canEdit()"
+            (click)="delete.emit(schemeCourse)"
+            [disabled]="schemeCourse.locked">删除</button>
+    <button type="button" class="btn btn-secondary btn-sm" *ngIf="schemeCourse.canRevert()"
+            (click)="restore.emit(schemeCourse)"
+            [disabled]="schemeCourse.locked">还原</button>
 </td>
