@@ -109,17 +109,23 @@ export class Scheme {
             });
         }
 
-        // 删除可包含方向课，但实际不包含课程的课程性质
-        for (let i = this.properties.length - 1; i >= 0; i--) {
-            let property = this.properties[i];
-            if (property.hasDirections &&  (!property.directions || property.directions.length === 0)) {
-                this.properties.splice(i, 1);
-            }
-        }
+        this.clearPropertyWithEmptyDirection();
 
         this.properties.forEach(p => p.sort());
 
         this.rebuildStatus();
+    }
+
+    /**
+     * 删除可包含方向课，但实际不包含课程的课程性质
+     */
+    clearPropertyWithEmptyDirection() {
+        for (let i = this.properties.length - 1; i >= 0; i--) {
+            let property = this.properties[i];
+            if (property.hasDirections &&  (!property.directions || property.directions.length === 0) && property.courses.length === 0) {
+                this.properties.splice(i, 1);
+            }
+        }
     }
 
     getDirection(directionId: number): DirectionDto {
@@ -422,7 +428,7 @@ export class Property extends AbstractGroup {
      * 获取最小总学分，如果不包含方向，则为属性的总学分；如果包含方向，则为各方向学分的最小值。
      */
     get minTotalCredit(): number {
-        return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
+        return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), 0) : this.totalCredit;
     }
 
 

@@ -39,6 +39,7 @@ Scheme.prototype.normalize = function(this: Scheme) {
         let property = this.properties[i];
         property.normalize();
     };
+    this.clearPropertyWithEmptyDirection();
 };
 
 class EmptyCourse extends SchemeCourse {
