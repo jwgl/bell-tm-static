@@ -14,7 +14,11 @@ export class SubjectDirectorService {
         return this.rest.get(this.api.list());
     }
 
-    save(subjectId: string, teacherId: string): Observable<void> {
-        return this.rest.post(this.api.list(), {subjectId, teacherId});
+    updateDirector(subjectId: string, directorId: string): Observable<void> {
+        return this.rest.put(this.api.item(subjectId), {directorId});
+    }
+
+    updateSecretary(subjectId: string, secretaryId: string): Observable<void> {
+        return this.rest.put(this.api.item(subjectId), {secretaryId});
     }
 }

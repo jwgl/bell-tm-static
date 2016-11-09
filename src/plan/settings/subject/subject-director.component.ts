@@ -35,20 +35,39 @@ export class SubjectDirectorComponent {
         });
     }
 
-    selectTeacher(target: any, subject: any) {
+    selectDirector(target: any, subject: any) {
         this.dialog.teacher(`选择${subject.subjectName}专业负责人`).then(result => {
-            subject.processing = true;
-            this.service.save(subject.subjectId, result.id).subscribe(_ => {
-                subject.processing = false;
-                subject.teacherId = result.id;
-                subject.teacherName = result.name;
+            subject.directorProcessing = true;
+            this.service.updateDirector(subject.subjectId, result.id).subscribe(_ => {
+                subject.directorProcessing = false;
+                subject.directorId = result.id;
+                subject.directorName = result.name;
             });
         });
     }
 
-    format(subject: any) {
-        if (subject.teacherId) {
-            return `${subject.teacherId} ${subject.teacherName}`;
+    getDirectorLabel(subject: any) {
+        if (subject.directorId) {
+            return `${subject.directorId} ${subject.directorName}`;
+        } else {
+            return '<空>';
+        }
+    }
+
+    selectSecretary(target: any, subject: any) {
+        this.dialog.teacher(`选择${subject.subjectName}教务秘书`).then(result => {
+            subject.secretaryProcessing = true;
+            this.service.updateSecretary(subject.subjectId, result.id).subscribe(_ => {
+                subject.secretaryProcessing = false;
+                subject.secretaryId = result.id;
+                subject.secretaryName = result.name;
+            });
+        });
+    }
+
+    getSecretaryLabel(subject: any) {
+        if (subject.secretaryId) {
+            return `${subject.secretaryId} ${subject.secretaryName}`;
         } else {
             return '<空>';
         }

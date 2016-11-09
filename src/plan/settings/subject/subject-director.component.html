@@ -5,6 +5,7 @@
             <th>专业</th>
             <th>最近招生年级</th>
             <th>专业负责人</th>
+            <th>教务秘书</th>
         </tr>
     </thead>
     <tbody>
@@ -15,8 +16,12 @@
                     <td>{{subject.subjectId}} {{subject.subjectName}}</td>
                     <td>{{subject.maxGrade}}</td>
                     <td>
-                        <a href="#" class="open-dialog" (click)="selectTeacher($event.target, subject);false;">{{format(subject)}}</a>
-                        <i [spinning]="subject.processing"></i>
+                        <a href="#" class="open-dialog" (click)="selectDirector($event.target, subject);false;">{{getDirectorLabel(subject)}}</a>
+                        <i [spinning]="subject.directorProcessing"></i>
+                    </td>
+                    <td>
+                        <a href="#" class="open-dialog" (click)="selectSecretary($event.target, subject);false;">{{getSecretaryLabel(subject)}}</a>
+                        <i [spinning]="subject.secretaryProcessing"></i>
                     </td>
                 </tr>
             </template>

@@ -13,7 +13,7 @@ import {ProgramSettingsService} from './program-settings.service';
     imports: [
         BrowserModule,
         ProgramSettingsModule,
-        RestModule.for('/api/plan/programSettings'),
+        RestModule.for('/api/plan/settings/programs'),
     ],
     providers: [
         ProgramSettingsService,
