@@ -677,7 +677,7 @@ export class SchemeCourse {
     get isActive(): boolean {
         return (this.prevStatus === RecordStatus.None && this.currStatus !== RecordStatus.Deleted)
             || (this.prevStatus === RecordStatus.Created && this.currStatus !== RecordStatus.Reverted)
-            || (this.prevStatus === RecordStatus.Deleted && this.currStatus === RecordStatus.None);
+            || (this.prevStatus === RecordStatus.Deleted && this.currStatus === RecordStatus.Reverted);
     }
 
     get prevStatusLabel(): string {
