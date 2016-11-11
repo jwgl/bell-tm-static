@@ -428,7 +428,7 @@ export class Property extends AbstractGroup {
      * 获取最小总学分，如果不包含方向，则为属性的总学分；如果包含方向，则为各方向学分的最小值。
      */
     get minTotalCredit(): number {
-        return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), 0) : this.totalCredit;
+        return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
     }
 
 
