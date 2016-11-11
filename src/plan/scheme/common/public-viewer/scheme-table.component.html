@@ -1,15 +1,5 @@
 <table class="table table-bordered">
     <thead>
-        <tr class="fix">
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th *ngFor="let term of scheme.terms"></th>
-        </tr>
         <tr>
             <th rowspan="2" colspan="2">课程<br>类别</th>
             <th rowspan="2">课程编码</th>
@@ -22,29 +12,7 @@
         <tr>
             <th *ngFor="let term of scheme.terms" [class.short-term]="term >= 17">{{term | termTitle}}</th>
         </tr>
-        <tr class="fix">
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th *ngFor="let term of scheme.terms"></th>
-        </tr>
     </thead>
-    <tfoot>
-        <tr class="fix">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td *ngFor="let term of scheme.terms"></td>
-        </tr>
-    </tfoot>
     <tbody>
         <template ngFor let-property [ngForOf]="scheme.properties">
             <template ngFor let-direction [ngForOf]="property.directions" let-i="index">

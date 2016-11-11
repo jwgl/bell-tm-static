@@ -651,7 +651,7 @@ export class SchemeCourse {
      * 是否显示学时周
      */
     get showPeriodWeeks(): boolean {
-        return !(this.theoryPeriod === 0 && this.experimentPeriod === 0);
+        return this._periodWeeks !== 18;
     }
 
     /**

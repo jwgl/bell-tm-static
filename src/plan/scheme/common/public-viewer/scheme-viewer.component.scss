@@ -15,31 +15,24 @@
     }
 
     h2 {
-        font-size: 1.25Rem;
+        font-size: 1.25rem;
     }
 
     table {
-        th {
+        th, td {
             text-align: center;
             vertical-align: middle;
-            padding: 4px;
             white-space: nowrap;
+            padding: 0.25rem;
             &.short-term {
                 @include short-term();
             }
         }
 
         td {
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-            padding: 4px;
             &.course-name {
                 text-align: left;
                 white-space: normal;
-            }
-            &.short-term {
-                @include short-term();
             }
         }
 
@@ -48,32 +41,11 @@
                 background-color: #fafafa;
             }
         }
-
-        thead {
-            tr.fix {
-                th {
-                    padding: 0 !important;
-                    line-height: 0;
-                    border-top-width: 1px !important;
-                    border-bottom-style: hidden !important;
-                }
-            }
-        }
-
-        tfoot {
-            tr.fix {
-                td {
-                    padding: 0 !important;
-                    border-bottom-width: 1px !important;
-                    border-top: none !important;
-                }
-            }
-        }
     }
 
     .vertical {
         width: 1rem;
-        line-height: 1.25rem;
+        line-height: 1.125rem;
         margin: auto;
         white-space: normal;
     }
@@ -86,29 +58,20 @@
 
 @media print {
     body {
-        font-size: 10px;
+        font-size: 11px;
     }
 
     .scheme {
         table {
             font-family: '宋体';
-            border-top: solid 2px #000;
 
-            th {
-                border-color: #000 !important;
-                border-top-width: 1px !important;
-                border-bottom: none !important;
-                padding: 2px!important;
+            thead {
+                display: table-row-group;
             }
 
-            td {
-                border-color: #000 !important;
+            th, th {
                 padding: 2px!important;
             }
-        }
-
-        .vertical {
-            line-height: 1.2em;
         }
     }
 }
