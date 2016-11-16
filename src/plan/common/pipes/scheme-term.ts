@@ -4,7 +4,7 @@ import {numberToChinese} from 'core/utils';
 
 @Pipe({name: 'termName'})
 export class SchemeTermNamePipe {
-    transform(value: any, args: any[]) {
+    transform(value: number) {
         if (value < 16) {
             return `第${numberToChinese(value)}学期`;
         } else {
@@ -15,7 +15,7 @@ export class SchemeTermNamePipe {
 
 @Pipe({name: 'termTitle'})
 export class SchemeTermTitlePipe {
-    transform(value: any, args: any[]) {
+    transform(value: number) {
         if (value < 16) {
             return numberToChinese(value);
         } else {

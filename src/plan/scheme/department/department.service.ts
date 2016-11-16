@@ -7,4 +7,13 @@ export class SchemeDepartmentService extends ShowService {
     constructor(rest: Rest, api: ApiUrl) {
         super(rest, api);
     }
+
+    loadToes(id: string) {
+        return this.rest.get(`${this.api.item(id)}/toes`);
+    }
+
+    saveToes(id: string, toesDto: any) {
+        console.log(toesDto)
+        return this.rest.post(`${this.api.item(id)}/toes`, toesDto);
+    }
 }

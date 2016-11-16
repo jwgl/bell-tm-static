@@ -55,6 +55,7 @@ export class Scheme {
     terms: number[];
     directions: DirectionDto[];
     practiceCreditRatio: number;
+    latest: boolean;
 
     constructor(dto: SchemeDto) {
         this.id                    = dto.id;
@@ -73,6 +74,7 @@ export class Scheme {
         this.directions            = dto.directions;
         this.terms                 = dto.template.terms;
         this.practiceCreditRatio   = dto.template.practiceCreditRatio;
+        this.latest                = dto.latest;
 
         this.properties = dto.template.properties.map(tp => {
             tp.locked = tp.locked && dto.template.schemeTemplateLocked;
@@ -713,6 +715,7 @@ export interface SchemeDto {
     tempCourses: SchemeCourseDto[];
     template: TemplateDto;
     directions: DirectionDto[];
+    latest: boolean;
 }
 
 export interface SchemeCourseDto {

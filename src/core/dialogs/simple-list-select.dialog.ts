@@ -22,7 +22,12 @@ export class SimpleListSelectDialog extends BaseDialog {
         this.title = this.options.title;
         this.valueFn = this.options.valueFn || this.valueFn;
         this.labelFn = this.options.labelFn || this.labelFn;
-        return this.rest.get(this.options.url);
+
+        if (this.options.url) {
+            return this.rest.get(this.options.url);
+        } else {
+            return null;
+        }
     }
 
     protected onConfirmed(): any {

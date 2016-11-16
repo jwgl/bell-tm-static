@@ -1,0 +1,23 @@
+<td><input type="checkbox" [(ngModel)]="schemeCourse.selected" [disabled]="schemeCourse.exported"></td>
+<td>{{schemeCourse.courseId}}</td>
+<td class='course-name'>{{schemeCourse.courseName}}</td>
+<td>{{property.name}}</td>
+<td>{{directionName}}</td>
+<td>{{schemeCourse.credit}}</td>
+<td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
+<td>{{schemeCourse.totalPeriod | zeroEmpty}}</td>
+<td>{{schemeCourse.theoryPeriod}}</td>
+<td>{{schemeCourse.experimentPeriod}}</td>
+<td>{{schemeCourse.suggestedTerm | termTitle}}</td>
+<td>{{schemeCourse._periodWeeks}}</td>
+<td>
+    <ng-container [ngSwitch]="startWeekType">
+        <ng-container *ngSwitchCase="0">+{{schemeCourse._periodWeeks}}</ng-container>
+        <ng-container *ngSwitchDefault>{{schemeCourse.startWeek | zeroPad}}-{{schemeCourse.endWeek | zeroPad}}</ng-container>
+    </ng-container>
+</td>
+<td>{{departmentName}}</td>
+<td>
+    <label *ngIf="schemeCourse.exported" class="tag tag-success">已导入</label>
+    <button *ngIf="!schemeCourse.exported" type="button" class="btn btn-secondary btn-sm" (click)="edit.emit()">编辑</button>
+</td>

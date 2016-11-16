@@ -11,6 +11,7 @@ import {FormDirective} from './bootstrap/form.directive';
 import {FormFieldComponent} from './bootstrap/form-field.component';
 import {FormControlDirective} from './bootstrap/form-control.directive';
 import {GroupByPipe} from './pipes/group-by';
+import {ZeroPadPipe} from './pipes/zero-pad';
 import {
     FromNowPipe,
     MomentFormatPipe,
@@ -51,6 +52,7 @@ const CORE_DIRECTIVES: any[] = [
     Spinning,
     // pipes
     GroupByPipe,
+    ZeroPadPipe,
     FromNowPipe,
     MomentFormatPipe,
     DayOfWeekPipe,

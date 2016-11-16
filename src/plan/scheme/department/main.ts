@@ -9,6 +9,7 @@ import {SchemeDepartmentService} from './department.service';
 import {SchemeDepartmentRoutingModule} from './department.routes';
 import {SchemeDepartmentListModule} from './list/department-list.module';
 import {SchemeDepartmentItemModule} from './item/department-item.module';
+import {SchemeDepartmentToesModule} from './toes/department-toes.module';
 
 @NgModule({
     bootstrap: [SchemeDepartmentComponent],
@@ -19,8 +20,9 @@ import {SchemeDepartmentItemModule} from './item/department-item.module';
         BrowserModule,
         RestModule.for('/api/plan/departments/${departmentId}/schemes'),
         SchemeDepartmentRoutingModule,
-        SchemeDepartmentItemModule,
         SchemeDepartmentListModule,
+        SchemeDepartmentItemModule,
+        SchemeDepartmentToesModule,
     ],
     providers: [
         SchemeDepartmentService,

@@ -7,16 +7,12 @@ import {CommonDirectivesModule} from 'core/common-directives';
 import {PlanCommonModule} from '../../../common/module';
 import {SchemeDepartmentListComponent} from './department-list.component';
 
-const ROUTER_CONFIG = [
-    {path: '', component: SchemeDepartmentListComponent},
-];
-
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         CommonDirectivesModule,
         PlanCommonModule,
-        RouterModule.forChild(ROUTER_CONFIG),
     ],
     declarations: [
         SchemeDepartmentListComponent,
