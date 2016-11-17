@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ElementRef, ViewContainerRef} from '@angular/core';
 
 import {ApiUrl, Rest} from 'core/rest';
 import {Workflow} from 'core/workflow';
@@ -16,6 +16,7 @@ export class BookingReviewComponent {
     form: BookingForm;
 
     constructor(
+        public viewContainerRef: ViewContainerRef,
         elementRef: ElementRef,
         private workflow: Workflow,
         private rest: Rest,

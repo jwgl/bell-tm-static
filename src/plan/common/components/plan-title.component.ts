@@ -25,8 +25,6 @@ export class PlanTitleComponent {
             curr: this.version,
         }).then((newValue) => {
             this.versionChanged.emit(newValue);
-        }).catch((error) => {
-            console.log(error);
         });
     }
 }

@@ -41,7 +41,6 @@ export class SchemeDepartmentToesComponent implements OnInit {
         this.dialog.open(SchemeCourseDialog, {
             schemeCourse: schemeCourse,
         }).then(result => {
-            console.log(result);
             schemeCourse.startWeek = result.startWeek;
             schemeCourse.departmentId = result.departmentId;
             schemeCourse.departmentName = result.departmentName;

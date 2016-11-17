@@ -13,7 +13,6 @@ export class SchemeDepartmentService extends ShowService {
     }
 
     saveToes(id: string, toesDto: any) {
-        console.log(toesDto)
         return this.rest.post(`${this.api.item(id)}/toes`, toesDto);
     }
 }

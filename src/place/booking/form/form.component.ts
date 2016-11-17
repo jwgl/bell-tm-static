@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 
 @Component({
     selector: 'booking-form-container',
     template: '<router-outlet></router-outlet>',
 })
-export class BookingFormComponent {}
+export class BookingFormComponent {
+    constructor(public viewContainerRef: ViewContainerRef) {}
+}

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewContainerRef} from '@angular/core';
 
 import {ApiUrl, Rest} from 'core/rest';
 import {Workflow} from 'core/workflow';
@@ -16,7 +16,9 @@ export class VisionReviewComponent implements OnInit {
     wi: string;
     vm: Vision;
 
+
     constructor(
+        public viewContainerRef: ViewContainerRef,
         elementRef: ElementRef,
         private workflow: Workflow,
         private rest: Rest,

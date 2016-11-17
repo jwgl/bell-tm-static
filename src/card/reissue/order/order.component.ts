@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, ViewContainerRef} from '@angular/core';
 
 @Component({
     selector: 'reissue-order-container',
     template: '<router-outlet></router-outlet>',
 })
-export class ReissueOrderComponent {}
+export class ReissueOrderComponent {
+    constructor(public viewContainerRef: ViewContainerRef) {}
+}

@@ -83,7 +83,6 @@ export class ReissueOrderEditorComponent {
     addItems() {
         this.dialog.open(ReissueFormSelectDialog, {order: this.vm}).then((results: any[])  => {
             results.forEach(item => this.vm.addItem(item));
-            this.vm.items.forEach(item => console.log(JSON.stringify(item)));
         });
     }
 

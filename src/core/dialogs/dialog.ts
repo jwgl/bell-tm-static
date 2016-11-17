@@ -1,5 +1,6 @@
 import {
     Injectable,
+    Injector,
     Type,
     EventEmitter,
     OnInit,
@@ -13,15 +14,23 @@ import 'rxjs/add/observable/empty';
 
 @Injectable()
 export class Dialog {
-    constructor(private appRef: ApplicationRef, private componentFactoryResolver: ComponentFactoryResolver) {}
+    viewContainerRef: ViewContainerRef
+    constructor(private appRef: ApplicationRef, private injector: Injector, private componentFactoryResolver: ComponentFactoryResolver) {
+        // https://github.com/angular/angular/issues/9293
+        // angular 2.2.0 breaking change.
+        const rootComponent = this.appRef.components[0];
+        this.viewContainerRef = rootComponent.instance.viewContainerRef;
+        if (!this.viewContainerRef) {
+            throw new Error('Inject ViewContainerRef into the constructor of rootComponent');
+        }
+    }
 
     open(dialogType: Type<any>, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
-            let location: ViewContainerRef = (<any>this.appRef)['_rootComponents'][0]._hostElement.vcRef;
             let componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
-            let contextInjector = location.parentInjector;
+            let contextInjector = this.viewContainerRef.parentInjector;
             let childInjector = contextInjector;
-            let componentRef = location.createComponent(componentFactory, location.length, childInjector);
+            let componentRef = this.viewContainerRef.createComponent(componentFactory, this.viewContainerRef.length, childInjector);
 
             let nativeElement = componentRef.location.nativeElement;
             document.body.appendChild(nativeElement);
