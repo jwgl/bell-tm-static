@@ -652,10 +652,10 @@ export class SchemeCourse {
     }
 
     /**
-     * 是否显示学时周
+     * 是否显示学时周，纯实践课和非全学段课不显示
      */
     get showPeriodWeeks(): boolean {
-        return this._periodWeeks !== 18;
+        return !(this.theoryPeriod === 0 && this.experimentPeriod === 0) && this._periodWeeks !== 18;
     }
 
     /**
