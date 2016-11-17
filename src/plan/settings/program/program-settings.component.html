@@ -1,25 +1,26 @@
-<div class="form-group col-xs-2">
-    <select class="form-control" (change)="onGradeChanged($event.target.value)">
-        <option *ngFor="let grade of grades" [value]="grade">{{grade}}级</option>
-    </select>
+<div class="row">
+    <div class="form-group col-xs-2">
+        <select class="form-control" (change)="onGradeChanged($event.target.value)">
+            <option *ngFor="let grade of grades" [value]="grade">{{grade}}级</option>
+        </select>
+    </div>
 </div>
 <table class="table" *ngIf="departments">
     <thead>
         <tr>
             <th rowspan="2">学院</th>
             <th rowspan="2">执行计划</th>
-            <th rowspan="2" class="center">学位</th>
-            <th>培养方案</th>
-            <th colspan="4" class="center">教学安排</th>
-            <th rowspan="2" class="center">编辑</th>
+            <th rowspan="2">学位</th>
+            <th rowspan="2">培养方案<br>能否修订</th>
+            <th colspan="5" class="center">教学安排</th>
+            <th rowspan="2" class="center">操作</th>
         </tr>
         <tr>
-            <th>能否修订</th>
-            <th>模板</th>
-            <th>锁定模板</th>
-            <th>能否修订</th>
-            <th>能否导出</th>
-            <th>实践比例</th>
+            <th>计划模板</th>
+            <th class="center">锁定模板</th>
+            <th class="center">能否修订</th>
+            <th class="center">能否导出</th>
+            <th class="center">实践比例</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +29,7 @@
                 <tr>
                     <td *ngIf="j == 0" [rowSpan]="department.programs.length">{{department.name}}</td>
                     <td class="name">{{program.programId}} {{program.subjectName}}</td>
-                    <td class="center">{{program.degreeName}}</td>
+                    <td>{{program.degreeName}}</td>
                     <td class="center">{{program.visionRevisible ? '是' : '否'}}</td>
                     <td>{{program.templateName}}</td>
                     <td class="center">{{program.templateLocked ? '是' : '否'}}</td>
