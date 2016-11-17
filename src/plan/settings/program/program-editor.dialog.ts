@@ -23,6 +23,7 @@ export class ProgramEditorDialog extends BaseDialog {
             practiceCreditRatio: this.options.programSetting.practiceCreditRatio,
             templateLocked: this.options.programSetting.templateLocked,
             schemeRevisible: this.options.programSetting.schemeRevisible,
+            schemeExportable: this.options.programSetting.schemeExportable,
             templateId: this.options.programSetting.templateId,
             templateName: this.options.programSetting.templateName,
         };
@@ -43,6 +44,7 @@ export class ProgramEditorDialog extends BaseDialog {
             practiceCreditRatio: this.programSetting.practiceCreditRatio,
             templateLocked: this.programSetting.templateLocked,
             schemeRevisible: this.programSetting.schemeRevisible,
+            schemeExportable: this.programSetting.schemeExportable,
             templateId: this.template.id,
             templateName: this.template.name,
         };

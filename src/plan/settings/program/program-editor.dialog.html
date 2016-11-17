@@ -31,14 +31,21 @@
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input"
                             name="templateLocked"
-                            [(ngModel)]= "programSetting.templateLocked"> 是否锁定
+                            [(ngModel)]= "programSetting.templateLocked"> 是否锁定模板
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input"
                             name="schemeRevisible"
-                            [(ngModel)]= "programSetting.schemeRevisible"> 能否修订
+                            [(ngModel)]= "programSetting.schemeRevisible"> 能否修订计划
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input"
+                            name="schemeExportable"
+                            [(ngModel)]= "programSetting.schemeExportable"> 能否导入教务系统
                     </label>
                 </div>
             </fieldset>

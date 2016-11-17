@@ -56,6 +56,7 @@ export class Scheme {
     directions: DirectionDto[];
     practiceCreditRatio: number;
     latest: boolean;
+    exportable: boolean;
 
     constructor(dto: SchemeDto) {
         this.id                    = dto.id;
@@ -75,9 +76,10 @@ export class Scheme {
         this.terms                 = dto.template.terms;
         this.practiceCreditRatio   = dto.template.practiceCreditRatio;
         this.latest                = dto.latest;
+        this.exportable            = dto.template.exportable;
 
         this.properties = dto.template.properties.map(tp => {
-            tp.locked = tp.locked && dto.template.schemeTemplateLocked;
+            tp.locked = tp.locked && dto.template.templateLocked;
             tp.isResidual = tp.id === dto.template.residualPropertyId;
             tp.minCredit = tp.isResidual ? dto.template.minResidualCredit : 0;
             return new Property(this, tp);
@@ -744,7 +746,8 @@ export interface SchemeCourseDto {
 
 export interface TemplateDto {
     id: number;
-    schemeTemplateLocked: boolean;
+    templateLocked: boolean;
+    exportable: boolean;
     residualPropertyId: number;
     minResidualCredit: number;
     properties: TemplatePropertyDto[];

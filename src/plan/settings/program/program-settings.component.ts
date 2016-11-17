@@ -61,6 +61,7 @@ export class ProgramSettingsComponent {
                 program.practiceCreditRatio = result.practiceCreditRatio;
                 program.templateLocked = result.templateLocked;
                 program.schemeRevisible = result.schemeRevisible;
+                program.schemeExportable = result.schemeExportable;
                 program.templateId = result.templateId;
                 program.templateName = result.templateName;
             });

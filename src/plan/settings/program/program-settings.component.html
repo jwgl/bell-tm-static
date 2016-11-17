@@ -18,6 +18,7 @@
             <th>模板</th>
             <th>锁定模板</th>
             <th>能否修订</th>
+            <th>能否导出</th>
             <th>实践比例</th>
         </tr>
     </thead>
@@ -32,6 +33,7 @@
                     <td>{{program.templateName}}</td>
                     <td class="center">{{program.templateLocked ? '是' : '否'}}</td>
                     <td class="center">{{program.schemeRevisible ? '是' : '否'}}</td>
+                    <td class="center">{{program.schemeExportable ? '是' : '否'}}</td>
                     <td class="center">{{program.practiceCreditRatio | percent}}</td>
                     <td class="center"><button class="form-control form-control-sm" (click)="edit(program)">编辑</button></td>
                 </tr>
