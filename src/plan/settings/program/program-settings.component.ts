@@ -1,4 +1,4 @@
-import {Component, Inject, ViewContainerRef} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 
 import {Dialog} from 'core/dialogs';
 import {groupBy} from 'core/utils';
@@ -16,7 +16,6 @@ export class ProgramSettingsComponent {
     grades: any[];
 
     constructor(
-        public viewContainerRef: ViewContainerRef,
         private dialog: Dialog,
         private service: ProgramSettingsService,
         @Inject('SCHEME_TEMPLATES_URL') private schemeTemplatesUrl: string,

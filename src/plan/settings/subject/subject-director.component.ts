@@ -1,4 +1,4 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {groupBy} from 'core/utils';
@@ -13,7 +13,6 @@ export class SubjectDirectorComponent {
     departments: any[];
 
     constructor(
-        public viewContainerRef: ViewContainerRef,
         private dialog: CommonDialog,
         private service: SubjectDirectorService) {
         this.service.loadList().map(items => {

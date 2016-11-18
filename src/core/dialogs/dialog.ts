@@ -5,7 +5,8 @@ import {
     EventEmitter,
     OnInit,
     ApplicationRef,
-    ViewContainerRef,
+    ComponentRef,
+    EmbeddedViewRef,
     ComponentFactoryResolver,
 } from '@angular/core';
 
@@ -15,31 +16,27 @@ import 'rxjs/add/observable/empty';
 @Injectable()
 export class Dialog {
     constructor(
-        private appRef: ApplicationRef,
+        private applicationRef: ApplicationRef,
         private injector: Injector,
         private componentFactoryResolver: ComponentFactoryResolver
     ) {}
 
     open(dialogType: Type<any>, options: any = {}): Promise<any> {
         return new Promise((resolve, reject) => {
-            // https://github.com/angular/angular/issues/9293
-            // angular 2.2.0 breaking change.
-            const rootComponent = this.appRef.components[0];
-            const viewContainerRef = rootComponent.instance.viewContainerRef;
-            if (!viewContainerRef) {
-                throw new Error('Inject ViewContainerRef into the constructor of rootComponent');
-            }
+            const location = this.getRootViewContainerNode();
+            const componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
+            const componentRef = componentFactory.create(this.injector);
+            const componentRootNode = this.getComponentRootNode(componentRef);
 
-            let componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
-            let contextInjector = viewContainerRef.parentInjector;
-            let childInjector = contextInjector;
-            let componentRef = viewContainerRef.createComponent(componentFactory, viewContainerRef.length, childInjector);
+            this.applicationRef.attachView(componentRef.hostView);
+            componentRef.onDestroy(() => {
+                this.applicationRef.detachView(componentRef.hostView);
+            });
 
-            let nativeElement = componentRef.location.nativeElement;
-            document.body.appendChild(nativeElement);
+            location.appendChild(componentRootNode);
 
-            let instance = <DynamicDialog>componentRef.instance;
-            instance.nativeElement = nativeElement;
+            const instance = <DynamicDialog>componentRef.instance;
+            instance.nativeElement = componentRootNode;
             instance.options = options;
             instance.closed.subscribe((value: any) => {
                 componentRef.destroy();
@@ -51,6 +48,18 @@ export class Dialog {
             });
         });
     };
+
+    private getRootViewContainer(): ComponentRef<any> {
+        return this.applicationRef.components[0];
+    }
+
+    private getComponentRootNode(componentRef: ComponentRef<any>): HTMLElement {
+        return (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+    }
+
+    private getRootViewContainerNode(): HTMLElement {
+        return this.getComponentRootNode(this.getRootViewContainer());
+    }
 }
 
 export interface DynamicDialog {
