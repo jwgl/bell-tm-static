@@ -8,6 +8,7 @@
     "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --bail",
     "build": "npm run build:dev",
     "clean:dist": "npm run rimraf -- dist",
+    "lint": "npm run tslint \"src/**/*.ts\" --silent -- -s",
     "rimraf": "rimraf",
     "start": "npm run watch",
     "tslint": "tslint",
@@ -42,9 +43,9 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^3.3.32",
-    "@types/core-js": "^0.9.34",
+    "@types/core-js": "^0.9.35",
     "@types/jquery": "^2.0.34",
-    "@types/lodash": "^4.14.39",
+    "@types/lodash": "^4.14.41",
     "@types/node": "^6.0.48",
     "@types/webpack": "^2.0.0",
     "angular2-template-loader": "^0.6.0",
@@ -54,10 +55,10 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.2",
-    "tslint": "^3.14.0",
-    "tslint-loader": "^2.1.5",
+    "tslint": "^4.0.2",
+    "tslint-loader": "^3.2.1",
     "typescript": "^2.0.10",
     "webpack": "^2.1.0-beta.27",
-    "webpack-merge": "^0.17.0"
+    "webpack-merge": "^1.0.2"
   }
 }
