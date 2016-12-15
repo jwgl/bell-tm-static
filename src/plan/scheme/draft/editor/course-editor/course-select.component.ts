@@ -43,9 +43,9 @@ export class CourseSelectComponent {
         Observable.combineLatest(
             Observable.merge(
                 Observable.fromEvent(this.input.nativeElement, 'compositionstart').map(() => true),
-                Observable.fromEvent(this.input.nativeElement, 'compositionend').map(() => false)
+                Observable.fromEvent(this.input.nativeElement, 'compositionend').map(() => false),
             ).startWith(false),
-            Observable.fromEvent(this.input.nativeElement, 'keyup')
+            Observable.fromEvent(this.input.nativeElement, 'keyup'),
         )
         .filter(array => !array[0])
         .map(array => array[1])

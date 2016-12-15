@@ -8,7 +8,7 @@ import {SchemeDepartmentToesComponent} from './toes/department-toes.component';
 const routes: Routes = [
     {path: '', component: SchemeDepartmentListComponent},
     {path: ':id', component: SchemeDepartmentItemComponent},
-    {path: ':id/toes', component: SchemeDepartmentToesComponent}
+    {path: ':id/toes', component: SchemeDepartmentToesComponent},
 ];
 
 @NgModule({

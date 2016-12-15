@@ -6,9 +6,8 @@ import {Directive, Attribute, ElementRef} from '@angular/core';
 export class FormControlDirective {
     constructor(
         @Attribute('col') public col: string,
-        private elementRef: ElementRef
-        ) {
-    }
+        private elementRef: ElementRef,
+    ) {}
 
     set id(value: string) {
         this.elementRef.nativeElement.setAttribute('id', value);

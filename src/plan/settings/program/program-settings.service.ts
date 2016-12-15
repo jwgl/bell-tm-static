@@ -7,7 +7,7 @@ import {ApiUrl, Rest} from 'core/rest';
 export class ProgramSettingsService {
     constructor(
         private rest: Rest,
-        private api: ApiUrl
+        private api: ApiUrl,
     ) {}
 
     loadList(grade: number): Observable<any[]> {

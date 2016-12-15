@@ -4,6 +4,4 @@ import {Component} from '@angular/core';
     selector: 'booking-form-container',
     template: '<router-outlet></router-outlet>',
 })
-export class BookingFormComponent {
-    constructor() {}
-}
+export class BookingFormComponent {}

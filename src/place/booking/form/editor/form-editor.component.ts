@@ -19,7 +19,7 @@ export class BookingFormEditorComponent {
     private form: BookingForm;
     private departments: any[];
     private bookingTypes: any[];
-    private findPlaceOptions: any = {}
+    private findPlaceOptions: any = {};
     private saving = false;
 
     constructor(

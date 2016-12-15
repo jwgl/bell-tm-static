@@ -115,7 +115,7 @@ export class SchemeDraftEditorComponent {
         this.dialog.list(
             `导入课程 - ${property.name}`,
             this.departmentSchemesApiUrl.replace('${departmentId}', this.vm.departmentId),
-            (item: any) => `${item.grade}级${item.subjectName}`
+            (item: any) => `${item.grade}级${item.subjectName}`,
         ).then(id => {
             this.service.loadPropertyCourses(id, property.id).subscribe(courses => {
                 courses.forEach(course => {
@@ -132,7 +132,7 @@ export class SchemeDraftEditorComponent {
             `导入课程 - ${direction.name}`,
             this.departmentDeirectionsApiUrl.replace('${departmentId}', this.vm.departmentId),
             (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
-            (item: any) => `${item.schemeId}:${item.directionId}`
+            (item: any) => `${item.schemeId}:${item.directionId}`,
         ).then(result => {
             let arr = result.split(':');
             this.service.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
@@ -150,19 +150,19 @@ export class SchemeDraftEditorComponent {
             case EditMode.Create:
                 this.service.create(this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
-                    error => alert(JSON.stringify(error))
+                    error => alert(JSON.stringify(error)),
                 );
                 break;
             case EditMode.Revise:
                 this.service.revise(this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
-                    error => alert(JSON.stringify(error))
+                    error => alert(JSON.stringify(error)),
                 );
                 break;
             case EditMode.Edit:
                 this.service.update(this.vm.id, this.vm.toServerDto()).subscribe(
                     id => this.router.navigate(['/', id]),
-                    error => alert(JSON.stringify(error))
+                    error => alert(JSON.stringify(error)),
                 );
                 break;
         }

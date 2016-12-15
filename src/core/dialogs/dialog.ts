@@ -18,7 +18,7 @@ export class Dialog {
     constructor(
         private applicationRef: ApplicationRef,
         private injector: Injector,
-        private componentFactoryResolver: ComponentFactoryResolver
+        private componentFactoryResolver: ComponentFactoryResolver,
     ) {}
 
     open(dialogType: Type<any>, options: any = {}): Promise<any> {

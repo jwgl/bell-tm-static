@@ -113,7 +113,7 @@ export class VisionDraftEditorComponent {
         this.dialog.list(
             '选择导入的专业',
             this.departmentVisionsUrl.replace('${departmentId}', this.vm.departmentId),
-            (item: any) => `${item.grade}级${item.subjectName}`
+            (item: any) => `${item.grade}级${item.subjectName}`,
         ).then(id => {
             this.service.loadDataForImport(id).subscribe(vision => {
                this.vm.objective = vision.objective;

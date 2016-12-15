@@ -23,7 +23,7 @@ import {NavbarService} from './navbar.service';
     ],
     providers: [
         NavbarService,
-    ]
+    ],
 })
 class MainModule {}
 

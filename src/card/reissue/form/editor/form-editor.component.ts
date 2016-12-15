@@ -20,7 +20,7 @@ export class ReissueFormEditorComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: ReissueFormService
+        private service: ReissueFormService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;

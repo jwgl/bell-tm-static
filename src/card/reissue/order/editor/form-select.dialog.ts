@@ -28,7 +28,7 @@ export class ReissueFormSelectDialog extends BaseDialog {
             result.forms = _.differenceWith(
                 result.forms,
                 this.options.order.items,
-                (form: any, item: any) => form.id === item.formId
+                (form: any, item: any) => form.id === item.formId,
             );
         });
     }

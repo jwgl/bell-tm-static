@@ -163,9 +163,9 @@ export class Scheme {
             // 该属性的最小学分
             let minTotalCredit = property.minTotalCredit;
             // 获取不等于最小学分的方向。
-            let results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d =>
-                `${d.name.replace('方向','')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`
-            );
+            let results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d => {
+                return `${d.name.replace('方向','')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`;
+            });
             if (results.length) {
                 return `（${results.join(',')}）`;
             } else {

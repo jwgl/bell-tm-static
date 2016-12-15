@@ -20,7 +20,7 @@ const ROUTER_CONFIG = [
         BookingFormListComponent,
     ],
     exports: [
-        BookingFormListComponent
+        BookingFormListComponent,
     ],
 })
 export class BookingFormListModule {}

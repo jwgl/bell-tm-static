@@ -4,6 +4,4 @@ import {Component} from '@angular/core';
     selector: 'reissue-order-container',
     template: '<router-outlet></router-outlet>',
 })
-export class ReissueOrderComponent {
-    constructor() {}
-}
+export class ReissueOrderComponent {}

@@ -14,9 +14,9 @@ export function typeahead(element: ElementRef, minLength = 1, debounceTime = 250
     return Observable.combineLatest(
         Observable.merge(
             Observable.fromEvent(element.nativeElement, 'compositionstart').map(() => true),
-            Observable.fromEvent(element.nativeElement, 'compositionend').map(() => false)
+            Observable.fromEvent(element.nativeElement, 'compositionend').map(() => false),
         ).startWith(false),
-        Observable.fromEvent(element.nativeElement, 'keyup')
+        Observable.fromEvent(element.nativeElement, 'keyup'),
     )
     .filter(array => !array[0])
     .map(array => array[1])

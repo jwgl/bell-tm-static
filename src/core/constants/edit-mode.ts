@@ -1,5 +1,5 @@
 export enum EditMode {
     Create,
     Edit,
-    Revise
+    Revise,
 }

@@ -34,11 +34,13 @@ BookingForm.prototype.removeItem = function (this: BookingForm, item: BookingIte
 };
 
 BookingForm.prototype.conflict = function(this: BookingForm, item: BookingItem): boolean {
-    return this.items.some(it => it.place.id === item.place.id
-        && it.dayOfWeek === item.dayOfWeek
-        && it.startWeek <= item.endWeek && it.endWeek >= item.startWeek
-        && _.intersection(it.section.includes, item.section.includes).length > 0
-    );
+    return this.items.some(it => {
+        return it.place.id === item.place.id
+            && it.dayOfWeek === item.dayOfWeek
+            && it.startWeek <= item.endWeek
+            && it.endWeek >= item.startWeek
+            && _.intersection(it.section.includes, item.section.includes).length > 0;
+    });
 };
 
 BookingForm.prototype.occupied = function(this: BookingForm): boolean {

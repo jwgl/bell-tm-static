@@ -20,7 +20,7 @@ const ROUTER_CONFIG = [
         ReissueFormListComponent,
     ],
     exports: [
-        ReissueFormListComponent
+        ReissueFormListComponent,
     ],
 })
 export class ReissueFormListModule {}
