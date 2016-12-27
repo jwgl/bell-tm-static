@@ -4,7 +4,7 @@ const helpers = require('./helpers');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
 const entry = require('../webpack.entry');
@@ -23,34 +23,35 @@ module.exports = function(options) {
             'lodash': '_',
         },
         module: {
-            rules: [
-                {
-                    test: /\.ts$/,
-                    loaders: ['awesome-typescript-loader', 'angular2-template-loader'],
-                    exclude: [/\.(spec|e2e)\.ts$/]
-                },
-                {
-                    test: /\.html$/,
-                    loaders: ['raw-loader']
-                },
-                {
-                    test: /\.scss$/,
-                    loaders: ['raw-loader', 'sass-loader']
-                }
-            ]
+            rules: [{
+                test: /\.ts$/,
+                use: [
+                    'awesome-typescript-loader',
+                    'angular2-template-loader'
+                ],
+                exclude: [/\.(spec|e2e)\.ts$/]
+            }, {
+                test: /\.html$/,
+                use: ['raw-loader']
+            }, {
+                test: /\.scss$/,
+                use: [
+                    'raw-loader',
+                    'sass-loader'
+                ]
+            }]
         },
         plugins: [
-            new ForkCheckerPlugin(),
+            new CheckerPlugin(),
             new CommonsChunkPlugin({
                 name: ['polyfills', 'vendor'].reverse()
             }),
             // See: https://github.com/angular/angular/issues/11580
             new ContextReplacementPlugin(
-                /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+                /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
                 helpers.root('src')
             ),
             new CopyWebpackPlugin([
-                { to: 'js/lib',    from: './node_modules/moment/min/moment-with-locales.min.js' },
                 { to: 'js/lib',    from: './node_modules/moment/min/moment.min.js' },
                 { to: 'js/lib/moment.zh-cn.js', from: './node_modules/moment/locale/zh-cn.js' },
                 { to: 'js/lib',    from: './node_modules/markdown-it/dist/markdown-it.min.js' },
@@ -71,6 +72,7 @@ module.exports = function(options) {
         node: {
             global: true,
             crypto: 'empty',
+            process: true,
             module: false,
             clearImmediate: false,
             setImmediate: false
