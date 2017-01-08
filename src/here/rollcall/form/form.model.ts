@@ -220,9 +220,7 @@ export class RollcallForm {
     }
 
     setActive(student: Student): void {
-        console.log(student);
         this.activeIndex = this.visibleStudents.indexOf(student);
-        console.log(this.activeIndex);
     }
 
     get activeStudent(): Student {

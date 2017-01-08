@@ -73,7 +73,6 @@ export class RollcallListViewComponent extends BaseRollcallView implements OnIni
     }
 
     onKeydown(event: KeyboardEvent) {
-        console.log(event.key);
         if (this.operations[event.key]) {
             this.operations[event.key].bind(this)();
             this.scrollItem();

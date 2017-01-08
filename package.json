@@ -32,10 +32,10 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
-    "lodash": "^4.17.3",
+    "lodash": "^4.17.4",
     "markdown-it": "^8.2.2",
     "moment": "^2.17.1",
-    "rxjs": "^5.0.2",
+    "rxjs": "^5.0.3",
     "tether": "^1.4.0",
     "ts-helpers": "^1.1.2",
     "zone.js": "^0.7.4"
@@ -43,10 +43,10 @@
   "devDependencies": {
     "@types/bootstrap": "^3.3.32",
     "@types/core-js": "^0.9.35",
-    "@types/jquery": "^2.0.34",
-    "@types/lodash": "^4.14.44",
-    "@types/node": "^6.0.54",
-    "@types/webpack": "^2.0.0",
+    "@types/jquery": "^2.0.39",
+    "@types/lodash": "^4.14.47",
+    "@types/node": "^6.0.58",
+    "@types/webpack": "^2.1.0",
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.0.0-beta.17",
     "copy-webpack-plugin": "^4.0.1",
@@ -54,10 +54,10 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.1.1",
-    "tslint": "^4.2.0",
+    "tslint": "^4.3.1",
     "tslint-loader": "^3.3.0",
     "typescript": "^2.0.10",
     "webpack": "^2.2.0-rc.3",
-    "webpack-merge": "^2.0.0"
+    "webpack-merge": "^2.3.1"
   }
 }
