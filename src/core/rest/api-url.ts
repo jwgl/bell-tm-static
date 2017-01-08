@@ -7,9 +7,9 @@ export const BASE_URL = new OpaqueToken('BASE_URL');
 export class ApiUrl {
     constructor(@Inject(API_URL) private apiUrl: string) {
         if (apiUrl.indexOf('${userId}') !== -1) {
-            const match = window.location.href.match(/\/users\/([^\/]+)\//);
+            const match = window.location.href.match(/\/(users|teachers|students)\/([^\/]+)\//);
             if (match) {
-                this.apiUrl = this.apiUrl.replace('${userId}', match[1]);
+                this.apiUrl = this.apiUrl.replace('${userId}', match[2]);
             }
         }
 

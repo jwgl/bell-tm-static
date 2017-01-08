@@ -1,0 +1,37 @@
+<div class="row" tabindex="-1" *ngIf="rollcallForm">
+    <div class="tips-pane col-md-3">
+        <span class="label label-info">操作提示</span>
+        <ul class="list-unstyled">
+            <li>回车键：旷课/取消/查看假条</li>
+            <li>上下箭头：选择</li>
+            <li>数字1：旷课</li>
+            <li>数字2：迟到</li>
+            <li>数字3：早退</li>
+            <li>数字4：调课</li>
+        </ul>
+    </div>
+    <div class="list-pane col-md-6" tabindex="-1" (keydown)="onKeydown($event)">
+        <ul>
+            <li *ngFor="let student of rollcallForm.visibleStudents"
+                [class.active]="student == rollcallForm.activeStudent"
+                (click)="onClick(student)">
+                <span class="name">{{student.name}}</span>
+                <span class="statis">{{student.statis}}</span>
+                <label *ngIf="student.isFreeListen" class="tag tag-default">免听</label>
+                <label *ngIf="student.isCancelExam" class="tag tag-default">取消考试资格</label>
+                <label *ngIf="student.leaveRequest" class="tag tag-default">请假</label>
+                <ng-container *ngFor="let key of typeKeys">
+                    <label *ngIf="hasType(student, key)" class="tag" [ngClass]="'tag-' + key">{{label(key)}}</label>
+                </ng-container>
+            </li>
+        </ul>
+    </div>
+    <div class="detail-pane col-md-3">
+        <ul class="list-unstyled" *ngIf="rollcallForm.activeStudent">
+            <li>学号：{{rollcallForm.activeStudent.id}}</li>
+            <li>姓名：{{rollcallForm.activeStudent.name}}</li>
+            <li>专业：{{rollcallForm.activeStudent.subject}}</li>
+            <li>班级：{{rollcallForm.activeStudent.adminClass}}</li>
+        </ul>
+    </div>
+</div>

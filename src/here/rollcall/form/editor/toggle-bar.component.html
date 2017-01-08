@@ -1,0 +1,3 @@
+<div class="btn-group">
+    <button *ngFor="let key of typeKeys" class="btn btn-sm" [ngClass]="'btn-outline-' + key" [class.active]="hasType(key)" (click)="toggleType(key);$event.target.blur();">{{label(key)}}</button>
+</div>

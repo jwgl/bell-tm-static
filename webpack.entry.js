@@ -19,4 +19,5 @@ module.exports = {
     'card/reissue/order':     './src/card/reissue/order/main.ts',
     'place/booking/form':     './src/place/booking/form/main.ts',
     'place/booking/review':   './src/place/booking/review/main.ts',
+    'here/rollcall/form':     './src/here/rollcall/form/main.ts',
 };

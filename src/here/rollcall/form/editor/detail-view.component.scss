@@ -1,0 +1,19 @@
+.table {
+    th {
+        white-space: nowrap;
+        text-align: center;
+    }
+    td {
+        white-space: nowrap;
+        border-top-width: 0;
+        vertical-align: middle;
+
+        &:nth-child(2) {
+            text-align: center;
+        }
+
+        &:nth-child(7) {
+            width: 100%;
+        }
+    }
+}

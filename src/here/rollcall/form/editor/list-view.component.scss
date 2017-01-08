@@ -1,0 +1,83 @@
+@import 'node_modules/bootstrap/scss/_mixins.scss';
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import './base-view.component.scss';
+
+$item-height: 80px;
+$item-font-size: 60px;
+$item-count: 5;
+$list-border: 1px;
+
+.list-pane {
+	outline: none;
+	outline-style: none;
+	box-shadow: none;
+	border-color: transparent;
+
+    ul {
+      	cursor: default;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        list-style: none;
+        padding: 0px;
+        margin: 0px;
+        border: solid $list-border $gray-light;
+        font-size: $item-font-size;
+        height: $item-height * $item-count + 2 * $list-border;
+        position: relative;
+
+        li {
+          	background-color: #fff;
+            margin: 0px;
+            zoom: 1;
+            width: 100%;
+            line-height: $item-height;
+            overflow: hidden;
+            padding: 0px 10px;
+
+            label {
+                line-height: 22px;
+                font-size: 20px;
+                font-weight: normal;
+                margin-bottom: 0;
+            }
+
+            .name {
+                zoom: 1;
+            }
+
+            .statis {
+                position: absolute;
+                right: 10px;
+                padding-top: 10px;
+                line-height: 22px;
+                font-size:20px;
+                zoom: 1;
+                vertical-align: top;
+            }
+
+            &.active {
+                background-color: $component-active-bg;
+
+                .name, .statis {
+                    color: $component-active-color;
+                }
+            }
+        }
+    }
+}
+
+.tag-absent {
+  @include tag-variant($absent-bg);
+}
+
+.tag-late {
+  @include tag-variant($late-bg);
+}
+
+.tag-early {
+  @include tag-variant($early-bg);
+}
+
+.tag-attend {
+  @include tag-variant($attend-bg);
+}

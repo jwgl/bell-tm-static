@@ -1,0 +1,26 @@
+<table class="table table-sm" *ngIf="rollcallForm">
+    <thead>
+        <tr>
+            <th>操作</th>
+            <th>序号</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>旷/迟/退/假</th>
+            <th>班级</th>
+            <th>专业</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of rollcallForm.students; let i = index" [class.hidden-xs-up]="!student.visible">
+            <td>
+                <rollcall-toggle-bar [rollcallType]="student.rollcallType" (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
+            </td>
+            <td>{{i + 1}}</td>
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td>{{student.statis}}</td>
+            <td>{{student.adminClass}}</td>
+            <td>{{student.subject}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+.table {
+    border-bottom: solid $table-border-width $table-border-color;
+
+    th {
+        border-top-width: 0;
+        text-align: center;
+    }
+    td {
+        &.c1 {
+            width: 8%;
+            border-right: solid $table-border-width $table-border-color;
+        }
+        &.c2 {
+            width: 4.5%;
+            border-right: solid $table-border-width $table-border-color;
+        }
+        &.cn {
+            width: 12.5%;
+        }
+        &.active {
+            border-left: solid $table-border-width $table-border-color;
+            border-right: solid $table-border-width $table-border-color;
+            background-color: $gray-lightest;
+        }
+        vertical-align: middle;
+        text-align: center;
+    }
+}

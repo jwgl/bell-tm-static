@@ -1,0 +1,42 @@
+@import 'node_modules/bootstrap/scss/_mixins.scss';
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import 'node_modules/bootstrap/scss/_buttons.scss';
+@import './base-view.component.scss';
+
+$btn-late-bg:   $late-bg;
+$btn-absent-bg: $absent-bg;
+$btn-early-bg:  $early-bg;
+$btn-attend-bg: $attend-bg;
+
+@mixin rollcall-button-variant($color) {
+    @include button-outline-variant($color);
+    border-color: #ccc;
+    color: #333;
+
+    @include hover {
+        color: #000;
+        background-color: darken($btn-secondary-bg, 10%);
+        border-color: darken($btn-secondary-border, 12%);
+    }
+}
+
+.btn-outline-late {
+    @include rollcall-button-variant($btn-late-bg);
+}
+
+.btn-outline-absent {
+    @include rollcall-button-variant($btn-absent-bg);
+}
+
+.btn-outline-early {
+    @include rollcall-button-variant($btn-early-bg);
+}
+
+.btn-outline-attend {
+    @include rollcall-button-variant($btn-attend-bg);
+}
+
+.btn-group {
+    display: flex;
+    white-space: nowrap;
+}
