@@ -66,18 +66,18 @@ $list-border: 1px;
     }
 }
 
-.tag-absent {
-  @include tag-variant($absent-bg);
+.badge-absent {
+  @include badge-variant($absent-bg);
 }
 
-.tag-late {
-  @include tag-variant($late-bg);
+.badge-late {
+  @include badge-variant($late-bg);
 }
 
-.tag-early {
-  @include tag-variant($early-bg);
+.badge-early {
+  @include badge-variant($early-bg);
 }
 
-.tag-attend {
-  @include tag-variant($attend-bg);
+.badge-attend {
+  @include badge-variant($attend-bg);
 }

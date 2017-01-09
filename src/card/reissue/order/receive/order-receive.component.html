@@ -36,7 +36,7 @@
                 <th>专业</th>
                 <th>申请时间</th>
                 <th>状态</th>
-                <th class="text-xs-center">
+                <th class="text-center">
                     <input type="checkbox"
                            (change)="receiveAll(vm.items, $event.target.checked)"
                            [checked]="vm.allFinished">
@@ -52,7 +52,7 @@
                 <td>{{item.subject}}</td>
                 <td>{{item.applyDate | moment}}</td>
                 <td>{{item.status | formStatus}}</td>
-                <td class="text-xs-center">
+                <td class="text-center">
                     <input type="checkbox" (change)="receive(item, $event.target.checked)" [checked]="item.status == 'FINISHED'">
                 </td>
             </tr>

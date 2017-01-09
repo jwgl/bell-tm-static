@@ -18,6 +18,6 @@
 </td>
 <td>{{departmentName}}</td>
 <td>
-    <label *ngIf="schemeCourse.exported" class="tag tag-success">已导入</label>
+    <label *ngIf="schemeCourse.exported" class="badge badge-success">已导入</label>
     <button *ngIf="!schemeCourse.exported" type="button" class="btn btn-secondary btn-sm" (click)="edit.emit()">编辑</button>
 </td>

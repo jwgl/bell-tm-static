@@ -7,8 +7,8 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h5 class="modal-title">{{title}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                    <h4 class="modal-title">{{title}}</h4>
                 </div>
                 <div class="modal-body">
                     <ng-content select="modal-body"></ng-content>

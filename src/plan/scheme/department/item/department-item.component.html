@@ -1,10 +1,10 @@
 <div class='scheme' *ngIf="vm">
     <div class="btn-toolbar">
-        <div class="btn-group float-xs-right">
-            <a *ngIf="vm.latest && vm.exportable" class="btn btn-secondary" [routerLink]="['./toes']">导入教务系统</a>
-        </div>
-        <div class="btn-group float-xs-right">
+        <div class="btn-group ml-auto mr-2">
             <button class="btn btn-secondary" data-toggle="button" (click)="toggleShowDiff()">{{showDiffLabel}}</button>
+        </div>
+        <div class="btn-group">
+            <a *ngIf="vm.latest && vm.exportable" class="btn btn-secondary" [routerLink]="['./toes']">导入教务系统</a>
         </div>
     </div>
     <scheme-viewer [scheme]="vm" [showDiff]="showDiff"></scheme-viewer>

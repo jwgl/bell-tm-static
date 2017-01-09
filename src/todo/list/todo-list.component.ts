@@ -11,8 +11,8 @@ import {TodoService} from '../todo.service';
 })
 export class TodoListComponent {
     statuses: any[] = [
-        {status: 'open',   label: '待处理', class: 'tag-success'},
-        {status: 'closed', label: '已处理', class: 'tag-danger'},
+        {status: 'open',   label: '待处理', class: 'badge-success'},
+        {status: 'closed', label: '已处理', class: 'badge-danger'},
     ];
 
     private counts: {[key: string]: number};

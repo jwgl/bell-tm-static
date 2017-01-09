@@ -47,28 +47,28 @@ export class NavitemComponent {
 @Component({
     selector: 'header',
     template: `
-    <div class="container">
-        <nav>
-            <div class="clearfix">
-                <button class="navbar-toggler float-xs-right hidden-sm-up" type="button"
-                        data-toggle="collapse" data-target="#bd-main-nav"></button>
-                <a class="navbar-brand hidden-sm-up" href="/">TM</a>
-            </div>
-            <div class="collapse navbar-toggleable-xs" id="bd-main-nav">
-                <div class="navbar-brand logo hidden-xs-down"></div>
-                <ul class="nav navbar-nav" *ngIf="menus">
-                    <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
-                </ul>
-                <ul class="nav navbar-nav float-sm-right" *ngIf="menus">
-                    <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
-                    <li class="nav-item">
-                        <form #logoutForm action="/logout" method="post"></form>
-                        <a class="nav-link" href="#" (click)="logout($event)">退出</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <nav class="container">
+        <div class="d-flex justify-content-between hidden-lg-up">
+            <a class="navbar-brand hidden-sm-up" href="/">TM</a>
+            <button class="navbar-toggler collapsed" type="button"
+                    data-toggle="collapse" data-target="#bd-main-nav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse" id="bd-main-nav">
+            <div class="navbar-brand logo hidden-xs-down"></div>
+            <ul class="nav navbar-nav mr-auto" *ngIf="menus">
+                <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
+            </ul>
+            <ul class="nav navbar-nav" *ngIf="menus">
+                <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
+                <li class="nav-item">
+                    <form #logoutForm action="/logout" method="post"></form>
+                    <a class="nav-link" href="#" (click)="logout($event)">退出</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     `,
 })
 export class NavbarComponent {

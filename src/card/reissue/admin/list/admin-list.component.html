@@ -1,11 +1,14 @@
 <div class="row" *ngIf="counts">
     <div class="col-md-3">
-        <div class="list-group" >
-            <a *ngFor="let item of statuses" [routerLink]="['/list', item.status]" class="list-group-item" routerLinkActive="active">
-                <span class="tag tag-pill float-xs-right" [ngClass]="item.class">
+        <div class="list-group">
+            <a *ngFor="let item of statuses"
+                class="list-group-item list-group-item-action justify-content-between"
+                [routerLink]="['/list', item.status]"
+                routerLinkActive="active">
+                {{item.label}}
+                <span class="badge badge-pill " [ngClass]="item.class">
                     {{counts[item.status] ? counts[item.status] : 0}}
                 </span>
-                {{item.label}}
             </a>
         </div>
     </div>

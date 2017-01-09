@@ -17,11 +17,11 @@
                 (click)="onClick(student)">
                 <span class="name">{{student.name}}</span>
                 <span class="statis">{{student.statis}}</span>
-                <label *ngIf="student.isFreeListen" class="tag tag-default">免听</label>
-                <label *ngIf="student.isCancelExam" class="tag tag-default">取消考试资格</label>
-                <label *ngIf="student.leaveRequest" class="tag tag-default">请假</label>
+                <label *ngIf="student.isFreeListen" class="badge badge-default">免听</label>
+                <label *ngIf="student.isCancelExam" class="badge badge-default">取消考试资格</label>
+                <label *ngIf="student.leaveRequest" class="badge badge-default">请假</label>
                 <ng-container *ngFor="let key of typeKeys">
-                    <label *ngIf="hasType(student, key)" class="tag" [ngClass]="'tag-' + key">{{label(key)}}</label>
+                    <label *ngIf="hasType(student, key)" class="badge" [ngClass]="'badge-' + key">{{label(key)}}</label>
                 </ng-container>
             </li>
         </ul>

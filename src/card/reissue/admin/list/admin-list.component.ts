@@ -13,10 +13,10 @@ import {ReissueAdminService} from '../admin.service';
 })
 export class ReissueAdminListComponent {
     statuses: any[] = [
-        {status: 'SUBMITTED', label: '待审核', class: 'tag-success'},
-        {status: 'CHECKED',   label: '已审核', class: 'tag-info'},
-        {status: 'PROGRESS',  label: '制作中', class: 'tag-info'},
-        {status: 'FINISHED',  label: '已完成', class: 'tag-danger'},
+        {status: 'SUBMITTED', label: '待审核', class: 'badge-success'},
+        {status: 'CHECKED',   label: '已审核', class: 'badge-info'},
+        {status: 'PROGRESS',  label: '制作中', class: 'badge-info'},
+        {status: 'FINISHED',  label: '已完成', class: 'badge-danger'},
     ];
 
     private counts: {[key: string]: number};

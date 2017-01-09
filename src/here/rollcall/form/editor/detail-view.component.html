@@ -11,11 +11,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let student of rollcallForm.students; let i = index" [class.hidden-xs-up]="!student.visible">
+        <tr *ngFor="let student of rollcallForm.visibleStudents">
             <td>
                 <rollcall-toggle-bar [rollcallType]="student.rollcallType" (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
             </td>
-            <td>{{i + 1}}</td>
+            <td>{{student.index}}</td>
             <td>{{student.id}}</td>
             <td>{{student.name}}</td>
             <td>{{student.statis}}</td>
