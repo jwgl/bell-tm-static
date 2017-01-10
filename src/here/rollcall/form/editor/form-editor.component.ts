@@ -1,5 +1,8 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/mapTo';
 
 import {RollcallFormService} from '../form.service';
 import {RollcallForm, RollcallConfig} from '../form.model';
@@ -10,7 +13,6 @@ import {RollcallForm, RollcallConfig} from '../form.model';
 })
 export class RollcallFormEditorComponent implements OnInit {
     rollcallForm: RollcallForm;
-    formLoaded = new EventEmitter<void>();
 
     constructor(
         private router: Router,
@@ -19,21 +21,9 @@ export class RollcallFormEditorComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            if (this.service.config) {
-                this.loadForm(params);
-            } else {
-                this.service.configLoaded.subscribe(_ => {
-                    this.loadForm(params);
-                });
-            }
-        });
-    }
-
-    loadForm(params: any) {
-        this.service.loadDataForCreate(params).subscribe(dto => {
-            this.rollcallForm = new RollcallForm(dto, this.service.config);
-            this.formLoaded.emit();
-        });
+        this.route.params
+            .mergeMap(params => this.service.scheduleLoaded.mapTo(params))
+            .mergeMap(params => this.service.loadDataForCreate(params))
+            .subscribe(dto => this.rollcallForm = new RollcallForm(dto, this.service.config));
     }
 }

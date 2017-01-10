@@ -52,26 +52,13 @@ export class RollcallScheduleComponent implements OnInit {
             }
         }
 
-        if (this.service.term) {
+        this.service.scheduleLoaded.subscribe(v => {
             let term = this.service.term;
             this.weeks = _.range(term.startWeek, term.endWeek + 1);
             this.currentWeek = term.currentWeek;
-        } else {
-            this.service.termLoaded.subscribe(term => {
-                this.weeks = _.range(term.startWeek, term.endWeek + 1);
-                this.currentWeek = term.currentWeek;
-            });
-        }
-
-        if (this.service.schedules) {
             this.schedules = this.service.schedules;
             this.fillMap();
-        } else {
-            this.service.schedulesLoaded.subscribe(schedules => {
-                this.schedules = schedules;
-                this.fillMap();
-            });
-        }
+        });
     }
 
     fillMap() {

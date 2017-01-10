@@ -1,30 +1,33 @@
-import {Component, OnInit, Host, ViewChild, ElementRef} from '@angular/core';
+import {Component, Host, ViewChild, ElementRef} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-
-import * as $ from 'jquery';
-import * as _ from 'lodash';
 
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallFormService} from '../form.service';
 import {RollcallType, RollcallTypes, RollcallTypeKeys, Student} from '../form.model';
 
+const PageSize = 5;
+
 @Component({
     styleUrls: ['list-view.component.scss'],
     templateUrl: 'list-view.component.html',
-    host: {
-        '(document: click)': 'focusList()',
-    },
 })
-export class RollcallListViewComponent extends BaseRollcallView implements OnInit {
-    typeKeys: string[];
+export class RollcallListViewComponent extends BaseRollcallView {
+    @ViewChild('list') list: ElementRef;
+
+    typeKeys = RollcallTypeKeys;
+
     operations: {[key: string]: () => void} = {
         'PageUp'    : this.prevPage,
         'PageDown'  : this.nextPage,
         'ArrowUp'   : this.prevItem,
         'ArrowLeft' : this.prevItem,
+        'Up'        : this.prevItem,
+        'Left'      : this.prevItem,
         'ArrowDown' : this.nextItem,
         'ArrowRight': this.nextItem,
+        'Down'      : this.nextItem,
+        'Right'     : this.nextItem,
         'Home'      : this.first,
         'End'       : this.last,
         'Enter'     : this.toggleLocal,
@@ -32,7 +35,6 @@ export class RollcallListViewComponent extends BaseRollcallView implements OnIni
         '2'         : this.toggleLate,
         '3'         : this.toggleEarly,
         '4'         : this.toggleAttend,
-
     };
 
     constructor(
@@ -42,21 +44,6 @@ export class RollcallListViewComponent extends BaseRollcallView implements OnIni
         @Host() editor: RollcallFormEditorComponent,
     ) {
         super(editor);
-        this.typeKeys = RollcallTypeKeys;
-    }
-
-    ngOnInit() {
-        this.editor.formLoaded.subscribe(() => {
-            this.focusList();
-        });
-        this.focusList();
-    }
-
-    focusList() {
-        setTimeout(() => {
-            $('.list-pane').focus();
-            this.scrollItem();
-        });
     }
 
     hasType(student: Student, key: string): boolean {
@@ -73,18 +60,19 @@ export class RollcallListViewComponent extends BaseRollcallView implements OnIni
     }
 
     onKeydown(event: KeyboardEvent) {
-        if (this.operations[event.key]) {
-            this.operations[event.key].bind(this)();
+        let operation = this.operations[event.key];
+        if (operation) {
+            operation.bind(this)();
             this.scrollItem();
         }
     }
 
     prevPage() {
-        this.rollcallForm.activatePrev(5);
+        this.rollcallForm.activatePrev(PageSize);
     }
 
     nextPage() {
-        this.rollcallForm.activateNext(5);
+        this.rollcallForm.activateNext(PageSize);
     }
 
     prevItem() {
@@ -155,30 +143,26 @@ export class RollcallListViewComponent extends BaseRollcallView implements OnIni
         }
     }
 
-    hasScroll($list: JQuery): boolean {
-        return $list.height() < $list[$.fn.prop ? 'prop' : 'attr']('scrollHeight');
-    }
-
     scrollItem(click = false) {
-        let $list: JQuery = $('.list-pane ul');
-        if (this.hasScroll($list)) {
-            let itemCount = this.rollcallForm.visibleStudents.length;
+        let ul = this.list.nativeElement as HTMLElement;
+        let itemCount = this.rollcallForm.visibleStudents.length;
+        if (itemCount > PageSize) {
             let itemIndex = this.rollcallForm.activeIndex;
-            let listHeight = $list.height();
-            let itemHeight = $list.children().first().height();
-            let favorPosition = Math.floor(listHeight / itemHeight / 2);
+            let li = ul.children[itemIndex] as HTMLElement;
+
+            let listHeight = ul.offsetHeight;
+            let itemHeight = li.offsetHeight;
+            let favorPosition = Math.floor(PageSize / 2);
             let favorHeight = favorPosition * itemHeight;
-            let borderWidth = ($list.outerHeight() - $list.innerHeight()) / 2;
-            let offset = $list.children().eq(itemIndex).offset().top - $list.offset().top - borderWidth;
-            let scroll = $list.scrollTop();
-            if (!click && itemIndex > favorPosition && offset < favorHeight) {
-                $list.scrollTop(scroll + offset - favorHeight);
-            } else if (offset < 0) {
-                $list.scrollTop(scroll + offset);
-            } else if (!click && itemIndex + favorPosition < itemCount && offset > favorHeight) {
-                $list.scrollTop(scroll + offset - favorHeight);
-            } else if (offset + itemHeight >= listHeight) {
-                $list.scrollTop(scroll + offset - listHeight + itemHeight);
+
+            if (!click && itemIndex > favorPosition && li.offsetTop - ul.scrollTop < favorHeight) {
+                ul.scrollTop = li.offsetTop - favorHeight;
+            } else if (li.offsetTop - ul.scrollTop < 0) {
+                ul.scrollTop = li.offsetTop;
+            } else if (!click && itemIndex + favorPosition < itemCount && li.offsetTop - ul.scrollTop > favorHeight) {
+                ul.scrollTop = li.offsetTop - favorHeight;
+            } else if (li.offsetTop - ul.scrollTop + itemHeight >= listHeight) {
+                ul.scrollTop = li.offsetTop - listHeight + itemHeight;
             }
         }
     }

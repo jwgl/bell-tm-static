@@ -1,4 +1,4 @@
-import {Component, OnInit, Host} from '@angular/core';
+import {Component, Host} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {BaseRollcallView} from './base-view.component';
@@ -9,7 +9,7 @@ import {RollcallFormService} from '../form.service';
     styleUrls: ['detail-view.component.scss'],
     templateUrl: 'detail-view.component.html',
 })
-export class RollcallDetailViewComponent extends BaseRollcallView implements OnInit {
+export class RollcallDetailViewComponent extends BaseRollcallView {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -17,8 +17,5 @@ export class RollcallDetailViewComponent extends BaseRollcallView implements OnI
         @Host() editor: RollcallFormEditorComponent,
     ) {
         super(editor);
-    }
-
-    ngOnInit() {
     }
 }

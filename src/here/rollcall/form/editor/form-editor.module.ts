@@ -10,6 +10,7 @@ import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallDetailViewComponent} from './detail-view.component';
 import {RollcallListViewComponent} from './list-view.component';
 import {RollcallToggleBarComponent} from './toggle-bar.component';
+import {FocusDirective} from './focus.directive';
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import {RollcallToggleBarComponent} from './toggle-bar.component';
         RollcallDetailViewComponent,
         RollcallListViewComponent,
         RollcallToggleBarComponent,
+        FocusDirective,
     ],
 })
 export class RoolcallFormEditorModule {}
