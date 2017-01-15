@@ -3,8 +3,9 @@
         <a class="btn btn-secondary" routerLink="/schedules">课表</a>
     </div>
     <div class="btn-group ml-auto">
-        <a class="btn btn-secondary" routerLink="detail" routerLinkActive="active">detail</a>
-        <a class="btn btn-secondary" routerLink="list" routerLinkActive="active">list</a>
+        <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-table"></i></button>
+        <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-list"></i></button>
+        <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-th"></i></button>
     </div>
 </div>
 <router-outlet></router-outlet>

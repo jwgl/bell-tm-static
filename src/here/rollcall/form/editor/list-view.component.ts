@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallFormService} from '../form.service';
-import {RollcallType, RollcallTypes, RollcallTypeKeys, Student} from '../form.model';
+import {RollcallType, RollcallTypes, RollcallKeys, Student} from '../form.model';
 
 const PageSize = 5;
 
@@ -15,26 +15,24 @@ const PageSize = 5;
 export class RollcallListViewComponent extends BaseRollcallView {
     @ViewChild('list') list: ElementRef;
 
-    typeKeys = RollcallTypeKeys;
-
-    operations: {[key: string]: () => void} = {
-        'PageUp'    : this.prevPage,
-        'PageDown'  : this.nextPage,
-        'ArrowUp'   : this.prevItem,
-        'ArrowLeft' : this.prevItem,
-        'Up'        : this.prevItem,
-        'Left'      : this.prevItem,
-        'ArrowDown' : this.nextItem,
-        'ArrowRight': this.nextItem,
-        'Down'      : this.nextItem,
-        'Right'     : this.nextItem,
-        'Home'      : this.first,
-        'End'       : this.last,
-        'Enter'     : this.toggleLocal,
-        '1'         : this.toggleAbsent,
-        '2'         : this.toggleLate,
-        '3'         : this.toggleEarly,
-        '4'         : this.toggleAttend,
+    readonly operations: {[key: string]: {fn: () => void, param?: any}} = {
+        'PageUp'    : {fn: this.prev, param: PageSize},
+        'PageDown'  : {fn: this.next, param: PageSize},
+        'ArrowUp'   : {fn: this.prev},
+        'ArrowLeft' : {fn: this.prev},
+        'Up'        : {fn: this.prev},
+        'Left'      : {fn: this.prev},
+        'ArrowDown' : {fn: this.next},
+        'ArrowRight': {fn: this.next},
+        'Down'      : {fn: this.next},
+        'Right'     : {fn: this.next},
+        'Home'      : {fn: this.first},
+        'End'       : {fn: this.last},
+        'Enter'     : {fn: this.toggleLocal},
+        '1'         : {fn: this.toggleLocal, param: 'absent'},
+        '2'         : {fn: this.toggleLocal, param: 'late'},
+        '3'         : {fn: this.toggleLocal, param: 'early'},
+        '4'         : {fn: this.toggleLocal, param: 'attend'},
     };
 
     constructor(
@@ -46,41 +44,29 @@ export class RollcallListViewComponent extends BaseRollcallView {
         super(editor);
     }
 
-    hasType(student: Student, key: string): boolean {
-        return RollcallType.contains(student.rollcallType, key);
-    }
-
-    label(key: string): string {
-        return RollcallTypes[key].text;
-    }
-
     onClick(student: Student) {
-        this.rollcallForm.setActive(student);
+        this.rollcallForm.activateStudent(student);
         this.scrollItem(true);
     }
 
     onKeydown(event: KeyboardEvent) {
         let operation = this.operations[event.key];
         if (operation) {
-            operation.bind(this)();
+            if (operation.param) {
+                operation.fn.apply(this, [operation.param]);
+            } else {
+                operation.fn.apply(this);
+            }
             this.scrollItem();
         }
     }
 
-    prevPage() {
-        this.rollcallForm.activatePrev(PageSize);
+    prev(step?: number) {
+        this.rollcallForm.activatePrev(step);
     }
 
-    nextPage() {
-        this.rollcallForm.activateNext(PageSize);
-    }
-
-    prevItem() {
-        this.rollcallForm.activatePrev();
-    }
-
-    nextItem() {
-        this.rollcallForm.activateNext();
+    next(step?: number) {
+        this.rollcallForm.activateNext(step);
     }
 
     first() {
@@ -91,51 +77,24 @@ export class RollcallListViewComponent extends BaseRollcallView {
         this.rollcallForm.activateLast();
     }
 
-    toggleAbsent() {
-        this.toggleLocal('absent');
-    }
-
-    toggleLate() {
-        this.toggleLocal('late');
-    }
-
-    toggleEarly() {
-        this.toggleLocal('early');
-    }
-
-    toggleAttend() {
-        this.toggleLocal('attend');
-    }
-
     toggleLocal(type?: string) {
         let student = this.rollcallForm.activeStudent;
-        if (student.pending) {
-            return;
-        }
-
-        if (student.isFreeListen || student.isCancelExam) {
-            return;
-        }
-
-        if (student.leaveRequest) {
+        if (student.pending || student.isFreeListen || student.isCancelExam) {
+            // doing nothing
+        } else if (student.leaveRequest) {
             if (!type) {
                 window.open(`../../leaves/${student.leaveRequest.id}`, '_blank');
             }
-            return;
-        }
-
-        if (type) {
+        } else if (type) {
             super.toggle(student, type);
         } else {
             if (student.rollcallItem) {
-                for (let i = 0; i < this.typeKeys.length; i++) {
-                    let key = this.typeKeys[i];
-                    if (student.rollcallItem.type === RollcallTypes[key].value ||
+                type = RollcallKeys.find(key =>
+                        student.rollcallItem.type === RollcallTypes[key].value ||
                         student.rollcallItem.type === RollcallType.LateEarly &&
-                        RollcallTypes[key].value === RollcallType.Early) {
-                        super.toggle(student, key);
-                        break;
-                    }
+                        RollcallTypes[key].value === RollcallType.Early);
+                if (type) {
+                    super.toggle(student, type);
                 }
             } else {
                 super.toggle(student, 'absent');

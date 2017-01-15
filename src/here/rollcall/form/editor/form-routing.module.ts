@@ -5,6 +5,7 @@ import {EditMode} from 'core/constants';
 import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallDetailViewComponent} from './detail-view.component';
 import {RollcallListViewComponent} from './list-view.component';
+import {RollcallTileViewComponent} from './tile-view.component';
 
 const routes: Routes = [
     {
@@ -14,6 +15,7 @@ const routes: Routes = [
             {path: '', redirectTo: 'detail', pathMatch: 'full'},
             {path: 'detail', component: RollcallDetailViewComponent},
             {path: 'list', component: RollcallListViewComponent},
+            {path: 'tile', component: RollcallTileViewComponent},
         ],
     },
 ];

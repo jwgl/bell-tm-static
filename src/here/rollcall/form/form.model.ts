@@ -7,14 +7,14 @@ export enum RollcallType {
     Attend    = 6,
 }
 
-export const RollcallTypes: {[key: string]: {text: string, value: RollcallType, comb?: RollcallType}} = {
-    'absent': {text: '旷课', value: RollcallType.Absent},
-    'late':   {text: '迟到', value: RollcallType.Late, comb: RollcallType.Early},
-    'early':  {text: '早退', value: RollcallType.Early, comb: RollcallType.Late},
-    'attend': {text: '调课', value: RollcallType.Attend},
+export const RollcallTypes: {[key: string]: {label: string, value: RollcallType, comb?: RollcallType}} = {
+    'absent': {label: '旷课', value: RollcallType.Absent},
+    'late':   {label: '迟到', value: RollcallType.Late, comb: RollcallType.Early},
+    'early':  {label: '早退', value: RollcallType.Early, comb: RollcallType.Late},
+    'attend': {label: '调课', value: RollcallType.Attend},
 };
 
-export const RollcallTypeKeys = ['absent', 'late', 'early', 'attend'];
+export const RollcallKeys = ['absent', 'late', 'early', 'attend'];
 
 export namespace RollcallType {
     export function contains(type: RollcallType, key: string) {
@@ -35,6 +35,7 @@ export interface RollcallConfig {
     hideLeave: boolean;
     hideCancel: boolean;
     random: number;
+    view: string;
 }
 
 export class RollcallItem {
@@ -57,6 +58,7 @@ class LeaveRequest {
     }
 }
 
+
 export interface ToggleResult {
     op: 'insert' | 'update' | 'delete' | 'none';
     type?: RollcallType;
@@ -75,6 +77,7 @@ export class Student {
     rollcallItem: RollcallItem;
     leaveRequest: LeaveRequest;
     pending: false;
+    hover: false;
 
     constructor(index: number, dto: any) {
         this.index = index;
@@ -117,13 +120,6 @@ export class Student {
                 type: currType,
             };
         }
-    }
-
-    hasType(type: string) {
-        return this.rollcallItem && (
-            this.rollcallItem.type === RollcallTypes[type].value ||
-            this.rollcallItem.type === RollcallTypes[type].value + RollcallTypes[type].comb
-        );
     }
 
     get rollcallType(): RollcallType {
@@ -184,17 +180,7 @@ export class RollcallForm {
         this.cancelledStudents.forEach(student => student.visible = !this.config.hideCancel);
         this.hideRandom();
 
-        this.updateVisibleStudents();
-    }
-
-    updateVisibleStudents(): void {
-        this.visibleStudents = [];
-        for (let i = 0; i < this.students.length; i++) {
-            let student = this.students[i];
-            if (student.visible) {
-                this.visibleStudents.push(student);
-            }
-        }
+        this.visibleStudents = this.students.filter(s => s.visible);
     }
 
     activateNext(step = 1): void {
@@ -219,7 +205,7 @@ export class RollcallForm {
         this.activeIndex = this.visibleStudents.length - 1;
     }
 
-    setActive(student: Student): void {
+    activateStudent(student: Student): void {
         this.activeIndex = this.visibleStudents.indexOf(student);
     }
 

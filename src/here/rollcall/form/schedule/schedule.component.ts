@@ -69,4 +69,8 @@ export class RollcallScheduleComponent implements OnInit {
             }
         });
     }
+
+    get viewType(): string {
+        return this.service.config.view ? this.service.config.view : 'detail';
+    }
 }

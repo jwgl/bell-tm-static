@@ -24,7 +24,7 @@
                 <td *ngIf="map[day][section];let s" class="cn"
                     [rowSpan]="s.totalSection ? s.totalSection : 1"
                     [class.active]="s !== true">
-                    <a *ngIf="s.startSection" [routerLink]="['/week', currentWeek, 'day',  day, 'section', section]">
+                    <a *ngIf="s.startSection" [routerLink]="['/week', currentWeek, 'day',  day, 'section', section, viewType]">
                         <div>{{s.course}}</div>
                         <div>{{s.startWeek}}-{{s.endWeek}}周</div>
                         <div>{{s.place}}</div>

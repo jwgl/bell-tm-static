@@ -9,6 +9,7 @@ import {RollcallFormRoutingModule} from './form-routing.module';
 import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallDetailViewComponent} from './detail-view.component';
 import {RollcallListViewComponent} from './list-view.component';
+import {RollcallTileViewComponent} from './tile-view.component';
 import {RollcallToggleBarComponent} from './toggle-bar.component';
 import {FocusDirective} from './focus.directive';
 
@@ -24,6 +25,7 @@ import {FocusDirective} from './focus.directive';
         RollcallFormEditorComponent,
         RollcallDetailViewComponent,
         RollcallListViewComponent,
+        RollcallTileViewComponent,
         RollcallToggleBarComponent,
         FocusDirective,
     ],

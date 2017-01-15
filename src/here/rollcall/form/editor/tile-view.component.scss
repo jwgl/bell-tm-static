@@ -1,0 +1,19 @@
+@import './base-view.component.scss';
+
+.card-header {
+    border-bottom: 0;
+    background-color: transparent;
+    height: 1.5rem;
+}
+
+.card-block {
+    padding: 0.125rem;
+}
+
+.card-title {
+    font-size: 3rem;
+}
+
+:host /deep/ .btn-sm {
+    font-size: 75%;
+}

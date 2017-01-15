@@ -6,6 +6,7 @@ import {
     Student,
     RollcallType,
     RollcallTypes,
+    RollcallKeys,
     ToggleResult,
 } from '../form.model';
 
@@ -34,5 +35,13 @@ export class BaseRollcallView {
                 student.rollcallItem = null;
                 break;
         }
+    }
+
+    typeKeys(student: Student): string[] {
+        return student.rollcallItem ? RollcallKeys.filter(key => RollcallType.contains(student.rollcallType, key)) : [];
+    }
+
+    label(key: string): string {
+        return RollcallTypes[key].label;
     }
 }

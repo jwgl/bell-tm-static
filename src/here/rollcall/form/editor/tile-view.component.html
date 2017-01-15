@@ -1,0 +1,28 @@
+<div class="row" *ngIf="rollcallForm">
+    <div *ngFor="let student of rollcallForm.visibleStudents" class="col-lg-2 col-md-3 col-sm-4 col-6">
+        <div class="card text-center mb-3"
+             [ngClass]="{'card-inverse': student.hover, 'card-primary': student.hover}"
+             (mouseenter)="student.hover=true"
+             (mouseleave)="student.hover=false">
+            <div class="card-header text-left p-0">
+                <ng-container [ngSwitch]="student.hover">
+                    <ng-container *ngSwitchCase="false" [ngSwitch]="true">
+                        <label *ngSwitchCase="student.isFreeListen" class="badge badge-default">免听</label>
+                        <label *ngSwitchCase="student.isCancelExam" class="badge badge-default">取消考试资格</label>
+                        <label *ngSwitchCase="!!student.leaveRequest" class="badge badge-default">请假</label>
+                        <ng-container *ngSwitchCase="!!student.rollcallItem">
+                            <label *ngFor="let key of typeKeys(student)" class="badge ml-1 mb-0" [ngClass]="'badge-' + key">{{label(key)}}</label>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="true">
+                        <rollcall-toggle-bar [stretch]="true" [rollcallType]="student.rollcallType" (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <div class="card-block">
+                <h4 class="card-title">{{student.name}}</h4>
+                <p class="card-text">{{student.statis}}</p>
+            </div>
+        </div>
+    </div>
+</div>
