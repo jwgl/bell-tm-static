@@ -44,11 +44,11 @@
     "@types/bootstrap": "^3.3.32",
     "@types/core-js": "^0.9.35",
     "@types/jquery": "^2.0.39",
-    "@types/lodash": "^4.14.47",
-    "@types/node": "^6.0.58",
-    "@types/webpack": "^2.1.0",
+    "@types/lodash": "^4.14.50",
+    "@types/node": "^7.0.0",
+    "@types/webpack": "^2.2.0",
     "angular2-template-loader": "^0.6.0",
-    "awesome-typescript-loader": "^3.0.0-beta.17",
+    "awesome-typescript-loader": "^3.0.0-beta.18",
     "copy-webpack-plugin": "^4.0.1",
     "node-sass": "^4.1.1",
     "raw-loader": "^0.5.1",
@@ -57,7 +57,7 @@
     "tslint": "^4.3.1",
     "tslint-loader": "^3.3.0",
     "typescript": "^2.0.10",
-    "webpack": "^2.2.0-rc.3",
-    "webpack-merge": "^2.3.1"
+    "webpack": "^2.2.0-rc.5",
+    "webpack-merge": "^2.4.0"
   }
 }
