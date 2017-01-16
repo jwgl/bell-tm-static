@@ -1,0 +1,8 @@
+<ng-container [ngSwitch]="true">
+    <label *ngSwitchCase="student.isFreeListen" class="badge badge-default">免听</label>
+    <label *ngSwitchCase="student.isCancelExam" class="badge badge-default">取消考试资格</label>
+    <label *ngSwitchCase="!!student.leaveRequest" class="badge badge-default">请假</label>
+    <ng-container *ngSwitchCase="!!student.rollcallItem">
+        <label *ngFor="let key of typeKeys(student)" class="badge" [ngClass]="'badge-' + key">{{label(key)}}</label>
+    </ng-container>
+</ng-container>

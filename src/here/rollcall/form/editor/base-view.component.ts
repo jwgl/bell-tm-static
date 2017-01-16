@@ -36,12 +36,4 @@ export class BaseRollcallView {
                 break;
         }
     }
-
-    typeKeys(student: Student): string[] {
-        return student.rollcallItem ? RollcallKeys.filter(key => RollcallType.contains(student.rollcallType, key)) : [];
-    }
-
-    label(key: string): string {
-        return RollcallTypes[key].label;
-    }
 }

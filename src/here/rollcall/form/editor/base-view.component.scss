@@ -1,27 +1,6 @@
-@import 'node_modules/bootstrap/scss/_mixins.scss';
 @import 'node_modules/bootstrap/scss/_variables.scss';
 
 $late-bg: $btn-warning-bg;
 $absent-bg: $btn-danger-bg;
 $early-bg: #613d7c ;
 $attend-bg: $btn-info-bg;
-
-.badge-absent {
-    @include badge-variant($absent-bg);
-    font-weight: normal;
-}
-
-.badge-late {
-    @include badge-variant($late-bg);
-    font-weight: normal;
-}
-
-.badge-early {
-    @include badge-variant($early-bg);
-    font-weight: normal;
-}
-
-.badge-attend {
-      @include badge-variant($attend-bg);
-    font-weight: normal;
-}
