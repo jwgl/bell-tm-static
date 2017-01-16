@@ -38,7 +38,7 @@
     "rxjs": "^5.0.3",
     "tether": "^1.4.0",
     "ts-helpers": "^1.1.2",
-    "zone.js": "^0.7.4"
+    "zone.js": "^0.7.5"
   },
   "devDependencies": {
     "@types/bootstrap": "^3.3.32",
