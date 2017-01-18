@@ -24,7 +24,7 @@
                 <ng-container [ngSwitch]="cellType(day, section)">
                     <td *ngSwitchCase="'schedule'" [rowSpan]="getRowSpan(day, section)" class="cn active">
                         <ng-container *ngFor="let s of getScheduleCell(day, section)">
-                            <ng-container [ngTemplateOutlet]="tpl" [ngOutletContext]="getScheduleContext(s, day, section)"></ng-container>
+                            <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></ng-container>
                         </ng-container>
                     </td>
                     <td *ngSwitchCase="'normal'" class="cn"></td>
