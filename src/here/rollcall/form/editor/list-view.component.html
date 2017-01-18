@@ -16,7 +16,7 @@
                 (click)="onClick(student)">
                 <span class="name ml-2">{{student.name}}</span>
                 <rollcall-status [student]="student"></rollcall-status>
-                <span class="statis ml-auto">{{student.statis}}</span>
+                <span class="statis ml-auto">{{student.statis.join(' ')}}</span>
             </li>
         </ul>
     </div>

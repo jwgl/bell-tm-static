@@ -1,5 +1,5 @@
 <div class="row" *ngIf="rollcallForm">
-    <div *ngFor="let student of rollcallForm.visibleStudents" class="col-lg-2 col-md-3 col-sm-4 col-6">
+    <div *ngFor="let student of rollcallForm.visibleStudents" class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="card text-center mb-3"
              [ngClass]="{'card-inverse': student.hover, 'card-primary': student.hover}"
              (mouseenter)="student.hover=true"
@@ -14,7 +14,7 @@
             </div>
             <div class="card-block">
                 <h4 class="card-title">{{student.name}}</h4>
-                <p class="card-text">{{student.statis}}</p>
+                <p class="card-text">{{student.statis.join(' / ')}}</p>
             </div>
         </div>
     </div>

@@ -5,11 +5,12 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import {ApiUrl, Rest, EditService} from 'core/rest';
 import {RollcallConfig} from './form.model';
+import {Term, Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 
 @Injectable()
 export class RollcallFormService extends EditService {
-    term: any;
-    schedules: any[];
+    term: Term;
+    schedules: Schedule[];
     config: RollcallConfig;
 
     private _scheduleLoaded = new BehaviorSubject<boolean>(false);
@@ -21,7 +22,7 @@ export class RollcallFormService extends EditService {
     loadFormList() {
         this.loadList().subscribe(result => {
             this.term = result.term;
-            this.schedules = result.schedules;
+            this.schedules = result.schedules.map((dto: ScheduleDto) => new Schedule(dto));
             this.config = result.config;
             this._scheduleLoaded.next(true);
         });
@@ -29,5 +30,9 @@ export class RollcallFormService extends EditService {
 
     get scheduleLoaded(): Observable<boolean> {
         return this._scheduleLoaded.filter(b => b);
+    }
+
+    get viewType(): string {
+        return this.config.view ? this.config.view : 'detail';
     }
 }

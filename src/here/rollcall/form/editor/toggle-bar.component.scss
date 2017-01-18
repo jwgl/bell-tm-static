@@ -18,6 +18,14 @@ $btn-attend-bg: $attend-bg;
         background-color: darken($btn-secondary-bg, 10%);
         border-color: darken($btn-secondary-border, 12%);
     }
+
+    &.active {
+        @include hover {
+            color: #fff;
+            background-color: darken($color, 10%);
+            border-color: darken($color, 12%);
+        }
+    }
 }
 
 .btn-outline-late {

@@ -1,36 +1,9 @@
-<ul class="nav nav-tabs week-tabs">
-	<li *ngFor="let week of weeks" class="nav-item" >
-        <a class="nav-link" [ngClass]="{active: currentWeek == week}" href='#' data-toggle="tab">{{week}}</a>
-    </li>
-</ul>
-<table class="table" *ngIf="schedules">
-    <thead>
-        <tr>
-            <th colspan="2" data-week="${currentWeek}">第{{currentWeek}}周</th>
-            <th>星期一</th>
-            <th>星期二</th>
-            <th>星期三</th>
-            <th>星期四</th>
-            <th>星期五</th>
-            <th>星期六</th>
-            <th>星期日</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let section of sections">
-            <td class="c1" [rowSpan]="spans[section].span" *ngIf="spans[section]">{{spans[section].label}}</td>
-            <td class="c2">{{section}}</td>
-            <ng-container *ngFor="let day of days">
-                <td *ngIf="map[day][section];let s" class="cn"
-                    [rowSpan]="s.totalSection ? s.totalSection : 1"
-                    [class.active]="s !== true">
-                    <a *ngIf="s.startSection" [routerLink]="['/week', currentWeek, 'day',  day, 'section', section, viewType]">
-                        <div>{{s.course}}</div>
-                        <div>{{s.startWeek}}-{{s.endWeek}}周</div>
-                        <div>{{s.place}}</div>
-                    </a>
-                </td>
-            </ng-container>
-        </tr>
-    </tbody>
-</table>
+<here-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
+    <template let-s="schedule" let-week="week", let-day="day" let-section="section">
+        <a [routerLink]="['/week', week, 'day',  day, 'section', section, service.viewType]">
+            <div>{{s.course}}<ng-container *ngIf="s.courseItem"> 【{{s.courseItem}}】</ng-container></div>
+            <div>{{s.startWeek}}-{{s.endWeek}}{{s.oddEven | oddEven}}周</div>
+            <div>{{s.place}}</div>
+        </a>
+    </template>
+</here-schedule>

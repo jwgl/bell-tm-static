@@ -3,7 +3,7 @@ import {Directive, ElementRef, OnInit} from '@angular/core';
 @Directive({
     selector: '[focus]',
     host: {
-        '(document: click)': 'focus()',
+        '(click)': 'focus()',
     },
 })
 export class FocusDirective implements OnInit {

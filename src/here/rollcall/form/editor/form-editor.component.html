@@ -1,6 +1,18 @@
 <div class="btn-toolbar">
-    <div class="btn-group">
-        <a class="btn btn-secondary" routerLink="/schedules">课表</a>
+    <div class="my-auto">
+        <a routerLink="/schedules">课表</a>
+    </div>
+    <div class="dropdown ml-2 my-auto" *ngIf="weekSchedules">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">第{{week}}周</a>
+        <div class="dropdown-menu">
+            <a *ngFor="let w of weeks" class="dropdown-item" [routerLink]="['/week', w, 'day', activeSchedule.dayOfWeek, 'section', activeSchedule.startSection, service.viewType]">第{{w}}周</a>
+        </div>
+    </div>
+    <div class="dropdown ml-2 my-auto" *ngIf="weekSchedules">
+        <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{activeSchedule.label}}</a>
+        <div class="dropdown-menu">
+            <a *ngFor="let s of weekSchedules" class="dropdown-item" [routerLink]="['/week', week, 'day', s.dayOfWeek, 'section', s.startSection, service.viewType]">{{s.label}}</a>
+        </div>
     </div>
     <div class="btn-group ml-auto">
         <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-table"></i></button>

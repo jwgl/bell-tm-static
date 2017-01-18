@@ -12,6 +12,7 @@ import {FormFieldComponent} from './bootstrap/form-field.component';
 import {FormControlDirective} from './bootstrap/form-control.directive';
 import {GroupByPipe} from './pipes/group-by';
 import {ZeroPadPipe} from './pipes/zero-pad';
+import {OddEvenPipe} from './pipes/odd-even';
 import {
     FromNowPipe,
     MomentFormatPipe,
@@ -59,6 +60,7 @@ const CORE_DIRECTIVES: any[] = [
     ActionNamePipe,
     ActionClassPipe,
     MarkdownPipe,
+    OddEvenPipe,
 ];
 
 @NgModule({
