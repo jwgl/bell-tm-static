@@ -12,6 +12,7 @@ import {RollcallListViewComponent} from './list-view.component';
 import {RollcallTileViewComponent} from './tile-view.component';
 import {RollcallToggleBarComponent} from './toggle-bar.component';
 import {RollcallStatusComponent} from './rollcall-status.component';
+import {RollcallSummaryComponent} from './rollcall-summary.component';
 import {FocusDirective} from './focus.directive';
 
 @NgModule({
@@ -29,6 +30,7 @@ import {FocusDirective} from './focus.directive';
         RollcallTileViewComponent,
         RollcallToggleBarComponent,
         RollcallStatusComponent,
+        RollcallSummaryComponent,
         FocusDirective,
     ],
 })

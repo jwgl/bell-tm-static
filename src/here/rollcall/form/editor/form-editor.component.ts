@@ -50,8 +50,4 @@ export class RollcallFormEditorComponent implements OnInit {
             this.rollcallForm = new RollcallForm(dto, this.service.config);
         });
     }
-
-    onChangeSchedule() {
-        console.log(this.activeSchedule);
-    }
 }

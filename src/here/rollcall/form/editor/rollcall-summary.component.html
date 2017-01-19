@@ -1,0 +1,9 @@
+<span title="总人数" class="total">{{summary.total}}</span> -
+<span title="免听人数" class="free">{{summary.free}}</span> -
+<span title="请假人数" class="leave">{{summary.leave}}</span> =
+<span title="应到人数" class="should">{{summary.total - summary.free - summary.leave}}</span>
+(<span title="显示人数" class="visible">{{summary.visible}}</span> /
+<span title="旷课人数" class="absent">{{summary.absent}}</span> /
+<span title="迟到人数" class="late">{{summary.late + summary.lateEarly}}</span> /
+<span title="早退人数" class="early">{{summary.early + summary.lateEarly}}</span> /
+<span title="调课人数" class="attend">{{summary.attend}}</span>)

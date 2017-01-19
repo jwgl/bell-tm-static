@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 export enum RollcallType {
     None      = 0,
     Absent    = 1,
@@ -6,6 +8,12 @@ export enum RollcallType {
     LateEarly = 5,
     Attend    = 6,
 }
+
+// {0: 'none', 1: 'absent', ...}
+const RollcallTypeNames = _.fromPairs(_.toPairs(RollcallType).filter(p => !/\d+/.test(p[0])).map(p => [p[1], _.camelCase(p[0])]));
+
+// {'none': 0, absent: 0, ...}
+const RollcallTypeCounts = _.fromPairs(_.values(RollcallTypeNames).map(n => [n, 0]));
 
 export const RollcallTypes: {[key: string]: {label: string, value: RollcallType, comb?: RollcallType}} = {
     'absent': {label: '旷课', value: RollcallType.Absent},
@@ -22,7 +30,6 @@ export namespace RollcallType {
                type === RollcallTypes[key].value + RollcallTypes[key].comb;
     }
 }
-
 
 enum LeaveType {
     PrivateAffair = 1,
@@ -57,7 +64,6 @@ class LeaveRequest {
         this.type = dto.type;
     }
 }
-
 
 export interface ToggleResult {
     op: 'insert' | 'update' | 'delete' | 'none';
@@ -137,7 +143,6 @@ export interface RollcallFormDto {
      }[];
 }
 
-
 export class RollcallForm {
     students: Student[] = [];
     studentsMap: {[key: string]: Student} = {};
@@ -211,6 +216,24 @@ export class RollcallForm {
 
     get activeStudent(): Student {
         return this.visibleStudents[this.activeIndex];
+    }
+
+    get summary(): any {
+        let counters = _.countBy(this.visibleStudents, s => {
+            if (s.rollcallItem) {
+                return RollcallTypeNames[s.rollcallItem.type];
+            } else {
+                return RollcallTypeNames[RollcallType.None];
+            }
+        });
+
+        return _.defaults(counters, {
+            total: this.students.length,
+            free: this.freedStudents.length,
+            leave: this.leftStudents.length,
+            cancel: this.cancelledStudents.length,
+            visible: this.visibleStudents.length,
+        }, RollcallTypeCounts);
     }
 
     private hideRandom() {

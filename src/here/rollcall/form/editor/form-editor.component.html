@@ -14,6 +14,9 @@
             <a *ngFor="let s of weekSchedules" class="dropdown-item" [routerLink]="['/week', week, 'day', s.dayOfWeek, 'section', s.startSection, service.viewType]">{{s.label}}</a>
         </div>
     </div>
+    <div class="ml-2 my-auto hidden-md-down" *ngIf="rollcallForm">
+        <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
+    </div>
     <div class="btn-group ml-auto">
         <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-table"></i></button>
         <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" (click)="$event.target.blur()"><i class="fa fa-list"></i></button>

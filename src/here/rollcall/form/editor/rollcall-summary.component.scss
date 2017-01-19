@@ -1,0 +1,31 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import './base-view.component.scss';
+
+:host {
+    white-space: nowrap;
+}
+
+.absent {
+  color: $absent-bg;
+}
+
+.late {
+  color: $late-bg;
+}
+
+.early {
+  color: #BB1684;
+}
+
+.attend {
+  color: $attend-bg;
+}
+
+.visible {
+  color: $btn-success-bg;
+}
+
+.leave,
+.free {
+  color: $gray;
+}
