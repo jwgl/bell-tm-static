@@ -1,7 +1,7 @@
-import {Injectable, Inject, OpaqueToken} from '@angular/core';
+import {Injectable, Inject, InjectionToken} from '@angular/core';
 
-export const API_URL = new OpaqueToken('API_URL');
-export const BASE_URL = new OpaqueToken('BASE_URL');
+export const API_URL = new InjectionToken<string>('API_URL');
+export const BASE_URL = new InjectionToken<string>('BASE_URL');
 
 @Injectable()
 export class ApiUrl {
