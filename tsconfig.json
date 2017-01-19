@@ -9,6 +9,7 @@
     "noEmitHelpers": true,
     "strictNullChecks": false,
     "noImplicitAny": true,
+    "importHelpers": true,
     "baseUrl": "./src",
     "lib": [
       "dom",
