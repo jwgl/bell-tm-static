@@ -1,0 +1,24 @@
+<table class="table table-sm" *ngIf="rollcallForm">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>考勤</th>
+            <th>旷/迟/退/假</th>
+            <th>班级</th>
+            <th>专业</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let student of rollcallForm.visibleStudents">
+            <td>{{student.index}}</td>
+            <td>{{student.id}}</td>
+            <td>{{student.name}}</td>
+            <td><rollcall-status [student]="student"></rollcall-status></td>
+            <td>{{student.statis.join(' / ')}}</td>
+            <td>{{student.adminClass}}</td>
+            <td>{{student.subject}}</td>
+        </tr>
+    </tbody>
+</table>

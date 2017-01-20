@@ -141,12 +141,14 @@ export interface RollcallFormDto {
      leaveRequests: {
          studentId: string;
      }[];
+     locked: boolean;
 }
 
 export class RollcallForm {
     students: Student[] = [];
     studentsMap: {[key: string]: Student} = {};
     config: RollcallConfig;
+    locked: boolean;
 
     freedStudents: Student[] = [];
     leftStudents: Student[] = [];
@@ -158,6 +160,7 @@ export class RollcallForm {
 
     constructor(dto: RollcallFormDto, config: RollcallConfig) {
         this.config = config;
+        this.locked = dto.locked;
 
         dto.students.forEach((s, index) => {
             let student = new Student(index + 1, s);

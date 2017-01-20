@@ -35,4 +35,8 @@ export class RollcallFormService extends EditService {
     get viewType(): string {
         return this.config.view ? this.config.view : 'detail';
     }
+
+    set viewType(value: string) {
+        this.config.view = value;
+    }
 }

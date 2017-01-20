@@ -10,6 +10,7 @@ import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallDetailViewComponent} from './detail-view.component';
 import {RollcallListViewComponent} from './list-view.component';
 import {RollcallTileViewComponent} from './tile-view.component';
+import {RollcallLockViewComponent} from './lock-view.component';
 import {RollcallToggleBarComponent} from './toggle-bar.component';
 import {RollcallStatusComponent} from './rollcall-status.component';
 import {RollcallSummaryComponent} from './rollcall-summary.component';
@@ -28,6 +29,7 @@ import {FocusDirective} from './focus.directive';
         RollcallDetailViewComponent,
         RollcallListViewComponent,
         RollcallTileViewComponent,
+        RollcallLockViewComponent,
         RollcallToggleBarComponent,
         RollcallStatusComponent,
         RollcallSummaryComponent,

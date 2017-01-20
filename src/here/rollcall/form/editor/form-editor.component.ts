@@ -1,8 +1,6 @@
 import {Component, OnInit, EventEmitter} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/mapTo';
+
 import * as _ from 'lodash';
 
 import {RollcallFormService} from '../form.service';
@@ -29,12 +27,14 @@ export class RollcallFormEditorComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.route.params.mergeMap(params => {
+        this.route.data.subscribe((data: {form: RollcallForm}) => {
+            this.rollcallForm = data.form;
+        });
+
+        this.route.params.subscribe(params => {
             this.week = parseInt(params['week'], 10);
             this.day = parseInt(params['day'], 10);
             this.section = parseInt(params['section'], 10);
-            return this.service.scheduleLoaded;
-        }).mergeMap(() => {
             this.weekSchedules = _.values(findWeekSchedules(this.service.schedules, this.week))
                 .map((ss: Schedule[]) => ss[0])
                 .sort((a, b) => a.dayOfWeek - b.dayOfWeek || a.startSection - b.startSection);
@@ -44,10 +44,11 @@ export class RollcallFormEditorComponent implements OnInit {
                           .filter(w => this.activeSchedule.oddEven === 0 ||
                                        this.activeSchedule.oddEven === 1 && w % 2 === 1 ||
                                        this.activeSchedule.oddEven === 2 && w % 2 === 0);
-
-            return this.service.loadDataForCreate({week: this.week, day: this.day, section: this.section});
-        }).subscribe(dto => {
-            this.rollcallForm = new RollcallForm(dto, this.service.config);
         });
+    }
+
+    onSwitchView($event: Event, view: string) {
+        ($event.target as HTMLElement).blur();
+        this.service.viewType = view;
     }
 }

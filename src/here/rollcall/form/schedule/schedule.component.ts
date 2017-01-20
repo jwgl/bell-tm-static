@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as _ from 'lodash';
 
 import {RollcallFormService} from '../form.service';
 import {Term, Schedule} from '../../../shared/schedule/schedule.model';
@@ -18,9 +17,7 @@ export class RollcallScheduleComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.service.scheduleLoaded.subscribe(v => {
-            this.term = this.service.term;
-            this.schedules = this.service.schedules;
-        });
+        this.term = this.service.term;
+        this.schedules = this.service.schedules;
     }
 }

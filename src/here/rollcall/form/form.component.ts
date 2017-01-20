@@ -10,6 +10,6 @@ export class RollcallFormComponent implements OnInit {
     constructor(private service: RollcallFormService) {}
 
     ngOnInit() {
-        this.service.loadFormList();
+        //this.service.loadFormList();
     }
 }
