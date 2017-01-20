@@ -8,6 +8,7 @@ import {RollcallListViewComponent} from './list-view.component';
 import {RollcallTileViewComponent} from './tile-view.component';
 import {RollcallLockViewComponent} from './lock-view.component';
 import {RollcallFormEditorResolve} from './form-editor-resolve.service';
+import {RollcallLockGuard} from './lock-guard.service';
 import {RollcallFormResolve} from '../form-resolve.service';
 
 const routes: Routes = [
@@ -19,9 +20,9 @@ const routes: Routes = [
             form: RollcallFormEditorResolve,
         },
         children: [
-            {path: 'detail', component: RollcallDetailViewComponent},
-            {path: 'list', component: RollcallListViewComponent},
-            {path: 'tile', component: RollcallTileViewComponent},
+            {path: 'detail', component: RollcallDetailViewComponent, canActivate: [RollcallLockGuard]},
+            {path: 'list', component: RollcallListViewComponent, canActivate: [RollcallLockGuard]},
+            {path: 'tile', component: RollcallTileViewComponent, canActivate: [RollcallLockGuard]},
             {path: 'lock', component: RollcallLockViewComponent},
         ],
     },
@@ -36,6 +37,7 @@ const routes: Routes = [
     ],
     providers: [
         RollcallFormEditorResolve,
+        RollcallLockGuard,
     ],
 })
 export class RollcallFormRoutingModule {}

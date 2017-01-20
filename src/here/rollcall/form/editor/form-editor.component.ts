@@ -3,6 +3,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import * as _ from 'lodash';
 
+import {matchOddEven} from 'core/utils';
+
 import {RollcallFormService} from '../form.service';
 import {RollcallForm, RollcallConfig} from '../form.model';
 import {Term, Schedule, findWeekSchedules} from '../../../shared/schedule/schedule.model';
@@ -41,14 +43,13 @@ export class RollcallFormEditorComponent implements OnInit {
 
             this.activeSchedule = this.weekSchedules.find(s => s.dayOfWeek === this.day && s.startSection === this.section);
             this.weeks = _.range(this.activeSchedule.startWeek, this.activeSchedule.endWeek + 1)
-                          .filter(w => this.activeSchedule.oddEven === 0 ||
-                                       this.activeSchedule.oddEven === 1 && w % 2 === 1 ||
-                                       this.activeSchedule.oddEven === 2 && w % 2 === 0);
+                          .filter(w => matchOddEven(this.activeSchedule.oddEven, w));
         });
     }
 
     onSwitchView($event: Event, view: string) {
-        ($event.target as HTMLElement).blur();
+        const button = $event.target as HTMLElement;
+        button.blur();
         this.service.viewType = view;
     }
 }

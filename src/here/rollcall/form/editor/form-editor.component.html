@@ -17,13 +17,16 @@
     <div class="ml-2 my-auto hidden-md-down" *ngIf="rollcallForm">
         <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
     </div>
-    <div class="btn-group ml-auto" *ngIf="!rollcallForm.locked; else locked">
-        <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" (click)="onSwitchView($event, 'detail')"><i class="fa fa-table"></i></button>
-        <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" (click)="onSwitchView($event, 'list')"><i class="fa fa-list"></i></button>
-        <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" (click)="onSwitchView($event, 'tile')"><i class="fa fa-th"></i></button>
+    <div class="btn-group ml-auto" *ngIf="rollcallForm">
+        <ng-container  *ngIf="rollcallForm.locked; then unlock; else locked"></ng-container>
+        <template #unlock>
+            <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')"><i class="fa fa-table"></i></button>
+            <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><i class="fa fa-list"></i></button>
+            <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><i class="fa fa-th"></i></button>
+        </template>
+        <template #locked>
+            <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
+        </template>
     </div>
-    <template #locked>
-        <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
-    </template>
 </div>
 <router-outlet></router-outlet>

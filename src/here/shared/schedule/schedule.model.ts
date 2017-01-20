@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
 
+import {matchOddEven} from 'core/utils';
+
 export interface ScheduleDto {
     startWeek: number;
     endWeek: number;
@@ -46,6 +48,15 @@ export class Schedule {
         let courseItem = this.courseItem ? `【${this.courseItem}】` : '';
         return `周${days[this.dayOfWeek]} ${sections}节 ${this.course}${courseItem}`;
     }
+
+    uniqueCompare(other: Schedule): boolean {
+        return this.startWeek === other.startWeek &&
+               this.endWeek === other.endWeek &&
+               this.oddEven === other.oddEven &&
+               this.course === other.course &&
+               this.courseItem === other.courseItem &&
+               this.place === other.place;
+    }
 }
 
 export interface Term {
@@ -56,22 +67,9 @@ export interface Term {
 
 export function findWeekSchedules(schedules: Schedule[], week: number): _.Dictionary<Schedule[]> {
     return _.chain(schedules)
-            .filter(s =>  {
-                return week >= s.startWeek && week <= s.endWeek && (
-                    s.oddEven === 0 ||
-                    s.oddEven === 1 && week % 2 === 1 ||
-                    s.oddEven === 2 && week % 2 === 0
-                );
-            })
+            .filter(s => week >= s.startWeek && week <= s.endWeek && matchOddEven(s.oddEven, week))
             .groupBy(s => this.buildKey(s.dayOfWeek, s.startSection))
-            .mapValues((arr: Schedule[]) => _.uniqWith(arr, (a: Schedule, b: Schedule) => {
-                return a.startWeek === b.startWeek &&
-                    a.endWeek === b.endWeek &&
-                    a.oddEven === b.oddEven &&
-                    a.course === b.course &&
-                    a.courseItem === b.courseItem &&
-                    a.place === b.place;
-            }))
+            .mapValues((ss: Schedule[]) => _.uniqWith(ss, (a: Schedule, b: Schedule) => a.uniqueCompare(b)))
             .value();
 }
 
