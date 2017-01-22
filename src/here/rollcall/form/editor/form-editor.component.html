@@ -18,12 +18,11 @@
         <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
     </div>
     <div class="btn-group ml-auto" *ngIf="rollcallForm">
-        <ng-container  *ngIf="rollcallForm.locked; then unlock; else locked"></ng-container>
-        <template #unlock>
+        <ng-container  *ngIf="!rollcallForm.locked; else locked">
             <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')"><i class="fa fa-table"></i></button>
             <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><i class="fa fa-list"></i></button>
             <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><i class="fa fa-th"></i></button>
-        </template>
+        </ng-container>
         <template #locked>
             <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
         </template>

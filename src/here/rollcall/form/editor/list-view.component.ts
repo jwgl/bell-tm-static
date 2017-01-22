@@ -1,9 +1,7 @@
 import {Component, Host, ViewChild, ElementRef} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
 
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
-import {RollcallFormService} from '../form.service';
 import {RollcallType, RollcallTypes, RollcallKeys, Student} from '../form.model';
 
 const PageSize = 5;
@@ -35,12 +33,7 @@ export class RollcallListViewComponent extends BaseRollcallView {
         '4'         : {fn: this.toggleLocal, param: 'attend'},
     };
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private service: RollcallFormService,
-        @Host() editor: RollcallFormEditorComponent,
-    ) {
+    constructor(@Host() editor: RollcallFormEditorComponent) {
         super(editor);
     }
 
@@ -79,26 +72,10 @@ export class RollcallListViewComponent extends BaseRollcallView {
 
     toggleLocal(type?: string) {
         let student = this.rollcallForm.activeStudent;
-        if (student.pending || student.isFreeListen || student.isCancelExam) {
-            // doing nothing
-        } else if (student.leaveRequest) {
-            if (!type) {
-                window.open(`../../leaves/${student.leaveRequest.id}`, '_blank');
-            }
-        } else if (type) {
-            super.toggle(student, type);
+        if (student.leaveRequest) {
+            window.open(`../../leaves/${student.leaveRequest.id}`, '_blank');
         } else {
-            if (student.rollcallItem) {
-                type = RollcallKeys.find(key =>
-                        student.rollcallItem.type === RollcallTypes[key].value ||
-                        student.rollcallItem.type === RollcallType.LateEarly &&
-                        RollcallTypes[key].value === RollcallType.Early);
-                if (type) {
-                    super.toggle(student, type);
-                }
-            } else {
-                super.toggle(student, 'absent');
-            }
+            super.toggle(student, type);
         }
     }
 

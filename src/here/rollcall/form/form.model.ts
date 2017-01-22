@@ -95,8 +95,26 @@ export class Student {
     }
 
     toggle(type: string): ToggleResult {
-        if (this.isCancelExam || this.isFreeListen || this.leaveRequest) {
+        if (this.pending ||
+            this.isCancelExam ||
+            this.isFreeListen ||
+            this.leaveRequest) {
             return {op: 'none'};
+        }
+
+        // List view中按回车键时type为空
+        if (!type) {
+            if (this.rollcallItem) {
+                // 执行取消操作
+                if (this.rollcallItem.type === RollcallType.LateEarly) {
+                    type = 'early';
+                } else {
+                    type = RollcallKeys.find(key => this.rollcallItem.type === RollcallTypes[key].value);
+                }
+            } else {
+                // 默认为旷课
+                type = 'absent';
+            }
         }
 
         let currType = RollcallTypes[type].value;
@@ -115,16 +133,9 @@ export class Student {
                     }
                 }
             }
-
-            return {
-                op: 'update',
-                type: currType,
-            };
+            return {op: 'update', type: currType};
         } else {
-            return {
-                op: 'insert',
-                type: currType,
-            };
+            return {op: 'insert', type: currType};
         }
     }
 

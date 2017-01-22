@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import {matchOddEven} from 'core/utils';
 
 import {RollcallFormService} from '../form.service';
-import {RollcallForm, RollcallConfig} from '../form.model';
+import {RollcallForm, RollcallConfig, Student, ToggleResult, RollcallItem} from '../form.model';
 import {Term, Schedule, findWeekSchedules} from '../../../shared/schedule/schedule.model';
 
 @Component({
@@ -51,5 +51,20 @@ export class RollcallFormEditorComponent implements OnInit {
         const button = $event.target as HTMLElement;
         button.blur();
         this.service.viewType = view;
+    }
+
+    toggle(student: Student, type: string) {
+        let result: ToggleResult = student.toggle(type);
+        switch (result.op) {
+            case 'insert':
+                student.rollcallItem = new RollcallItem({id: 1, type: result.type});
+                break;
+            case 'update':
+                student.rollcallItem.type = result.type;
+                break;
+            case 'delete':
+                student.rollcallItem = null;
+                break;
+        }
     }
 }
