@@ -14,6 +14,21 @@
     font-size: 2.5rem;
 }
 
+.card-title {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
+
+i {
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0.75rem;
+}
+
 /deep/ .btn-sm {
     font-size: 75%;
 }

@@ -72,8 +72,8 @@ export class RollcallListViewComponent extends BaseRollcallView {
 
     toggleLocal(type?: string) {
         let student = this.rollcallForm.activeStudent;
-        if (student.leaveRequest) {
-            window.open(`../../leaves/${student.leaveRequest.id}`, '_blank');
+        if (student.leave) {
+            window.open(`../../leaves/${student.leave.id}`, '_blank');
         } else {
             super.toggle(student, type);
         }

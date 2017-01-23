@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import {matchOddEven} from 'core/utils';
 
 import {RollcallFormService} from '../form.service';
-import {RollcallForm, RollcallConfig, Student, ToggleResult, RollcallItem} from '../form.model';
+import {RollcallForm, RollcallConfig, Student, ToggleResult, Rollcall} from '../form.model';
 import {Term, Schedule, findWeekSchedules} from '../../../shared/schedule/schedule.model';
 
 @Component({
@@ -57,13 +57,39 @@ export class RollcallFormEditorComponent implements OnInit {
         let result: ToggleResult = student.toggle(type);
         switch (result.op) {
             case 'insert':
-                student.rollcallItem = new RollcallItem({id: 1, type: result.type});
+                student.pending = true;
+                this.service.create({
+                    week: this.week,
+                    taskScheduleId: student.taskScheduleId,
+                    studentId: student.id,
+                    type: result.type,
+                }).subscribe(id => {
+                    student.rollcall = new Rollcall({id: id, type: result.type});
+                }, error => {
+                    alert(JSON.stringify(error));
+                }, () => {
+                    student.pending = false;
+                });
                 break;
             case 'update':
-                student.rollcallItem.type = result.type;
+                student.pending = true;
+                this.service.update(student.rollcall.id, {type: result.type}).subscribe(id => {
+                    student.rollcall.type = result.type;
+                }, error => {
+                    alert(JSON.stringify(error));
+                }, () => {
+                    student.pending = false;
+                });
                 break;
             case 'delete':
-                student.rollcallItem = null;
+                student.pending = true;
+                this.service.delete(student.rollcall.id).subscribe(() => {
+                    student.rollcall = null;
+                }, error => {
+                    alert(JSON.stringify(error));
+                }, () => {
+                    student.pending = false;
+                });
                 break;
         }
     }

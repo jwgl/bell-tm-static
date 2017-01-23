@@ -26,6 +26,10 @@ $btn-attend-bg: $attend-bg;
             border-color: darken($color, 12%);
         }
     }
+
+    &[disabled] {
+        color: #888;
+    }
 }
 
 .btn-outline-late {

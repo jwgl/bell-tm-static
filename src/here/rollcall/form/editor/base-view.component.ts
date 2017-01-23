@@ -2,7 +2,7 @@ import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallFormService} from '../form.service';
 import {
     RollcallForm,
-    RollcallItem,
+    Rollcall,
     Student,
     ToggleResult,
 } from '../form.model';

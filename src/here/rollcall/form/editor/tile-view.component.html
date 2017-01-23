@@ -2,19 +2,24 @@
     <div *ngFor="let student of rollcallForm.visibleStudents" class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="card text-center mb-3"
              [ngClass]="{'card-inverse': student.hover, 'card-primary': student.hover}"
-             (mouseenter)="student.hover=true"
-             (mouseleave)="student.hover=false">
+             (mouseenter)="hovered = student"
+             (mouseleave)="hovered = null">
             <div class="card-header text-left p-0">
-                <ng-container *ngIf="!student.hover">
+                <rollcall-toggle-bar *ngIf="student === hovered; else status"
+                    [stretch]="true"
+                    [rollcallType]="student.rollcallType"
+                    [disabled]="student.pending"
+                    (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
+                <template #status>
                     <rollcall-status [student]="student"></rollcall-status>
-                </ng-container>
-                <ng-container *ngIf="student.hover">
-                    <rollcall-toggle-bar [stretch]="true" [rollcallType]="student.rollcallType" (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
-                </ng-container>
+                </template>
             </div>
             <div class="card-block">
                 <h4 class="card-title">{{student.name}}</h4>
-                <p class="card-text">{{student.statis.join(' / ')}}</p>
+                <div>
+                    <p class="card-text">{{student.statis.join(' / ')}}</p>
+                    <i [spinning]="student.pending"></i>
+                </div>
             </div>
         </div>
     </div>

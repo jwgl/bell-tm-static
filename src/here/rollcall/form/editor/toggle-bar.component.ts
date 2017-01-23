@@ -10,6 +10,7 @@ import {RollcallType, RollcallTypes, RollcallKeys} from '../form.model';
 export class RollcallToggleBarComponent {
     @Input() stretch = false;
     @Input() rollcallType: RollcallType;
+    @Input() disabled = false;
     @Output() toggle = new EventEmitter<string>();
 
     get typeKeys() {

@@ -4,5 +4,6 @@
             [ngClass]="'btn-outline-' + key"
             [class.col]="stretch"
             [class.active]="hasType(key)"
+            [disabled]="disabled"
             (click)="toggleType(key);$event.target.blur();">{{label(key)}}</button>
 </div>
