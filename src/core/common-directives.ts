@@ -8,8 +8,13 @@ import {PagerComponent} from './components/pager';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {FormDirective} from './bootstrap/form.directive';
-import {FormFieldComponent} from './bootstrap/form-field.component';
 import {FormControlDirective} from './bootstrap/form-control.directive';
+import {FormFieldComponent} from './bootstrap/form-field.component';
+import {
+    FormField2Component,
+    FormFieldLeftDirective,
+    FormFieldRightDirective,
+} from './bootstrap/form-field-2.component';
 import {GroupByPipe} from './pipes/group-by';
 import {ZeroPadPipe} from './pipes/zero-pad';
 import {OddEvenPipe} from './pipes/odd-even';
@@ -40,8 +45,11 @@ const CORE_DIRECTIVES: any[] = [
     PagerComponent,
     // bootstrap form directives
     FormDirective,
-    FormFieldComponent,
     FormControlDirective,
+    FormFieldComponent,
+    FormField2Component,
+    FormFieldLeftDirective,
+    FormFieldRightDirective,
     // bootstrap modal directives
     ModalDialogDirective,
     ModalCancelButtonDirective,

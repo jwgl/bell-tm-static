@@ -4,32 +4,34 @@ import {FormControlDirective} from './form-control.directive';
 
 @Component({
     selector: 'form-field',
+    styles: ['label {white-space: nowrap}'],
     template: `
     <label [attr.for]="controlId" class="col-sm-{{labelCol}} col-form-label">{{label}}</label>
     <div class="col-sm-{{controlCol}}">
         <ng-content></ng-content>
     </div>
     `,
+    host: {
+        '[class.form-group]': 'true',
+        '[class.row]': 'true',
+    },
 })
 export class FormFieldComponent {
-    private static _id = 0;
+    private static _id = 1000;
 
     @Input() label: string;
-    @Input() labelCol: string;
+    @Input() labelCol: number = 2;
     @ContentChild(FormControlDirective) formControl: FormControlDirective;
 
     controlId: string;
-    controlCol: string;
+    controlCol: number = 10;
 
-    constructor(private formDirective: FormDirective) {
-        this.controlId = `ctrl_${FormFieldComponent._id++}`;
+    static nextId(): string {
+        return `ctrl_${FormFieldComponent._id++}`;
     }
 
-    ngOnInit() {
-        if (!this.labelCol) {
-            this.labelCol = this.formDirective ? this.formDirective.colLabel : '2';
-        }
-        this.controlCol = this.formDirective ? this.formDirective.colControll : '10';
+    constructor() {
+        this.controlId = FormFieldComponent.nextId();
     }
 
     ngAfterContentInit() {

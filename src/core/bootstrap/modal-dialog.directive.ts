@@ -4,7 +4,7 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
     selector: 'modal-dialog',
     template: `
     <div class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog" [ngClass]="{'modal-lg': size == 'lg', 'modal-sm': size == 'sm'}">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">{{title}}</h5>
@@ -23,6 +23,7 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
 })
 export class ModalDialogDirective {
     @Input() title: string;
+    @Input() size: string;
 
     constructor(@Attribute('title') title: string) {
         this.title = title;

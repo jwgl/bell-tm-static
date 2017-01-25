@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import {matchOddEven} from 'core/utils';
 
 export interface ScheduleDto {
+    id: string;
     startWeek: number;
     endWeek: number;
     oddEven: number;
@@ -12,10 +13,10 @@ export interface ScheduleDto {
     course: string;
     place: string;
     courseItem: string;
-    scheduleId: string;
 }
 
 export class Schedule {
+    id: string;
     startWeek: number;
     endWeek: number;
     oddEven: number;
@@ -25,9 +26,9 @@ export class Schedule {
     course: string;
     courseItem: string;
     place: string;
-    scheduleId: string;
 
     constructor(dto: ScheduleDto) {
+        this.id = dto.id;
         this.startWeek = dto.startWeek;
         this.endWeek = dto.endWeek;
         this.oddEven = dto.oddEven;
@@ -37,7 +38,6 @@ export class Schedule {
         this.course = dto.course;
         this.courseItem = dto.courseItem;
         this.place = dto.place;
-        this.scheduleId = dto.scheduleId;
     }
 
     get label(): string {

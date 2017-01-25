@@ -4,6 +4,6 @@ import {Directive, Input} from '@angular/core';
     selector: 'form.form-horizontal',
 })
 export class FormDirective {
-    @Input() colLabel = '2';
-    @Input() colControll = '10';
+    @Input() colLabel = 2;
+    @Input() colControll = 10;
 }

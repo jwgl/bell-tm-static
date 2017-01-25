@@ -1,89 +1,67 @@
-<modal-dialog [title]="title">
+<modal-dialog [title]="title" size="lg">
     <modal-body>
         <form class="form-horizontal" #f="ngForm">
-            <div class="form-group row">
-                <form-field label="课程代码">
-                    <course-select [courseId]="schemeCourse.courseId"
-                                   [group]="options.group"
-                                   [editMode]="options.editMode"
-                                   [isTempCourse]="schemeCourse.isTempCourse"
-                                   (selectCourse)="onCourseSelected($event)"></course-select>
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="课程名称">
-                    <input type="text" class="form-control" required
-                           name="courseName"
-                           [(ngModel)]="schemeCourse.courseName"
-                           [disabled]="schemeCourse.courseId">
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="学分">
-                    <input type="number" class="form-control" col="4" min="0" required
-                           name="credit"
-                           [(ngModel)]= "schemeCourse.credit"
-                           [disabled]="schemeCourse.courseId">
-                </form-field >
-                <form-field label="实践学分">
-                    <input type="number" class="form-control" col="4" min="0"
-                           name="practiceCredit"
-                           [(ngModel)]= "schemeCourse.practiceCredit">
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="理论学时">
-                    <input type="number" class="form-control" col="4" min="0"
-                           name="theoryPeriod"
-                           [(ngModel)]= "schemeCourse.theoryPeriod">
-                </form-field>
-                <form-field label="实验学时">
-                    <input type="number" class="form-control" col="4" min="0"
-                           name="experimentPeriod"
-                           [(ngModel)]= "schemeCourse.experimentPeriod">
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="考核方式">
-                    <select class="form-control" col="4"
-                            name="assessType"
-                            [(ngModel)]="schemeCourse.assessType">
-                        <option value="1">考试</option>
-                        <option value="2">考查</option>
-                        <option value="3">论文</option>
-                    </select>
-                </form-field>
-                <form-field label="课程群组">
-                    <input type="number" class="form-control" col="4" min="0"
-                           name="courseGroup"
-                           [(ngModel)]= "schemeCourse.courseGroup">
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="推荐学期">
-                    <select class="form-control" col="4"
-                            name="suggestedTerm"
-                            [(ngModel)]="schemeCourse.suggestedTerm"
-                            (change)="onChangeSuggestedTerm(st.value)" #st>
-                        <option *ngFor="let term of options.terms" [ngValue]="term">{{term | termName}}</option>
-                    </select>
-                </form-field>
-                <form-field label="开课周数">
-                    <select class="form-control" col="4"
-                            name="periodWeeks"
-                            [(ngModel)]="schemeCourse.periodWeeks">
-                        <option *ngFor="let pw of periodWeekOptions" [value]="pw.value">{{pw.label}}</option>
-                    </select>
-                </form-field>
-            </div>
-            <div class="form-group row">
-                <form-field label="允许学期">
-                    <allowed-term [terms]="options.terms"
-                                  [suggestedTerm]="schemeCourse.suggestedTerm"
-                                  name="allowedTerm"
-                                  [(ngModel)]="schemeCourse.allowedTerm"></allowed-term>
-                </form-field>
-            </div>
+            <form-field label="课程代码">
+                <course-select [courseId]="schemeCourse.courseId"
+                               [group]="options.group"
+                               [editMode]="options.editMode"
+                               [isTempCourse]="schemeCourse.isTempCourse"
+                               (selectCourse)="onCourseSelected($event)"></course-select>
+            </form-field>
+            <form-field label="课程名称">
+                <input class="form-control" type="text" required
+                       name="courseName"
+                       [(ngModel)]="schemeCourse.courseName"
+                       [disabled]="schemeCourse.courseId">
+            </form-field>
+            <form-field-2>
+                <input class="form-control form-field-left" label="学分" type="number" min="0" required
+                       name="credit"
+                       [(ngModel)]= "schemeCourse.credit"
+                       [disabled]="schemeCourse.courseId">
+                <input class="form-control form-field-right" label="实践学分" type="number" min="0"
+                       name="practiceCredit"
+                       [(ngModel)]= "schemeCourse.practiceCredit">
+            </form-field-2>
+            <form-field-2>
+                <input class="form-control form-field-left" label="理论学时" type="number" min="0"
+                       name="theoryPeriod"
+                       [(ngModel)]= "schemeCourse.theoryPeriod">
+                <input class="form-control form-field-right" label="实验学时" type="number" min="0"
+                       name="experimentPeriod"
+                       [(ngModel)]= "schemeCourse.experimentPeriod">
+            </form-field-2>
+            <form-field-2>
+                <select class="form-control form-field-left" label="考核方式"
+                        name="assessType"
+                        [(ngModel)]="schemeCourse.assessType">
+                    <option value="1">考试</option>
+                    <option value="2">考查</option>
+                    <option value="3">论文</option>
+                </select>
+                <input class="form-control form-field-right" label="课程群组" type="number" min="0"
+                       name="courseGroup"
+                       [(ngModel)]= "schemeCourse.courseGroup">
+            </form-field-2>
+            <form-field-2>
+                <select class="form-control form-field-left" label="推荐学期"
+                        name="suggestedTerm"
+                        [(ngModel)]="schemeCourse.suggestedTerm"
+                        (change)="onChangeSuggestedTerm(st.value)" #st>
+                    <option *ngFor="let term of options.terms" [ngValue]="term">{{term | termName}}</option>
+                </select>
+                <select class="form-control form-field-right" label="开课周数"
+                        name="periodWeeks"
+                        [(ngModel)]="schemeCourse.periodWeeks">
+                    <option *ngFor="let pw of periodWeekOptions" [value]="pw.value">{{pw.label}}</option>
+                </select>
+            </form-field-2>
+            <form-field label="允许学期">
+                <allowed-term [terms]="options.terms"
+                                [suggestedTerm]="schemeCourse.suggestedTerm"
+                                name="allowedTerm"
+                                [(ngModel)]="schemeCourse.allowedTerm"></allowed-term>
+            </form-field>
         </form>
     </modal-body>
     <modal-footer>

@@ -13,20 +13,16 @@
             </fieldset>
             <fieldset>
                 <legend>课程安排</legend>
-                <div class="form-group row">
-                    <form-field label="计划模板">
-                        <select class="form-control" col="4" min="0"
+                <form-field-2>
+                    <select class="form-control form-field-left" label="计划模板" min="0"
                             name="schemeTemplate"
                             [(ngModel)]= "template">
-                            <option *ngFor="let template of options.data" [ngValue]="template">{{template.name}}</option>
-                        </select>
-                    </form-field>
-                    <form-field label="实践比例">
-                        <input type="number" class="form-control" col="4" min="0" max="1" step="0.01"
-                            name="practiceCreditRatio"
-                            [(ngModel)]= "programSetting.practiceCreditRatio">
-                    </form-field>
-                </div>
+                        <option *ngFor="let template of options.data" [ngValue]="template">{{template.name}}</option>
+                    </select>
+                    <input class="form-control form-field-right" label="实践比例" type="number" min="0" max="1" step="0.01"
+                           name="practiceCreditRatio"
+                           [(ngModel)]= "programSetting.practiceCreditRatio">
+                </form-field-2>
                 <div class="form-check">
                     <label class="form-check-label">
                         <input type="checkbox" class="form-check-input"

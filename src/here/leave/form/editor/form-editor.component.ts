@@ -4,29 +4,24 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {BookingForm, BookingSection, bookingSectionMap} from '../../common/form.model';
+import {LeaveForm} from '../../shared/form.model';
 import './form-editor.model';
-import {BookingFormService} from '../form.service';
-import {FindPlaceDialogService} from './find-place/find-place.module';
+import {LeaveFormService} from '../form.service';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
     templateUrl: 'form-editor.component.html',
 })
-export class BookingFormEditorComponent {
+export class LeaveFormEditorComponent {
     private editMode: EditMode;
-    private form: BookingForm;
-    private departments: any[];
-    private bookingTypes: any[];
-    private findPlaceOptions: any = {};
+    private form: LeaveForm;
     private saving = false;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: BookingFormService,
-        private findPlaceDialog: FindPlaceDialogService,
+        private service: LeaveFormService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
@@ -41,29 +36,7 @@ export class BookingFormEditorComponent {
     }
 
     onLoadData(dto: any) {
-        dto.sections.forEach((section: BookingSection) => bookingSectionMap[section.id] = section);
-        this.form = new BookingForm(dto.form);
-        this.departments = dto.departments;
-        this.bookingTypes = dto.bookingTypes;
-        this.findPlaceOptions.term = dto.term;
-        this.findPlaceOptions.placeTypes = dto.placeTypes;
-        this.findPlaceOptions.sections = dto.sections;
-        this.findPlaceOptions.bookingDays = dto.bookingDays;
-    }
-
-    onDepartmentChanged(departmentId: string) {
-        this.service.getDepartmentBookingType(departmentId).subscribe(bookingTypes => {
-            this.bookingTypes = bookingTypes;
-            this.form.bookingTypeId = this.bookingTypes[0].id;
-        });
-    }
-
-    findPlace() {
-        this.findPlaceDialog.open(this.findPlaceOptions).then((places: any[]) => {
-            places.forEach(place => {
-                this.form.addItem(place);
-            });
-        });
+        this.form = new LeaveForm(dto.form);
     }
 
     cancel() {
@@ -89,13 +62,14 @@ export class BookingFormEditorComponent {
     }
 
     create() {
-        this.saving = true;
-        this.service.create(this.form.toServerDto()).subscribe(id => {
-            this.router.navigate(['/', id]);
-        }, error => {
-            this.saving = false;
-            alert(error.json().message);
-        });
+        console.log(this.form)
+        // this.saving = true;
+        // this.service.create(this.form.toServerDto()).subscribe(id => {
+        //     this.router.navigate(['/', id]);
+        // }, error => {
+        //     this.saving = false;
+        //     alert(error.json().message);
+        // });
     }
 
     update() {

@@ -42,11 +42,7 @@ export class BookingForm {
     }
 
     get title(): string {
-        if (this.id) {
-            return `教室借用单#${this.id}`;
-        } else {
-            return '教室借用单';
-        }
+        return this.id ? `教室借用单#${this.id}` : '教室借用单';
     }
 }
 

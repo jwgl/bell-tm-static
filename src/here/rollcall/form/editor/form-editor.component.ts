@@ -64,31 +64,31 @@ export class RollcallFormEditorComponent implements OnInit {
                     studentId: student.id,
                     type: result.type,
                 }).subscribe(id => {
+                    student.pending = false;
                     student.rollcall = new Rollcall({id: id, type: result.type});
                 }, error => {
-                    alert(JSON.stringify(error));
-                }, () => {
                     student.pending = false;
+                    alert(JSON.stringify(error));
                 });
                 break;
             case 'update':
                 student.pending = true;
                 this.service.update(student.rollcall.id, {type: result.type}).subscribe(id => {
+                    student.pending = false;
                     student.rollcall.type = result.type;
                 }, error => {
-                    alert(JSON.stringify(error));
-                }, () => {
                     student.pending = false;
+                    alert(JSON.stringify(error));
                 });
                 break;
             case 'delete':
                 student.pending = true;
                 this.service.delete(student.rollcall.id).subscribe(() => {
+                    student.pending = false;
                     student.rollcall = null;
                 }, error => {
-                    alert(JSON.stringify(error));
-                }, () => {
                     student.pending = false;
+                    alert(JSON.stringify(error));
                 });
                 break;
         }

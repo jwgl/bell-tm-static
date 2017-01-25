@@ -1,0 +1,29 @@
+<h3><span>{{form.title}}</span></h3>
+<form class="form-horizontal row offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
+    <div form-field="请假人">
+            <p class="form-control-static" col="4">{{form.userName}}</p>
+    </div>
+    <div form-fields>
+        <p form-field1="班级" class="form-control-static" col="4">{{form.departmentName}}</p>
+        <p form-field2="类别" class="form-control-static" col="4">{{form.bookingTypeName}}</p>
+    </div>
+    <div form-field="事由">
+        <p class="form-control-static">{{form.reason}}</p>
+    </div>
+    <div form-field="明细">
+        <table class="table table-bordered table-sm form-control-static">
+            <thead>
+                <tr>
+                    <th>时间段</th>
+                    <th>教室名称</th>
+                    <th>教室类型</th>
+                    <th>座位数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of form.items">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>

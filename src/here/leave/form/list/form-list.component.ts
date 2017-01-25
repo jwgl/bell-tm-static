@@ -1,23 +1,22 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {BookingFormService} from '../form.service';
+import {LeaveFormService} from '../form.service';
 
 @Component({
     styleUrls: ['form-list.component.scss'],
     templateUrl: 'form-list.component.html',
 })
-export class BookingFormListComponent {
-    private user: {phoneNumber: string};
-    private count: number;
+export class LeaveFormListComponent {
     private forms: any[];
     private offset: number;
     private max = 10;
+    private count: number;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: BookingFormService,
+        private service: LeaveFormService,
     ) {
         this.loadData(0);
     }
@@ -25,7 +24,6 @@ export class BookingFormListComponent {
     loadData(offset: number) {
         this.offset = offset;
         this.service.loadList().subscribe(data => {
-            this.user = data.user;
             this.count = data.count;
             this.forms = data.forms;
         });
@@ -33,9 +31,5 @@ export class BookingFormListComponent {
 
     create() {
         this.router.navigate(['/', 'create']);
-    }
-
-    canApply() {
-        return !!this.user.phoneNumber;
     }
 }

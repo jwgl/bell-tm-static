@@ -20,4 +20,5 @@ module.exports = {
     'place/booking/form':     './src/place/booking/form/main.ts',
     'place/booking/review':   './src/place/booking/review/main.ts',
     'here/rollcall/form':     './src/here/rollcall/form/main.ts',
+    'here/leave/form':        './src/here/leave/form/main.ts',
 };

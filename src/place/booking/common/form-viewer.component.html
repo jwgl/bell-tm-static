@@ -1,46 +1,34 @@
 <h3><span>{{form.title}}</span></h3>
 <form class="form-horizontal row offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
-    <div class="form-group row">
-        <form-field label="借用人">
-            <p class="form-control-static" col="4">{{form.userName}}</p>
-        </form-field>
-        <form-field label="联系电话">
-            <p class="form-control-static" col="4">{{form.phoneNumber}}</p>
-        </form-field>
-    </div>
-    <div class="form-group row">
-        <form-field label="借用单位">
-            <p class="form-control-static" col="4">{{form.departmentName}}</p>
-        </form-field>
-        <form-field label="借用类别">
-            <p class="form-control-static" col="4">{{form.bookingTypeName}}</p>
-        </form-field>
-    </div>
-    <div class="form-group row">
-        <form-field label="借用事由">
-            <p class="form-control-static">{{form.reason}}</p>
-        </form-field>
-    </div>
-    <div class="form-group row">
-        <form-field label="借用明细">
-            <table class="table table-bordered table-sm form-control-static">
-                <thead>
-                    <tr>
-                        <th>时间段</th>
-                        <th>教室名称</th>
-                        <th>教室类型</th>
-                        <th>座位数</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of form.items">
-                        <td>{{item.weeks}} {{item.dayOfWeek | dayOfWeek}} {{item.section.name}}</td>
-                        <td>{{item.place.name}}</td>
-                        <td>{{item.place.type}}</td>
-                        <td>{{item.place.seat}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </form-field>
-    </div>
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="借用人">{{form.userName}}</p>
+        <p class="form-control-static form-field-right" label="联系电话">{{form.phoneNumber}}</p>
+    </form-field-2>
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="借用单位">{{form.departmentName}}</p>
+        <p class="form-control-static form-field-right" label="借用类别">{{form.bookingTypeName}}</p>
+    </form-field-2>
+    <form-field label="借用事由">
+        <p class="form-control-static">{{form.reason}}</p>
+    </form-field>
+    <form-field label="借用明细">
+        <table class="table table-bordered table-sm form-control-static">
+            <thead>
+                <tr>
+                    <th>时间段</th>
+                    <th>教室名称</th>
+                    <th>教室类型</th>
+                    <th>座位数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of form.items">
+                    <td>{{item.weeks}} {{item.dayOfWeek | dayOfWeek}} {{item.section.name}}</td>
+                    <td>{{item.place.name}}</td>
+                    <td>{{item.place.type}}</td>
+                    <td>{{item.place.seat}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form-field>
 </form>
