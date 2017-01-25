@@ -8,25 +8,58 @@
             <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
         </div>
     </div>
-    <h3><span>{{form.title}}</span></h3>
-    <form class="form-horizontal">
-        <form-field-2>
-            <p class="form-control-static form-field-left" label="请假人">{{form.studentName}}</p>
-            <select class="form-control form-field-right" label="请假类别" name="leaveType" [(ngModel)]="form.type">
-                <option *ngFor="let leaveType of leaveTypes" [ngValue]="leaveType.id">{{leaveType.name}}</option>
-            </select>
-        </form-field-2>
-        <form-field label="请假事由">
-            <textarea class="form-control" name="reason" rows="4"
-                [(ngModel)]="form.reason"
-                maxlength="200" minlength="10"
-                required
-                #reason="ngModel"></textarea>
-            <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
-                <span *ngIf="reason.errors?.required">请假事由不能为空。</span>
-                <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
-                <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
-            </p>
-        </form-field>
-    </form>
+    <form-title>{{form.title}}</form-title>
+    <div class="row">
+        <div class="col-md-9">
+            <form class="form-horizontal">
+                <form-field-2>
+                    <p class="form-control-static form-field-left" label="请假人">{{form.studentName}}</p>
+                    <select class="form-control form-field-right" label="请假类别" name="leaveType" [(ngModel)]="form.type">
+                        <option *ngFor="let leaveType of leaveTypes" [ngValue]="leaveType.id">{{leaveType.name}}</option>
+                    </select>
+                </form-field-2>
+                <form-field label="请假事由">
+                    <textarea class="form-control" name="reason" rows="4"
+                        [(ngModel)]="form.reason"
+                        maxlength="200" minlength="10"
+                        required
+                        #reason="ngModel"></textarea>
+                    <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
+                        <span *ngIf="reason.errors?.required">请假事由不能为空。</span>
+                        <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                        <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+                    </p>
+                </form-field>
+            </form>
+            <here-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" selectable="true" size="sm">
+                <template #weekTpl let-week="week">
+                    <a class="text-muted" href="#"
+                       [class.text-success]="form.weekSelected(week)"
+                       (click)="onClickWeek(week);$event.preventDefault();">
+                       第{{week}}周
+                    </a>
+                </template>
+                <template #dayOfWeekTpl let-week="week" let-day="day">
+                    <a class="text-muted" href="#"
+                       [class.text-success]="form.dayOfWeekSelected(week, day)"
+                       (click)="onClickDay(week, day);$event.preventDefault();">
+                       {{day | dayOfWeek}}
+                    </a>
+                </template>
+                <template #scheduleTpl let-s="schedule" let-week="week", let-day="day" let-section="section">
+                    <a class="text-muted" href="#"
+                       [class.text-success]="form.scheduleSelected(week, s)"
+                       title="{{s.startWeek}}-{{s.endWeek}}{{s.oddEven | oddEven}}周&#013;{{s.place}}"
+                       (click)="onClickSchedule(week, s);$event.preventDefault();">
+                       {{s.course}}<ng-container *ngIf="s.courseItem"><br>【{{s.courseItem}}】</ng-container>
+                    </a>
+                </template>
+            </here-schedule>
+        </div>
+        <div class="col-md-3">
+            <ul>
+                <li *ngFor="let item of form.items">{{item}}</li>
+            </ul>
+        </div>
+    </div>
 </ng-container>

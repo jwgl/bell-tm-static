@@ -7,6 +7,7 @@ import {Workflow} from 'core/workflow';
 import {LeaveFormService} from '../form.service';
 import {LeaveForm} from '../../shared/form.model';
 import './form-item.model';
+import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
 
 @Component({
     templateUrl: 'form-item.component.html',
@@ -26,7 +27,8 @@ export class LeaveFormItemComponent {
 
     loadData(id: number) {
         this.service.loadItem(id).subscribe(dto => {
-            this.form = new LeaveForm(dto);
+            let schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
+            this.form = new LeaveForm(dto.form, schedules);
             this.form.editable = dto.editable;
         });
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ContentChild, TemplateRef} from '@angular/core';
+import {Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter} from '@angular/core';
 import * as _ from 'lodash';
 
 import {Term, Schedule, findWeekSchedules, buildKey} from './schedule.model';
@@ -9,17 +9,20 @@ import {Term, Schedule, findWeekSchedules, buildKey} from './schedule.model';
     templateUrl: 'schedule.component.html',
 })
 export class HereScheduleComponent implements OnInit {
-    @ContentChild(TemplateRef) tpl: TemplateRef<Schedule>;
-
     readonly spans = {
         1  : {span: 4, label: '上午'},
         5  : {span: 5, label: '下午'},
         10 : {span: 4, label: '晚上'},
     };
 
-
     @Input() term: Term;
     @Input() schedules: Schedule[];
+    @Input() selectable = false;
+    @Input() size: string;
+
+    @ContentChild('scheduleTpl') scheduleTemplate: TemplateRef<any>;
+    @ContentChild('dayOfWeekTpl') dayOfWeekTemplate: TemplateRef<any>;
+    @ContentChild('weekTpl') weekTemplate: TemplateRef<any>;
 
     days: number[];
     sections: number[];

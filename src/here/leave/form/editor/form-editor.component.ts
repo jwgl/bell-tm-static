@@ -4,9 +4,10 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {LeaveForm} from '../../shared/form.model';
+import {LeaveForm, LeaveItem} from '../../shared/form.model';
 import './form-editor.model';
 import {LeaveFormService} from '../form.service';
+import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -16,6 +17,8 @@ export class LeaveFormEditorComponent {
     private editMode: EditMode;
     private form: LeaveForm;
     private saving = false;
+    private schedules: Schedule[];
+    private term: Term;
 
     constructor(
         private router: Router,
@@ -36,7 +39,9 @@ export class LeaveFormEditorComponent {
     }
 
     onLoadData(dto: any) {
-        this.form = new LeaveForm(dto.form);
+        this.schedules = dto.schedules.map((scheduleDto: ScheduleDto) => new Schedule(scheduleDto));
+        this.form = new LeaveForm(dto.form, this.schedules);
+        this.term = dto.term;
     }
 
     cancel() {
@@ -80,5 +85,17 @@ export class LeaveFormEditorComponent {
             this.saving = false;
             alert(error.json().message);
         });
+    }
+
+    onClickSchedule(week: number, schedule: Schedule) {
+        this.form.toggleSchedule(week, schedule);
+    }
+
+    onClickDay(week: number, dayOfWeek: number) {
+        this.form.toggleDayOfWeek(week, dayOfWeek);
+    }
+
+    onClickWeek(week: number) {
+        this.form.toggleWeek(week);
     }
 }

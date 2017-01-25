@@ -6,6 +6,7 @@ import {CommonDirectivesModule} from 'core/common-directives';
 import {CommonDialogsModule} from 'core/common-dialogs';
 
 import {LeaveFormEditorComponent} from './form-editor.component';
+import {HereScheduleModule} from '../../../shared/schedule/schedule.module';
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import {LeaveFormEditorComponent} from './form-editor.component';
         FormsModule,
         CommonDirectivesModule,
         CommonDialogsModule,
+        HereScheduleModule,
     ],
     declarations: [
         LeaveFormEditorComponent,

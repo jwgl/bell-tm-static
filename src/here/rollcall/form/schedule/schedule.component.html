@@ -1,5 +1,5 @@
 <here-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
-    <template let-s="schedule" let-week="week", let-day="day" let-section="section">
+    <template #scheduleTpl let-s="schedule" let-week="week", let-day="day" let-section="section">
         <a [routerLink]="['/week', week, 'day',  day, 'section', section, service.viewType]">
             <div>{{s.course}}<ng-container *ngIf="s.courseItem"> 【{{s.courseItem}}】</ng-container></div>
             <div>{{s.startWeek}}-{{s.endWeek}}{{s.oddEven | oddEven}}周</div>

@@ -1,19 +1,23 @@
-<ul class="nav nav-tabs week-tabs">
+<ul class="nav nav-tabs flex-wrap week-tabs">
 	<li *ngFor="let week of weeks" class="nav-item" >
         <a class="nav-link" [ngClass]="{active: currentWeek == week}" href='#' data-toggle="tab" (click)="currentWeek=week">{{week}}</a>
     </li>
 </ul>
-<table class="table" *ngIf="schedules">
+<table class="table" [class.table-sm]="size=='sm'" *ngIf="schedules">
     <thead>
         <tr>
-            <th colspan="2" data-week="${currentWeek}">第{{currentWeek}}周</th>
-            <th>星期一</th>
-            <th>星期二</th>
-            <th>星期三</th>
-            <th>星期四</th>
-            <th>星期五</th>
-            <th>星期六</th>
-            <th>星期日</th>
+            <th colspan="2">
+                <ng-container *ngIf="weekTemplate; else defaultWeek">
+                    <template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: currentWeek}"></template>
+                </ng-container>
+                <template #defaultWeek>第{{currentWeek}}周</template>
+            </th>
+            <th *ngFor="let day of days">
+                <ng-container *ngIf="dayOfWeekTemplate; else defaultDay">
+                    <template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: currentWeek, day: day}"></template>
+                </ng-container>
+                <template #defaultDay>{{day | dayOfWeek}}</template>
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +28,7 @@
                 <ng-container [ngSwitch]="cellType(day, section)">
                     <td *ngSwitchCase="'schedule'" [rowSpan]="getRowSpan(day, section)" class="cn active">
                         <ng-container *ngFor="let s of getScheduleCell(day, section)">
-                            <ng-container [ngTemplateOutlet]="tpl" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></ng-container>
+                            <template [ngTemplateOutlet]="scheduleTemplate" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></template>
                         </ng-container>
                     </td>
                     <td *ngSwitchCase="'normal'" class="cn"></td>

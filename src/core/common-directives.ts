@@ -5,6 +5,7 @@ import {AuditStatusComponent} from './components/audit-status';
 import {FromNowComponent} from './components/from-now';
 import {CheckboxSelectorComponent} from './components/checkbox-selector';
 import {PagerComponent} from './components/pager';
+import {FormTitleComponent} from './components/form-title';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {FormDirective} from './bootstrap/form.directive';
@@ -43,6 +44,7 @@ const CORE_DIRECTIVES: any[] = [
     FromNowComponent,
     CheckboxSelectorComponent,
     PagerComponent,
+    FormTitleComponent,
     // bootstrap form directives
     FormDirective,
     FormControlDirective,

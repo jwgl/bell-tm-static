@@ -1,12 +1,8 @@
 import {Pipe} from '@angular/core';
 import * as moment from 'moment';
-
+moment.locale('zh-cn');
 @Pipe({name: 'fromNow'})
 export class FromNowPipe {
-    constructor() {
-        moment.locale('zh-cn');
-    }
-
     transform(value: any, args: any[]) {
         return moment(value).fromNow();
     }
@@ -14,10 +10,6 @@ export class FromNowPipe {
 
 @Pipe({name: 'moment'})
 export class MomentFormatPipe {
-    constructor() {
-        moment.locale('zh-cn');
-    }
-
     transform(value: any, args: any[]) {
         let format: string;
 
@@ -33,10 +25,6 @@ export class MomentFormatPipe {
 
 @Pipe({name: 'dayOfWeek'})
 export class DayOfWeekPipe {
-    constructor() {
-        moment.locale('zh-cn');
-    }
-
     transform(value: number) {
         return moment.weekdays(value);
     }

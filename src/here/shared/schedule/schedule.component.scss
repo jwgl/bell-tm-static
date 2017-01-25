@@ -5,6 +5,7 @@
     th {
         border-top-width: 0;
         text-align: center;
+        font-weight: normal;
     }
     td {
         vertical-align: middle;
@@ -30,4 +31,8 @@
             background-color: $gray-lightest;
         }
     }
+}
+
+:host-context([size=sm]) {
+    font-size: 0.75rem;
 }
