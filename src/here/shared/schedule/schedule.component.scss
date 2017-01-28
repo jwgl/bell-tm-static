@@ -1,6 +1,14 @@
 @import 'node_modules/bootstrap/scss/_variables.scss';
 .table {
     border-bottom: solid $table-border-width $table-border-color;
+    thead {
+        tr {
+            th {
+                border-bottom-width: 1px;
+                border-right: solid $table-border-width transparent;
+            }
+        }
+    }
 
     th {
         border-top-width: 0;
@@ -23,12 +31,7 @@
 
         &.cn {
             width: 12.5%;
-        }
-
-        &.active {
-            border-left: solid $table-border-width $table-border-color;
-            border-right: solid $table-border-width $table-border-color;
-            background-color: $gray-lightest;
+            border-right: solid $table-border-width transparent;
         }
     }
 }

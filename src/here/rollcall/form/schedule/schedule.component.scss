@@ -1,4 +1,10 @@
-a {
-    display: inline-block;
-    line-height: 1.25rem;
+here-schedule {
+    .btn {
+        white-space: normal;
+        padding: 0;
+        span {
+            display: inline-block;
+            padding: 0.3rem;
+        }
+    }
 }

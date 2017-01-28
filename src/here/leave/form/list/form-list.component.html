@@ -16,7 +16,7 @@
     <tbody>
         <tr *ngFor="let form of forms">
             <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
-            <td>{{form.type}}</td>
+            <td>{{form.type | leaveType}}</td>
             <td><div class="reason">{{form.reason}}</div></td>
             <td>{{form.dateCreated | moment}}</td>
             <td><audit-status [status]="form.status"></audit-status></td>

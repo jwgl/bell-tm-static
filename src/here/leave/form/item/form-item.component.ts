@@ -29,7 +29,7 @@ export class LeaveFormItemComponent {
         this.service.loadItem(id).subscribe(dto => {
             let schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
             this.form = new LeaveForm(dto.form, schedules);
-            this.form.editable = dto.editable;
+            this.form.editable = dto.form.editable;
         });
     }
 

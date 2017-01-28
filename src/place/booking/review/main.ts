@@ -12,7 +12,7 @@ import {BookingCommonModule} from '../common/booking-common.module';
     bootstrap: [BookingReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/place/bookingForms'),
+        RestModule.for('/api/place/bookings'),
         WorkflowModule,
         BookingCommonModule,
     ],

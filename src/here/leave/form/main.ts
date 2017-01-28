@@ -18,7 +18,7 @@ import {LeaveFormEditorModule} from './editor/form-editor.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/here/students/${userId}/leaveForms'),
+        RestModule.for('/api/here/students/${userId}/leaves'),
         LeaveFormRoutingModule,
         LeaveFormEditorModule,
         LeaveFormItemModule,

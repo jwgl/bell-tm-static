@@ -1,5 +1,20 @@
 import {Schedule} from '../../shared/schedule/schedule.model';
 import * as moment from 'moment';
+import * as _ from 'lodash';
+
+export enum LeaveType {
+    PrivateAffair = 1,
+    SickLeave = 2,
+    PublicAffair = 3,
+}
+
+export const LeaveTypes = [
+    {type: LeaveType.PrivateAffair, label: '事假'},
+    {type: LeaveType.SickLeave, label: '病假'},
+    {type: LeaveType.PublicAffair, label: '公假'},
+];
+
+export const LeaveTypeNames = _.fromPairs(_.map(LeaveTypes, it => [it.type, it.label]));
 
 export class LeaveForm {
     id: number;
@@ -7,12 +22,11 @@ export class LeaveForm {
     studentId: string;
     studentName: string;
     adminClass: string;
-    type: number;
+    type: LeaveType;
     reason: string;
     status: string;
     workflowInstanceId: string;
     items: LeaveItem[];
-    removedItems: LeaveItem[];
 
     constructor(dto: any, schedules: Schedule[]) {
         this.id = dto.id;
@@ -20,7 +34,7 @@ export class LeaveForm {
         this.studentId = dto.studentId;
         this.studentName = dto.studentName;
         this.adminClass = dto.adminClass;
-        this.type = dto.type;
+        this.type = dto.type ? dto.type : LeaveType.PrivateAffair;
         this.reason = dto.reason;
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
@@ -29,16 +43,20 @@ export class LeaveForm {
             if (item.taskScheduleId) {
                 leaveItem.schedule = schedules.find(s => s.id === item.taskScheduleId);
             }
+            return leaveItem;
         });
-        this.removedItems = [];
     }
 
     get title(): string {
-        return this.id ? `假条#${this.id}` : '假条';
+        return this.id ? `请假#${this.id}` : '请假';
     }
 
     contains(item: LeaveItem) {
         return !!this.items.find(i => i.equalsTo(item));
+    }
+
+    containsWeek(week: number) {
+        return !!this.items.find(i => i.week === week);
     }
 
     weekSelected(week: number): boolean {

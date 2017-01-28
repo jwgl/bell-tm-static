@@ -23,6 +23,7 @@ export class HereScheduleComponent implements OnInit {
     @ContentChild('scheduleTpl') scheduleTemplate: TemplateRef<any>;
     @ContentChild('dayOfWeekTpl') dayOfWeekTemplate: TemplateRef<any>;
     @ContentChild('weekTpl') weekTemplate: TemplateRef<any>;
+    @ContentChild('weekTabTpl') weekTabTemplate: TemplateRef<any>;
 
     days: number[];
     sections: number[];
@@ -76,6 +77,7 @@ export class HereScheduleComponent implements OnInit {
     getScheduleContext(schedule: Schedule, day: number, section: number) {
         return {
             schedule: schedule,
+            count: this.weekSchedules[buildKey(day, section)].length,
             week: this.currentWeek,
             day: day,
             section: section,

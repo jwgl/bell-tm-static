@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {LeaveForm, LeaveItem} from '../../shared/form.model';
+import {LeaveForm, LeaveItem, LeaveTypes} from '../../shared/form.model';
 import './form-editor.model';
 import {LeaveFormService} from '../form.service';
 import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
@@ -19,6 +19,7 @@ export class LeaveFormEditorComponent {
     private saving = false;
     private schedules: Schedule[];
     private term: Term;
+    private leaveTypes = LeaveTypes;
 
     constructor(
         private router: Router,
@@ -41,6 +42,14 @@ export class LeaveFormEditorComponent {
     onLoadData(dto: any) {
         this.schedules = dto.schedules.map((scheduleDto: ScheduleDto) => new Schedule(scheduleDto));
         this.form = new LeaveForm(dto.form, this.schedules);
+        this.form.removedItems = [];
+        this.form.existedItems = dto.existedItems.map((item: any) => {
+            let leaveItem = new LeaveItem(this.form, item);
+            if (item.taskScheduleId) {
+                leaveItem.schedule = this.schedules.find(s => s.id === item.taskScheduleId);
+            }
+            return leaveItem;
+        });
         this.term = dto.term;
     }
 
@@ -67,14 +76,13 @@ export class LeaveFormEditorComponent {
     }
 
     create() {
-        console.log(this.form)
-        // this.saving = true;
-        // this.service.create(this.form.toServerDto()).subscribe(id => {
-        //     this.router.navigate(['/', id]);
-        // }, error => {
-        //     this.saving = false;
-        //     alert(error.json().message);
-        // });
+        this.saving = true;
+        this.service.create(this.form.toServerDto()).subscribe(id => {
+            this.router.navigate(['/', id]);
+        }, error => {
+            this.saving = false;
+            alert(error.json().message);
+        });
     }
 
     update() {
@@ -85,17 +93,5 @@ export class LeaveFormEditorComponent {
             this.saving = false;
             alert(error.json().message);
         });
-    }
-
-    onClickSchedule(week: number, schedule: Schedule) {
-        this.form.toggleSchedule(week, schedule);
-    }
-
-    onClickDay(week: number, dayOfWeek: number) {
-        this.form.toggleDayOfWeek(week, dayOfWeek);
-    }
-
-    onClickWeek(week: number) {
-        this.form.toggleWeek(week);
     }
 }

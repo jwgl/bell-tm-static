@@ -59,22 +59,13 @@ BookingForm.prototype.isValid = function(this: BookingForm): boolean {
 };
 
 BookingForm.prototype.toServerDto = function(this: BookingForm): any {
-    if (!this.id) {
-        return {
-            departmentId: this.departmentId,
-            bookingTypeId: this.bookingTypeId,
-            reason: this.reason,
-            addedItems: this.getAddedItems(),
-        };
-    } else {
-        return {
-            departmentId: this.departmentId,
-            bookingTypeId: this.bookingTypeId,
-            reason: this.reason,
-            addedItems: this.getAddedItems(),
-            removedItems: this.removedItems.map(it => it.id),
-        };
-    }
+    return {
+        departmentId: this.departmentId,
+        bookingTypeId: this.bookingTypeId,
+        reason: this.reason,
+        addedItems: this.getAddedItems(),
+        removedItems: this.id ? this.removedItems.map(it => it.id) : null,
+    };
 };
 
 BookingForm.prototype.getAddedItems = function(this: BookingForm) {

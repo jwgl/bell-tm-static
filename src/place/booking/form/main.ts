@@ -18,7 +18,7 @@ import {BookingFormEditorModule} from './editor/form-editor.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/place/users/${userId}/bookingForms'),
+        RestModule.for('/api/place/users/${userId}/bookings'),
         routing,
         BookingFormEditorModule,
         BookingFormItemModule,

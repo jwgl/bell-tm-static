@@ -1,29 +1,19 @@
-<h3><span>{{form.title}}</span></h3>
-<form class="form-horizontal row offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
-    <div form-field="请假人">
-            <p class="form-control-static" col="4">{{form.userName}}</p>
-    </div>
-    <div form-fields>
-        <p form-field1="班级" class="form-control-static" col="4">{{form.departmentName}}</p>
-        <p form-field2="类别" class="form-control-static" col="4">{{form.bookingTypeName}}</p>
-    </div>
-    <div form-field="事由">
+<form-title>{{form.title}}</form-title>
+<form class="form-horizontal">
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="学号">{{form.studentId}}</p>
+        <p class="form-control-static form-field-right" label="姓名">{{form.studentName}}</p>
+    </form-field-2>
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="类型">{{form.type | leaveType}}</p>
+        <p class="form-control-static form-field-right" label="班级">{{form.adminClass}}</p>
+    </form-field-2>
+    <form-field label="事由">
         <p class="form-control-static">{{form.reason}}</p>
-    </div>
-    <div form-field="明细">
-        <table class="table table-bordered table-sm form-control-static">
-            <thead>
-                <tr>
-                    <th>时间段</th>
-                    <th>教室名称</th>
-                    <th>教室类型</th>
-                    <th>座位数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of form.items">
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    </form-field>
+    <form-field label="明细">
+        <ul>
+            <li *ngFor="let item of form.items">{{item}}</li>
+        </ul>
+    </form-field>
 </form>

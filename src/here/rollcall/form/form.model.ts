@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
 
+import {LeaveType} from '../../leave/shared/form.model';
+
 export enum RollcallType {
     None = 0,
     Absent = 1,
@@ -29,12 +31,6 @@ export namespace RollcallType {
         return type === RollcallTypes[key].value ||
                type === RollcallType.LateEarly && (key === 'late' || key === 'early');
     }
-}
-
-enum LeaveType {
-    PrivateAffair = 1,
-    SickLeave = 2,
-    PublicAffair = 3,
 }
 
 export interface RollcallConfig {

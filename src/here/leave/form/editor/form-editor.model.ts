@@ -5,12 +5,21 @@ import {Schedule} from '../../../shared/schedule/schedule.model';
 
 declare module '../../shared/form.model' {
     interface LeaveForm {
+        removedItems: LeaveItem[];
+        existedItems: LeaveItem[];
+
         toggleWeek(week: number): void;
         toggleDayOfWeek(week: number, dayOfWeek: number): void;
         toggleSchedule(week: number, schedule: Schedule): void;
+
+        weekDisabled(week: number): boolean;
+        dayOfWeekDisabled(week: number, dayOfWeek: number): boolean;
+        scheduleDisabled(week: number, schedule: Schedule): boolean;
+
         addItem(item: LeaveItem): void;
         removeItem(item: LeaveItem): void;
         toServerDto(): any;
+        getAddedItems(): any[];
         isValid(): boolean;
     }
 }
@@ -54,6 +63,23 @@ LeaveForm.prototype.toggleSchedule = function(this: LeaveForm, week: number, sch
     }
 };
 
+LeaveForm.prototype.weekDisabled = function(this: LeaveForm, week: number): boolean {
+    return _.some(this.existedItems, it => it.week === week);
+};
+
+LeaveForm.prototype.dayOfWeekDisabled = function(this: LeaveForm, week: number, dayOfWeek: number): boolean {
+    return _.some(this.existedItems, it => it.week === week && (
+        !it.dayOfWeek && !it.schedule ||
+        it.dayOfWeek && it.dayOfWeek === dayOfWeek ||
+        it.schedule && it.schedule.dayOfWeek === dayOfWeek));
+};
+
+LeaveForm.prototype.scheduleDisabled = function(this: LeaveForm, week: number, schedule: Schedule): boolean {
+    return _.some(this.existedItems, it => it.week === week && (
+        !it.dayOfWeek && !it.schedule ||
+        it.dayOfWeek && it.dayOfWeek === schedule.dayOfWeek ||
+        it.schedule && it.schedule.id === schedule.id));
+};
 
 LeaveForm.prototype.addItem = function(this: LeaveForm, item: LeaveItem): void {
     if (this.items.find(i => i.equalsTo(item))) {
@@ -81,15 +107,25 @@ LeaveForm.prototype.removeItem = function(this: LeaveForm, item: LeaveItem): voi
 };
 
 LeaveForm.prototype.isValid = function(this: LeaveForm): boolean {
-    return true;
+    return this.reason
+        && this.reason.length >= 10
+        && this.reason.length <= 200
+        && this.items.length > 0;
 };
 
 LeaveForm.prototype.toServerDto = function(this: LeaveForm): any {
-    if (!this.id) {
-        return {
-        };
-    } else {
-        return {
-        };
-    }
+    return {
+        type: this.type,
+        reason: this.reason,
+        addedItems: this.getAddedItems(),
+        removedItems: this.id ? this.removedItems.map(it => it.id) : null,
+    };
+};
+
+LeaveForm.prototype.getAddedItems = function(this: LeaveForm): any[] {
+    return this.items.filter(it => !it.id).map(it => ({
+        week: it.week,
+        dayOfWeek: it.dayOfWeek,
+        taskScheduleId: it.schedule ? it.schedule.id : null,
+    }));
 };
