@@ -7,7 +7,7 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
 export class ApiUrl {
     constructor(@Inject(API_URL) private apiUrl: string) {
         if (apiUrl.indexOf('${userId}') !== -1) {
-            const match = window.location.href.match(/\/(users|teachers|students)\/([^\/]+)\//);
+            const match = window.location.href.match(/\/(users|teachers|students|reviewers)\/([^\/]+)\//);
             if (match) {
                 this.apiUrl = this.apiUrl.replace('${userId}', match[2]);
             }
@@ -58,24 +58,21 @@ export class ApiUrl {
         return `${this.item(id)}?op=SUBMIT`;
     }
 
-    checkers(id: any): string {
-        return `${this.item(id)}/checkers`;
-    }
-
-    review(id: any, wi: any) {
-        return `${this.item(id)}/reviews/${wi}`;
+    workitem(id: any, wi: any) {
+        return `${this.item(id)}/workitems/${wi}`;
     }
 
     accept(id: any, wi: any) {
-        return `${this.review(id, wi)}?op=ACCEPT`;
+        return `${this.workitem(id, wi)}?op=ACCEPT`;
     }
 
     reject(id: any, wi: any) {
-        return `${this.review(id, wi)}?op=REJECT`;
+        return `${this.workitem(id, wi)}?op=REJECT`;
     }
 
-    approvers(id: any, wi: any) {
-        return `${this.review(id, wi)}/approvers`;
+    reviewers(id: any, type: string) {
+        let entitiesUlr = this.list().replace(/\/(users|teachers|students|reviewers)\/[^\/]+\//, '/');
+        return `${entitiesUlr}/${id}/reviewers?type=${type}`;
     }
 
     buildQueryString(options: {[key: string]: string}): string {

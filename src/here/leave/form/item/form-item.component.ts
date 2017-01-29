@@ -7,7 +7,7 @@ import {Workflow} from 'core/workflow';
 import {LeaveFormService} from '../form.service';
 import {LeaveForm} from '../../shared/form.model';
 import './form-item.model';
-import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
+import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 
 @Component({
     templateUrl: 'form-item.component.html',

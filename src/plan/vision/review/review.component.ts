@@ -27,7 +27,7 @@ export class VisionReviewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.rest.get(this.api.review(this.id, this.wi)).subscribe(dto => {
+        this.rest.get(this.api.workitem(this.id, this.wi)).subscribe(dto => {
             this.vm = new Vision(dto);
             this.vm.activity = dto.activity;
         });

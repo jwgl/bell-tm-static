@@ -4,6 +4,7 @@ import {Rest} from './rest/rest';
 import {ApiUrl, API_URL, BASE_URL} from './rest/api-url';
 import {ShowService} from './rest/show-service';
 import {EditService} from './rest/edit-service';
+import {ReviewService} from './rest/review-service';
 
 export {
     Rest,
@@ -12,6 +13,7 @@ export {
     BASE_URL,
     ShowService,
     EditService,
+    ReviewService,
 }
 
 @NgModule({

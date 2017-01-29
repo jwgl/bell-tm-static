@@ -26,7 +26,7 @@ export class BookingReviewComponent {
     }
 
     loadData() {
-        this.rest.get(this.api.review(this.id, this.wi)).subscribe(dto => {
+        this.rest.get(this.api.workitem(this.id, this.wi)).subscribe(dto => {
             this.form = new BookingForm(dto);
             this.form.activity = dto.activity;
         });

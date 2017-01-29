@@ -18,7 +18,7 @@ export class Workflow {
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
     submit(id: any, what: string): Promise<void> {
-        const whoUrl = this.api.checkers(id);
+        const whoUrl = this.api.reviewers(id, 'check');
         const does = '审核';
         return this.dialog.open(WorkflowSubmitDialog, {whoUrl, does, what}).then(result => {
             return this.rest.patch(this.api.submit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();
@@ -26,7 +26,7 @@ export class Workflow {
     }
 
     accept(id: any, wi: string, type: string, what: string): Promise<void> {
-        const whoUrl = type === 'check' ? this.api.approvers(id, wi) : null;
+        const whoUrl = type === 'check' ? this.api.reviewers(id, 'approve') : null;
         const does = type === 'check' ? '审核' : '审批';
         return this.dialog.open(WorkflowAcceptDialog, {whoUrl, does, what}).then(result => {
             return this.rest.patch(this.api.accept(id, wi), {title: result.what, to: result.to, comment: result.comment}).toPromise();

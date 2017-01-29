@@ -27,7 +27,7 @@ export class SchemeReviewComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.rest.get(this.api.review(this.id, this.wi)).subscribe(item => {
+        this.rest.get(this.api.workitem(this.id, this.wi)).subscribe(item => {
             this.vm = new Scheme(item);
             this.vm.activity = item.activity;
         });
