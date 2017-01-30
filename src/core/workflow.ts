@@ -18,7 +18,7 @@ export class Workflow {
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
     submit(id: any, what: string): Promise<void> {
-        const whoUrl = this.api.reviewers(id, 'check');
+        const whoUrl = this.api.submitTo(id);
         const does = '审核';
         return this.dialog.open(WorkflowSubmitDialog, {whoUrl, does, what}).then(result => {
             return this.rest.patch(this.api.submit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();

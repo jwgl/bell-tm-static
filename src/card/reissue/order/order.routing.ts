@@ -1,4 +1,5 @@
-import {RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
 
@@ -7,7 +8,7 @@ import {ReissueOrderItemComponent} from './item/order-item.component';
 import {ReissueOrderEditorComponent} from './editor/order-editor.component';
 import {ReissueOrderReceiveComponent} from './receive/order-receive.component';
 
-const ROUTER_CONFIG = [
+const routes: Routes = [
     {path: '', component: ReissueOrderListComponent},
     {path: 'create', component: ReissueOrderEditorComponent, data: {mode: EditMode.Create}},
     {path: ':id', component: ReissueOrderItemComponent},
@@ -15,4 +16,12 @@ const ROUTER_CONFIG = [
     {path: ':id/receive', component: ReissueOrderReceiveComponent},
 ];
 
-export const routing = RouterModule.forRoot(ROUTER_CONFIG, {useHash: true});
+@NgModule({
+    imports: [
+        RouterModule.forRoot(routes, {useHash: true}),
+    ],
+    exports: [
+        RouterModule,
+    ],
+})
+export class ReissueOrderRoutingModule {}

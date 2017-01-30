@@ -16,14 +16,14 @@ export class ReissueFormSelectDialog extends BaseDialog {
 
     constructor(
         private rest: Rest,
-        @Inject('REISSUE_FORM_API_URL')
-        private reissueFormApiUrl: String,
+        @Inject('REISSUES_API_URL')
+        private reissuesApiUrl: String,
     ) {
         super();
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get(`${this.reissueFormApiUrl}?status=CHECKED`).do((result: any) => {
+        return this.rest.get(`${this.reissuesApiUrl}?status=CHECKED`).do((result: any) => {
             // 删除已添加的申请
             result.forms = _.differenceWith(
                 result.forms,

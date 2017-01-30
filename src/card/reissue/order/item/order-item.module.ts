@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {ReissueCommonModule} from '../../common/reissue-common.module';
+import {ReissueSharedModule} from '../../shared/reissue-shared.module';
 import {ReissueOrderItemComponent} from './order-item.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {ReissueOrderItemComponent} from './order-item.component';
         CommonModule,
         CommonDialogsModule,
         CommonDirectivesModule,
-        ReissueCommonModule,
+        ReissueSharedModule,
     ],
     declarations: [
         ReissueOrderItemComponent,

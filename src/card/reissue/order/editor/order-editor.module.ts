@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {Dialog} from 'core/dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {ReissueCommonModule} from '../../common/reissue-common.module';
+import {ReissueSharedModule} from '../../shared/reissue-shared.module';
 import {ReissueFormSelectDialog} from './form-select.dialog';
 import {ReissueOrderEditorComponent} from './order-editor.component';
 
@@ -14,7 +14,7 @@ import {ReissueOrderEditorComponent} from './order-editor.component';
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
-        ReissueCommonModule,
+        ReissueSharedModule,
     ],
     declarations: [
         ReissueOrderEditorComponent,

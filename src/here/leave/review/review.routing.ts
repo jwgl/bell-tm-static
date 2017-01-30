@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 import {LeaveReviewListComponent} from './list/review-list.component';
 import {LeaveReviewItemComponent} from './item/review-item.component';
 
-const routes = [
+const routes: Routes = [
     {path: '', redirectTo: 'list/SUBMITTED', pathMatch: 'full'},
     {path: 'list/:status', component: LeaveReviewListComponent},
     {path: ':id', component: LeaveReviewItemComponent},

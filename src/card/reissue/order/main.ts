@@ -6,31 +6,31 @@ import {RestModule} from 'core/rest';
 
 import {ReissueOrderComponent} from './order.component';
 import {ReissueOrderService} from './order.service';
-import {routing} from './order.routes';
+import {ReissueOrderRoutingModule} from './order.routing';
 import {ReissueOrderListModule} from './list/order-list.module';
 import {ReissueOrderItemModule} from './item/order-item.module';
 import {ReissueOrderEditorModule} from './editor/order-editor.module';
 import {ReissueOrderReceiveModule} from './receive/order-receive.module';
 
 @NgModule({
-    bootstrap: [ReissueOrderComponent],
-    declarations: [
-        ReissueOrderComponent,
-    ],
     imports: [
         BrowserModule,
         RestModule.for('/api/card/reissueOrders'),
-        routing,
+        ReissueOrderRoutingModule,
         ReissueOrderListModule,
         ReissueOrderItemModule,
         ReissueOrderEditorModule,
         ReissueOrderReceiveModule,
     ],
+    declarations: [
+        ReissueOrderComponent,
+    ],
     providers: [
         ReissueOrderService,
-        {provide: 'REISSUE_FORM_WEB_URL', useValue: '/web/card/reissueForms'},
-        {provide: 'REISSUE_FORM_API_URL', useValue: '/api/card/reissueForms'},
+        {provide: 'REISSUES_WEB_URL', useValue: '/web/card/reissues'},
+        {provide: 'REISSUES_API_URL', useValue: '/api/card/reissues'},
     ],
+    bootstrap: [ReissueOrderComponent],
 })
 class MainModule {}
 

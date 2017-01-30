@@ -25,4 +25,4 @@ export {
         FormStatusPipe,
     ],
 })
-export class ReissueCommonModule {}
+export class ReissueSharedModule {}

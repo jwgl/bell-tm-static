@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 
 import {ReissueOrderService} from '../order.service';
-import {ReissueOrder} from '../common/reissue-order.model';
+import {ReissueOrder} from '../shared/reissue-order.model';
 
 @Component({
     selector: 'reissue-order-receive',

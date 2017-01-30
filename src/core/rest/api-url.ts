@@ -58,6 +58,10 @@ export class ApiUrl {
         return `${this.item(id)}?op=SUBMIT`;
     }
 
+    submitTo(id: any): string {
+        return `${this.item(id)}/checkers`;
+    }
+
     workitem(id: any, wi: any) {
         return `${this.item(id)}/workitems/${wi}`;
     }
@@ -71,7 +75,7 @@ export class ApiUrl {
     }
 
     reviewers(id: any, type: string) {
-        let entitiesUlr = this.list().replace(/\/(users|teachers|students|reviewers)\/[^\/]+\//, '/');
+        let entitiesUlr = this.list();
         return `${entitiesUlr}/${id}/reviewers?type=${type}`;
     }
 

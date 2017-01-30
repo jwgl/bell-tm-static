@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 
 import {ReissueOrderService} from '../order.service';
-import {ReissueOrder} from '../common/reissue-order.model';
+import {ReissueOrder} from '../shared/reissue-order.model';
 
 @Component({
     selector: 'reissue-order-item',
@@ -19,8 +19,8 @@ export class ReissueOrderItemComponent {
         private route: ActivatedRoute,
         private dialog: CommonDialog,
         private service: ReissueOrderService,
-        @Inject('REISSUE_FORM_WEB_URL')
-        private reissueFormWebUrl: String,
+        @Inject('REISSUES_WEB_URL')
+        private reissuesWebUrl: String,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];

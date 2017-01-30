@@ -1,17 +1,16 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {ReissueAdminService} from '../admin.service';
+import {ReissueReviewService} from '../review.service';
 
 /**
- * 补办学生证列表（管理员）。
+ * 审核补办学生证列表。
  */
 @Component({
-    selector: 'reissue-admin-list',
-    styleUrls: ['admin-list.component.scss'],
-    templateUrl: 'admin-list.component.html',
+    styleUrls: ['review-list.component.scss'],
+    templateUrl: 'review-list.component.html',
 })
-export class ReissueAdminListComponent {
+export class ReissueReviewListComponent {
     statuses: any[] = [
         {status: 'SUBMITTED', label: '待审核', class: 'badge-success'},
         {status: 'CHECKED',   label: '已审核', class: 'badge-info'},
@@ -28,7 +27,7 @@ export class ReissueAdminListComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: ReissueAdminService,
+        private service: ReissueReviewService,
     ) {
         this.route.params.subscribe(params => {
             this.status = params['status'];

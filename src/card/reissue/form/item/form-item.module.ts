@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {WorkflowModule} from 'core/workflow';
 
-import {ReissueCommonModule} from '../../common/reissue-common.module';
+import {ReissueSharedModule} from '../../shared/reissue-shared.module';
 import {ReissueFormItemComponent} from './form-item.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {ReissueFormItemComponent} from './form-item.component';
         CommonModule,
         CommonDialogsModule,
         WorkflowModule,
-        ReissueCommonModule,
+        ReissueSharedModule,
     ],
     declarations: [
         ReissueFormItemComponent,

@@ -3,18 +3,17 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
 
-import {CardReissueForm} from '../../common/card-reissue-form.model';
-import {ReissueAdminService} from '../admin.service';
+import {CardReissueForm} from '../../shared/reissue-form.model';
+import {ReissueReviewService} from '../review.service';
 
 /**
- * 补办学生证申请（管理员）。
+ * 审核补办学生证申请项。
  */
 @Component({
-    selector: 'reissue-form',
-    templateUrl: 'admin-item.component.html',
+    templateUrl: 'review-item.component.html',
 
 })
-export class ReissueAdminItemComponent {
+export class ReissueReviewItemComponent {
     private id: string;
     private wi: string;
 
@@ -24,7 +23,7 @@ export class ReissueAdminItemComponent {
         private router: Router,
         private route: ActivatedRoute,
         elementRef: ElementRef,
-        private service: ReissueAdminService,
+        private service: ReissueReviewService,
         private workflow: Workflow,
     ) {
         this.route.params.subscribe(params => {
@@ -36,7 +35,7 @@ export class ReissueAdminItemComponent {
     }
 
     loadData() {
-        this.service.loadItem(this.id).subscribe(dto => {
+        this.service.loadItem(this.id, this.wi).subscribe(dto => {
             this.vm = new CardReissueForm(dto);
             if (this.wi === undefined) {
                 this.wi = dto.workitemId;
