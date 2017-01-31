@@ -20,4 +20,4 @@ export {
         BookingFormViewerComponent,
     ],
 })
-export class BookingCommonModule {}
+export class BookingSharedModule {}

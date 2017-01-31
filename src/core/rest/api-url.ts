@@ -7,7 +7,7 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
 export class ApiUrl {
     constructor(@Inject(API_URL) private apiUrl: string) {
         if (apiUrl.indexOf('${userId}') !== -1) {
-            const match = window.location.href.match(/\/(users|teachers|students|reviewers)\/([^\/]+)\//);
+            const match = window.location.href.match(/\/(users|teachers|students|reviewers|checkers|approvers)\/([^\/]+)\//);
             if (match) {
                 this.apiUrl = this.apiUrl.replace('${userId}', match[2]);
             }
@@ -58,8 +58,12 @@ export class ApiUrl {
         return `${this.item(id)}?op=SUBMIT`;
     }
 
-    submitTo(id: any): string {
+    checkers(id: any): string {
         return `${this.item(id)}/checkers`;
+    }
+
+    approvers(id: any): string {
+        return `${this.item(id)}/approvers`;
     }
 
     workitem(id: any, wi: any) {
@@ -72,11 +76,6 @@ export class ApiUrl {
 
     reject(id: any, wi: any) {
         return `${this.workitem(id, wi)}?op=REJECT`;
-    }
-
-    reviewers(id: any, type: string) {
-        let entitiesUlr = this.list();
-        return `${entitiesUlr}/${id}/reviewers?type=${type}`;
     }
 
     buildQueryString(options: {[key: string]: string}): string {

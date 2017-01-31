@@ -4,7 +4,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {BookingForm, BookingSection, bookingSectionMap} from '../../common/form.model';
+import {BookingForm, BookingSection, bookingSectionMap} from '../../shared/form.model';
 import './form-editor.model';
 import {BookingFormService} from '../form.service';
 import {FindPlaceDialogService} from './find-place/find-place.module';

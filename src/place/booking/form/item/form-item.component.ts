@@ -5,7 +5,7 @@ import {CommonDialog} from 'core/common-dialogs';
 import {Workflow} from 'core/workflow';
 
 import {BookingFormService} from '../form.service';
-import {BookingForm} from '../../common/form.model';
+import {BookingForm} from '../../shared/form.model';
 import './form-item.model';
 
 @Component({

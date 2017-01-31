@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-variable */
-import {BookingForm} from '../common/form.model';
+import {BookingForm} from '../../shared/form.model';
 /* tslint:enable:no-unused-variable */
 
-declare module '../common/form.model' {
+declare module '../../shared/form.model' {
     interface BookingForm {
         activity: string;
     }

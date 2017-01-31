@@ -6,28 +6,28 @@ import {RestModule} from 'core/rest';
 
 import {BookingFormComponent} from './form.component';
 import {BookingFormService} from './form.service';
-import {routing} from './form.routes';
+import {BookingFormRoutingModule} from './form.routing';
 import {BookingFormListModule} from './list/form-list.module';
 import {BookingFormItemModule} from './item/form-item.module';
 import {BookingFormEditorModule} from './editor/form-editor.module';
 
 @NgModule({
-    bootstrap: [BookingFormComponent],
-    declarations: [
-        BookingFormComponent,
-    ],
     imports: [
         BrowserModule,
         RestModule.for('/api/place/users/${userId}/bookings'),
-        routing,
+        BookingFormRoutingModule,
         BookingFormEditorModule,
         BookingFormItemModule,
         BookingFormListModule,
+    ],
+    declarations: [
+        BookingFormComponent,
     ],
     providers: [
         BookingFormService,
         {provide: 'DEPARTMENT_BOOKING_TYPES_API_URL', useValue: '/api/place/departments/${departmentId}/bookingTypes'},
     ],
+    bootstrap: [BookingFormComponent],
 })
 class MainModule {}
 

@@ -19,8 +19,9 @@ module.exports = {
     'card/reissue/item':      './src/card/reissue/item/main.ts',
     'card/reissue/order':     './src/card/reissue/order/main.ts',
     'place/booking/form':     './src/place/booking/form/main.ts',
-    'place/booking/review':   './src/place/booking/review/main.ts',
+    'place/booking/check':    './src/place/booking/check/main.ts',
+    'place/booking/approval': './src/place/booking/approval/main.ts',
     'here/rollcall/form':     './src/here/rollcall/form/main.ts',
     'here/leave/form':        './src/here/leave/form/main.ts',
-    'here/leave/review':     './src/here/leave/review/main.ts',
+    'here/leave/review':      './src/here/leave/review/main.ts',
 };

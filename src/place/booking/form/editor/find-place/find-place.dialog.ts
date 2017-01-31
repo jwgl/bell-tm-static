@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 
 import {BaseDialog} from 'core/dialogs';
 import {NumberStringOption, OddEvenOptions} from 'core/options';
-import {BookingSection} from '../../../common/form.model';
+import {BookingSection} from '../../../shared/form.model';
 import {BookingFormService} from '../../form.service';
 
 interface BookingDayOption {
@@ -133,7 +133,6 @@ export class FindPlaceDialog extends BaseDialog {
                     this.vm.startWeeks.push(i);
                 }
                 this.vm.endWeeks.push(i);
-
             }
 
             for (let i = 1; i <= 7; i++) {

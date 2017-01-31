@@ -1,7 +1,7 @@
-import {BookingForm, BookingItem} from '../../common/form.model';
+import {BookingForm, BookingItem} from '../../shared/form.model';
 import * as _ from 'lodash';
 
-declare module '../../common/form.model' {
+declare module '../../shared/form.model' {
     interface BookingForm {
         addItem(dto: any): void;
         removeItem(item: BookingItem): void;

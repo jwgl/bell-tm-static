@@ -10,12 +10,8 @@ import {Component, Directive, Attribute, Input} from '@angular/core';
                     <h5 class="modal-title">{{title}}</h5>
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                 </div>
-                <div class="modal-body">
-                    <ng-content select="modal-body"></ng-content>
-                </div>
-                <div class="modal-footer">
-                    <ng-content select="modal-footer"></ng-content>
-                </div>
+                <ng-content select="modal-body"></ng-content>
+                <ng-content select="modal-footer"></ng-content>
             </div>
         </div>
     </div>
@@ -57,8 +53,14 @@ export class ModalCancelButtonDirective {}
 })
 export class ModalOkButtonDirective {}
 
-@Directive({selector: 'modal-body'})
+@Directive({
+    selector: 'modal-body',
+    host: {'[class]': '"modal-body"'},
+})
 export class ModalBodyDirective {}
 
-@Directive({selector: 'modal-footer'})
+@Directive({
+    selector: 'modal-footer',
+    host: {'[class]': '"modal-footer"'},
+})
 export class ModalFooterDirective {}
