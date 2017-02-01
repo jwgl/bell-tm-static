@@ -44,7 +44,7 @@ export class ReissueFormItemComponent {
     }
 
     submit() {
-        this.workflow.submit(this.id, '补办学生证申请').then(() => {
+        this.workflow.submit(this.id, 'approve', '补办学生证申请').then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);

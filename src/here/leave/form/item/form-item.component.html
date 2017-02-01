@@ -11,6 +11,9 @@
             <button class="btn btn-secondary" (click)="remove()">删除</button>
             <button class="btn btn-primary" (click)="submit()">提交</button>
         </div>
+        <div class="btn-group ml-auto" *ngIf="form.status === 'APPROVED'">
+            <button class="btn btn-primary" (click)="finish()">销假</button>
+        </div>
     </div>
     <leave-form-viewer [form]="form"></leave-form-viewer>
 </ng-container>

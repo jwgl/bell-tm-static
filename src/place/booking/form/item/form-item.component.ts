@@ -44,7 +44,7 @@ export class BookingFormItemComponent {
     }
 
     submit() {
-        this.workflow.submit(this.form.id, this.form.title).then(() => {
+        this.workflow.submit(this.form.id, 'check', this.form.title).then(() => {
             this.loadData(this.form.id);
         }, (error) => {
             alert(error.json().message);

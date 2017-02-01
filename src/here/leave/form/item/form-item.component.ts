@@ -46,7 +46,15 @@ export class LeaveFormItemComponent {
     }
 
     submit() {
-        this.workflow.submit(this.form.id, this.form.title).then(() => {
+        this.workflow.submit(this.form.id, 'approve', this.form.title).then(() => {
+            this.loadData(this.form.id);
+        }, (error) => {
+            alert(error.json().message);
+        });
+    }
+
+    finish() {
+        this.service.finish(this.form.id).subscribe(() => {
             this.loadData(this.form.id);
         }, (error) => {
             alert(error.json().message);

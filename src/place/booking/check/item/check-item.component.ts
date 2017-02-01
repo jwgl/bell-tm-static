@@ -45,7 +45,7 @@ export class BookingCheckItemComponent {
     }
 
     accept() {
-        this.workflow.accept(this.id, this.wi, this.form.activity, this.form.title).then(() => {
+        this.workflow.accept(this.id, this.wi, 'check', this.form.title).then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);
@@ -53,7 +53,7 @@ export class BookingCheckItemComponent {
     }
 
     reject(title: string) {
-        this.workflow.reject(this.form.id, this.wi, this.form.activity, this.form.title).then(() => {
+        this.workflow.reject(this.form.id, this.wi, 'check', this.form.title).then(() => {
             this.loadData();
         }, (error) => {
             alert(error.json().message);

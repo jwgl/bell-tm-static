@@ -17,24 +17,24 @@ import {WorkitemStatusComponent} from './workflow/workitem-status.component';
 export class Workflow {
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
-    submit(id: any, what: string): Promise<void> {
-        const whoUrl = this.api.checkers(id);
-        const does = '审核';
+    submit(id: any, type: 'check' | 'approve', what: string): Promise<void> {
+        const whoUrl = type === 'check' ? this.api.checkers(id) : this.api.approvers(id);
+        const does = this.typeLabel(type);
         return this.dialog.open(WorkflowSubmitDialog, {whoUrl, does, what}).then(result => {
             return this.rest.patch(this.api.submit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();
         });
     }
 
-    accept(id: any, wi: string, type: string, what: string): Promise<void> {
+    accept(id: any, wi: string, type: 'check' | 'approve', what: string): Promise<void> {
         const whoUrl = type === 'check' ? this.api.approvers(id) : null;
-        const does = type === 'check' ? '审核' : '审批';
+        const does = this.typeLabel(type);
         return this.dialog.open(WorkflowAcceptDialog, {whoUrl, does, what}).then(result => {
             return this.rest.patch(this.api.accept(id, wi), {title: result.what, to: result.to, comment: result.comment}).toPromise();
         });
     }
 
-    reject(id: any, wi: string, type: string, what: string): Promise<void> {
-        const does = type === 'check' ? '审核' : '审批';
+    reject(id: any, wi: string, type: 'check' | 'approve', what: string): Promise<void> {
+        const does = this.typeLabel(type);
         return this.dialog.open(WorkflowRejectDialog, {does, what}).then(result => {
             return this.rest.patch(this.api.reject(id, wi), {title: result.what, comment: result.comment}).toPromise();
         });
@@ -42,6 +42,10 @@ export class Workflow {
 
     workitems(workflowInstanceId: string) {
         this.dialog.open(WorkflowWorkitemsDialog, {instance: workflowInstanceId});
+    }
+
+    typeLabel(type: 'check' | 'approve'): string {
+        return type === 'check' ? '审核' : '审批';
     }
 }
 

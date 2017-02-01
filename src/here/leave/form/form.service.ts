@@ -8,4 +8,8 @@ export class LeaveFormService extends EditService {
     constructor(rest: Rest, api: ApiUrl) {
         super(rest, api);
     }
+
+    finish(id: any): Observable<any> {
+        return this.rest.patch(`${this.api.item(id)}?op=FINISH`, {});
+    }
 }

@@ -7,7 +7,7 @@ const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
     [AuditStatus.SUBMITTED]: {class: 'badge-info',    label: '待审核'},
     [AuditStatus.CHECKED]:   {class: 'badge-info',    label: '待审批'},
     [AuditStatus.REJECTED]:  {class: 'badge-warning', label: '退回'},
-    [AuditStatus.APPROVED]:  {class: 'badge-success', label: '完成'},
+    [AuditStatus.APPROVED]:  {class: 'badge-success', label: '已审批'},
     [AuditStatus.REVOKED]:   {class: 'badge-danger',  label: '回收'},
     [AuditStatus.PROGRESS]:  {class: 'badge-primary', label: '处理中'},
     [AuditStatus.FINISHED]:  {class: 'badge-success', label: '完成'},

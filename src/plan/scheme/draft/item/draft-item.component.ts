@@ -59,7 +59,7 @@ export class SchemeDraftItemComponent {
         if (errors.length > 0) {
             this.dialog.error(errors);
         } else {
-            this.workflow.submit(this.id, this.title).then(() => {
+            this.workflow.submit(this.id, 'check', this.title).then(() => {
                 this.loadData();
             }, (error) => {
                 alert(error.json().message);

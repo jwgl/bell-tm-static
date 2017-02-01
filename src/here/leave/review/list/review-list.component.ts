@@ -12,8 +12,9 @@ import {LeaveReviewService} from '../review.service';
 })
 export class LeaveReviewListComponent {
     statuses: any[] = [
-        {status: 'SUBMITTED', label: '待审核', class: 'badge-success'},
-        {status: 'FINISHED',  label: '已审核', class: 'badge-info'},
+        {status: 'SUBMITTED', label: '待处理', class: 'badge-success'},
+        {status: 'APPROVED',  label: '已审批', class: 'badge-info'},
+        {status: 'FINISHED',  label: '已销假', class: 'badge-danger'},
     ];
 
     private counts: {[key: string]: number};
