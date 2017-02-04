@@ -1,0 +1,8 @@
+<div *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group mr-auto">
+            <button class="btn btn-secondary" (click)="showWorkitems()" [hidden]="!form.workflowInstanceId">查看流程</button>
+        </div>
+    </div>
+    <leave-form-viewer [form]="form"></leave-form-viewer>
+</div>

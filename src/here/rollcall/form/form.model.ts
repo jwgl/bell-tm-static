@@ -33,6 +33,8 @@ export namespace RollcallType {
     }
 }
 
+type StudentStatus = 'freeListen' | 'cancelExam' | 'leave' | 'normal';
+
 export interface RollcallConfig {
     hideFree: boolean;
     hideLeave: boolean;
@@ -81,7 +83,7 @@ export class Student {
     isCancelExam = false;
     visible = true;
     pending = false;
-    hover = false;
+    status: StudentStatus;
 
     constructor(index: number, dto: any) {
         this.index = index;
@@ -190,12 +192,16 @@ export class RollcallForm {
 
         this.students.forEach(student => {
             if (student.isFreeListen) {
+                student.status = 'freeListen';
                 this.freedStudents.push(student);
             } else if (student.isCancelExam) {
+                student.status = 'cancelExam';
                 this.cancelledStudents.push(student);
             } else if (student.leave) {
+                student.status = 'leave';
                 this.leftStudents.push(student);
             } else {
+                student.status = 'normal';
                 this.normalStudents.push(student);
             }
         });

@@ -3,11 +3,9 @@
         <button class="btn btn-secondary w-100"
                 [style.height]="count > 1 ? 'inherit' : '100%'"
                 [routerLink]="['/week', week, 'day',  day, 'section', section, service.viewType]">
-            <span>
-                {{schedule.course}}<ng-container *ngIf="schedule.courseItem"> 【{{schedule.courseItem}}】</ng-container><br>
-                {{schedule.startWeek}}-{{schedule.endWeek}}{{schedule.oddEven | oddEven}}周<br>
-                {{schedule.place}}
-            </span>
+            {{schedule.course}}<ng-container *ngIf="schedule.courseItem"> 【{{schedule.courseItem}}】</ng-container><br>
+            {{schedule.startWeek}}-{{schedule.endWeek}}{{schedule.oddEven | oddEven}}周<br>
+            {{schedule.place}}
         </button>
     </template>
 </here-schedule>

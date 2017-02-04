@@ -38,17 +38,13 @@
                     <button class="btn w-100"
                             [ngClass]="form.weekSelected(week) ? 'btn-warning' : 'btn-secondary'"
                             [disabled]="form.weekDisabled(week)"
-                            (click)="form.toggleWeek(week)">
-                        <span>第{{week}}周</span>
-                    </button>
+                            (click)="form.toggleWeek(week)">第{{week}}周</button>
                 </template>
                 <template #dayOfWeekTpl let-week="week" let-day="day">
                     <button class="btn w-100"
                             [ngClass]="form.dayOfWeekSelected(week, day) ? 'btn-info' : 'btn-secondary'"
                             [disabled]="form.dayOfWeekDisabled(week, day)"
-                            (click)="form.toggleDayOfWeek(week, day)">
-                        <span>{{day | dayOfWeek}}</span>
-                    </button>
+                            (click)="form.toggleDayOfWeek(week, day)">{{day | dayOfWeek}}</button>
                 </template>
                 <template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section" let-count="count">
                     <button class="btn w-100"
@@ -57,7 +53,7 @@
                             [style.height]="count > 1 ? 'inherit' : '100%'"
                             [disabled]="form.scheduleDisabled(week, schedule)"
                             (click)="form.toggleSchedule(week, schedule)">
-                        <span>{{schedule.course}}<ng-container *ngIf="schedule.courseItem"><br>【{{schedule.courseItem}}】</ng-container></span>
+                        {{schedule.course}}<ng-container *ngIf="schedule.courseItem"><br>【{{schedule.courseItem}}】</ng-container>
                     </button>
                 </template>
             </here-schedule>

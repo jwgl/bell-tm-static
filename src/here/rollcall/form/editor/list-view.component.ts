@@ -1,4 +1,4 @@
-import {Component, Host, ViewChild, ElementRef} from '@angular/core';
+import {Component, Host, Inject, ViewChild, ElementRef} from '@angular/core';
 
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
@@ -33,7 +33,10 @@ export class RollcallListViewComponent extends BaseRollcallView {
         '4'         : {fn: this.toggleLocal, param: 'attend'},
     };
 
-    constructor(@Host() editor: RollcallFormEditorComponent) {
+    constructor(
+        @Host() editor: RollcallFormEditorComponent,
+        @Inject('PUBLIC_LEAVE_WEB_URL') private leaveUrl: string,
+    ) {
         super(editor);
     }
 
@@ -73,7 +76,7 @@ export class RollcallListViewComponent extends BaseRollcallView {
     toggleLocal(type?: string) {
         let student = this.rollcallForm.activeStudent;
         if (student.leave) {
-            window.open(`../../leaves/${student.leave.id}`, '_blank');
+            window.open(`${this.leaveUrl}/${student.leave.id}`, '_blank');
         } else {
             super.toggle(student, type);
         }

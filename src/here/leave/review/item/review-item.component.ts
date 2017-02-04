@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
@@ -22,7 +22,6 @@ export class LeaveReviewItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        elementRef: ElementRef,
         private service: LeaveReviewService,
         private workflow: Workflow,
     ) {
@@ -60,8 +59,6 @@ export class LeaveReviewItemComponent {
     }
 
     get reviewable(): boolean {
-        console.log(this.form.status)
-        console.log(this.wi)
         return this.form.status === 'SUBMITTED' && this.wi !== undefined;
     }
 

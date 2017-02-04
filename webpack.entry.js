@@ -24,4 +24,5 @@ module.exports = {
     'here/rollcall/form':     './src/here/rollcall/form/main.ts',
     'here/leave/form':        './src/here/leave/form/main.ts',
     'here/leave/review':      './src/here/leave/review/main.ts',
+    'here/leave/item':        './src/here/leave/item/main.ts',
 };

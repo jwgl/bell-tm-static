@@ -5,7 +5,7 @@
              (mouseenter)="hovered = student"
              (mouseleave)="hovered = null">
             <div class="card-header text-left p-0">
-                <rollcall-toggle-bar *ngIf="student === hovered; else status"
+                <rollcall-toggle-bar *ngIf="student.status === 'normal' && student === hovered; else status"
                     [stretch]="true"
                     [rollcallType]="student.rollcallType"
                     [disabled]="student.pending"

@@ -24,6 +24,7 @@ import {RollcallFormService} from './form.service';
     ],
     providers: [
         RollcallFormService,
+        {provide: 'PUBLIC_LEAVE_WEB_URL', useValue: '/web/here/leaves'},
     ],
 })
 class MainModule {}
