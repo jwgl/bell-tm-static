@@ -8,11 +8,11 @@ import {FormFieldComponent} from './form-field.component';
 })
 export class FormFieldLeftDirective {
     @Input() label: string;
-    @Input() labelCol: number = 2;
+    @Input() labelCol = 2;
     @ContentChild(FormControlDirective) formControl: FormControlDirective;
 
     controlId: string;
-    controlCol: number = 4;
+    controlCol = 4;
 
     constructor() {
         this.controlId = FormFieldComponent.nextId();
@@ -33,11 +33,11 @@ export class FormFieldLeftDirective {
 })
 export class FormFieldRightDirective {
     @Input() label: string;
-    @Input() labelCol: number = 2;
+    @Input() labelCol = 2;
     @ContentChild(FormControlDirective) formControl: FormControlDirective;
 
     controlId: string;
-    controlCol: number = 4;
+    controlCol = 4;
 
     constructor() {
         this.controlId = FormFieldComponent.nextId();

@@ -20,11 +20,11 @@ export class FormFieldComponent {
     private static _id = 1000;
 
     @Input() label: string;
-    @Input() labelCol: number = 2;
+    @Input() labelCol = 2;
     @ContentChild(FormControlDirective) formControl: FormControlDirective;
 
     controlId: string;
-    controlCol: number = 10;
+    controlCol = 10;
 
     static nextId(): string {
         return `ctrl_${FormFieldComponent._id++}`;
