@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-    selector: 'leave-review-container',
+    selector: 'leave-approval-container',
     template: '<router-outlet></router-outlet>',
 })
-export class LeaveReviewComponent {}
+export class LeaveApprovalComponent {}

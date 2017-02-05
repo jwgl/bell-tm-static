@@ -3,7 +3,7 @@ import {Router, ActivatedRoute} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
 
-import {LeaveReviewService} from '../review.service';
+import {LeaveApprovalService} from '../approval.service';
 import {LeaveForm} from '../../shared/form.model';
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 
@@ -11,9 +11,9 @@ import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
  * 学生请假审批项。
  */
 @Component({
-    templateUrl: 'review-item.component.html',
+    templateUrl: 'approval-item.component.html',
 })
-export class LeaveReviewItemComponent {
+export class LeaveApprovalItemComponent {
     private id: string;
     private wi: string;
 
@@ -22,7 +22,7 @@ export class LeaveReviewItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: LeaveReviewService,
+        private service: LeaveApprovalService,
         private workflow: Workflow,
     ) {
         this.route.params.subscribe(params => {

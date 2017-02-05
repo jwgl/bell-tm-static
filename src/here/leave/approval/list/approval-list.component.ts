@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {LeaveReviewService} from '../review.service';
+import {LeaveApprovalService} from '../approval.service';
 
 /**
  * 学生请假审批列表。
  */
 @Component({
-    styleUrls: ['review-list.component.scss'],
-    templateUrl: 'review-list.component.html',
+    styleUrls: ['approval-list.component.scss'],
+    templateUrl: 'approval-list.component.html',
 })
-export class LeaveReviewListComponent {
+export class LeaveApprovalListComponent {
     statuses: any[] = [
         {status: 'SUBMITTED', label: '待处理', class: 'badge-success'},
         {status: 'APPROVED',  label: '已审批', class: 'badge-info'},
@@ -26,7 +26,7 @@ export class LeaveReviewListComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: LeaveReviewService,
+        private service: LeaveApprovalService,
     ) {
         this.route.params.subscribe(params => {
             this.status = params['status'];

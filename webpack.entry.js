@@ -23,6 +23,6 @@ module.exports = {
     'place/booking/approval': './src/place/booking/approval/main.ts',
     'here/rollcall/form':     './src/here/rollcall/form/main.ts',
     'here/leave/form':        './src/here/leave/form/main.ts',
-    'here/leave/review':      './src/here/leave/review/main.ts',
+    'here/leave/approval':      './src/here/leave/approval/main.ts',
     'here/leave/item':        './src/here/leave/item/main.ts',
 };

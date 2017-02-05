@@ -7,30 +7,30 @@ import {WorkflowModule} from 'core/workflow';
 import {CommonDirectivesModule} from 'core/common-directives';
 
 import {LeaveSharedModule} from '../shared/leave-shared.module';
-import {LeaveReviewRoutingModule} from './review.routing';
-import {LeaveReviewComponent} from './review.component';
-import {LeaveReviewListComponent} from './list/review-list.component';
-import {LeaveReviewItemComponent} from './item/review-item.component';
-import {LeaveReviewService} from './review.service';
+import {LeaveApprovalRoutingModule} from './approval.routing';
+import {LeaveApprovalComponent} from './approval.component';
+import {LeaveApprovalListComponent} from './list/approval-list.component';
+import {LeaveApprovalItemComponent} from './item/approval-item.component';
+import {LeaveApprovalService} from './approval.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/here/reviewers/${userId}/leaves'),
+        RestModule.for('/api/here/approvers/${userId}/leaves'),
         LeaveSharedModule,
-        LeaveReviewRoutingModule,
+        LeaveApprovalRoutingModule,
     ],
     declarations: [
-        LeaveReviewComponent,
-        LeaveReviewListComponent,
-        LeaveReviewItemComponent,
+        LeaveApprovalComponent,
+        LeaveApprovalListComponent,
+        LeaveApprovalItemComponent,
     ],
     providers: [
-        LeaveReviewService,
+        LeaveApprovalService,
     ],
-    bootstrap: [LeaveReviewComponent],
+    bootstrap: [LeaveApprovalComponent],
 })
 class MainModule {}
 

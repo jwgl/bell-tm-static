@@ -50,7 +50,7 @@
                     <button class="btn w-100"
                             title="{{schedule.startWeek}}-{{schedule.endWeek}}{{schedule.oddEven | oddEven}}周&#013;{{schedule.place}}"
                             [ngClass]="form.scheduleSelected(week, schedule) ? 'btn-success' : 'btn-secondary'"
-                            [style.height]="count > 1 ? 'inherit' : '100%'"
+                            [style.height]="count > 1 ? null : '100%'"
                             [disabled]="form.scheduleDisabled(week, schedule)"
                             (click)="form.toggleSchedule(week, schedule)">
                         {{schedule.course}}<ng-container *ngIf="schedule.courseItem"><br>【{{schedule.courseItem}}】</ng-container>
