@@ -10,7 +10,6 @@ import {RollcallForm, RollcallConfig, Student, ToggleResult, Rollcall} from '../
 import {Term, Schedule, findWeekSchedules} from '../../../shared/schedule/schedule.model';
 
 @Component({
-    styleUrls: ['form-editor.component.scss'],
     templateUrl: 'form-editor.component.html',
 })
 export class RollcallFormEditorComponent implements OnInit {

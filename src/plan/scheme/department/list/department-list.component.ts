@@ -7,7 +7,6 @@ import {SchemeDepartmentService} from '../department.service';
  */
 @Component({
     selector: 'scheme-department-list',
-    styleUrls: ['department-list.component.scss'],
     templateUrl: 'department-list.component.html',
 })
 export class SchemeDepartmentListComponent implements OnInit {
