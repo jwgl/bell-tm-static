@@ -1,0 +1,42 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+.table {
+    border-bottom: solid $table-border-width $table-border-color;
+    thead {
+        tr {
+            th {
+                border-bottom-width: 1px;
+                border-right: solid $table-border-width transparent;
+            }
+        }
+    }
+
+    th {
+        border-top-width: 0;
+        text-align: center;
+        font-weight: normal;
+    }
+    td {
+        vertical-align: middle;
+        text-align: center;
+        height: 1.6rem;
+
+        &.c1 {
+            width: 8%;
+            border-right: solid $table-border-width $table-border-color;
+        }
+
+        &.c2 {
+            width: 4.5%;
+            border-right: solid $table-border-width $table-border-color;
+        }
+
+        &.cn {
+            width: 12.5%;
+            border-right: solid $table-border-width transparent;
+        }
+    }
+}
+
+:host-context([size=sm]) {
+    font-size: 0.75rem;
+}

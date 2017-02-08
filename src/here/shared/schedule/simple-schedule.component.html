@@ -1,0 +1,23 @@
+<table class="table table-sm" *ngIf="schedules">
+    <thead>
+        <tr>
+            <th>时段</th>
+            <th *ngFor="let day of days">{{day | dayOfWeek}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let section of sections">
+            <td class="c2">{{section}}</td>
+            <ng-container *ngFor="let day of days">
+                <ng-container [ngSwitch]="cellType(day, section)">
+                    <td *ngSwitchCase="'schedule'" [rowSpan]="getRowSpan(day, section)" class="cn active">
+                        <ng-container *ngFor="let s of getScheduleCell(day, section)">
+                            <template [ngTemplateOutlet]="scheduleTemplate" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></template>
+                        </ng-container>
+                    </td>
+                    <td *ngSwitchCase="'normal'" class="cn"></td>
+                </ng-container>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

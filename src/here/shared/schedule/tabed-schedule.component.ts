@@ -1,23 +1,18 @@
 import {Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter} from '@angular/core';
 import * as _ from 'lodash';
 
-import {Term, Schedule, findWeekSchedules, buildKey} from './schedule.model';
+import {Term, Schedule, findWeekSchedules, buildKey, SPANS} from './schedule.model';
 
 @Component({
-    selector: 'here-schedule',
-    styleUrls: ['schedule.component.scss'],
-    templateUrl: 'schedule.component.html',
+    selector: 'tabed-schedule',
+    styleUrls: ['tabed-schedule.component.scss'],
+    templateUrl: 'tabed-schedule.component.html',
 })
-export class HereScheduleComponent implements OnInit {
-    readonly spans = {
-        1  : {span: 4, label: '上午'},
-        5  : {span: 5, label: '下午'},
-        10 : {span: 4, label: '晚上'},
-    };
+export class TabedScheduleComponent implements OnInit {
+    readonly spans = SPANS;
 
     @Input() term: Term;
     @Input() schedules: Schedule[];
-    @Input() selectable = false;
     @Input() size: string;
 
     @ContentChild('scheduleTpl') scheduleTemplate: TemplateRef<any>;

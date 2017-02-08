@@ -1,0 +1,34 @@
+th, td {
+	white-space: nowrap;
+}
+
+.reason {
+	width: 540px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media (max-width : 1199px) {
+	.reason {
+		max-width: 360px;
+	}
+}
+
+@media (max-width : 991px) {
+	.reason {
+		max-width: 240px;
+	}
+}
+
+@media only screen and (max-width : 767px) {
+	.reason {
+		max-width: 160px;
+	}
+}
+
+@media only screen and (max-width : 543px) {
+	.reason {
+		max-width: 100px;
+	}
+}

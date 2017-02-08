@@ -4,7 +4,8 @@ import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {HereScheduleComponent} from './schedule.component';
+import {TabedScheduleComponent} from './tabed-schedule.component';
+import {SimpleScheduleComponent} from './simple-schedule.component';
 
 @NgModule({
     imports: [
@@ -13,10 +14,12 @@ import {HereScheduleComponent} from './schedule.component';
         CommonDirectivesModule,
     ],
     declarations: [
-        HereScheduleComponent,
+        TabedScheduleComponent,
+        SimpleScheduleComponent,
     ],
     exports: [
-        HereScheduleComponent,
+        TabedScheduleComponent,
+        SimpleScheduleComponent,
     ],
 })
 export class HereScheduleModule {}

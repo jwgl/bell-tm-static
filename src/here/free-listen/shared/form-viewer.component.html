@@ -1,0 +1,39 @@
+<form-title>{{form.title}}</form-title>
+<form class="form-horizontal">
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="学号">{{form.studentId}}</p>
+        <p class="form-control-static form-field-right" label="姓名">{{form.studentName}}</p>
+    </form-field-2>
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="专业">{{form.subject}}</p>
+        <p class="form-control-static form-field-right" label="年级">{{form.grade}}</p>
+    </form-field-2>
+    <form-field-2>
+        <p class="form-control-static form-field-left" label="班级">{{form.adminClass}}</p>
+        <p class="form-control-static form-field-right" label="主讲教师">{{form.checkerName}}</p>
+    </form-field-2>
+    <form-field label="明细">
+        <simple-schedule [schedules]="schedules" size="sm">
+            <template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
+                <button class="btn w-100"
+                        [ngClass]="getScheduleClass(schedule)"
+                        [style.height]="count > 1 ? null : '100%'">
+                    {{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}
+                </button>
+            </template>
+        </simple-schedule>
+        <div>
+            图例：
+            <button class="btn btn-success btn-sm">免听申请项</button>
+            <button class="btn btn-secondary btn-sm">学生课表</button>
+            <button class="btn btn-danger btn-sm">主讲教师课表</button>
+            <button class="btn btn-warning btn-sm">其它教师课表</button>
+        </div>
+        <ul>
+            <li *ngFor="let item of form.items">{{item}}</li>
+        </ul>
+    </form-field>
+    <form-field label="事由">
+        <p class="form-control-static">{{form.reason}}</p>
+    </form-field>
+</form>

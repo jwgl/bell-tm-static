@@ -1,23 +1,3 @@
-h3 {
-    text-align: center;
-    margin-bottom: 1rem;
-    span {
-        border-bottom: double 3px rgba(0,0,0,.85)
-    }
-}
-
 .form-control-static:not(.text-muted) {
     border-bottom: solid 1px rgba(0,0,0,.15);
-}
-
-table {
-    th {
-        text-align: center;
-    }
-
-    td {
-        &:nth-child(4) {
-            text-align: right;
-        }
-    }
 }

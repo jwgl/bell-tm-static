@@ -17,6 +17,7 @@ import {
     FormFieldRightDirective,
 } from './bootstrap/form-field-2.component';
 import {GroupByPipe} from './pipes/group-by';
+import {FilterByPipe} from './pipes/filter-by';
 import {ZeroPadPipe} from './pipes/zero-pad';
 import {OddEvenPipe} from './pipes/odd-even';
 import {
@@ -63,6 +64,7 @@ const CORE_DIRECTIVES: any[] = [
     Spinning,
     // pipes
     GroupByPipe,
+    FilterByPipe,
     ZeroPadPipe,
     FromNowPipe,
     MomentFormatPipe,

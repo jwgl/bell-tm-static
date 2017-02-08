@@ -42,9 +42,9 @@ LeaveForm.prototype.toggleDayOfWeek = function(this: LeaveForm, week: number, da
         this.removeItem(leaveItem);
     } else {
         this.items
-            .filter(i => i.week === week)
-            .filter(i => !i.dayOfWeek && !i.schedule || i.schedule && i.schedule.dayOfWeek === dayOfWeek)
-            .forEach(i => this.removeItem(i));
+            .filter(it => it.week === week)
+            .filter(it => !it.dayOfWeek && !it.schedule || it.schedule && it.schedule.dayOfWeek === dayOfWeek)
+            .forEach(it => this.removeItem(it));
         this.addItem(leaveItem);
     }
 };
@@ -56,9 +56,9 @@ LeaveForm.prototype.toggleSchedule = function(this: LeaveForm, week: number, sch
         this.removeItem(leaveItem);
     } else {
         this.items
-            .filter(i => i.week === week)
-            .filter(i => !i.dayOfWeek && !i.schedule || i.dayOfWeek === schedule.dayOfWeek)
-            .forEach(i => this.removeItem(i));
+            .filter(it => it.week === week)
+            .filter(it => !it.dayOfWeek && !it.schedule || it.dayOfWeek === schedule.dayOfWeek)
+            .forEach(it => this.removeItem(it));
         this.addItem(leaveItem);
     }
 };
@@ -82,7 +82,7 @@ LeaveForm.prototype.scheduleDisabled = function(this: LeaveForm, week: number, s
 };
 
 LeaveForm.prototype.addItem = function(this: LeaveForm, item: LeaveItem): void {
-    if (this.items.find(i => i.equalsTo(item))) {
+    if (this.items.find(it => it.equalsTo(item))) {
         return;
     }
 
@@ -96,7 +96,7 @@ LeaveForm.prototype.addItem = function(this: LeaveForm, item: LeaveItem): void {
 };
 
 LeaveForm.prototype.removeItem = function(this: LeaveForm, item: LeaveItem): void {
-    let leaveItem = this.items.find(i => i.equalsTo(item));
+    let leaveItem = this.items.find(it => it.equalsTo(item));
 
     if (leaveItem) {
         this.items.splice(this.items.indexOf(leaveItem), 1);

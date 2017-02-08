@@ -30,7 +30,7 @@
                     </p>
                 </form-field>
             </form>
-            <here-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" size="sm">
+            <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" size="sm">
                 <template #weekTabTpl let-week="week">
                     {{week}}<ng-container *ngIf="form.containsWeek(week)">*</ng-container>
                 </template>
@@ -56,7 +56,7 @@
                         {{schedule.course}}<ng-container *ngIf="schedule.courseItem"><br>【{{schedule.courseItem}}】</ng-container>
                     </button>
                 </template>
-            </here-schedule>
+            </tabed-schedule>
         </div>
         <div class="col-md-3">
             <ul>

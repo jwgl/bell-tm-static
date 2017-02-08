@@ -1,10 +1,10 @@
 import {Pipe} from '@angular/core';
 
-const OddEven = ['', '单', '双'];
+import {oddEvenLabel} from '../utils/odd-even';
 
 @Pipe({name: 'oddEven'})
 export class OddEvenPipe {
     transform(data: number) {
-        return OddEven[data];
+        return oddEvenLabel(data);
     }
 }

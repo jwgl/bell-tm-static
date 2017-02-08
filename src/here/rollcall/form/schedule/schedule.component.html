@@ -1,4 +1,4 @@
-<here-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
+<tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
     <template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section">
         <button class="btn btn-secondary w-100"
                 [style.height]="count > 1 ? 'inherit' : '100%'"
@@ -8,4 +8,4 @@
             {{schedule.place}}
         </button>
     </template>
-</here-schedule>
+</tabed-schedule>
