@@ -1,26 +1,28 @@
 import {Component, Input} from '@angular/core';
 
-import {FreeForm} from './form.model';
+import {FreeListenForm} from './form.model';
 import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 import './form-viewer.model';
 
 @Component({
-    selector: 'free-form-viewer',
+    selector: 'free-listen-form-viewer',
     styleUrls: ['form-viewer.component.scss'],
     templateUrl: 'form-viewer.component.html',
 })
 export class FreeFormViewerComponent {
-    @Input() form: FreeForm;
+    @Input() form: FreeListenForm;
     @Input() schedules: any;
 
     getScheduleClass(schedule: Schedule) {
         switch (schedule.belongsTo) {
             case 'checker':
-                return 'btn-danger';
+                return ['bg-danger', 'text-white'];
             case 'department':
-                return 'btn-warning';
+                return ['bg-warning', 'text-white'];
             case 'student':
-                return this.form.scheduleSelected(schedule) ? 'btn-success' : 'btn-secondary';
+                return this.form.scheduleSelected(schedule)
+                     ? ['bg-success', 'text-white']
+                     : [];
         }
     }
 }

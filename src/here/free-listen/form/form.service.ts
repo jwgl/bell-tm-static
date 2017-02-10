@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {ApiUrl, Rest, EditService} from 'core/rest';
 
 @Injectable()
-export class FreeFormService extends EditService {
+export class FreeListenFormService extends EditService {
     constructor(rest: Rest, api: ApiUrl) {
         super(rest, api);
     }

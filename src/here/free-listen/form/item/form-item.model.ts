@@ -1,9 +1,9 @@
 /* tslint:disable:no-unused-variable */
-import {FreeForm} from '../../shared/form.model';
+import {FreeListenForm} from '../../shared/form.model';
 /* tslint:enable:no-unused-variable */
 
 declare module '../../shared/form.model' {
-    interface FreeForm {
+    interface FreeListenForm {
         editable: boolean;
     }
 }

@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 
-import {FreeFormService} from '../form.service';
+import {FreeListenFormService} from '../form.service';
 
 @Component({
     styleUrls: ['form-list.component.scss'],
     templateUrl: 'form-list.component.html',
 })
-export class FreeFormListComponent {
+export class FreeListenFormListComponent {
     private forms: any[];
     private offset: number;
     private max = 10;
@@ -16,7 +16,7 @@ export class FreeFormListComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: FreeFormService,
+        private service: FreeListenFormService,
     ) {
         this.loadData(0);
     }

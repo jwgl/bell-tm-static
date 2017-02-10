@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {WorkflowModule} from 'core/workflow';
 
-import {FreeSharedModule} from '../../shared/free-shared.module';
+import {FreeListenSharedModule} from '../../shared/free-listen-shared.module';
 import {FreeFormItemComponent} from './form-item.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {FreeFormItemComponent} from './form-item.component';
         CommonModule,
         CommonDialogsModule,
         WorkflowModule,
-        FreeSharedModule,
+        FreeListenSharedModule,
     ],
     declarations: [
         FreeFormItemComponent,
@@ -21,4 +21,4 @@ import {FreeFormItemComponent} from './form-item.component';
         FreeFormItemComponent,
     ],
 })
-export class FreeFormItemModule {}
+export class FreeListenFormItemModule {}

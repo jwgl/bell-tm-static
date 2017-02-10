@@ -3,14 +3,28 @@
 }
 
 simple-schedule {
-    .btn {
+    .schedule ~ .schedule {
+        margin-top: 0.25rem;
+    }
+
+    .schedule:before{
+        content: '';
+        display: inline-block;
+        height: 100%;
+        margin-right: -.35em;
+        vertical-align: middle;
+    }
+
+    .schedule {
         font-size: 0.75rem;
         white-space: normal;
         padding: 0.25rem;
-    }
-
-    .btn ~ .btn {
-        margin-top: 0.25rem;
+        border: solid 1px #ddd;
+        border-radius: 4px;
+        span {
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
 }
 

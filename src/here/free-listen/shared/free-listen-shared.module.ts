@@ -18,4 +18,4 @@ import {HereScheduleModule} from '../../shared/schedule/schedule.module';
         FreeFormViewerComponent,
     ],
 })
-export class FreeSharedModule {}
+export class FreeListenSharedModule {}

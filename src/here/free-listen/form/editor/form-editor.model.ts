@@ -1,33 +1,33 @@
 import * as _ from 'lodash';
 
-import {FreeForm, FreeItem} from '../../shared/form.model';
+import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 import {Schedule} from '../../../shared/schedule/schedule.model';
 import '../../shared/student-schedule.model';
 
 declare module '../../shared/form.model' {
-    interface FreeForm {
-        removedItems: FreeItem[];
-        existedItems: FreeItem[];
+    interface FreeListenForm {
+        removedItems: FreeListenItem[];
+        existedItems: FreeListenItem[];
 
         scheduleDisabled(schedule: Schedule): boolean;
 
         toggleSchedule(schedule: Schedule): void;
 
-        addItem(item: FreeItem): void;
-        removeItem(item: FreeItem): void;
+        addItem(item: FreeListenItem): void;
+        removeItem(item: FreeListenItem): void;
         toServerDto(): any;
         getAddedItems(): any[];
         isValid(): boolean;
     }
 }
 
-FreeForm.prototype.scheduleDisabled = function(this: FreeForm, schedule: Schedule): boolean {
+FreeListenForm.prototype.scheduleDisabled = function(this: FreeListenForm, schedule: Schedule): boolean {
     return schedule.repeatType === 0 // repeat course only
         || _.some(this.existedItems, it => it.schedule.id === schedule.id);
 };
 
-FreeForm.prototype.toggleSchedule = function(this: FreeForm, schedule: Schedule): void {
-    let freeItem = new FreeItem(this, {});
+FreeListenForm.prototype.toggleSchedule = function(this: FreeListenForm, schedule: Schedule): void {
+    let freeItem = new FreeListenItem(this, {});
     freeItem.schedule = schedule;
     if (this.contains(freeItem)) {
         this.removeItem(freeItem);
@@ -39,7 +39,7 @@ FreeForm.prototype.toggleSchedule = function(this: FreeForm, schedule: Schedule)
     }
 };
 
-FreeForm.prototype.addItem = function(this: FreeForm, item: FreeItem): void {
+FreeListenForm.prototype.addItem = function(this: FreeListenForm, item: FreeListenItem): void {
     if (this.items.find(it => it.equalsTo(item))) {
         return;
     }
@@ -55,7 +55,7 @@ FreeForm.prototype.addItem = function(this: FreeForm, item: FreeItem): void {
     }
 };
 
-FreeForm.prototype.removeItem = function(this: FreeForm, item: FreeItem): void {
+FreeListenForm.prototype.removeItem = function(this: FreeListenForm, item: FreeListenItem): void {
     let freeItem = this.items.find(it => it.equalsTo(item));
 
     if (freeItem) {
@@ -70,14 +70,14 @@ FreeForm.prototype.removeItem = function(this: FreeForm, item: FreeItem): void {
     }
 };
 
-FreeForm.prototype.isValid = function(this: FreeForm): boolean {
+FreeListenForm.prototype.isValid = function(this: FreeListenForm): boolean {
     return this.reason
         && this.reason.length >= 10
         && this.reason.length <= 200
         && this.items.length > 0;
 };
 
-FreeForm.prototype.toServerDto = function(this: FreeForm): any {
+FreeListenForm.prototype.toServerDto = function(this: FreeListenForm): any {
     return {
         reason: this.reason,
         checkerId: this.checkerId,
@@ -86,7 +86,7 @@ FreeForm.prototype.toServerDto = function(this: FreeForm): any {
     };
 };
 
-FreeForm.prototype.getAddedItems = function(this: FreeForm): any[] {
+FreeListenForm.prototype.getAddedItems = function(this: FreeListenForm): any[] {
     return this.items.filter(it => !it.id).map(it => ({
         taskScheduleId: it.schedule.id,
     }));

@@ -1,6 +1,6 @@
 import {Schedule} from '../../shared/schedule/schedule.model';
 
-export class FreeForm {
+export class FreeListenForm {
     id: number;
     term: number;
     studentId: string;
@@ -13,7 +13,7 @@ export class FreeForm {
     reason: string;
     status: string;
     workflowInstanceId: string;
-    items: FreeItem[];
+    items: FreeListenItem[];
 
     constructor(dto: any, schedules: Schedule[]) {
         this.id = dto.id;
@@ -29,7 +29,7 @@ export class FreeForm {
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.items = dto.items.map((item: any) => {
-            let freeItem = new FreeItem(this, item);
+            let freeItem = new FreeListenItem(this, item);
             if (item.taskScheduleId) {
                 freeItem.schedule = schedules.find(s => s.id === item.taskScheduleId);
             }
@@ -41,7 +41,7 @@ export class FreeForm {
         return this.id ? `免听#${this.id}` : '免听';
     }
 
-    contains(item: FreeItem) {
+    contains(item: FreeListenItem) {
         return !!this.items.find(i => i.equalsTo(item));
     }
 
@@ -50,17 +50,17 @@ export class FreeForm {
     }
 }
 
-export class FreeItem {
-    form: FreeForm;
+export class FreeListenItem {
+    form: FreeListenForm;
     id: number;
     schedule: Schedule;
 
-    constructor(form: FreeForm, dto: any) {
+    constructor(form: FreeListenForm, dto: any) {
         this.form = form;
         this.id = dto.id;
     }
 
-    equalsTo(other: FreeItem): boolean {
+    equalsTo(other: FreeListenItem): boolean {
         if (this.id && other.id && this.id === other.id) {
             return true;
         }

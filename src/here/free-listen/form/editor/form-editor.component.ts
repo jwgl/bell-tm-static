@@ -5,8 +5,8 @@ import * as _ from 'lodash';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {FreeFormService} from '../form.service';
-import {FreeForm, FreeItem} from '../../shared/form.model';
+import {FreeListenFormService} from '../form.service';
+import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 import './form-editor.model';
 import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
 import '../../shared/student-schedule.model';
@@ -22,7 +22,7 @@ interface Teacher {
 })
 export class FreeFormEditorComponent {
     private editMode: EditMode;
-    private form: FreeForm;
+    private form: FreeListenForm;
     private saving = false;
     private schedules: Schedule[];
     private term: Term;
@@ -33,7 +33,7 @@ export class FreeFormEditorComponent {
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: FreeFormService,
+        private service: FreeListenFormService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         let params = this.route.snapshot.params;
@@ -53,10 +53,10 @@ export class FreeFormEditorComponent {
             schedule.repeatType = (<any>scheduleDto).repeatType;
             return schedule;
         });
-        this.form = new FreeForm(dto.form, this.schedules);
+        this.form = new FreeListenForm(dto.form, this.schedules);
         this.form.removedItems = [];
         this.form.existedItems = dto.existedItems.map((item: any) => {
-            let freeItem = new FreeItem(this.form, item);
+            let freeItem = new FreeListenItem(this.form, item);
             freeItem.schedule = this.schedules.find(s => s.id === item.taskScheduleId);
             return freeItem;
         });

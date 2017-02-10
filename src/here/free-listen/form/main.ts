@@ -4,28 +4,28 @@ import {NgModule} from '@angular/core';
 
 import {RestModule} from 'core/rest';
 
-import {FreeFormComponent} from './form.component';
-import {FreeFormService} from './form.service';
-import {FreeFormRoutingModule} from './form-routing.module';
-import {FreeFormListModule} from './list/form-list.module';
-import {FreeFormItemModule} from './item/form-item.module';
+import {FreeListenFormComponent} from './form.component';
+import {FreeListenFormService} from './form.service';
+import {FreeListenFormRoutingModule} from './form-routing.module';
+import {FreeListenFormListModule} from './list/form-list.module';
+import {FreeListenFormItemModule} from './item/form-item.module';
 import {LeaveFormEditorModule} from './editor/form-editor.module';
 
 @NgModule({
-    bootstrap: [FreeFormComponent],
+    bootstrap: [FreeListenFormComponent],
     declarations: [
-        FreeFormComponent,
+        FreeListenFormComponent,
     ],
     imports: [
         BrowserModule,
         RestModule.for('/api/here/students/${userId}/freeListens'),
-        FreeFormRoutingModule,
+        FreeListenFormRoutingModule,
         LeaveFormEditorModule,
-        FreeFormItemModule,
-        FreeFormListModule,
+        FreeListenFormItemModule,
+        FreeListenFormListModule,
     ],
     providers: [
-        FreeFormService,
+        FreeListenFormService,
     ],
 })
 class MainModule {}

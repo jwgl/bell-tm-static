@@ -11,6 +11,10 @@ header {
     margin-bottom: 1rem;
 }
 
+th {
+    white-space: nowrap
+}
+
 @media print {
     .no-print, .no-print * {
         display: none !important;

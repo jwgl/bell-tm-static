@@ -1,2 +1,19 @@
-@import '../../shared/form-viewer.component.scss';
+.form-control-static:not(.text-muted) {
+    border-bottom: solid 1px rgba(0,0,0,.15);
+}
 
+simple-schedule {
+    .btn {
+        font-size: 0.75rem;
+        white-space: normal;
+        padding: 0.25rem;
+    }
+
+    .btn ~ .btn {
+        margin-top: 0.25rem;
+    }
+}
+
+ul {
+    padding: 0.5rem 0 0.5rem 0;
+}

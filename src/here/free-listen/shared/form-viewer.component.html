@@ -15,19 +15,19 @@
     <form-field label="明细">
         <simple-schedule [schedules]="schedules" size="sm">
             <template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
-                <button class="btn w-100"
-                        [ngClass]="getScheduleClass(schedule)"
-                        [style.height]="count > 1 ? null : '100%'">
-                    {{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}
-                </button>
+                <div class="schedule"
+                     [ngClass]="getScheduleClass(schedule)"
+                     [style.height]="count > 1 ? null : '100%'">
+                    <span>{{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}</span>
+                </div>
             </template>
         </simple-schedule>
         <div>
             图例：
-            <button class="btn btn-success btn-sm">免听申请项</button>
-            <button class="btn btn-secondary btn-sm">学生课表</button>
-            <button class="btn btn-danger btn-sm">主讲教师课表</button>
-            <button class="btn btn-warning btn-sm">其它教师课表</button>
+            <span class="btn btn-success btn-sm">免听申请项</span>
+            <span class="btn btn-secondary btn-sm">学生课表</span>
+            <span class="btn btn-danger btn-sm">主讲教师课表</span>
+            <span class="btn btn-warning btn-sm">其它教师课表</span>
         </div>
         <ul>
             <li *ngFor="let item of form.items">{{item}}</li>
