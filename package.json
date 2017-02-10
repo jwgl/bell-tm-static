@@ -2,6 +2,10 @@
   "name": "bell-tm-static",
   "version": "1.0.0",
   "description": "Front end assets for tm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jwgl/bell-tm-static.git"
+  },
   "main": "index.js",
   "scripts": {
     "build:dev": "webpack --config config/webpack.dev.js --progress --profile",
@@ -19,14 +23,14 @@
   "author": "Yang Lin <todoubaba@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@angular/common": "^4.0.0-beta.6",
-    "@angular/compiler": "^4.0.0-beta.6",
-    "@angular/core": "^4.0.0-beta.6",
-    "@angular/forms": "^4.0.0-beta.6",
-    "@angular/http": "^4.0.0-beta.6",
-    "@angular/platform-browser": "^4.0.0-beta.6",
-    "@angular/platform-browser-dynamic": "^4.0.0-beta.6",
-    "@angular/router": "^4.0.0-beta.6",
+    "@angular/common": "^4.0.0-beta.7",
+    "@angular/compiler": "^4.0.0-beta.7",
+    "@angular/core": "^4.0.0-beta.7",
+    "@angular/forms": "^4.0.0-beta.7",
+    "@angular/http": "^4.0.0-beta.7",
+    "@angular/platform-browser": "^4.0.0-beta.7",
+    "@angular/platform-browser-dynamic": "^4.0.0-beta.7",
+    "@angular/router": "^4.0.0-beta.7",
     "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-submenu": "^2.0.4",
     "core-js": "^2.4.1",
