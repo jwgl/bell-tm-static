@@ -1,8 +1,6 @@
-<ng-container [ngSwitch]="student.status">
-    <label *ngSwitchCase="'freeListen'" class="badge badge-default">免听</label>
-    <label *ngSwitchCase="'cancelExam'" class="badge badge-default">取消考试资格</label>
-    <a *ngSwitchCase="'leave'" class="badge badge-default" href="{{leaveUrl}}/{{student.leave.id}}" target="_blank">{{leaveTypeLabel(student.leave.type)}}</a>
-    <ng-container *ngSwitchCase="'normal'">
-        <label *ngFor="let key of student.rollcallKeys" class="badge" [ngClass]="'badge-' + key">{{label(key)}}</label>
-    </ng-container>
+<ng-container *ngIf="student.absence; else normal">
+    <a class="badge badge-default" href="/web/here/{{student.absence.url}}/{{student.absence.id}}" target="_blank">{{student.absence.label}}</a>
 </ng-container>
+<template #normal *ngIf="student.rollcall">
+    <label *ngFor="let label of student.rollcall.labels" class="badge" [ngClass]="'badge-' + label.key">{{label.label}}</label>
+</template>

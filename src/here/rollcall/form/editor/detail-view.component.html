@@ -13,11 +13,13 @@
     <tbody>
         <tr *ngFor="let student of rollcallForm.visibleStudents">
             <td>
-                <rollcall-toggle-bar *ngIf="student.status === 'normal'; else status"
-                    [rollcallType]="student.rollcallType"
-                    [disabled]="student.pending"
-                    (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
-                <i [spinning]="student.pending"></i>
+                <ng-container *ngIf="!student.absence; else status">
+                    <rollcall-toggle-bar
+                        [rollcallType]="student.rollcallType"
+                        [disabled]="student.pending"
+                        (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
+                    <i [spinning]="student.pending"></i>
+                </ng-container>
                 <template #status>
                     <rollcall-status [student]="student"></rollcall-status>
                 </template>

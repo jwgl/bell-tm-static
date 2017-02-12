@@ -7,6 +7,10 @@ $absent-bg: $btn-danger-bg;
 $early-bg: #613d7c ;
 $attend-bg: $btn-info-bg;
 
+:host {
+    display: flex;
+}
+
 .badge {
     font-weight: normal;
     margin-left: 0.25rem;

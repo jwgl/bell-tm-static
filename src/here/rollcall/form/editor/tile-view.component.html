@@ -5,13 +5,13 @@
              (mouseenter)="hovered = student"
              (mouseleave)="hovered = null">
             <div class="card-header text-left p-0">
-                <rollcall-toggle-bar *ngIf="student.status === 'normal' && student === hovered; else status"
+                <rollcall-toggle-bar *ngIf="!student.absence && student === hovered; else status"
                     [stretch]="true"
                     [rollcallType]="student.rollcallType"
                     [disabled]="student.pending"
                     (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
                 <template #status>
-                    <rollcall-status [student]="student"></rollcall-status>
+                    <rollcall-status class="py-1" [student]="student"></rollcall-status>
                 </template>
             </div>
             <div class="card-block">

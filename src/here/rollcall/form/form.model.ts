@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import {LeaveType} from '../../leave/shared/form.model';
+import {LeaveType, LeaveTypeNames} from '../../leave/shared/form.model';
 
 export enum RollcallType {
     None = 0,
@@ -15,25 +15,39 @@ export enum RollcallType {
 const RollcallTypeNames = _.fromPairs(_.toPairs(RollcallType).filter(p => !/\d+/.test(p[0])).map(p => [p[1], _.camelCase(p[0])]));
 
 // {'none': 0, absent: 0, ...}
-const RollcallTypeCounts = _.fromPairs(_.values(RollcallTypeNames).map(n => [n, 0]));
+const RollcallTypeCounts = _.transform(RollcallTypeNames, (result, value) => result[value] = 0);
 
-export const RollcallTypes: { [key: string]: { label: string, value: RollcallType } } = {
+export const RollcallActions: { [key: string]: { label: string, value: RollcallType } } = {
     'absent': { label: '旷课', value: RollcallType.Absent },
     'late':   { label: '迟到', value: RollcallType.Late },
     'early':  { label: '早退', value: RollcallType.Early },
     'attend': { label: '调课', value: RollcallType.Attend },
 };
 
-export const RollcallKeys = ['absent', 'late', 'early', 'attend'];
+export const RollcallActionsKeys = ['absent', 'late', 'early', 'attend'];
 
 export namespace RollcallType {
     export function contains(type: RollcallType, key: string) {
-        return type === RollcallTypes[key].value ||
+        return type === RollcallActions[key].value ||
                type === RollcallType.LateEarly && (key === 'late' || key === 'early');
     }
 }
 
-type StudentStatus = 'freeListen' | 'cancelExam' | 'leave' | 'normal';
+// RollcallType -> {key: string, label: string}[]
+// {
+//    1: [{key: 'absent', label: '旷课'}],
+//       ...
+//    5: [{key: 'late',   label: '迟到}, {key: 'Early', label: {'早退'}]
+// }
+const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key) => {
+    result[key] = RollcallActionsKeys.filter(ak => {
+        return key === RollcallActions[ak].value.toString() ||
+               key === RollcallType.LateEarly.toString() && (ak === 'late' || ak === 'early')
+    }).map(ak => ({
+        key: ak,
+        label: RollcallActions[ak].label,
+    }));
+}, <{[k: string]: {key: string, label: string}[]}>{});
 
 export interface RollcallConfig {
     hideFree: boolean;
@@ -43,24 +57,126 @@ export interface RollcallConfig {
     view: string;
 }
 
+interface RollcallDto {
+    id: number;
+    studentId: string;
+    type: RollcallType;
+}
+
 export class Rollcall {
     id: number;
     type: RollcallType;
 
-    constructor(dto: any) {
+    constructor(dto: RollcallDto) {
         this.id = dto.id;
         this.type = dto.type;
+    }
+
+    get lables(): {key: string, label: string}[] {
+        return RollcallLabels[this.type];
+    }
+
+    get cancelKey(): string {
+        if (this.type === RollcallType.LateEarly) {
+            return 'early';
+        } else {
+            return RollcallActionsKeys.find(it => this.type === RollcallActions[it].value);
+        }
+    }
+
+    toggle(type: RollcallType): ToggleResult {
+        console.log(type);
+        if (this.type === type) {
+            return { op: 'delete' };
+        }
+
+        if (this.type === RollcallType.LateEarly) {
+            if (type === RollcallType.Late) {
+                type = RollcallType.Early;
+            } else if (type === RollcallType.Early) {
+                type = RollcallType.Late;
+            }
+        } else if (this.type === RollcallType.Late && type === RollcallType.Early ||
+                   type === RollcallType.Late && this.type === RollcallType.Early) {
+            type = RollcallType.LateEarly;
+        }
+        return { op: 'update', type: type };
     }
 }
 
-class StudentLeave {
+interface AbsenceDto {
     id: number;
+    studentId: string;
+}
+
+abstract class Absence {
+    constructor(public id: number) {}
+    abstract get label(): string;
+    abstract get url(): string;
+}
+
+
+interface StudentLeaveDto extends AbsenceDto {
+    type: LeaveType;
+}
+
+class StudentLeave extends Absence {
     type: LeaveType;
 
-    constructor(dto: any) {
-        this.id = dto.id;
+    constructor(dto: StudentLeaveDto) {
+        super(dto.id);
         this.type = dto.type;
     }
+
+    get label(): string {
+        return LeaveTypeNames[this.type];
+    }
+
+    get url(): string {
+        return 'leaves';
+    }
+}
+
+interface FreeListenDto extends AbsenceDto {}
+
+class FreeListen extends Absence {
+    constructor(dto: FreeListenDto) {
+        super(dto.id);
+    }
+
+    get label(): string {
+        return '免听';
+    }
+
+    get url(): string {
+        return 'freeListens';
+    }
+}
+
+interface CancelExamDto extends AbsenceDto {}
+
+class CancelExam extends Absence {
+    id: number;
+    constructor(dto: CancelExamDto) {
+        super(dto.id);
+    }
+
+    get label(): string {
+        return '取消考试';
+    }
+
+    get url(): string {
+        return 'cancelExams';
+    }
+}
+
+export interface RollcallFormDto {
+    students: any[];
+    rollcalls: RollcallDto[];
+    leaves: StudentLeaveDto[];
+    freeListens: FreeListenDto[];
+    cancelExams: CancelExamDto[];
+    locked: boolean;
 }
 
 export interface ToggleResult {
@@ -77,13 +193,9 @@ export class Student {
     subject: string;
     statis: number[];
     rollcall: Rollcall;
-    leave: StudentLeave;
-
-    isFreeListen = false;
-    isCancelExam = false;
+    absence: Absence;
     visible = true;
     pending = false;
-    status: StudentStatus;
 
     constructor(index: number, dto: any) {
         this.index = index;
@@ -95,87 +207,43 @@ export class Student {
         this.statis = [0, 0, 0, 0];
     }
 
-    toggle(type: string): ToggleResult {
-        if (this.pending ||
-            this.isCancelExam ||
-            this.isFreeListen ||
-            this.leave) {
+    toggle(key: string): ToggleResult {
+        if (this.pending || this.absence) {
             return { op: 'none' };
         }
 
-        // List view中按回车键时type为空
-        if (!type) {
-            if (this.rollcall) {
-                // 执行取消操作
-                if (this.rollcall.type === RollcallType.LateEarly) {
-                    type = 'early';
-                } else {
-                    type = RollcallKeys.find(key => this.rollcall.type === RollcallTypes[key].value);
-                }
-            } else {
-                // 默认为旷课
-                type = 'absent';
-            }
+        // List view中按回车键时key为空
+        if (!key) {
+            key = this.rollcall ? this.rollcall.cancelKey : 'absent';
         }
 
-        let currType = RollcallTypes[type].value;
-        if (!this.rollcall) {
-            return { op: 'insert', type: currType };
-        }
-
-        let prevType = this.rollcall.type;
-        if (prevType === currType) {
-            return { op: 'delete' };
-        }
-
-        if (prevType === RollcallType.LateEarly) {
-            if (currType === RollcallType.Late) {
-                currType = RollcallType.Early;
-            } else if (currType === RollcallType.Early) {
-                currType = RollcallType.Late;
-            }
-        } else if (prevType === RollcallType.Late && currType === RollcallType.Early ||
-            currType === RollcallType.Late && prevType === RollcallType.Early) {
-            currType = RollcallType.LateEarly;
-        }
-        return { op: 'update', type: currType };
+        let currType = RollcallActions[key].value;
+        return this.rollcall ? this.rollcall.toggle(currType) : { op: 'insert', type: currType };
     }
 
     get rollcallType(): RollcallType {
         return this.rollcall ? this.rollcall.type : RollcallType.None;
     }
-
-    get rollcallKeys(): string[] {
-        return this.rollcall ? RollcallKeys.filter(key => RollcallType.contains(this.rollcallType, key)) : [];
-    }
 }
 
-export interface RollcallFormDto {
-    students: any[];
-    rollcalls: {
-        id: number,
-        studentId: string,
-        type: RollcallType,
-    }[];
-    leaves: {
-        studentId: string;
-    }[];
-    locked: boolean;
-}
 
 export class RollcallForm {
     students: Student[] = [];
-    studentsMap: { [key: string]: Student } = {};
     config: RollcallConfig;
     locked: boolean;
-
-    freedStudents: Student[] = [];
-    leftStudents: Student[] = [];
-    cancelledStudents: Student[] = [];
-    normalStudents: Student[] = [];
     visibleStudents: Student[] = [];
 
+    summaryCounter = {
+        total: 0,
+        free: 0,
+        leave: 0,
+        cancel: 0,
+        visible: 0,
+    };
+
     activeIndex = 0;
+
+    private studentsMap: { [key: string]: Student } = {};
 
     constructor(dto: RollcallFormDto, config: RollcallConfig) {
         this.config = config;
@@ -187,31 +255,33 @@ export class RollcallForm {
             this.students.push(student);
         });
 
-        dto.rollcalls.forEach(i => this.studentsMap[i.studentId].rollcall = new Rollcall(i));
-        dto.leaves.forEach(l => this.studentsMap[l.studentId].leave = new StudentLeave(l));
+        this.summaryCounter.total = this.students.length;
 
-        this.students.forEach(student => {
-            if (student.isFreeListen) {
-                student.status = 'freeListen';
-                this.freedStudents.push(student);
-            } else if (student.isCancelExam) {
-                student.status = 'cancelExam';
-                this.cancelledStudents.push(student);
-            } else if (student.leave) {
-                student.status = 'leave';
-                this.leftStudents.push(student);
-            } else {
-                student.status = 'normal';
-                this.normalStudents.push(student);
-            }
+        dto.rollcalls.forEach(it => {
+            const student = this.studentsMap[it.studentId];
+            student.rollcall = new Rollcall(it);
         });
 
-        this.freedStudents.forEach(student => student.visible = !this.config.hideFree);
-        this.leftStudents.forEach(student => student.visible = !this.config.hideLeave);
-        this.cancelledStudents.forEach(student => student.visible = !this.config.hideCancel);
-        this.hideRandom();
+        dto.leaves.forEach(it => {
+            const student = this.studentsMap[it.studentId];
+            student.absence = new StudentLeave(it);
+            this.summaryCounter.leave++;
+        });
 
-        this.visibleStudents = this.students.filter(s => s.visible);
+        dto.freeListens.forEach(it => {
+            const student = this.studentsMap[it.studentId];
+            student.absence = new FreeListen(it);
+            this.summaryCounter.free++;
+        });
+
+        dto.cancelExams.forEach(it => {
+            const student = this.studentsMap[it.studentId];
+            student.absence = new CancelExam(it);
+            this.summaryCounter.cancel++;
+        });
+
+        this.applyConfig();
+
     }
 
     activateNext(step = 1): void {
@@ -253,32 +323,45 @@ export class RollcallForm {
             }
         });
 
-        return _.defaults(counters, {
-            total: this.students.length,
-            free: this.freedStudents.length,
-            leave: this.leftStudents.length,
-            cancel: this.cancelledStudents.length,
-            visible: this.visibleStudents.length,
-        }, RollcallTypeCounts);
+        return _.defaults(counters, this.summaryCounter, RollcallTypeCounts);
+    }
+
+    applyConfig(): void {
+        this.students.forEach(student => {
+            if (student.absence instanceof CancelExam) {
+                student.visible = !this.config.hideCancel;
+            } else if (student.absence instanceof FreeListen) {
+                student.visible = !this.config.hideFree;
+            } else if (student.absence instanceof StudentLeave) {
+                student.visible = !this.config.hideLeave;
+            }
+        });
+
+        this.hideRandom();
+
+        this.visibleStudents = this.students.filter(s => s.visible);
+        this.summaryCounter.visible = this.visibleStudents.length;
     }
 
     private hideRandom() {
         let random = this.config.random;
 
+        const normalStudents = this.students.filter(student => !student.absence);
+
         if (random < 10 || random > 90) {
-            this.normalStudents.forEach(student => student.visible = true);
+            normalStudents.forEach(student => student.visible = true);
             return;
         }
 
         // 统计迟到旷课早退次数,清除之前的随机
         let statis: number[] = [];
-        this.normalStudents.forEach((student, index) => {
+        normalStudents.forEach((student, index) => {
             statis[index] = student.statis[0] + student.statis[1] + student.statis[2];
             student.visible = true;
         });
 
         // 随机选择，统计减1，达到-1则隐藏
-        let total = this.normalStudents.length;
+        let total = normalStudents.length;
         let numberToHide = (100 - random) / 100 * total;
         let count = 0;
         while (numberToHide > 0) {
@@ -286,7 +369,7 @@ export class RollcallForm {
             if (statis[index] > -1) {
                 statis[index]--;
                 if (statis[index] === -1) {
-                    this.normalStudents[index].visible = false;
+                    normalStudents[index].visible = false;
                     numberToHide--;
                 }
             }

@@ -28,4 +28,5 @@ module.exports = {
     'here/free-listen/form':     './src/here/free-listen/form/main.ts',
     'here/free-listen/check':    './src/here/free-listen/check/main.ts',
     'here/free-listen/approval': './src/here/free-listen/approval/main.ts',
+    'here/free-listen/item':     './src/here/free-listen/item/main.ts',
 };

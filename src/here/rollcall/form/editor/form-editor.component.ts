@@ -64,7 +64,7 @@ export class RollcallFormEditorComponent implements OnInit {
                     type: result.type,
                 }).subscribe(id => {
                     student.pending = false;
-                    student.rollcall = new Rollcall({id: id, type: result.type});
+                    student.rollcall = new Rollcall({id: parseInt(id, 10), studentId: student.id, type: result.type});
                 }, error => {
                     student.pending = false;
                     alert(JSON.stringify(error));
