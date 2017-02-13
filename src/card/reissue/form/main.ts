@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
-import {ReissueFormComponent} from './form.component';
-import {ReissueFormService} from './form.service';
-import {ReissueFormRoutingModule} from './form.routing';
-import {ReissueFormListModule} from './list/form-list.module';
-import {ReissueFormItemModule} from './item/form-item.module';
 import {ReissueFormEditorModule} from './editor/form-editor.module';
+import {ReissueFormComponent} from './form.component';
+import {ReissueFormRoutingModule} from './form.routing';
+import {ReissueFormService} from './form.service';
+import {ReissueFormItemModule} from './item/form-item.module';
+import {ReissueFormListModule} from './list/form-list.module';
 
 @NgModule({
     imports: [

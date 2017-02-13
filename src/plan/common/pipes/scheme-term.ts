@@ -13,6 +13,7 @@ export class SchemeTermNamePipe {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 @Pipe({name: 'termTitle'})
 export class SchemeTermTitlePipe {
     transform(value: number) {

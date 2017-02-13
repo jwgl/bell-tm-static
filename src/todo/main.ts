@@ -1,14 +1,14 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {CommonDirectivesModule} from 'core/common-directives';
-import {RestModule, BASE_URL} from 'core/rest';
+import {BASE_URL, RestModule} from 'core/rest';
 
-import {TodoService} from './todo.service';
-import {routing} from './todo.routes';
-import {TodoComponent} from './todo.component';
 import {TodoListComponent} from './list/todo-list.component';
+import {TodoComponent} from './todo.component';
+import {routing} from './todo.routes';
+import {TodoService} from './todo.service';
 
 @NgModule({
     bootstrap: [TodoComponent],

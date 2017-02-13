@@ -1,6 +1,6 @@
-import {Component, Input, ContentChild} from '@angular/core';
-import {FormDirective} from './form.directive';
+import {Component, ContentChild, Input} from '@angular/core';
 import {FormControlDirective} from './form-control.directive';
+import {FormDirective} from './form.directive';
 
 @Component({
     selector: 'form-field',
@@ -17,6 +17,10 @@ import {FormControlDirective} from './form-control.directive';
     },
 })
 export class FormFieldComponent {
+    static nextId(): string {
+        return `ctrl_${FormFieldComponent._id++}`;
+    }
+
     private static _id = 1000;
 
     @Input() label: string;
@@ -25,10 +29,6 @@ export class FormFieldComponent {
 
     controlId: string;
     controlCol = 10;
-
-    static nextId(): string {
-        return `ctrl_${FormFieldComponent._id++}`;
-    }
 
     constructor() {
         this.controlId = FormFieldComponent.nextId();

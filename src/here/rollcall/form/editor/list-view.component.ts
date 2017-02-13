@@ -1,8 +1,8 @@
-import {Component, Host, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Component, ElementRef, Host, Inject, ViewChild} from '@angular/core';
 
+import {Student} from '../form.model';
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
-import {Student} from '../form.model';
 
 const PageSize = 5;
 
@@ -14,23 +14,23 @@ export class RollcallListViewComponent extends BaseRollcallView {
     @ViewChild('list') list: ElementRef;
 
     readonly operations: {[key: string]: {fn: () => void, param?: any}} = {
-        'PageUp'    : {fn: this.prev, param: PageSize},
-        'PageDown'  : {fn: this.next, param: PageSize},
-        'ArrowUp'   : {fn: this.prev},
-        'ArrowLeft' : {fn: this.prev},
-        'Up'        : {fn: this.prev},
-        'Left'      : {fn: this.prev},
-        'ArrowDown' : {fn: this.next},
-        'ArrowRight': {fn: this.next},
-        'Down'      : {fn: this.next},
-        'Right'     : {fn: this.next},
-        'Home'      : {fn: this.first},
-        'End'       : {fn: this.last},
-        'Enter'     : {fn: this.toggleLocal},
-        '1'         : {fn: this.toggleLocal, param: 'absent'},
-        '2'         : {fn: this.toggleLocal, param: 'late'},
-        '3'         : {fn: this.toggleLocal, param: 'early'},
-        '4'         : {fn: this.toggleLocal, param: 'attend'},
+        PageUp    : {fn: this.prev, param: PageSize},
+        PageDown  : {fn: this.next, param: PageSize},
+        ArrowUp   : {fn: this.prev},
+        ArrowLeft : {fn: this.prev},
+        Up        : {fn: this.prev},
+        Left      : {fn: this.prev},
+        ArrowDown : {fn: this.next},
+        ArrowRight: {fn: this.next},
+        Down      : {fn: this.next},
+        Right     : {fn: this.next},
+        Home      : {fn: this.first},
+        End       : {fn: this.last},
+        Enter     : {fn: this.toggleLocal},
+        1         : {fn: this.toggleLocal, param: 'absent'},
+        2         : {fn: this.toggleLocal, param: 'late'},
+        3         : {fn: this.toggleLocal, param: 'early'},
+        4         : {fn: this.toggleLocal, param: 'attend'},
     };
 
     constructor(@Host() editor: RollcallFormEditorComponent) {
@@ -43,7 +43,7 @@ export class RollcallListViewComponent extends BaseRollcallView {
     }
 
     onKeydown(event: KeyboardEvent) {
-        let operation = this.operations[event.key];
+        const operation = this.operations[event.key];
         if (operation) {
             if (operation.param) {
                 operation.fn.apply(this, [operation.param]);
@@ -71,7 +71,7 @@ export class RollcallListViewComponent extends BaseRollcallView {
     }
 
     toggleLocal(type?: string) {
-        let student = this.rollcallForm.activeStudent;
+        const student = this.rollcallForm.activeStudent;
         if (student.absence) {
             window.open(`/web/here/${student.absence.url}/${student.absence.id}`, '_blank');
         } else {
@@ -80,16 +80,16 @@ export class RollcallListViewComponent extends BaseRollcallView {
     }
 
     scrollItem(click = false) {
-        let ul = this.list.nativeElement as HTMLElement;
-        let itemCount = this.rollcallForm.visibleStudents.length;
+        const ul = this.list.nativeElement as HTMLElement;
+        const itemCount = this.rollcallForm.visibleStudents.length;
         if (itemCount > PageSize) {
-            let itemIndex = this.rollcallForm.activeIndex;
-            let li = ul.children[itemIndex] as HTMLElement;
+            const itemIndex = this.rollcallForm.activeIndex;
+            const li = ul.children[itemIndex] as HTMLElement;
 
-            let listHeight = ul.offsetHeight;
-            let itemHeight = li.offsetHeight;
-            let favorPosition = Math.floor(PageSize / 2);
-            let favorHeight = favorPosition * itemHeight;
+            const listHeight = ul.offsetHeight;
+            const itemHeight = li.offsetHeight;
+            const favorPosition = Math.floor(PageSize / 2);
+            const favorHeight = favorPosition * itemHeight;
 
             if (!click && itemIndex > favorPosition && li.offsetTop - ul.scrollTop < favorHeight) {
                 ul.scrollTop = li.offsetTop - favorHeight;

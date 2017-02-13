@@ -1,8 +1,8 @@
 import {Component, Host} from '@angular/core';
 
+import {Student} from '../form.model';
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
-import {Student} from '../form.model';
 
 @Component({
     styleUrls: ['tile-view.component.scss'],

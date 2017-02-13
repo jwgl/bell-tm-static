@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {BookingApprovalListComponent} from './list/approval-list.component';
 import {BookingApprovalItemComponent} from './item/approval-item.component';
+import {BookingApprovalListComponent} from './list/approval-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},

@@ -3,21 +3,21 @@ import {Pipe} from '@angular/core';
 @Pipe({name: 'primaryCourses'})
 export class PrimaryCoursesPipe {
     transform(courses: any, args: any[]) {
-        let items: string[] = [];
-        for (let i = 0; i < courses.length; i++) {
-            let value = courses[i]
+        const items: string[] = [];
+        for (const value of courses) {
+            const replaced = value
                 .replace(/[\(（][\d上下一二三四 五六七ⅠⅡⅢ][\)）]/, '')
                 .replace(/[\dⅠⅡⅢI]+$/, '')
                 .replace(/^\s+|\s+$/, '');
             let found = false;
-            for (let j = 0; j < items.length; j++) {
-                if (value === items[j]) {
+            for (const item of items) {
+                if (replaced === item) {
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                items.push(value);
+                items.push(replaced);
             }
         }
         return items.join('、');

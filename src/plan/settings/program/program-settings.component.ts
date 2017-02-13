@@ -3,8 +3,8 @@ import {Component, Inject} from '@angular/core';
 import {Dialog} from 'core/dialogs';
 import {groupBy} from 'core/utils';
 
-import {ProgramSettingsService} from './program-settings.service';
 import {ProgramEditorDialog} from './program-editor.dialog';
+import {ProgramSettingsService} from './program-settings.service';
 
 @Component({
     selector: 'program-settings-list',
@@ -25,10 +25,10 @@ export class ProgramSettingsComponent {
 
     loadData(grade = 0) {
         this.service.loadList(grade).map(items => {
-            let departments: {
+            const departments: Array<{
                 id: string,
-                programs: {programId: number}[],
-            }[] = groupBy(items, [{
+                programs: Array<{programId: number}>,
+            }> = groupBy(items, [{
                 groupBy: 'departmentId',
                 into: 'programs',
                 mappings: {

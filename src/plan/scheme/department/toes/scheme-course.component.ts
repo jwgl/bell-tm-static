@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Scheme, SchemeCourse, Direction, Property, RecordStatus} from '../../common/scheme.model';
+import {Direction, Property, RecordStatus, Scheme, SchemeCourse} from '../../common/scheme.model';
 import './department-toes.model';
 
 @Component({
@@ -44,7 +44,7 @@ export class SchemeCourseToesComponent {
             return '';
         }
 
-        let classes: string[] = [];
+        const classes: string[] = [];
         if (this.schemeCourse.prevStatus !== RecordStatus.None) {
             classes.push('Prev' + RecordStatus[this.schemeCourse.prevStatus]);
         }

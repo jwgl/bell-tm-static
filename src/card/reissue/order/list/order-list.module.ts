@@ -1,10 +1,10 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
 import {ReissueOrderListComponent} from './order-list.component';
-import {RouterModule} from '@angular/router';
 
 @NgModule({
     imports: [

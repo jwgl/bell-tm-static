@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import {Observable} from 'rxjs/Observable';
 
 import {BaseDialog} from 'core/dialogs';
 import {NumberStringOption, OddEvenOptions} from 'core/options';
@@ -60,6 +60,56 @@ export class FindPlaceDialog extends BaseDialog {
         moment.locale('zh-cn');
     }
 
+    get bookingDay(): BookingDayOption {
+        return this._bookingDay;
+    }
+
+    set bookingDay(value: BookingDayOption) {
+        this._bookingDay = value;
+        this.queryOptions.startWeek = value.week;
+        this.queryOptions.endWeek = value.week;
+        this.queryOptions.oddEven = 0;
+        this.queryOptions.dayOfWeek = value.dayOfWeek;
+    }
+
+    startWeekChanged(newValue: number) {
+        if (newValue > this.queryOptions.endWeek) {
+            this.queryOptions.endWeek = newValue;
+        }
+        this.queryOptions.startWeek = newValue;
+    }
+
+    endWeekChanged(newValue: number) {
+        if (newValue < this.queryOptions.startWeek) {
+            this.queryOptions.startWeek = newValue;
+        }
+        this.queryOptions.endWeek = newValue;
+    }
+
+    findPlace() {
+        this.service.findPlace({
+            startWeek: this.queryOptions.startWeek,
+            endWeek: this.queryOptions.endWeek,
+            oddEven: this.queryOptions.oddEven,
+            dayOfWeek: this.queryOptions.dayOfWeek,
+            sectionId: this.queryOptions.section.id,
+            placeType: this.queryOptions.placeType,
+        }).subscribe((data: any[]) => {
+            this.queryOptionsSnapshot = _.clone(this.queryOptions);
+            this.places = data;
+        });
+    }
+
+    get selectedCount() {
+        return this.places.filter(it => it.selected).length;
+    }
+
+    placeRowClicked(event: Event, place: any) {
+        if (!(event.target instanceof HTMLInputElement)) {
+            place.selected = !place.selected;
+        }
+    }
+
     protected onOpening(): Observable<any> {
         this.term = {
             startWeek: this.options.term.startWeek,
@@ -111,7 +161,7 @@ export class FindPlaceDialog extends BaseDialog {
                 }
 
                 this.vm.days.push({
-                    week: week,
+                    week,
                     dayOfWeek: day.isoWeekday(),
                     date: moment(day),
                 });
@@ -166,55 +216,5 @@ export class FindPlaceDialog extends BaseDialog {
                             type: this.queryOptionsSnapshot.placeType,
                         },
                     }));
-    }
-
-    get bookingDay(): BookingDayOption {
-        return this._bookingDay;
-    }
-
-    set bookingDay(value: BookingDayOption) {
-        this._bookingDay = value;
-        this.queryOptions.startWeek = value.week;
-        this.queryOptions.endWeek = value.week;
-        this.queryOptions.oddEven = 0;
-        this.queryOptions.dayOfWeek = value.dayOfWeek;
-    }
-
-    startWeekChanged(newValue: number) {
-        if (newValue > this.queryOptions.endWeek) {
-            this.queryOptions.endWeek = newValue;
-        }
-        this.queryOptions.startWeek = newValue;
-    }
-
-    endWeekChanged(newValue: number) {
-        if (newValue < this.queryOptions.startWeek) {
-            this.queryOptions.startWeek = newValue;
-        }
-        this.queryOptions.endWeek = newValue;
-    }
-
-    findPlace() {
-        this.service.findPlace({
-            startWeek: this.queryOptions.startWeek,
-            endWeek: this.queryOptions.endWeek,
-            oddEven: this.queryOptions.oddEven,
-            dayOfWeek: this.queryOptions.dayOfWeek,
-            sectionId: this.queryOptions.section.id,
-            placeType: this.queryOptions.placeType,
-        }).subscribe((data: any[]) => {
-            this.queryOptionsSnapshot = _.clone(this.queryOptions);
-            this.places = data;
-        });
-    }
-
-    get selectedCount() {
-        return this.places.filter(it => it.selected).length;
-    }
-
-    placeRowClicked(event: Event, place: any) {
-        if (!(event.target instanceof HTMLInputElement)) {
-            place.selected = !place.selected;
-        }
     }
 }

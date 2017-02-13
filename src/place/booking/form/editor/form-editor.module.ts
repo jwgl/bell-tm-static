@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
-import {CommonDirectivesModule} from 'core/common-directives';
 import {CommonDialogsModule} from 'core/common-dialogs';
+import {CommonDirectivesModule} from 'core/common-directives';
 
-import {BookingFormEditorComponent} from './form-editor.component';
 import {BookingFindPlaceModule} from './find-place/find-place.module';
+import {BookingFormEditorComponent} from './form-editor.component';
 
 @NgModule({
     imports: [

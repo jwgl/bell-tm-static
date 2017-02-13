@@ -14,4 +14,3 @@ export function clearBit(value: number, index: number): number {
 export function toggleBit(value: number, index: number): number {
     return value ^ 1 << index;
 }
-/* tslint:enable:no-bitwise */

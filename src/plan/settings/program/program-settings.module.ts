@@ -1,13 +1,13 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
-import {Dialog} from 'core/dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
+import {Dialog} from 'core/dialogs';
 
 import {PlanCommonModule} from '../../common/module';
-import {ProgramSettingsComponent} from './program-settings.component';
 import {ProgramEditorDialog} from './program-editor.dialog';
+import {ProgramSettingsComponent} from './program-settings.component';
 
 @NgModule({
     imports: [

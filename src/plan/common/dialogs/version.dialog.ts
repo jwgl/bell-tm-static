@@ -26,7 +26,7 @@ export class VersionDialog extends BaseDialog {
             return null;
         }
 
-        let newVersion = this.getValue(form);
+        const newVersion = this.getValue(form);
         return newVersion <= this.prev ? {mustGreatThan: {value: toVersionString(this.prev)}} : null;
     }
 
@@ -36,7 +36,6 @@ export class VersionDialog extends BaseDialog {
     protected onOpening(): Observable<any>  {
         this.prev = this.options.prev;
         this.curr = this.options.curr;
-
         /* tslint:disable:no-bitwise */
         this.versionForm = this.fb.group({
             a: [(this.curr >> 24) & 255],
@@ -53,10 +52,10 @@ export class VersionDialog extends BaseDialog {
     }
 
     private getValue(form: FormGroup): number {
-        let a = form.controls['a'].value;
-        let b = form.controls['b'].value;
-        let c = form.controls['c'].value;
-        let d = form.controls['d'].value;
+        const a = form.controls['a'].value;
+        const b = form.controls['b'].value;
+        const c = form.controls['c'].value;
+        const d = form.controls['d'].value;
         /* tslint:disable:no-bitwise */
         return (a << 24) + (b << 16) + (c << 8) + (d << 0);
         /* tslint:enable:no-bitwise */

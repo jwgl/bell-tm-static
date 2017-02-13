@@ -1,13 +1,13 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
+import {ReissueSharedModule} from '../shared/reissue-shared.module';
 import {ReissueItemComponent} from './item.component';
 import {ReissueItemService} from './item.service';
-import {ReissueSharedModule} from '../shared/reissue-shared.module';
 
 @NgModule({
     imports: [

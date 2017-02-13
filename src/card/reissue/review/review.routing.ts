@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {ReissueReviewListComponent} from './list/review-list.component';
 import {ReissueReviewItemComponent} from './item/review-item.component';
+import {ReissueReviewListComponent} from './list/review-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/SUBMITTED', pathMatch: 'full'},

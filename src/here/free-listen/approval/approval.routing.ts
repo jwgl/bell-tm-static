@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {FreeListenApprovalListComponent} from './list/approval-list.component';
 import {FreeListenApprovalItemComponent} from './item/approval-item.component';
+import {FreeListenApprovalListComponent} from './list/approval-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},

@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 
 import {PlanCommonModule} from '../../../common/module';
 import {SchemeCourseComponent} from './scheme-course.component';

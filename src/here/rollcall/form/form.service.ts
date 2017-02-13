@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
-import {ApiUrl, Rest, EditService} from 'core/rest';
+import {ApiUrl, EditService, Rest} from 'core/rest';
+
+import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model';
 import {RollcallConfig} from './form.model';
-import {Term, Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 
 @Injectable()
 export class RollcallFormService extends EditService {

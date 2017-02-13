@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
 
-import {LeaveApprovalService} from '../approval.service';
-import {LeaveForm} from '../../shared/form.model';
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
+import {LeaveForm} from '../../shared/form.model';
+import {LeaveApprovalService} from '../approval.service';
 
 /**
  * 学生请假审批项。
@@ -34,7 +34,7 @@ export class LeaveApprovalItemComponent {
 
     loadData() {
         this.service.loadItem(this.id, this.wi).subscribe(dto => {
-            let schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
+            const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
             this.form = new LeaveForm(dto.form, schedules);
             if (this.wi === undefined) {
                 this.wi = dto.form.workitemId;

@@ -8,7 +8,7 @@ export class Markdown {
     md: any;
 
     constructor(private elementRef: ElementRef) {
-        this.md = (<any>window).markdownit();
+        this.md = (window as any).markdownit();
     }
 
     set markdown(text: string) {

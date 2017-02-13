@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {AbstractGroup, Property, Direction} from '../../common/scheme.model';
+import {AbstractGroup, Direction, Property} from '../../common/scheme.model';
 
 /**
  * 小计
@@ -17,7 +17,7 @@ export class SchemeGroupComponent {
     get summary(): string {
         if (this.group instanceof Property) {
              if (this.group.isResidual) {
-                let residual = this.group.scheme.directionResidualCredits;
+                const residual = this.group.scheme.directionResidualCredits;
                 if (residual) {
                     return `小计${residual}`;
                 } else {

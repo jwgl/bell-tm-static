@@ -18,14 +18,15 @@ const RollcallTypeNames = _.fromPairs(_.toPairs(RollcallType).filter(p => !/\d+/
 const RollcallTypeCounts = _.transform(RollcallTypeNames, (result, value) => result[value] = 0);
 
 export const RollcallActions: { [key: string]: { label: string, value: RollcallType } } = {
-    'absent': { label: '旷课', value: RollcallType.Absent },
-    'late':   { label: '迟到', value: RollcallType.Late },
-    'early':  { label: '早退', value: RollcallType.Early },
-    'attend': { label: '调课', value: RollcallType.Attend },
+    absent: { label: '旷课', value: RollcallType.Absent },
+    late:   { label: '迟到', value: RollcallType.Late },
+    early:  { label: '早退', value: RollcallType.Early },
+    attend: { label: '调课', value: RollcallType.Attend },
 };
 
 export const RollcallActionsKeys = ['absent', 'late', 'early', 'attend'];
 
+/* tslint:disable:no-namespace*/
 export namespace RollcallType {
     export function contains(type: RollcallType, key: string) {
         return type === RollcallActions[key].value ||
@@ -42,12 +43,12 @@ export namespace RollcallType {
 const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key) => {
     result[key] = RollcallActionsKeys.filter(ak => {
         return key === RollcallActions[ak].value.toString() ||
-               key === RollcallType.LateEarly.toString() && (ak === 'late' || ak === 'early')
+               key === RollcallType.LateEarly.toString() && (ak === 'late' || ak === 'early');
     }).map(ak => ({
         key: ak,
         label: RollcallActions[ak].label,
     }));
-}, <{[k: string]: {key: string, label: string}[]}>{});
+}, {} as {[k: string]: Array<{key: string, label: string}>});
 
 export interface RollcallConfig {
     hideFree: boolean;
@@ -72,7 +73,7 @@ export class Rollcall {
         this.type = dto.type;
     }
 
-    get lables(): {key: string, label: string}[] {
+    get lables(): Array<{key: string, label: string}> {
         return RollcallLabels[this.type];
     }
 
@@ -85,7 +86,6 @@ export class Rollcall {
     }
 
     toggle(type: RollcallType): ToggleResult {
-        console.log(type);
         if (this.type === type) {
             return { op: 'delete' };
         }
@@ -100,7 +100,7 @@ export class Rollcall {
                    type === RollcallType.Late && this.type === RollcallType.Early) {
             type = RollcallType.LateEarly;
         }
-        return { op: 'update', type: type };
+        return { op: 'update', type };
     }
 }
 
@@ -109,12 +109,12 @@ interface AbsenceDto {
     studentId: string;
 }
 
+/* tslint:disable:max-classes-per-file*/
 abstract class Absence {
     constructor(public id: number) {}
     abstract get label(): string;
     abstract get url(): string;
 }
-
 
 interface StudentLeaveDto extends AbsenceDto {
     type: LeaveType;
@@ -217,7 +217,7 @@ export class Student {
             key = this.rollcall ? this.rollcall.cancelKey : 'absent';
         }
 
-        let currType = RollcallActions[key].value;
+        const currType = RollcallActions[key].value;
         return this.rollcall ? this.rollcall.toggle(currType) : { op: 'insert', type: currType };
     }
 
@@ -225,7 +225,6 @@ export class Student {
         return this.rollcall ? this.rollcall.type : RollcallType.None;
     }
 }
-
 
 export class RollcallForm {
     students: Student[] = [];
@@ -250,7 +249,7 @@ export class RollcallForm {
         this.locked = dto.locked;
 
         dto.students.forEach((s, index) => {
-            let student = new Student(index + 1, s);
+            const student = new Student(index + 1, s);
             this.studentsMap[student.id] = student;
             this.students.push(student);
         });
@@ -315,7 +314,7 @@ export class RollcallForm {
     }
 
     get summary(): any {
-        let counters = _.countBy(this.visibleStudents, s => {
+        const counters = _.countBy(this.visibleStudents, s => {
             if (s.rollcall) {
                 return RollcallTypeNames[s.rollcall.type];
             } else {
@@ -344,7 +343,7 @@ export class RollcallForm {
     }
 
     private hideRandom() {
-        let random = this.config.random;
+        const random = this.config.random;
 
         const normalStudents = this.students.filter(student => !student.absence);
 
@@ -354,18 +353,17 @@ export class RollcallForm {
         }
 
         // 统计迟到旷课早退次数,清除之前的随机
-        let statis: number[] = [];
+        const statis: number[] = [];
         normalStudents.forEach((student, index) => {
             statis[index] = student.statis[0] + student.statis[1] + student.statis[2];
             student.visible = true;
         });
 
         // 随机选择，统计减1，达到-1则隐藏
-        let total = normalStudents.length;
+        const total = normalStudents.length;
         let numberToHide = (100 - random) / 100 * total;
-        let count = 0;
         while (numberToHide > 0) {
-            let index = Math.floor(Math.random() * total);
+            const index = Math.floor(Math.random() * total);
             if (statis[index] > -1) {
                 statis[index]--;
                 if (statis[index] === -1) {

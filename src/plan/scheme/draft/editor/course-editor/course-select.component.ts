@@ -1,18 +1,19 @@
-import {Component, ElementRef, ViewChild, EventEmitter, Output, Input} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
+
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
-import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 import {EditMode} from 'core/constants';
 
-import {CourseSelectDto, AbstractGroup} from '../../../common/scheme.model';
+import {AbstractGroup, CourseSelectDto} from '../../../common/scheme.model';
 import {SchemeDraftService} from '../../draft.service';
 
 @Component({
@@ -49,7 +50,7 @@ export class CourseSelectComponent {
         )
         .filter(array => !array[0])
         .map(array => array[1])
-        .map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+        .map((event: KeyboardEvent) => (event.target as HTMLInputElement).value)
         .debounceTime(250)
         .distinctUntilChanged()
         .filter(value => value.length >= 2)
@@ -61,8 +62,8 @@ export class CourseSelectComponent {
     }
 
     search(query: string): Observable<{query: string, result: CourseSelectDto[]}> {
-        let type = this.editMode === EditMode.Create ? 0 : (this.isTempCourse ? 2 : 1);
-        return this.service.findCourses(query, type).map(result => ({query: query, result: result}));
+        const type = this.editMode === EditMode.Create ? 0 : (this.isTempCourse ? 2 : 1);
+        return this.service.findCourses(query, type).map(result => ({query, result}));
     }
 
     clearCourse() {

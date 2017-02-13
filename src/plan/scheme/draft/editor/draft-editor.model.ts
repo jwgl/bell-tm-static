@@ -1,14 +1,13 @@
 import * as _ from 'lodash';
 
 import {
-    Scheme,
     AbstractGroup,
     Property,
-    SchemeCourseDto,
-    SchemeCourse,
     RecordStatus,
+    Scheme,
+    SchemeCourse,
+    SchemeCourseDto,
 } from '../../common/scheme.model';
-
 
 declare module '../../common/scheme.model' {
     interface Scheme {
@@ -87,13 +86,13 @@ Scheme.prototype.toServerDto = function(this: Scheme) {
         previousId: this.previousId,
         programId: this.programId,
         courses: this.properties
-            .reduce((acc, p) => acc.concat(p.getModifiedCourses()), <SchemeCourse[]>[])
+            .reduce((acc, p) => acc.concat(p.getModifiedCourses()), [] as SchemeCourse[])
             .map(sc => sc.toServerDto()),
     };
 };
 
 AbstractGroup.prototype.remove = function(this: AbstractGroup, sc: SchemeCourse) {
-    let index = this.courses.indexOf(sc);
+    const index = this.courses.indexOf(sc);
     if (index > -1) {
         this.courses.splice(index, 1);
         if (sc.ref) { // 修改 -> 删除, 还原引用
@@ -126,7 +125,7 @@ AbstractGroup.prototype.restore = function(this: AbstractGroup, sc: SchemeCourse
 };
 
 Property.prototype.getModifiedCourses = function(this: Property): SchemeCourse[] {
-    const EMPTY = <SchemeCourse[]>[];
+    const EMPTY: SchemeCourse[] = [];
     return (this.directions ? this.directions.reduce((acc, d) => acc.concat(d.courses), EMPTY) : EMPTY)
             .concat(this.courses)
             .filter(sc => sc.currStatus !== RecordStatus.None);
@@ -143,7 +142,7 @@ SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDt
                 case RecordStatus.None:
                     dto.id = null;
                     this.currStatus = RecordStatus.Deleted;
-                    let schemeCourse = this.group.add(dto);
+                    const schemeCourse = this.group.add(dto);
                     schemeCourse.ref = this;
                     break;
                 case RecordStatus.Created:
@@ -167,7 +166,7 @@ SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDt
                     if (this.ref) { // 修改 -> 修改
                         this.ref.update(dto, level + 1);
                     } else { // 新建 -> 修改
-                        let schemeCourse = this.group.add(dto);
+                        const schemeCourse = this.group.add(dto);
                         schemeCourse.prevStatus = RecordStatus.Created;
                         schemeCourse.currStatus = RecordStatus.Updated;
                     }
@@ -181,7 +180,7 @@ SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDt
                 case RecordStatus.Reverted:
                     if (level === 0) {
                         // 第0层，直接更新Deleted状态项
-                        let referencedBy = this.findReferencedBy();
+                        const referencedBy = this.findReferencedBy();
                         if (referencedBy) {
                             // 删除(修改) -> 还原 -> 修改
                             dto.id = referencedBy.id;
@@ -189,13 +188,13 @@ SchemeCourse.prototype.update = function(this: SchemeCourse, dto: SchemeCourseDt
                         } else {
                             // 删除(直接) -> 还原 -> 修改
                             dto.id = null;
-                            let schemeCourse = this.group.add(dto);
+                            const schemeCourse = this.group.add(dto);
                             schemeCourse.ref = this;
                         }
                     } else {
                         // 其它层，通过更新操作Deleted状态项
                         // 新增(修改) -> REF -> 修改
-                        let schemeCourse = this.group.add(dto);
+                        const schemeCourse = this.group.add(dto);
                         schemeCourse.ref = this;
                         schemeCourse.prevStatus = RecordStatus.Created;
                         schemeCourse.currStatus = RecordStatus.Updated;
@@ -242,7 +241,7 @@ SchemeCourse.prototype.remove = function(this: SchemeCourse) {
             switch (this.currStatus) {
                 case RecordStatus.Reverted:
                     this.currStatus = RecordStatus.None;
-                    let referencedBy = this.findReferencedBy();
+                    const referencedBy = this.findReferencedBy();
                     if (referencedBy) {
                         referencedBy.currStatus = RecordStatus.Updated;
                     }
@@ -294,12 +293,7 @@ SchemeCourse.prototype.restore = function(this: SchemeCourse) {
 };
 
 SchemeCourse.prototype.findReferencedBy = function(this: SchemeCourse): SchemeCourse {
-    for (let i = 0; i < this.group.courses.length; i++) {
-        if (this.group.courses[i].ref === this) {
-            return this.group.courses[i];
-        }
-    }
-    return null;
+    return this.group.courses.find(c => c.ref === this);
 };
 
 SchemeCourse.prototype.toClientDto = function(this: SchemeCourse): SchemeCourseDto {
@@ -328,7 +322,7 @@ SchemeCourse.prototype.toClientDto = function(this: SchemeCourse): SchemeCourseD
 };
 
 SchemeCourse.prototype.toServerDto = function(this: SchemeCourse) {
-    let dto: any = {
+    const dto: any = {
         id               : this.id,
         isTempCourse     : this.isTempCourse,
         courseId         : this._courseId,

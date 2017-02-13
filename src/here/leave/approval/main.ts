@@ -1,17 +1,17 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
+import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
-import {CommonDirectivesModule} from 'core/common-directives';
 
 import {LeaveSharedModule} from '../shared/leave-shared.module';
-import {LeaveApprovalRoutingModule} from './approval.routing';
 import {LeaveApprovalComponent} from './approval.component';
-import {LeaveApprovalListComponent} from './list/approval-list.component';
-import {LeaveApprovalItemComponent} from './item/approval-item.component';
+import {LeaveApprovalRoutingModule} from './approval.routing';
 import {LeaveApprovalService} from './approval.service';
+import {LeaveApprovalItemComponent} from './item/approval-item.component';
+import {LeaveApprovalListComponent} from './list/approval-list.component';
 
 @NgModule({
     imports: [

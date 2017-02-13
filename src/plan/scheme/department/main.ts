@@ -1,14 +1,14 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
 import {SchemeDepartmentComponent} from './department.component';
-import {SchemeDepartmentService} from './department.service';
 import {SchemeDepartmentRoutingModule} from './department.routes';
-import {SchemeDepartmentListModule} from './list/department-list.module';
+import {SchemeDepartmentService} from './department.service';
 import {SchemeDepartmentItemModule} from './item/department-item.module';
+import {SchemeDepartmentListModule} from './list/department-list.module';
 import {SchemeDepartmentToesModule} from './toes/department-toes.module';
 
 @NgModule({

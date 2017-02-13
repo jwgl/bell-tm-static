@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {SchemeDepartmentListComponent} from './list/department-list.component';
 import {SchemeDepartmentItemComponent} from './item/department-item.component';
+import {SchemeDepartmentListComponent} from './list/department-list.component';
 import {SchemeDepartmentToesComponent} from './toes/department-toes.component';
 
 const routes: Routes = [

@@ -1,13 +1,13 @@
-import {Component, OnInit, EventEmitter} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, EventEmitter, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import * as _ from 'lodash';
 
 import {matchOddEven} from 'core/utils';
 
+import {findWeekSchedules, Schedule, Term} from '../../../shared/schedule/schedule.model';
+import {Rollcall, RollcallConfig, RollcallForm, Student, ToggleResult} from '../form.model';
 import {RollcallFormService} from '../form.service';
-import {RollcallForm, RollcallConfig, Student, ToggleResult, Rollcall} from '../form.model';
-import {Term, Schedule, findWeekSchedules} from '../../../shared/schedule/schedule.model';
 
 @Component({
     templateUrl: 'form-editor.component.html',
@@ -53,7 +53,7 @@ export class RollcallFormEditorComponent implements OnInit {
     }
 
     toggle(student: Student, type: string) {
-        let result: ToggleResult = student.toggle(type);
+        const result: ToggleResult = student.toggle(type);
         switch (result.op) {
             case 'insert':
                 student.pending = true;

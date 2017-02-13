@@ -2,14 +2,15 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
-import {RollcallFormEditorComponent} from './form-editor.component';
-import {RollcallDetailViewComponent} from './detail-view.component';
-import {RollcallListViewComponent} from './list-view.component';
-import {RollcallTileViewComponent} from './tile-view.component';
-import {RollcallLockViewComponent} from './lock-view.component';
-import {RollcallFormEditorResolve} from './form-editor-resolve.service';
-import {RollcallLockGuard} from './lock-guard.service';
+
 import {RollcallFormResolve} from '../form-resolve.service';
+import {RollcallDetailViewComponent} from './detail-view.component';
+import {RollcallFormEditorResolve} from './form-editor-resolve.service';
+import {RollcallFormEditorComponent} from './form-editor.component';
+import {RollcallListViewComponent} from './list-view.component';
+import {RollcallLockGuard} from './lock-guard.service';
+import {RollcallLockViewComponent} from './lock-view.component';
+import {RollcallTileViewComponent} from './tile-view.component';
 
 const routes: Routes = [
     {

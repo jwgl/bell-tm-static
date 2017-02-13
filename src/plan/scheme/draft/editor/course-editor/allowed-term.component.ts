@@ -1,20 +1,7 @@
-import {
-    Component,
-    Directive,
-    Input,
-    Output,
-    EventEmitter,
-    SimpleChange,
-    forwardRef,
-} from '@angular/core';
-import {
-    FormControl,
-    FormArray,
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import {Component, EventEmitter, Input, Output, SimpleChange} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
 
-import {getBit, setBit, clearBit} from 'core/utils';
+import {clearBit, getBit, setBit} from 'core/utils';
 
 @Component({
     selector: 'allowed-term',
@@ -47,7 +34,7 @@ export class AllowedTermComponent {
     }
 
     ngOnChanges(changes: {[key: string]: SimpleChange}) {
-        let suggestedTermChange = changes['suggestedTerm'];
+        const suggestedTermChange = changes['suggestedTerm'];
         if (suggestedTermChange && !suggestedTermChange.isFirstChange()) {
             let value = this.value;
             value = clearBit(value, suggestedTermChange.previousValue - 1);
@@ -71,26 +58,4 @@ export class AllowedTermComponent {
         this.value = value;
         this.terms.forEach((term, i) => this.controls.at(i).setValue(getBit(this.value, term - 1), {emitEvent: false}));
     }
-}
-
-@Directive({
-    selector: 'allowed-term',
-    host: {'(valueChange)': 'onChange($event)'},
-    providers: [{provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => AllowedTermAccessor), multi: true}],
-})
-export class AllowedTermAccessor implements ControlValueAccessor {
-    /* tslint:disable:no-empty */
-    onChange = (_: any) => {};
-    onTouched = () => {};
-    /* tslint:enable:no-empty */
-
-    constructor(private host: AllowedTermComponent) {
-    }
-
-    writeValue(value: any): void {
-        this.host.setValue(value);
-    }
-
-    registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
-    registerOnTouched(fn: () => void): void { this.onTouched = fn; }
 }

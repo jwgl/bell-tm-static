@@ -1,7 +1,8 @@
 import {Component, Input} from '@angular/core';
 
-import {FreeListenForm} from './form.model';
 import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {FreeListenForm} from './form.model';
+
 import './form-viewer.model';
 
 @Component({

@@ -1,8 +1,14 @@
 import * as _ from 'lodash';
 
+import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
-import {Schedule} from '../../../shared/schedule/schedule.model';
 import '../../shared/student-schedule.model';
+
+declare module '../../../shared/schedule/schedule.model' {
+    interface ScheduleDto {
+        repeatType: number;
+    }
+}
 
 declare module '../../shared/form.model' {
     interface FreeListenForm {
@@ -19,6 +25,7 @@ declare module '../../shared/form.model' {
         getAddedItems(): any[];
         isValid(): boolean;
     }
+
 }
 
 FreeListenForm.prototype.scheduleDisabled = function(this: FreeListenForm, schedule: Schedule): boolean {
@@ -27,7 +34,7 @@ FreeListenForm.prototype.scheduleDisabled = function(this: FreeListenForm, sched
 };
 
 FreeListenForm.prototype.toggleSchedule = function(this: FreeListenForm, schedule: Schedule): void {
-    let freeItem = new FreeListenItem(this, {});
+    const freeItem = new FreeListenItem(this, {});
     freeItem.schedule = schedule;
     if (this.contains(freeItem)) {
         this.removeItem(freeItem);
@@ -44,7 +51,7 @@ FreeListenForm.prototype.addItem = function(this: FreeListenForm, item: FreeList
         return;
     }
 
-    let removedItem = this.removedItems.find(i => i.equalsTo(item));
+    const removedItem = this.removedItems.find(i => i.equalsTo(item));
     if (removedItem) {
         this.removedItems.splice(this.removedItems.indexOf(removedItem), 1);
         this.items.push(removedItem);
@@ -56,7 +63,7 @@ FreeListenForm.prototype.addItem = function(this: FreeListenForm, item: FreeList
 };
 
 FreeListenForm.prototype.removeItem = function(this: FreeListenForm, item: FreeListenItem): void {
-    let freeItem = this.items.find(it => it.equalsTo(item));
+    const freeItem = this.items.find(it => it.equalsTo(item));
 
     if (freeItem) {
         this.items.splice(this.items.indexOf(freeItem), 1);

@@ -1,6 +1,6 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {RollcallType, RollcallActions, RollcallActionsKeys} from '../form.model';
+import {RollcallActions, RollcallActionsKeys, RollcallType} from '../form.model';
 
 @Component({
     selector: 'rollcall-toggle-bar',
@@ -19,7 +19,7 @@ export class RollcallToggleBarComponent {
 
     hasType(key: string): boolean {
         return this.rollcallType === RollcallActions[key].value ||
-               this.rollcallType === RollcallType.LateEarly && (key === 'late' || key === 'early')
+               this.rollcallType === RollcallType.LateEarly && (key === 'late' || key === 'early');
     }
 
     label(key: string): string {

@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 
-import {LeaveForm, LeaveItem} from '../../shared/form.model';
 import {Schedule} from '../../../shared/schedule/schedule.model';
+import {LeaveForm, LeaveItem} from '../../shared/form.model';
 
 declare module '../../shared/form.model' {
     interface LeaveForm {
@@ -25,7 +25,7 @@ declare module '../../shared/form.model' {
 }
 
 LeaveForm.prototype.toggleWeek = function(this: LeaveForm, week: number): void {
-    let leaveItem = new LeaveItem(this, {week});
+    const leaveItem = new LeaveItem(this, {week});
     if (this.contains(leaveItem)) {
         this.removeItem(leaveItem);
     } else {
@@ -37,7 +37,7 @@ LeaveForm.prototype.toggleWeek = function(this: LeaveForm, week: number): void {
 };
 
 LeaveForm.prototype.toggleDayOfWeek = function(this: LeaveForm, week: number, dayOfWeek: number): void {
-    let leaveItem = new LeaveItem(this, {week, dayOfWeek});
+    const leaveItem = new LeaveItem(this, {week, dayOfWeek});
     if (this.contains(leaveItem)) {
         this.removeItem(leaveItem);
     } else {
@@ -50,7 +50,7 @@ LeaveForm.prototype.toggleDayOfWeek = function(this: LeaveForm, week: number, da
 };
 
 LeaveForm.prototype.toggleSchedule = function(this: LeaveForm, week: number, schedule: Schedule): void {
-    let leaveItem = new LeaveItem(this, {week});
+    const leaveItem = new LeaveItem(this, {week});
     leaveItem.schedule = schedule;
     if (this.contains(leaveItem)) {
         this.removeItem(leaveItem);
@@ -86,7 +86,7 @@ LeaveForm.prototype.addItem = function(this: LeaveForm, item: LeaveItem): void {
         return;
     }
 
-    let removedItem = this.removedItems.find(i => i.equalsTo(item));
+    const removedItem = this.removedItems.find(i => i.equalsTo(item));
     if (removedItem) {
         this.removedItems.splice(this.removedItems.indexOf(removedItem), 1);
         this.items.push(removedItem);
@@ -96,7 +96,7 @@ LeaveForm.prototype.addItem = function(this: LeaveForm, item: LeaveItem): void {
 };
 
 LeaveForm.prototype.removeItem = function(this: LeaveForm, item: LeaveItem): void {
-    let leaveItem = this.items.find(it => it.equalsTo(item));
+    const leaveItem = this.items.find(it => it.equalsTo(item));
 
     if (leaveItem) {
         this.items.splice(this.items.indexOf(leaveItem), 1);

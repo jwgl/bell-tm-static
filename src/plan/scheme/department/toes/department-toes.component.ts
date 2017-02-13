@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import {Dialog} from 'core/dialogs';
 import {CommonDialog} from 'core/common-dialogs';
+import {Dialog} from 'core/dialogs';
 
 import {Scheme, SchemeCourse} from '../../common/scheme.model';
-import './department-toes.model';
 import {SchemeDepartmentService} from '../department.service';
+import './department-toes.model';
 import {SchemeCourseDialog} from './scheme-course.dialog';
 
 @Component({
@@ -38,9 +38,7 @@ export class SchemeDepartmentToesComponent implements OnInit {
     }
 
     onEdit(schemeCourse: SchemeCourse): void {
-        this.dialog.open(SchemeCourseDialog, {
-            schemeCourse: schemeCourse,
-        }).then(result => {
+        this.dialog.open(SchemeCourseDialog, {schemeCourse}).then(result => {
             schemeCourse.startWeek = result.startWeek;
             schemeCourse.departmentId = result.departmentId;
             schemeCourse.departmentName = result.departmentName;

@@ -1,17 +1,17 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
+import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
-import {CommonDirectivesModule} from 'core/common-directives';
 
 import {FreeListenSharedModule} from '../shared/free-listen-shared.module';
 import {FreeListenApprovalComponent} from './approval.component';
-import {FreeListenApprovalService} from './approval.service';
 import {FreeListenApprovalRoutingModule} from './approval.routing';
-import {FreeListenApprovalListComponent} from './list/approval-list.component';
+import {FreeListenApprovalService} from './approval.service';
 import {FreeListenApprovalItemComponent} from './item/approval-item.component';
+import {FreeListenApprovalListComponent} from './list/approval-list.component';
 
 @NgModule({
     imports: [

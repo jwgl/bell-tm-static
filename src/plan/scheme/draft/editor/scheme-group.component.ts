@@ -1,11 +1,11 @@
 import {
     Component,
+    EventEmitter,
     Input,
     Output,
-    EventEmitter,
 } from '@angular/core';
 
-import {AbstractGroup, Property, Direction} from '../../common/scheme.model';
+import {AbstractGroup, Direction, Property} from '../../common/scheme.model';
 
 /**
  * 小计
@@ -23,9 +23,9 @@ export class SchemeGroupComponent {
 
     get summary(): string {
         if (this.group instanceof Property) {
-            let property = <Property>this.group;
+            const property = this.group as Property;
             if (property.isResidual) {
-                let residual = property.scheme.directionResidualCredits;
+                const residual = property.scheme.directionResidualCredits;
                 if (residual) {
                     return `小计${residual}`;
                 } else {

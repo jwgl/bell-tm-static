@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
-import {BookingFormComponent} from './form.component';
-import {BookingFormService} from './form.service';
-import {BookingFormRoutingModule} from './form.routing';
-import {BookingFormListModule} from './list/form-list.module';
-import {BookingFormItemModule} from './item/form-item.module';
 import {BookingFormEditorModule} from './editor/form-editor.module';
+import {BookingFormComponent} from './form.component';
+import {BookingFormRoutingModule} from './form.routing';
+import {BookingFormService} from './form.service';
+import {BookingFormItemModule} from './item/form-item.module';
+import {BookingFormListModule} from './list/form-list.module';
 
 @NgModule({
     imports: [

@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter} from '@angular/core';
+import {Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import * as _ from 'lodash';
 
-import {Term, Schedule, createScheduleMap, buildKey, SPANS} from './schedule.model';
+import {buildKey, createScheduleMap, Schedule, SPANS, Term} from './schedule.model';
 
 @Component({
     selector: 'simple-schedule',
@@ -18,7 +18,7 @@ export class SimpleScheduleComponent implements OnInit {
 
     days: number[];
     sections: number[];
-    map: (boolean | Schedule)[][];
+    map: Array<Array<boolean | Schedule>>;
 
     hiddenCells: {[key: number]: boolean};
     scheduleMap: _.Dictionary<Schedule[]>;
@@ -35,7 +35,7 @@ export class SimpleScheduleComponent implements OnInit {
     }
 
     cellType(day: number, section: number): 'schedule' | 'normal' | 'hidden' {
-        let key = buildKey(day, section);
+        const key = buildKey(day, section);
         if (this.scheduleMap[key]) {
             return 'schedule';
         } else if (this.hiddenCells[key]) {
@@ -55,10 +55,10 @@ export class SimpleScheduleComponent implements OnInit {
 
     getScheduleContext(schedule: Schedule, day: number, section: number) {
         return {
-            schedule: schedule,
+            schedule,
             count: this.scheduleMap[buildKey(day, section)].length,
-            day: day,
-            section: section,
+            day,
+            section,
         };
     }
 

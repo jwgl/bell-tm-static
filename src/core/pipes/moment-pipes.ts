@@ -8,6 +8,7 @@ export class FromNowPipe {
     }
 }
 
+/* tslint:disable:max-classes-per-file*/
 @Pipe({name: 'moment'})
 export class MomentFormatPipe {
     transform(value: any, args: any[]) {

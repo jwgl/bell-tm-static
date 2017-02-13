@@ -3,9 +3,10 @@ import * as _ from 'lodash';
 
 import {Workflow} from 'core/workflow';
 
-import {FreeListenItemService} from './item.service';
-import {FreeListenForm} from '../shared/form.model';
 import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {FreeListenForm} from '../shared/form.model';
+import {FreeListenItemService} from './item.service';
+
 import '../shared/form-viewer.model';
 
 /**

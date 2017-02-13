@@ -1,4 +1,4 @@
-import {Directive, Attribute, ElementRef} from '@angular/core';
+import {Attribute, Directive, ElementRef} from '@angular/core';
 
 @Directive({
     selector: '.form-control,.form-control-static',

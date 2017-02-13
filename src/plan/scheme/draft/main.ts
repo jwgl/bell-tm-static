@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
 import {SchemeDraftComponent} from './draft.component';
-import {SchemeDraftService} from './draft.service';
 import {SchemeDraftRoutingModule} from './draft.routes';
-import {SchemeDraftListModule} from './list/draft-list.module';
-import {SchemeDraftItemModule} from './item/draft-item.module';
+import {SchemeDraftService} from './draft.service';
 import {SchemeDraftEditorModule} from './editor/draft-editor.module';
+import {SchemeDraftItemModule} from './item/draft-item.module';
+import {SchemeDraftListModule} from './list/draft-list.module';
 
 @NgModule({
     bootstrap: [SchemeDraftComponent],
@@ -34,4 +34,3 @@ import {SchemeDraftEditorModule} from './editor/draft-editor.module';
 class MainModule {}
 
 platformBrowserDynamic().bootstrapModule(MainModule);
-

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {ApiUrl, Rest, EditService} from 'core/rest';
+import {ApiUrl, EditService, Rest} from 'core/rest';
 
 @Injectable()
 export class ReissueOrderService extends EditService {

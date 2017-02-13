@@ -1,17 +1,17 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
+import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
-import {CommonDirectivesModule} from 'core/common-directives';
 
 import {ReissueSharedModule} from '../shared/reissue-shared.module';
-import {ReissueReviewComponent} from './review.component';
-import {ReissueReviewService} from './review.service';
-import {ReissueReviewRoutingModule} from './review.routing';
-import {ReissueReviewListComponent} from './list/review-list.component';
 import {ReissueReviewItemComponent} from './item/review-item.component';
+import {ReissueReviewListComponent} from './list/review-list.component';
+import {ReissueReviewComponent} from './review.component';
+import {ReissueReviewRoutingModule} from './review.routing';
+import {ReissueReviewService} from './review.service';
 
 @NgModule({
     imports: [

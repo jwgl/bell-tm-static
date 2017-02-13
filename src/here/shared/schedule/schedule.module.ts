@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {TabedScheduleComponent} from './tabed-schedule.component';
 import {SimpleScheduleComponent} from './simple-schedule.component';
+import {TabedScheduleComponent} from './tabed-schedule.component';
 
 @NgModule({
     imports: [

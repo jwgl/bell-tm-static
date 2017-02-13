@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {FreeListenCheckListComponent} from './list/check-list.component';
 import {FreeListenCheckItemComponent} from './item/check-item.component';
+import {FreeListenCheckListComponent} from './list/check-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},

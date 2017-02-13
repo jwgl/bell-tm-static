@@ -1,11 +1,6 @@
-import {RollcallFormEditorComponent} from './form-editor.component';
+import {Rollcall, RollcallForm, Student, ToggleResult} from '../form.model';
 import {RollcallFormService} from '../form.service';
-import {
-    RollcallForm,
-    Rollcall,
-    Student,
-    ToggleResult,
-} from '../form.model';
+import {RollcallFormEditorComponent} from './form-editor.component';
 
 export class BaseRollcallView {
     constructor(private editor: RollcallFormEditorComponent) {}

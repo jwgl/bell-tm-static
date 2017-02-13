@@ -1,17 +1,18 @@
 import {
-    Injectable,
-    Injector,
-    Type,
-    EventEmitter,
-    OnInit,
     ApplicationRef,
+    ComponentFactoryResolver,
     ComponentRef,
     EmbeddedViewRef,
-    ComponentFactoryResolver,
+    EventEmitter,
+    Injectable,
+    Injector,
+    OnInit,
+    Type,
 } from '@angular/core';
 
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/empty';
+
+import {DynamicDialog} from './base-dialog';
 
 @Injectable()
 export class Dialog {
@@ -35,7 +36,7 @@ export class Dialog {
 
             location.appendChild(componentRootNode);
 
-            const instance = <DynamicDialog>componentRef.instance;
+            const instance = componentRef.instance as DynamicDialog;
             instance.nativeElement = componentRootNode;
             instance.options = options;
             instance.closed.subscribe((value: any) => {
@@ -59,75 +60,5 @@ export class Dialog {
 
     private getRootViewContainerNode(): HTMLElement {
         return this.getComponentRootNode(this.getRootViewContainer());
-    }
-}
-
-export interface DynamicDialog {
-    nativeElement: any;
-    closed: EventEmitter<any>;
-    confirm: EventEmitter<any>;
-    options: any;
-}
-
-export class BaseDialog implements DynamicDialog, OnInit {
-    nativeElement: any;
-    $modal: JQuery;
-    confirm: EventEmitter<any>;
-    confirmed: boolean;
-    closed: EventEmitter<void>;
-    options: any;
-
-    constructor() {
-        this.confirm = new EventEmitter();
-        this.closed = new EventEmitter<void>();
-    }
-
-    ngOnInit() {
-        this.$modal = $(this.nativeElement).find('.modal');
-
-        this.$modal.on('show.bs.modal', () => {
-            this.confirmed = false;
-        }).on('hide.bs.modal', () => {
-            if (this.confirmed) {
-                this.confirm.emit(this.onConfirmed());
-            }
-        }).on('hidden.bs.modal', () => {
-            this.closed.emit(null);
-        });
-        this.open();
-    }
-
-    ok() {
-        this.confirmed = true;
-        this.$modal.modal('hide');
-    }
-
-    /**
-     * 如果希望对话框返回值，覆盖此方法。
-     */
-    protected onConfirmed(): any {
-        return null;
-    }
-
-    open() {
-        let result = this.onOpening();
-
-        if (result) {
-            result.subscribe(value => {
-                this.options.data = value;
-                this.$modal.modal('show');
-            }, error => {
-                this.confirm.error(error);
-            });
-        } else {
-            this.$modal.modal('show');
-        }
-    }
-
-    /**
-     * 打开对话框时的初始化操作。
-     */
-    protected onOpening(): Observable<any> {
-        return null;
     }
 }

@@ -1,12 +1,12 @@
 import {Component, Inject} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
 import {Vision} from '../../common/vision.model';
-import './draft-editor.model';
 import {VisionDraftService} from '../draft.service';
+import './draft-editor.model';
 
 @Component({
     selector: 'vision-draft-editor',
@@ -26,8 +26,8 @@ export class VisionDraftEditorComponent {
         private service: VisionDraftService,
         @Inject('DEPARTMENT_VISIONS_URL') private departmentVisionsUrl: string,
     ) {
+        const params = this.route.snapshot.params;
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.service.loadDataForCreate({program: params['program']}).subscribe(dto => this.vm = new Vision(dto));

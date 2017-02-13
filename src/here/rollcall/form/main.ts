@@ -1,14 +1,14 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
-import {RollcallFormComponent} from './form.component';
-import {RollcallFormRoutingModule} from './form-routing.module';
-import {RollcallScheduleModule} from './schedule/schedule.module';
 import {RoolcallFormEditorModule} from './editor/form-editor.module';
+import {RollcallFormRoutingModule} from './form-routing.module';
+import {RollcallFormComponent} from './form.component';
 import {RollcallFormService} from './form.service';
+import {RollcallScheduleModule} from './schedule/schedule.module';
 
 @NgModule({
     bootstrap: [RollcallFormComponent],

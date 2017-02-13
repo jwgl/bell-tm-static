@@ -1,9 +1,9 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {Rest} from '../rest';
-import {BaseDialog} from './dialog';
 import {typeahead} from '../utils/typeahead';
+import {BaseDialog} from './base-dialog';
 
 @Component({
     selector: 'teacher-select-dialog',
@@ -20,6 +20,12 @@ export class TeacherSelectDialog extends BaseDialog {
         super();
     }
 
+    ngAfterViewInit() {
+        typeahead(this.input)
+            .switchMap(value => this.rest.get(`/api/core/teachers?q=${value}`))
+            .subscribe(value => this.teachers = value);
+    }
+
     protected onOpening(): Observable<any> {
         this.title = this.options.title || '选择教师';
         return null;
@@ -27,11 +33,5 @@ export class TeacherSelectDialog extends BaseDialog {
 
     protected onConfirmed(): any {
         return this.result;
-    }
-
-    ngAfterViewInit() {
-        typeahead(this.input)
-        .switchMap(value => this.rest.get(`/api/core/teachers?q=${value}`))
-        .subscribe(value => this.teachers = value);
     }
 }

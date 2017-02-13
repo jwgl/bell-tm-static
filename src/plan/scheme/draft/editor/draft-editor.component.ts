@@ -1,17 +1,13 @@
-import {
-    Component,
-    ViewEncapsulation,
-    Inject,
-} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, Inject, ViewEncapsulation} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
+import {AbstractGroup, Direction, Property,  Scheme, SchemeCourse} from '../../common/scheme.model';
 import {SchemeDraftService} from '../draft.service';
-import {Scheme, Property, Direction, AbstractGroup, SchemeCourse} from '../../common/scheme.model';
+import {CourseEditorService} from './course-editor/course-editor.service';
 import './draft-editor.model';
-import {CourseEditorService} from './course-editor/course-editor.module';
 
 /**
  * 教学计划编辑器
@@ -36,7 +32,7 @@ export class SchemeDraftEditorComponent {
         @Inject('DEPARTMENT_DIRECTIONS_API_URL') private departmentDeirectionsApiUrl: string,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
+        const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.service.loadDataForCreate({program: params['program']}).subscribe(data => this.vm = new Scheme(data));
@@ -76,7 +72,7 @@ export class SchemeDraftEditorComponent {
         this.courseEditor.open({
             editMode: EditMode.Create,
             terms: this.vm.terms,
-            group: group,
+            group,
         }).then(dto => {
             group.add(dto);
             group.sort();
@@ -134,7 +130,7 @@ export class SchemeDraftEditorComponent {
             (item: any) => `${item.grade}级${item.subjectName}-${item.directionName}`,
             (item: any) => `${item.schemeId}:${item.directionId}`,
         ).then(result => {
-            let arr = result.split(':');
+            const arr = result.split(':');
             this.service.loadDirectionCourses(arr[0], arr[1]).subscribe(courses => {
                 courses.forEach(course => {
                     if (!direction.contains(course.courseId)) {

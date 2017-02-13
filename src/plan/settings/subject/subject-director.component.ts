@@ -16,10 +16,10 @@ export class SubjectDirectorComponent {
         private dialog: CommonDialog,
         private service: SubjectDirectorService) {
         this.service.loadList().map(items => {
-            let departments: {
+            const departments: Array<{
                 id: string,
-                subjects: {subjectId: string}[],
-            }[] = groupBy(items, [{
+                subjects: Array<{subjectId: string}>,
+            }> = groupBy(items, [{
                 groupBy: 'departmentId',
                 into: 'subjects',
                 mappings: {

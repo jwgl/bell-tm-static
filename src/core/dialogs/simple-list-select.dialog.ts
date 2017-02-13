@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 import {Rest} from '../rest';
-import {BaseDialog} from './dialog';
+import {BaseDialog} from './base-dialog';
 
 @Component({
     selector: 'simple-list-select-dialog',
@@ -11,12 +11,13 @@ import {BaseDialog} from './dialog';
 export class SimpleListSelectDialog extends BaseDialog {
     result: any;
     title: string;
-    valueFn = (item: any) => item.id;
-    labelFn = (item: any) => item.toString();
 
     constructor(private rest: Rest) {
         super();
     }
+
+    valueFn = (item: any) => item.id;
+    labelFn = (item: any) => item.toString();
 
     protected onOpening(): Observable<any> {
         this.title = this.options.title;

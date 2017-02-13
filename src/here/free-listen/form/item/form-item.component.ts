@@ -1,15 +1,16 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {Workflow} from 'core/workflow';
 
-import {FreeListenFormService} from '../form.service';
-import {FreeListenForm} from '../../shared/form.model';
-import './form-item.model';
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
+import {FreeListenForm} from '../../shared/form.model';
+import {FreeListenFormService} from '../form.service';
+
 import '../../shared/form-viewer.model';
+import './form-item.model';
 
 @Component({
     templateUrl: 'form-item.component.html',

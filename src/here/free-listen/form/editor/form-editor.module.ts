@@ -1,12 +1,12 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 
-import {CommonDirectivesModule} from 'core/common-directives';
 import {CommonDialogsModule} from 'core/common-dialogs';
+import {CommonDirectivesModule} from 'core/common-directives';
 
-import {FreeFormEditorComponent} from './form-editor.component';
 import {HereScheduleModule} from '../../../shared/schedule/schedule.module';
+import {FreeFormEditorComponent} from './form-editor.component';
 
 @NgModule({
     imports: [

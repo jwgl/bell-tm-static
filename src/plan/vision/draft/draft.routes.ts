@@ -2,9 +2,9 @@ import {RouterModule} from '@angular/router';
 
 import {EditMode} from 'core/constants';
 
-import {VisionDraftListComponent} from './list/draft-list.component';
-import {VisionDraftItemComponent} from './item/draft-item.component';
 import {VisionDraftEditorComponent} from './editor/draft-editor.component';
+import {VisionDraftItemComponent} from './item/draft-item.component';
+import {VisionDraftListComponent} from './list/draft-list.component';
 
 const ROUTER_CONFIG = [
     {path: '', component: VisionDraftListComponent},

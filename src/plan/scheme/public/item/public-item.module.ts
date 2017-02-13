@@ -1,6 +1,6 @@
+import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {CommonModule} from '@angular/common';
 
 import {PlanCommonModule} from '../../../common/module';
 import {SchemePublicViewerModule} from '../../common/public-viewer/scheme-viewer.module';

@@ -2,9 +2,9 @@ import {Component, ElementRef} from '@angular/core';
 
 import {Workflow} from 'core/workflow';
 
-import {LeaveItemService} from './item.service';
-import {LeaveForm} from '../shared/form.model';
 import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {LeaveForm} from '../shared/form.model';
+import {LeaveItemService} from './item.service';
 
 /**
  * 查看学生请假。
@@ -25,7 +25,7 @@ export class LeaveItemComponent {
     ) {
         this.id = elementRef.nativeElement.getAttribute('id');
         this.service.loadItem(this.id).subscribe(dto => {
-            let schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
+            const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
             this.form = new LeaveForm(dto.form, schedules);
         }, (error) => {
             if (error.status === 403) {

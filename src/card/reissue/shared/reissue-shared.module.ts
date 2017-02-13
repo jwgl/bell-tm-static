@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import {StudentInfoComponent} from './student-info.component';
-import {ReissueFormViewerComponent} from './form-viewer.component';
 import {FormStatusPipe} from './form-status.pipe';
+import {ReissueFormViewerComponent} from './form-viewer.component';
+import {StudentInfoComponent} from './student-info.component';
 
 export {
     StudentInfoComponent,

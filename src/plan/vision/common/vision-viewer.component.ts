@@ -1,4 +1,4 @@
-import {Component, Input, Inject} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 
 import {Vision} from './vision.model';
 

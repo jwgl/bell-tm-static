@@ -11,7 +11,7 @@ export class NavbarService extends ShowService {
     }
 
     loadList(groups: string[]): Observable<any> {
-        let queryString = groups.map(group => `group=${group}`).join('&');
+        const queryString = groups.map(group => `group=${group}`).join('&');
         return this.rest.get(`${this.api.list()}?${queryString}`);
     }
 

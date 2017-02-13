@@ -1,11 +1,13 @@
-import {Component, ViewChildren, QueryList, Inject} from '@angular/core';
+import {Component, Inject, QueryList, ViewChildren} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+
 import 'rxjs/add/operator/do';
+
 import * as _ from 'lodash';
 
-import {Rest} from 'core/rest';
-import {BaseDialog} from 'core/dialogs';
 import {CheckboxSelectorComponent} from 'core/common-directives';
+import {BaseDialog} from 'core/dialogs';
+import {Rest} from 'core/rest';
 
 @Component({
     selector: 'reissue-form-select-dialog',
@@ -22,6 +24,10 @@ export class ReissueFormSelectDialog extends BaseDialog {
         super();
     }
 
+    checkAll(checked: boolean) {
+        this.selectors.forEach(checkbox => checkbox.checked = checked);
+    }
+
     protected onOpening(): Observable<any> {
         return this.rest.get(`${this.reissuesApiUrl}?status=CHECKED`).do((result: any) => {
             // 删除已添加的申请
@@ -36,9 +42,4 @@ export class ReissueFormSelectDialog extends BaseDialog {
     protected onConfirmed(): any {
         return this.selectors.filter(s => s.checked).map(s => s.data);
     }
-
-    checkAll(checked: boolean) {
-        this.selectors.forEach(checkbox => checkbox.checked = checked);
-    }
 }
-

@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
-import {SchemeDraftListComponent} from './list/draft-list.component';
-import {SchemeDraftItemComponent} from './item/draft-item.component';
 import {SchemeDraftEditorComponent} from './editor/draft-editor.component';
+import {SchemeDraftItemComponent} from './item/draft-item.component';
+import {SchemeDraftListComponent} from './list/draft-list.component';
 
 const routes: Routes = [
     {path: '', component: SchemeDraftListComponent},

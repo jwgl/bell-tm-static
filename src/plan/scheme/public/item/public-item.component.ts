@@ -1,8 +1,10 @@
-import {Title} from '@angular/platform-browser';
 import {Component, ElementRef} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+
 import {Scheme} from '../../common/scheme.model';
-import '../../common/public-viewer/scheme-viewer.model';
 import {SchemePublicService} from '../public.service';
+
+import '../../common/public-viewer/scheme-viewer.model';
 
 /**
  * 教学计划（公共）。
@@ -19,7 +21,7 @@ export class SchemePublicItemComponent {
         private service: SchemePublicService,
         private title: Title) {
         // TODO: see https://github.com/angular/angular/issues/1858
-        let id = elementRef.nativeElement.getAttribute('id');
+        const id = elementRef.nativeElement.getAttribute('id');
         this.service.loadItem(id).subscribe(dto => {
             this.vm = new Scheme(dto);
             this.vm.normalize();

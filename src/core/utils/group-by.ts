@@ -6,14 +6,13 @@ export function groupBy(data: any, conditions: any[]) {
         return data;
     }
 
-    let condition = conditions[0];
+    const condition = conditions[0];
     if (typeof condition === 'function') {
         return condition(data);
     } else {
-        let result: any[] = [];
-        let groups: any = {};
-        for (let i = 0; i < data.length; i++) {
-            let row = data[i];
+        const result: any[] = [];
+        const groups: any = {};
+        for (const row of data) {
             // groupBy 可以是属性名或映射函数
             let groupValue: any;
             if (typeof condition.groupBy === 'function') {
@@ -26,7 +25,7 @@ export function groupBy(data: any, conditions: any[]) {
             // 创建分组
             if (obj === undefined) {
                 obj = {};
-                for (let k in condition.mappings) {
+                for (const k in condition.mappings) {
                     if (condition.mappings.hasOwnProperty(k)) {
                         obj[condition.mappings[k]] = row[k];
                     }
@@ -36,9 +35,9 @@ export function groupBy(data: any, conditions: any[]) {
                 groups[groupValue] = obj;
             }
 
-            let newRow: any = {};
+            const newRow: any = {};
             // 除去映射字段的新数据
-            for (let p in row) {
+            for (const p in row) {
                 if (row.hasOwnProperty(p)) {
                     if (condition.mappings[p] === undefined) {
                         newRow[p] = row[p];
@@ -48,7 +47,7 @@ export function groupBy(data: any, conditions: any[]) {
             obj[condition.into].push(newRow);
         }
 
-        for (let group in groups) {
+        for (const group in groups) {
             if (groups.hasOwnProperty(group)) {
                 groups[group][condition.into] = groupBy(groups[group][condition.into], conditions.slice(1));
             }

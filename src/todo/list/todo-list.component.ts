@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {BASE_URL} from 'core/rest';
 
@@ -10,7 +10,7 @@ import {TodoService} from '../todo.service';
     templateUrl: 'todo-list.component.html',
 })
 export class TodoListComponent {
-    statuses: any[] = [
+    public readonly statuses: any[] = [
         {status: 'open',   label: '待处理', class: 'badge-success'},
         {status: 'closed', label: '已处理', class: 'badge-danger'},
     ];
@@ -26,7 +26,7 @@ export class TodoListComponent {
         private service: TodoService,
         @Inject(BASE_URL) private baseUrl: string,
     ) {
-        let match = window.location.href.match(/\/users\/([^\/]+)\//);
+        const match = window.location.href.match(/\/users\/([^\/]+)\//);
         this.baseUrl = this.baseUrl.replace('${userId}', match[1]);
         this.route.params.subscribe(params => {
             this.status = params['status'];
@@ -34,11 +34,11 @@ export class TodoListComponent {
         });
     }
 
-    loadData(offset: number) {
+    private loadData(offset: number) {
         this.service.loadList({
             is: this.status,
-            offset: offset,
             max: this.max,
+            offset,
         }).subscribe(result => {
             this.counts = result.counts;
             this.todos = result.todos;

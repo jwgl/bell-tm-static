@@ -1,4 +1,4 @@
-import {Component, ViewChild, Input, ElementRef} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'checkbox-selector',

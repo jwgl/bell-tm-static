@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
+import {Schedule, Term} from '../../../shared/schedule/schedule.model';
 import {RollcallFormService} from '../form.service';
-import {Term, Schedule} from '../../../shared/schedule/schedule.model';
 
 @Component({
     selector: 'rollcall-schedule',

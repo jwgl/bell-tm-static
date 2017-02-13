@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
 import {VisionDraftComponent} from './draft.component';
-import {VisionDraftService} from './draft.service';
 import {routing} from './draft.routes';
-import {VisionDraftListModule} from './list/draft-list.module';
-import {VisionDraftItemModule} from './item/draft-item.module';
+import {VisionDraftService} from './draft.service';
 import {VisionDraftEditorModule} from './editor/draft-editor.module';
+import {VisionDraftItemModule} from './item/draft-item.module';
+import {VisionDraftListModule} from './list/draft-list.module';
 
 @NgModule({
     bootstrap: [VisionDraftComponent],

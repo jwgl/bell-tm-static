@@ -1,39 +1,40 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import {AuditStatusComponent} from './components/audit-status';
-import {FromNowComponent} from './components/from-now';
-import {CheckboxSelectorComponent} from './components/checkbox-selector';
-import {PagerComponent} from './components/pager';
-import {FormTitleComponent} from './components/form-title';
-import {Markdown} from './directives/markdown';
-import {Spinning} from './directives/spinning';
-import {FormDirective} from './bootstrap/form.directive';
 import {FormControlDirective} from './bootstrap/form-control.directive';
-import {FormFieldComponent} from './bootstrap/form-field.component';
 import {
     FormField2Component,
     FormFieldLeftDirective,
     FormFieldRightDirective,
 } from './bootstrap/form-field-2.component';
-import {GroupByPipe} from './pipes/group-by';
-import {FilterByPipe} from './pipes/filter-by';
-import {ZeroPadPipe} from './pipes/zero-pad';
-import {OddEvenPipe} from './pipes/odd-even';
+import {FormFieldComponent} from './bootstrap/form-field.component';
+import {FormDirective} from './bootstrap/form.directive';
 import {
-    FromNowPipe,
-    MomentFormatPipe,
-    DayOfWeekPipe,
-} from './pipes/moment-pipes';
-import {ActionNamePipe, ActionClassPipe} from './pipes/audit-action';
+    ModalBodyDirective,
+    ModalCancelButtonDirective,
+    ModalDialogDirective,
+    ModalFooterDirective,
+    ModalOkButtonDirective,
+} from './bootstrap/modal-dialog.directive';
+import {AuditStatusComponent} from './components/audit-status';
+import {CheckboxSelectorComponent} from './components/checkbox-selector';
+import {FormTitleComponent} from './components/form-title';
+import {FromNowComponent} from './components/from-now';
+import {PagerComponent} from './components/pager';
+import {Markdown} from './directives/markdown';
+import {Spinning} from './directives/spinning';
+import {ActionClassPipe, ActionNamePipe} from './pipes/audit-action';
+import {FilterByPipe} from './pipes/filter-by';
+import {GroupByPipe} from './pipes/group-by';
 import {MarkdownPipe} from './pipes/markdown';
 import {
-    ModalDialogDirective,
-    ModalCancelButtonDirective,
-    ModalOkButtonDirective,
-    ModalBodyDirective,
-    ModalFooterDirective,
-} from './bootstrap/modal-dialog.directive';
+    DayOfWeekPipe,
+    FromNowPipe,
+    MomentFormatPipe,
+} from './pipes/moment-pipes';
+
+import {OddEvenPipe} from './pipes/odd-even';
+import {ZeroPadPipe} from './pipes/zero-pad';
 
 export {
     CheckboxSelectorComponent,

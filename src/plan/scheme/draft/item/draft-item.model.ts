@@ -1,6 +1,4 @@
-/* tslint:disable:no-unused-variable */
 import {Scheme} from '../../common/scheme.model';
-/* tslint:enable:no-unused-variable */
 
 declare module '../../common/scheme.model' {
     interface Scheme {
@@ -11,11 +9,11 @@ declare module '../../common/scheme.model' {
 }
 
 Scheme.prototype.checkCredit = function(this: Scheme) {
-    let errors = <string[]>[];
-    let statis = this.creditStatis;
-    let compulsories = statis.filter(s => !s.name.startsWith('专业选修') && s.name.startsWith('专业'));
+    const errors = [] as string[];
+    const statis = this.creditStatis;
+    const compulsories = statis.filter(s => !s.name.startsWith('专业选修') && s.name.startsWith('专业'));
     if (this.directions.length > 0) {
-        let directions = this.directions.map(d => {
+        const directions = this.directions.map(d => {
             return {
                 id: d.id,
                 name: d.name,
@@ -33,8 +31,8 @@ Scheme.prototype.checkCredit = function(this: Scheme) {
             }
         });
     } else {
-        let total = compulsories.reduce((sum, s) => sum += s.credit, 0);
-        let practiceCredit = compulsories.reduce((sum, s) => sum += s.practiceCredit, 0);
+        const total = compulsories.reduce((sum, s) => sum += s.credit, 0);
+        const practiceCredit = compulsories.reduce((sum, s) => sum += s.practiceCredit, 0);
 
         if (practiceCredit / total < this.practiceCreditRatio) {
             errors.push(`专业必修课中实践学分的比例小于${this.practiceCreditRatio * 100}%` +
@@ -42,9 +40,9 @@ Scheme.prototype.checkCredit = function(this: Scheme) {
         }
     }
 
-    let electives = statis.filter(s => s.name.startsWith('专业选修'));
-    let electiveCredit = electives.reduce((sum, s) => sum += s.electiveCredit, 0);
-    let electivePracticeCredit = electives.reduce((sum, s) => sum += s.electivePracticeCredit, 0);
+    const electives = statis.filter(s => s.name.startsWith('专业选修'));
+    const electiveCredit = electives.reduce((sum, s) => sum += s.electiveCredit, 0);
+    const electivePracticeCredit = electives.reduce((sum, s) => sum += s.electivePracticeCredit, 0);
 
     if (electivePracticeCredit / electiveCredit < this.practiceCreditRatio) {
         errors.push(`专业选修课中实践学分的比例小于${this.practiceCreditRatio * 100}%` +

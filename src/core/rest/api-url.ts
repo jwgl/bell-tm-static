@@ -1,4 +1,4 @@
-import {Injectable, Inject, InjectionToken} from '@angular/core';
+import {Inject, Injectable, InjectionToken} from '@angular/core';
 
 export const API_URL = new InjectionToken<string>('API_URL');
 export const BASE_URL = new InjectionToken<string>('BASE_URL');
@@ -79,8 +79,8 @@ export class ApiUrl {
     }
 
     buildQueryString(options: {[key: string]: string}): string {
-        let search: string[] = [];
-        for (let key in options) {
+        const search: string[] = [];
+        for (const key in options) {
             if (options.hasOwnProperty(key)) {
                 search.push(`${key}=${options[key]}`);
             }
@@ -89,4 +89,3 @@ export class ApiUrl {
         return search.join('&');
     }
 }
-

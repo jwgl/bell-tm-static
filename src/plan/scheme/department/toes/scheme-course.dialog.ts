@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+
 import 'rxjs/add/operator/do';
 
-import {Rest} from 'core/rest';
 import {BaseDialog} from 'core/dialogs';
+import {Rest} from 'core/rest';
 
 @Component({
     selector: 'scheme-course-dialog',
@@ -37,7 +38,7 @@ export class SchemeCourseDialog extends BaseDialog {
         } else if (this.schemeCourse._periodWeeks === 9) {
             return [1, 9];
         } else {
-            let starts: number[] = [];
+            const starts: number[] = [];
             for (let i = 1; i <= 18 - this.schemeCourse._periodWeeks; i++) {
                 starts.push(i);
             }
@@ -61,7 +62,7 @@ export class SchemeCourseDialog extends BaseDialog {
         });
     }
 
-    onConfirmed() {
+    protected onConfirmed() {
         return {
             startWeek: this.startWeek,
             departmentId: this.department.id,

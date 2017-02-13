@@ -1,11 +1,11 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {RollcallScheduleComponent} from './schedule.component';
 import {HereScheduleModule} from '../../../shared/schedule/schedule.module';
+import {RollcallScheduleComponent} from './schedule.component';
 
 @NgModule({
     imports: [

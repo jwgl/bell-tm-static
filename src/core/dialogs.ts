@@ -1,1 +1,2 @@
-export {Dialog, BaseDialog} from './dialogs/dialog';
+export {Dialog} from './dialogs/dialog';
+export {BaseDialog} from './dialogs/base-dialog';

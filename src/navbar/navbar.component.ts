@@ -1,4 +1,4 @@
-import {Component, Directive, Input, ViewChild, ElementRef} from '@angular/core';
+import {Component, Directive, ElementRef, Input, ViewChild} from '@angular/core';
 
 import {NavbarService} from './navbar.service';
 
@@ -25,6 +25,7 @@ export class DropdownMenu {
     @Input() menus: any[];
 }
 
+/* tslint:disable:max-classes-per-file */
 @Component({
     selector: '.nav-item[menu]',
     host: {
@@ -101,8 +102,6 @@ export class NavbarComponent {
 })
 export class SubmenuDirective {
     constructor(elementRef: ElementRef) {
-        setTimeout(function() {
-            (<any>$(elementRef.nativeElement)).submenupicker();
-        }, 1);
+        setTimeout(() => ($(elementRef.nativeElement) as any).submenupicker(), 1);
     }
 }

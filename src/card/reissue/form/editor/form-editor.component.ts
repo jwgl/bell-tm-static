@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
@@ -23,7 +23,7 @@ export class ReissueFormEditorComponent {
         private service: ReissueFormService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
+        const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.service.loadDataForCreate().subscribe(dto => this.vm = dto);

@@ -1,9 +1,9 @@
+import {GradeFilterPipe} from './pipes/grade-filter';
 import {PrimaryCoursesPipe} from './pipes/primary-courses';
-import {ProgramTypePipe, getProgramType} from './pipes/program-type';
+import {getProgramType, ProgramTypePipe} from './pipes/program-type';
+import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
 import {VersionNumberPipe} from './pipes/version-number';
 import {ZeroEmptyPipe} from './pipes/zero-empty';
-import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
-import {GradeFilterPipe} from './pipes/grade-filter';
 
 export {
     PrimaryCoursesPipe,

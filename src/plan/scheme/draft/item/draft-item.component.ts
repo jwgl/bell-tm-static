@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {Workflow} from 'core/workflow';
@@ -7,8 +7,8 @@ import {Workflow} from 'core/workflow';
 import {toVersionString} from '../../../common/utils';
 import {Scheme} from '../../common/scheme.model';
 import '../../common/scheme.model';
-import './draft-item.model';
 import {SchemeDraftService} from '../draft.service';
+import './draft-item.model';
 
 /**
  * 所有者教学计划。
@@ -55,7 +55,7 @@ export class SchemeDraftItemComponent {
     }
 
     submit() {
-        let errors = this.vm.checkCredit();
+        const errors = this.vm.checkCredit();
         if (errors.length > 0) {
             this.dialog.error(errors);
         } else {

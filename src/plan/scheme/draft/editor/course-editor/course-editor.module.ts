@@ -1,24 +1,16 @@
-import {NgModule, Injectable} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {Injectable, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Dialog} from 'core/dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
+import {Dialog} from 'core/dialogs';
 
 import {PlanCommonModule} from '../../../../common/module';
-
+import {AllowedTermAccessor} from './allowed-term.accessor';
+import {AllowedTermComponent} from './allowed-term.component';
 import {CourseEditorDialog} from './course-editor.dialog';
+import {CourseEditorService} from './course-editor.service';
 import {CourseSelectComponent} from './course-select.component';
-import {AllowedTermComponent, AllowedTermAccessor} from './allowed-term.component';
-
-@Injectable()
-export class CourseEditorService {
-    constructor(private dialog: Dialog) {}
-
-    open(options: any): Promise<any> {
-        return this.dialog.open(CourseEditorDialog, options);
-    }
-}
 
 @NgModule({
     imports: [

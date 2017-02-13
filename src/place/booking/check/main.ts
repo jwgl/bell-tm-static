@@ -1,17 +1,17 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
+import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
-import {CommonDirectivesModule} from 'core/common-directives';
 
 import {BookingSharedModule} from '../shared/booking-shared.module';
 import {BookingCheckComponent} from './check.component';
-import {BookingCheckService} from './check.service';
 import {BookingCheckRoutingModule} from './check.routing';
-import {BookingCheckListComponent} from './list/check-list.component';
+import {BookingCheckService} from './check.service';
 import {BookingCheckItemComponent} from './item/check-item.component';
+import {BookingCheckListComponent} from './list/check-list.component';
 
 @NgModule({
     imports: [

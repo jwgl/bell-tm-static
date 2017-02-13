@@ -1,10 +1,10 @@
-import {NgModule, ModuleWithProviders} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
-import {Rest} from './rest/rest';
-import {ApiUrl, API_URL, BASE_URL} from './rest/api-url';
-import {ShowService} from './rest/show-service';
+import {API_URL, ApiUrl, BASE_URL} from './rest/api-url';
 import {EditService} from './rest/edit-service';
+import {Rest} from './rest/rest';
 import {ReviewService} from './rest/review-service';
+import {ShowService} from './rest/show-service';
 
 export {
     Rest,

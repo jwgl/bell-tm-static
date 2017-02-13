@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {LeaveApprovalListComponent} from './list/approval-list.component';
 import {LeaveApprovalItemComponent} from './item/approval-item.component';
+import {LeaveApprovalListComponent} from './list/approval-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/SUBMITTED', pathMatch: 'full'},

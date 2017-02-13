@@ -59,7 +59,7 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^5.0.1",
     "tslint": "^4.4.2",
-    "tslint-loader": "^3.3.0",
+    "tslint-loader": "^3.4.1",
     "typescript": "^2.1.6",
     "webpack": "^2.2.1",
     "webpack-merge": "^2.6.1"

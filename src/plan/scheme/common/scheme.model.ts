@@ -85,7 +85,7 @@ export class Scheme {
             return new Property(this, tp);
         });
 
-        let propertyMap = this.properties.reduce((acc, p, i) => { acc[p.id] = p; return acc; }, <{[key: string]: Property}>{});
+        const propertyMap = this.properties.reduce((acc, p, i) => { acc[p.id] = p; return acc; }, {} as {[key: string]: Property});
 
         dto.template.courses.forEach(sc => {
             propertyMap[sc.propertyId].addTemplateCourse(sc);
@@ -125,7 +125,7 @@ export class Scheme {
      */
     clearPropertyWithEmptyDirection() {
         for (let i = this.properties.length - 1; i >= 0; i--) {
-            let property = this.properties[i];
+            const property = this.properties[i];
             if (property.hasDirections &&  (!property.directions || property.directions.length === 0) && property.courses.length === 0) {
                 this.properties.splice(i, 1);
             }
@@ -152,18 +152,18 @@ export class Scheme {
      */
     get directionResidualCredits(): string {
         if (this.directions.length > 0) {
-            let residualCredit = this.residualCredit;
+            const residualCredit = this.residualCredit;
             // 获取具有方向的属性
-            let property = this.properties.find(p => p.hasDirections);
+            const property = this.properties.find(p => p.hasDirections);
             // 可能计划中不包含专业方向课程性质
             if (!property) {
                 return null;
             }
 
             // 该属性的最小学分
-            let minTotalCredit = property.minTotalCredit;
+            const minTotalCredit = property.minTotalCredit;
             // 获取不等于最小学分的方向。
-            let results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d => {
+            const results = property.directions.filter(d => d.totalCredit !== minTotalCredit).map(d => {
                 return `${d.name.replace('方向', '')}方向${residualCredit - d.totalCredit + minTotalCredit}学分`;
             });
             if (results.length) {
@@ -178,7 +178,7 @@ export class Scheme {
 
     get creditStatis() {
         return this.properties.map(p => {
-            let cs: CreditStatis = <CreditStatis>{};
+            const cs: CreditStatis = {} as CreditStatis;
             cs.id = p.id;
             cs.name = p.name;
             cs.credit = p.totalCredit;
@@ -193,7 +193,7 @@ export class Scheme {
 
             if (p.hasDirections) {
                 cs.directions = this.directions.map(d => {
-                    let direction = <Direction>null;
+                    let direction: Direction = null;
                     if (p.directions) {
                         direction = p.directions.find(pd => pd.id === d.id);
                     }
@@ -224,6 +224,7 @@ export class Scheme {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 export abstract class AbstractGroup {
     id: number;
     name: string;
@@ -285,19 +286,14 @@ export abstract class AbstractGroup {
     }
 
     contains(courseId: string | number): boolean {
-        for (let i = 0; i < this.courses.length; i++) {
-            if (this.courses[i]._courseId === courseId) {
-                return true;
-            }
-        }
-        return false;
+        return !this.courses.find(c => c._courseId === courseId);
     }
 
     /**
      * 重构状态
      */
     rebuildStatus(): void {
-        const deleted = <{[key: string]: SchemeCourse}>{};
+        const deleted = {} as {[key: string]: SchemeCourse};
         const scheme = this.getScheme();
 
         this.courses.forEach(c => {
@@ -340,10 +336,10 @@ export class Direction extends AbstractGroup {
      */
     load(sc: SchemeCourseDto): SchemeCourse {
         if (this.id !== sc.directionId) {
-            throw `Course(${sc.courseId}) does not belongs to Direction(${this.id})`;
+            throw new Error(`Course(${sc.courseId}) does not belongs to Direction(${this.id})`);
         }
 
-        let schemeCourse: SchemeCourse = new SchemeCourse(sc);
+        const schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
         schemeCourse.displayOrder = this.getDisplayOrder(sc);
         // 编辑时由外部函数更新prevStatus
@@ -360,7 +356,7 @@ export class Direction extends AbstractGroup {
         sc.directionId = this.id;
         sc.propertyId = this.property.id;
 
-        let schemeCourse: SchemeCourse = new SchemeCourse(sc);
+        const schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
         schemeCourse.displayOrder = this.getDisplayOrder(sc);
         schemeCourse.prevStatus = RecordStatus.None;
@@ -435,7 +431,6 @@ export class Property extends AbstractGroup {
         return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
     }
 
-
     getScheme() {
         return this.scheme;
     }
@@ -445,11 +440,11 @@ export class Property extends AbstractGroup {
      */
     load(sc: SchemeCourseDto): SchemeCourse {
         if (this.id !== sc.propertyId) {
-            throw `Course(${sc.courseId}) does not belongs to property(${this.id})`;
+            throw new Error(`Course(${sc.courseId}) does not belongs to property(${this.id})`);
         }
 
         if (this.directions && sc.directionId) {
-            let direction = this.directions.find(d => d.id === sc.directionId);
+            const direction = this.directions.find(d => d.id === sc.directionId);
             if (direction) {
                 return direction.load(sc);
             } else {
@@ -460,7 +455,7 @@ export class Property extends AbstractGroup {
         sc.displayOrder = this.getDisplayOrder(sc);
         sc.locked = this.getLockedStatus(sc);
 
-        let schemeCourse: SchemeCourse = new SchemeCourse(sc);
+        const schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
         schemeCourse.prevStatus = RecordStatus.None;
         schemeCourse.currStatus = RecordStatus.None;
@@ -473,7 +468,7 @@ export class Property extends AbstractGroup {
      */
     add(sc: SchemeCourseDto): SchemeCourse {
         if (this.directions && sc.directionId) {
-            let direction = this.directions.find(d => d.id === sc.directionId);
+            const direction = this.directions.find(d => d.id === sc.directionId);
             if (direction) {
                 return direction.add(sc);
             } else {
@@ -485,7 +480,7 @@ export class Property extends AbstractGroup {
         sc.displayOrder = this.getDisplayOrder(sc);
         sc.locked = this.getLockedStatus(sc);
 
-        let schemeCourse: SchemeCourse = new SchemeCourse(sc);
+        const schemeCourse: SchemeCourse = new SchemeCourse(sc);
         schemeCourse.group = this;
         schemeCourse.prevStatus = RecordStatus.None;
         schemeCourse.currStatus = RecordStatus.Created;
@@ -496,7 +491,6 @@ export class Property extends AbstractGroup {
     addTemplateCourse(sc: SchemeCourseDto) {
         this.templateCourses.push(sc);
     }
-
 
     /**
      * 课程排序
@@ -529,7 +523,7 @@ export class Property extends AbstractGroup {
         let courseOrder = 900;
         if (!sc.isTempCourse) {
             for (let i = 0; i < this.templateCourses.length; i++) {
-                let pattern = this.templateCourses[i].matchPattern
+                const pattern = this.templateCourses[i].matchPattern
                             ? this.templateCourses[i].matchPattern
                             : this.templateCourses[i].courseId.toString();
                 if (sc.courseId.toString().search(pattern) !== -1) {
@@ -538,7 +532,7 @@ export class Property extends AbstractGroup {
                 }
             }
         }
-        let termIndex = this.scheme.terms.indexOf(sc.suggestedTerm);
+        const termIndex = this.scheme.terms.indexOf(sc.suggestedTerm);
         return courseOrder * 10000 + termIndex * 100;
     }
 
@@ -547,7 +541,7 @@ export class Property extends AbstractGroup {
      */
     private getLockedStatus(sc: SchemeCourseDto): boolean {
         if (this.locked && this.templateCourses.length > 0) {
-            let course = this.templateCourses.find(c => c.courseId === sc.courseId);
+            const course = this.templateCourses.find(c => c.courseId === sc.courseId);
             if (course) {
                 return course.locked;
             }
@@ -624,7 +618,7 @@ export class SchemeCourse {
      */
     get courseName() {
         if (!(this.group instanceof Direction) && this.directionId) {
-            let direction = this.group.getScheme().getDirection(this.directionId);
+            const direction = this.group.getScheme().getDirection(this.directionId);
             return this._courseName + (direction ? `[${direction.name}]` : `[未知方向${this.directionId}]`);
         } else {
             return this._courseName;
@@ -794,10 +788,10 @@ export interface CreditStatis {
     practiceCredit: number;         // 要求总实践学分
     electiveCredit: number;         // 可选总学分
     electivePracticeCredit: number; // 可选总实践学分
-    directions: {
+    directions: Array<{
         id: number;                 // 方向ID
         name: string;               // 方向名称
         credit: number;             // 要求总学分
         practiceCredit: number;     // 要求总实践学分
-    }[];
+    }>;
 }

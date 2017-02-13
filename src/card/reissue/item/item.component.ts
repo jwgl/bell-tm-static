@@ -1,5 +1,5 @@
 import {Component, ElementRef} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
 
@@ -12,11 +12,12 @@ import {ReissueItemService} from './item.service';
 export class ReissueItemComponent {
     id: string;
     vm: any;
-    constructor(elementRef: ElementRef,
+    constructor(
+        elementRef: ElementRef,
         private workflow: Workflow,
         private service: ReissueItemService,
     ) {
-        let id = elementRef.nativeElement.getAttribute('id');
+        const id = elementRef.nativeElement.getAttribute('id');
         this.service.loadItem(id).subscribe(dto => {
             this.vm = dto;
         });

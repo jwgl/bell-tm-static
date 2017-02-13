@@ -1,15 +1,15 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {FreeListenFormService} from '../form.service';
-import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
-import './form-editor.model';
 import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
+import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 import '../../shared/student-schedule.model';
+import {FreeListenFormService} from '../form.service';
+import './form-editor.model';
 
 interface Teacher {
     id: string;
@@ -36,7 +36,7 @@ export class FreeFormEditorComponent {
         private service: FreeListenFormService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
+        const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
@@ -49,14 +49,14 @@ export class FreeFormEditorComponent {
 
     onLoadData(dto: any) {
         this.schedules = dto.schedules.map((scheduleDto: ScheduleDto) => {
-            let schedule: Schedule = new Schedule(scheduleDto);
-            schedule.repeatType = (<any>scheduleDto).repeatType;
+            const schedule: Schedule = new Schedule(scheduleDto);
+            schedule.repeatType = scheduleDto.repeatType;
             return schedule;
         });
         this.form = new FreeListenForm(dto.form, this.schedules);
         this.form.removedItems = [];
         this.form.existedItems = dto.existedItems.map((item: any) => {
-            let freeItem = new FreeListenItem(this.form, item);
+            const freeItem = new FreeListenItem(this.form, item);
             freeItem.schedule = this.schedules.find(s => s.id === item.taskScheduleId);
             return freeItem;
         });

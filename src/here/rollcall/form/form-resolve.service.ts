@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
+
 import 'rxjs/add/operator/do';
 
+import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model';
 import {RollcallFormService} from './form.service';
-import {Term, Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 
 @Injectable()
 export class RollcallFormResolve implements Resolve<true> {

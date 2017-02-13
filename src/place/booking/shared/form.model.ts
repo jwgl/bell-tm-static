@@ -46,6 +46,7 @@ export class BookingForm {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 export class BookingItem {
     form: BookingForm;
     id: number;
@@ -82,7 +83,7 @@ export class BookingItem {
         if (this.startWeek === this.endWeek) {
             return `第${this.startWeek}周`;
         } else {
-            let oddEvenString = ' 单双';
+            const oddEvenString = ' 单双';
             if (this.oddEven === 0) {
                 return `${this.startWeek}-${this.endWeek}周`;
             } else {

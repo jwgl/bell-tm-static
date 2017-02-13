@@ -3,9 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
 
-import {ReissueOrderListComponent} from './list/order-list.component';
-import {ReissueOrderItemComponent} from './item/order-item.component';
 import {ReissueOrderEditorComponent} from './editor/order-editor.component';
+import {ReissueOrderItemComponent} from './item/order-item.component';
+import {ReissueOrderListComponent} from './list/order-list.component';
 import {ReissueOrderReceiveComponent} from './receive/order-receive.component';
 
 const routes: Routes = [

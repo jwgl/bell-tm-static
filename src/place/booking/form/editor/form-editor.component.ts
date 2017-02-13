@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
 import {BookingForm, BookingSection, bookingSectionMap} from '../../shared/form.model';
-import './form-editor.model';
 import {BookingFormService} from '../form.service';
-import {FindPlaceDialogService} from './find-place/find-place.module';
+import {FindPlaceDialogService} from './find-place/find-place.service';
+import './form-editor.model';
 
 @Component({
     styleUrls: ['form-editor.component.scss'],
@@ -29,7 +29,7 @@ export class BookingFormEditorComponent {
         private findPlaceDialog: FindPlaceDialogService,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
+        const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));

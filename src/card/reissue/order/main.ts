@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
-import {ReissueOrderComponent} from './order.component';
-import {ReissueOrderService} from './order.service';
-import {ReissueOrderRoutingModule} from './order.routing';
-import {ReissueOrderListModule} from './list/order-list.module';
-import {ReissueOrderItemModule} from './item/order-item.module';
 import {ReissueOrderEditorModule} from './editor/order-editor.module';
+import {ReissueOrderItemModule} from './item/order-item.module';
+import {ReissueOrderListModule} from './list/order-list.module';
+import {ReissueOrderComponent} from './order.component';
+import {ReissueOrderRoutingModule} from './order.routing';
+import {ReissueOrderService} from './order.service';
 import {ReissueOrderReceiveModule} from './receive/order-receive.module';
 
 @NgModule({

@@ -1,7 +1,7 @@
-import {Injectable, Inject} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest, EditService} from 'core/rest';
+import {ApiUrl, EditService, Rest} from 'core/rest';
 
 @Injectable()
 export class BookingFormService extends EditService {
@@ -15,7 +15,7 @@ export class BookingFormService extends EditService {
     }
 
     getDepartmentBookingType(departmentId: string): Observable<any> {
-        let url = this.departmentBookingTypesApiUrl.replace('${departmentId}', departmentId);
+        const url = this.departmentBookingTypesApiUrl.replace('${departmentId}', departmentId);
         return this.rest.get(url);
     }
 

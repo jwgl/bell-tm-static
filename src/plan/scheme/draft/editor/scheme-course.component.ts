@@ -1,8 +1,8 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {EditMode} from 'core/constants';
 
-import {SchemeCourse, RecordStatus} from '../../common/scheme.model';
+import {RecordStatus, SchemeCourse} from '../../common/scheme.model';
 
 /**
  * 课程
@@ -32,7 +32,7 @@ export class SchemeCourseComponent {
             return '';
         }
 
-        let classes: string[] = [];
+        const classes: string[] = [];
         if (this.editMode !== EditMode.Create && this.schemeCourse.prevStatus !== RecordStatus.None) {
             classes.push('Prev' + RecordStatus[this.schemeCourse.prevStatus]);
         }

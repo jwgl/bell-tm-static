@@ -9,7 +9,7 @@ export class TodoService extends ShowService {
         super(rest, api);
     }
 
-    loadCounts(): Observable<any> {
+    public loadCounts(): Observable<any> {
         return this.rest.get(`${this.api.list()}/counts`);
     }
 }

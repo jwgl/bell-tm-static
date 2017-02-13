@@ -1,11 +1,11 @@
 import {Component, Inject} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import {Dialog} from 'core/dialogs';
 import {EditMode} from 'core/constants';
+import {Dialog} from 'core/dialogs';
 
-import {ReissueOrder} from '../shared/reissue-order.model';
 import {ReissueOrderService} from '../order.service';
+import {ReissueOrder} from '../shared/reissue-order.model';
 import {ReissueFormSelectDialog} from './form-select.dialog';
 
 @Component({
@@ -27,7 +27,7 @@ export class ReissueOrderEditorComponent {
         private reissuesWebUrl: String,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
-        let params = this.route.snapshot.params;
+        const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
                 this.vm = ReissueOrder.create();

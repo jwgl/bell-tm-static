@@ -28,13 +28,14 @@ export class ActionNamePipe {
                 }
             }
         }
-        return ACTION_INFO[<any>AuditAction[<any>value]].label;
+        return ACTION_INFO[(AuditAction as any)[value as any]].label;
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 @Pipe({name: 'actionClass'})
 export class ActionClassPipe {
     transform(value: any, args: any[]) {
-        return ACTION_INFO[<any>AuditAction[<any>value]].class;
+        return ACTION_INFO[(AuditAction as any)[value as any]].class;
     }
 }

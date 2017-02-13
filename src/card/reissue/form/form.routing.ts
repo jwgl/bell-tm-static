@@ -3,9 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {EditMode} from 'core/constants';
 
-import {ReissueFormListComponent} from './list/form-list.component';
-import {ReissueFormItemComponent} from './item/form-item.component';
 import {ReissueFormEditorComponent} from './editor/form-editor.component';
+import {ReissueFormItemComponent} from './item/form-item.component';
+import {ReissueFormListComponent} from './list/form-list.component';
 
 const routes: Routes = [
     {path: '', component: ReissueFormListComponent},

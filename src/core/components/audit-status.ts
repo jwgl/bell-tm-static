@@ -24,10 +24,10 @@ export class AuditStatusComponent {
     @Input() status: string;
 
     get class(): string {
-        return STATUS_INFO[<any>AuditStatus[<any>this.status]].class;
+        return STATUS_INFO[(AuditStatus as any)[this.status as any]].class;
     }
 
     get label(): string {
-        return STATUS_INFO[<any>AuditStatus[<any>this.status]].label;
+        return STATUS_INFO[(AuditStatus as any)[this.status as any]].label;
     }
 }

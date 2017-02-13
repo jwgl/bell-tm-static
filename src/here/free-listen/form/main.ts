@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
+import {LeaveFormEditorModule} from './editor/form-editor.module';
+import {FreeListenFormRoutingModule} from './form-routing.module';
 import {FreeListenFormComponent} from './form.component';
 import {FreeListenFormService} from './form.service';
-import {FreeListenFormRoutingModule} from './form-routing.module';
-import {FreeListenFormListModule} from './list/form-list.module';
 import {FreeListenFormItemModule} from './item/form-item.module';
-import {LeaveFormEditorModule} from './editor/form-editor.module';
+import {FreeListenFormListModule} from './list/form-list.module';
 
 @NgModule({
     bootstrap: [FreeListenFormComponent],

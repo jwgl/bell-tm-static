@@ -1,10 +1,10 @@
 import {
-    Scheme,
     AbstractGroup,
     Property,
-    SchemeCourseDto,
-    SchemeCourse,
     RecordStatus,
+    Scheme,
+    SchemeCourse,
+    SchemeCourseDto,
 } from '../../common/scheme.model';
 
 declare module '../../common/scheme.model' {
@@ -83,17 +83,19 @@ Scheme.prototype.getExportCourses = function(this: Scheme, selectedTerm: number)
 };
 
 Object.defineProperty(SchemeCourse.prototype, 'endWeek', {
-        get: function (this: SchemeCourse) {
-            // 全学段或实践课
-            if (this._periodWeeks === 18 || this.theoryPeriod === 0 && this.experimentPeriod === 0) {
-                return 17;
-            } else {
-                return this.startWeek + this._periodWeeks - 1;
-            }
-        },
-        enumerable: true,
-        configurable: true,
-    });
+    /* tslint:disable:object-literal-shorthand*/
+    get: function(this: SchemeCourse) {
+        // 全学段或实践课
+        if (this._periodWeeks === 18 || this.theoryPeriod === 0 && this.experimentPeriod === 0) {
+            return 17;
+        } else {
+            return this.startWeek + this._periodWeeks - 1;
+        }
+    },
+    /* tslint:enable:object-literal-shorthand*/
+    enumerable: true,
+    configurable: true,
+});
 
 SchemeCourse.prototype.toToesDto = function(this: SchemeCourse) {
     return {

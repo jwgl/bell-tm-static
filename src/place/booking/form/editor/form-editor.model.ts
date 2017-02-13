@@ -1,5 +1,5 @@
-import {BookingForm, BookingItem} from '../../shared/form.model';
 import * as _ from 'lodash';
+import {BookingForm, BookingItem} from '../../shared/form.model';
 
 declare module '../../shared/form.model' {
     interface BookingForm {
@@ -19,14 +19,14 @@ declare module '../../shared/form.model' {
 }
 
 BookingForm.prototype.addItem = function(this: BookingForm, dto: any): void {
-    let item = new BookingItem(this, dto);
+    const item = new BookingItem(this, dto);
     if (!this.conflict(item)) {
         this.items.push(item);
     }
 };
 
-BookingForm.prototype.removeItem = function (this: BookingForm, item: BookingItem): void {
-    let index = this.items.indexOf(item);
+BookingForm.prototype.removeItem = function(this: BookingForm, item: BookingItem): void {
+    const index = this.items.indexOf(item);
     this.items.splice(index, 1);
     if (item.id) {
         this.removedItems.push(item);

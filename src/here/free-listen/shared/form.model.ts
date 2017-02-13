@@ -29,7 +29,7 @@ export class FreeListenForm {
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.items = dto.items.map((item: any) => {
-            let freeItem = new FreeListenItem(this, item);
+            const freeItem = new FreeListenItem(this, item);
             if (item.taskScheduleId) {
                 freeItem.schedule = schedules.find(s => s.id === item.taskScheduleId);
             }
@@ -50,6 +50,7 @@ export class FreeListenForm {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 export class FreeListenItem {
     form: FreeListenForm;
     id: number;

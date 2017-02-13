@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {Workflow} from 'core/workflow';
 
-import {LeaveFormService} from '../form.service';
-import {LeaveForm} from '../../shared/form.model';
-import './form-item.model';
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
+import {LeaveForm} from '../../shared/form.model';
+import {LeaveFormService} from '../form.service';
+import './form-item.model';
 
 @Component({
     templateUrl: 'form-item.component.html',
@@ -27,7 +27,7 @@ export class LeaveFormItemComponent {
 
     loadData(id: number) {
         this.service.loadItem(id).subscribe(dto => {
-            let schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
+            const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
             this.form = new LeaveForm(dto.form, schedules);
             this.form.editable = dto.form.editable;
         });

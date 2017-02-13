@@ -1,4 +1,4 @@
-import {Scheme, Property, SchemeCourse} from '../scheme.model';
+import {Property, Scheme, SchemeCourse} from '../scheme.model';
 
 declare module '../scheme.model' {
     /**
@@ -36,9 +36,9 @@ Property.prototype.normalize = function(this: Property) {
 
 Scheme.prototype.normalize = function(this: Scheme) {
     for (let i = this.properties.length - 1; i >= 0; i--) {
-        let property = this.properties[i];
+        const property = this.properties[i];
         property.normalize();
-    };
+    }
     this.clearPropertyWithEmptyDirection();
 };
 

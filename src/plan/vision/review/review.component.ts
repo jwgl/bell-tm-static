@@ -16,7 +16,6 @@ export class VisionReviewComponent implements OnInit {
     wi: string;
     vm: Vision;
 
-
     constructor(
         elementRef: ElementRef,
         private workflow: Workflow,

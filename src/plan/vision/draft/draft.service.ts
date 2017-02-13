@@ -1,7 +1,7 @@
-import {Injectable, Inject} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {ApiUrl, Rest, EditService} from 'core/rest';
+import {ApiUrl, EditService, Rest} from 'core/rest';
 
 @Injectable()
 export class VisionDraftService extends EditService {

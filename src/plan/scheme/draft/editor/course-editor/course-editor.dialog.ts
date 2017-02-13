@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {BaseDialog} from 'core/dialogs';
 import {EditMode} from 'core/constants';
+import {BaseDialog} from 'core/dialogs';
 
-import {getPeriodWeeks, buildPeriodWeeksOptions} from '../../../../common/utils';
-import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
+import {buildPeriodWeeksOptions, getPeriodWeeks} from '../../../../common/utils';
+import {CourseSelectDto, SchemeCourseDto} from '../../../common/scheme.model';
 
 @Component({
     selector: 'course-editor-dialog',
@@ -13,34 +13,15 @@ import {SchemeCourseDto, CourseSelectDto} from '../../../common/scheme.model';
 })
 export class CourseEditorDialog extends BaseDialog {
     title: string;
-    schemeCourse: SchemeCourseDto = <any>{};
-    periodWeekOptions: [{label: string, value: number}] = <any>[];
+    schemeCourse = {} as SchemeCourseDto;
+    periodWeekOptions = [] as Array<{label: string, value: number}>;
     lastPeriodWeeks: number;
 
     constructor() {
         super();
     }
 
-    protected onOpening(): Observable<any> {
-        if (this.options.editMode === EditMode.Create) {
-            this.title = `添加课程 - ${this.options.group.name}`;
-            this.schemeCourse = this.defaultCourse();
-        } else {
-            this.title = `编辑课程 - ${this.options.group.name}`;
-            this.schemeCourse = this.options.dto;
-        }
-
-        this.onChangeSuggestedTerm(`${this.schemeCourse.suggestedTerm}`);
-        return null;
-    }
-
-    onConfirmed() {
-        this.schemeCourse.suggestedTerm = parseInt(`${this.schemeCourse.suggestedTerm}`, 10);
-        return this.schemeCourse;
-    }
-
     onCourseSelected(course: CourseSelectDto): void {
-        console.log(course);
         if (course) {
             this.schemeCourse.courseId = course.id;
             this.schemeCourse.courseName = course.name;
@@ -60,8 +41,8 @@ export class CourseEditorDialog extends BaseDialog {
 
     onChangeSuggestedTerm(value: string) {
         if (value) {
-            let term = parseInt(value, 10);
-            let periodWeeks = getPeriodWeeks(term);
+            const term = parseInt(value, 10);
+            const periodWeeks = getPeriodWeeks(term);
             if (this.lastPeriodWeeks !== periodWeeks) {
                 this.periodWeekOptions = buildPeriodWeeksOptions(term);
                 this.lastPeriodWeeks = periodWeeks;
@@ -76,8 +57,26 @@ export class CourseEditorDialog extends BaseDialog {
         }
     }
 
+    protected onOpening(): Observable<any> {
+        if (this.options.editMode === EditMode.Create) {
+            this.title = `添加课程 - ${this.options.group.name}`;
+            this.schemeCourse = this.defaultCourse();
+        } else {
+            this.title = `编辑课程 - ${this.options.group.name}`;
+            this.schemeCourse = this.options.dto;
+        }
+
+        this.onChangeSuggestedTerm(`${this.schemeCourse.suggestedTerm}`);
+        return null;
+    }
+
+    protected onConfirmed() {
+        this.schemeCourse.suggestedTerm = parseInt(`${this.schemeCourse.suggestedTerm}`, 10);
+        return this.schemeCourse;
+    }
+
     private defaultCourse(): SchemeCourseDto {
-        let term = this.options.terms[0];
+        const term = this.options.terms[0];
         return {
             courseId: null,
             courseName: null,
@@ -98,6 +97,6 @@ export class CourseEditorDialog extends BaseDialog {
     }
 
     private getTermOrder(term: number): number {
-        return (<number[]>this.options.terms).indexOf(term);
+        return (this.options.terms as number[]).indexOf(term);
     }
 }

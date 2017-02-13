@@ -1,11 +1,11 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
 import {LogoComponent} from './logo.component';
-import {NavbarComponent, NavitemComponent, DropdownMenu, SubmenuDirective} from './navbar.component';
+import {DropdownMenu, NavbarComponent, NavitemComponent, SubmenuDirective} from './navbar.component';
 import {NavbarService} from './navbar.service';
 
 @NgModule({

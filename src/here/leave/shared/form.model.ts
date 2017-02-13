@@ -1,6 +1,6 @@
-import {Schedule} from '../../shared/schedule/schedule.model';
-import * as moment from 'moment';
 import * as _ from 'lodash';
+import * as moment from 'moment';
+import {Schedule} from '../../shared/schedule/schedule.model';
 
 export enum LeaveType {
     PrivateAffair = 1,
@@ -39,7 +39,7 @@ export class LeaveForm {
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
         this.items = dto.items.map((item: any) => {
-            let leaveItem = new LeaveItem(this, item);
+            const leaveItem = new LeaveItem(this, item);
             if (item.taskScheduleId) {
                 leaveItem.schedule = schedules.find(s => s.id === item.taskScheduleId);
             }
@@ -72,6 +72,7 @@ export class LeaveForm {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 export class LeaveItem {
     form: LeaveForm;
     id: number;

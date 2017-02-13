@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, Output, ContentChild, TemplateRef, EventEmitter} from '@angular/core';
+import {Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import * as _ from 'lodash';
 
-import {Term, Schedule, findWeekSchedules, buildKey, SPANS} from './schedule.model';
+import {buildKey, findWeekSchedules, Schedule, SPANS, Term} from './schedule.model';
 
 @Component({
     selector: 'tabed-schedule',
@@ -24,7 +24,7 @@ export class TabedScheduleComponent implements OnInit {
     sections: number[];
     weeks: number[];
     _currentWeek: number;
-    map: (boolean | Schedule)[][];
+    map: Array<Array<boolean | Schedule>>;
 
     hiddenCells: {[key: number]: boolean};
     weekSchedules: _.Dictionary<Schedule[]>;
@@ -51,7 +51,7 @@ export class TabedScheduleComponent implements OnInit {
     }
 
     cellType(day: number, section: number): 'schedule' | 'normal' | 'hidden' {
-        let key = buildKey(day, section);
+        const key = buildKey(day, section);
         if (this.weekSchedules[key]) {
             return 'schedule';
         } else if (this.hiddenCells[key]) {
@@ -71,11 +71,11 @@ export class TabedScheduleComponent implements OnInit {
 
     getScheduleContext(schedule: Schedule, day: number, section: number) {
         return {
-            schedule: schedule,
+            schedule,
             count: this.weekSchedules[buildKey(day, section)].length,
             week: this.currentWeek,
-            day: day,
-            section: section,
+            day,
+            section,
         };
     }
 

@@ -1,15 +1,15 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {RestModule} from 'core/rest';
 
+import {LeaveFormEditorModule} from './editor/form-editor.module';
+import {LeaveFormRoutingModule} from './form-routing.module';
 import {LeaveFormComponent} from './form.component';
 import {LeaveFormService} from './form.service';
-import {LeaveFormRoutingModule} from './form-routing.module';
-import {LeaveFormListModule} from './list/form-list.module';
 import {LeaveFormItemModule} from './item/form-item.module';
-import {LeaveFormEditorModule} from './editor/form-editor.module';
+import {LeaveFormListModule} from './list/form-list.module';
 
 @NgModule({
     bootstrap: [LeaveFormComponent],

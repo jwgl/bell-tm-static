@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 
-import {CommonDirectivesModule} from 'core/common-directives';
 import {CommonDialogsModule} from 'core/common-dialogs';
+import {CommonDirectivesModule} from 'core/common-directives';
 import {WorkflowModule} from 'core/workflow';
 
 import {PlanCommonModule} from '../../../common/module';

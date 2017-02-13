@@ -1,18 +1,18 @@
-import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import {Dialog} from 'core/dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
+import {Dialog} from 'core/dialogs';
 
 import {PlanTitleComponent} from './components/plan-title.component';
 import {VersionDialog} from './dialogs/version.dialog';
+import {GradeFilterPipe} from './pipes/grade-filter';
 import {PrimaryCoursesPipe} from './pipes/primary-courses';
 import {ProgramTypePipe} from './pipes/program-type';
+import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
 import {VersionNumberPipe} from './pipes/version-number';
 import {ZeroEmptyPipe} from './pipes/zero-empty';
-import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
-import {GradeFilterPipe} from './pipes/grade-filter';
 
 @NgModule({
     imports: [

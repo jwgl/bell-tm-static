@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {BaseDialog} from './dialog';
+import {BaseDialog} from './base-dialog';
 
 @Component({
     selector: 'confirm-dialog',

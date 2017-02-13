@@ -1,7 +1,7 @@
-import {Directive, Component, Input, ContentChild} from '@angular/core';
-import {FormDirective} from './form.directive';
+import {Component, ContentChild, Directive, Input} from '@angular/core';
 import {FormControlDirective} from './form-control.directive';
 import {FormFieldComponent} from './form-field.component';
+import {FormDirective} from './form.directive';
 
 @Directive({
     selector: '.form-field-left',
@@ -28,6 +28,7 @@ export class FormFieldLeftDirective {
     }
 }
 
+/* tslint:disable:max-classes-per-file */
 @Directive({
     selector: '.form-field-right',
 })

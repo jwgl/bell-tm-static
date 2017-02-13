@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
-import {RollcallFormService} from '../form.service';
 import {RollcallForm} from '../form.model';
+import {RollcallFormService} from '../form.service';
 
 @Injectable()
 export class RollcallFormEditorResolve implements Resolve<RollcallForm> {
@@ -11,7 +11,7 @@ export class RollcallFormEditorResolve implements Resolve<RollcallForm> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RollcallForm> {
         return this.service.loadDataForCreate(route.params).map(dto => {
-            let form = new RollcallForm(dto, this.service.config);
+            const form = new RollcallForm(dto, this.service.config);
             if (form.locked && !/\/lock$/.test(state.url)) {
                 this.router.navigateByUrl(state.url.replace(/\/\w*$/, '/lock'));
             }

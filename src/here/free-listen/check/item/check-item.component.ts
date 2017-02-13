@@ -1,12 +1,13 @@
 import {Component, ElementRef} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
 import {Workflow} from 'core/workflow';
 
+import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm} from '../../shared/form.model';
 import {FreeListenCheckService} from '../check.service';
-import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
+
 import '../../shared/form-viewer.model';
 
 /**

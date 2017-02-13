@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/do';
 
-import {Rest} from 'core/rest';
 import {BaseDialog} from 'core/dialogs';
+import {Rest} from 'core/rest';
+
+import 'rxjs/add/operator/do';
 
 @Component({
     selector: 'program-setting-dialog',
@@ -38,7 +39,7 @@ export class ProgramEditorDialog extends BaseDialog {
         });
     }
 
-    onConfirmed() {
+    protected onConfirmed() {
         return {
             visionRevisible: this.programSetting.visionRevisible,
             practiceCreditRatio: this.programSetting.practiceCreditRatio,
