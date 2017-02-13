@@ -1,5 +1,6 @@
 import * as _ from 'lodash';
 
+import {Label, LabelArrayMap} from 'core/models';
 import {LeaveType, LeaveTypeNames} from '../../leave/shared/form.model';
 
 export enum RollcallType {
@@ -45,10 +46,10 @@ const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key) => {
         return key === RollcallActions[ak].value.toString() ||
                key === RollcallType.LateEarly.toString() && (ak === 'late' || ak === 'early');
     }).map(ak => ({
-        key: ak,
-        label: RollcallActions[ak].label,
+        class: ak,
+        text: RollcallActions[ak].label,
     }));
-}, {} as {[k: string]: Array<{key: string, label: string}>});
+}, {} as LabelArrayMap);
 
 export interface RollcallConfig {
     hideFree: boolean;
@@ -73,7 +74,7 @@ export class Rollcall {
         this.type = dto.type;
     }
 
-    get lables(): Array<{key: string, label: string}> {
+    get labels(): Label[] {
         return RollcallLabels[this.type];
     }
 
