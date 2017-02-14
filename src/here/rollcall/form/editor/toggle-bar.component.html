@@ -1,9 +1,9 @@
 <div class="btn-group" [class.w-100]="stretch">
-    <button *ngFor="let key of actionsKeys"
+    <button *ngFor="let action of actions"
             class="btn btn-sm"
-            [ngClass]="'btn-outline-' + key"
+            [ngClass]="getClass(action)"
             [class.col]="stretch"
-            [class.active]="hasType(key)"
+            [class.active]="hasType(action)"
             [disabled]="disabled"
-            (click)="toggleType(key);$event.target.blur();">{{label(key)}}</button>
+            (click)="toggleType(action);$event.target.blur();">{{getText(action)}}</button>
 </div>

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import {Label, LabelArrayMap} from 'core/models';
+import {Label, LabelArrayMap, LabelMap} from 'core/models';
 import {LeaveType, LeaveTypeNames} from '../../leave/shared/form.model';
 
 export enum RollcallType {
@@ -18,37 +18,24 @@ const RollcallTypeNames = _.fromPairs(_.toPairs(RollcallType).filter(p => !/\d+/
 // {'none': 0, absent: 0, ...}
 const RollcallTypeCounts = _.transform(RollcallTypeNames, (result, value) => result[value] = 0);
 
-export const RollcallActions: { [key: string]: { label: string, value: RollcallType } } = {
-    absent: { label: '旷课', value: RollcallType.Absent },
-    late:   { label: '迟到', value: RollcallType.Late },
-    early:  { label: '早退', value: RollcallType.Early },
-    attend: { label: '调课', value: RollcallType.Attend },
+export const RollcallActionLabels: LabelMap = {
+    [RollcallType.Absent]: { text: '旷课', class: 'absent'},
+    [RollcallType.Late]:   { text: '迟到', class: 'late'},
+    [RollcallType.Early]:  { text: '早退', class: 'early'},
+    [RollcallType.Attend]: { text: '调课', class: 'attend'},
 };
 
-export const RollcallActionsKeys = ['absent', 'late', 'early', 'attend'];
+export const RollcallActions = [
+    RollcallType.Absent,
+    RollcallType.Late,
+    RollcallType.Early,
+    RollcallType.Attend,
+];
 
-/* tslint:disable:no-namespace*/
-export namespace RollcallType {
-    export function contains(type: RollcallType, key: string) {
-        return type === RollcallActions[key].value ||
-               type === RollcallType.LateEarly && (key === 'late' || key === 'early');
-    }
-}
-
-// RollcallType -> {key: string, label: string}[]
-// {
-//    1: [{key: 'absent', label: '旷课'}],
-//       ...
-//    5: [{key: 'late',   label: '迟到}, {key: 'Early', label: {'早退'}]
-// }
 const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key) => {
-    result[key] = RollcallActionsKeys.filter(ak => {
-        return key === RollcallActions[ak].value.toString() ||
-               key === RollcallType.LateEarly.toString() && (ak === 'late' || ak === 'early');
-    }).map(ak => ({
-        class: ak,
-        text: RollcallActions[ak].label,
-    }));
+    result[key] = RollcallActions.filter(t => {
+        return key === t.toString() || key === RollcallType.LateEarly.toString() && (t === RollcallType.Late || t === RollcallType.Early);
+    }).map(t => RollcallActionLabels[t]);
 }, {} as LabelArrayMap);
 
 export interface RollcallConfig {
@@ -78,11 +65,11 @@ export class Rollcall {
         return RollcallLabels[this.type];
     }
 
-    get cancelKey(): string {
+    get cancelType(): RollcallType {
         if (this.type === RollcallType.LateEarly) {
-            return 'early';
+            return RollcallType.Early;
         } else {
-            return RollcallActionsKeys.find(it => this.type === RollcallActions[it].value);
+            return RollcallActions.find(it => this.type === it);
         }
     }
 
@@ -208,18 +195,17 @@ export class Student {
         this.statis = [0, 0, 0, 0];
     }
 
-    toggle(key: string): ToggleResult {
+    toggle(type: RollcallType): ToggleResult {
         if (this.pending || this.absence) {
             return { op: 'none' };
         }
 
-        // List view中按回车键时key为空
-        if (!key) {
-            key = this.rollcall ? this.rollcall.cancelKey : 'absent';
+        // List view中按回车键时type为空
+        if (!type) {
+            type = this.rollcall ? this.rollcall.cancelType : RollcallType.Absent;
         }
 
-        const currType = RollcallActions[key].value;
-        return this.rollcall ? this.rollcall.toggle(currType) : { op: 'insert', type: currType };
+        return this.rollcall ? this.rollcall.toggle(type) : { op: 'insert', type};
     }
 
     get rollcallType(): RollcallType {

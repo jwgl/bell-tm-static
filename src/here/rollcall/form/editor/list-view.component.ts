@@ -1,6 +1,6 @@
 import {Component, ElementRef, Host, Inject, ViewChild} from '@angular/core';
 
-import {Student} from '../form.model';
+import {RollcallType, Student} from '../form.model';
 import {BaseRollcallView} from './base-view.component';
 import {RollcallFormEditorComponent} from './form-editor.component';
 
@@ -13,7 +13,7 @@ const PageSize = 5;
 export class RollcallListViewComponent extends BaseRollcallView {
     @ViewChild('list') list: ElementRef;
 
-    readonly operations: {[key: string]: {fn: () => void, param?: any}} = {
+    readonly operations: {[key: string]: {fn: () => void, param?: RollcallType}} = {
         PageUp    : {fn: this.prev, param: PageSize},
         PageDown  : {fn: this.next, param: PageSize},
         ArrowUp   : {fn: this.prev},
@@ -27,10 +27,10 @@ export class RollcallListViewComponent extends BaseRollcallView {
         Home      : {fn: this.first},
         End       : {fn: this.last},
         Enter     : {fn: this.toggleLocal},
-        1         : {fn: this.toggleLocal, param: 'absent'},
-        2         : {fn: this.toggleLocal, param: 'late'},
-        3         : {fn: this.toggleLocal, param: 'early'},
-        4         : {fn: this.toggleLocal, param: 'attend'},
+        1         : {fn: this.toggleLocal, param: RollcallType.Absent},
+        2         : {fn: this.toggleLocal, param: RollcallType.Late},
+        3         : {fn: this.toggleLocal, param: RollcallType.Early},
+        4         : {fn: this.toggleLocal, param: RollcallType.Attend},
     };
 
     constructor(@Host() editor: RollcallFormEditorComponent) {
@@ -70,7 +70,7 @@ export class RollcallListViewComponent extends BaseRollcallView {
         this.rollcallForm.activateLast();
     }
 
-    toggleLocal(type?: string) {
+    toggleLocal(type?: RollcallType) {
         const student = this.rollcallForm.activeStudent;
         if (student.absence) {
             window.open(`/web/here/${student.absence.url}/${student.absence.id}`, '_blank');

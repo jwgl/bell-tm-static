@@ -1,33 +1,35 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 
 import {AuditStatus} from '../constants/audit-status';
+import {Labels} from '../models';
 
-const STATUS_INFO: {[key: number]: {class: string, label: string}} = {
-    [AuditStatus.CREATED]:   {class: 'badge-default', label: '未提交'},
-    [AuditStatus.SUBMITTED]: {class: 'badge-info',    label: '待审核'},
-    [AuditStatus.CHECKED]:   {class: 'badge-info',    label: '待审批'},
-    [AuditStatus.REJECTED]:  {class: 'badge-warning', label: '退回'},
-    [AuditStatus.APPROVED]:  {class: 'badge-success', label: '已审批'},
-    [AuditStatus.REVOKED]:   {class: 'badge-danger',  label: '回收'},
-    [AuditStatus.PROGRESS]:  {class: 'badge-primary', label: '处理中'},
-    [AuditStatus.FINISHED]:  {class: 'badge-success', label: '完成'},
-    [AuditStatus.CLOSED]:    {class: 'badge-danger',  label: '关闭'},
-    [AuditStatus.DELETED]:   {class: 'badge-danger',  label: '删除'},
-};
+const statusLabels: Labels<AuditStatus> = new Labels(AuditStatus, {
+    [AuditStatus.CREATED]:   {class: 'badge-default', text: '未提交'},
+    [AuditStatus.SUBMITTED]: {class: 'badge-info',    text: '待审核'},
+    [AuditStatus.CHECKED]:   {class: 'badge-info',    text: '待审批'},
+    [AuditStatus.REJECTED]:  {class: 'badge-warning', text: '退回'},
+    [AuditStatus.APPROVED]:  {class: 'badge-success', text: '已审批'},
+    [AuditStatus.REVOKED]:   {class: 'badge-danger',  text: '回收'},
+    [AuditStatus.PROGRESS]:  {class: 'badge-primary', text: '处理中'},
+    [AuditStatus.FINISHED]:  {class: 'badge-success', text: '完成'},
+    [AuditStatus.CLOSED]:    {class: 'badge-danger',  text: '关闭'},
+    [AuditStatus.DELETED]:   {class: 'badge-danger',  text: '删除'},
+});
 
 @Component({
     selector: 'audit-status',
     styles: ['label { font-weight:initial; margin-bottom:0; }'],
-    template: '<label class="badge" [ngClass]="class">{{label}}</label>',
+    template: '<label class="badge" [ngClass]="class">{{text}}</label>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AuditStatusComponent {
-    @Input() status: string;
+    @Input() status: AuditStatus;
 
     get class(): string {
-        return STATUS_INFO[(AuditStatus as any)[this.status as any]].class;
+        return statusLabels.getClass(this.status);
     }
 
-    get label(): string {
-        return STATUS_INFO[(AuditStatus as any)[this.status as any]].label;
+    get text(): string {
+        return statusLabels.getText(this.status);
     }
 }

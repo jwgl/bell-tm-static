@@ -1,4 +1,4 @@
-import {Rollcall, RollcallForm, Student, ToggleResult} from '../form.model';
+import {Rollcall, RollcallForm, RollcallType, Student, ToggleResult} from '../form.model';
 import {RollcallFormService} from '../form.service';
 import {RollcallFormEditorComponent} from './form-editor.component';
 
@@ -9,7 +9,7 @@ export class BaseRollcallView {
         return this.editor.rollcallForm;
     }
 
-    toggle(student: Student, type: string) {
+    toggle(student: Student, type: RollcallType) {
         this.editor.toggle(student, type);
     }
 }

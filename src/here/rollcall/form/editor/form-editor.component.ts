@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import {matchOddEven} from 'core/utils';
 
 import {findWeekSchedules, Schedule, Term} from '../../../shared/schedule/schedule.model';
-import {Rollcall, RollcallConfig, RollcallForm, Student, ToggleResult} from '../form.model';
+import {Rollcall, RollcallConfig, RollcallForm, RollcallType, Student, ToggleResult} from '../form.model';
 import {RollcallFormService} from '../form.service';
 
 @Component({
@@ -52,7 +52,7 @@ export class RollcallFormEditorComponent implements OnInit {
         this.service.viewType = view;
     }
 
-    toggle(student: Student, type: string) {
+    toggle(student: Student, type: RollcallType) {
         const result: ToggleResult = student.toggle(type);
         switch (result.op) {
             case 'insert':

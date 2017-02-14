@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {RollcallActions, RollcallActionsKeys, RollcallType} from '../form.model';
+import {RollcallActionLabels, RollcallActions, RollcallType} from '../form.model';
 
 @Component({
     selector: 'rollcall-toggle-bar',
@@ -11,22 +11,26 @@ export class RollcallToggleBarComponent {
     @Input() stretch = false;
     @Input() rollcallType: RollcallType;
     @Input() disabled = false;
-    @Output() toggle = new EventEmitter<string>();
+    @Output() toggle = new EventEmitter<RollcallType>();
 
-    get actionsKeys() {
-        return RollcallActionsKeys;
+    get actions() {
+        return RollcallActions;
     }
 
-    hasType(key: string): boolean {
-        return this.rollcallType === RollcallActions[key].value ||
-               this.rollcallType === RollcallType.LateEarly && (key === 'late' || key === 'early');
+    hasType(type: RollcallType): boolean {
+        return this.rollcallType === type ||
+               this.rollcallType === RollcallType.LateEarly && (type === RollcallType.Late || type === RollcallType.Early);
     }
 
-    label(key: string): string {
-        return RollcallActions[key].label;
+    getText(type: RollcallType): string {
+        return RollcallActionLabels[type].text;
     }
 
-    toggleType(key: string) {
-        this.toggle.emit(key);
+    getClass(type: RollcallType): string {
+        return `btn-outline-${RollcallActionLabels[type].class}`;
+    }
+
+    toggleType(type: RollcallType) {
+        this.toggle.emit(type);
     }
 }
