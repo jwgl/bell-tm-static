@@ -16,6 +16,13 @@ module.exports = function (options) {
             sourceMapFilename: 'js/app/[name].map',
             chunkFilename: 'js/app/[id].chunk.js',
         },
+        module: {
+            rules: [{
+                test: /\.ts$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+            }]
+        },
         plugins: [
             new DefinePlugin({
                 'ENV': JSON.stringify(ENV),
