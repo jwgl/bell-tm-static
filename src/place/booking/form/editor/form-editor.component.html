@@ -36,26 +36,9 @@
             </p>
         </form-field>
         <form-field label="借用明细">
-            <table *ngIf="form.items.length > 0; else prompt" class="table table-bordered table-sm form-control-static">
-                <thead>
-                    <tr>
-                        <th>时间段</th>
-                        <th>教室名称</th>
-                        <th>教室类型</th>
-                        <th>座位数</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of form.items">
-                        <td>{{item.weeks}} {{item.dayOfWeek | dayOfWeek}} {{item.section.name}}</td>
-                        <td>{{item.place.name}}</td>
-                        <td>{{item.place.type}}</td>
-                        <td>{{item.place.seat}}</td>
-                        <td><button class="btn btn-secondary btn-sm" type="button" (click)="form.removeItem(item)">删除</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <ul *ngIf="form.items.length > 0; else prompt">
+                <li *ngFor="let item of form.items">{{item}} <remove-item (click)="form.removeItem(item)"></remove-item></li>
+            </ul>
             <template #prompt>
                  <p class="form-control-static text-muted">一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。</p>
             </template>

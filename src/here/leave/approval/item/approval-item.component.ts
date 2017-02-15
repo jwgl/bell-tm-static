@@ -58,10 +58,6 @@ export class LeaveApprovalItemComponent {
         });
     }
 
-    get reviewable(): boolean {
-        return this.form.status === 'SUBMITTED' && this.wi !== undefined;
-    }
-
     showWorkitems() {
         this.workflow.workitems(this.form.workflowInstanceId);
     }

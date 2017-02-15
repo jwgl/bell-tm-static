@@ -17,13 +17,13 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">单双周</label>
-                    <select class="form-control" name="oddEven" [(ngModel)]="queryOptions.oddEven">
+                    <select class="form-control" name="oddEven" [(ngModel)]="queryOptions.oddEven" (ngModelChange)="clearData()">
                         <option *ngFor="let item of vm.oddEvens" [ngValue]="item.value">{{item.label}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="control-label">星期几</label>
-                    <select class="form-control" name="dayOfWeek" [(ngModel)]="queryOptions.dayOfWeek">
+                    <select class="form-control" name="dayOfWeek" [(ngModel)]="queryOptions.dayOfWeek" (ngModelChange)="clearData()">
                         <option *ngFor="let item of vm.dayOfWeeks" [ngValue]="item.value">{{item.label}}</option>
                     </select>
                 </div>
@@ -31,20 +31,20 @@
                 <ng-container *ngIf="vm.simpleOption">
                 <div class="form-group">
                     <label class="control-label">日期</label><span class="date">{{bookingDay.date.format('YYYY-MM-DD')}}</span>
-                    <select class="form-control" name="days" [(ngModel)]="bookingDay">
+                    <select class="form-control" name="days" [(ngModel)]="bookingDay" (ngModelChange)="clearData()">
                         <option *ngFor="let day of vm.days" [ngValue]="day" [title]="day.date.format('YYYY-MM-DD')">第{{day.week}}周 {{day.date.format('dddd')}}</option>
                     </select>
                 </div>
                 </ng-container>
                 <div class="form-group">
                     <label class="control-label">时间段</label>
-                    <select class="form-control" name="section" [(ngModel)]="queryOptions.section">
+                    <select class="form-control" name="section" [(ngModel)]="queryOptions.section" (ngModelChange)="clearData()">
                         <option *ngFor="let section of options.sections" [ngValue]="section">{{section.name}}</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="control-label">教室类型</label>
-                    <select class="form-control" name="placeType" [(ngModel)]="queryOptions.placeType">
+                    <select class="form-control" name="placeType" [(ngModel)]="queryOptions.placeType" (ngModelChange)="clearData()">
                         <option *ngFor="let placeType of options.placeTypes" [ngValue]="placeType">{{placeType}}</option>
                     </select>
                 </div>
@@ -52,30 +52,20 @@
             <div class="col-8">
                 <div class="form-group">
                     <label class="control-label">可选教室 ({{selectedCount}} / {{places.length}})</label>
-                    <table class="table table-bordered table-hover table-sm">
-                        <thead>
-                            <tr>
-                                <th>选择</th>
-                                <th>教室名称</th>
-                                <th>座位数</th>
-                                <th>预定数</th>
-                            </tr>
-                        </thead>
-                        <tbody [style.height]="vm.simpleOption ? '330px' : '442px'">
-                            <tr *ngFor="let place of places" (click)="placeRowClicked($event, place)" [class.table-info]="place.selected">
-                                <td><input type="checkbox" name="places" [(ngModel)]="place.selected"></td>
-                                <td>{{place.name}}</td>
-                                <td>{{place.seat}}</td>
-                                <td>{{place.booking == 0 ? '' : place.booking}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="px-2 pt-2" style="overflow-y: scroll; border: solid 1px #ddd;" [style.height]="vm.simpleOption ? '330px' : '468px'">
+                        <div class="form-check" *ngFor="let place of places">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="places" [(ngModel)]="place.selected">
+                                {{place.name}}（{{place.seat}}座）<ng-container *ngIf="place.booking">{{place.booking}}次预定</ng-container>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </modal-body>
     <modal-footer>
-        <button class="btn btn-secondary mr-auto" (click)="findPlace()">查询</button>
+        <button class="btn btn-secondary mr-auto" (click)="findPlace()" [disabled]="finding">查询</button>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()">确定</button>
     </modal-footer>

@@ -12,23 +12,8 @@
         <p class="form-control-static">{{form.reason}}</p>
     </form-field>
     <form-field label="借用明细">
-        <table class="table table-bordered table-sm form-control-static">
-            <thead>
-                <tr>
-                    <th>时间段</th>
-                    <th>教室名称</th>
-                    <th>教室类型</th>
-                    <th>座位数</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of form.items">
-                    <td>{{item.weeks}} {{item.dayOfWeek | dayOfWeek}} {{item.section.name}}</td>
-                    <td>{{item.place.name}}</td>
-                    <td>{{item.place.type}}</td>
-                    <td>{{item.place.seat}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <ul *ngIf="form.items.length > 0; else prompt">
+            <li *ngFor="let item of form.items">{{item}}</li>
+        </ul>
     </form-field>
 </form>

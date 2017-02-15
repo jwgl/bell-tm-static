@@ -22,7 +22,6 @@ export class BookingCheckItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        elementRef: ElementRef,
         private service: BookingCheckService,
         private workflow: Workflow,
     ) {

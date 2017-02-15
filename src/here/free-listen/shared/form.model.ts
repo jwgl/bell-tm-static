@@ -38,7 +38,7 @@ export class FreeListenForm {
     }
 
     get title(): string {
-        return this.id ? `免听#${this.id}` : '免听';
+        return this.id ? `免听申请#${this.id}` : '免听申请';
     }
 
     contains(item: FreeListenItem) {

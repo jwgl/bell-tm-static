@@ -4,6 +4,7 @@ import {Dialog} from '../dialogs';
 import {ApiUrl, Rest} from '../rest';
 import {WorkflowAcceptDialog} from './accept.dialog';
 import {WorkflowRejectDialog} from './reject.dialog';
+import {WorkflowRevokeDialog} from './revoke.dialog';
 import {WorkflowSubmitDialog} from './submit.dialog';
 import {WorkflowWorkitemsDialog} from './workitems.dialog';
 
@@ -31,6 +32,12 @@ export class Workflow {
         const does = this.typeLabel(type);
         return this.dialog.open(WorkflowRejectDialog, {does, what}).then(result => {
             return this.rest.patch(this.api.reject(id, wi), {title: result.what, comment: result.comment}).toPromise();
+        });
+    }
+
+    revoke(id: any, what: string): Promise<void> {
+        return this.dialog.open(WorkflowRevokeDialog, {what}).then(result => {
+            return this.rest.patch(this.api.revoke(id), {title: result.what, comment: result.comment}).toPromise();
         });
     }
 

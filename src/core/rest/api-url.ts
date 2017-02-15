@@ -58,6 +58,10 @@ export class ApiUrl {
         return `${this.item(id)}?op=SUBMIT`;
     }
 
+    revoke(id: any) {
+        return `${this.item(id)}/workitems/undefined?op=REVOKE`;
+    }
+
     checkers(id: any): string {
         return `${this.item(id)}/checkers`;
     }

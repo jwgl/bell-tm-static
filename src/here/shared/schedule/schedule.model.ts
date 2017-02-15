@@ -1,6 +1,11 @@
 import * as _ from 'lodash';
 
-import {matchOddEven, oddEvenLabel} from 'core/utils';
+import {
+    dayOfWeekText,
+    matchOddEven,
+    sectionRangeText,
+    weekRangeText,
+} from 'core/utils';
 
 export const SPANS = {
     1  : {span: 4, label: '上午'},
@@ -72,20 +77,15 @@ export class Schedule {
     }
 
     get weeksLabel(): string {
-        return this.oddEven
-            ? `${this.startWeek}-${this.endWeek}周（${oddEvenLabel(this.oddEven)}）`
-            : `${this.startWeek}-${this.endWeek}周`;
+        return weekRangeText(this);
     }
 
     get dayOfWeekLabel(): string {
-        const days = ' 一二三四五六日';
-        return `周${days[this.dayOfWeek]}`;
+        return `周${dayOfWeekText(this.dayOfWeek)}`;
     }
 
     get sectionsLabel(): string {
-        return this.totalSection === 1
-            ? `第${this.startSection}节`
-            : `${this.startSection}-${this.startSection + this.totalSection - 1}节`;
+        return sectionRangeText(this);
     }
 
     get courseLabel(): string {

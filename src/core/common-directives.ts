@@ -21,6 +21,7 @@ import {CheckboxSelectorComponent} from './components/checkbox-selector';
 import {FormTitleComponent} from './components/form-title';
 import {FromNowComponent} from './components/from-now';
 import {PagerComponent} from './components/pager';
+import {RemoveItemComponent} from './components/remove-item';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {ActionClassPipe, ActionNamePipe} from './pipes/audit-action';
@@ -47,6 +48,7 @@ const CORE_DIRECTIVES: any[] = [
     CheckboxSelectorComponent,
     PagerComponent,
     FormTitleComponent,
+    RemoveItemComponent,
     // bootstrap form directives
     FormDirective,
     FormControlDirective,

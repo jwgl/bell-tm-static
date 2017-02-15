@@ -54,6 +54,7 @@ export class FindPlaceDialog extends BaseDialog {
     _bookingDay: BookingDayOption;
 
     places: any[] = [];
+    finding = false;
 
     constructor(private service: BookingFormService) {
         super();
@@ -77,6 +78,7 @@ export class FindPlaceDialog extends BaseDialog {
             this.queryOptions.endWeek = newValue;
         }
         this.queryOptions.startWeek = newValue;
+        this.places = [];
     }
 
     endWeekChanged(newValue: number) {
@@ -84,9 +86,11 @@ export class FindPlaceDialog extends BaseDialog {
             this.queryOptions.startWeek = newValue;
         }
         this.queryOptions.endWeek = newValue;
+        this.places = [];
     }
 
     findPlace() {
+        this.finding = true;
         this.service.findPlace({
             startWeek: this.queryOptions.startWeek,
             endWeek: this.queryOptions.endWeek,
@@ -97,6 +101,7 @@ export class FindPlaceDialog extends BaseDialog {
         }).subscribe((data: any[]) => {
             this.queryOptionsSnapshot = _.clone(this.queryOptions);
             this.places = data;
+            this.finding = false;
         });
     }
 
@@ -108,6 +113,10 @@ export class FindPlaceDialog extends BaseDialog {
         if (!(event.target instanceof HTMLInputElement)) {
             place.selected = !place.selected;
         }
+    }
+
+    clearData() {
+        this.places = [];
     }
 
     protected onOpening(): Observable<any> {

@@ -6,7 +6,7 @@ export function matchOddEven(oddEven: number, week: number): boolean {
            oddEven === 2 && week % 2 === 0;
 }
 
-export function oddEvenLabel(value: number) {
+export function oddEvenText(value: number) {
     if (value >= 1 && value <= 2) {
         return OddEven[value];
     } else {

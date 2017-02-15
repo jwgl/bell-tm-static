@@ -57,6 +57,14 @@ export class BookingApprovalItemComponent {
         });
     }
 
+    revoke() {
+        this.workflow.revoke(this.form.id, this.form.title).then(() => {
+            this.loadData();
+        }, (error) => {
+            alert(error.json().message);
+        });
+    }
+
     showWorkitems() {
         this.workflow.workitems(this.form.workflowInstanceId);
     }

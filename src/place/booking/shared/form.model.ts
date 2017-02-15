@@ -1,3 +1,5 @@
+import {dayOfWeekText, weekRangeText} from 'core/utils';
+
 export interface BookingSection {
     id: number;
     name: string;
@@ -79,16 +81,8 @@ export class BookingItem {
         this.occurpied = dto.occurpied;
     }
 
-    get weeks(): string {
-        if (this.startWeek === this.endWeek) {
-            return `第${this.startWeek}周`;
-        } else {
-            const oddEvenString = ' 单双';
-            if (this.oddEven === 0) {
-                return `${this.startWeek}-${this.endWeek}周`;
-            } else {
-                return `${this.startWeek}-${this.endWeek}周（${oddEvenString[this.oddEven]}）`;
-            }
-        }
+    toString(): string {
+        return `${weekRangeText(this)} 星期${dayOfWeekText(this.dayOfWeek)} ${this.section.name} ` +
+               `${this.place.name}（${this.place.type} / ${this.place.seat}座）`;
     }
 }
