@@ -7,19 +7,16 @@ import * as _ from 'lodash';
 
 import {CheckboxSelectorComponent} from 'core/common-directives';
 import {BaseDialog} from 'core/dialogs';
-import {Rest} from 'core/rest';
+
+import {BookingReportService} from '../report.service';
 
 @Component({
     templateUrl: 'form-select.dialog.html',
 })
-export class ReissueFormSelectDialog extends BaseDialog {
+export class BookingFormSelectDialog extends BaseDialog {
     @ViewChildren(CheckboxSelectorComponent) selectors: QueryList<CheckboxSelectorComponent>;
 
-    constructor(
-        private rest: Rest,
-        @Inject('REISSUES_API_URL')
-        private reissuesApiUrl: string,
-    ) {
+    constructor(private service: BookingReportService) {
         super();
     }
 
@@ -28,12 +25,12 @@ export class ReissueFormSelectDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get(`${this.reissuesApiUrl}?status=CHECKED`).do((result: any) => {
+        return this.service.unreportedForms().do(result => {
             // 删除已添加的申请
             result.forms = _.differenceWith(
                 result.forms,
-                this.options.order.items,
-                (form: any, item: any) => form.id === item.formId,
+                this.options.report.items,
+                (form: any, item: any) => form.formId === item.formId,
             );
         });
     }

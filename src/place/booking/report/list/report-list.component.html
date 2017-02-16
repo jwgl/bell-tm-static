@@ -1,0 +1,23 @@
+<div class="btn-toolbar">
+    <button routerLink="/create" class="btn btn-primary ml-auto">新建</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>报表编号</th>
+            <th>创建人</th>
+            <th>创建时间</th>
+            <th>修改人</th>
+            <th>修改时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let report of reports">
+            <td><a [routerLink]="['/', report.id]">{{report.id}}</a></td>
+            <td>{{report.creator}}</td>
+            <td>{{report.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
+            <td>{{report.modifier}}</td>
+            <td>{{report.dateModified | date: 'y-MM-dd HH:mm'}}</td>
+        </tr>
+    </tbody>
+</table>

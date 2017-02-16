@@ -4,35 +4,35 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {EditMode} from 'core/constants';
 import {Dialog} from 'core/dialogs';
 
-import {ReissueOrderService} from '../order.service';
-import {ReissueOrder} from '../shared/reissue-order.model';
-import {ReissueFormSelectDialog} from './form-select.dialog';
+import {BookingReportService} from '../report.service';
+import {BookingReport} from '../shared/booking-report.model';
+import {BookingFormSelectDialog} from './form-select.dialog';
 
 @Component({
-    styleUrls: ['order-editor.component.scss'],
-    templateUrl: 'order-editor.component.html',
+    styleUrls: ['report-editor.component.scss'],
+    templateUrl: 'report-editor.component.html',
 })
-export class ReissueOrderEditorComponent {
+export class BookingReportEditorComponent {
     private editMode: EditMode;
-    private vm: ReissueOrder;
+    private vm: BookingReport;
     private saving = false;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private dialog: Dialog,
-        private service: ReissueOrderService,
-        @Inject('REISSUES_WEB_URL')
-        private reissuesWebUrl: String,
+        private service: BookingReportService,
+        @Inject('BOOKINGS_WEB_URL')
+        private bookingsWebUrl: String,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.vm = ReissueOrder.create();
+                this.vm = BookingReport.create();
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(dto => this.vm = ReissueOrder.fromDto(dto));
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.vm = BookingReport.fromDto(dto));
                 break;
         }
     }
@@ -80,7 +80,7 @@ export class ReissueOrderEditorComponent {
     }
 
     addItems() {
-        this.dialog.open(ReissueFormSelectDialog, {order: this.vm}).then((results: any[])  => {
+        this.dialog.open(BookingFormSelectDialog, {report: this.vm}).then((results: any[])  => {
             results.forEach(item => this.vm.addItem(item));
         });
     }

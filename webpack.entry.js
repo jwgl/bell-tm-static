@@ -21,6 +21,8 @@ module.exports = {
     'place/booking/form':        './src/place/booking/form/main.ts',
     'place/booking/check':       './src/place/booking/check/main.ts',
     'place/booking/approval':    './src/place/booking/approval/main.ts',
+    'place/booking/report':      './src/place/booking/report/main.ts',
+    'place/booking/item':        './src/place/booking/item/main.ts',
     'here/rollcall/form':        './src/here/rollcall/form/main.ts',
     'here/leave/form':           './src/here/leave/form/main.ts',
     'here/leave/approval':       './src/here/leave/approval/main.ts',

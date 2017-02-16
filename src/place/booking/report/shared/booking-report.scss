@@ -1,0 +1,40 @@
+@import 'node_modules/bootstrap/scss/_mixins.scss';
+@import 'node_modules/bootstrap/scss/_variables.scss';
+
+label {
+    font-weight: bold;
+}
+
+.form-control-static {
+    display: inline-block;
+    text-decoration: underline;
+    margin-left: 1rem;
+    margin-right: 2rem;
+}
+
+.reason {
+	width: 420px;
+	max-width: 420px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@include media-breakpoint-down(sm) {
+    .reason {
+        width: 80px;
+        max-width: 80px;
+    }
+}
+@include media-breakpoint-down(md) {
+    .reason {
+        width: 140px;
+        max-width: 140px;
+    }
+}
+@include media-breakpoint-down(lg) {
+    .reason {
+        width: 200px;
+        max-width: 300px;
+    }
+}

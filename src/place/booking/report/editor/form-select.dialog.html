@@ -4,19 +4,19 @@
             <thead>
                 <tr>
                     <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
-                    <th>学号</th>
-                    <th>姓名</th>
-                    <th>学院</th>
-                    <th>申请时间</th>
+                    <th>借用单号</th>
+                    <th>借用人</th>
+                    <th>借用单位</th>
+                    <th>审批时间</th>
                 </tr>
             </thead>
             <tbody #tbody>
                 <tr *ngFor="let form of options.data.forms">
                     <td><checkbox-selector [data]="form"></checkbox-selector></td>
-                    <td>{{form.studentId}}</td>
-                    <td>{{form.name}}</td>
+                    <td>{{form.userId}}</td>
+                    <td>{{form.userName}}</td>
                     <td>{{form.department}}</td>
-                    <td>{{form.applyDate | date : 'y-MM-dd HH:mm:ss'}}</td>
+                    <td>{{form.dateApproved | date : 'MM-dd HH:mm'}}</td>
                 </tr>
             </tbody>
 	    </table>

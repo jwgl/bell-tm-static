@@ -3,23 +3,23 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 
-import {ReissueOrderService} from '../order.service';
-import {ReissueOrder} from '../shared/reissue-order.model';
+import {BookingReportService} from '../report.service';
+import {BookingReport} from '../shared/booking-report.model';
 
 @Component({
-    styleUrls: ['order-item.component.scss'],
-    templateUrl: 'order-item.component.html',
+    styleUrls: ['report-item.component.scss'],
+    templateUrl: 'report-item.component.html',
 })
-export class ReissueOrderItemComponent {
+export class BookingReportItemComponent {
     id: string;
-    vm: ReissueOrder;
+    vm: BookingReport;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: ReissueOrderService,
-        @Inject('REISSUES_WEB_URL')
-        private reissuesWebUrl: string,
+        private service: BookingReportService,
+        @Inject('BOOKINGS_WEB_URL')
+        private bookingsWebUrl: string,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -29,12 +29,8 @@ export class ReissueOrderItemComponent {
 
     loadData() {
         this.service.loadItem(this.id).subscribe(dto => {
-            this.vm = ReissueOrder.fromDto(dto);
+            this.vm = BookingReport.fromDto(dto);
         });
-    }
-
-    edit() {
-        this.router.navigate(['/', this.id, 'edit']);
     }
 
     remove() {
@@ -43,13 +39,5 @@ export class ReissueOrderItemComponent {
                 this.router.navigate(['/']);
             });
         });
-    }
-
-    receive() {
-        this.router.navigate(['/', this.id, 'receive']);
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
     }
 }
