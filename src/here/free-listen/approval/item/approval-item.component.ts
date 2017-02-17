@@ -40,7 +40,6 @@ export class FreeListenApprovalItemComponent {
     loadData() {
         this.service.loadItem(this.id, this.wi).subscribe(dto => {
             const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
-            const checkerSchedules: Schedule[] = dto.checkerSchedules.map((s: ScheduleDto) => new Schedule(s));
             const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
 
             this.form = new FreeListenForm(dto.form, studentSchedules);
@@ -49,9 +48,8 @@ export class FreeListenApprovalItemComponent {
             }
 
             studentSchedules.forEach(it => it.belongsTo = 'student');
-            checkerSchedules.forEach(it => it.belongsTo = 'checker');
             departmentSchedules.forEach(it => it.belongsTo = 'department');
-            this.schedules = _.concat(studentSchedules, checkerSchedules, departmentSchedules);
+            this.schedules = _.concat(studentSchedules, departmentSchedules);
         });
     }
 

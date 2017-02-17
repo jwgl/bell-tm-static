@@ -26,8 +26,6 @@ export class FreeFormEditorComponent {
     private saving = false;
     private schedules: Schedule[];
     private term: Term;
-    private selectedTeacher: Teacher;
-    private teachers: Teacher[];
 
     constructor(
         private router: Router,
@@ -55,24 +53,7 @@ export class FreeFormEditorComponent {
         });
         this.form = new FreeListenForm(dto.form, this.schedules);
         this.form.removedItems = [];
-        this.form.existedItems = dto.existedItems.map((item: any) => {
-            const freeItem = new FreeListenItem(this.form, item);
-            freeItem.schedule = this.schedules.find(s => s.id === item.taskScheduleId);
-            return freeItem;
-        });
         this.term = dto.term;
-
-        this.teachers = _.chain(this.schedules)
-                         .map(it => ({id: it.courseTeacherId, name: it.courseTeacherName}))
-                         .uniqBy(it => it.id)
-                         .sort((a, b) => a.name.localeCompare(b.name))
-                         .value();
-
-        if (this.form.checkerId) {
-            this.selectedTeacher = this.teachers.find(it => it.id === this.form.checkerId);
-        } else {
-            this.selectedTeacher = this.teachers[0];
-        }
     }
 
     cancel() {
@@ -115,5 +96,15 @@ export class FreeFormEditorComponent {
             this.saving = false;
             alert(error.json().message);
         });
+    }
+
+    scheduleClass(schedule: Schedule) {
+        return this.form.scheduleSelected(schedule)
+             ? 'btn-danger'
+             : this.form.scheduleApproved(schedule)
+             ? 'btn-success'
+             : this.form.scheduleExisted(schedule)
+             ? 'btn-info'
+             : 'btn-secondary';
     }
 }

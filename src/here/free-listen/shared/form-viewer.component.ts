@@ -16,13 +16,15 @@ export class FreeFormViewerComponent {
 
     getScheduleClass(schedule: Schedule) {
         switch (schedule.belongsTo) {
-            case 'checker':
-                return ['bg-danger', 'text-white'];
             case 'department':
                 return ['bg-warning', 'text-white'];
             case 'student':
                 return this.form.scheduleSelected(schedule)
+                     ? ['bg-danger', 'text-white']
+                     : this.form.scheduleApproved(schedule)
                      ? ['bg-success', 'text-white']
+                     : this.form.scheduleExisted(schedule)
+                     ? ['bg-info', 'text-white']
                      : [];
         }
     }

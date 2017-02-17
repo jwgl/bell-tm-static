@@ -30,15 +30,13 @@ export class FreeListenItemComponent {
         this.id = elementRef.nativeElement.getAttribute('id');
         this.service.loadItem(this.id).subscribe(dto => {
             const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
-            const checkerSchedules: Schedule[] = dto.checkerSchedules.map((s: ScheduleDto) => new Schedule(s));
             const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
 
             this.form = new FreeListenForm(dto.form, studentSchedules);
 
             studentSchedules.forEach(it => it.belongsTo = 'student');
-            checkerSchedules.forEach(it => it.belongsTo = 'checker');
             departmentSchedules.forEach(it => it.belongsTo = 'department');
-            this.schedules = _.concat(studentSchedules, checkerSchedules, departmentSchedules);
+            this.schedules = _.concat(studentSchedules, departmentSchedules);
         }, (error) => {
             if (error.status === 403) {
                 alert('无权查看');

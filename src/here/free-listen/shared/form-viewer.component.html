@@ -24,10 +24,11 @@
         </simple-schedule>
         <div>
             图例：
-            <span class="btn btn-success btn-sm">免听申请项</span>
-            <span class="btn btn-secondary btn-sm">学生课表</span>
-            <span class="btn btn-danger btn-sm">主讲教师课表</span>
-            <span class="btn btn-warning btn-sm">其它教师课表</span>
+            <span class="btn btn-sm btn-secondary">学生课表</span>
+            <span class="btn btn-sm btn-danger">当前申请</span>
+            <span class="btn btn-sm btn-info">其它申请（未审批）</span>
+            <span class="btn btn-sm btn-success">其它申请（已审批）</span>
+            <span class="btn btn-sm btn-warning">其它教学班</span>
         </div>
         <ul>
             <li *ngFor="let item of form.items">{{item}}</li>

@@ -32,16 +32,15 @@ export class FreeFormItemComponent {
     loadData(id: number) {
         this.service.loadItem(id).subscribe(dto => {
             const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
-            const checkerSchedules: Schedule[] = dto.checkerSchedules.map((s: ScheduleDto) => new Schedule(s));
             const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
 
             this.form = new FreeListenForm(dto.form, studentSchedules);
             this.form.editable = dto.form.editable;
 
             studentSchedules.forEach(it => it.belongsTo = 'student');
-            checkerSchedules.forEach(it => it.belongsTo = 'checker');
+
             departmentSchedules.forEach(it => it.belongsTo = 'department');
-            this.schedules = _.concat(studentSchedules, checkerSchedules, departmentSchedules);
+            this.schedules = _.concat(studentSchedules, departmentSchedules);
         });
     }
 
