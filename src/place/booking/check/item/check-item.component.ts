@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {Workflow} from 'core/workflow';
@@ -11,7 +11,6 @@ import {BookingCheckService} from '../check.service';
  */
 @Component({
     templateUrl: 'check-item.component.html',
-
 })
 export class BookingCheckItemComponent {
     form: BookingForm;

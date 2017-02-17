@@ -1,0 +1,28 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="/">取消</button>
+        <button class="btn btn-primary" (click)="save()">保存</button>
+    </div>
+</div>
+<div class="offset-lg-3 col-lg-6">
+    <form class="form-horizontal" *ngIf="user">
+        <form-field label="编号">
+            <p class="form-control-static">{{user.id}}</p>
+        </form-field>
+        <form-field label="姓名">
+            <p class="form-control-static">{{user.name}}</p>
+        </form-field>
+        <form-field label="电子邮箱">
+            <input class="form-control" name="email" [(ngModel)]="user.email">
+        </form-field>
+        <form-field label="办公电话">
+            <input class="form-control" name="officePhone" [(ngModel)]="user.officePhone">
+        </form-field>
+        <form-field label="移动电话">
+            <input class="form-control" name="longPhone" [(ngModel)]="user.longPhone">
+        </form-field>
+        <form-field label="手机短号">
+            <input class="form-control" name="shortPhone" [(ngModel)]="user.shortPhone">
+        </form-field>
+    </form>
+</div>
