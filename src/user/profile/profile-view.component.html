@@ -14,7 +14,7 @@
         <form-field label="电子邮箱">
             <p class="form-control-static">{{user.email || '<空>'}}</p>
         </form-field>
-        <form-field label="办公电话">
+        <form-field label="办公电话" *ngIf="user.userType != 'STUDENT'">
             <p class="form-control-static">{{user.officePhone || '<空>'}}</p>
         </form-field>
         <form-field label="移动电话">

@@ -15,7 +15,7 @@
         <form-field label="电子邮箱">
             <input class="form-control" name="email" [(ngModel)]="user.email">
         </form-field>
-        <form-field label="办公电话">
+        <form-field label="办公电话" *ngIf="user.userType != 'STUDENT'">
             <input class="form-control" name="officePhone" [(ngModel)]="user.officePhone">
         </form-field>
         <form-field label="移动电话">
