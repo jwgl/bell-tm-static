@@ -1,15 +1,22 @@
-<h3><span>{{form.title}}</span></h3>
+<form-title>{{form.title}}</form-title>
 <form class="form-horizontal offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
-    <form-field-2>
-        <p class="form-control-static form-field-left" label="借用人">{{form.userName}}</p>
-        <p class="form-control-static form-field-right" label="联系电话">{{form.phoneNumber}}</p>
-    </form-field-2>
-    <form-field-2>
-        <p class="form-control-static form-field-left" label="借用单位">{{form.departmentName}}</p>
-        <p class="form-control-static form-field-right" label="借用类别">{{form.bookingTypeName}}</p>
-    </form-field-2>
+    <form-field label="借用单位">
+        <p class="form-control-static" >{{form.departmentName}}</p>
+    </form-field>
+    <form-field  label="借用类别">
+        <p class="form-control-static">{{form.bookingTypeName}}</p>
+    </form-field>
     <form-field label="借用事由">
         <p class="form-control-static">{{form.reason}}</p>
+    </form-field>
+    <form-field label="借用人">
+        <p class="form-control-static">
+            <ng-container *ngIf="form.extraInfo">{{form.extraInfo.join(' ')}}</ng-container>
+            {{form.userName}}
+        </p>
+    </form-field>
+    <form-field label="联系电话">
+        <p class="form-control-static">{{form.phoneNumber}}</p>
     </form-field>
     <form-field label="借用明细">
         <ul *ngIf="form.items.length > 0; else prompt">

@@ -15,6 +15,7 @@ export class BookingForm {
     term: number;
     userId: string;
     userName: string;
+    extraInfo: string[];
     phoneNumber: string;
     departmentId: string;
     departmentName: string;
@@ -31,6 +32,7 @@ export class BookingForm {
         this.term = dto.term;
         this.userId = dto.userId;
         this.userName = dto.userName;
+        this.extraInfo = dto.extraInfo;
         this.phoneNumber = dto.phoneNumber;
         this.departmentId = dto.departmentId;
         this.departmentName = dto.departmentName;
