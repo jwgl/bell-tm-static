@@ -89,3 +89,19 @@ export class FreeListenItem {
              + `${this.schedule.teacherName}`;
     }
 }
+
+export class FreeListenConfig {
+    startDate: Date;
+    endDate: Date;
+    today: Date;
+
+    constructor(dto: any) {
+        this.startDate = new Date(dto.startDate);
+        this.endDate = new Date(dto.endDate);
+        this.today = new Date(dto.today);
+    }
+
+    get isOpening(): boolean {
+        return this.today >= this.startDate && this.today <= this.endDate;
+    }
+}

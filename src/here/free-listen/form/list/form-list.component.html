@@ -1,8 +1,13 @@
-<div class="btn-toolbar">
+<div class="btn-toolbar" *ngIf="config && config.isOpening; else close">
     <div class="btn-group ml-auto">
         <button class="btn btn-primary" routerLink="/create">新建</button>
     </div>
 </div>
+<template #close>
+    <div class="alert alert-warning" *ngIf="config">
+        免听申请时间为{{config.startDate | date: 'y-MM-dd'}} 至 {{config.endDate | date: 'y-MM-dd'}}
+    </div>
+</template>
 <table class="table" *ngIf="forms">
     <thead>
         <tr>
