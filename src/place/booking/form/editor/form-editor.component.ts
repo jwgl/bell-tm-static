@@ -49,6 +49,7 @@ export class BookingFormEditorComponent {
         this.findPlaceOptions.placeTypes = dto.placeTypes;
         this.findPlaceOptions.sections = dto.sections;
         this.findPlaceOptions.bookingDays = dto.bookingDays;
+        this.findPlaceOptions.today = dto.today;
     }
 
     onDepartmentChanged(departmentId: string) {

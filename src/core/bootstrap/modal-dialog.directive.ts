@@ -62,6 +62,13 @@ export class ModalBodyDirective {}
 
 @Directive({
     selector: 'modal-footer',
-    host: {'[class]': '"modal-footer"'},
+    host: {'[class]': 'footerClass'},
 })
-export class ModalFooterDirective {}
+export class ModalFooterDirective {
+    // IE bug, when justify-content: flex-end, margin: auto does not work
+    @Input()fix: boolean;
+
+    get footerClass(): string {
+        return this.fix ? 'modal-footer justify-content-start' : 'modal-footer';
+    }
+}

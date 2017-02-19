@@ -8,7 +8,7 @@
             <button class='btn btn-primary' (click)="save()" [disabled]="saving || !form.isValid()">保存</button>
         </div>
     </div>
-    <h3><span>{{form.title}}</span></h3>
+    <form-title>{{form.title}}</form-title>
     <form class="form-horizontal offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
         <form-field-2>
             <select class="form-control form-field-left" label="借用单位" name="department" [(ngModel)]="form.departmentId" (ngModelChange)="onDepartmentChanged($event)">

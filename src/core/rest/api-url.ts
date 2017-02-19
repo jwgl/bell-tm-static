@@ -86,7 +86,7 @@ export class ApiUrl {
         const search: string[] = [];
         for (const key in options) {
             if (options.hasOwnProperty(key)) {
-                search.push(`${key}=${options[key]}`);
+                search.push(`${key}=${encodeURI(options[key])}`);
             }
         }
 
