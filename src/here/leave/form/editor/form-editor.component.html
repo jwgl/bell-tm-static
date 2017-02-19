@@ -6,30 +6,28 @@
         </div>
     </div>
     <form-title>{{form.title}}</form-title>
-    <div class="row">
-        <div class="col-md-9">
-            <form class="form-horizontal">
-                <form-field label="请假类型">
-                    <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type">
-                            {{leaveType.label}}
-                        </label>
-                    </div>
-                </form-field>
-                <form-field label="请假事由">
-                    <textarea class="form-control" name="reason" rows="4"
-                        [(ngModel)]="form.reason"
-                        maxlength="200" minlength="10"
-                        required
-                        #reason="ngModel"></textarea>
-                    <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
-                        <span *ngIf="reason.errors?.required">请假事由不能为空。</span>
-                        <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
-                        <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
-                    </p>
-                </form-field>
-            </form>
+    <form class="form-horizontal">
+        <form-field label="请假类型">
+            <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
+                <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type">
+                    {{leaveType.label}}
+                </label>
+            </div>
+        </form-field>
+        <form-field label="请假事由">
+            <textarea class="form-control" name="reason" rows="4"
+                [(ngModel)]="form.reason"
+                maxlength="200" minlength="10"
+                required
+                #reason="ngModel"></textarea>
+            <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
+                <span *ngIf="reason.errors?.required">请假事由不能为空。</span>
+                <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+            </p>
+        </form-field>
+        <form-field label="请假明细">
             <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" size="sm">
                 <template #weekTabTpl let-week="week">
                     {{week}}<ng-container *ngIf="form.containsWeek(week)">*</ng-container>
@@ -57,11 +55,9 @@
                     </button>
                 </template>
             </tabed-schedule>
-        </div>
-        <div class="col-md-3">
             <ul>
                 <li *ngFor="let item of form.items">{{item}}</li>
             </ul>
-        </div>
-    </div>
+        </form-field>
+    </form>
 </ng-container>
