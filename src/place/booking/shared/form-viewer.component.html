@@ -20,7 +20,10 @@
     </form-field>
     <form-field label="借用明细">
         <ul *ngIf="form.items.length > 0; else prompt">
-            <li *ngFor="let item of form.items">{{item}}</li>
+            <li *ngFor="let item of form.items">
+                {{item}}
+                <span *ngIf="item.occupied" class="badge badge-danger">已占用</span>
+            </li>
         </ul>
     </form-field>
 </form>

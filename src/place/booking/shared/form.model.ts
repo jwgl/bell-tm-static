@@ -1,4 +1,5 @@
 import {dayOfWeekText, weekRangeText} from 'core/utils';
+import * as _ from 'lodash';
 
 export interface BookingSection {
     id: number;
@@ -48,6 +49,10 @@ export class BookingForm {
     get title(): string {
         return this.id ? `教室借用单#${this.id}` : '教室借用单';
     }
+
+    get occupied(): boolean {
+        return _.some(this.items, it => it.occupied);
+    }
 }
 
 /* tslint:disable:max-classes-per-file */
@@ -65,7 +70,7 @@ export class BookingItem {
     oddEven: number;
     dayOfWeek: number;
     section: BookingSection;
-    occurpied: boolean;
+    occupied: boolean;
 
     constructor(form: BookingForm, dto: any) {
         this.form = form;
@@ -80,7 +85,7 @@ export class BookingItem {
         } else {
             this.section = dto.section;
         }
-        this.occurpied = dto.occurpied;
+        this.occupied = dto.occupied;
     }
 
     toString(): string {

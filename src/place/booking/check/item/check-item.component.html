@@ -5,7 +5,7 @@
         </div>
         <div class="btn-group" *ngIf="form.status === 'SUBMITTED'">
             <button class="btn btn-secondary btn-warning" (click)="reject()">退回</button>
-            <button class="btn btn-secondary btn-success" (click)="accept()">同意</button>
+            <button class="btn btn-secondary btn-success" (click)="accept()" [disabled]="form.occupied">同意</button>
         </div>
     </div>
     <booking-form-viewer [form]="form"></booking-form-viewer>

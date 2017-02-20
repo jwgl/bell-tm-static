@@ -6,8 +6,6 @@ declare module '../../shared/form.model' {
         addItem(dto: any): void;
         removeItem(item: BookingItem): void;
         conflict(item: BookingItem): boolean;
-        occupied(): boolean;
-        getOcuupiedItem(): number[];
         isValid(): boolean;
         toServerDto(): any;
         getAddedItems(): any[];
@@ -41,14 +39,6 @@ BookingForm.prototype.conflict = function(this: BookingForm, item: BookingItem):
             && it.endWeek >= item.startWeek
             && _.intersection(it.section.includes, item.section.includes).length > 0;
     });
-};
-
-BookingForm.prototype.occupied = function(this: BookingForm): boolean {
-    return this.items.some(it => it.occurpied);
-};
-
-BookingForm.prototype.getOcuupiedItem = function(this: BookingForm): number[] {
-    return this.items.filter(it => it.occurpied).map(it => it.id);
 };
 
 BookingForm.prototype.isValid = function(this: BookingForm): boolean {

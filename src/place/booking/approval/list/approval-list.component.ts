@@ -12,8 +12,8 @@ import {BookingApprovalService} from '../approval.service';
 })
 export class BookingApprovalListComponent {
     statuses: any[] = [
-        {status: 'PENDING',   label: '待审核', class: 'badge-success'},
-        {status: 'PROCESSED', label: '已审核', class: 'badge-danger'},
+        {status: 'PENDING',   label: '待审批', class: 'badge-success'},
+        {status: 'PROCESSED', label: '已审批', class: 'badge-danger'},
         {status: 'UNCHECKED', label: '未审核', class: 'badge-warning'},
     ];
 
