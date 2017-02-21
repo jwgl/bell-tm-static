@@ -1,15 +1,11 @@
 <ng-container *ngIf="form">
     <div class="btn-toolbar">
-        <div class="btn-group">
-            <button class="btn btn-secondary" (click)="returnList()">返回列表</button>
-        </div>
-        <div class="btn-group ml-2">
-            <button class="btn btn-secondary" (click)="showWorkitems()" [hidden]="!form.workflowInstanceId">查看流程</button>
-        </div>
+        <button class="btn btn-secondary mr-2" (click)="returnList()">返回列表</button>
+        <button [workflow-workitems]="form.workflowInstanceId">查看流程</button>
         <div class="btn-group ml-auto" *ngIf="form.editable" >
             <button class="btn btn-secondary" (click)="edit()">编辑</button>
             <button class="btn btn-secondary" (click)="remove()">删除</button>
-            <button class="btn btn-primary" (click)="submit()">提交</button>
+            <button [workflow-submit]="submitOptions" (submitted)="loadData(form.id)">提交</button>
         </div>
         <div class="btn-group ml-auto" *ngIf="form.status === 'APPROVED'">
             <button class="btn btn-primary" (click)="finish()">销假</button>

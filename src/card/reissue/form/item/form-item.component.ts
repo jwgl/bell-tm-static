@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
-import {Workflow} from 'core/workflow';
+import {SubmitOptions} from 'core/workflow';
 
 import {ReissueFormService} from '../form.service';
 
@@ -11,43 +11,32 @@ import {ReissueFormService} from '../form.service';
     templateUrl: 'form-item.component.html',
 })
 export class ReissueFormItemComponent {
-    id: string;
-    vm: any;
+    form: any;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private workflow: Workflow,
         private dialog: CommonDialog,
         private service: ReissueFormService) {
         this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.loadData();
+            this.loadData(params['id']);
         });
     }
 
-    loadData() {
-        this.service.loadItem(this.id).subscribe(dto => {
-            this.vm = dto;
+    loadData(id: string) {
+        this.service.loadItem(id).subscribe(dto => {
+            this.form = dto;
         });
     }
 
     edit() {
-        this.router.navigate(['/', this.id, 'edit']);
+        this.router.navigate(['/', this.form.id, 'edit']);
     }
 
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.service.delete(this.id).subscribe(() => {
+            this.service.delete(this.form.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
-        });
-    }
-
-    submit() {
-        this.workflow.submit(this.id, 'approve', '补办学生证申请').then(() => {
-            this.loadData();
-        }, (error) => {
-            alert(error.json().message);
         });
     }
 
@@ -55,7 +44,11 @@ export class ReissueFormItemComponent {
         this.router.navigate(['/']);
     }
 
-    showWorkitems() {
-        this.workflow.workitems(this.vm.workflowInstanceId);
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.form.id,
+            type: 'approve',
+            what: this.form.title,
+        };
     }
 }

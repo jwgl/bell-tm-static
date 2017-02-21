@@ -13,7 +13,7 @@ import {VisionReviewComponent} from './review.component';
     bootstrap: [VisionReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/plan/visions'),
+        RestModule.for('/api/plan/reviewers/${userId}/visions'),
         CommonDirectivesModule,
         WorkflowModule,
         VisionViewerModule,

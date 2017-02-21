@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
 import {CommonDialog} from 'core/common-dialogs';
-import {Workflow} from 'core/workflow';
+import {SubmitOptions} from 'core/workflow';
 
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm} from '../../shared/form.model';
@@ -21,7 +21,6 @@ export class FreeFormItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private workflow: Workflow,
         private dialog: CommonDialog,
         private service: FreeListenFormService) {
         this.route.params.subscribe(params => {
@@ -56,19 +55,15 @@ export class FreeFormItemComponent {
         });
     }
 
-    submit() {
-        this.workflow.submit(this.form.id, 'check', this.form.title).then(() => {
-            this.loadData(this.form.id);
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
     returnList() {
         this.router.navigate(['/']);
     }
 
-    showWorkitems() {
-        this.workflow.workitems(this.form.workflowInstanceId);
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.form.id,
+            type: 'check',
+            what: this.form.title,
+        };
     }
 }

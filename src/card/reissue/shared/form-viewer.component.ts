@@ -6,5 +6,5 @@ import {Component, Input} from '@angular/core';
     templateUrl: 'form-viewer.component.html',
 })
 export class ReissueFormViewerComponent {
-    @Input() vm: any;
+    @Input() form: any;
 }

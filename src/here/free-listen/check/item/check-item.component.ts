@@ -2,7 +2,7 @@ import {Component, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from 'lodash';
 
-import {Workflow} from 'core/workflow';
+import {ReviewOptions} from 'core/workflow';
 
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm} from '../../shared/form.model';
@@ -10,12 +10,8 @@ import {FreeListenCheckService} from '../check.service';
 
 import '../../shared/form-viewer.model';
 
-/**
- * 审核补办学生证申请项。
- */
 @Component({
     templateUrl: 'check-item.component.html',
-
 })
 export class FreeListenCheckItemComponent {
     schedules: Schedule[];
@@ -25,10 +21,8 @@ export class FreeListenCheckItemComponent {
     private wi: string;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private service: FreeListenCheckService,
-        private workflow: Workflow,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -53,23 +47,16 @@ export class FreeListenCheckItemComponent {
         });
     }
 
-    accept() {
-        this.workflow.accept(this.id, this.wi, 'check', this.form.title).then(() => {
-            this.loadData();
-        }, (error) => {
-            alert(error.json().message);
-        });
+    get reviewable(): boolean {
+        return this.wi && this.form.status === 'SUBMITTED';
     }
 
-    reject(title: string) {
-        this.workflow.reject(this.form.id, this.wi, 'check', this.form.title).then(() => {
-            this.loadData();
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
-    showWorkitems() {
-        this.workflow.workitems(this.form.workflowInstanceId);
+    get reviewOptions(): ReviewOptions {
+        return {
+            id: this.id,
+            wi: this.wi,
+            type: 'check',
+            what: this.form.title,
+        };
     }
 }

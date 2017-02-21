@@ -12,7 +12,7 @@ import {SchemeReviewComponent} from './review.component';
     bootstrap: [SchemeReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/plan/schemes'),
+        RestModule.for('/api/plan/reviewers/${userId}/schemes'),
         WorkflowModule,
         SchemeInternalViewerModule,
     ],

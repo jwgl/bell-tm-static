@@ -22,7 +22,7 @@ export class Dialog {
         private componentFactoryResolver: ComponentFactoryResolver,
     ) {}
 
-    open(dialogType: Type<any>, options: any = {}): Promise<any> {
+    open(dialogType: Type<any>, options?: any, onclose?: () => void): Promise<any> {
         return new Promise((resolve, reject) => {
             const location = this.getRootViewContainerNode();
             const componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
@@ -41,6 +41,9 @@ export class Dialog {
             instance.options = options;
             instance.closed.subscribe((value: any) => {
                 componentRef.destroy();
+                if (onclose) {
+                    onclose();
+                }
             });
             instance.confirm.subscribe((value: any) => {
                 resolve(value);

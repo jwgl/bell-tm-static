@@ -11,6 +11,7 @@ import {FreeListenFormService} from '../form.service';
 export class FreeListenFormListComponent {
     config: FreeListenConfig;
     forms: any[];
+    notice: string;
     count: number;
     max = 10;
     private offset: number;
@@ -29,6 +30,7 @@ export class FreeListenFormListComponent {
             this.count = data.count;
             this.forms = data.forms;
             this.config = new FreeListenConfig(data.config);
+            this.notice = data.notice;
         });
     }
 

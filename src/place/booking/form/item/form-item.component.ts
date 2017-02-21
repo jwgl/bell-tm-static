@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
-import {Workflow} from 'core/workflow';
+import {SubmitOptions} from 'core/workflow';
 
 import {BookingForm} from '../../shared/form.model';
 import {BookingFormService} from '../form.service';
@@ -16,7 +16,6 @@ export class BookingFormItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private workflow: Workflow,
         private dialog: CommonDialog,
         private service: BookingFormService) {
         this.route.params.subscribe(params => {
@@ -43,19 +42,15 @@ export class BookingFormItemComponent {
         });
     }
 
-    submit() {
-        this.workflow.submit(this.form.id, 'check', this.form.title).then(() => {
-            this.loadData(this.form.id);
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
     returnList() {
         this.router.navigate(['/']);
     }
 
-    showWorkitems() {
-        this.workflow.workitems(this.form.workflowInstanceId);
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.form.id,
+            type: 'check',
+            what: this.form.title,
+        };
     }
 }

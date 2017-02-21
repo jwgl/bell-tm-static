@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
-import {Workflow} from 'core/workflow';
+import {SubmitOptions} from 'core/workflow';
 
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {LeaveForm} from '../../shared/form.model';
@@ -17,7 +17,6 @@ export class LeaveFormItemComponent {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private workflow: Workflow,
         private dialog: CommonDialog,
         private service: LeaveFormService) {
         this.route.params.subscribe(params => {
@@ -45,14 +44,6 @@ export class LeaveFormItemComponent {
         });
     }
 
-    submit() {
-        this.workflow.submit(this.form.id, 'approve', this.form.title).then(() => {
-            this.loadData(this.form.id);
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
     finish() {
         this.service.finish(this.form.id).subscribe(() => {
             this.loadData(this.form.id);
@@ -65,7 +56,11 @@ export class LeaveFormItemComponent {
         this.router.navigate(['/']);
     }
 
-    showWorkitems() {
-        this.workflow.workitems(this.form.workflowInstanceId);
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.form.id,
+            type: 'approve',
+            what: this.form.title,
+        };
     }
 }

@@ -1,8 +1,6 @@
-<div *ngIf="vm">
+<div *ngIf="form">
     <div class="btn-toolbar">
-        <div class="btn-group">
-            <button class="btn btn-secondary" (click)="showWorkitems()" [hidden]="!vm.workflowInstanceId">查看流程</button>
-        </div>
+        <button [workflow-workitems]="form.workflowInstanceId">查看流程</button>
     </div>
-    <reissue-form-viewer [vm]="vm"></reissue-form-viewer>
+    <reissue-form-viewer [form]="form"></reissue-form-viewer>
 </div>

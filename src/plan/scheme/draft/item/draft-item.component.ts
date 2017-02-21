@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
-import {Workflow} from 'core/workflow';
+import {SubmitOptions} from 'core/workflow';
 
 import {toVersionString} from '../../../common/utils';
 import {Scheme} from '../../common/scheme.model';
@@ -14,28 +14,24 @@ import './draft-item.model';
  * 所有者教学计划。
  */
 @Component({
-    selector: 'scheme-draft-item',
     templateUrl: 'draft-item.component.html',
 })
 export class SchemeDraftItemComponent {
-    private id: string;
-    private vm: Scheme;
-    private showDiff = false;
+    vm: Scheme;
+    showDiff = false;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private workflow: Workflow,
         private dialog: CommonDialog,
         private service: SchemeDraftService) {
         this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.loadData();
+            this.loadData(params['id']);
         });
     }
 
-    loadData() {
-        this.service.loadItem(this.id).subscribe(dto => {
+    loadData(id: string) {
+        this.service.loadItem(id).subscribe(dto => {
             this.vm = new Scheme(dto);
             this.vm.editable = dto.editable;
             this.vm.revisable = dto.revisable;
@@ -43,40 +39,23 @@ export class SchemeDraftItemComponent {
     }
 
     edit() {
-        this.router.navigate(['/', this.id, 'edit']);
+        this.router.navigate(['/', this.vm.id, 'edit']);
     }
 
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
-            this.service.delete(this.id).subscribe(() => {
+            this.service.delete(this.vm.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });
     }
 
-    submit() {
-        const errors = this.vm.checkCredit();
-        if (errors.length > 0) {
-            this.dialog.error(errors);
-        } else {
-            this.workflow.submit(this.id, 'check', this.title).then(() => {
-                this.loadData();
-            }, (error) => {
-                alert(error.json().message);
-            });
-        }
-    }
-
     revise() {
-        this.router.navigate(['/', this.id, 'revise']);
+        this.router.navigate(['/', this.vm.id, 'revise']);
     }
 
     returnList() {
         this.router.navigate(['/']);
-    }
-
-    showWorkitems() {
-        this.workflow.workitems(this.vm.workflowInstanceId);
     }
 
     get title(): string {
@@ -89,5 +68,14 @@ export class SchemeDraftItemComponent {
 
     get showDiffLabel(): string {
         return this.showDiff ? '隐藏变更' : '显示变更';
+    }
+
+    get submitOptions(): SubmitOptions {
+        return {
+            id: this.vm.id,
+            type: 'check',
+            what: this.title,
+            validate: this.vm.checkCredit.bind(this.vm),
+        };
     }
 }

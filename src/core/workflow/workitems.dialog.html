@@ -1,6 +1,6 @@
 <modal-dialog title="处理流程">
     <modal-body>
-        <ul *ngIf="options.data" style="max-height: 400px; overflow-y: auto">
+        <ul *ngIf="options.data && options.data.length > 0" style="max-height: 400px; overflow-y: auto">
             <li *ngIf="showLast"><b>{{lastToUser}}</b>{{lastStatus}}</li>
             <li *ngFor="let item of options.data">
                 <div><b>{{item.fromUser}}</b>于{{item.dateCreated | fromNow}}<workitem-status [status]="item.state"></workitem-status></div>

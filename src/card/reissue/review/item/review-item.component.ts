@@ -1,7 +1,7 @@
 import {Component, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {Workflow} from 'core/workflow';
+import {ReviewOptions} from 'core/workflow';
 
 import {CardReissueForm} from '../../shared/reissue-form.model';
 import {ReissueReviewService} from '../review.service';
@@ -17,14 +17,11 @@ export class ReissueReviewItemComponent {
     private id: string;
     private wi: string;
 
-    private vm: CardReissueForm;
+    private form: CardReissueForm;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
-        elementRef: ElementRef,
         private service: ReissueReviewService,
-        private workflow: Workflow,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];
@@ -36,34 +33,23 @@ export class ReissueReviewItemComponent {
 
     loadData() {
         this.service.loadItem(this.id, this.wi).subscribe(dto => {
-            this.vm = new CardReissueForm(dto);
+            this.form = new CardReissueForm(dto);
             if (this.wi === undefined) {
                 this.wi = dto.workitemId;
             }
         });
     }
 
-    accept() {
-        this.workflow.accept(this.id, this.wi, 'approve', this.vm.title).then(() => {
-            this.loadData();
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
-    reject(title: string) {
-        this.workflow.reject(this.vm.id, this.wi, 'approve', this.vm.title).then(() => {
-            this.loadData();
-        }, (error) => {
-            alert(error.json().message);
-        });
-    }
-
     get reviewable(): boolean {
-        return this.vm.status === 'SUBMITTED' && this.wi !== undefined;
+        return this.wi && this.form.status === 'SUBMITTED';
     }
 
-    showWorkitems() {
-        this.workflow.workitems(this.vm.workflowInstanceId);
+    get reviewOptions(): ReviewOptions {
+        return {
+            id: this.id,
+            wi: this.wi,
+            type: 'approve',
+            what: this.form.title,
+        };
     }
 }

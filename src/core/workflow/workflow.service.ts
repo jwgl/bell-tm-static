@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import 'rxjs/add/operator/finally';
 
 import {Dialog} from '../dialogs';
 import {ApiUrl, Rest} from '../rest';
@@ -8,36 +9,108 @@ import {WorkflowRevokeDialog} from './revoke.dialog';
 import {WorkflowSubmitDialog} from './submit.dialog';
 import {WorkflowWorkitemsDialog} from './workitems.dialog';
 
+export interface SubmitOptions {
+    id: any;
+    type: 'check' | 'approve';
+    what: string;
+    validate?: () => string[];
+}
+
+export interface ReviewOptions {
+    id: any;
+    wi: string;
+    type: 'check' | 'approve';
+    what: string;
+}
+
+export interface RevokeOptions {
+    id: any;
+    what: string;
+}
+
 @Injectable()
 export class Workflow {
+    pending = false;
+
     constructor(private dialog: Dialog, private rest: Rest, private api: ApiUrl) {}
 
-    submit(id: any, type: 'check' | 'approve', what: string): Promise<void> {
-        const whoUrl = type === 'check' ? this.api.checkers(id) : this.api.approvers(id);
-        const does = this.typeLabel(type);
-        return this.dialog.open(WorkflowSubmitDialog, {whoUrl, does, what}).then(result => {
-            return this.rest.patch(this.api.submit(id), {title: result.what, to: result.to, comment: result.comment}).toPromise();
+    submit(options: SubmitOptions): Promise<void> {
+        const whoUrl = options.type === 'check' ? this.api.checkers(options.id) : this.api.approvers(options.id);
+        const does = this.typeLabel(options.type);
+        this.pending = true;
+        return this.dialog.open(WorkflowSubmitDialog, {
+            whoUrl,
+            does,
+            what: options.what,
+        }, () => {
+            this.pending = false;
+        }).then(result => {
+            return this.rest.patch(this.api.submit(options.id), {
+                title: result.what,
+                to: result.to,
+                comment: result.comment,
+            }).finally(() => {
+                this.pending = false;
+            }).toPromise();
+        }, () => {
+            this.pending = false;
         });
     }
 
-    accept(id: any, wi: string, type: 'check' | 'approve', what: string): Promise<void> {
-        const whoUrl = type === 'check' ? this.api.approvers(id) : null;
-        const does = this.typeLabel(type);
-        return this.dialog.open(WorkflowAcceptDialog, {whoUrl, does, what}).then(result => {
-            return this.rest.patch(this.api.accept(id, wi), {title: result.what, to: result.to, comment: result.comment}).toPromise();
+    accept(options: ReviewOptions): Promise<void> {
+        const whoUrl = options.type === 'check' ? this.api.approvers(options.id) : null;
+        const does = this.typeLabel(options.type);
+        this.pending = true;
+        return this.dialog.open(WorkflowAcceptDialog, {
+            whoUrl,
+            does,
+            what: options.what,
+        }, () => {
+            this.pending = false;
+        }).then(result => {
+            return this.rest.patch(this.api.accept(options.id, options.wi), {
+                title: result.what,
+                to: result.to,
+                comment: result.comment,
+            }).finally(() => {
+                this.pending = false;
+            }).toPromise();
         });
     }
 
-    reject(id: any, wi: string, type: 'check' | 'approve', what: string): Promise<void> {
-        const does = this.typeLabel(type);
-        return this.dialog.open(WorkflowRejectDialog, {does, what}).then(result => {
-            return this.rest.patch(this.api.reject(id, wi), {title: result.what, comment: result.comment}).toPromise();
+    reject(options: ReviewOptions): Promise<void> {
+        const does = this.typeLabel(options.type);
+        this.pending = true;
+        return this.dialog.open(WorkflowRejectDialog, {
+            does,
+            what: options.what,
+        }, () => {
+            this.pending = false;
+        }).then(result => {
+            return this.rest.patch(this.api.reject(options.id, options.wi), {
+                title: result.what,
+                comment: result.comment,
+            }).finally(() => {
+                this.pending = false;
+            }).toPromise();
         });
     }
 
-    revoke(id: any, what: string): Promise<void> {
-        return this.dialog.open(WorkflowRevokeDialog, {what}).then(result => {
-            return this.rest.patch(this.api.revoke(id), {title: result.what, comment: result.comment}).toPromise();
+    revoke(options: RevokeOptions): Promise<void> {
+        this.pending = true;
+        return this.dialog.open(WorkflowRevokeDialog, {
+            what: options.what,
+        }, () => {
+            this.pending = false;
+        }).then(result => {
+            return this.rest.patch(this.api.revoke(options.id), {
+                title: result.what,
+                comment: result.comment,
+            }).finally(() => {
+                this.pending = false;
+            }).toPromise();
+        }, () => {
+            this.pending = false;
         });
     }
 
