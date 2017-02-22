@@ -52,17 +52,17 @@
     "@types/node": "^7.0.5",
     "@types/webpack": "^2.2.6",
     "angular2-template-loader": "^0.6.2",
-    "awesome-typescript-loader": "^3.0.4",
+    "awesome-typescript-loader": "^3.0.6",
     "copy-webpack-plugin": "^4.0.1",
     "markdown-it": "^8.3.0",
     "node-sass": "^4.5.0",
     "raw-loader": "^0.5.1",
-    "rimraf": "^2.5.4",
-    "sass-loader": "^6.0.1",
+    "rimraf": "^2.6.0",
+    "sass-loader": "^6.0.2",
     "tslint": "^4.4.2",
     "tslint-loader": "^3.4.2",
     "typescript": "^2.1.6",
     "webpack": "^2.2.1",
-    "webpack-merge": "^2.6.1"
+    "webpack-merge": "^3.0.0"
   }
 }
