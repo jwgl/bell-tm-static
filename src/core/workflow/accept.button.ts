@@ -12,15 +12,15 @@ import {ReviewOptions, Workflow} from './workflow.service';
 })
 export class WorkflowAcceptButton {
     @Input('workflow-accept') options: ReviewOptions;
-    @Output() accepted = new EventEmitter<void>();
+    @Output() accepted = new EventEmitter<any>();
 
     constructor(private workflow: Workflow) {}
 
     click() {
-        this.workflow.accept(this.options).then(() => {
-            this.accepted.emit();
+        this.workflow.accept(this.options).then(data => {
+            this.accepted.emit(data);
         }, (error) => {
-            alert(error.json().message);
+            alert(error);
         });
     }
 }

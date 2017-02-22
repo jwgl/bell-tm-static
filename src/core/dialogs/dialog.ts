@@ -22,7 +22,7 @@ export class Dialog {
         private componentFactoryResolver: ComponentFactoryResolver,
     ) {}
 
-    open(dialogType: Type<any>, options?: any, onclose?: () => void): Promise<any> {
+    open(dialogType: Type<any>, options?: any, onCancel?: () => void): Promise<any> {
         return new Promise((resolve, reject) => {
             const location = this.getRootViewContainerNode();
             const componentFactory = this.componentFactoryResolver.resolveComponentFactory(dialogType);
@@ -39,16 +39,18 @@ export class Dialog {
             const instance = componentRef.instance as DynamicDialog;
             instance.nativeElement = componentRootNode;
             instance.options = options;
-            instance.closed.subscribe((value: any) => {
+            instance.closed.subscribe(() => {
                 componentRef.destroy();
-                if (onclose) {
-                    onclose();
-                }
             });
             instance.confirm.subscribe((value: any) => {
                 resolve(value);
             }, (error: any) => {
                 reject(error);
+            });
+            instance.cancel.subscribe(() => {
+                if (onCancel) {
+                    onCancel();
+                }
             });
         });
     };

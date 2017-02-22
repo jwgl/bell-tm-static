@@ -26,18 +26,16 @@ export class LeaveApprovalItemComponent {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.wi = params['wi'];
-            this.loadData();
+            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
         });
     }
 
-    loadData() {
-        this.service.loadItem(this.id, this.wi).subscribe(dto => {
-            const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
-            this.form = new LeaveForm(dto.form, schedules);
-            if (this.wi === undefined) {
-                this.wi = dto.form.workitemId;
-            }
-        });
+    onItemLoaded(dto: any) {
+        const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
+        this.form = new LeaveForm(dto.form, schedules);
+        if (this.wi === undefined) {
+            this.wi = dto.form.workitemId;
+        }
     }
 
     get reviewable(): boolean {

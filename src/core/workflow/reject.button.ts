@@ -12,15 +12,15 @@ import {ReviewOptions, Workflow} from './workflow.service';
 })
 export class WorkflowRejectButton {
     @Input('workflow-reject') options: ReviewOptions;
-    @Output() rejected = new EventEmitter<void>();
+    @Output() rejected = new EventEmitter<any>();
 
     constructor(private workflow: Workflow) {}
 
     click() {
-        this.workflow.reject(this.options).then(() => {
-            this.rejected.emit();
+        this.workflow.reject(this.options).then(data => {
+            this.rejected.emit(data);
         }, (error) => {
-            alert(error.json().message);
+            alert(error);
         });
     }
 }

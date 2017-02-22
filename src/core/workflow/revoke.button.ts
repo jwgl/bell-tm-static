@@ -12,15 +12,15 @@ import {RevokeOptions, Workflow} from './workflow.service';
 })
 export class WorkflowRevokeButton {
     @Input('workflow-revoke') options: RevokeOptions;
-    @Output() accepted = new EventEmitter<void>();
+    @Output() accepted = new EventEmitter<any>();
 
     constructor(private workflow: Workflow) {}
 
     click() {
-        this.workflow.revoke(this.options).then(() => {
-            this.accepted.emit();
+        this.workflow.revoke(this.options).then(data => {
+            this.accepted.emit(data);
         }, (error) => {
-            alert(error.json().message);
+            alert(error);
         });
     }
 }

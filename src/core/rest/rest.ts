@@ -15,18 +15,31 @@ export class Rest {
     }
 
     post(url: string, data: Object): Observable<any> {
-        return this.http.post(url, JSON.stringify(data)).map(res => res.json());
+        this.deleteEmptyProperties(data);
+        return this.http.post(url, data).map(res => res.json());
     }
 
     put(url: string, data: Object): Observable<any> {
-        return this.http.put(url, JSON.stringify(data)).map(res => res.json());
+        this.deleteEmptyProperties(data);
+        return this.http.put(url, data).map(res => res.json());
     }
 
     patch(url: string, data: Object): Observable<any> {
-        return this.http.patch(url, JSON.stringify(data)).map(res => res.json());
+        this.deleteEmptyProperties(data);
+        return this.http.patch(url, data).map(res => res.json());
     }
 
     delete(url: string): Observable<any> {
         return this.http.delete(url).map(res => res.json());
+    }
+
+    private deleteEmptyProperties(data: any) {
+        for (const i in data) {
+            if (data[i] === null || data[i] === undefined) {
+                delete data[i];
+            } else if (typeof data[i] === 'object') {
+                this.deleteEmptyProperties(data[i]);
+            }
+        }
     }
 }

@@ -26,18 +26,15 @@ export class ReissueReviewItemComponent {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.wi = params['wi'];
-            this.loadData();
+            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
         });
-
     }
 
-    loadData() {
-        this.service.loadItem(this.id, this.wi).subscribe(dto => {
-            this.form = new CardReissueForm(dto);
-            if (this.wi === undefined) {
-                this.wi = dto.workitemId;
-            }
-        });
+    onItemLoaded(dto: any) {
+        this.form = new CardReissueForm(dto);
+        if (this.wi === undefined) {
+            this.wi = dto.workitemId;
+        }
     }
 
     get reviewable(): boolean {

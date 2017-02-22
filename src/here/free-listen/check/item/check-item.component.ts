@@ -27,24 +27,22 @@ export class FreeListenCheckItemComponent {
         this.route.params.subscribe(params => {
             this.id = params['id'];
             this.wi = params['wi'];
-            this.loadData();
+            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
         });
     }
 
-    loadData() {
-        this.service.loadItem(this.id, this.wi).subscribe(dto => {
-            const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
-            const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
+    onItemLoaded(dto: any) {
+        const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
+        const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
 
-            this.form = new FreeListenForm(dto.form, studentSchedules);
-            if (this.wi === undefined) {
-                this.wi = dto.form.workitemId;
-            }
+        this.form = new FreeListenForm(dto.form, studentSchedules);
+        if (this.wi === undefined) {
+            this.wi = dto.form.workitemId;
+        }
 
-            studentSchedules.forEach(it => it.belongsTo = 'student');
-            departmentSchedules.forEach(it => it.belongsTo = 'department');
-            this.schedules = _.concat(studentSchedules, departmentSchedules);
-        });
+        studentSchedules.forEach(it => it.belongsTo = 'student');
+        departmentSchedules.forEach(it => it.belongsTo = 'department');
+        this.schedules = _.concat(studentSchedules, departmentSchedules);
     }
 
     get reviewable(): boolean {

@@ -3,8 +3,9 @@ import {Observable} from 'rxjs/Observable';
 
 export interface DynamicDialog {
     nativeElement: any;
-    closed: EventEmitter<any>;
     confirm: EventEmitter<any>;
+    cancel: EventEmitter<void>;
+    closed: EventEmitter<void>;
     options: any;
 }
 
@@ -15,9 +16,11 @@ export class BaseDialog implements DynamicDialog, OnInit {
     confirmed: boolean;
     closed: EventEmitter<void>;
     options: any;
+    cancel: EventEmitter<void>;
 
     constructor() {
         this.confirm = new EventEmitter();
+        this.cancel = new EventEmitter<void>();
         this.closed = new EventEmitter<void>();
     }
 
@@ -29,9 +32,11 @@ export class BaseDialog implements DynamicDialog, OnInit {
         }).on('hide.bs.modal', () => {
             if (this.confirmed) {
                 this.confirm.emit(this.onConfirmed());
+            } else {
+                this.cancel.emit();
             }
         }).on('hidden.bs.modal', () => {
-            this.closed.emit(null);
+            this.closed.emit();
         });
         this.open();
     }

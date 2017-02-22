@@ -22,14 +22,12 @@ export class VisionReviewComponent {
         private api: ApiUrl) {
         this.id = elementRef.nativeElement.getAttribute('id');
         this.wi = elementRef.nativeElement.getAttribute('wi');
-        this.loadData();
+        this.rest.get(this.api.workitem(this.id, this.wi)).subscribe(dto => this.onItemLoaded(dto));
     }
 
-    loadData() {
-        this.rest.get(this.api.workitem(this.id, this.wi)).subscribe(dto => {
-            this.vm = new Vision(dto);
-            this.vm.activity = dto.activity;
-        });
+    onItemLoaded(dto: any) {
+        this.vm = new Vision(dto);
+        this.vm.activity = dto.activity;
     }
 
     get reviewable(): boolean {

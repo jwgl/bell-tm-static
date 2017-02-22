@@ -29,7 +29,7 @@ export class WorkflowSubmitButton {
         this.workflow.submit(this.options).then(() => {
             this.submitted.emit();
         }, (error) => {
-            alert(error.json().message);
+            alert(error.message);
         });
     }
 }
