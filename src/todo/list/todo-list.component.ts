@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 import {BASE_URL} from 'core/rest';
 
@@ -15,13 +15,12 @@ export class TodoListComponent {
         {status: 'closed', label: '已处理', class: 'badge-danger'},
     ];
 
-    private counts: {[key: string]: number};
-    private todos: any[];
-    private status = 'open';
-    private max = 10;
+    status: string;
+    counts: {[key: string]: number};
+    todos: any[];
+    max = 10;
 
     constructor(
-        private router: Router,
         private route: ActivatedRoute,
         private service: TodoService,
         @Inject(BASE_URL) private baseUrl: string,
@@ -35,11 +34,7 @@ export class TodoListComponent {
     }
 
     private loadData(offset: number) {
-        this.service.loadList({
-            is: this.status,
-            max: this.max,
-            offset,
-        }).subscribe(result => {
+        this.service.loadList({is: this.status, max: this.max, offset}).subscribe(result => {
             this.counts = result.counts;
             this.todos = result.todos;
         });

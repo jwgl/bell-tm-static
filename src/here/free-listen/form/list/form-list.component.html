@@ -7,7 +7,7 @@
 <div [markdown]="notice"></div>
 免听申请时间：{{config.startDate | date: 'y-MM-dd'}} 至 {{config.endDate | date: 'y-MM-dd'}}
 </div>
-<table class="table" *ngIf="forms; else empty">
+<table class="table" *ngIf="forms && forms.length > 0">
     <thead>
         <tr>
             <th>查看</th>
@@ -25,11 +25,11 @@
         </tr>
     </tbody>
     <tfoot>
-        <pager [total]="count"
-               [max]="max"
-               [length]="forms.length"
-               (prev)="loadData($event)"
-               (next)="loadData($event)">
-        </pager>
-
+        <tr>
+            <td colspan="4">
+                <pager [total]="count" [max]="max" [length]="forms.length"
+                       (prev)="loadData($event)" (next)="loadData($event)"></pager>
+            </td>
+        </tr>
+    </tfoot>
 </table>

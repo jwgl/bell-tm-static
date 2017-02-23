@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 
 import {LeaveFormService} from '../form.service';
 
@@ -8,28 +7,18 @@ import {LeaveFormService} from '../form.service';
     templateUrl: 'form-list.component.html',
 })
 export class LeaveFormListComponent {
-    private forms: any[];
-    private offset: number;
-    private max = 10;
-    private count: number;
+    forms: any[];
+    count: number;
+    max = 10;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private service: LeaveFormService,
-    ) {
+    constructor(private service: LeaveFormService) {
         this.loadData(0);
     }
 
     loadData(offset: number) {
-        this.offset = offset;
-        this.service.loadList().subscribe(data => {
+        this.service.loadList({offset, max: this.max}).subscribe(data => {
             this.count = data.count;
             this.forms = data.forms;
         });
-    }
-
-    create() {
-        this.router.navigate(['/', 'create']);
     }
 }

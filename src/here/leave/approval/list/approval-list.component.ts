@@ -1,11 +1,8 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 import {LeaveApprovalService} from '../approval.service';
 
-/**
- * 学生请假审批列表。
- */
 @Component({
     styleUrls: ['approval-list.component.scss'],
     templateUrl: 'approval-list.component.html',
@@ -17,17 +14,12 @@ export class LeaveApprovalListComponent {
         {status: 'FINISHED',  label: '已销假', class: 'badge-danger'},
     ];
 
-    private counts: {[key: string]: number};
-    private forms: any[];
-    private status = 'SUBMITTED';
-    private offset: number;
-    private max = 10;
+    status: string;
+    counts: {[key: string]: number};
+    forms: any[];
+    max = 10;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private service: LeaveApprovalService,
-    ) {
+    constructor(private route: ActivatedRoute, private service: LeaveApprovalService) {
         this.route.params.subscribe(params => {
             this.status = params['status'];
             this.loadData(0);
@@ -35,12 +27,7 @@ export class LeaveApprovalListComponent {
     }
 
     loadData(offset: number) {
-        this.offset = offset;
-        this.service.loadList({
-            status: this.status,
-            offset: this.offset,
-            max: this.max,
-        }).subscribe(result => {
+        this.service.loadList({status: this.status, offset, max: this.max}).subscribe(result => {
             this.counts = result.counts;
             this.forms = result.forms;
         });

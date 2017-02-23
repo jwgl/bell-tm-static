@@ -7,9 +7,6 @@ import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {LeaveForm} from '../../shared/form.model';
 import {LeaveApprovalService} from '../approval.service';
 
-/**
- * 学生请假审批项。
- */
 @Component({
     templateUrl: 'approval-item.component.html',
 })

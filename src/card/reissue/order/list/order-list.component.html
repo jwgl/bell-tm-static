@@ -24,4 +24,12 @@
             <td>{{order.dateModified | moment}}</td>
         </tr>
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                <pager [total]="count" [max]="max" [length]="forms.length"
+                       (prev)="loadData($event)" (next)="loadData($event)"></pager>
+            </td>
+        </tr>
+    </tfoot>
 </table>

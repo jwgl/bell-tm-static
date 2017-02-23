@@ -11,7 +11,6 @@ import {BookingApprovalService} from '../approval.service';
  */
 @Component({
     templateUrl: 'approval-item.component.html',
-
 })
 export class BookingApprovalItemComponent {
     form: BookingForm;

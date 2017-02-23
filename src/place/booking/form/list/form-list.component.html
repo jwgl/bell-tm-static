@@ -4,11 +4,9 @@
     </div>
     <div *ngIf="canApply()">
         <div class="btn-toolbar">
-            <div class="btn-group ml-auto">
-                <button class="btn btn-primary" (click)="create()" >新建</button>
-            </div>
+            <button class="btn btn-primary ml-auto" routerLink="/create">新建</button>
         </div>
-        <table class="table">
+        <table class="table" *ngIf="forms && forms.length > 0">
             <thead>
                 <tr>
                     <th>查看</th>
@@ -29,8 +27,14 @@
                     <td><audit-status [status]="form.status"></audit-status></td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <pager [total]="count" [max]="max" [length]="forms.length"
+                               (prev)="loadData($event)" (next)="loadData($event)"></pager>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-        <pager [total]="count" [max]="max" [length]="forms.length"
-            (prev)="loadData($event)" (next)="loadData($event)"></pager>
     </div>
 </div>

@@ -10,9 +10,6 @@ import {FreeListenApprovalService} from '../approval.service';
 
 import '../../shared/form-viewer.model';
 
-/**
- * 审批补办学生证申请项。
- */
 @Component({
     templateUrl: 'approval-item.component.html',
 

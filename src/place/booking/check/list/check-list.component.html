@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="col-md-9">
-        <table class="table">
+        <table class="table" *ngIf="forms && forms.length > 0; else empty">
             <thead>
                 <tr>
                     <th>申请单号</th>
@@ -34,8 +34,15 @@
                     <td><audit-status [status]="form.status"></audit-status></td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <pager [total]="counts[status]" [max]="max" [length]="forms.length"
+                               (prev)="loadData($event)" (next)="loadData($event)"></pager>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-        <pager [total]="counts[status]" [max]="max" [length]="forms.length"
-            (prev)="loadData($event)" (next)="loadData($event)"></pager>
+        <template #empty><div class="alert alert-info">暂无数据</div></template>
     </div>
 </div>

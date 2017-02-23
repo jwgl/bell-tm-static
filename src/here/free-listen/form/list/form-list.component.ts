@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 
 import {FreeListenConfig} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
@@ -14,27 +13,17 @@ export class FreeListenFormListComponent {
     notice: string;
     count: number;
     max = 10;
-    private offset: number;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private service: FreeListenFormService,
-    ) {
+    constructor(private service: FreeListenFormService) {
         this.loadData(0);
     }
 
     loadData(offset: number) {
-        this.offset = offset;
-        this.service.loadList().subscribe(data => {
+        this.service.loadList({offset, max: this.max}).subscribe(data => {
             this.count = data.count;
             this.forms = data.forms;
             this.config = new FreeListenConfig(data.config);
             this.notice = data.notice;
         });
-    }
-
-    create() {
-        this.router.navigate(['/', 'create']);
     }
 }
