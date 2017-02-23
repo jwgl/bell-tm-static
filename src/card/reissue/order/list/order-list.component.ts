@@ -11,7 +11,7 @@ export class ReissueOrderListComponent {
     max = 10;
 
     constructor(private service: ReissueOrderService) {
-        this.loadData(0)
+        this.loadData(0);
     }
 
     loadData(offset: number) {

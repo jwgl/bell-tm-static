@@ -25,6 +25,11 @@ export class BookingForm {
     reason: string;
     status: string;
     workflowInstanceId: string;
+    dateSubmitted: string;
+    checker: string;
+    dateChecked: string;
+    approver: string;
+    dateApproved: string;
     items: BookingItem[];
     removedItems: BookingItem[];
 
@@ -42,6 +47,11 @@ export class BookingForm {
         this.reason = dto.reason;
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
+        this.dateSubmitted = dto.dateSubmitted;
+        this.checker = dto.checker;
+        this.dateChecked = dto.dateChecked;
+        this.approver = dto.approver;
+        this.dateApproved = dto.dateApproved;
         this.items = dto.items.map ((item: any) => new BookingItem(this, item));
         this.removedItems = [];
     }

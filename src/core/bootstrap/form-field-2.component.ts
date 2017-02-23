@@ -58,12 +58,12 @@ export class FormFieldRightDirective {
     selector: 'form-field-2',
     styles: ['label {white-space: nowrap}'],
     template: `
-    <label [attr.for]="left.controlId" class="col-sm-{{left.labelCol}} col-form-label">{{left.label}}</label>
-    <div class="col-sm-{{left.controlCol}}">
+    <label *ngIf="left" [attr.for]="left.controlId" class="col-sm-{{left.labelCol}} col-form-label">{{left.label}}</label>
+    <div *ngIf="left" class="col-sm-{{left.controlCol}}">
         <ng-content select=".form-field-left"></ng-content>
     </div>
-    <label [attr.for]="right.controlId" class="col-sm-{{right.labelCol}} col-form-label">{{right.label}}</label>
-    <div class="col-sm-{{right.controlCol}}">
+    <label *ngIf="right" [attr.for]="right.controlId" class="col-sm-{{right.labelCol}} col-form-label">{{right.label}}</label>
+    <div *ngIf="right" class="col-sm-{{right.controlCol}}">
         <ng-content select=".form-field-right"></ng-content>
     </div>
     `,
