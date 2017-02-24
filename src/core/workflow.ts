@@ -42,6 +42,7 @@ const WORKFLOW_BUTTONS: any[] = [
     WorkflowAcceptButton,
     WorkflowRejectButton,
     WorkflowSubmitButton,
+    WorkflowRevokeButton,
     WorkflowWorkitemsButton,
 ];
 

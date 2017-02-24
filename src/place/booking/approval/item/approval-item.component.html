@@ -8,7 +8,7 @@
             <button [workflow-accept]="reviewOptions" (accepted)="onItemLoaded($event)" *ngIf="!form.occupied">同意</button>
         </div>
         <div class="btn-group" *ngIf="form.status === 'APPROVED'">
-            <button class="btn btn-secondary btn-danger" (click)="revoke()">回收</button>
+            <button [workflow-revoke]="revokeOptions" (revoked)="onItemLoaded($event)">回收</button>
         </div>
     </div>
     <booking-form-viewer [form]="form"></booking-form-viewer>
