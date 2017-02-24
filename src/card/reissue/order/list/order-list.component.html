@@ -1,7 +1,7 @@
 <div class="btn-toolbar">
     <button [routerLink]="['/create']" class="btn btn-primary ml-auto">新建</button>
 </div>
-<table class="table">
+<table class="table" *ngIf="forms">
     <thead>
         <tr>
             <th>订单编号</th>

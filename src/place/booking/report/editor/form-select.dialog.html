@@ -13,7 +13,7 @@
             <tbody #tbody>
                 <tr *ngFor="let form of options.data.forms">
                     <td><checkbox-selector [data]="form"></checkbox-selector></td>
-                    <td>{{form.userId}}</td>
+                    <td>{{form.formId}}</td>
                     <td>{{form.userName}}</td>
                     <td>{{form.department}}</td>
                     <td>{{form.dateApproved | date : 'MM-dd HH:mm'}}</td>
