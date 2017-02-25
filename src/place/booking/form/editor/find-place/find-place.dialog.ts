@@ -4,8 +4,10 @@ import * as moment from 'moment';
 import {Observable} from 'rxjs/Observable';
 
 import {BaseDialog} from 'core/dialogs';
+import {weekRangeConflict} from 'core/utils';
+
 import {NumberStringOption, OddEvenOptions} from 'core/options';
-import {BookingSection} from '../../../shared/form.model';
+import {BookingForm, BookingSection} from '../../../shared/form.model';
 import {BookingFormService} from '../../form.service';
 
 interface BookingDayOption {
@@ -34,7 +36,7 @@ export class FindPlaceDialog extends BaseDialog {
         maxWeek: number,
         currentWeek: number,
         startDate: moment.Moment,
-        swapDates: moment.Moment[],
+        swapToDates: moment.Moment[],
     };
 
     today: moment.Moment;
@@ -49,7 +51,6 @@ export class FindPlaceDialog extends BaseDialog {
     };
 
     queryOptions: QueryOptions;
-    queryOptionsSnapshot: QueryOptions;
 
     _bookingDay: BookingDayOption;
 
@@ -90,6 +91,18 @@ export class FindPlaceDialog extends BaseDialog {
     }
 
     findPlace() {
+        // 处理校历日期调整。
+        if (this.queryOptions.startWeek === this.queryOptions.endWeek) {
+            const day = moment(this.term.startDate);
+            day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
+            day.add(this.queryOptions.dayOfWeek - 1, 'days');
+            for (const date of this.term.swapToDates) {
+                if (date.isSame(day)) {
+                    return;
+                }
+            }
+        }
+
         this.finding = true;
         this.service.findPlace({
             startWeek: this.queryOptions.startWeek,
@@ -99,8 +112,16 @@ export class FindPlaceDialog extends BaseDialog {
             sectionId: this.queryOptions.section.id,
             placeType: this.queryOptions.placeType,
         }).subscribe((data: any[]) => {
-            this.queryOptionsSnapshot = _.clone(this.queryOptions);
-            this.places = data;
+            this.places = data.filter(it => !(this.options.form as BookingForm).items.some(item => {
+                return item.place.id === it.id
+                    && item.dayOfWeek === this.queryOptions.dayOfWeek
+                    && weekRangeConflict({
+                        startWeek: this.queryOptions.startWeek,
+                        endWeek: this.queryOptions.endWeek,
+                        oddEven: this.queryOptions.oddEven,
+                    }, item)
+                    && _.intersection(item.section.includes, this.queryOptions.section.includes).length > 0;
+            }));
             this.finding = false;
         });
     }
@@ -125,7 +146,7 @@ export class FindPlaceDialog extends BaseDialog {
             maxWeek: this.options.term.maxWeek,
             currentWeek: this.options.term.currentWeek,
             startDate: moment(this.options.term.startDate),
-            swapDates: this.options.term.swapDates.map((it: string) => moment(it)),
+            swapToDates: this.options.term.swapDates.map((it: string) => moment(it)),
         };
 
         this.today = moment(this.options.today);
@@ -211,19 +232,19 @@ export class FindPlaceDialog extends BaseDialog {
 
     protected onConfirmed(): any {
         return this.places
-                   .filter(it => it.selected)
-                   .map(it => ({
-                        startWeek: this.queryOptionsSnapshot.startWeek,
-                        endWeek: this.queryOptionsSnapshot.endWeek,
-                        oddEven: this.queryOptionsSnapshot.oddEven,
-                        dayOfWeek: this.queryOptionsSnapshot.dayOfWeek,
-                        section: this.queryOptionsSnapshot.section,
-                        place: {
-                            id: it.id,
-                            name: it.name,
-                            seat: it.seat,
-                            type: this.queryOptionsSnapshot.placeType,
-                        },
-                    }));
+            .filter(it => it.selected)
+            .map(it => ({
+                startWeek: this.queryOptions.startWeek,
+                endWeek: this.queryOptions.endWeek,
+                oddEven: this.queryOptions.oddEven,
+                dayOfWeek: this.queryOptions.dayOfWeek,
+                section: this.queryOptions.section,
+                place: {
+                    id: it.id,
+                    name: it.name,
+                    seat: it.seat,
+                    type: this.queryOptions.placeType,
+                },
+            }));
     }
 }

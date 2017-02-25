@@ -1,3 +1,4 @@
+import {weekRangeConflict} from 'core/utils';
 import * as _ from 'lodash';
 import {BookingForm, BookingItem} from '../../shared/form.model';
 
@@ -35,8 +36,7 @@ BookingForm.prototype.conflict = function(this: BookingForm, item: BookingItem):
     return this.items.some(it => {
         return it.place.id === item.place.id
             && it.dayOfWeek === item.dayOfWeek
-            && it.startWeek <= item.endWeek
-            && it.endWeek >= item.startWeek
+            && weekRangeConflict(it, item)
             && _.intersection(it.section.includes, item.section.includes).length > 0;
     });
 };

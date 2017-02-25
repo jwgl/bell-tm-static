@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import {oddEvenText} from './odd-even';
 
 export interface WeekRange {
@@ -16,4 +17,26 @@ export function weekRangeText(weekRange: WeekRange): string {
             return `${weekRange.startWeek}-${weekRange.endWeek}周（${oddEvenText(weekRange.oddEven)}）`;
         }
     }
+}
+
+/**
+ * 判断两个WeekRange是否冲突
+ */
+export function weekRangeConflict(wr1: WeekRange, wr2: WeekRange) {
+    return _.intersection(weekRangeToArray(wr1), weekRangeToArray(wr2)).length > 0;
+}
+
+/**
+ * WeekRange转换为数组
+ */
+export function weekRangeToArray(weekRange: WeekRange) {
+    return _.range(weekRange.startWeek, weekRange.endWeek + 1).filter(w => {
+        return weekRange.oddEven === 0
+             ? true
+             : weekRange.oddEven === 1
+             ? w % 2 === 1
+             : weekRange.oddEven === 2
+             ? w % 2 === 0
+             : false;
+    });
 }
