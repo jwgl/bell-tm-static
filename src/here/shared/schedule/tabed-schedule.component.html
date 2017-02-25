@@ -2,9 +2,9 @@
 	<li *ngFor="let week of weeks" class="nav-item" >
         <a class="nav-link" [ngClass]="{active: currentWeek == week}" href='#' data-toggle="tab" (click)="currentWeek=week">
             <ng-container *ngIf="weekTabTemplate; else defaultWeekTab">
-                <template [ngTemplateOutlet]="weekTabTemplate" [ngTemplateOutletContext]="{week: week}"></template>
+                <ng-template [ngTemplateOutlet]="weekTabTemplate" [ngTemplateOutletContext]="{week: week}"></ng-template>
             </ng-container>
-            <template #defaultWeekTab>{{week}}</template>
+            <ng-template #defaultWeekTab>{{week}}</ng-template>
         </a>
     </li>
 </ul>
@@ -13,15 +13,15 @@
         <tr>
             <th colspan="2">
                 <ng-container *ngIf="weekTemplate; else defaultWeek">
-                    <template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: currentWeek}"></template>
+                    <ng-template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: currentWeek}"></ng-template>
                 </ng-container>
-                <template #defaultWeek>第{{currentWeek}}周</template>
+                <ng-template #defaultWeek>第{{currentWeek}}周</ng-template>
             </th>
             <th *ngFor="let day of days">
                 <ng-container *ngIf="dayOfWeekTemplate; else defaultDay">
-                    <template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: currentWeek, day: day}"></template>
+                    <ng-template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: currentWeek, day: day}"></ng-template>
                 </ng-container>
-                <template #defaultDay>{{day | dayOfWeek}}</template>
+                <ng-template #defaultDay>{{day | dayOfWeek}}</ng-template>
             </th>
         </tr>
     </thead>
@@ -33,7 +33,7 @@
                 <ng-container [ngSwitch]="cellType(day, section)">
                     <td *ngSwitchCase="'schedule'" [rowSpan]="getRowSpan(day, section)" class="cn active">
                         <ng-container *ngFor="let s of getScheduleCell(day, section)">
-                            <template [ngTemplateOutlet]="scheduleTemplate" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></template>
+                            <ng-template [ngTemplateOutlet]="scheduleTemplate" [ngTemplateOutletContext]="getScheduleContext(s, day, section)"></ng-template>
                         </ng-container>
                     </td>
                     <td *ngSwitchCase="'normal'" class="cn"></td>

@@ -1,7 +1,7 @@
-<template [ngIf]="!group.directions">
+<ng-container *ngIf="!group.directions">
     <td colspan="2">{{summary}}</td>
     <td>{{group.totalCredit | zeroEmpty}}</td>
     <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
     <td>{{group.totalPeriod | zeroEmpty}}</td>
     <td *ngFor="let term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
-</template>
+</ng-container>

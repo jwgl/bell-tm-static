@@ -29,22 +29,22 @@
         </form-field>
         <form-field label="请假明细">
             <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" size="sm">
-                <template #weekTabTpl let-week="week">
+                <ng-template #weekTabTpl let-week="week">
                     {{week}}<ng-container *ngIf="form.containsWeek(week)">*</ng-container>
-                </template>
-                <template #weekTpl let-week="week">
+                </ng-template>
+                <ng-template #weekTpl let-week="week">
                     <button class="btn w-100"
                             [ngClass]="form.weekSelected(week) ? 'btn-warning' : 'btn-secondary'"
                             [disabled]="form.weekDisabled(week)"
                             (click)="form.toggleWeek(week)">第{{week}}周</button>
-                </template>
-                <template #dayOfWeekTpl let-week="week" let-day="day">
+                </ng-template>
+                <ng-template #dayOfWeekTpl let-week="week" let-day="day">
                     <button class="btn w-100"
                             [ngClass]="form.dayOfWeekSelected(week, day) ? 'btn-info' : 'btn-secondary'"
                             [disabled]="form.dayOfWeekDisabled(week, day)"
                             (click)="form.toggleDayOfWeek(week, day)">{{day | dayOfWeek}}</button>
-                </template>
-                <template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section" let-count="count">
+                </ng-template>
+                <ng-template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section" let-count="count">
                     <button class="btn w-100"
                             title="{{schedule.startWeek}}-{{schedule.endWeek}}{{schedule.oddEven | oddEven}}周&#013;{{schedule.place}}"
                             [ngClass]="form.scheduleSelected(week, schedule) ? 'btn-success' : 'btn-secondary'"
@@ -53,7 +53,7 @@
                             (click)="form.toggleSchedule(week, schedule)">
                         {{schedule.course}}<ng-container *ngIf="schedule.courseItem"><br>【{{schedule.courseItem}}】</ng-container>
                     </button>
-                </template>
+                </ng-template>
             </tabed-schedule>
             <ul>
                 <li *ngFor="let item of form.items">{{item}}</li>

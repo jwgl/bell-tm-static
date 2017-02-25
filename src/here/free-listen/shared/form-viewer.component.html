@@ -14,13 +14,13 @@
     </form-field-2>
     <form-field label="明细">
         <simple-schedule [schedules]="schedules" size="sm">
-            <template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
+            <ng-template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
                 <div class="schedule"
                      [ngClass]="getScheduleClass(schedule)"
                      [style.height]="count > 1 ? null : '100%'">
                     <span>{{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}</span>
                 </div>
-            </template>
+            </ng-template>
         </simple-schedule>
         <div>
             图例：

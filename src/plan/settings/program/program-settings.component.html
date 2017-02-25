@@ -24,8 +24,8 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-department [ngForOf]="departments" let-i="index">
-            <template ngFor let-program [ngForOf]="department.programs" let-j="index">
+        <ng-container *ngFor="let department of departments; let i = index">
+            <ng-container *ngFor="let program of department.programs; let j = index">
                 <tr>
                     <td *ngIf="j == 0" [rowSpan]="department.programs.length">{{department.name}}</td>
                     <td class="name">{{program.programId}} {{program.subjectName}}</td>
@@ -38,7 +38,7 @@
                     <td class="center">{{program.practiceCreditRatio | percent}}</td>
                     <td class="center"><button class="form-control form-control-sm" (click)="edit(program)">编辑</button></td>
                 </tr>
-            </template>
-        </template>
+            </ng-container>
+        </ng-container>
     </tbody>
 </table>

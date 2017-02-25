@@ -14,8 +14,8 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-property [ngForOf]="scheme.properties">
-            <template ngFor let-direction [ngForOf]="property.directions" let-i="index">
+        <ng-container *ngFor="let property of scheme.properties">
+            <ng-container *ngFor="let direction of property.directions; let i = index">
                 <tr *ngFor="let sc of direction.courses; let j = index"
                     [scheme-course]="sc"
                     [terms]="scheme.terms"
@@ -25,7 +25,7 @@
                     [first2]="i == 0"></tr>
                 <tr [scheme-group]="direction"
                     [terms]="scheme.terms"></tr>
-            </template>
+            </ng-container>
             <tr *ngFor="let sc of property.courses; let i = index"
                 [scheme-course]="sc"
                 [terms]="scheme.terms"
@@ -33,7 +33,7 @@
                 [first1]="i == 0"></tr>
             <tr [scheme-group]="property"
                 [terms]="scheme.terms"></tr>
-        </template>
+        </ng-container>
         <tr [scheme-summary]="scheme"></tr>
     </tbody>
 </table>

@@ -34,22 +34,22 @@
             </tr>
         </thead>
         <tbody>
-            <template ngFor let-property [ngForOf]="vm.properties | propertyToes">
-                <template ngFor let-direction [ngForOf]="property.directions" let-i="index">
+            <ng-container *ngFor="let property of vm.properties | propertyToes">
+                <ng-container *ngFor="let direction of property.directions; let i = index">
                     <tr *ngFor="let sc of direction.courses | schemeCourseToes : selectedTerm"
                         [scheme-course]="sc"
                         [property]="property"
                         [direction]="direction"
                         [scheme]="vm"
                         (edit)="onEdit(sc)"></tr>
-                </template>
+                </ng-container>
                 <tr *ngFor="let sc of property.courses | schemeCourseToes : selectedTerm"
                     [scheme-course]="sc"
                     [property]="property"
                     [direction]="null"
                     [scheme]="vm"
                     (edit)="onEdit(sc)"></tr>
-            </template>
+            </ng-container>
         </tbody>
     </table>
 </div>

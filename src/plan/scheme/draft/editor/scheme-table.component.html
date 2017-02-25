@@ -11,9 +11,9 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-property [ngForOf]="scheme.properties">
+        <ng-container *ngFor="let property of scheme.properties">
             <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
-            <template ngFor let-direction [ngForOf]="property.directions">
+            <ng-container *ngFor="let direction of property.directions">
                 <tr *ngFor="let sc of direction.courses"
                     [scheme-course]="sc"
                     [terms]="scheme.terms"
@@ -25,7 +25,7 @@
                     [terms]="scheme.terms"
                     (add)="add.emit($event)"
                     (import)="import.emit($event)"></tr>
-            </template>
+            </ng-container>
             <tr *ngFor="let sc of property.courses"
                 [scheme-course]="sc"
                 [terms]="scheme.terms"
@@ -37,7 +37,7 @@
                 [terms]="scheme.terms"
                 (add)="add.emit($event)"
                 (import)="import.emit($event)"></tr>
-        </template>
+        </ng-container>
         <tr [scheme-summary]="scheme"></tr>
     </tbody>
 </table>

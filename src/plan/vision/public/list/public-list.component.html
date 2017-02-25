@@ -11,8 +11,8 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-department [ngForOf]="departments" let-i="index">
-            <template ngFor let-subject [ngForOf]="department.subjects | gradeFilter:selectedGrade" let-j="index">
+        <ng-container *ngFor="let department of departments; let i = index">
+            <ng-container *ngFor="let subject of department.subjects | gradeFilter:selectedGrade; let j = index">
                 <tr>
                     <td *ngIf="j == 0" [rowSpan]="(department.subjects | gradeFilter:selectedGrade).length">{{department.name}}</td>
                     <td>{{subject.id}} {{subject.name}}</td>
@@ -20,7 +20,7 @@
                         <a *ngIf="subject.grades[grade]" href="visions/{{subject.grades[grade]}}">{{grade}}</a>
                     </td>
                 </tr>
-            </template>
-        </template>
+            </ng-container>
+        </ng-container>
     </tbody>
 </table>

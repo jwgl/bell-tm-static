@@ -20,9 +20,9 @@
                         (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
                     <i [spinning]="student.pending"></i>
                 </ng-container>
-                <template #status>
+                <ng-template #status>
                     <rollcall-status [student]="student"></rollcall-status>
-                </template>
+                </ng-template>
             </td>
             <td>{{student.index}}</td>
             <td>{{student.id}}</td>

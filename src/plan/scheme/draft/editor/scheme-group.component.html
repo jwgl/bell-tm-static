@@ -1,4 +1,4 @@
-<template [ngIf]="!group.directions">
+<ng-container *ngIf="!group.directions">
     <td colspan="2">{{summary}}</td>
     <td>{{group.totalCredit | zeroEmpty}}</td>
     <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
@@ -8,4 +8,4 @@
         <button type="button" class="btn btn-secondary btn-sm" (click)="add.emit(group)" [disabled]="group.locked">添加</button>
         <button type="button" class="btn btn-secondary btn-sm" (click)="import.emit(group)" [disabled]="group.locked">导入</button>
     </td>
-</template>
+</ng-container>

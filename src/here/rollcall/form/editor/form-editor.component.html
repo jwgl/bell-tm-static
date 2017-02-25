@@ -23,9 +23,9 @@
             <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><i class="fa fa-list"></i></button>
             <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><i class="fa fa-th"></i></button>
         </ng-container>
-        <template #locked>
+        <ng-template #locked>
             <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
-        </template>
+        </ng-template>
     </div>
 </div>
 <router-outlet></router-outlet>

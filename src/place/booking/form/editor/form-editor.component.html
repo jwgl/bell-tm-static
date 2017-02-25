@@ -39,9 +39,9 @@
             <ul *ngIf="form.items.length > 0; else prompt">
                 <li *ngFor="let item of form.items">{{item}} <remove-item (click)="form.removeItem(item)"></remove-item></li>
             </ul>
-            <template #prompt>
+            <ng-template #prompt>
                  <p class="form-control-static text-muted">一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。</p>
-            </template>
+            </ng-template>
         </form-field>
     </form>
 </div>

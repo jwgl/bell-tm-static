@@ -5,24 +5,23 @@ import {NavbarService} from './navbar.service';
 @Component({
     selector: '.dropdown-menu',
     template: `
-    <template ngFor let-menu [ngForOf]="menus">
-        <template [ngIf]="!menu.items">
-            <a *ngIf="menu.label != '---'" class="dropdown-item" href="{{menu.url}}">{{menu.label}}</a>
-            <div *ngIf="menu.label == '---'" class="dropdown-divider"></div>
-        </template>
-        <template [ngIf]="menu.items">
-            <div class="dropdown dropdown-submenu">
-                <a href="#" class="dropdown-item" data-toggle="dropdown" data-submenu>
-                    {{menu.label}}
-                </a>
-                <div class="dropdown-menu" [menus]="menu.items"></div>
-            </div>
-        </template>
-    </template>
+    <ng-container *ngFor="let menu of menus">
+        <div *ngIf="menu.items; else menuItem" class="dropdown dropdown-submenu" [class.show]="show">
+            <a href="#" class="dropdown-item" (click)="show=!show">{{menu.label}}</a>
+            <div class="dropdown-menu" [menus]="menu.items"></div>
+        </div>
+        <ng-template #menuItem>
+            <a *ngIf="menu.label != '---'; else divider" class="dropdown-item" href="{{menu.url}}">{{menu.label}}</a>
+        </ng-template>
+    </ng-container>
+    <ng-template #divider>
+        <div class="dropdown-divider"></div>
+    </ng-template>
     `,
 })
 export class DropdownMenu {
     @Input() menus: any[];
+    show: false;
 }
 
 /* tslint:disable:max-classes-per-file */
@@ -32,13 +31,13 @@ export class DropdownMenu {
         '[class.dropdown]': 'menu.items',
     },
     template: `
-    <template [ngIf]="!menu.items">
-        <a class="nav-link" href="{{menu.url}}">{{menu.label}}</a>
-    </template>
-    <template [ngIf]="menu.items">
+    <ng-container *ngIf="menu.items; else naviItem">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-submenu>{{menu.label}}</a>
         <div class="dropdown-menu" [menus]="menu.items"></div>
-    </template>
+    </ng-container>
+    <ng-template #naviItem>
+        <a class="nav-link" href="{{menu.url}}">{{menu.label}}</a>
+    </ng-template>
     `,
 })
 export class NavitemComponent {

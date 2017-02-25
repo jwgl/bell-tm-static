@@ -9,10 +9,11 @@
                     [stretch]="true"
                     [rollcallType]="student.rollcallType"
                     [disabled]="student.pending"
-                    (toggle)="toggle(student, $event)"></rollcall-toggle-bar>
-                <template #status>
+                    (toggle)="toggle(student, $event)">
+                </rollcall-toggle-bar>
+                <ng-template #status>
                     <rollcall-status class="py-1" [student]="student"></rollcall-status>
-                </template>
+                </ng-template>
             </div>
             <div class="card-block">
                 <h4 class="card-title">{{student.name}}</h4>

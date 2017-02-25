@@ -9,8 +9,8 @@
         </tr>
     </thead>
     <tbody>
-        <template ngFor let-department [ngForOf]="departments" let-i="index">
-            <template ngFor let-subject [ngForOf]="department.subjects" let-j="index">
+        <ng-container *ngFor="let department of departments; let i = index">
+            <ng-container *ngFor="let subject of department.subjects; let j =index">
                 <tr>
                     <td *ngIf="j == 0" [rowSpan]="department.subjects.length">{{department.name}}</td>
                     <td>{{subject.subjectId}} {{subject.subjectName}}</td>
@@ -24,7 +24,7 @@
                         <i [spinning]="subject.secretaryProcessing"></i>
                     </td>
                 </tr>
-            </template>
-        </template>
+            </ng-container>
+        </ng-container>
     </tbody>
 </table>
