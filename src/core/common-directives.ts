@@ -44,10 +44,10 @@ export {
 const CORE_DIRECTIVES: any[] = [
     // common commponent
     AuditStatusComponent,
-    FromNowComponent,
     CheckboxSelectorComponent,
-    PagerComponent,
     FormTitleComponent,
+    FromNowComponent,
+    PagerComponent,
     RemoveItemComponent,
     // bootstrap form directives
     FormDirective,
@@ -79,8 +79,14 @@ const CORE_DIRECTIVES: any[] = [
 ];
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [CORE_DIRECTIVES],
-    exports: [CORE_DIRECTIVES],
+    imports: [
+        CommonModule,
+    ],
+    declarations: [
+        CORE_DIRECTIVES,
+    ],
+    exports: [
+        CORE_DIRECTIVES,
+    ],
 })
 export class CommonDirectivesModule {}

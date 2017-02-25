@@ -9,9 +9,9 @@ import {WorkflowModule} from 'core/workflow';
 import {BookingSharedModule} from '../shared/booking-shared.module';
 import {BookingApprovalComponent} from './approval.component';
 import {BookingApprovalRoutingModule} from './approval.routing';
-import {BookingApprovalService} from './approval.service';
-import {BookingApprovalItemComponent} from './item/approval-item.component';
-import {BookingApprovalListComponent} from './list/approval-list.component';
+
+import {BookingApprovalItemComponent} from './approval-item.component';
+import {BookingApprovalListComponent} from './approval-list.component';
 
 @NgModule({
     imports: [
@@ -26,9 +26,6 @@ import {BookingApprovalListComponent} from './list/approval-list.component';
         BookingApprovalComponent,
         BookingApprovalListComponent,
         BookingApprovalItemComponent,
-    ],
-    providers: [
-        BookingApprovalService,
     ],
     bootstrap: [BookingApprovalComponent],
 })

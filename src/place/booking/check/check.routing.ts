@@ -1,14 +1,27 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {BookingCheckItemComponent} from './item/check-item.component';
-import {BookingCheckListComponent} from './list/check-list.component';
+import {WorkflowItemResolve, WorkflowListResolve} from 'core/workflow';
+
+import {BookingCheckItemComponent} from './check-item.component';
+import {BookingCheckListComponent} from './check-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},
-    {path: 'list/:status', component: BookingCheckListComponent},
-    {path: ':id', component: BookingCheckItemComponent},
-    {path: ':id/workitems/:wi', component: BookingCheckItemComponent},
+    {
+        path: 'list/:status',
+        component: BookingCheckListComponent,
+        resolve: {list: WorkflowListResolve},
+    },
+    {
+        path: ':id',
+        component: BookingCheckItemComponent,
+        resolve: {item: WorkflowItemResolve},
+    },
+    {
+        path: ':id/workitems/:wi',
+        component: BookingCheckItemComponent,
+    },
 ];
 
 @NgModule({

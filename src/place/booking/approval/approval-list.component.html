@@ -1,0 +1,35 @@
+<div *ngIf="list">
+    <table class="table" *ngIf="list.items?.length > 0; else empty">
+        <thead>
+            <tr>
+                <th>申请单号</th>
+                <th>申请单位</th>
+                <th>借用类别</th>
+                <th>借用人</th>
+                <th>申请时间</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of list.items">
+                <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
+                <td>{{form.department}}</td>
+                <td>{{form.type}}</td>
+                <td>{{form.userName}}</td>
+                <td>{{form.date | moment}}</td>
+                <td><audit-status [status]="form.status"></audit-status></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="6" style="text-align: center">
+                    <div class="btn-group" *ngIf="list.pagerEnabled">
+                        <button class="btn btn-secondary" [routerLink]="['./', {offset: list.prevOffset}]" [disabled]="list.prevDisabled">上一页</button>
+                        <button class="btn btn-secondary" [routerLink]="['./', {offset: list.nextOffset}]" [disabled]="list.nextDisabled">下一页</button>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <template #empty><div class="alert alert-info">暂无数据</div></template>
+</div>

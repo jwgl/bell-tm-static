@@ -1,6 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+
 import 'rxjs/add/operator/toPromise';
 
 import {CommonDirectivesModule} from './common-directives';
@@ -23,11 +25,18 @@ import {WorkitemStatusComponent} from './workflow/workitem-status.component';
 import {WorkflowWorkitemsButton} from './workflow/workitems.button';
 import {WorkflowWorkitemsDialog} from './workflow/workitems.dialog';
 
+import {WorkflowItemResolve} from './workflow/item.resolve';
+import {WorkflowListResolve} from './workflow/list.resolve';
+
+import {ListGroupComponent} from './workflow/list-group.component';
+
 export {
     ReviewOptions,
     RevokeOptions,
     SubmitOptions,
-    Workflow
+    Workflow,
+    WorkflowItemResolve,
+    WorkflowListResolve,
 }
 
 const WORKFLOW_DIALOGS: any[] = [
@@ -50,19 +59,24 @@ const WORKFLOW_BUTTONS: any[] = [
     imports: [
         CommonModule,
         FormsModule,
+        RouterModule,
         CommonDirectivesModule,
     ],
     declarations: [
         WORKFLOW_DIALOGS,
         WORKFLOW_BUTTONS,
         WorkitemStatusComponent,
+        ListGroupComponent,
     ],
     providers: [
         Dialog,
         Workflow,
+        WorkflowItemResolve,
+        WorkflowListResolve,
     ],
     exports: [
         WORKFLOW_BUTTONS,
+        ListGroupComponent,
     ],
     entryComponents: [
         WORKFLOW_DIALOGS,

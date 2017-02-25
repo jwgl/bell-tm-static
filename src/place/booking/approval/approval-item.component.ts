@@ -3,35 +3,24 @@ import {ActivatedRoute} from '@angular/router';
 
 import {ReviewOptions, RevokeOptions} from 'core/workflow';
 
-import {BookingForm} from '../../shared/form.model';
-import {BookingApprovalService} from '../approval.service';
+import {BookingForm} from '../shared/form.model';
 
-/**
- * 审批补办学生证申请项。
- */
 @Component({
     templateUrl: 'approval-item.component.html',
 })
 export class BookingApprovalItemComponent {
     form: BookingForm;
 
-    private id: string;
     private wi: string;
-    constructor(
-        private route: ActivatedRoute,
-        private service: BookingApprovalService,
-    ) {
-        this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.wi = params['wi'];
-            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
-        });
+
+    constructor(route: ActivatedRoute) {
+        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
-        this.form = new BookingForm(dto);
+        this.form = new BookingForm(dto.form);
         if (this.wi === undefined) {
-            this.wi = dto.workitemId;
+            this.wi = dto.wi;
         }
     }
 
@@ -41,7 +30,7 @@ export class BookingApprovalItemComponent {
 
     get reviewOptions(): ReviewOptions {
         return {
-            id: this.id,
+            id: this.form.id,
             wi: this.wi,
             type: 'approve',
             what: this.form.title,
@@ -50,7 +39,7 @@ export class BookingApprovalItemComponent {
 
     get revokeOptions(): RevokeOptions {
         return {
-            id: this.id,
+            id: this.form.id,
             what: this.form.title,
         };
     }
