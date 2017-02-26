@@ -3,7 +3,7 @@
         <button class="btn btn-primary" routerLink="/create">新建</button>
     </div>
 </div>
-<table class="table" *ngIf="forms">
+<table class="table" *ngIf="reports">
     <thead>
         <tr>
             <th>报表编号</th>
@@ -25,7 +25,7 @@
     <tfoot>
         <tr>
             <td colspan="5">
-                <pager [total]="count" [max]="max" [length]="forms.length"
+                <pager [total]="count" [max]="max" [length]="reports.length"
                        (prev)="loadData($event)" (next)="loadData($event)"></pager>
             </td>
         </tr>

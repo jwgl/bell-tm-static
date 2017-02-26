@@ -9,7 +9,7 @@
             <a class="btn btn-secondary" download href="bookingReports/{{id}}">导出</a>
         </div>
     </div>
-    <div class="form-inline mb-3">
+    <form class="form-inline mb-3">
         <div class="form-group">
             <label>报表编号</label>
             <p class="form-control-static">{{vm.id}}</p>
@@ -30,7 +30,7 @@
             <label>修改时间</label>
             <p class="form-control-static">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
         </div>
-    </div>
+    </form>
     <table class="table table-bordered table-sm">
         <thead>
             <tr>
