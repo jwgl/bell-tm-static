@@ -6,16 +6,20 @@
         </div>
     </div>
     <form-title>{{form.title}}</form-title>
-    <form class="form-horizontal">
-        <form-field label="请假类型">
-            <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type">
-                    {{leaveType.label}}
-                </label>
+    <form>
+        <div class="form-group">
+            <label>请假类型</label>
+            <div>
+                <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type">
+                        {{leaveType.label}}
+                    </label>
+                </div>
             </div>
-        </form-field>
-        <form-field label="请假事由">
+        </div>
+        <div class="form-group" [class.has-danger]="!reason.pristine && !reason.valid">
+            <label>请假事由</label>
             <textarea class="form-control" name="reason" rows="4"
                 [(ngModel)]="form.reason"
                 maxlength="200" minlength="10"
@@ -26,9 +30,10 @@
                 <span *ngIf="reason.errors?.minlength">请假事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
                 <span *ngIf="reason.errors?.maxlength">请假事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
             </p>
-        </form-field>
-        <form-field label="请假明细">
-            <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules" size="sm">
+        </div>
+        <div class="form-group">
+            <label>请假明细</label>
+            <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
                 <ng-template #weekTabTpl let-week="week">
                     {{week}}<ng-container *ngIf="form.containsWeek(week)">*</ng-container>
                 </ng-template>
@@ -58,6 +63,6 @@
             <ul>
                 <li *ngFor="let item of form.items">{{item}}</li>
             </ul>
-        </form-field>
+        </div>
     </form>
 </ng-container>

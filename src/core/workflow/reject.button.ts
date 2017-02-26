@@ -6,7 +6,7 @@ import {ReviewOptions, Workflow} from './workflow.service';
     selector: 'button[workflow-reject]',
     host: {
         '(click)': 'click()',
-        '[class]': '"btn btn-warning"',
+        '[class]': '"btn btn-secondary"',
         '[disabled]': 'workflow.pending',
     },
 })

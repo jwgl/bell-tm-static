@@ -5,17 +5,14 @@ import {ListGroup, ListGroupOption, StatusCounts} from 'core/models';
 import {Workflow} from './workflow.service';
 
 @Component({
-    selector: 'list-group',
-    template: `
-<div class="list-group">
-    <a *ngFor="let item of group.items" class="list-group-item list-group-item-action justify-content-between"
-        [routerLink]="['/list', item.status]"
-        [class.active]="item.active">
-        {{item.label}} <span>{{item.count}}</span>
-    </a>
-</div>`,
+    selector: 'nav-tabs',
+    styleUrls: ['nav-tabs.component.scss'],
+    templateUrl: 'nav-tabs.component.html',
+    host: {
+        '[class]': '"d-block"',
+    },
 })
-export class ListGroupComponent {
+export class NavTabsComponent {
     @Input() set options(value: ListGroupOption[]) {
         this.group = new ListGroup(value);
         this.workflow.listGroup = this.group;

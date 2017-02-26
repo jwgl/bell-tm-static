@@ -1,6 +1,8 @@
-<div *ngIf="form">
+<ng-container *ngIf="form">
     <div class="btn-toolbar">
-        <button [workflow-workitems]="form.workflowInstanceId">查看流程</button>
+        <div class="btn-group ml-auto">
+            <button [workflow-workitems]="form.workflowInstanceId">流程</button>
+        </div>
     </div>
     <leave-form-viewer [form]="form"></leave-form-viewer>
-</div>
+</ng-container>

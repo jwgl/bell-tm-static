@@ -9,9 +9,9 @@ import {WorkflowModule} from 'core/workflow';
 import {FreeListenSharedModule} from '../shared/free-listen-shared.module';
 import {FreeListenApprovalComponent} from './approval.component';
 import {FreeListenApprovalRoutingModule} from './approval.routing';
-import {FreeListenApprovalService} from './approval.service';
-import {FreeListenApprovalItemComponent} from './item/approval-item.component';
-import {FreeListenApprovalListComponent} from './list/approval-list.component';
+
+import {FreeListenApprovalItemComponent} from './approval-item.component';
+import {FreeListenApprovalListComponent} from './approval-list.component';
 
 @NgModule({
     imports: [
@@ -26,9 +26,6 @@ import {FreeListenApprovalListComponent} from './list/approval-list.component';
         FreeListenApprovalComponent,
         FreeListenApprovalListComponent,
         FreeListenApprovalItemComponent,
-    ],
-    providers: [
-        FreeListenApprovalService,
     ],
     bootstrap: [FreeListenApprovalComponent],
 })

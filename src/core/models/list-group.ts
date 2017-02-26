@@ -31,10 +31,7 @@ export class ListGroup {
 
     update(counts: StatusCounts): void {
         this.items.forEach(item => {
-            const value = counts[item.status];
-            if (value !== undefined) {
-                item.count = value;
-            }
+            item.count = counts[item.status] || 0;
         });
     }
 

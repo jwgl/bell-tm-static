@@ -1,0 +1,21 @@
+@import 'node_modules/bootstrap/scss/_mixins.scss';
+@import 'node_modules/bootstrap/scss/_variables.scss';
+
+$count-bg: #ddd;
+
+.badge-count {
+   @include badge-variant($count-bg);
+   color: inherit;
+}
+
+:host {
+    margin-top: -1rem;
+    padding-top: 1rem;
+    border-top: solid 1px #ddd;
+    border-bottom: solid 1px #ddd;
+    background-color: #eee;
+}
+
+.container {
+    margin-bottom: -1px;
+}

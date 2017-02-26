@@ -1,14 +1,27 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {LeaveApprovalItemComponent} from './item/approval-item.component';
-import {LeaveApprovalListComponent} from './list/approval-list.component';
+import {WorkflowItemResolve, WorkflowListResolve} from 'core/workflow';
+
+import {LeaveApprovalItemComponent} from './approval-item.component';
+import {LeaveApprovalListComponent} from './approval-list.component';
 
 const routes: Routes = [
     {path: '', redirectTo: 'list/SUBMITTED', pathMatch: 'full'},
-    {path: 'list/:status', component: LeaveApprovalListComponent},
-    {path: ':id', component: LeaveApprovalItemComponent},
-    {path: ':id/workitems/:wi', component: LeaveApprovalItemComponent},
+    {
+        path: 'list/:status',
+        component: LeaveApprovalListComponent,
+        resolve: {list: WorkflowListResolve},
+    },
+    {
+        path: ':id',
+        component: LeaveApprovalItemComponent,
+        resolve: {item: WorkflowItemResolve},
+    },
+    {
+        path: ':id/workitems/:wi',
+        component: LeaveApprovalItemComponent,
+    },
 ];
 
 @NgModule({

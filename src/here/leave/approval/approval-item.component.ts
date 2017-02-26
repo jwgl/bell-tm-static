@@ -3,9 +3,8 @@ import {ActivatedRoute} from '@angular/router';
 
 import {ReviewOptions} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
-import {LeaveForm} from '../../shared/form.model';
-import {LeaveApprovalService} from '../approval.service';
+import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {LeaveForm} from '../shared/form.model';
 
 @Component({
     templateUrl: 'approval-item.component.html',
@@ -13,25 +12,17 @@ import {LeaveApprovalService} from '../approval.service';
 export class LeaveApprovalItemComponent {
     form: LeaveForm;
 
-    private id: string;
     private wi: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private service: LeaveApprovalService,
-    ) {
-        this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.wi = params['wi'];
-            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
-        });
+    constructor(route: ActivatedRoute) {
+        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
         const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
         this.form = new LeaveForm(dto.form, schedules);
         if (this.wi === undefined) {
-            this.wi = dto.form.workitemId;
+            this.wi = dto.workitemId;
         }
     }
 
@@ -41,7 +32,7 @@ export class LeaveApprovalItemComponent {
 
     get reviewOptions(): ReviewOptions {
         return {
-            id: this.id,
+            id: this.form.id,
             wi: this.wi,
             type: 'approve',
             what: this.form.title,

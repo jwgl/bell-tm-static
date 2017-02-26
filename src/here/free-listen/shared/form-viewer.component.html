@@ -1,23 +1,44 @@
 <form-title>{{form.title}}</form-title>
-<form class="form-horizontal">
-    <form-field-2>
-        <p class="form-control-static form-field-left" label="学号">{{form.studentId}}</p>
-        <p class="form-control-static form-field-right" label="姓名">{{form.studentName}}</p>
-    </form-field-2>
-    <form-field-2>
-        <p class="form-control-static form-field-left" label="专业">{{form.subject}}</p>
-        <p class="form-control-static form-field-right" label="年级">{{form.grade}}</p>
-    </form-field-2>
-    <form-field-2>
-        <p class="form-control-static form-field-left" label="班级">{{form.adminClass}}</p>
-        <p class="form-control-static form-field-right" label="主讲教师">{{form.checkerName}}</p>
-    </form-field-2>
-    <form-field label="明细">
-        <simple-schedule [schedules]="schedules" size="sm">
+<form>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>学号</label>
+            <p class="form-control-static">{{form.studentId}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>姓名</label>
+            <p class="form-control-static">{{form.studentName}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>专业</label>
+            <p class="form-control-static">{{form.subject}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label>年级</label>
+            <p class="form-control-static">{{form.grade}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>班级</label>
+            <p class="form-control-static">{{form.adminClass}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>主讲教师</label>
+            <p class="form-control-static">{{form.checkerName}}</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>免听事由</label>
+        <p class="form-control-static">{{form.reason}}</p>
+    </div>
+    <div class="form-group">
+        <label>免听明细</label>
+        <simple-schedule [schedules]="schedules">
             <ng-template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
                 <div class="schedule"
-                     [ngClass]="getScheduleClass(schedule)"
-                     [style.height]="count > 1 ? null : '100%'">
+                    [ngClass]="getScheduleClass(schedule)"
+                    [style.height]="count > 1 ? null : '100%'">
                     <span>{{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}</span>
                 </div>
             </ng-template>
@@ -33,8 +54,5 @@
         <ul>
             <li *ngFor="let item of form.items">{{item}}</li>
         </ul>
-    </form-field>
-    <form-field label="事由">
-        <p class="form-control-static">{{form.reason}}</p>
-    </form-field>
+    </div>
 </form>

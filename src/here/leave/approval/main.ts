@@ -9,9 +9,9 @@ import {WorkflowModule} from 'core/workflow';
 import {LeaveSharedModule} from '../shared/leave-shared.module';
 import {LeaveApprovalComponent} from './approval.component';
 import {LeaveApprovalRoutingModule} from './approval.routing';
-import {LeaveApprovalService} from './approval.service';
-import {LeaveApprovalItemComponent} from './item/approval-item.component';
-import {LeaveApprovalListComponent} from './list/approval-list.component';
+
+import {LeaveApprovalItemComponent} from './approval-item.component';
+import {LeaveApprovalListComponent} from './approval-list.component';
 
 @NgModule({
     imports: [
@@ -26,9 +26,6 @@ import {LeaveApprovalListComponent} from './list/approval-list.component';
         LeaveApprovalComponent,
         LeaveApprovalListComponent,
         LeaveApprovalItemComponent,
-    ],
-    providers: [
-        LeaveApprovalService,
     ],
     bootstrap: [LeaveApprovalComponent],
 })

@@ -102,6 +102,15 @@ export class Schedule {
                this.courseItem === other.courseItem &&
                this.place === other.place;
     }
+
+    compare(other: Schedule): number {
+        return this.startWeek - other.startWeek
+             || this.endWeek - other.endWeek
+             || this.oddEven - other.oddEven
+             || this.course.localeCompare(other.course)
+             || this.course.localeCompare(other.courseItem)
+             || this.place.localeCompare(other.place);
+    }
 }
 
 export interface Term {
@@ -110,18 +119,23 @@ export interface Term {
     currentWeek: number;
 }
 
+function uniqueAndSort(schedules: Schedule[]): Schedule[] {
+    return _.uniqWith(schedules, (a: Schedule, b: Schedule) => a.uniqueCompare(b))
+            .sort((a, b) => a.compare(b));
+}
+
 export function findWeekSchedules(schedules: Schedule[], week: number): _.Dictionary<Schedule[]> {
     return _.chain(schedules)
             .filter(s => week >= s.startWeek && week <= s.endWeek && matchOddEven(s.oddEven, week))
             .groupBy(s => this.buildKey(s.dayOfWeek, s.startSection))
-            .mapValues((ss: Schedule[]) => _.uniqWith(ss, (a: Schedule, b: Schedule) => a.uniqueCompare(b)))
+            .mapValues((ss: Schedule[]) => uniqueAndSort(ss))
             .value();
 }
 
 export function createScheduleMap(schedules: Schedule[]): _.Dictionary<Schedule[]> {
     return _.chain(schedules)
             .groupBy(s => this.buildKey(s.dayOfWeek, s.startSection))
-            .mapValues((ss: Schedule[]) => _.uniqWith(ss, (a: Schedule, b: Schedule) => a.uniqueCompare(b)))
+            .mapValues((ss: Schedule[]) => uniqueAndSort(ss))
             .value();
 }
 

@@ -18,10 +18,7 @@ export class WorkflowItemResolve implements Resolve<any> {
                 this.workflow.listGroup.update(result.counts);
             }
 
-            return {
-                form: result.form,
-                wi: wi ? wi : result.workitemId,
-            };
+            return result;
         });
     }
 }

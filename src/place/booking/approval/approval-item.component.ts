@@ -20,7 +20,7 @@ export class BookingApprovalItemComponent {
     onItemLoaded(dto: any) {
         this.form = new BookingForm(dto.form);
         if (this.wi === undefined) {
-            this.wi = dto.wi;
+            this.wi = dto.workitemId;
         }
     }
 
@@ -35,6 +35,10 @@ export class BookingApprovalItemComponent {
             type: 'approve',
             what: this.form.title,
         };
+    }
+
+    get revokable(): boolean {
+        return this.form.status === 'APPROVED';
     }
 
     get revokeOptions(): RevokeOptions {

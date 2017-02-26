@@ -9,16 +9,23 @@
         </div>
     </div>
     <form-title>{{form.title}}</form-title>
-    <form class="form-horizontal offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
-        <form-field-2>
-            <select class="form-control form-field-left" label="借用单位" name="department" [(ngModel)]="form.departmentId" (ngModelChange)="onDepartmentChanged($event)">
-                <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}</option>
-            </select>
-            <select class="form-control form-field-right" label="借用类别" name="bookingType" [(ngModel)]="form.bookingTypeId">
-                <option *ngFor="let bookingType of bookingTypes" [ngValue]="bookingType.id">{{bookingType.name}} ({{bookingType.checker}})</option>
-            </select>
-        </form-field-2>
-        <form-field label="借用事由" [class.has-danger]="!reason.pristine && !reason.valid">
+    <form class="offset-lg-1 col-lg-10 offset-xl-2 col-xl-8">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>借用单位</label>
+                <select class="form-control" name="department" [(ngModel)]="form.departmentId" (ngModelChange)="onDepartmentChanged($event)">
+                    <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label>借用类别</label>
+                <select class="form-control" name="bookingType" [(ngModel)]="form.bookingTypeId">
+                    <option *ngFor="let bookingType of bookingTypes" [ngValue]="bookingType.id">{{bookingType.name}} ({{bookingType.checker}})</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group" [class.has-danger]="!reason.pristine && !reason.valid">
+            <label>借用事由</label>
             <textarea class="form-control" name="reason" rows="4"
                 [(ngModel)]="form.reason"
                 placeholder="请注明借用单位下属部门（班级或社团名称）、使用人数和用途。"
@@ -30,18 +37,23 @@
                 <span *ngIf="reason.errors?.minlength">借用事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
                 <span *ngIf="reason.errors?.maxlength">借用事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
             </p>
-        </form-field>
-        <form-field-2>
-            <p class="form-control-static form-field-left" label="借用人">{{form.userName}}</p>
-            <p class="form-control-static form-field-right" label="联系电话">{{form.phoneNumber}}</p>
-        </form-field-2>
-        <form-field label="借用明细">
+        </div>
+        <div class="form-group">
+            <label>借用人</label>
+            <p class="form-control-static d-flex" label="借用人">
+                <ng-container *ngIf="form.extraInfo">{{form.extraInfo.join(' ')}} </ng-container>{{form.userName}}
+                &#9742; {{form.phoneNumber}}
+                <span class="ml-auto">{{form.dateSubmitted | date: 'y-MM-dd HH:mm'}}</span>
+            </p>
+        </div>
+        <div class="form-group">
+            <label>借用明细</label>
             <ul *ngIf="form.items.length > 0; else prompt">
                 <li *ngFor="let item of form.items">{{item}} <remove-item (click)="form.removeItem(item)"></remove-item></li>
             </ul>
             <ng-template #prompt>
                  <p class="form-control-static text-muted">一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。</p>
             </ng-template>
-        </form-field>
+        </div>
     </form>
 </div>

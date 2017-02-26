@@ -9,9 +9,9 @@ import {WorkflowModule} from 'core/workflow';
 import {FreeListenSharedModule} from '../shared/free-listen-shared.module';
 import {FreeListenCheckComponent} from './check.component';
 import {FreeListenCheckRoutingModule} from './check.routing';
-import {FreeListenCheckService} from './check.service';
-import {FreeListenCheckItemComponent} from './item/check-item.component';
-import {FreeListenCheckListComponent} from './list/check-list.component';
+
+import {FreeListenCheckItemComponent} from './check-item.component';
+import {FreeListenCheckListComponent} from './check-list.component';
 
 @NgModule({
     imports: [
@@ -26,9 +26,6 @@ import {FreeListenCheckListComponent} from './list/check-list.component';
         FreeListenCheckComponent,
         FreeListenCheckListComponent,
         FreeListenCheckItemComponent,
-    ],
-    providers: [
-        FreeListenCheckService,
     ],
     bootstrap: [FreeListenCheckComponent],
 })

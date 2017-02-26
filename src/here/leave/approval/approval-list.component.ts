@@ -7,7 +7,7 @@ import {ReviewList} from 'core/models';
     styleUrls: ['approval-list.component.scss'],
     templateUrl: 'approval-list.component.html',
 })
-export class BookingApprovalListComponent {
+export class LeaveApprovalListComponent {
     list: ReviewList;
 
     constructor(route: ActivatedRoute) {

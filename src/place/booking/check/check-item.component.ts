@@ -20,7 +20,7 @@ export class BookingCheckItemComponent {
     onItemLoaded(dto: any) {
         this.form = new BookingForm(dto.form);
         if (this.wi === undefined) {
-            this.wi = dto.wi;
+            this.wi = dto.workitemId;
         }
     }
 

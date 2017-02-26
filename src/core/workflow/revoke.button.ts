@@ -6,7 +6,7 @@ import {RevokeOptions, Workflow} from './workflow.service';
     selector: 'button[workflow-revoke]',
     host: {
         '(click)': 'click()',
-        '[class]': '"btn btn-danger"',
+        '[class]': '"btn btn-secondary"',
         '[disabled]': 'workflow.pending',
     },
 })

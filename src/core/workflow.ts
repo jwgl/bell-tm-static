@@ -29,6 +29,7 @@ import {WorkflowItemResolve} from './workflow/item.resolve';
 import {WorkflowListResolve} from './workflow/list.resolve';
 
 import {ListGroupComponent} from './workflow/list-group.component';
+import {NavTabsComponent} from './workflow/nav-tabs.component';
 
 export {
     ReviewOptions,
@@ -67,6 +68,7 @@ const WORKFLOW_BUTTONS: any[] = [
         WORKFLOW_BUTTONS,
         WorkitemStatusComponent,
         ListGroupComponent,
+        NavTabsComponent,
     ],
     providers: [
         Dialog,
@@ -77,6 +79,7 @@ const WORKFLOW_BUTTONS: any[] = [
     exports: [
         WORKFLOW_BUTTONS,
         ListGroupComponent,
+        NavTabsComponent,
     ],
     entryComponents: [
         WORKFLOW_DIALOGS,

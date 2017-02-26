@@ -15,6 +15,14 @@ th {
     white-space: nowrap
 }
 
+label {
+    font-weight: bold;
+}
+
+.form-check label {
+    font-weight: normal;
+}
+
 @media print {
     .no-print, .no-print * {
         display: none !important;

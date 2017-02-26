@@ -5,14 +5,9 @@ import {ListGroupOption} from 'core/models';
 @Component({
     selector: 'booking-check-container',
     template: `
-<div class="row">
-    <div class="col-md-3">
-        <list-group [options]="options"></list-group>
-    </div>
-    <div class="col-md-9">
-        <router-outlet></router-outlet>
-    </div>
-</div>`,
+<nav-tabs [options]="options"></nav-tabs>
+<router-outlet></router-outlet>
+`,
 })
 export class BookingCheckComponent {
     options: ListGroupOption[] = [

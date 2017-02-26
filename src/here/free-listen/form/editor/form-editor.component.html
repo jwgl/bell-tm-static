@@ -6,15 +6,30 @@
         </div>
     </div>
     <form-title>{{form.title}}</form-title>
-    <form class="form-horizontal">
-        <form-field label="主讲教师">
+    <form>
+        <div class="form-group">
+            <label>主讲教师</label>
             <p class="form-control-static">
                 <ng-container *ngIf="form.checkerName; else prompt">{{form.checkerName}}</ng-container>
                 <ng-template #prompt>每次免听申请只能选择一位主讲教师，可选择多次教学安排。只有重修课程可以申请免听</ng-template>
             </p>
-        </form-field>
-        <form-field label="免听项目">
-            <simple-schedule [schedules]="schedules" size="sm">
+        </div>
+        <div class="form-group" [class.has-danger]="!reason.pristine && !reason.valid">
+            <label>免听事由</label>
+            <textarea class="form-control" name="reason" rows="4"
+                [(ngModel)]="form.reason"
+                maxlength="200" minlength="10"
+                required
+                #reason="ngModel"></textarea>
+            <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
+                <span *ngIf="reason.errors?.required">免听事由不能为空。</span>
+                <span *ngIf="reason.errors?.minlength">免听事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
+                <span *ngIf="reason.errors?.maxlength">免听事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
+            </p>
+        </div>
+        <div class="form-group">
+            <label>免听项目</label>
+                        <simple-schedule [schedules]="schedules" size="sm">
                 <ng-template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
                     <button class="btn w-100"
                             [ngClass]="scheduleClass(schedule)"
@@ -35,18 +50,6 @@
             <ul>
                 <li *ngFor="let item of form.items">{{item}}</li>
             </ul>
-        </form-field>
-        <form-field label="免听事由">
-            <textarea class="form-control" name="reason" rows="4"
-                [(ngModel)]="form.reason"
-                maxlength="200" minlength="10"
-                required
-                #reason="ngModel"></textarea>
-            <p class="form-control-feedback" [hidden]="reason.pristine || reason.valid">
-                <span *ngIf="reason.errors?.required">免听事由不能为空。</span>
-                <span *ngIf="reason.errors?.minlength">免听事由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
-                <span *ngIf="reason.errors?.maxlength">免听事由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
-            </p>
-        </form-field>
+        </div>
     </form>
 </ng-container>

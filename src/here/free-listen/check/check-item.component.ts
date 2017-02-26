@@ -4,32 +4,22 @@ import * as _ from 'lodash';
 
 import {ReviewOptions} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
-import {FreeListenForm} from '../../shared/form.model';
-import {FreeListenApprovalService} from '../approval.service';
+import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {FreeListenForm} from '../shared/form.model';
 
-import '../../shared/form-viewer.model';
+import '../shared/form-viewer.model';
 
 @Component({
-    templateUrl: 'approval-item.component.html',
-
+    templateUrl: 'check-item.component.html',
 })
-export class FreeListenApprovalItemComponent {
+export class FreeListenCheckItemComponent {
     schedules: Schedule[];
     form: FreeListenForm;
 
-    private id: string;
     private wi: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private service: FreeListenApprovalService,
-    ) {
-        this.route.params.subscribe(params => {
-            this.id = params['id'];
-            this.wi = params['wi'];
-            this.service.loadItem(this.id, this.wi).subscribe(dto => this.onItemLoaded(dto));
-        });
+    constructor(route: ActivatedRoute) {
+        route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
     }
 
     onItemLoaded(dto: any) {
@@ -38,7 +28,7 @@ export class FreeListenApprovalItemComponent {
 
         this.form = new FreeListenForm(dto.form, studentSchedules);
         if (this.wi === undefined) {
-            this.wi = dto.form.workitemId;
+            this.wi = dto.workitemId;
         }
 
         studentSchedules.forEach(it => it.belongsTo = 'student');
@@ -47,14 +37,14 @@ export class FreeListenApprovalItemComponent {
     }
 
     get reviewable(): boolean {
-        return this.wi && this.form.status === 'CHECKED';
+        return this.wi && this.form.status === 'SUBMITTED';
     }
 
     get reviewOptions(): ReviewOptions {
         return {
-            id: this.id,
+            id: this.form.id,
             wi: this.wi,
-            type: 'approve',
+            type: 'check',
             what: this.form.title,
         };
     }

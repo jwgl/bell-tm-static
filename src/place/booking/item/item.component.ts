@@ -22,8 +22,4 @@ export class BookingItemComponent {
             this.form = new BookingForm(dto);
         });
     }
-
-    showWorkitems() {
-        this.workflow.workitems(this.form.workflowInstanceId);
-    }
 }
