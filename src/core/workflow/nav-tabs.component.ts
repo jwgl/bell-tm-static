@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {ListGroup, ListGroupOption, StatusCounts} from 'core/models';
+import {ListGroup, ListOption} from 'core/models';
 
 import {Workflow} from './workflow.service';
 
@@ -13,7 +13,7 @@ import {Workflow} from './workflow.service';
     },
 })
 export class NavTabsComponent {
-    @Input() set options(value: ListGroupOption[]) {
+    @Input() set options(value: ListOption[]) {
         this.group = new ListGroup(value);
         this.workflow.listGroup = this.group;
     }

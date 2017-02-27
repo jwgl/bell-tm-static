@@ -19,9 +19,7 @@ export class BookingCheckItemComponent {
 
     onItemLoaded(dto: any) {
         this.form = new BookingForm(dto.form);
-        if (this.wi === undefined) {
-            this.wi = dto.workitemId;
-        }
+        this.wi = dto.workitemId;
     }
 
     get reviewable(): boolean {

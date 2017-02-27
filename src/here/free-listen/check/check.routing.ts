@@ -7,20 +7,27 @@ import {FreeListenCheckItemComponent} from './check-item.component';
 import {FreeListenCheckListComponent} from './check-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},
+    {path: '', redirectTo: 'todo', pathMatch: 'full'},
     {
-        path: 'list/:status',
-        component: FreeListenCheckListComponent,
-        resolve: {list: WorkflowListResolve},
-    },
-    {
-        path: ':id',
-        component: FreeListenCheckItemComponent,
-        resolve: {item: WorkflowItemResolve},
-    },
-    {
-        path: ':id/workitems/:wi',
-        component: FreeListenCheckItemComponent,
+        path: ':type',
+        children: [
+            {
+                path: '',
+                component: FreeListenCheckListComponent,
+                resolve: {list: WorkflowListResolve},
+
+            },
+            {
+                path: ':id',
+                component: FreeListenCheckItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+            {
+                path: ':id/workitems/:wi',
+                component: FreeListenCheckItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+        ],
     },
 ];
 

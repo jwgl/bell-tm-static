@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {ListGroupOption} from 'core/models';
+import {ListOption} from 'core/models';
 
 @Component({
     selector: 'booking-check-container',
@@ -10,8 +10,8 @@ import {ListGroupOption} from 'core/models';
 `,
 })
 export class BookingCheckComponent {
-    options: ListGroupOption[] = [
-        {status: 'PENDING',   label: '待审核', class: 'badge-success'},
-        {status: 'PROCESSED', label: '已审核', class: 'badge-danger'},
+    options: ListOption[] = [
+        {type: 'todo', label: '待审核', class: 'badge-success'},
+        {type: 'done', label: '已审核', class: 'badge-danger'},
     ];
 }

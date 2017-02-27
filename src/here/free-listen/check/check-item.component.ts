@@ -27,9 +27,7 @@ export class FreeListenCheckItemComponent {
         const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
 
         this.form = new FreeListenForm(dto.form, studentSchedules);
-        if (this.wi === undefined) {
-            this.wi = dto.workitemId;
-        }
+        this.wi = dto.workitemId;
 
         studentSchedules.forEach(it => it.belongsTo = 'student');
         departmentSchedules.forEach(it => it.belongsTo = 'department');

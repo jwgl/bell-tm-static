@@ -7,20 +7,27 @@ import {BookingCheckItemComponent} from './check-item.component';
 import {BookingCheckListComponent} from './check-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},
+    {path: '', redirectTo: 'todo', pathMatch: 'full'},
     {
-        path: 'list/:status',
-        component: BookingCheckListComponent,
-        resolve: {list: WorkflowListResolve},
-    },
-    {
-        path: ':id',
-        component: BookingCheckItemComponent,
-        resolve: {item: WorkflowItemResolve},
-    },
-    {
-        path: ':id/workitems/:wi',
-        component: BookingCheckItemComponent,
+        path: ':type',
+        children: [
+            {
+                path: '',
+                component: BookingCheckListComponent,
+                resolve: {list: WorkflowListResolve},
+
+            },
+            {
+                path: ':id',
+                component: BookingCheckItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+            {
+                path: ':id/workitems/:wi',
+                component: BookingCheckItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+        ],
     },
 ];
 

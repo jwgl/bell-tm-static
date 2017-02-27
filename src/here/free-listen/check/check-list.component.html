@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let form of list.items">
-                <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
+                <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
                 <td>{{form.studentId}}</td>
                 <td>{{form.studentName}}</td>
                 <td>{{form.subject}}</td>
@@ -26,8 +26,8 @@
             <tr>
                 <td colspan="7" style="text-align: center">
                     <div class="btn-group" *ngIf="list.pagerEnabled">
-                        <button class="btn btn-secondary" [routerLink]="['./', {offset: list.prevOffset}]" [disabled]="list.prevDisabled">上一页</button>
-                        <button class="btn btn-secondary" [routerLink]="['./', {offset: list.nextOffset}]" [disabled]="list.nextDisabled">下一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[{offset: list.prevOffset}]" [disabled]="list.prevDisabled">上一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[{offset: list.nextOffset}]" [disabled]="list.nextDisabled">下一页</button>
                     </div>
                 </td>
             </tr>

@@ -7,20 +7,27 @@ import {LeaveApprovalItemComponent} from './approval-item.component';
 import {LeaveApprovalListComponent} from './approval-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'list/SUBMITTED', pathMatch: 'full'},
+    {path: '', redirectTo: 'todo', pathMatch: 'full'},
     {
-        path: 'list/:status',
-        component: LeaveApprovalListComponent,
-        resolve: {list: WorkflowListResolve},
-    },
-    {
-        path: ':id',
-        component: LeaveApprovalItemComponent,
-        resolve: {item: WorkflowItemResolve},
-    },
-    {
-        path: ':id/workitems/:wi',
-        component: LeaveApprovalItemComponent,
+        path: ':type',
+        children: [
+            {
+                path: '',
+                component: LeaveApprovalListComponent,
+                resolve: {list: WorkflowListResolve},
+
+            },
+            {
+                path: ':id',
+                component: LeaveApprovalItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+            {
+                path: ':id/workitems/:wi',
+                component: LeaveApprovalItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+        ],
     },
 ];
 

@@ -7,20 +7,27 @@ import {BookingApprovalItemComponent} from './approval-item.component';
 import {BookingApprovalListComponent} from './approval-list.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'list/PENDING', pathMatch: 'full'},
+    {path: '', redirectTo: 'todo', pathMatch: 'full'},
     {
-        path: 'list/:status',
-        component: BookingApprovalListComponent,
-        resolve: {list: WorkflowListResolve},
-    },
-    {
-        path: ':id',
-        component: BookingApprovalItemComponent,
-        resolve: {item: WorkflowItemResolve},
-    },
-    {
-        path: ':id/workitems/:wi',
-        component: BookingApprovalItemComponent,
+        path: ':type',
+        children: [
+            {
+                path: '',
+                component: BookingApprovalListComponent,
+                resolve: {list: WorkflowListResolve},
+
+            },
+            {
+                path: ':id',
+                component: BookingApprovalItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+            {
+                path: ':id/workitems/:wi',
+                component: BookingApprovalItemComponent,
+                resolve: {item: WorkflowItemResolve},
+            },
+        ],
     },
 ];
 

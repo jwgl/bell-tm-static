@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
 import {Dialog} from '../dialogs';
-import {ListGroup, StatusCounts} from '../models';
+import {ListCounts, ListGroup} from '../models';
 import {ApiUrl, Rest} from '../rest';
 import {WorkflowAcceptDialog} from './accept.dialog';
 import {WorkflowRejectDialog} from './reject.dialog';
@@ -76,7 +76,7 @@ export class Workflow {
                 title: result.what,
                 to: result.to,
                 comment: result.comment,
-            }).do((data: {counts: StatusCounts}) => {
+            }).do((data: {counts: ListCounts}) => {
                 if (this.listGroup && data.counts) {
                     this.listGroup.update(data.counts);
                 }
@@ -98,7 +98,7 @@ export class Workflow {
             return this.rest.patch(this.api.reject(options.id, options.wi), {
                 title: result.what,
                 comment: result.comment,
-            }).do((data: {counts: StatusCounts}) => {
+            }).do((data: {counts: ListCounts}) => {
                 if (this.listGroup && data.counts) {
                     this.listGroup.update(data.counts);
                 }
@@ -135,18 +135,19 @@ export class Workflow {
     }
 
     loadList(options: {[key: string]: any} = {}): Observable<any> {
-        return this.rest.get(this.api.list(options)).do((data: {counts: StatusCounts}) => {
+        return this.rest.get(this.api.list(options)).do((data: {counts: ListCounts}) => {
             if (this.listGroup && data.counts) {
                 this.listGroup.update(data.counts);
-                this.listGroup.activate(options.status);
+                this.listGroup.activate(options.type);
             }
         });
     }
 
-    loadItem(id: any, wi: string): Observable<any> {
-        return this.rest.get(this.api.workitem(id, wi)).do((data: {counts: StatusCounts}) => {
+    loadItem(type: string, id: any, wi: string): Observable<any> {
+        return this.rest.get(this.api.workitem(id, wi)).do((data: {counts: ListCounts}) => {
             if (this.listGroup && data.counts) {
                 this.listGroup.update(data.counts);
+                this.listGroup.activate(type);
             }
         });
     }

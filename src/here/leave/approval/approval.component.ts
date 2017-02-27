@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {ListGroupOption} from 'core/models';
+import {ListOption} from 'core/models';
 
 @Component({
     selector: 'leave-approval-container',
@@ -10,9 +10,9 @@ import {ListGroupOption} from 'core/models';
     `,
 })
 export class LeaveApprovalComponent {
-    options: ListGroupOption[] = [
-        {status: 'SUBMITTED', label: '待处理', class: 'badge-success'},
-        {status: 'APPROVED',  label: '已审批', class: 'badge-info'},
-        {status: 'FINISHED',  label: '已销假', class: 'badge-danger'},
+    options: ListOption[] = [
+        {type: 'todo', label: '待处理', class: 'badge-success'},
+        {type: 'done', label: '已审批', class: 'badge-info'},
+        {type: 'next', label: '已销假', class: 'badge-danger'},
     ];
 }

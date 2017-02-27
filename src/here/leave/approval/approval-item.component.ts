@@ -21,9 +21,7 @@ export class LeaveApprovalItemComponent {
     onItemLoaded(dto: any) {
         const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
         this.form = new LeaveForm(dto.form, schedules);
-        if (this.wi === undefined) {
-            this.wi = dto.workitemId;
-        }
+        this.wi = dto.workitemId;
     }
 
     get reviewable(): boolean {

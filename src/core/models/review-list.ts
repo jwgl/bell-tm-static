@@ -1,17 +1,17 @@
 export class ReviewList {
-    status: string;
+    type: string;
     max: number = 10;
     offset: number = 0;
     total: number;
     items: any[];
 
     constructor(dto: {
-        status: string,
+        type: string,
         offset: number,
         total: number,
         items: any[],
     }) {
-        this.status = dto.status;
+        this.type = dto.type;
         this.offset = dto.offset;
         this.total = dto.total;
         this.items = dto.items;
