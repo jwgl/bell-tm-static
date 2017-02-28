@@ -18,6 +18,8 @@ export class FreeListenApprovalItemComponent {
     form: FreeListenForm;
 
     private wi: string;
+    private prevId: number;
+    private nextId: number;
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
@@ -29,6 +31,8 @@ export class FreeListenApprovalItemComponent {
 
         this.form = new FreeListenForm(dto.form, studentSchedules);
         this.wi = dto.workitemId;
+        this.prevId = dto.prevId;
+        this.nextId = dto.nextId;
 
         studentSchedules.forEach(it => it.belongsTo = 'student');
         departmentSchedules.forEach(it => it.belongsTo = 'department');

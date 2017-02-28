@@ -144,7 +144,7 @@ export class Workflow {
     }
 
     loadItem(type: string, id: any, wi: string): Observable<any> {
-        return this.rest.get(this.api.workitem(id, wi)).do((data: {counts: ListCounts}) => {
+        return this.rest.get(`${this.api.workitem(id, wi)}?type=${type}`).do((data: {counts: ListCounts}) => {
             if (this.listGroup && data.counts) {
                 this.listGroup.update(data.counts);
                 this.listGroup.activate(type);

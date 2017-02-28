@@ -7,3 +7,38 @@
 .alert {
     margin-top: 1rem;
 }
+
+th, td {
+	white-space: nowrap;
+}
+
+.reason {
+	width: 440px;
+	white-space:nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media (max-width : 1199px) {
+	.reason {
+		max-width: 260px;
+	}
+}
+
+@media (max-width : 991px) {
+	.reason {
+		max-width: 140px;
+	}
+}
+
+@media only screen and (max-width : 767px) {
+	.reason {
+		max-width: 60px;
+	}
+}
+
+@media only screen and (max-width : 543px) {
+	.reason {
+		max-width: 40px;
+	}
+}

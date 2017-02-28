@@ -13,6 +13,8 @@ export class LeaveApprovalItemComponent {
     form: LeaveForm;
 
     private wi: string;
+    private prevId: number;
+    private nextId: number;
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
@@ -22,6 +24,8 @@ export class LeaveApprovalItemComponent {
         const schedules = dto.schedules.map((s: ScheduleDto) => new Schedule(s));
         this.form = new LeaveForm(dto.form, schedules);
         this.wi = dto.workitemId;
+        this.prevId = dto.prevId;
+        this.nextId = dto.nextId;
     }
 
     get reviewable(): boolean {

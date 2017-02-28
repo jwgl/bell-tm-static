@@ -12,6 +12,8 @@ export class BookingApprovalItemComponent {
     form: BookingForm;
 
     private wi: string;
+    private prevId: number;
+    private nextId: number;
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
@@ -20,6 +22,8 @@ export class BookingApprovalItemComponent {
     onItemLoaded(dto: any) {
         this.form = new BookingForm(dto.form);
         this.wi = dto.workitemId;
+        this.prevId = dto.prevId;
+        this.nextId = dto.nextId;
     }
 
     get reviewable(): boolean {

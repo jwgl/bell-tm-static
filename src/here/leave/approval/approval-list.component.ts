@@ -3,6 +3,12 @@ import {ActivatedRoute} from '@angular/router';
 
 import {ReviewList} from 'core/models';
 
+const dateLabels: {[key: string]: string} = {
+    todo: '申请时间',
+    done: '审批时间',
+    next: '审批时间',
+};
+
 @Component({
     styleUrls: ['approval-list.component.scss'],
     templateUrl: 'approval-list.component.html',
@@ -14,5 +20,9 @@ export class LeaveApprovalListComponent {
         route.data.subscribe((data: {list: ReviewList}) => {
             this.list = data.list;
         });
+    }
+
+    get dateLabel(): string {
+        return dateLabels[this.list.type];
     }
 }
