@@ -25,14 +25,12 @@ import {RemoveItemComponent} from './components/remove-item';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {ActionClassPipe, ActionNamePipe} from './pipes/audit-action';
+import {DayOfWeekPipe} from './pipes/day-of-week';
 import {FilterByPipe} from './pipes/filter-by';
 import {GroupByPipe} from './pipes/group-by';
 import {MarkdownPipe} from './pipes/markdown';
-import {
-    DayOfWeekPipe,
-    FromNowPipe,
-    MomentFormatPipe,
-} from './pipes/moment-pipes';
+import {FromNowPipe, MomentFormatPipe} from './pipes/moment-pipes';
+import {SectionRangePipe} from './pipes/section-range';
 
 import {OddEvenPipe} from './pipes/odd-even';
 import {ZeroPadPipe} from './pipes/zero-pad';
@@ -76,6 +74,7 @@ const CORE_DIRECTIVES: any[] = [
     ActionClassPipe,
     MarkdownPipe,
     OddEvenPipe,
+    SectionRangePipe,
 ];
 
 @NgModule({

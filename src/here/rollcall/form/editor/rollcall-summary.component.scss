@@ -1,5 +1,5 @@
 @import 'node_modules/bootstrap/scss/_variables.scss';
-@import './base-view.component.scss';
+@import '../../shared/variables.scss';
 
 :host {
     white-space: nowrap;
@@ -14,7 +14,7 @@
 }
 
 .early {
-    color: #BB1684;
+    color: $early-bg;
 }
 
 .attend {

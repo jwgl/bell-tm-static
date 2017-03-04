@@ -1,0 +1,37 @@
+<ng-container *ngIf="loaded">
+    <section *ngIf="student">
+        <h5>学生信息</h5>
+        <ul>
+            <li>学号：{{student.id}}</li>
+            <li>姓名：{{student.name}}</li>
+            <li>年级：{{student.grade}}</li>
+            <li>专业：{{student.subject}}</li>
+            <li>班级：{{student.adminClass}}</li>
+        </ul>
+    </section>
+    <section *ngIf="rollcalls.length > 0">
+        <h5>考勤情况</h5>
+        <ul *ngIf="rollcalls">
+            <li *ngFor="let item of rollcalls">
+                <span [class.invalid]="!item.valid">
+                    第{{item.week}}周 {{item.dayOfWeek | dayOfWeek}} {{item | sectionRange}} {{item.course}} / {{item.teacher}}
+                </span>
+                <label *ngFor="let label of getLabels(item.type)" class="badge badge-{{label.class}}">{{label.text}}</label>
+                <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                <a *ngIf="item.studentLeave" href="../../leaves/{{item.studentLeave}}" target="_blank">请假</a>
+            </li>
+        </ul>
+    </section>
+    <section *ngIf="leaves.length > 0">
+        <h5>请假情况</h5>
+        <ul >
+            <li *ngFor="let item of leaves">
+                <span [class.invalid]="!item.valid">
+                    第{{item.week}}周 {{item.dayOfWeek | dayOfWeek}} {{item | sectionRange}} {{item.course}} / {{item.teacher}}
+                </span>
+                <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                <a *ngIf="item.studentLeave" href="../../leaves/{{item.studentLeave}}" target="_blank">请假</a>
+            </li>
+        </ul>
+    </section>
+</ng-container>

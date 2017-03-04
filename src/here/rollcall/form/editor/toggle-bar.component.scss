@@ -1,6 +1,6 @@
 @import 'node_modules/bootstrap/scss/_mixins.scss';
 @import 'node_modules/bootstrap/scss/_variables.scss';
-@import './base-view.component.scss';
+@import '../../shared/variables.scss';
 
 $btn-late-bg:   $late-bg;
 $btn-absent-bg: $absent-bg;
