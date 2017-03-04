@@ -18,7 +18,7 @@ const ACTION_INFO = {
 
 @Pipe({name: 'actionName'})
 export class ActionNamePipe {
-    transform(value: String, arg: string) {
+    transform(value: string, arg: string) {
         if (arg) {
             if (value === 'ACCEPT') {
                 if (arg === 'CHECKED' || arg.endsWith('.view')) {

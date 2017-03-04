@@ -26,6 +26,7 @@ interface Es6PromiseLoader {
 type FactoryEs6PromiseLoader = () => Es6PromiseLoader;
 type FactoryPromise = () => Promise<any>;
 
+/* tslint:disable */
 interface AsyncRoutes {
     [component: string]: Es6PromiseLoader |
     Function |
@@ -37,6 +38,7 @@ type IdleCallbacks = Es6PromiseLoader |
     Function |
     FactoryEs6PromiseLoader |
     FactoryPromise;
+/* tslint:enable */
 
 interface WebpackModule {
     hot: {

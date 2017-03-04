@@ -14,17 +14,17 @@ export class Rest {
         return this.http.get(url).map(res => res.json());
     }
 
-    post(url: string, data: Object): Observable<any> {
+    post(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
         return this.http.post(url, data).map(res => res.json());
     }
 
-    put(url: string, data: Object): Observable<any> {
+    put(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
         return this.http.put(url, data).map(res => res.json());
     }
 
-    patch(url: string, data: Object): Observable<any> {
+    patch(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
         return this.http.patch(url, data).map(res => res.json());
     }

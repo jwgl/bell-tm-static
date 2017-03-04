@@ -23,7 +23,7 @@ export class BookingReportEditorComponent {
         private dialog: Dialog,
         private service: BookingReportService,
         @Inject('BOOKINGS_WEB_URL')
-        private bookingsWebUrl: String,
+        private bookingsWebUrl: string,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;

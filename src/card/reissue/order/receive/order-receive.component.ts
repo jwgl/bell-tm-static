@@ -20,7 +20,7 @@ export class ReissueOrderReceiveComponent {
         private dialog: CommonDialog,
         private service: ReissueOrderService,
         @Inject('REISSUE_FORM_WEB_URL')
-        private reissueFormWebUrl: String,
+        private reissueFormWebUrl: string,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];

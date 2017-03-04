@@ -23,7 +23,7 @@ export class ReissueOrderEditorComponent {
         private dialog: Dialog,
         private service: ReissueOrderService,
         @Inject('REISSUES_WEB_URL')
-        private reissuesWebUrl: String,
+        private reissuesWebUrl: string,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;
