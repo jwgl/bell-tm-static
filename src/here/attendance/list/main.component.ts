@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {AlwaysRouteReuseStrategy} from './reuse';
+import {AlwaysRouteReuseStrategy} from './main.reuse';
 
 @Component({
-    selector: 'rollcall-query-container',
+    selector: 'attendance-list-container',
     template: '<router-outlet></router-outlet>',
 })
-export class RollcallQueryComponent {
+export class AttendanceListMainComponent {
     constructor(router: Router) {
         router.routeReuseStrategy = new AlwaysRouteReuseStrategy();
     }

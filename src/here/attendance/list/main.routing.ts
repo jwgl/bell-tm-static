@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {RollcallQueryListComponent} from './list.component';
+import {AttendanceListComponent} from './list.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: RollcallQueryListComponent,
+        component: AttendanceListComponent,
     },
     {
         path: 'adminClasses/:adminClassId',
-        component: RollcallQueryListComponent,
+        component: AttendanceListComponent,
     },
 ];
 
@@ -22,4 +22,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class RollcallQueryRoutingModule {}
+export class AttendanceListMainRoutingModule {}

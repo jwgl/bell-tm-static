@@ -7,28 +7,28 @@ import {RouterModule} from '@angular/router';
 import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 
-import {RollcallQueryListComponent} from './list.component';
-import {RollcallQueryComponent} from './query.component';
-import {RollcallQueryRoutingModule} from './query.routing';
-import {RollcallQueryService} from './query.service';
+import {AttendanceListComponent} from './list.component';
+import {AttendanceListMainComponent} from './main.component';
+import {AttendanceListMainRoutingModule} from './main.routing';
+import {AttendanceListMainService} from './main.service';
 
 @NgModule({
-    bootstrap: [RollcallQueryComponent],
+    bootstrap: [AttendanceListMainComponent],
     declarations: [
-        RollcallQueryComponent,
-        RollcallQueryListComponent,
+        AttendanceListMainComponent,
+        AttendanceListComponent,
     ],
     imports: [
         BrowserModule,
         FormsModule,
         RouterModule,
         CommonDirectivesModule,
-        RestModule.for('/api/here/rollcalls'),
-        RollcallQueryRoutingModule,
+        RestModule.for('/api/here/attendances'),
+        AttendanceListMainRoutingModule,
     ],
     providers: [
-        RollcallQueryService,
-        {provide: 'ADMIN_CLASS_ROLLCALL_API', useValue: '/api/here/adminClasses/${id}/rollcalls'},
+        AttendanceListMainService,
+        {provide: 'ADMIN_CLASS_ATTENDANCE_API', useValue: '/api/here/adminClasses/${id}/attendances'},
     ],
 })
 class MainModule {}

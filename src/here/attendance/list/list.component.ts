@@ -1,21 +1,21 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router, RouterState} from '@angular/router';
-import {RollcallQueryService} from './query.service';
+import {AttendanceListMainService} from './main.service';
 
 @Component({
     styleUrls: ['list.component.scss'],
     templateUrl: 'list.component.html',
 })
-export class RollcallQueryListComponent {
+export class AttendanceListComponent {
     adminClasses: any[];
     students: any[];
     max = 20;
     adminClassId: number;
     totalCount: number;
     adminClassMap: {[key: number]: number} = {};
-
+    dataLoaded = false;
     constructor(
-        private service: RollcallQueryService,
+        private service: AttendanceListMainService,
         private router: Router, private route: ActivatedRoute) {
         this.route.params.subscribe(params => {
             this.adminClassId = parseInt(params['adminClassId'], 10);
@@ -32,6 +32,7 @@ export class RollcallQueryListComponent {
     }
 
     onDataLoaded(data: any) {
+        this.dataLoaded = true;
         this.adminClasses = data.adminClasses;
         this.students = data.students;
         this.totalCount = this.adminClasses.reduce((sum, ac) => sum += ac.count, 0);

@@ -4,14 +4,14 @@ import {Observable} from 'rxjs/Observable';
 import {ApiUrl, Rest} from 'core/rest';
 
 @Injectable()
-export class RollcallQueryService {
+export class AttendanceListMainService {
     indexes: any;
     indexesLoaded = false;
     constructor(
         private rest: Rest,
         private apiUrl: ApiUrl,
-        @Inject('ADMIN_CLASS_ROLLCALL_API')
-        private adminClassRollcallApi: string,
+        @Inject('ADMIN_CLASS_ATTENDANCE_API')
+        private adminClassAttendanceApi: string,
     ) {}
 
     loadList(options: {[key: string]: any}) {
@@ -19,6 +19,6 @@ export class RollcallQueryService {
     }
 
     loadListByAdminClass(id: number, options: {[key: string]: any}): Observable<any> {
-        return this.rest.get(this.adminClassRollcallApi.replace('${id}', id.toString()) + '?' + this.apiUrl.buildQueryString(options));
+        return this.rest.get(this.adminClassAttendanceApi.replace('${id}', id.toString()) + '?' + this.apiUrl.buildQueryString(options));
     }
 }
