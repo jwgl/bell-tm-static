@@ -14,6 +14,7 @@ export class AttendanceListComponent {
     totalCount: number;
     adminClassMap: {[key: number]: number} = {};
     dataLoaded = false;
+    count = 0;
     constructor(
         private service: AttendanceListMainService,
         private router: Router, private route: ActivatedRoute) {
@@ -25,9 +26,15 @@ export class AttendanceListComponent {
 
     loadData(offset: number) {
         if (this.adminClassId) {
-            this.service.loadListByAdminClass(this.adminClassId, {offset, max: this.max}).subscribe(data => this.onDataLoaded(data));
+            this.service.loadListByAdminClass(this.adminClassId, {offset, max: this.max}).subscribe(data => {
+                this.onDataLoaded(data);
+                this.count = this.adminClassMap[this.adminClassId];
+            });
         } else {
-            this.service.loadList({offset, max: this.max}).subscribe(data => this.onDataLoaded(data));
+            this.service.loadList({offset, max: this.max}).subscribe(data => {
+                this.onDataLoaded(data);
+                this.count = this.totalCount;
+            });
         }
     }
 
@@ -37,13 +44,5 @@ export class AttendanceListComponent {
         this.students = data.students;
         this.totalCount = this.adminClasses.reduce((sum, ac) => sum += ac.count, 0);
         this.adminClasses.forEach(it => this.adminClassMap[it.id] = it.count);
-    }
-
-    get count(): number {
-        if (this.adminClassId) {
-            return this.adminClassMap[this.adminClassId];
-        } else {
-            return this.totalCount;
-        }
     }
 }
