@@ -48,7 +48,7 @@ module.exports = function(options) {
             }),
             // See: https://github.com/angular/angular/issues/11580
             new ContextReplacementPlugin(
-                /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
+                /angular(\\|\/)core(\\|\/)@angular/,
                 helpers.root('src')
             ),
             new CopyWebpackPlugin([
