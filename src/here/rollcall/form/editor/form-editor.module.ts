@@ -11,6 +11,7 @@ import {RollcallFormEditorComponent} from './form-editor.component';
 import {RollcallFormRoutingModule} from './form-routing.module';
 import {RollcallListViewComponent} from './list-view.component';
 import {RollcallLockViewComponent} from './lock-view.component';
+import {RollcallSettingsDialog} from './rollcall-settings.dialog';
 import {RollcallStatusComponent} from './rollcall-status.component';
 import {RollcallSummaryComponent} from './rollcall-summary.component';
 import {RollcallTileViewComponent} from './tile-view.component';
@@ -33,7 +34,11 @@ import {RollcallToggleBarComponent} from './toggle-bar.component';
         RollcallToggleBarComponent,
         RollcallStatusComponent,
         RollcallSummaryComponent,
+        RollcallSettingsDialog,
         FocusDirective,
+    ],
+    entryComponents: [
+        RollcallSettingsDialog,
     ],
 })
 export class RoolcallFormEditorModule {}

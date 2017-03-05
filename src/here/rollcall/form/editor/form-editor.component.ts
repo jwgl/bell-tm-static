@@ -3,11 +3,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import * as _ from 'lodash';
 
+import {Dialog} from 'core/dialogs';
 import {matchOddEven} from 'core/utils';
 
 import {findWeekSchedules, Schedule, Term} from '../../../shared/schedule/schedule.model';
-import {Rollcall, RollcallConfig, RollcallForm, RollcallType, Student, ToggleResult} from '../form.model';
+import {Rollcall, RollcallForm, RollcallType, Student, ToggleResult} from '../form.model';
 import {RollcallFormService} from '../form.service';
+import {RollcallSettingsDialog} from './rollcall-settings.dialog';
 
 @Component({
     templateUrl: 'form-editor.component.html',
@@ -25,6 +27,7 @@ export class RollcallFormEditorComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private service: RollcallFormService,
+        private dialog: Dialog,
     ) {}
 
     ngOnInit() {
@@ -48,8 +51,9 @@ export class RollcallFormEditorComponent implements OnInit {
 
     onSwitchView($event: Event, view: string) {
         const button = $event.target as HTMLElement;
-        button.blur();
-        this.service.viewType = view;
+        this.service.updateViewType(view).subscribe(() => {
+            button.blur();
+        });
     }
 
     toggle(student: Student, type: RollcallType) {
@@ -96,5 +100,13 @@ export class RollcallFormEditorComponent implements OnInit {
                 });
                 break;
         }
+    }
+
+    showSettingsDialog() {
+        this.dialog.open(RollcallSettingsDialog, this.rollcallForm.settings).then(result => {
+            this.service.updateSettings(result).subscribe(() => {
+                this.rollcallForm.applySettings();
+            });
+        });
     }
 }

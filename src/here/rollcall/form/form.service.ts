@@ -6,13 +6,14 @@ import {Subject} from 'rxjs/Subject';
 import {ApiUrl, EditService, Rest} from 'core/rest';
 
 import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model';
-import {RollcallConfig} from './form.model';
+import {RollcallSettings} from './form.model';
 
 @Injectable()
 export class RollcallFormService {
     term: Term;
     schedules: Schedule[];
-    config: RollcallConfig;
+    settings: RollcallSettings;
+    viewType: string;
 
     constructor(private rest: Rest, private api: ApiUrl) {}
 
@@ -22,14 +23,6 @@ export class RollcallFormService {
 
     loadDataForCreate(options: {[key: string]: any} = {}): Observable<any> {
         return this.rest.get(this.api.dataForCreate(options));
-    }
-
-    get viewType(): string {
-        return this.config.view ? this.config.view : 'detail';
-    }
-
-    set viewType(value: string) {
-        this.config.view = value;
     }
 
     create(value: any): Observable<{id: string, attendances: number[]}> {
@@ -42,5 +35,20 @@ export class RollcallFormService {
 
     delete(id: any): Observable<{id: string, attendances: number[]}> {
         return this.rest.delete(this.api.item(id));
+    }
+
+    updateSettings(settings: RollcallSettings): Observable<void> {
+        return this.rest.put(`${this.api.list()}/settings?type=settings`, settings).do(() => {
+            this.settings.hideFree = settings.hideFree;
+            this.settings.hideLeave = settings.hideLeave;
+            this.settings.hideCancel = settings.hideCancel;
+            this.settings.random = settings.random;
+        });
+    }
+
+    updateViewType(viewType: string): Observable<void> {
+        return this.rest.put(`${this.api.list()}/settings?type=view`, {view: viewType}).do(() => {
+            this.viewType = viewType;
+        });
     }
 }

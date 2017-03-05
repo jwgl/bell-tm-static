@@ -11,7 +11,7 @@ export class RollcallFormEditorResolve implements Resolve<RollcallForm> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RollcallForm> {
         return this.service.loadDataForCreate(route.params).map(dto => {
-            const form = new RollcallForm(dto, this.service.config);
+            const form = new RollcallForm(dto, this.service.settings);
             if (form.locked && !/\/lock$/.test(state.url)) {
                 this.router.navigateByUrl(state.url.replace(/\/\w*$/, '/lock'));
             }

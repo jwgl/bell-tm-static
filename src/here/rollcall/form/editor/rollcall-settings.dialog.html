@@ -1,0 +1,35 @@
+<modal-dialog title="点名设置">
+    <modal-body>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="hideFree">
+                不显示免听学生
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="hideLeave">
+                不显示请假学生
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="hideCancel">
+                不显示取消考试资格学生
+            </label>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="randomEnabled">
+                随机点名
+            </label>
+            <select [(ngModel)]="random" [disabled]="!randomEnabled">
+                <option *ngFor="let i of [9,8,7,6,5,4,3,2,1]" [ngValue]="i * 10">{{i * 10}}%</option>
+            </select>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button modalOk (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

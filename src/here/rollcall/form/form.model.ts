@@ -38,12 +38,11 @@ export const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key
     }).map(t => RollcallActionLabels[t]);
 }, {} as LabelArrayMap);
 
-export interface RollcallConfig {
+export interface RollcallSettings {
     hideFree: boolean;
     hideLeave: boolean;
     hideCancel: boolean;
     random: number;
-    view: string;
 }
 
 interface RollcallDto {
@@ -216,7 +215,7 @@ export class Student {
 
 export class RollcallForm {
     students: Student[] = [];
-    config: RollcallConfig;
+    settings: RollcallSettings;
     locked: boolean;
     visibleStudents: Student[] = [];
 
@@ -232,8 +231,8 @@ export class RollcallForm {
 
     private studentsMap: { [key: string]: Student } = {};
 
-    constructor(dto: RollcallFormDto, config: RollcallConfig) {
-        this.config = config;
+    constructor(dto: RollcallFormDto, settings: RollcallSettings) {
+        this.settings = settings;
         this.locked = dto.locked;
 
         dto.students.forEach((s, index) => {
@@ -271,7 +270,7 @@ export class RollcallForm {
             this.summaryCounter.cancel++;
         });
 
-        this.applyConfig();
+        this.applySettings();
 
     }
 
@@ -317,14 +316,14 @@ export class RollcallForm {
         return _.defaults(counters, this.summaryCounter, RollcallTypeCounts);
     }
 
-    applyConfig(): void {
+    applySettings(): void {
         this.students.forEach(student => {
             if (student.absence instanceof CancelExam) {
-                student.visible = !this.config.hideCancel;
+                student.visible = !this.settings.hideCancel;
             } else if (student.absence instanceof FreeListen) {
-                student.visible = !this.config.hideFree;
+                student.visible = !this.settings.hideFree;
             } else if (student.absence instanceof StudentLeave) {
-                student.visible = !this.config.hideLeave;
+                student.visible = !this.settings.hideLeave;
             }
         });
 
@@ -335,7 +334,7 @@ export class RollcallForm {
     }
 
     private hideRandom() {
-        const random = this.config.random;
+        const random = this.settings.random;
 
         const normalStudents = this.students.filter(student => !student.absence);
 

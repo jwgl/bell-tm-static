@@ -27,5 +27,8 @@
             <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
         </ng-template>
     </div>
+    <div class="btn-group ml-2" *ngIf="rollcallForm && !rollcallForm.locked">
+        <button class="btn btn-secondary" (click)="showSettingsDialog()"><i class="fa fa-cog"></i></button>
+    </div>
 </div>
 <router-outlet></router-outlet>

@@ -18,7 +18,8 @@ export class RollcallFormResolve implements Resolve<true> {
             return this.service.loadList().do(result => {
                 this.service.term = result.term;
                 this.service.schedules = result.schedules.map((dto: ScheduleDto) => new Schedule(dto));
-                this.service.config = result.config;
+                this.service.settings = result.config;
+                this.service.viewType = result.view;
             }).map(() => true);
         }
     }
