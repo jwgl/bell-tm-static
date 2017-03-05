@@ -9,28 +9,19 @@ import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model'
 import {RollcallConfig} from './form.model';
 
 @Injectable()
-export class RollcallFormService extends EditService {
+export class RollcallFormService {
     term: Term;
     schedules: Schedule[];
     config: RollcallConfig;
 
-    private _scheduleLoaded = new BehaviorSubject<boolean>(false);
+    constructor(private rest: Rest, private api: ApiUrl) {}
 
-    constructor(rest: Rest, api: ApiUrl) {
-        super(rest, api);
+    loadList() {
+        return this.rest.get(this.api.list());
     }
 
-    loadFormList() {
-        this.loadList().subscribe(result => {
-            this.term = result.term;
-            this.schedules = result.schedules.map((dto: ScheduleDto) => new Schedule(dto));
-            this.config = result.config;
-            this._scheduleLoaded.next(true);
-        });
-    }
-
-    get scheduleLoaded(): Observable<boolean> {
-        return this._scheduleLoaded.filter(b => b);
+    loadDataForCreate(options: {[key: string]: any} = {}): Observable<any> {
+        return this.rest.get(this.api.dataForCreate(options));
     }
 
     get viewType(): string {
@@ -39,5 +30,17 @@ export class RollcallFormService extends EditService {
 
     set viewType(value: string) {
         this.config.view = value;
+    }
+
+    create(value: any): Observable<{id: string, attendances: number[]}> {
+        return this.rest.post(this.api.list(), value);
+    }
+
+    update(id: any, value: any): Observable<{id: string, attendances: number[]}> {
+        return this.rest.put(this.api.item(id), value);
+    }
+
+    delete(id: any): Observable<{id: string, attendances: number[]}> {
+        return this.rest.delete(this.api.item(id));
     }
 }

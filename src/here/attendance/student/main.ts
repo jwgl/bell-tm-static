@@ -6,22 +6,22 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 
-import {AttendanceItemComponent} from './item.component';
-import {AttendanceItemMainService} from './main.service';
+import {AttendanceStudentMainService} from './main.service';
+import {AttendanceStudentComponent} from './student.component';
 
 @NgModule({
-    bootstrap: [AttendanceItemComponent],
+    bootstrap: [AttendanceStudentComponent],
     declarations: [
-        AttendanceItemComponent,
+        AttendanceStudentComponent,
     ],
     imports: [
         BrowserModule,
         FormsModule,
         CommonDirectivesModule,
-        RestModule.for('/api/here/attendances'),
+        RestModule.for('/api/here/students/${userId}/attendances'),
     ],
     providers: [
-        AttendanceItemMainService,
+        AttendanceStudentMainService,
     ],
 })
 class MainModule {}

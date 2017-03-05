@@ -27,6 +27,7 @@ module.exports = {
     'here/rollcall/form':        './src/here/rollcall/form/main.ts',
     'here/attendance/list':      './src/here/attendance/list/main.ts',
     'here/attendance/item':      './src/here/attendance/item/main.ts',
+    'here/attendance/student':   './src/here/attendance/student/main.ts',
     'here/leave/form':           './src/here/leave/form/main.ts',
     'here/leave/approval':       './src/here/leave/approval/main.ts',
     'here/leave/item':           './src/here/leave/item/main.ts',

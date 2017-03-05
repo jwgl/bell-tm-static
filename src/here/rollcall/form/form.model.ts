@@ -164,6 +164,7 @@ export interface RollcallFormDto {
     leaves: StudentLeaveDto[];
     freeListens: FreeListenDto[];
     cancelExams: CancelExamDto[];
+    attendances: {[key: string]: number[]};
     locked: boolean;
 }
 
@@ -179,7 +180,7 @@ export class Student {
     taskScheduleId: string;
     adminClass: string;
     subject: string;
-    statis: number[];
+    attendances: number[];
     rollcall: Rollcall;
     absence: Absence;
     visible = true;
@@ -192,7 +193,7 @@ export class Student {
         this.taskScheduleId = dto.taskScheduleId;
         this.adminClass = dto.adminClass;
         this.subject = dto.subject;
-        this.statis = [0, 0, 0, 0];
+        this.attendances = [0, 0, 0, 0];
     }
 
     toggle(type: RollcallType): ToggleResult {
@@ -239,6 +240,10 @@ export class RollcallForm {
             const student = new Student(index + 1, s);
             this.studentsMap[student.id] = student;
             this.students.push(student);
+        });
+
+        Object.keys(dto.attendances).forEach(studentId => {
+            this.studentsMap[studentId].attendances = dto.attendances[studentId];
         });
 
         this.summaryCounter.total = this.students.length;
@@ -340,9 +345,9 @@ export class RollcallForm {
         }
 
         // 统计迟到旷课早退次数,清除之前的随机
-        const statis: number[] = [];
+        const attendances: number[] = [];
         normalStudents.forEach((student, index) => {
-            statis[index] = student.statis[0] + student.statis[1] + student.statis[2];
+            attendances[index] = student.attendances[0] + student.attendances[1] + student.attendances[2];
             student.visible = true;
         });
 
@@ -351,9 +356,9 @@ export class RollcallForm {
         let numberToHide = (100 - random) / 100 * total;
         while (numberToHide > 0) {
             const index = Math.floor(Math.random() * total);
-            if (statis[index] > -1) {
-                statis[index]--;
-                if (statis[index] === -1) {
+            if (attendances[index] > -1) {
+                attendances[index]--;
+                if (attendances[index] === -1) {
                     normalStudents[index].visible = false;
                     numberToHide--;
                 }

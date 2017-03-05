@@ -17,7 +17,7 @@
                 <span class="name ml-2">{{student.name}}</span>
                 <rollcall-status [student]="student"></rollcall-status>
                 <div class="d-flex flex-column align-items-end h-100 ml-auto p-2">
-                    <div class="statis">{{student.statis.join(' ')}}</div>
+                    <div class="statis">{{student.attendances.join(' ')}}</div>
                     <div class="mt-auto"><i [spinning]="student.pending"></i></div>
                 </div>
             </li>

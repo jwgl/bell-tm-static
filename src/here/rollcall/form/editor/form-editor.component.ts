@@ -62,9 +62,10 @@ export class RollcallFormEditorComponent implements OnInit {
                     taskScheduleId: student.taskScheduleId,
                     studentId: student.id,
                     type: result.type,
-                }).subscribe(id => {
+                }).subscribe((res: {id: string, attendances: number[]}) => {
                     student.pending = false;
-                    student.rollcall = new Rollcall({id: parseInt(id, 10), studentId: student.id, type: result.type});
+                    student.rollcall = new Rollcall({id: parseInt(res.id, 10), studentId: student.id, type: result.type});
+                    student.attendances = res.attendances;
                 }, error => {
                     student.pending = false;
                     alert(JSON.stringify(error));
@@ -72,9 +73,12 @@ export class RollcallFormEditorComponent implements OnInit {
                 break;
             case 'update':
                 student.pending = true;
-                this.service.update(student.rollcall.id, {type: result.type}).subscribe(id => {
+                this.service.update(student.rollcall.id, {
+                    type: result.type,
+                }).subscribe((res: {attendances: number[]}) => {
                     student.pending = false;
                     student.rollcall.type = result.type;
+                    student.attendances = res.attendances;
                 }, error => {
                     student.pending = false;
                     alert(JSON.stringify(error));
@@ -82,9 +86,10 @@ export class RollcallFormEditorComponent implements OnInit {
                 break;
             case 'delete':
                 student.pending = true;
-                this.service.delete(student.rollcall.id).subscribe(() => {
+                this.service.delete(student.rollcall.id).subscribe((res: {attendances: number[]}) => {
                     student.pending = false;
                     student.rollcall = null;
+                    student.attendances = res.attendances;
                 }, error => {
                     student.pending = false;
                     alert(JSON.stringify(error));
