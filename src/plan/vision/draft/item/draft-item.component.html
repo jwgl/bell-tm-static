@@ -4,7 +4,7 @@
             <button class="btn btn-secondary" (click)="returnList()">返回</button>
         </div>
         <div class="btn-group ml-2">
-            <button [workflow-workitems]="form.workflowInstanceId">流程</button>
+            <button [workflow-workitems]="vm.workflowInstanceId">流程</button>
         </div>
         <div class="btn-group ml-2" *ngIf="vm.editable">
             <button class="btn btn-secondary" (click)="edit()">编辑</button>
