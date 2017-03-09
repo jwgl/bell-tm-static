@@ -22,7 +22,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">星期几</label>
+                        <label class="control-label d-flex">星期几 <span class="date ml-auto">{{startDate}}</span></label>
                         <select class="form-control" name="dayOfWeek" [(ngModel)]="queryOptions.dayOfWeek" (ngModelChange)="clearData()" [disabled]="finding">
                             <option *ngFor="let item of vm.dayOfWeeks" [ngValue]="item.value">{{item.label}}</option>
                         </select>
@@ -30,7 +30,7 @@
                 </ng-container>
                 <ng-container *ngIf="vm.simpleOption">
                     <div class="form-group">
-                        <label class="control-label">日期</label><span class="date">{{bookingDay?.date.format('YYYY-MM-DD')}}</span>
+                        <label class="control-label d-flex">日期<span class="date ml-auto">{{bookingDay?.date.format('YYYY-MM-DD')}}</span></label>
                         <select class="form-control" name="days" [(ngModel)]="bookingDay" (ngModelChange)="clearData()" [disabled]="finding">
                             <option *ngFor="let day of vm.days" [ngValue]="day" [title]="day.date.format('YYYY-MM-DD')">第{{day.week}}周 {{day.date.format('dddd')}}</option>
                         </select>
@@ -65,7 +65,7 @@
         </div>
     </modal-body>
     <modal-footer [fix]="true">
-        <button class="btn btn-secondary mr-auto" (click)="findPlace()" [disabled]="finding">查询</button>
+        <button class="btn btn-secondary mr-auto" (click)="findPlace()" [disabled]="finding || containsSwapToDate">查询</button>
         <button modalCancel>取消</button>
         <button modalOk (click)="ok()" [disabled]="selectedCount === 0">确定</button>
     </modal-footer>

@@ -16,21 +16,37 @@ export class Rest {
 
     post(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
-        return this.http.post(url, data).map(res => res.json());
+        return this.http.post(url, data).map(res => {
+            if (res.text()) {
+                return res.json();
+            }
+        });
     }
 
     put(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
-        return this.http.put(url, data).map(res => res.json());
+        return this.http.put(url, data).map(res => {
+            if (res.text()) {
+                return res.json();
+            }
+        });
     }
 
     patch(url: string, data: object): Observable<any> {
         this.deleteEmptyProperties(data);
-        return this.http.patch(url, data).map(res => res.json());
+        return this.http.patch(url, data).map(res => {
+            if (res.text()) {
+                return res.json();
+            }
+        });
     }
 
     delete(url: string): Observable<any> {
-        return this.http.delete(url).map(res => res.json());
+        return this.http.delete(url).map(res => {
+            if (res.text()) {
+                return res.json();
+            }
+        });
     }
 
     private deleteEmptyProperties(data: any) {

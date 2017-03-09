@@ -91,18 +91,6 @@ export class FindPlaceDialog extends BaseDialog {
     }
 
     findPlace() {
-        // 处理校历日期调整。
-        if (this.queryOptions.startWeek === this.queryOptions.endWeek) {
-            const day = moment(this.term.startDate);
-            day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
-            day.add(this.queryOptions.dayOfWeek - 1, 'days');
-            for (const date of this.term.swapToDates) {
-                if (date.isSame(day)) {
-                    return;
-                }
-            }
-        }
-
         this.finding = true;
         this.service.findPlace({
             startWeek: this.queryOptions.startWeek,
@@ -140,13 +128,36 @@ export class FindPlaceDialog extends BaseDialog {
         this.places = [];
     }
 
+    get containsSwapToDate(): boolean {
+        if (this.queryOptions.startWeek === this.queryOptions.endWeek) {
+            const day = moment(this.term.startDate);
+            day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
+            day.add(this.queryOptions.dayOfWeek - 1, 'days');
+            for (const date of this.term.swapToDates) {
+                if (date.isSame(day)) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    get startDate(): string {
+        const day = moment(this.term.startDate);
+        day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
+        day.add(this.queryOptions.dayOfWeek - 1, 'days');
+        return day.format('YYYY-MM-DD');
+    }
+
     protected onOpening(): Observable<any> {
         this.term = {
             startWeek: this.options.term.startWeek,
             maxWeek: this.options.term.maxWeek,
             currentWeek: this.options.term.currentWeek,
             startDate: moment(this.options.term.startDate),
-            swapToDates: this.options.term.swapDates.map((it: string) => moment(it)),
+            swapToDates: this.options.term.swapDates.map((it: {from: string, to: string}) => moment(it.to)),
         };
 
         this.today = moment(this.options.today);

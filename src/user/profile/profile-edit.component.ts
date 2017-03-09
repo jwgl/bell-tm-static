@@ -33,7 +33,7 @@ export class UserProfileEditComponent {
             this.router.navigate(['/']);
         }, error => {
             this.saving = false;
-            alert(error.json().message);
+            alert(error);
         });
     }
 }
