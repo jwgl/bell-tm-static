@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 
+import {CommonDialog} from 'core/common-dialogs';
+
 import {BookingFormService} from '../form.service';
 
 @Component({
@@ -12,7 +14,7 @@ export class BookingFormListComponent {
     forms: any[];
     max = 10;
 
-    constructor(private service: BookingFormService) {
+    constructor(private dialog: CommonDialog, private service: BookingFormService) {
         this.loadData(0);
     }
 
@@ -24,7 +26,7 @@ export class BookingFormListComponent {
         });
     }
 
-    canApply() {
-        return !!this.user.phoneNumber;
+    showNotice() {
+        this.dialog.notice();
     }
 }

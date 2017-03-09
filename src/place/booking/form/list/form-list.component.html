@@ -1,14 +1,14 @@
 <ng-container *ngIf="user">
-    <div class="alert alert-warning" *ngIf="!user.phoneNumber">
-        你的手机号码为空，请补充完整个人信息。
-    </div>
-    <div *ngIf="canApply()">
+    <div *ngIf="user.phoneNumber; else phoneNumber">
         <div class="btn-toolbar">
             <div class="btn-group ml-auto">
+                <button class="btn btn-warning" (click)="showNotice()">借用须知</button>
+            </div>
+            <div class="btn-group ml-2">
                 <button class="btn btn-primary" routerLink="/create">新建</button>
             </div>
         </div>
-        <table class="table" *ngIf="forms && forms.length > 0">
+        <table class="table" *ngIf="forms && forms.length > 0; else empty">
             <thead>
                 <tr>
                     <th>申请单号</th>
@@ -38,5 +38,7 @@
                 </tr>
             </tfoot>
         </table>
+        <ng-template #empty><div class="alert alert-info">暂无借用数据</div></ng-template>
     </div>
+    <ng-template #phoneNumber><div class="alert alert-warning">你的手机号码为空，请补充完整个人信息。</div></ng-template>
 </ng-container>

@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {ConfirmDialog} from './confirm.dialog';
 import {Dialog} from './dialog';
 import {ErrorMessageDialog} from './error-message.dialog';
+import {FormNoticeDialog} from './form-notice.dialog';
 import {SimpleListSelectDialog} from './simple-list-select.dialog';
 import {TeacherSelectDialog} from './teacher-select.dialog';
 
@@ -26,5 +27,9 @@ export class CommonDialog {
 
     teacher(title: string): Promise<{id: string, name: string}> {
         return this.dialog.open(TeacherSelectDialog, {title});
+    }
+
+    notice(): Promise<void> {
+        return this.dialog.open(FormNoticeDialog);
     }
 }
