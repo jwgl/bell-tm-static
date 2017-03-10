@@ -1,5 +1,6 @@
 export class ReviewList {
     type: string;
+    query: string;
     max: number = 10;
     offset: number = 0;
     total: number;
@@ -7,11 +8,13 @@ export class ReviewList {
 
     constructor(dto: {
         type: string,
+        query: string,
         offset: number,
         total: number,
         items: any[],
     }) {
         this.type = dto.type;
+        this.query = dto.query;
         this.offset = dto.offset;
         this.total = dto.total;
         this.items = dto.items;
@@ -43,5 +46,31 @@ export class ReviewList {
 
     get pagerEnabled(): boolean {
         return this.items.length < this.total;
+    }
+
+    get prevRouterLink() {
+        if (this.query) {
+            return {
+                offset: this.prevOffset,
+                query: this.query,
+            };
+        } else {
+            return {
+                offset: this.prevOffset,
+            };
+        }
+    }
+
+    get nextRouterLink() {
+        if (this.query) {
+            return {
+                offset: this.nextOffset,
+                query: this.query,
+            };
+        } else {
+            return {
+                offset: this.nextOffset,
+            };
+        }
     }
 }

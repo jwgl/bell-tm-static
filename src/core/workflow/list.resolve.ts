@@ -11,13 +11,19 @@ export class WorkflowListResolve implements Resolve<ReviewList> {
     constructor(private workflow: Workflow) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ReviewList> {
-        const type = route.params['type'];
-        const offset = route.params['offset'] || 0;
-        return this.workflow.loadList({type, offset, max: 10}).map((result: {forms: any[], counts: ListCounts}) => {
+        const options: {[key: string]: any} = {};
+        options.type = route.params['type'];
+        options.offset = route.params['offset'] || 0;
+        options.max = route.params['offset'] || 10;
+        if (route.params['query']) {
+            options.query = route.params['query'];
+        }
+        return this.workflow.loadList(options).map((result: {forms: any[], counts: ListCounts}) => {
             return new ReviewList({
-                type,
-                offset,
-                total: result.counts[type],
+                type: options.type,
+                query: options.query,
+                offset: options.offset,
+                total: result.counts[options.type],
                 items: result.forms,
             });
         });

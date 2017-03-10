@@ -26,8 +26,8 @@
             <tr>
                 <td colspan="7" style="text-align: center">
                     <div class="btn-group" *ngIf="list.pagerEnabled">
-                        <button class="btn btn-secondary" [routerLink]="[{offset: list.prevOffset}]" [disabled]="list.prevDisabled">上一页</button>
-                        <button class="btn btn-secondary" [routerLink]="[{offset: list.nextOffset}]" [disabled]="list.nextDisabled">下一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[list.prevRouterLink]" [disabled]="list.prevDisabled">上一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[list.nextRouterLink]" [disabled]="list.nextDisabled">下一页</button>
                     </div>
                 </td>
             </tr>

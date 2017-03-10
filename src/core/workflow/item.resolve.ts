@@ -14,7 +14,8 @@ export class WorkflowItemResolve implements Resolve<any> {
         const type = route.params['type'];
         const id = route.params['id'];
         const wi = route.params['wi'];
+        const query = route.params['query'];
 
-        return this.workflow.loadItem(type, id, wi);
+        return this.workflow.loadItem(type, id, wi, query);
     }
 }

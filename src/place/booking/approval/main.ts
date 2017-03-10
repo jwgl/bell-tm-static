@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
@@ -16,6 +17,7 @@ import {BookingApprovalListComponent} from './approval-list.component';
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         CommonDirectivesModule,
         WorkflowModule,
         RestModule.for('/api/place/approvers/${userId}/bookings'),
