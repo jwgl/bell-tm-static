@@ -50,6 +50,9 @@ export class BaseDialog implements DynamicDialog, OnInit {
         const result = this.onOpening();
         if (result) {
             result.subscribe(value => {
+                if (!this.options) {
+                    this.options = {};
+                }
                 this.options.data = value;
                 this.$modal.modal('show');
             }, error => {

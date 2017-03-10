@@ -1,6 +1,6 @@
-<modal-dialog [title]="options.data?.title" size="lg">
+<modal-dialog [title]="options?.data?.title" size="lg">
     <modal-body>
-        <div [markdown]="options.data?.content"></div>
+        <div [markdown]="options?.data?.content"></div>
     </modal-body>
     <modal-footer>
         <button modalOk (click)="ok()">确定</button>
