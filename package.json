@@ -46,23 +46,23 @@
   },
   "devDependencies": {
     "@types/bootstrap": "^3.3.32",
-    "@types/core-js": "^0.9.35",
+    "@types/core-js": "^0.9.36",
     "@types/jquery": "^2.0.40",
-    "@types/lodash": "^4.14.54",
-    "@types/node": "^7.0.5",
-    "@types/webpack": "^2.2.7",
+    "@types/lodash": "^4.14.55",
+    "@types/node": "^7.0.8",
+    "@types/webpack": "^2.2.11",
     "angular2-template-loader": "^0.6.2",
-    "awesome-typescript-loader": "^3.0.8",
+    "awesome-typescript-loader": "^3.1.2",
     "copy-webpack-plugin": "^4.0.1",
     "markdown-it": "^8.3.0",
     "node-sass": "^4.5.0",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.1",
-    "sass-loader": "^6.0.2",
+    "sass-loader": "^6.0.3",
     "tslint": "^4.5.1",
     "tslint-loader": "^3.4.3",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1",
-    "webpack-merge": "^3.0.0"
+    "webpack-merge": "^4.0.0"
   }
 }
