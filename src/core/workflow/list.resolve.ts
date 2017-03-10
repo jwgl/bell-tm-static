@@ -14,7 +14,7 @@ export class WorkflowListResolve implements Resolve<ReviewList> {
         const options: {[key: string]: any} = {};
         options.type = route.params['type'];
         options.offset = route.params['offset'] || 0;
-        options.max = route.params['offset'] || 10;
+        options.max = route.params['max'] || 10;
         if (route.params['query']) {
             options.query = route.params['query'];
         }
