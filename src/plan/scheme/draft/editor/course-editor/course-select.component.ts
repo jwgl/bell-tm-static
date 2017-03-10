@@ -1,4 +1,5 @@
 import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import * as _ from 'lodash';
 import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/observable/combineLatest';
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
 
 import {EditMode} from 'core/constants';
 
-import {AbstractGroup, CourseSelectDto} from '../../../common/scheme.model';
+import {AbstractGroup, CourseSelectDto, SchemeCourse} from '../../../common/scheme.model';
 import {SchemeDraftService} from '../../draft.service';
 
 @Component({
@@ -57,7 +58,10 @@ export class CourseSelectComponent {
         .switchMap(value => this.search(value))
         .subscribe(value => {
             this.query = value.query;
-            this.courses = value.result.filter(c => !this.group.contains(c.id)); // 过滤已选择的课程
+            // 过滤已选择的课程
+            this.courses = _.differenceWith(value.result, this.group.courses, (a: CourseSelectDto, b: SchemeCourse) => {
+                return a.id === b._courseId;
+            });
         });
     }
 

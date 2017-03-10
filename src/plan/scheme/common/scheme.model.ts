@@ -286,7 +286,7 @@ export abstract class AbstractGroup {
     }
 
     contains(courseId: string | number): boolean {
-        return !this.courses.find(c => c._courseId === courseId);
+        return !!this.courses.find(c => c._courseId === courseId);
     }
 
     /**
