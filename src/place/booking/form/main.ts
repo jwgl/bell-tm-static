@@ -10,6 +10,7 @@ import {BookingFormRoutingModule} from './form.routing';
 import {BookingFormService} from './form.service';
 import {BookingFormItemModule} from './item/form-item.module';
 import {BookingFormListModule} from './list/form-list.module';
+import {BookingFormNoticeModule} from './notice/form-notice.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {BookingFormListModule} from './list/form-list.module';
         BookingFormEditorModule,
         BookingFormItemModule,
         BookingFormListModule,
+        BookingFormNoticeModule,
     ],
     declarations: [
         BookingFormComponent,

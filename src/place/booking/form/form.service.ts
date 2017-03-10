@@ -22,4 +22,8 @@ export class BookingFormService extends EditService {
     findPlace(options: any) {
         return this.rest.get(`${this.api.list()}/places?${this.api.buildQueryString(options)}`);
     }
+
+    getNotice() {
+        return this.rest.get(`${this.api.list()}/notice`);
+    }
 }

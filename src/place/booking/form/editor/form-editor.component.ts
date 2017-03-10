@@ -96,7 +96,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['/', id]);
         }, error => {
             this.saving = false;
-            alert(error.json().message);
+            alert(error);
         });
     }
 
@@ -106,7 +106,7 @@ export class BookingFormEditorComponent {
             this.router.navigate(['/', id]);
         }, error => {
             this.saving = false;
-            alert(error.json().message);
+            alert(error);
         });
     }
 }
