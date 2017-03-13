@@ -1,25 +1,26 @@
-export class CardReissueForm {
+export interface Student {
+    id: string;
+    name: string;
+    birthday: string;
+    province: string;
+    department: string;
+    subject: string;
+    educationLevel: string;
+};
+
+export class ReissueForm {
     id: number;
     reason: string;
     status: string;
+    student: Student;
     workflowInstanceId: string;
 
-    student: {
-        id: string,
-        name: string,
-        birthday: string,
-        province: string,
-        department: string,
-        subject: string,
-        educationLevel: string,
-    };
-
-    constructor(dto: any) {
+    constructor(dto: any, student: Student) {
         this.id = dto.id;
         this.reason = dto.reason;
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
-        this.student = dto.student;
+        this.student = student;
     }
 
     get title(): string {

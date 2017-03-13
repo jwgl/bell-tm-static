@@ -19,8 +19,8 @@ export class ReissueOrderReceiveComponent {
         private route: ActivatedRoute,
         private dialog: CommonDialog,
         private service: ReissueOrderService,
-        @Inject('REISSUE_FORM_WEB_URL')
-        private reissueFormWebUrl: string,
+        @Inject('REISSUES_WEB_URL')
+        private reissuesWebUrl: string,
     ) {
         this.route.params.subscribe(params => {
             this.id = params['id'];

@@ -7,30 +7,30 @@ import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
 import {ReissueSharedModule} from '../shared/reissue-shared.module';
-import {ReissueReviewItemComponent} from './item/review-item.component';
-import {ReissueReviewListComponent} from './list/review-list.component';
-import {ReissueReviewComponent} from './review.component';
-import {ReissueReviewRoutingModule} from './review.routing';
-import {ReissueReviewService} from './review.service';
+import {ReissueApprovalItemComponent} from './approval-item.component';
+import {ReissueApprovalListComponent} from './approval-list.component';
+import {ReissueApprovalComponent} from './approval.component';
+import {ReissueApprovalRoutingModule} from './approval.routing';
+import {ReissueApprovalService} from './approval.service';
 
 @NgModule({
     imports: [
         BrowserModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/card/reviewers/${userId}/reissues'),
-        ReissueReviewRoutingModule,
+        RestModule.for('/api/card/approvers/${userId}/reissues'),
+        ReissueApprovalRoutingModule,
         ReissueSharedModule,
     ],
     declarations: [
-        ReissueReviewComponent,
-        ReissueReviewListComponent,
-        ReissueReviewItemComponent,
+        ReissueApprovalComponent,
+        ReissueApprovalListComponent,
+        ReissueApprovalItemComponent,
     ],
     providers: [
-        ReissueReviewService,
+        ReissueApprovalService,
     ],
-    bootstrap: [ReissueReviewComponent],
+    bootstrap: [ReissueApprovalComponent],
 })
 class MainModule {}
 

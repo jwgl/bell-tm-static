@@ -1,0 +1,35 @@
+<div class="container" *ngIf="list">
+    <table class="table" *ngIf="list.items?.length > 0; else empty">
+        <thead>
+            <tr>
+                <th>申请单号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>{{dateLabel}}</th>
+                <th>申请次序</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of list.items">
+                <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                <td>{{form.studentId}}</td>
+                <td>{{form.studentName}}</td>
+                <td>{{form.department}}</td>
+                <td>{{form.subject}}</td>
+                <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
+                <td>第{{form.ordinal}}次</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="7" style="text-align: center">
+                    <button class="btn btn-secondary" [routerLink]="[list.prevRouterLink]" [disabled]="list.prevDisabled">上一页</button>
+                    <button class="btn btn-secondary" [routerLink]="[list.nextRouterLink]" [disabled]="list.nextDisabled">下一页</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <ng-template #empty><div class="alert alert-info mt-3">暂无数据</div></ng-template>
+</div>

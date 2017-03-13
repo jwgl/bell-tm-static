@@ -7,4 +7,5 @@ import {Component, Input} from '@angular/core';
 })
 export class ReissueFormViewerComponent {
     @Input() form: any;
+    @Input() student: any;
 }

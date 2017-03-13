@@ -7,4 +7,8 @@ export class ReissueFormService extends EditService {
     constructor(rest: Rest, api: ApiUrl) {
         super(rest, api);
     }
+
+    getNotice() {
+        return this.rest.get(`${this.api.list()}/notice`);
+    }
 }

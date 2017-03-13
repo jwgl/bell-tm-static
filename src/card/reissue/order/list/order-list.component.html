@@ -1,33 +1,33 @@
 <div class="btn-toolbar">
     <button [routerLink]="['/create']" class="btn btn-primary ml-auto">新建</button>
 </div>
-<table class="table" *ngIf="forms">
+<table class="table" *ngIf="orders">
     <thead>
         <tr>
             <th>订单编号</th>
-            <th>申请数量</th>
-            <th>完成数量</th>
             <th>创建人</th>
             <th>创建时间</th>
             <th>修改人</th>
             <th>修改时间</th>
+            <th class="number">申请数量</th>
+            <th class="number">完成数量</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let order of orders">
-            <td><a [routerLink]="['/', order.id]">{{order.id}}</a></td>
-            <td>{{order.totalCount}}</td>
-            <td>{{order.finishedCount}}</td>
+            <td><a [routerLink]="['/', order.id]">#{{order.id}}</a></td>
             <td>{{order.creatorName}}</td>
-            <td>{{order.dateCreated | moment}}</td>
+            <td>{{order.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
             <td>{{order.modifierName}}</td>
-            <td>{{order.dateModified | moment}}</td>
+            <td>{{order.dateModified | date: 'y-MM-dd HH:mm'}}</td>
+            <td class="number">{{order.totalCount}}</td>
+            <td class="number">{{order.finishedCount}}</td>
         </tr>
     </tbody>
     <tfoot>
         <tr>
             <td colspan="7">
-                <pager [total]="count" [max]="max" [length]="forms.length"
+                <pager [total]="count" [max]="max" [length]="orders.length"
                        (prev)="loadData($event)" (next)="loadData($event)"></pager>
             </td>
         </tr>

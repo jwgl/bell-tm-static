@@ -4,14 +4,17 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {SubmitOptions} from 'core/workflow';
 
+import {ReissueForm, Student} from '../../shared/reissue-form.model';
 import {ReissueFormService} from '../form.service';
 
 @Component({
-    selector: 'reissue-form-item',
     templateUrl: 'form-item.component.html',
 })
 export class ReissueFormItemComponent {
-    form: any;
+    form: ReissueForm;
+    student: Student;
+    editable: boolean;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -24,7 +27,9 @@ export class ReissueFormItemComponent {
 
     loadData(id: string) {
         this.service.loadItem(id).subscribe(dto => {
-            this.form = dto;
+            this.student = dto.student;
+            this.form = new ReissueForm(dto.form, this.student);
+            this.editable = dto.editable;
         });
     }
 

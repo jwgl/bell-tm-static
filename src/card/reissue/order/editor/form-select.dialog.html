@@ -1,6 +1,6 @@
 <modal-dialog title="添加申请单">
     <modal-body>
-        <table class="table table-hover table-sm" *ngIf="options.data">
+        <table class="table table-hover table-sm" *ngIf="options?.data?.forms && options.data.forms.length > 0; else empty">
             <thead>
                 <tr>
                     <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
@@ -16,10 +16,11 @@
                     <td>{{form.studentId}}</td>
                     <td>{{form.name}}</td>
                     <td>{{form.department}}</td>
-                    <td>{{form.applyDate | date : 'y-MM-dd HH:mm:ss'}}</td>
+                    <td>{{form.dateSubmitted | date : 'y-MM-dd HH:mm'}}</td>
                 </tr>
             </tbody>
 	    </table>
+        <ng-template #empty>暂无数据。</ng-template>
     </modal-body>
     <modal-footer>
         <button modalCancel>取消</button>

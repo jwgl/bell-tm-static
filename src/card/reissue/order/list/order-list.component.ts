@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {ReissueOrderService} from '../order.service';
 
 @Component({
+    styles: ['.number{text-align:right}'],
     templateUrl: 'order-list.component.html',
 })
 export class ReissueOrderListComponent {
@@ -15,8 +16,9 @@ export class ReissueOrderListComponent {
     }
 
     loadData(offset: number) {
-        this.service.loadList().subscribe(data => {
-            this.orders = data;
+        this.service.loadList({offset, max: this.max}).subscribe(data => {
+            this.orders = data.orders;
+            this.count = data.count;
         });
     }
 }

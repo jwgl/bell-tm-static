@@ -10,8 +10,9 @@ import {ReissueItemService} from './item.service';
     templateUrl: 'item.component.html',
 })
 export class ReissueItemComponent {
-    id: string;
-    vm: any;
+    form: any;
+    student: any;
+
     constructor(
         elementRef: ElementRef,
         private workflow: Workflow,
@@ -19,11 +20,8 @@ export class ReissueItemComponent {
     ) {
         const id = elementRef.nativeElement.getAttribute('id');
         this.service.loadItem(id).subscribe(dto => {
-            this.vm = dto;
+            this.form = dto.form;
+            this.student = dto.student;
         });
-    }
-
-    showWorkitems() {
-        this.workflow.workitems(this.vm.workflowInstanceId);
     }
 }

@@ -10,6 +10,7 @@ import {ReissueFormRoutingModule} from './form.routing';
 import {ReissueFormService} from './form.service';
 import {ReissueFormItemModule} from './item/form-item.module';
 import {ReissueFormListModule} from './list/form-list.module';
+import {ReissueFormNoticeModule} from './notice/form-notice.module';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {ReissueFormListModule} from './list/form-list.module';
         ReissueFormEditorModule,
         ReissueFormItemModule,
         ReissueFormListModule,
+        ReissueFormNoticeModule,
     ],
     declarations: [
         ReissueFormComponent,

@@ -1,4 +1,4 @@
-<div *ngIf="vm">
+<div *ngIf="form">
     <div class="btn-toolbar">
         <div class="btn-group ml-auto">
             <button class='btn btn-secondary' (click)="cancel()">取消</button>
@@ -6,12 +6,12 @@
         </div>
     </div>
     <form class="frame">
-        <student-info [student]="vm.student"></student-info>
+        <student-info [student]="student"></student-info>
         <div class="form-group row" [class.has-danger]="!reason.valid">
             <label class="col-sm-3 col-form-label">补办理由</label>
             <div class="col-sm-9">
                 <textarea class="form-control" rows="8" name="reason"
-                    [(ngModel)]="vm.reason"
+                    [(ngModel)]="form.reason"
                     maxlength="250"
                     minlength="10"
                     required #reason="ngModel"></textarea>

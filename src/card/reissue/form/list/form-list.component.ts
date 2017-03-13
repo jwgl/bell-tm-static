@@ -8,18 +8,17 @@ import {ReissueFormService} from '../form.service';
 })
 export class ReissueFormListComponent {
     forms: any[];
-    student: any;
+    warning: string = null;
 
     constructor(private service: ReissueFormService) {
         this.service.loadList().subscribe(data => {
-            this.student = data.student;
+            this.warning = data.warning || null;
             this.forms = data.forms;
         });
     }
 
     canApply() {
-        return this.student.atSchool
-            && this.student.picture
+        return !this.warning
             && this.forms.length < 2
             && (this.forms.length === 0
             || this.forms.every(item => item.status === 'FINISHED'));

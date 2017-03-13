@@ -8,13 +8,13 @@
             <button class='btn btn-primary' (click)="save()" [disabled]="saving">保存</button>
         </div>
     </div>
-    <form class="form-inline" *ngIf="!vm.id">
+    <form class="form-inline mb-3" *ngIf="!vm.id">
         <div class="form-group">
             <label>订单编号</label>
             <p class="form-control-static">（新订单）</p>
         </div>
     </form>
-    <div class="form-inline" *ngIf="vm.id">
+    <div class="form-inline mb-3" *ngIf="vm.id">
         <div class="form-group">
             <label>订单编号</label>
             <p class="form-control-static">{{vm.id}}</p>
@@ -25,7 +25,7 @@
         </div>
         <div class="form-group">
             <label>创建时间</label>
-            <p class="form-control-static">{{vm.dateCreated | moment}}</p>
+            <p class="form-control-static">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改人</label>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改时间</label>
-            <p class="form-control-static">{{vm.dateModified | moment}}</p>
+            <p class="form-control-static">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
         </div>
     </div>
     <table class="table table-bordered table-sm">
@@ -56,7 +56,8 @@
                 <td>{{item.sex}}</td>
                 <td>{{item.department}}</td>
                 <td>{{item.subject}}</td>
-                <td>{{item.applyDate | moment}}</td>
+                <td>{{item.dateSubmitted | date: 'y-MM-dd HH:mm'}}</td>
+                <td>{{item.dateApproved | date: 'y-MM-dd HH:mm'}}</td>s
                 <td>{{item.status | formStatus}}</td>
                 <td class="text-center" (click)="removeItem(item.formId)">
                     <button class="btn btn-secondary btn-sm" [disabled]="item.status=='FINISHED'">

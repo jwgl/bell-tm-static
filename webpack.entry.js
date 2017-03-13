@@ -15,7 +15,7 @@ module.exports = {
     'plan/scheme/draft':         './src/plan/scheme/draft/main.ts',
     'plan/scheme/review':        './src/plan/scheme/review/main.ts',
     'plan/scheme/department':    './src/plan/scheme/department/main.ts',
-    'card/reissue/review':       './src/card/reissue/review/main.ts',
+    'card/reissue/approval':     './src/card/reissue/approval/main.ts',
     'card/reissue/form':         './src/card/reissue/form/main.ts',
     'card/reissue/item':         './src/card/reissue/item/main.ts',
     'card/reissue/order':        './src/card/reissue/order/main.ts',

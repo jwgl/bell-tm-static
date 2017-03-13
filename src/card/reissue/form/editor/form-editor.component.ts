@@ -13,7 +13,8 @@ import {ReissueFormService} from '../form.service';
 })
 export class ReissueFormEditorComponent {
     private editMode: EditMode;
-    private vm: any;
+    private form: any;
+    private student: any;
     private saving = false;
 
     constructor(
@@ -26,12 +27,17 @@ export class ReissueFormEditorComponent {
         const params = this.route.snapshot.params;
         switch (this.editMode) {
             case EditMode.Create:
-                this.service.loadDataForCreate().subscribe(dto => this.vm = dto);
+                this.service.loadDataForCreate().subscribe(dto => this.onLoadData(dto));
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(dto => this.vm = dto);
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
                 break;
         }
+    }
+
+    onLoadData(dto: any) {
+        this.form = dto.form;
+        this.student = dto.student;
     }
 
     cancel() {
@@ -40,7 +46,7 @@ export class ReissueFormEditorComponent {
                 this.router.navigate(['/']);
                 break;
             case EditMode.Edit:
-                this.router.navigate(['/', this.vm.id]);
+                this.router.navigate(['/', this.form.id]);
                 break;
         }
     }
@@ -59,7 +65,7 @@ export class ReissueFormEditorComponent {
     create() {
         this.saving = true;
         this.service.create({
-            reason: this.vm.reason,
+            reason: this.form.reason,
         }).subscribe(id => {
             this.router.navigate(['/', id]);
         }, error => {
@@ -70,8 +76,8 @@ export class ReissueFormEditorComponent {
 
     update() {
         this.saving = true;
-        this.service.update(this.vm.id, {
-            reason: this.vm.reason,
+        this.service.update(this.form.id, {
+            reason: this.form.reason,
         }).subscribe(id => {
             this.router.navigate(['/', id]);
         }, error => {

@@ -28,7 +28,7 @@ export class ReissueFormSelectDialog extends BaseDialog {
     }
 
     protected onOpening(): Observable<any> {
-        return this.rest.get(`${this.reissuesApiUrl}?status=CHECKED`).do((result: any) => {
+        return this.rest.get(`${this.reissuesApiUrl}?status=APPROVED`).do((result: any) => {
             // 删除已添加的申请
             result.forms = _.differenceWith(
                 result.forms,
