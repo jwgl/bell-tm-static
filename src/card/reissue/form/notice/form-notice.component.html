@@ -8,5 +8,5 @@
         </div>
     </div>
     <form-title>{{notice.title}}</form-title>
-    <div [markdown]="notice.content"></div>
+    <div [markdown]="notice.content" [options]="{html:true}"></div>
 </ng-container>

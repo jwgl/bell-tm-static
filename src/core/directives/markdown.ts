@@ -1,19 +1,21 @@
-import {Directive, ElementRef} from '@angular/core';
+import {Directive, ElementRef, Input} from '@angular/core';
 
 @Directive({
     selector: '[markdown]',
-    inputs: ['markdown'],
 })
 export class Markdown {
-    md: any;
+    @Input()
+    options: any;
+    @Input('markdown')
+    text: string;
 
     constructor(private elementRef: ElementRef) {
-        this.md = (window as any).markdownit();
     }
 
-    set markdown(text: string) {
-        if (text) {
-            this.elementRef.nativeElement.innerHTML = this.md.render(text);
+    ngAfterViewInit() {
+        const markdown = (window as any).markdownit(this.options);
+        if (this.text) {
+            this.elementRef.nativeElement.innerHTML = markdown.render(this.text);
         }
     }
 }
