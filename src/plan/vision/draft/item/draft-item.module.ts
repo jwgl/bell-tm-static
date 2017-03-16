@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
@@ -12,6 +13,7 @@ import {VisionDraftItemComponent} from './draft-item.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         PlanCommonModule,
         CommonDirectivesModule,
         CommonDialogsModule,

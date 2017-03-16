@@ -32,10 +32,6 @@ export class LeaveFormItemComponent {
         });
     }
 
-    edit() {
-        this.router.navigate(['/', this.form.id, 'edit']);
-    }
-
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.form.id).subscribe(() => {
@@ -50,10 +46,6 @@ export class LeaveFormItemComponent {
         }, (error) => {
             alert(error.json().message);
         });
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
     }
 
     get submitOptions(): SubmitOptions {

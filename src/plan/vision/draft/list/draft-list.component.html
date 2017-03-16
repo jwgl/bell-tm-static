@@ -6,9 +6,9 @@
                 <h2>{{program.grade}}级{{program.type | programType}}</h2>
                 <ul>
                     <li *ngFor="let vision of program.visions">
-                        <a *ngIf="!vision.id; else exists" [routerLink]="['/create', program.id]">新建</a>
+                        <a *ngIf="!vision.id; else exists" [routerLink]="['create', program.id]">新建</a>
                         <ng-template #exists>
-                            <a [routerLink]="['/', vision.id]">v{{vision.versionNumber | versionNumber}}</a>
+                            <a [routerLink]="[vision.id]">v{{vision.versionNumber | versionNumber}}</a>
                             <audit-status [status]="vision.status"></audit-status>
                         </ng-template>
                     </li>

@@ -1,6 +1,6 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
-        <button class="btn btn-primary" routerLink="/create">新建</button>
+        <button class="btn btn-primary" routerLink="create">新建</button>
     </div>
 </div>
 <table class="table" *ngIf="forms && forms.length > 0">
@@ -15,7 +15,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let form of forms">
-            <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
+            <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
             <td>{{form.type | leaveType}}</td>
             <td><div class="reason">{{form.reason}}</div></td>
             <td>{{form.dateCreated | moment}}</td>

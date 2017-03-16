@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
@@ -10,6 +11,7 @@ import {ReissueOrderItemComponent} from './order-item.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         CommonDialogsModule,
         CommonDirectivesModule,
         ReissueSharedModule,

@@ -33,23 +33,11 @@ export class ReissueOrderItemComponent {
         });
     }
 
-    edit() {
-        this.router.navigate(['/', this.id, 'edit']);
-    }
-
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });
-    }
-
-    receive() {
-        this.router.navigate(['/', this.id, 'receive']);
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
     }
 }

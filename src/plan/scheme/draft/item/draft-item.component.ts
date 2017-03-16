@@ -38,24 +38,12 @@ export class SchemeDraftItemComponent {
         });
     }
 
-    edit() {
-        this.router.navigate(['/', this.vm.id, 'edit']);
-    }
-
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.vm.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });
-    }
-
-    revise() {
-        this.router.navigate(['/', this.vm.id, 'revise']);
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
     }
 
     get title(): string {

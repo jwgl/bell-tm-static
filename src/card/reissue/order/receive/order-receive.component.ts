@@ -45,8 +45,4 @@ export class ReissueOrderReceiveComponent {
             items.forEach(item => item.status = result.status);
         });
     }
-
-    return() {
-        this.router.navigate(['/', this.id]);
-    }
 }

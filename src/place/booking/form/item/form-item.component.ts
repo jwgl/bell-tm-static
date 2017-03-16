@@ -30,20 +30,12 @@ export class BookingFormItemComponent {
         });
     }
 
-    edit() {
-        this.router.navigate(['/', this.form.id, 'edit']);
-    }
-
     remove() {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.form.id).subscribe(() => {
                 this.router.navigate(['/']);
             });
         });
-    }
-
-    returnList() {
-        this.router.navigate(['/']);
     }
 
     get submitOptions(): SubmitOptions {

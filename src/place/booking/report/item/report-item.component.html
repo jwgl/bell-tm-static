@@ -4,7 +4,7 @@
             <button class="btn btn-secondary" routerLink="/">返回</button>
         </div>
         <div class="btn-group ml-2">
-            <button class="btn btn-secondary" [routerLink]="['/', id, 'edit']">编辑</button>
+            <button class="btn btn-secondary" routerLink="edit">编辑</button>
             <button class="btn btn-secondary" (click)="remove()">删除</button>
             <a class="btn btn-secondary" download href="bookingReports/{{id}}">导出</a>
         </div>

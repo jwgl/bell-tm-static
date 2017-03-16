@@ -1,5 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {WorkflowModule} from 'core/workflow';
@@ -11,6 +12,7 @@ import {SchemeDraftItemComponent} from './draft-item.component';
 @NgModule({
     imports: [
         CommonModule,
+        RouterModule,
         PlanCommonModule,
         CommonDialogsModule,
         WorkflowModule,

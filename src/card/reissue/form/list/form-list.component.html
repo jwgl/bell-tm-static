@@ -2,13 +2,13 @@
     <ng-container *ngIf="forms">
         <div class="btn-toolbar">
             <div class="btn-group ml-auto">
-                <button class="btn btn-primary" routerLink="/notice" [disabled]="!canApply()">新建</button>
+                <button class="btn btn-primary" routerLink="notice" [disabled]="!canApply()">新建</button>
             </div>
         </div>
         <div class="alert alert-warning" *ngIf="forms.length > 0">
             你已经有{{forms.length}}次补办学生证申请：
             <ng-container *ngFor="let form of forms">
-                <a [routerLink]="['/', form.id]">第{{form.ordinal}}次</a> <audit-status [status]="form.status"></audit-status>
+                <a [routerLink]="[form.id]">第{{form.ordinal}}次</a> <audit-status [status]="form.status"></audit-status>
             </ng-container>
         </div>
     </ng-container>
