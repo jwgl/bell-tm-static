@@ -1,0 +1,33 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+    <select class="form-control" [(ngModel)]="department">
+        <option *ngFor="let department of departments" [ngValue]="department">{{department.name}}</option>
+    </select>
+    </div>
+    <div class="btn-group ml-auto">
+        <button class='btn btn-primary' (click)="create()" [disabled]="!canCreate()">新建</button>
+    </div>
+</div>
+<table class="table" *ngIf="departments">
+    <thead>
+        <tr>
+            <th>借用类别</th>
+            <th>审核人</th>
+            <th>办公电话</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+            <ng-container *ngFor="let auth of auths | filterBy: filterByDepartment(department)">
+                <tr>
+                    <td>{{auth.typeName}}</td>
+                    <td>{{auth.checkerId}} {{auth.checkerName}}</td>
+                    <td>{{auth.checkerPhone}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary" (click)="edit(auth)">编辑</button>
+                        <button class="btn btn-sm btn-secondary" (click)="delete(auth)">删除</button>
+                    </td>
+                </tr>
+            </ng-container>
+    </tbody>
+</table>

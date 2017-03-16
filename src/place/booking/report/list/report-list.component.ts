@@ -16,7 +16,8 @@ export class BookingReportListComponent {
 
     loadData(offset: number) {
         this.service.loadList({offset, max: this.max}).subscribe(data => {
-            this.reports = data;
+            this.reports = data.reports;
+            this.count = data.count;
         });
     }
 }
