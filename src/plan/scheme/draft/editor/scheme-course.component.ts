@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {EditMode} from 'core/constants';
 
-import {RecordStatus, SchemeCourse} from '../../common/scheme.model';
+import {RecordStatus, SchemeCourse} from '../../shared/scheme.model';
 
 /**
  * 课程

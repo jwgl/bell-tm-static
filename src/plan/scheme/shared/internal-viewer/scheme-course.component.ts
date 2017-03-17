@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {RecordStatus, SchemeCourse} from '../../common/scheme.model';
+import {RecordStatus, SchemeCourse} from '../scheme.model';
 
 /**
  * 课程

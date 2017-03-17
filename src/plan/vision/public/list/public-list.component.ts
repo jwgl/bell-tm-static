@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {findGradeRange} from '../../../common/utils';
+import {findGradeRange} from '../../../shared/utils';
 import {VisionPublicService} from '../public.service';
 
 /**

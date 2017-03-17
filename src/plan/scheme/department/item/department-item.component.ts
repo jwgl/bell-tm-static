@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {Scheme} from '../../common/scheme.model';
+import {Scheme} from '../../shared/scheme.model';
 import {SchemeDepartmentService} from '../department.service';
 
 /**

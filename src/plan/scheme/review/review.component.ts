@@ -3,9 +3,9 @@ import {Component, ElementRef} from '@angular/core';
 import {ApiUrl, Rest} from 'core/rest';
 import {ReviewOptions} from 'core/workflow';
 
-import {toVersionString} from '../../common/utils';
-import {Scheme} from '../common/scheme.model';
-import '../common/scheme.model';
+import {toVersionString} from '../../shared/utils';
+import {Scheme} from '../shared/scheme.model';
+
 import './review.model';
 
 @Component({

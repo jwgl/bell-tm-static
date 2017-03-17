@@ -3,13 +3,13 @@ import {NgModule} from '@angular/core';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {PlanCommonModule} from '../../common/module';
+import {PlanSharedModule} from '../../shared/module';
 import {VisionViewerComponent} from './vision-viewer.component';
 
 @NgModule({
     imports: [
         CommonModule,
-        PlanCommonModule,
+        PlanSharedModule,
         CommonDirectivesModule,
     ],
     declarations: [

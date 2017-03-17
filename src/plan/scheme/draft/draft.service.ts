@@ -3,7 +3,7 @@ import {Observable} from 'rxjs/Observable';
 
 import {ApiUrl, EditService, Rest} from 'core/rest';
 
-import {SchemeCourseDto} from '../common/scheme.model';
+import {SchemeCourseDto} from '../shared/scheme.model';
 
 @Injectable()
 export class SchemeDraftService extends EditService {

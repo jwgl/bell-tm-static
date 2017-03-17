@@ -8,11 +8,8 @@ import {Dialog} from 'core/dialogs';
 import {PlanTitleComponent} from './components/plan-title.component';
 import {VersionDialog} from './dialogs/version.dialog';
 import {GradeFilterPipe} from './pipes/grade-filter';
-import {PrimaryCoursesPipe} from './pipes/primary-courses';
 import {ProgramTypePipe} from './pipes/program-type';
-import {SchemeTermNamePipe, SchemeTermTitlePipe} from './pipes/scheme-term';
 import {VersionNumberPipe} from './pipes/version-number';
-import {ZeroEmptyPipe} from './pipes/zero-empty';
 
 @NgModule({
     imports: [
@@ -24,12 +21,8 @@ import {ZeroEmptyPipe} from './pipes/zero-empty';
     declarations: [
         PlanTitleComponent,
         VersionDialog,
-        PrimaryCoursesPipe,
         ProgramTypePipe,
         VersionNumberPipe,
-        ZeroEmptyPipe,
-        SchemeTermNamePipe,
-        SchemeTermTitlePipe,
         GradeFilterPipe,
     ],
     providers: [
@@ -37,16 +30,12 @@ import {ZeroEmptyPipe} from './pipes/zero-empty';
     ],
     exports: [
         PlanTitleComponent,
-        PrimaryCoursesPipe,
         ProgramTypePipe,
         VersionNumberPipe,
-        ZeroEmptyPipe,
-        SchemeTermNamePipe,
-        SchemeTermTitlePipe,
         GradeFilterPipe,
     ],
     entryComponents: [
         VersionDialog,
     ],
 })
-export class PlanCommonModule {}
+export class PlanSharedModule {}

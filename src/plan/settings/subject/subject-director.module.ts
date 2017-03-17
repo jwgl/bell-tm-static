@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {PlanCommonModule} from '../../common/module';
+import {PlanSharedModule} from '../../shared/module';
 import {SubjectDirectorComponent} from './subject-director.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {SubjectDirectorComponent} from './subject-director.component';
         CommonModule,
         CommonDirectivesModule,
         CommonDialogsModule,
-        PlanCommonModule,
+        PlanSharedModule,
     ],
     declarations: [
         SubjectDirectorComponent,

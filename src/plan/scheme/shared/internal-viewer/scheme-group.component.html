@@ -4,4 +4,5 @@
     <td>{{group.totalPracticeCredit | zeroEmpty}}</td>
     <td>{{group.totalPeriod | zeroEmpty}}</td>
     <td *ngFor="let term of terms" [class.short-term]="term>=17">{{group.getTermPeriod(term) | zeroEmpty}}</td>
+    <td></td>
 </ng-container>

@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
 
 import {EditMode} from 'core/constants';
 
-import {AbstractGroup, CourseSelectDto, SchemeCourse} from '../../../common/scheme.model';
+import {AbstractGroup, CourseSelectDto, SchemeCourse} from '../../../shared/scheme.model';
 import {SchemeDraftService} from '../../draft.service';
 
 @Component({

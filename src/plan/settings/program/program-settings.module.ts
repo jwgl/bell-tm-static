@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {CommonDirectivesModule} from 'core/common-directives';
 import {Dialog} from 'core/dialogs';
 
-import {PlanCommonModule} from '../../common/module';
+import {PlanSharedModule} from '../../shared/module';
 import {ProgramEditorDialog} from './program-editor.dialog';
 import {ProgramSettingsComponent} from './program-settings.component';
 
@@ -14,7 +14,7 @@ import {ProgramSettingsComponent} from './program-settings.component';
         CommonModule,
         FormsModule,
         CommonDirectivesModule,
-        PlanCommonModule,
+        PlanSharedModule,
     ],
     declarations: [
         ProgramSettingsComponent,

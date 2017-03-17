@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 
-import {Vision} from '../../common/vision.model';
+import {Vision} from '../../shared/vision.model';
 import {VisionDraftService} from '../draft.service';
 import './draft-editor.model';
 

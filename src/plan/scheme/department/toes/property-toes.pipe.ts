@@ -1,6 +1,6 @@
 import {Pipe} from '@angular/core';
 
-import {Property} from '../../common/scheme.model';
+import {Property} from '../../shared/scheme.model';
 
 @Pipe({name: 'propertyToes'})
 export class PropertyToesPipe {

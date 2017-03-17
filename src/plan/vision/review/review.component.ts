@@ -3,8 +3,8 @@ import {Component, ElementRef} from '@angular/core';
 import {ApiUrl, Rest} from 'core/rest';
 import {ReviewOptions} from 'core/workflow';
 
-import {toVersionString} from '../../common/utils';
-import {Vision} from '../common/vision.model';
+import {toVersionString} from '../../shared/utils';
+import {Vision} from '../shared/vision.model';
 import './review.model';
 
 @Component({

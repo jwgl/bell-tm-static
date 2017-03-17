@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {Dialog} from 'core/dialogs';
 
-import {Scheme, SchemeCourse} from '../../common/scheme.model';
+import {Scheme, SchemeCourse} from '../../shared/scheme.model';
 import {SchemeDepartmentService} from '../department.service';
 import './department-toes.model';
 import {SchemeCourseDialog} from './scheme-course.dialog';

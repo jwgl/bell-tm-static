@@ -1,6 +1,6 @@
 import {getBit} from 'core/utils';
 
-import {getProgramType} from '../../common/pipes';
+import {getProgramType} from '../../shared/utils';
 
 const courseComparer = (a: SchemeCourse, b: SchemeCourse): number => {
         return a.displayOrder - b.displayOrder

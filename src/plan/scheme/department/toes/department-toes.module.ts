@@ -4,7 +4,9 @@ import {FormsModule} from '@angular/forms';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
-import {PlanCommonModule} from '../../../common/module';
+
+import {PlanSharedModule} from '../../../shared/module';
+import {SchemeSharedModule} from '../../shared/scheme.module';
 import {SchemeDepartmentToesComponent} from './department-toes.component';
 import {PropertyToesPipe} from './property-toes.pipe';
 import {SchemeCourseToesPipe} from './scheme-course-toes.pipe';
@@ -15,9 +17,10 @@ import {SchemeCourseDialog} from './scheme-course.dialog';
     imports: [
         CommonModule,
         FormsModule,
-        PlanCommonModule,
         CommonDialogsModule,
         CommonDirectivesModule,
+        PlanSharedModule,
+        SchemeSharedModule,
     ],
     declarations: [
         SchemeDepartmentToesComponent,

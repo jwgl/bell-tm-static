@@ -6,15 +6,15 @@ import {CommonDialogsModule} from 'core/common-dialogs';
 import {CommonDirectivesModule} from 'core/common-directives';
 import {WorkflowModule} from 'core/workflow';
 
-import {PlanCommonModule} from '../../../common/module';
-import {VisionViewerModule} from '../../common/vision-viewer.module';
+import {PlanSharedModule} from '../../../shared/module';
+import {VisionViewerModule} from '../../shared/vision-viewer.module';
 import {VisionDraftItemComponent} from './draft-item.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
-        PlanCommonModule,
+        PlanSharedModule,
         CommonDirectivesModule,
         CommonDialogsModule,
         WorkflowModule,

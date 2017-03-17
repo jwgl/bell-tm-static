@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 
+import {AbstractGroup, SchemeCourse} from '../scheme.model';
+
 /**
  * 课程。
  */
@@ -8,18 +10,18 @@ import {Component, Input} from '@angular/core';
     templateUrl: 'scheme-course.component.html',
 })
 export class SchemeCourseComponent {
-    @Input('scheme-course') schemeCourse: any;
+    @Input('scheme-course') schemeCourse: SchemeCourse;
     @Input() terms: number[];
 
     /**
      * 1级分组
      */
-    @Input() group1: any;
+    @Input() group1: AbstractGroup;
     @Input() first1: boolean;
 
     /**
      * 2级分组
      */
-    @Input() group2: any;
+    @Input() group2: AbstractGroup;
     @Input() first2: boolean;
 }

@@ -4,8 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {SubmitOptions} from 'core/workflow';
 
-import {toVersionString} from '../../../common/utils';
-import {Vision} from '../../common/vision.model';
+import {toVersionString} from '../../../shared/utils';
+import {Vision} from '../../shared/vision.model';
 import {VisionDraftService} from '../draft.service';
 import './draft-item.model';
 

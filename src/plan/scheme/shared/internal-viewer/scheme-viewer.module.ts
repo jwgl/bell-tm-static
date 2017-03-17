@@ -1,7 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 
-import {PlanCommonModule} from '../../../common/module';
+import {PlanSharedModule} from '../../../shared/module';
+import {SchemeSharedModule} from '../../shared/scheme.module';
 import {SchemeCourseComponent} from './scheme-course.component';
 import {SchemeGroupComponent} from './scheme-group.component';
 import {SchemePropertyComponent} from './scheme-property.component';
@@ -12,7 +13,8 @@ import {SchemeViewerComponent} from './scheme-viewer.component';
 @NgModule({
     imports: [
         CommonModule,
-        PlanCommonModule,
+        PlanSharedModule,
+        SchemeSharedModule,
     ],
     declarations: [
         SchemeCourseComponent,

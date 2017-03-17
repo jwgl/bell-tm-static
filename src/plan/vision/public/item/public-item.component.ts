@@ -1,7 +1,7 @@
 import {Component, ElementRef} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 
-import {Vision} from '../../common/vision.model';
+import {Vision} from '../../shared/vision.model';
 import {VisionPublicService} from '../public.service';
 
 /**

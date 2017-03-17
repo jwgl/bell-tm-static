@@ -4,15 +4,15 @@ import {RouterModule} from '@angular/router';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 
-import {PlanCommonModule} from '../../../common/module';
-import {SchemeInternalViewerModule} from '../../common/internal-viewer/scheme-viewer.module';
+import {PlanSharedModule} from '../../../shared/module';
+import {SchemeInternalViewerModule} from '../../shared/internal-viewer/scheme-viewer.module';
 import {SchemeDepartmentItemComponent} from './department-item.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
-        PlanCommonModule,
+        PlanSharedModule,
         CommonDialogsModule,
         SchemeInternalViewerModule,
     ],

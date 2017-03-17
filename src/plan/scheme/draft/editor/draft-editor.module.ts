@@ -3,7 +3,8 @@ import {NgModule} from '@angular/core';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 
-import {PlanCommonModule} from '../../../common/module';
+import {PlanSharedModule} from '../../../shared/module';
+import {SchemeSharedModule} from '../../shared/scheme.module';
 import {CourseEditorModule} from './course-editor/course-editor.module';
 import {SchemeDraftEditorComponent} from './draft-editor.component';
 import {SchemeCourseComponent} from './scheme-course.component';
@@ -15,7 +16,8 @@ import {SchemeDraftTableComponent} from './scheme-table.component';
 @NgModule({
     imports: [
         CommonModule,
-        PlanCommonModule,
+        PlanSharedModule,
+        SchemeSharedModule,
         CommonDialogsModule,
         CourseEditorModule,
     ],

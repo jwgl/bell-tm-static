@@ -4,10 +4,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CommonDialog} from 'core/common-dialogs';
 import {SubmitOptions} from 'core/workflow';
 
-import {toVersionString} from '../../../common/utils';
-import {Scheme} from '../../common/scheme.model';
-import '../../common/scheme.model';
+import {toVersionString} from '../../../shared/utils';
+import {Scheme} from '../../shared/scheme.model';
 import {SchemeDraftService} from '../draft.service';
+
+import '../../shared/scheme.model';
 import './draft-item.model';
 
 /**

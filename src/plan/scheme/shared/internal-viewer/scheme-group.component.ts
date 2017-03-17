@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {AbstractGroup, Direction, Property} from '../../common/scheme.model';
+import {AbstractGroup, Direction, Property} from '../scheme.model';
 
 /**
  * 小计

@@ -1,4 +1,4 @@
-import {getProgramType} from '../../common/pipes';
+import {getProgramType} from '../../shared/utils';
 
 export class Vision {
     id: number;

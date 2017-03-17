@@ -4,14 +4,14 @@ import {FormsModule} from '@angular/forms';
 
 import {CommonDialogsModule} from 'core/common-dialogs';
 
-import {PlanCommonModule} from '../../../common/module';
+import {PlanSharedModule} from '../../../shared/module';
 import {VisionDraftEditorComponent} from './draft-editor.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        PlanCommonModule,
+        PlanSharedModule,
         CommonDialogsModule,
     ],
     declarations: [

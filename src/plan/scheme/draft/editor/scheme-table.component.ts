@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 import {EditMode} from 'core/constants';
 
-import {AbstractGroup, Scheme, SchemeCourse} from '../../common/scheme.model';
+import {AbstractGroup, Scheme, SchemeCourse} from '../../shared/scheme.model';
 
 /**
  * 教学计划表格

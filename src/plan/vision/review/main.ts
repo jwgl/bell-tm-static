@@ -6,7 +6,7 @@ import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
-import {VisionViewerModule} from '../common/vision-viewer.module';
+import {VisionViewerModule} from '../shared/vision-viewer.module';
 import {VisionReviewComponent} from './review.component';
 
 @NgModule({

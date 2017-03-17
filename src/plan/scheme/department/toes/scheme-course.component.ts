@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Direction, Property, RecordStatus, Scheme, SchemeCourse} from '../../common/scheme.model';
+import {Direction, Property, RecordStatus, Scheme, SchemeCourse} from '../../shared/scheme.model';
 import './department-toes.model';
 
 @Component({

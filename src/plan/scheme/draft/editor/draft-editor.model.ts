@@ -7,9 +7,9 @@ import {
     Scheme,
     SchemeCourse,
     SchemeCourseDto,
-} from '../../common/scheme.model';
+} from '../../shared/scheme.model';
 
-declare module '../../common/scheme.model' {
+declare module '../../shared/scheme.model' {
     interface Scheme {
         /**
          * 转换为Server DTO

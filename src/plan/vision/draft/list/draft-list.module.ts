@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {PlanCommonModule} from '../../../common/module';
+import {PlanSharedModule} from '../../../shared/module';
 import {VisionDraftListComponent} from './draft-list.component';
 
 const ROUTER_CONFIG = [
@@ -14,7 +14,7 @@ const ROUTER_CONFIG = [
 @NgModule({
     imports: [
         CommonModule,
-        PlanCommonModule,
+        PlanSharedModule,
         RouterModule.forChild(ROUTER_CONFIG),
         CommonDirectivesModule,
     ],

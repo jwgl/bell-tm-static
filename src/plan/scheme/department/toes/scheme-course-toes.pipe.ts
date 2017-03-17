@@ -1,6 +1,6 @@
 import {Pipe} from '@angular/core';
 
-import {SchemeCourse} from '../../common/scheme.model';
+import {SchemeCourse} from '../../shared/scheme.model';
 
 @Pipe({name: 'schemeCourseToes'})
 export class SchemeCourseToesPipe {

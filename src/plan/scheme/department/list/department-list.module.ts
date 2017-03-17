@@ -4,7 +4,7 @@ import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {PlanCommonModule} from '../../../common/module';
+import {PlanSharedModule} from '../../../shared/module';
 import {SchemeDepartmentListComponent} from './department-list.component';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {SchemeDepartmentListComponent} from './department-list.component';
         CommonModule,
         RouterModule,
         CommonDirectivesModule,
-        PlanCommonModule,
+        PlanSharedModule,
     ],
     declarations: [
         SchemeDepartmentListComponent,

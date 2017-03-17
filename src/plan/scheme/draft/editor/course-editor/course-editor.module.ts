@@ -5,7 +5,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonDirectivesModule} from 'core/common-directives';
 import {Dialog} from 'core/dialogs';
 
-import {PlanCommonModule} from '../../../../common/module';
+import {PlanSharedModule} from '../../../../shared/module';
+import {SchemeSharedModule} from '../../../shared/scheme.module';
 import {AllowedTermAccessor} from './allowed-term.accessor';
 import {AllowedTermComponent} from './allowed-term.component';
 import {CourseEditorDialog} from './course-editor.dialog';
@@ -18,7 +19,8 @@ import {CourseSelectComponent} from './course-select.component';
         FormsModule,
         ReactiveFormsModule,
         CommonDirectivesModule,
-        PlanCommonModule,
+        PlanSharedModule,
+        SchemeSharedModule,
     ],
     declarations: [
         CourseEditorDialog,

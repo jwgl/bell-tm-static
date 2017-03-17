@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {Scheme} from '../../common/scheme.model';
+import {Scheme} from '../../shared/scheme.model';
 
 @Component({
     selector: '[scheme-summary]',

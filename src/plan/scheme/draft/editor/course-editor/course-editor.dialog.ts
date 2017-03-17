@@ -4,8 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {EditMode} from 'core/constants';
 import {BaseDialog} from 'core/dialogs';
 
-import {buildPeriodWeeksOptions, getPeriodWeeks} from '../../../../common/utils';
-import {CourseSelectDto, SchemeCourseDto} from '../../../common/scheme.model';
+import {buildPeriodWeeksOptions, getPeriodWeeks} from '../../../../shared/utils';
+import {CourseSelectDto, SchemeCourseDto} from '../../../shared/scheme.model';
 
 @Component({
     selector: 'course-editor-dialog',

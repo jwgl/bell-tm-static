@@ -4,6 +4,7 @@
 <td>{{schemeCourse.practiceCredit | zeroEmpty}}</td>
 <td>{{schemeCourse.totalPeriod | zeroEmpty}}<sup *ngIf="schemeCourse.showPeriodWeeks" class="text-info">{{schemeCourse.periodWeeks | zeroEmpty}}</sup></td>
 <td *ngFor="let term of terms" [class.short-term]="term>=17">{{schemeCourse.getTermPeriod(term) | zeroEmpty}}</td>
+<td>{{schemeCourse.assessType | assessType}}</td>
 <td>
     <button type="button" class="btn btn-secondary btn-sm" *ngIf="!schemeCourse.isTempCourse && schemeCourse.canEdit()"
             (click)="edit.emit(schemeCourse)"

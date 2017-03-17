@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {Property} from '../../common/scheme.model';
+import {Property} from '../../shared/scheme.model';
 
 /**
  * 课程性质

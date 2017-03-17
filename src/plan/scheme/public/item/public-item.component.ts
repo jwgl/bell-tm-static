@@ -1,10 +1,10 @@
 import {Component, ElementRef} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 
-import {Scheme} from '../../common/scheme.model';
+import {Scheme} from '../../shared/scheme.model';
 import {SchemePublicService} from '../public.service';
 
-import '../../common/public-viewer/scheme-viewer.model';
+import '../../shared/public-viewer/scheme-viewer.model';
 
 /**
  * 教学计划（公共）。

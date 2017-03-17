@@ -5,7 +5,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
-import {SchemeInternalViewerModule} from '../common/internal-viewer/scheme-viewer.module';
+import {SchemeInternalViewerModule} from '../shared/internal-viewer/scheme-viewer.module';
 import {SchemeReviewComponent} from './review.component';
 
 @NgModule({
