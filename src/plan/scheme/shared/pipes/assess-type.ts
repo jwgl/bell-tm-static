@@ -7,7 +7,6 @@ const ASSESS_TYPES: {[key: number]: string} = {
     9: '其它',
 };
 
-
 @Pipe({name: 'assessType'})
 export class AssessTypePipe {
     transform(value: number) {
