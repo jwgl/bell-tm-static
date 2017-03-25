@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label>创建时间</label>
-                <p class="form-control-static">{{vm.dateCreated | moment}}</p>
+                <p class="form-control-static">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
             </div>
             <div class="form-group" *ngIf="vm.modifierName">
                 <label>修改人</label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group" *ngIf="vm.modifierName">
                 <label>修改时间</label>
-                <p class="form-control-static">{{vm.dateModified | moment}}</p>
+                <p class="form-control-static">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
             </div>
         </ng-container>
     </form>

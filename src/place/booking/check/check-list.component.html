@@ -18,7 +18,7 @@
                 <td>{{form.type}}</td>
                 <td>{{form.userName}}</td>
                 <td><div class="reason">{{form.reason}}</div></td>
-                <td>{{form.date | moment}}</td>
+                <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
                 <td><audit-status [status]="form.status"></audit-status></td>
             </tr>
         </tbody>

@@ -22,7 +22,7 @@
                     <td>{{form.department}}</td>
                     <td>{{form.type}}</td>
                     <td><div class="reason">{{form.reason}}</div></td>
-                    <td>{{form.dateModified | moment}}</td>
+                    <td>{{form.dateModified | date: 'y-MM-dd HH:mm'}}</td>
                     <td><audit-status [status]="form.status"></audit-status></td>
                 </tr>
             </tbody>

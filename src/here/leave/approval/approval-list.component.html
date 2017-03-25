@@ -19,7 +19,7 @@
                 <td>{{form.adminClass}}</td>
                 <td>{{form.type | leaveType}}</td>
                 <td>{{form.reason}}</td>
-                <td>{{form.applyDate | moment}}</td>
+                <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
             </tr>
         </tbody>
         <tfoot>

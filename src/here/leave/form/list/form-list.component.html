@@ -18,7 +18,7 @@
             <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
             <td>{{form.type | leaveType}}</td>
             <td><div class="reason">{{form.reason}}</div></td>
-            <td>{{form.dateCreated | moment}}</td>
+            <td>{{form.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
             <td><audit-status [status]="form.status"></audit-status></td>
         </tr>
     </tbody>

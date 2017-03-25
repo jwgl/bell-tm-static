@@ -29,7 +29,7 @@ import {DayOfWeekPipe} from './pipes/day-of-week';
 import {FilterByPipe} from './pipes/filter-by';
 import {GroupByPipe} from './pipes/group-by';
 import {MarkdownPipe} from './pipes/markdown';
-import {FromNowPipe, MomentFormatPipe} from './pipes/moment-pipes';
+import {FromNowPipe} from './pipes/moment-pipes';
 import {SectionRangePipe} from './pipes/section-range';
 
 import {OddEvenPipe} from './pipes/odd-even';
@@ -68,7 +68,6 @@ const CORE_DIRECTIVES: any[] = [
     FilterByPipe,
     ZeroPadPipe,
     FromNowPipe,
-    MomentFormatPipe,
     DayOfWeekPipe,
     ActionNamePipe,
     ActionClassPipe,
