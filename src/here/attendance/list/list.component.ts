@@ -15,6 +15,7 @@ export class AttendanceListComponent {
     adminClassMap: {[key: number]: number} = {};
     dataLoaded = false;
     count = 0;
+    termId: number;
     constructor(
         private service: AttendanceListMainService,
         private router: Router, private route: ActivatedRoute) {
@@ -42,7 +43,16 @@ export class AttendanceListComponent {
         this.dataLoaded = true;
         this.adminClasses = data.adminClasses;
         this.students = data.students;
+        this.termId = data.termId;
         this.totalCount = this.adminClasses.reduce((sum, ac) => sum += ac.count, 0);
         this.adminClasses.forEach(it => this.adminClassMap[it.id] = it.count);
+    }
+
+    get statisUrl() {
+         return `/web/here/attendances/statisReport?termId=${this.termId}`;
+    }
+
+    get detailUrl() {
+        return `/web/here/attendances/detailReport?termId=${this.termId}`;
     }
 }

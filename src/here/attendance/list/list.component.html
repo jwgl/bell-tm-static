@@ -17,6 +17,15 @@
             </div>
         </div>
         <div class="col-md-9">
+            <div class="btn-toolbar">
+                <div class="btn-group ml-auto">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">导出</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" download href="{{statisUrl}}">统计数据</a>
+                        <a class="dropdown-item" download href="{{detailUrl}}">明细数据</a>
+                    </div>
+                </div>
+            </div>
             <table class="table" *ngIf="students && students.length > 0">
                 <thead>
                     <tr>
