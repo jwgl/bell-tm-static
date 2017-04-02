@@ -25,6 +25,7 @@ import {RemoveItemComponent} from './components/remove-item';
 import {Markdown} from './directives/markdown';
 import {Spinning} from './directives/spinning';
 import {ActionClassPipe, ActionNamePipe} from './pipes/audit-action';
+import {AuditStatusTextPipe} from './pipes/audit-status';
 import {DayOfWeekPipe} from './pipes/day-of-week';
 import {FilterByPipe} from './pipes/filter-by';
 import {GroupByPipe} from './pipes/group-by';
@@ -74,6 +75,7 @@ const CORE_DIRECTIVES: any[] = [
     MarkdownPipe,
     OddEvenPipe,
     SectionRangePipe,
+    AuditStatusTextPipe,
 ];
 
 @NgModule({

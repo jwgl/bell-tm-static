@@ -46,6 +46,24 @@
                 <span class="ml-auto">{{form.dateSubmitted | date: 'y-MM-dd HH:mm'}}</span>
             </p>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6" *ngIf="form.checker">
+                <label>审核人</label>
+                <p class="form-control-static d-flex">
+                    {{form.checker}}<span class="ml-auto">{{form.dateChecked | date: 'y-MM-dd HH:mm'}}</span>
+                </p>
+            </div>
+            <div class="form-group col-md-6" *ngIf="form.approver">
+                <label>审批人</label>
+                <p class="form-control-static d-flex">
+                    {{form.approver}}<span class="ml-auto">{{form.dateApproved | date: 'y-MM-dd HH:mm'}}</span>
+                </p>
+            </div>
+            <div class="form-group col-md-6" *ngIf="form.status">
+                <label>表单状态</label>
+                <p class="form-control-static">{{form.status | statusText}}</p>
+            </div>
+        </div>
         <div class="form-group">
             <label>借用明细</label>
             <ul *ngIf="form.items.length > 0; else prompt">
