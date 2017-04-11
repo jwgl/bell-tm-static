@@ -45,6 +45,7 @@
                 <th>学院</th>
                 <th>专业</th>
                 <th>申请时间</th>
+                <th>审批时间</th>
                 <th>状态</th>
                 <th class="text-center">操作</th>
             </tr>
@@ -57,7 +58,7 @@
                 <td>{{item.department}}</td>
                 <td>{{item.subject}}</td>
                 <td>{{item.dateSubmitted | date: 'y-MM-dd HH:mm'}}</td>
-                <td>{{item.dateApproved | date: 'y-MM-dd HH:mm'}}</td>s
+                <td>{{item.dateApproved | date: 'y-MM-dd HH:mm'}}</td>
                 <td>{{item.status | formStatus}}</td>
                 <td class="text-center" (click)="removeItem(item.formId)">
                     <button class="btn btn-secondary btn-sm" [disabled]="item.status=='FINISHED'">
