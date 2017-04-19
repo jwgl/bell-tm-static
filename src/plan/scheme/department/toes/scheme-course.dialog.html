@@ -2,28 +2,26 @@
     <modal-body>
         <form class="form-horizontal" #f="ngForm">
             <form-field-2>
-                <p class="form-control-static mb-0 form-field-left" label="课程代码">{{schemeCourse.courseId}}</p>
-                <p class="form-control-static mb-0 form-field-right" label="课程名称">{{schemeCourse.courseName}}</p>
+                <p class="form-control-static form-field-left" label="课程代码">{{schemeCourse.courseId}}</p>
+                <p class="form-control-static form-field-right" label="课程名称">{{schemeCourse.courseName}}</p>
             </form-field-2>
             <form-field-2>
-                <p class="form-control-static mb-0 form-field-left" label="学分">{{schemeCourse.credit}}</p>
-                <p class="form-control-static mb-0 form-field-right" label="实践学分">{{schemeCourse.practiceCredit}}</p>
+                <p class="form-control-static form-field-left" label="学分">{{schemeCourse.credit}}<span *ngIf="schemeCourse.practiceCredit">/{{schemeCourse.practiceCredit}}</span></p>
+                <p class="form-control-static form-field-right" label="周学时">{{schemeCourse.weekPeriod}}</p>
             </form-field-2>
             <form-field-2>
-                <p class="form-control-static mb-0 form-field-left" label="理论学时">{{schemeCourse.theoryPeriod}}</p>
-                <p class="form-control-static mb-0 form-field-right" label="实验学时">{{schemeCourse.experimentPeriod}}</p>
+                <p class="form-control-static form-field-left" label="推荐学期">{{schemeCourse.suggestedTerm}}</p>
+                <p class="form-control-static form-field-right" label="开课周数">{{schemeCourse._periodWeeks}}</p>
             </form-field-2>
             <form-field-2>
-                <p class="form-control-static mb-0 form-field-left" label="推荐学期">{{schemeCourse.suggestedTerm}}</p>
-                <p class="form-control-static mb-0 form-field-right" label="开课周数">{{schemeCourse._periodWeeks}}</p>
-            </form-field-2>
-            <form-field-2>
-                <ng-container [ngSwitch]="startWeekType">
-                    <p *ngSwitchCase="0" class="form-control-static mb-0 form-field-left" label="起始结束周">+{{schemeCourse._periodWeeks}}</p>
-                    <select *ngSwitchDefault class="form-control form-field-left" label="起始结束周" name="startWeek" [(ngModel)]="startWeek">
-                        <option *ngFor="let startWeek of startWeeks" [ngValue]="startWeek">{{startWeek | zeroPad}} - {{getEndWeek(startWeek, schemeCourse._periodWeeks) | zeroPad}}</option>
-                    </select>
-                </ng-container>
+                <div class="form-field-left" label="起始结束周">
+                    <p class="form-control-static" *ngIf="schemeCourse.isPracticeCourse; else weeks">+{{schemeCourse._periodWeeks}}</p>
+                    <ng-template #weeks>
+                        <select class="form-control" name="startWeek" [(ngModel)]="startWeek">
+                            <option *ngFor="let startWeek of startWeeks" [ngValue]="startWeek">{{startWeek | zeroPad}} - {{getEndWeek(startWeek, schemeCourse._periodWeeks) | zeroPad}}</option>
+                        </select>
+                    </ng-template>
+                </div>
                 <select class="form-control form-field-right" label="开课单位" name="department" [(ngModel)]="department">
                     <option *ngFor="let department of options.data" [ngValue]="department">{{department.name}}</option>
                 </select>

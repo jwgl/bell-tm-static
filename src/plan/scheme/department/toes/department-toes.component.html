@@ -13,39 +13,35 @@
     <plan-title [title]="vm.title"
             [program]="vm.programId"
             [version]="vm.versionNumber"></plan-title>
-    <table class="table table-bordered">
+    <table class="table table-sm">
         <thead>
             <tr>
                 <th>选择</th>
                 <th>课程编码</th>
                 <th>课程名称</th>
-                <th>课程性质</th>
                 <th>专业方向</th>
+                <th>学期</th>
                 <th>学分</th>
-                <th>实践<br>学分</th>
-                <th>总<br>学时</th>
-                <th>理论<br>学时</th>
-                <th>实验<br>学时</th>
-                <th>开课<br>学期</th>
-                <th>开课<br>周数</th>
-                <th>起始－<br>结束周</th>
+                <th>总学时</th>
+                <th>周学时</th>
+                <th>起始结束周</th>
                 <th>开课单位</th>
+                <th>考核方式</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
             <ng-container *ngFor="let property of vm.properties | propertyToes">
+                <tr [scheme-property]="property"></tr>
                 <ng-container *ngFor="let direction of property.directions; let i = index">
                     <tr *ngFor="let sc of direction.courses | schemeCourseToes : selectedTerm"
                         [scheme-course]="sc"
-                        [property]="property"
                         [direction]="direction"
                         [scheme]="vm"
                         (edit)="onEdit(sc)"></tr>
                 </ng-container>
                 <tr *ngFor="let sc of property.courses | schemeCourseToes : selectedTerm"
                     [scheme-course]="sc"
-                    [property]="property"
                     [direction]="null"
                     [scheme]="vm"
                     (edit)="onEdit(sc)"></tr>

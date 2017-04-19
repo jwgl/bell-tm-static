@@ -18,20 +18,8 @@ export class SchemeCourseDialog extends BaseDialog {
         super();
     }
 
-    get startWeekType(): number {
-        if (this.schemeCourse.theoryPeriod === 0 && this.schemeCourse.experimentPeriod === 0) {
-            return 0;
-        } else if (this.schemeCourse._periodWeeks === 18) {
-            return 1;
-        } else if (this.schemeCourse._periodWeeks === 9) {
-            return 2;
-        } else {
-            return 3;
-        }
-    }
-
     get startWeeks(): number[] {
-        if (this.schemeCourse.theoryPeriod === 0 && this.schemeCourse.experimentPeriod === 0) {
+        if (this.schemeCourse.isPracticeCourse) {
             return [];
         } else if (this.schemeCourse._periodWeeks > 9) {
             return [1];

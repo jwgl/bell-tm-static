@@ -1,23 +1,14 @@
 th {
-    padding: 0.25rem;
     white-space: nowrap;
 
+    &:nth-child(1),
+    &:nth-child(5),
     &:nth-child(6),
     &:nth-child(7),
     &:nth-child(8),
     &:nth-child(9),
-    &:nth-child(10),
     &:nth-child(11),
-    &:nth-child(12),
-    &:nth-child(13) {
-        text-align: right;
+    &:nth-child(12){
+        text-align: center;
     }
-}
-
-td {
-    padding: 0.25rem;
-}
-
-tr.property {
-    background-color: #ddd;
 }

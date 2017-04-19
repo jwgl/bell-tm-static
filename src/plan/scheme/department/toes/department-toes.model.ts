@@ -20,7 +20,8 @@ declare module '../../shared/scheme.model' {
         departmentId: string;
         departmentName: string;
         startWeek: number;
-        readonly endWeek: number;
+        readonly weekPeriod: string; // 周学时，用于显示
+        readonly endWeek: number; // 结束周，用于显示
         selected: boolean;
         exported: boolean;
         toToesDto(): any;
@@ -82,11 +83,27 @@ Scheme.prototype.getExportCourses = function(this: Scheme, selectedTerm: number)
     return schemeCourses;
 };
 
+Object.defineProperty(SchemeCourse.prototype, 'weekPeriod', {
+    /* tslint:disable:object-literal-shorthand*/
+    get: function(this: SchemeCourse) {
+        // 全学段或实践课
+        if (this.isPracticeCourse) {
+            return `+${this._periodWeeks}`;
+        } else {
+            return this.theoryPeriod.toLocaleString(undefined, {minimumFractionDigits: 1}) + '-' +
+                   this.experimentPeriod.toLocaleString(undefined, {minimumFractionDigits: 1});
+        }
+    },
+    /* tslint:enable:object-literal-shorthand*/
+    enumerable: true,
+    configurable: true,
+});
+
 Object.defineProperty(SchemeCourse.prototype, 'endWeek', {
     /* tslint:disable:object-literal-shorthand*/
     get: function(this: SchemeCourse) {
         // 全学段或实践课
-        if (this._periodWeeks === 18 || this.theoryPeriod === 0 && this.experimentPeriod === 0) {
+        if (this._periodWeeks === 18 || this.isPracticeCourse) {
             return 17;
         } else {
             return this.startWeek + this._periodWeeks - 1;

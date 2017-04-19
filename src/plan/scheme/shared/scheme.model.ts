@@ -629,7 +629,7 @@ export class SchemeCourse {
      * 课程总学时
      */
     get totalPeriod() {
-        return this.theoryPeriod === 0 && this.experimentPeriod === 0
+        return this.isPracticeCourse
             ? this._periodWeeks * 18
             : Math.round((this.theoryPeriod + this.experimentPeriod) * this._periodWeeks / 18) * 18;
     }
@@ -649,7 +649,11 @@ export class SchemeCourse {
      * 是否显示学时周，纯实践课和非全学段课不显示
      */
     get showPeriodWeeks(): boolean {
-        return !(this.theoryPeriod === 0 && this.experimentPeriod === 0) && this._periodWeeks !== 18;
+        return !this.isPracticeCourse && this._periodWeeks !== 18;
+    }
+
+    get isPracticeCourse(): boolean {
+        return this.theoryPeriod === 0 && this.experimentPeriod === 0;
     }
 
     /**
@@ -657,7 +661,7 @@ export class SchemeCourse {
      */
     getTermPeriod(term: number): string {
         if (this.suggestedTerm === term) {
-            if (this.theoryPeriod === 0 && this.experimentPeriod === 0) {
+            if (this.isPracticeCourse) {
                 return `${this._periodWeeks}周`;
             } else {
                 if (this.experimentPeriod !== 0) {

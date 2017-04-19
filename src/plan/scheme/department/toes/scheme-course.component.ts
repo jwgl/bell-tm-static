@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import {Direction, Property, RecordStatus, Scheme, SchemeCourse} from '../../shared/scheme.model';
+import {Direction, RecordStatus, Scheme, SchemeCourse} from '../../shared/scheme.model';
 import './department-toes.model';
 
 @Component({
@@ -15,12 +15,11 @@ export class SchemeCourseToesComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;
     @Input() scheme: Scheme;
     @Input() direction: Direction;
-    @Input() property: Property;
 
     @Output() edit: EventEmitter<null> = new EventEmitter();
 
     get directionName(): string {
-        return this.direction ? this.direction.name : '无方向';
+        return this.direction ? this.direction.name : '';
     }
 
     get departmentName(): string {

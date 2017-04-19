@@ -12,6 +12,7 @@ import {PropertyToesPipe} from './property-toes.pipe';
 import {SchemeCourseToesPipe} from './scheme-course-toes.pipe';
 import {SchemeCourseToesComponent} from './scheme-course.component';
 import {SchemeCourseDialog} from './scheme-course.dialog';
+import {SchemePropertyToesComponent} from './scheme-property.component';
 
 @NgModule({
     imports: [
@@ -28,6 +29,7 @@ import {SchemeCourseDialog} from './scheme-course.dialog';
         PropertyToesPipe,
         SchemeCourseToesPipe,
         SchemeCourseDialog,
+        SchemePropertyToesComponent,
     ],
     exports: [
         SchemeDepartmentToesComponent,
