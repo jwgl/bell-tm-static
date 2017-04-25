@@ -6,24 +6,33 @@ import {CommonDirectivesModule} from 'core/common-directives';
 import {RestModule} from 'core/rest';
 import {WorkflowModule} from 'core/workflow';
 
+import {PlanSharedModule} from '../../shared/module';
 import {VisionViewerModule} from '../shared/vision-viewer.module';
-import {VisionReviewComponent} from './review.component';
+import {VisionCheckComponent} from './check.component';
+import {VisionCheckRoutingModule} from './check.routing';
+
+import {VisionCheckItemComponent} from './check-item.component';
+import {VisionCheckListComponent} from './check-list.component';
 
 @NgModule({
-    bootstrap: [VisionReviewComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/plan/reviewers/${userId}/visions'),
         CommonDirectivesModule,
         WorkflowModule,
+        RestModule.for('/api/plan/checkers/${userId}/visions'),
+        VisionCheckRoutingModule,
+        PlanSharedModule,
         VisionViewerModule,
     ],
     declarations: [
-        VisionReviewComponent,
+        VisionCheckComponent,
+        VisionCheckListComponent,
+        VisionCheckItemComponent,
     ],
     providers: [
         {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/public/schemes'},
     ],
+    bootstrap: [VisionCheckComponent],
 })
 class MainModule {}
 

@@ -1,0 +1,35 @@
+<div class="container" *ngIf="list">
+    <table class="table" *ngIf="list.items?.length > 0; else empty">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>单位</th>
+                <th>专业</th>
+                <th>专业负责人</th>
+                <th>{{dateLabel}}</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vision of list.items">
+                <td><a [routerLink]="[vision.id]">#{{vision.id}}</a></td>
+                <td>{{vision.department}}</td>
+                <td>{{vision.grade}}级{{vision.subject}}专业（{{vision.versionNumber | versionNumber}}）</td>
+                <td>{{vision.creator}}</td>
+                <td>{{vision.date | date: 'y-MM-dd HH:mm'}}</td>
+                <td><audit-status [status]="vision.status"></audit-status></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8" style="text-align: center">
+                    <div class="btn-group" *ngIf="list.pagerEnabled">
+                        <button class="btn btn-secondary" [routerLink]="[list.prevRouterLink]" [disabled]="list.prevDisabled">上一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[list.nextRouterLink]" [disabled]="list.nextDisabled">下一页</button>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <ng-template #empty><div class="alert alert-info mt-3">暂无数据</div></ng-template>
+</div>
