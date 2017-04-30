@@ -119,6 +119,7 @@ export class SchemeDraftEditorComponent {
                         property.add(course);
                     }
                 });
+                property.sort();
             });
         });
     }
@@ -137,6 +138,7 @@ export class SchemeDraftEditorComponent {
                         direction.add(course);
                     }
                 });
+                direction.sort();
             });
         });
     }

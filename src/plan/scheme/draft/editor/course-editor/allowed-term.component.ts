@@ -5,7 +5,6 @@ import {clearBit, getBit, setBit} from 'core/utils';
 
 @Component({
     selector: 'allowed-term',
-    styleUrls: ['allowed-term.component.scss'],
     templateUrl: 'allowed-term.component.html',
 })
 export class AllowedTermComponent {
@@ -28,18 +27,15 @@ export class AllowedTermComponent {
         })));
 
         this.controls.valueChanges.subscribe((values: boolean[]) => {
-            this.value = values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0);
-            this.valueChange.emit(this.value);
+            // 被禁用的控件的值未包含在values中
+            values.splice(this.suggestedTerm - 1, 0, true);
+            this.setValue(values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0));
         });
     }
 
     ngOnChanges(changes: {[key: string]: SimpleChange}) {
         const suggestedTermChange = changes['suggestedTerm'];
         if (suggestedTermChange && !suggestedTermChange.isFirstChange()) {
-            let value = this.value;
-            value = clearBit(value, suggestedTermChange.previousValue - 1);
-            value = setBit(value, suggestedTermChange.currentValue - 1);
-
             this.terms.forEach((term, i) => {
                 const control = this.controls.at(i);
                 if (suggestedTermChange.currentValue === term) {
@@ -49,13 +45,13 @@ export class AllowedTermComponent {
                 }
             });
 
-            this.setValue(value);
-            this.valueChange.emit(this.value);
+            this.setValue(setBit(0, suggestedTermChange.currentValue - 1));
         }
     }
 
     setValue(value: number) {
         this.value = value;
         this.terms.forEach((term, i) => this.controls.at(i).setValue(getBit(this.value, term - 1), {emitEvent: false}));
+        this.valueChange.emit(this.value);
     }
 }
