@@ -13,7 +13,7 @@ import {CourseSelectDto, SchemeCourseDto} from '../../../shared/scheme.model';
 })
 export class CourseEditorDialog extends BaseDialog {
     title: string;
-    schemeCourse = {} as SchemeCourseDto;
+    schemeCourse = new Object() as SchemeCourseDto;
     periodWeekOptions = [] as Array<{label: string, value: number}>;
     lastPeriodWeeks: number;
 

@@ -8,7 +8,7 @@ import {StudentInfoComponent} from './student-info.component';
 export {
     StudentInfoComponent,
     ReissueFormViewerComponent,
-}
+};
 
 @NgModule({
     imports: [

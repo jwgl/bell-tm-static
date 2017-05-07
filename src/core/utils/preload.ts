@@ -7,10 +7,9 @@ export function getInlineData(id = 'preload'): any {
         try {
             return JSON.parse(el.textContent);
         } catch (e) {
-            console.error(`JSON parse error: ${el.textContent}`);
-            return null;
+            throw Error(`JSON parse error: ${el.textContent}`);
         }
     } else {
-        console.error(`Can not load data from element(id=${id})`);
+        throw Error(`Can not load data from element(id=${id})`);
     }
 }

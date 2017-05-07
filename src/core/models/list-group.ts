@@ -1,7 +1,7 @@
 /* tslint:disable:max-classes-per-file*/
 export interface ListCounts {
     [key: string]: number;
-};
+}
 
 export interface ListOption {
     type: string;

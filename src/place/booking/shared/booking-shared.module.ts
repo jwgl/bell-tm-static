@@ -6,7 +6,7 @@ import {BookingFormViewerComponent} from './form-viewer.component';
 
 export {
     BookingFormViewerComponent,
-}
+};
 
 @NgModule({
     imports: [

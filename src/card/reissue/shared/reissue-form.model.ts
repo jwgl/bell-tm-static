@@ -6,7 +6,7 @@ export interface Student {
     department: string;
     subject: string;
     educationLevel: string;
-};
+}
 
 export class ReissueForm {
     id: number;

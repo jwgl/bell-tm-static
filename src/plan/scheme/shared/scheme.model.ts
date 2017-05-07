@@ -85,7 +85,9 @@ export class Scheme {
             return new Property(this, tp);
         });
 
-        const propertyMap = this.properties.reduce((acc, p, i) => { acc[p.id] = p; return acc; }, {} as {[key: string]: Property});
+        const propertyMap = this.properties.reduce((acc, p, i) => {
+            acc[p.id] = p; return acc;
+        }, new Object() as {[key: string]: Property});
 
         dto.template.courses.forEach(sc => {
             propertyMap[sc.propertyId].addTemplateCourse(sc);
@@ -178,7 +180,7 @@ export class Scheme {
 
     get creditStatis() {
         return this.properties.map(p => {
-            const cs: CreditStatis = {} as CreditStatis;
+            const cs: CreditStatis = new Object() as CreditStatis;
             cs.id = p.id;
             cs.name = p.name;
             cs.credit = p.totalCredit;
@@ -293,7 +295,7 @@ export abstract class AbstractGroup {
      * 重构状态
      */
     rebuildStatus(): void {
-        const deleted = {} as {[key: string]: SchemeCourse};
+        const deleted = new Object() as {[key: string]: SchemeCourse};
         const scheme = this.getScheme();
 
         this.courses.forEach(c => {
@@ -364,7 +366,7 @@ export class Direction extends AbstractGroup {
         this.courses.push(schemeCourse);
 
         return schemeCourse;
-    };
+    }
 
     /**
      * 显示行数
@@ -448,7 +450,7 @@ export class Property extends AbstractGroup {
             if (direction) {
                 return direction.load(sc);
             } else {
-                console.warn(`Can not find Direction(${sc.directionId}) for Course(${sc.courseId})`);
+                throw new Error(`Can not find Direction(${sc.directionId}) for Course(${sc.courseId})`);
             }
         }
 
@@ -472,7 +474,7 @@ export class Property extends AbstractGroup {
             if (direction) {
                 return direction.add(sc);
             } else {
-                console.warn(`Can not find Direction(${sc.directionId}) for Course(${sc.courseId})`);
+                throw new Error(`Can not find Direction(${sc.directionId}) for Course(${sc.courseId})`);
             }
         }
 
@@ -486,7 +488,7 @@ export class Property extends AbstractGroup {
         schemeCourse.currStatus = RecordStatus.Created;
         this.courses.push(schemeCourse);
         return schemeCourse;
-    };
+    }
 
     addTemplateCourse(sc: SchemeCourseDto) {
         this.templateCourses.push(sc);

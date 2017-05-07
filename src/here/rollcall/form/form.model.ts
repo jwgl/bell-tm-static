@@ -36,7 +36,7 @@ export const RollcallLabels = _.transform(RollcallTypeNames, (result, value, key
     result[key] = RollcallActions.filter(t => {
         return key === t.toString() || key === RollcallType.LateEarly.toString() && (t === RollcallType.Late || t === RollcallType.Early);
     }).map(t => RollcallActionLabels[t]);
-}, {} as LabelArrayMap);
+}, new Object() as _.Dictionary<Label[]>);
 
 export interface RollcallSettings {
     hideFree: boolean;

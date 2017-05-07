@@ -14,7 +14,7 @@ export {
     ShowService,
     EditService,
     ReviewService,
-}
+};
 
 @NgModule({
     imports: [HttpModule],

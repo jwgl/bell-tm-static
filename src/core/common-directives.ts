@@ -38,7 +38,7 @@ import {ZeroPadPipe} from './pipes/zero-pad';
 
 export {
     CheckboxSelectorComponent,
-}
+};
 
 const CORE_DIRECTIVES: any[] = [
     // common commponent

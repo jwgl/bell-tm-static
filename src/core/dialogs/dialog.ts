@@ -53,7 +53,7 @@ export class Dialog {
                 }
             });
         });
-    };
+    }
 
     private getRootViewContainer(): ComponentRef<any> {
         return this.applicationRef.components[0];

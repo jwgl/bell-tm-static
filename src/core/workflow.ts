@@ -38,7 +38,7 @@ export {
     Workflow,
     WorkflowItemResolve,
     WorkflowListResolve,
-}
+};
 
 const WORKFLOW_DIALOGS: any[] = [
     WorkflowSubmitDialog,

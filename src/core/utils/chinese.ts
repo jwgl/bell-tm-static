@@ -28,4 +28,4 @@ export function numberToChinese(num: number): string {
         .replace(/零+([万亿])/g, '$1')
         .replace(/零+$/, '');
     return result;
-};
+}
