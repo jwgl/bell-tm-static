@@ -41,7 +41,8 @@
     "moment": "^2.18.1",
     "rxjs": "^5.2.0",
     "tether": "^1.4.0",
-    "tslib": "^1.6.0",
+    "tslib": "^1.7.0",
+    "typescript": "^2.3.2",
     "zone.js": "^0.8.5"
   },
   "devDependencies": {
