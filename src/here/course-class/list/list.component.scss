@@ -1,0 +1,29 @@
+@import '../../rollcall/shared/rollcall-status.scss';
+
+.invalid {
+    text-decoration: line-through;
+}
+
+td {
+    &:nth-child(1) {
+        width: 1.5rem;
+        text-align: center;
+    }
+    &:nth-child(2),
+    &:nth-child(7),
+    &:nth-child(8),
+    &:nth-child(9),
+    &:nth-child(10),
+    &:nth-child(11) {
+        width: 2.5rem;
+    }
+    &:nth-child(3) {
+        width: 7rem;
+    }
+    &:nth-child(4) {
+        width: 5rem;
+    }
+    &:nth-child(4) {
+        white-space: nowrap;
+    }
+}

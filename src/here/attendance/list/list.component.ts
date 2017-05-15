@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router, RouterState} from '@angular/router';
+
 import {AttendanceListMainService} from './main.service';
 
 @Component({
@@ -18,7 +19,9 @@ export class AttendanceListComponent {
     termId: number;
     constructor(
         private service: AttendanceListMainService,
-        private router: Router, private route: ActivatedRoute) {
+        private router: Router,
+        private route: ActivatedRoute,
+    ) {
         this.route.params.subscribe(params => {
             this.adminClassId = parseInt(params['adminClassId'], 10);
             this.loadData(0);

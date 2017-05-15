@@ -1,0 +1,93 @@
+<ng-container *ngIf="courseClass">
+        <div class="btn-toolbar">
+            <div class="btn-group ml-auto">
+                <a class="btn btn-secondary" download href="{{webUrl}}/{{courseClass.id}}/report?code={{courseClass.code}}">导出</a>
+            </div>
+        </div>
+        <div class="row">
+        <div class="form-group col-md-6">
+            <label>选课课号</label>
+            <p class="form-control-static">{{courseClass.code}}</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label>课程名称</label>
+            <p class="form-control-static">
+                {{courseClass.course}}
+                <span *ngIf="courseClass.name">- {{courseClass.name}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>开始结束周</label>
+            <p class="form-control-static">{{courseClass.startWeek}}-{{courseClass.endWeek}}周</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label>开课单位</label>
+            <p class="form-control-static">{{courseClass.department}}</p>
+        </div>
+    </div>
+    <div style="text-align: right">
+        考勤单位：节
+    </div>
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>班级</th>
+                <th>专业</th>
+                <th>旷课</th>
+                <th>迟到</th>
+                <th>早退</th>
+                <th>合计</th>
+                <th>请假</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let student of courseClass.students; let i = index">
+                <tr [ngClass]="e.expended ? 'table-active' : ''">
+                    <td><expend #e (toggle)="toggle($event, student)" [enabled]="student.hasDetails"></expend></td>
+                    <td>{{i + 1}}</td>
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.adminClass}}</td>
+                    <td>{{student.subject}}</td>
+                    <td>{{student.attendanceStats.absent}}</td>
+                    <td>{{student.attendanceStats.late}}</td>
+                    <td>{{student.attendanceStats.early}}</td>
+                    <td>{{student.attendanceStats.total}}</td>
+                    <td>{{student.attendanceStats.leave}}</td>
+                </tr>
+                <tr *ngIf="e.expended" class="table-info">
+                    <td colspan="2"></td>
+                    <td colspan="9">
+                        <section *ngIf="student.rollcalls && student.rollcalls.length > 0">
+                            <h6>考勤情况</h6>
+                            <ul class="list-unstyled mb-2">
+                                <li *ngFor="let item of student.rollcalls">
+                                    <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
+                                    <span [class.invalid]="!item.valid">{{item}}</span>
+                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                                    <a *ngIf="item.studentLeave" href="../../leaves/{{item.studentLeave}}" target="_blank">请假</a>
+                                </li>
+                            </ul>
+                        </section>
+                        <section *ngIf="student.leaves && student.leaves.length > 0">
+                            <h6>请假情况</h6>
+                            <ul class="list-unstyled mb-2">
+                                <li *ngFor="let item of student.leaves">
+                                    <span [class.invalid]="!item.valid">{{item}}</span>
+                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                                    <a *ngIf="item.studentLeave" href="../../leaves/{{item.studentLeave}}" target="_blank">请假</a>
+                                </li>
+                            </ul>
+                        </section>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

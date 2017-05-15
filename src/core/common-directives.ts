@@ -18,6 +18,7 @@ import {
 } from './bootstrap/modal-dialog.directive';
 import {AuditStatusComponent} from './components/audit-status';
 import {CheckboxSelectorComponent} from './components/checkbox-selector';
+import {ExpendComponent} from './components/expend';
 import {FormTitleComponent} from './components/form-title';
 import {FromNowComponent} from './components/from-now';
 import {PagerComponent} from './components/pager';
@@ -44,6 +45,7 @@ const CORE_DIRECTIVES: any[] = [
     // common commponent
     AuditStatusComponent,
     CheckboxSelectorComponent,
+    ExpendComponent,
     FormTitleComponent,
     FromNowComponent,
     PagerComponent,

@@ -31,6 +31,7 @@ module.exports = {
     'place/booking/item':          './src/place/booking/item/main.ts',
     'place/settings/booking-auth': './src/place/settings/booking-auth/main.ts',
     'here/rollcall/form':          './src/here/rollcall/form/main.ts',
+    'here/course-class/list':      './src/here/course-class/list/main.ts',
     'here/attendance/list':        './src/here/attendance/list/main.ts',
     'here/attendance/item':        './src/here/attendance/item/main.ts',
     'here/attendance/student':     './src/here/attendance/student/main.ts',
