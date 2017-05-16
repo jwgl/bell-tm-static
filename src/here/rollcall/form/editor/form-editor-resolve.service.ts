@@ -10,12 +10,13 @@ export class RollcallFormEditorResolve implements Resolve<RollcallForm> {
     constructor(private service: RollcallFormService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RollcallForm> {
-        return this.service.loadDataForCreate(route.params).map(dto => {
-            const form = new RollcallForm(dto, this.service.settings);
-            if (form.locked && !/\/lock$/.test(state.url)) {
-                this.router.navigateByUrl(state.url.replace(/\/\w*$/, '/lock'));
-            }
-            return form;
-        });
+        return null;
+        // return this.service.loadDataForCreate(route.params).map(dto => {
+        //     const form = new RollcallForm(dto, this.service.settings);
+        //     if (form.locked && !/\/lock$/.test(state.url)) {
+        //         this.router.navigateByUrl(state.url.replace(/\/\w*$/, '/lock'));
+        //     }
+        //     return form;
+        // });
     }
 }

@@ -17,7 +17,7 @@ import {RollcallScheduleModule} from './schedule/schedule.module';
     ],
     imports: [
         BrowserModule,
-        RestModule.for('/api/here/teachers/${userId}/rollcalls'),
+        RestModule.for('/api/here/teachers/${userId}/timeslots'),
         RollcallFormRoutingModule,
         RollcallScheduleModule,
         RoolcallFormEditorModule,
