@@ -10,7 +10,7 @@ import {RecordStatus, SchemeCourse} from '../scheme.model';
     styleUrls: ['scheme-course.component.scss'],
     templateUrl: 'scheme-course.component.html',
     host: {
-        '[class]': 'statusClasses',
+        '[class]': 'statusClass',
         '[class.highlight]': 'schemeCourse.highlight',
         '(mouseenter)': 'mouseenter()',
         '(mouseleave)': 'mouseleave()',
@@ -18,27 +18,18 @@ import {RecordStatus, SchemeCourse} from '../scheme.model';
 })
 export class SchemeCourseComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;
-    @Input() terms: number[];
 
-    get statusClasses(): string {
-        if (!this.schemeCourse.group.getScheme().previousId) {
+    get statusClass(): string {
+        if (!this.schemeCourse.group.scheme.previousId || this.schemeCourse.prevStatus === RecordStatus.None) {
             return '';
+        } else {
+            return RecordStatus[this.schemeCourse.prevStatus];
         }
-
-        const classes: string[] = [];
-        if (this.schemeCourse.prevStatus !== RecordStatus.None) {
-            classes.push('Prev' + RecordStatus[this.schemeCourse.prevStatus]);
-        }
-        if (this.schemeCourse.currStatus !== RecordStatus.None) {
-            classes.push('Curr' + RecordStatus[this.schemeCourse.currStatus]);
-        }
-        return classes.join(' ');
     }
 
     mouseenter() {
         if (this.schemeCourse.ref) {
             this.schemeCourse.ref.highlight = true;
-
         }
     }
 

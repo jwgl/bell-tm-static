@@ -16,5 +16,4 @@ import {Property} from '../scheme.model';
 })
 export class SchemePropertyComponent {
     @Input('scheme-property') property: Property;
-    @Input() terms: number[];
 }

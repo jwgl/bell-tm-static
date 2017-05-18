@@ -1,4 +1,4 @@
 <td [colSpan]="5" class="name">{{property.name}}</td>
-<td *ngFor="let term of terms" [class.short-term]="term>=17">{{term | termTitle}}</td>
+<td *ngFor="let term of property.terms" [class.short-term]="term>=17">{{term | termTitle}}</td>
 <td></td>
 <td></td>

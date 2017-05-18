@@ -17,7 +17,6 @@ import {AbstractGroup, Direction, Property} from '../../shared/scheme.model';
 })
 export class SchemeGroupComponent {
     @Input('scheme-group') group: AbstractGroup;
-    @Input() terms: number[];
     @Output() add: EventEmitter<AbstractGroup> = new EventEmitter<AbstractGroup>();
     @Output() import: EventEmitter<AbstractGroup> = new EventEmitter<AbstractGroup>();
 

@@ -20,7 +20,6 @@ import {RecordStatus, SchemeCourse} from '../../shared/scheme.model';
 })
 export class SchemeCourseComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;
-    @Input() terms: number[];
     @Input() editMode: EditMode;
 
     @Output() edit: EventEmitter<SchemeCourse> = new EventEmitter<SchemeCourse>();
@@ -28,7 +27,7 @@ export class SchemeCourseComponent {
     @Output() restore: EventEmitter<SchemeCourse> = new EventEmitter<SchemeCourse>();
 
     get statusClasses(): string {
-        if (!this.schemeCourse.group.getScheme().previousId) {
+        if (!this.schemeCourse.group.scheme.previousId) {
             return '';
         }
 

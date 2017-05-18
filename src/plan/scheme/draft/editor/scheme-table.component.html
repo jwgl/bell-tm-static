@@ -13,29 +13,25 @@
     </thead>
     <tbody>
         <ng-container *ngFor="let property of scheme.properties">
-            <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
+            <tr [scheme-property]="property"></tr>
             <ng-container *ngFor="let direction of property.directions">
                 <tr *ngFor="let sc of direction.courses"
                     [scheme-course]="sc"
-                    [terms]="scheme.terms"
                     [editMode]="editMode"
                     (edit)="edit.emit($event)"
                     (delete)="delete.emit($event)"
                     (restore)="restore.emit($event)"></tr>
                 <tr [scheme-group]="direction"
-                    [terms]="scheme.terms"
                     (add)="add.emit($event)"
                     (import)="import.emit($event)"></tr>
             </ng-container>
             <tr *ngFor="let sc of property.courses"
                 [scheme-course]="sc"
-                [terms]="scheme.terms"
                 [editMode]="editMode"
                 (edit)="edit.emit($event)"
                 (delete)="delete.emit($event)"
                 (restore)="restore.emit($event)"></tr>
             <tr [scheme-group]="property"
-                [terms]="scheme.terms"
                 (add)="add.emit($event)"
                 (import)="import.emit($event)"></tr>
         </ng-container>

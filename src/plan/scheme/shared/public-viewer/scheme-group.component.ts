@@ -12,5 +12,4 @@ import {AbstractGroup} from '../scheme.model';
 })
 export class SchemeGroupComponent {
     @Input('scheme-group') group: AbstractGroup;
-    @Input() terms: number[];
 }

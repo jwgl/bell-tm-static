@@ -237,10 +237,14 @@ export abstract class AbstractGroup {
 
     abstract load(sc: SchemeCourseDto): SchemeCourse;
     abstract add(sc: SchemeCourseDto): SchemeCourse;
-    abstract getScheme(): Scheme;
+    abstract get scheme(): Scheme;
 
     sort() {
         this.courses.sort(courseComparer);
+    }
+
+    get terms(): number[] {
+        return this.scheme.terms;
     }
 
     /**
@@ -296,17 +300,16 @@ export abstract class AbstractGroup {
      */
     rebuildStatus(): void {
         const deleted = new Object() as {[key: string]: SchemeCourse};
-        const scheme = this.getScheme();
 
         this.courses.forEach(c => {
-            if (c.reviseVersion === scheme.versionNumber) {
+            if (c.reviseVersion === this.scheme.versionNumber) {
                 c.prevStatus = RecordStatus.Deleted;
                 deleted[c.id] = c;
             }
         });
 
         this.courses.forEach(c => {
-            if (c.schemeId === scheme.id) {
+            if (c.schemeId === this.scheme.id) {
                 if (c.previousId) {
                     c.ref = deleted[c.previousId];
                 }
@@ -329,7 +332,7 @@ export class Direction extends AbstractGroup {
         this.courses = [];
     }
 
-    getScheme() {
+    get scheme() {
         return this.property.scheme;
     }
 
@@ -431,10 +434,6 @@ export class Property extends AbstractGroup {
      */
     get minTotalCredit(): number {
         return this.directions ? this.directions.reduce((min, d) => Math.min(d.totalCredit, min), Number.MAX_VALUE) : this.totalCredit;
-    }
-
-    getScheme() {
-        return this.scheme;
     }
 
     /**
@@ -620,7 +619,7 @@ export class SchemeCourse {
      */
     get courseName() {
         if (!(this.group instanceof Direction) && this.directionId) {
-            const direction = this.group.getScheme().getDirection(this.directionId);
+            const direction = this.group.scheme.getDirection(this.directionId);
             return this._courseName + (direction ? `[${direction.name}]` : `[未知方向${this.directionId}]`);
         } else {
             return this._courseName;
@@ -696,6 +695,10 @@ export class SchemeCourse {
 
     get currStatusLabel(): string {
         return RecordStatus[this.currStatus];
+    }
+
+    get terms(): number[] {
+        return this.group.terms;
     }
 }
 

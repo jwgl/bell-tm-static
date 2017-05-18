@@ -1,36 +1,36 @@
 $prevCreated: #eaffea;
 $prevDeleted: #ffecec;
-$currCreated: darken($prevCreated, 10%);
-$currDeleted: darken($prevDeleted, 10%);
+$plus: '+';
+$minus: '-';
 
 :host() {
-    &.PrevDeleted {
+    &.Deleted {
         display: none;
+    }
+
+    .course-id {
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            font-family: '宋体';
+        }
     }
 }
 
 :host-context(.show-diff) {
-    &.PrevCreated {
+    &.Created {
         background-color: $prevCreated;
-        &.CurrReverted {
-            background-color: $currDeleted;
-        }
-        &.CurrUpdated {
-            background-color: $currCreated;
+        .course-id::before {
+            content: $plus;
         }
     }
-    &.PrevDeleted {
-        display: table-row;
+    &.Deleted {
         background-color: $prevDeleted;
-        &.CurrReverted {
-            background-color: $currCreated;
+        display: table-row;
+        .course-id::before {
+            content: $minus;
         }
-    }
-    &.CurrCreated {
-        background-color: $currCreated;
-    }
-    &.CurrDeleted {
-        background-color: $currDeleted;
     }
     &.highlight {
         color: red;

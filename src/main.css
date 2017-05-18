@@ -28,6 +28,10 @@ label {
         display: none !important;
     }
 
+    .navbar {
+        display: none !important;
+    }
+
     .btn-toolbar {
         display: none !important;
     }

@@ -12,7 +12,6 @@ import {AbstractGroup, Direction, Property} from '../scheme.model';
 })
 export class SchemeGroupComponent {
     @Input('scheme-group') group: AbstractGroup;
-    @Input() terms: number[];
 
     get summary(): string {
         if (this.group instanceof Property) {

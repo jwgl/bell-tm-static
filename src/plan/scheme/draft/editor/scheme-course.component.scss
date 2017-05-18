@@ -1,15 +1,30 @@
-@import '../../shared/public-viewer/scheme-viewer.component.scss';
-
 $prevCreated: #eaffea;
 $prevDeleted: #ffecec;
 $currCreated: darken($prevCreated, 10%);
 $currDeleted: darken($prevDeleted, 10%);
+$plus: '+';
+$minus: '-';
 
 :host {
+    .course-id {
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            font-family: '宋体';
+        }
+    }
+
     &.PrevCreated {
         background-color: $prevCreated;
+        .course-id::before {
+            content: $plus;
+        }
         &.CurrReverted {
             background-color: $currDeleted;
+            .course-id::before {
+                content: $minus;
+            }
         }
         &.CurrUpdated {
             background-color: $currCreated;
@@ -17,15 +32,27 @@ $currDeleted: darken($prevDeleted, 10%);
     }
     &.PrevDeleted {
         background-color: $prevDeleted;
+        .course-id::before {
+            content: $minus;
+        }
         &.CurrReverted {
             background-color: $currCreated;
+            .course-id::before {
+                content: $plus;
+            }
         }
     }
     &.CurrCreated {
         background-color: $currCreated;
+        .course-id::before {
+            content: $plus;
+        }
     }
     &.CurrDeleted {
         background-color: $currDeleted;
+        .course-id::before {
+            content: $minus;
+        }
     }
     &.highlight {
         color: red;

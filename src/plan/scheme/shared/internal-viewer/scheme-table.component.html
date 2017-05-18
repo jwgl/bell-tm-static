@@ -12,19 +12,13 @@
     </thead>
     <tbody>
         <ng-container *ngFor="let property of scheme.properties">
-            <tr [scheme-property]="property" [terms]="scheme.terms"></tr>
+            <tr [scheme-property]="property"></tr>
             <ng-container *ngFor="let direction of property.directions">
-                <tr *ngFor="let sc of direction.courses"
-                    [scheme-course]="sc"
-                    [terms]="scheme.terms"></tr>
-                <tr [scheme-group]="direction"
-                    [terms]="scheme.terms"></tr>
+                <tr *ngFor="let sc of direction.courses"[scheme-course]="sc"></tr>
+                <tr [scheme-group]="direction"></tr>
             </ng-container>
-            <tr *ngFor="let sc of property.courses"
-                [scheme-course]="sc"
-                [terms]="scheme.terms"></tr>
-            <tr [scheme-group]="property"
-                [terms]="scheme.terms"></tr>
+            <tr *ngFor="let sc of property.courses" [scheme-course]="sc"></tr>
+            <tr [scheme-group]="property"></tr>
         </ng-container>
         <tr [scheme-summary]="scheme"></tr>
     </tbody>

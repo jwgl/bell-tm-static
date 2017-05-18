@@ -11,7 +11,6 @@ import {AbstractGroup, SchemeCourse} from '../scheme.model';
 })
 export class SchemeCourseComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;
-    @Input() terms: number[];
 
     /**
      * 1级分组

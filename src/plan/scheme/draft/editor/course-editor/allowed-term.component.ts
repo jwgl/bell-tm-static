@@ -28,7 +28,7 @@ export class AllowedTermComponent {
 
         this.controls.valueChanges.subscribe((values: boolean[]) => {
             // 被禁用的控件的值未包含在values中
-            values.splice(this.suggestedTerm - 1, 0, true);
+            values.splice(this.terms.indexOf(this.suggestedTerm), 0, true);
             this.setValue(values.reduce((prev, curr, i) => curr ? setBit(prev, this.terms[i] - 1) : prev, 0));
         });
     }

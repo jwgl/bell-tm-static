@@ -39,7 +39,7 @@ export class SchemeCourseToesComponent {
     }
 
     get statusClasses(): string {
-        if (!this.schemeCourse.group.getScheme().previousId) {
+        if (!this.schemeCourse.group.scheme.previousId) {
             return '';
         }
 

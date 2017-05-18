@@ -18,21 +18,17 @@
             <ng-container *ngFor="let direction of property.directions; let i = index">
                 <tr *ngFor="let sc of direction.courses; let j = index"
                     [scheme-course]="sc"
-                    [terms]="scheme.terms"
                     [group1]="direction"
                     [first1]="j == 0"
                     [group2]="property"
                     [first2]="i == 0"></tr>
-                <tr [scheme-group]="direction"
-                    [terms]="scheme.terms"></tr>
+                <tr [scheme-group]="direction"></tr>
             </ng-container>
             <tr *ngFor="let sc of property.courses; let i = index"
                 [scheme-course]="sc"
-                [terms]="scheme.terms"
                 [group1]="property"
                 [first1]="i == 0"></tr>
-            <tr [scheme-group]="property"
-                [terms]="scheme.terms"></tr>
+            <tr [scheme-group]="property"></tr>
         </ng-container>
         <tr [scheme-summary]="scheme"></tr>
     </tbody>

@@ -28,7 +28,7 @@ Property.prototype.normalize = function(this: Property) {
         // 没有数据的性质增加空课程，如果是方向课则不增加
         if (!this.hasDirections && this.courses.length === 0) {
             for (let i = 0; i < 3; i++) {
-                this.courses.push(new EmptyCourse());
+                this.courses.push(new EmptyCourse(this));
             }
         }
     }
@@ -43,7 +43,7 @@ Scheme.prototype.normalize = function(this: Scheme) {
 };
 
 class EmptyCourse extends SchemeCourse {
-    constructor() {
+    constructor(property: Property) {
         super({
             courseId: 0,
             courseName: '',
@@ -60,5 +60,6 @@ class EmptyCourse extends SchemeCourse {
             previousId: null,
             reviseVersion: null,
         });
+        this.group = property;
     }
 }
