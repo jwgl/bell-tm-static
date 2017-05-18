@@ -8,9 +8,6 @@ import {Workflow} from './workflow.service';
     selector: 'nav-tabs',
     styleUrls: ['nav-tabs.component.scss'],
     templateUrl: 'nav-tabs.component.html',
-    host: {
-        '[class]': '"d-block"',
-    },
 })
 export class NavTabsComponent {
     @Input() set options(value: ListOption[]) {

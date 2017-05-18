@@ -9,6 +9,7 @@ $count-bg: #ddd;
 }
 
 :host {
+    display: block;
     margin-top: -1rem;
     padding-top: 1rem;
     border-top: solid 1px #ddd;

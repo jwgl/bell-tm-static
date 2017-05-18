@@ -28,11 +28,7 @@ label {
         display: none !important;
     }
 
-    .navbar {
-        display: none !important;
-    }
-
-    .btn-toolbar {
+    nav-tabs, .navbar, .btn-toolbar {
         display: none !important;
     }
 
