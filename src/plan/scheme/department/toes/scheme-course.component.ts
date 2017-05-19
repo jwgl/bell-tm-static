@@ -7,9 +7,6 @@ import './department-toes.model';
     selector: '[scheme-course]',
     styleUrls: ['scheme-course.component.scss'],
     templateUrl: 'scheme-course.component.html',
-    host: {
-        '[class]': 'statusClasses',
-    },
 })
 export class SchemeCourseToesComponent {
     @Input('scheme-course') schemeCourse: SchemeCourse;
@@ -36,20 +33,5 @@ export class SchemeCourseToesComponent {
         } else {
             return 1;
         }
-    }
-
-    get statusClasses(): string {
-        if (!this.schemeCourse.group.scheme.previousId) {
-            return '';
-        }
-
-        const classes: string[] = [];
-        if (this.schemeCourse.prevStatus !== RecordStatus.None) {
-            classes.push('Prev' + RecordStatus[this.schemeCourse.prevStatus]);
-        }
-        if (this.schemeCourse.currStatus !== RecordStatus.None) {
-            classes.push('Curr' + RecordStatus[this.schemeCourse.currStatus]);
-        }
-        return classes.join(' ');
     }
 }
