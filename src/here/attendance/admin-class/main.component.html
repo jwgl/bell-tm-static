@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="btn-toolbar">
+            <button class="btn invisible">TODO: Term Select</button>
+        </div>
+        <div class="list-group" *ngIf="adminClasses">
+            <a class="list-group-item list-group-item-action justify-content-between"
+               routerLink="/all"
+               [routerLinkActiveOptions]="{exact: true}"
+               routerLinkActive="active">
+               全部<span>{{totalCount}}</span>
+            </a>
+            <a class="list-group-item list-group-item-action justify-content-between"
+               *ngFor="let adminClass of adminClasses"
+               [routerLink]="[adminClass.id]"
+               routerLinkActive="active">
+                {{adminClass.name}}<span>{{adminClass.count}}</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>

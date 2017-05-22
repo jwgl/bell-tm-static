@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {CourseClassListComponent} from './list.component';
-import {CourseClassListMainComponent} from './main.component';
 
 const routes: Routes = [
     {

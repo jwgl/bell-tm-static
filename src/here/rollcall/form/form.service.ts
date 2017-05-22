@@ -23,58 +23,16 @@ export class RollcallFormService {
         return this.rest.get(this.getRollcallApi(week, day, section));
     }
 
-    loadAttendances(week: number, day: number, section: number): Observable<any> {
-        return this.rest.get(this.getAttendanceApi(week, day, section));
+    create(week: number, day: number, section: number, data: object): Observable<{id: number, attendances: number[]}> {
+        return this.rest.post(this.getRollcallApi(week, day, section), data);
     }
 
-    loadAttendance(week: number, day: number, section: number, studentId: string): Observable<number[]> {
-        return this.rest.get(`${this.getAttendanceApi(week, day, section)}/${studentId}`);
+    update(week: number, day: number, section: number, id: number, data: object): Observable<{attendances: number[]}> {
+        return this.rest.put(`${this.getRollcallApi(week, day, section)}/${id}`, data);
     }
 
-    create(week: number, day: number, section: number, student: Student, type: RollcallType): void {
-        student.pending = true;
-        this.rest.post(this.getRollcallApi(week, day, section), {
-            week,
-            taskScheduleId: student.taskScheduleId,
-            studentId: student.id,
-            type,
-        }).switchMap((result: {id: number}) => {
-            student.pending = false;
-            student.rollcall = new Rollcall({id: result.id, studentId: student.id, type});
-            return this.loadAttendance(week, day, section, student.id);
-        }).subscribe(result => {
-            student.attendances = result;
-        }, error => {
-            student.pending = false;
-        });
-    }
-
-    update(week: number, day: number, section: number, student: Student, type: RollcallType): void {
-        student.pending = true;
-        this.rest.put(`${this.getRollcallApi(week, day, section)}/${student.rollcall.id}`, {
-            type,
-        }).switchMap(() => {
-            student.pending = false;
-            student.rollcall.type = type;
-            return this.loadAttendance(week, day, section, student.id);
-        }).subscribe(result => {
-            student.attendances = result;
-        }, error => {
-            student.pending = false;
-        });
-    }
-
-    delete(week: number, day: number, section: number, student: Student): void {
-        student.pending = true;
-        this.rest.delete(`${this.getRollcallApi(week, day, section)}/${student.rollcall.id}`).switchMap(() => {
-            student.pending = false;
-            student.rollcall = null;
-            return this.loadAttendance(week, day, section, student.id);
-        }).subscribe(result => {
-            student.attendances = result;
-        }, error => {
-            student.pending = false;
-        });
+    delete(week: number, day: number, section: number, id: number): Observable<{attendances: number[]}> {
+        return this.rest.delete(`${this.getRollcallApi(week, day, section)}/${id}`);
     }
 
     updateSettings(settings: RollcallSettings): Observable<void> {
@@ -94,10 +52,6 @@ export class RollcallFormService {
 
     private getRollcallApi(week: number, day: number, section: number): string {
         return `${this.api.item(day * 100 + section)}/weeks/${week}/rollcalls`;
-    }
-
-    private getAttendanceApi(week: number, day: number, section: number): string {
-        return `${this.api.item(day * 100 + section)}/weeks/${week}/attendances`;
     }
 
     private getSettingApi(): string {

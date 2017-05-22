@@ -3,7 +3,8 @@ import {ActivatedRoute, Router, RouterState} from '@angular/router';
 
 import {Subject} from 'rxjs/Subject';
 
-import {Attendance, CourseClass, Student} from './list.model';
+import {RollcallDetail, Student, StudentLeaveDetail} from '../shared/attendance.model';
+import {CourseClass} from './list.model';
 import {CourseClassListMainService} from './main.service';
 
 @Component({
@@ -33,8 +34,8 @@ export class CourseClassListComponent {
             subject.next();
         } else {
             this.service.getStudentAttendances(this.courseClass.id, student.id).subscribe(dto => {
-                student.rollcalls = dto.filter((it: any) => it.type !== 4).map((a: any) => new Attendance(a));
-                student.leaves = dto.filter((it: any) => it.type === 4).map((a: any) => new Attendance(a));
+                student.rollcalls = dto.rollcalls.map((a: any) => new RollcallDetail(a));
+                student.leaves = dto.studentLeaves.map((a: any) => new StudentLeaveDetail(a));
                 subject.next();
             });
         }

@@ -1,12 +1,10 @@
-<ng-container *ngIf="loaded">
+<ng-container *ngIf="student">
     <section>
         <h5>考勤情况</h5>
-        <ul *ngIf="rollcalls.length > 0; else emptyRollcall">
-            <li *ngFor="let item of rollcalls">
-                <span [class.invalid]="!item.valid">
-                    第{{item.week}}周 {{item.dayOfWeek | dayOfWeek}} {{item | sectionRange}} {{item.course}} / {{item.teacher}}
-                </span>
-                <label *ngFor="let label of getLabels(item.type)" class="badge badge-{{label.class}}">{{label.text}}</label>
+        <ul class="list-unstyled" *ngIf="student.rollcalls.length > 0; else emptyRollcall">
+            <li *ngFor="let item of student.rollcalls">
+                <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
+                <span [class.invalid]="item.freeListen || item.studentLeave">{{item}}</span>
                 <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListen}}" target="_blank">免听</a>
                 <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeave}}" target="_blank">请假</a>
             </li>
@@ -17,11 +15,10 @@
     </section>
     <section>
         <h5>请假情况</h5>
-        <ul *ngIf="leaves.length > 0; else emptyLeave">
-            <li *ngFor="let item of leaves">
-                <span [class.invalid]="!item.valid">
-                    第{{item.week}}周 {{item.dayOfWeek | dayOfWeek}} {{item | sectionRange}} {{item.course}} / {{item.teacher}}
-                </span>
+        <ul class="list-unstyled" *ngIf="student.leaves.length > 0; else emptyLeave">
+            <li *ngFor="let item of student.leaves">
+                <label class="badge badge-default">{{item.label}}</label>
+                <span [class.invalid]="item.freeListen">{{item}}</span>
                 <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListen}}" target="_blank">免听</a>
                 <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeave}}" target="_blank">请假</a>
             </li>

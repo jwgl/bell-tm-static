@@ -35,7 +35,6 @@ export class RollcallFormEditorComponent implements OnInit {
             const day = parseInt(params['day'], 10);
             const section = parseInt(params['section'], 10);
 
-            const weekChangedOnly = this.week !== week && this.day === day && this.section === section;
             this.week = week;
             this.day = day;
             this.section = section;
@@ -46,20 +45,13 @@ export class RollcallFormEditorComponent implements OnInit {
             this.activeSchedule = this.weekSchedules.find(s => s.dayOfWeek === this.day && s.startSection === this.section);
             this.weeks = _.range(this.activeSchedule.startWeek, this.activeSchedule.endWeek + 1)
                           .filter(w => matchOddEven(this.activeSchedule.oddEven, w));
-            this.loadData(weekChangedOnly);
+            this.loadData();
         });
     }
 
-    loadData(weekChangedOnly: boolean) {
+    loadData() {
         return this.service.loadRollcalls(this.week, this.day, this.section).subscribe(dto => {
-            if (weekChangedOnly) {
-                this.rollcallForm.update(dto);
-            } else {
-                this.rollcallForm = new RollcallForm(dto, this.service.settings);
-                this.service.loadAttendances(this.week, this.day, this.section).subscribe(stats => {
-                    this.rollcallForm.setAttendanceStats(stats);
-                });
-            }
+            this.rollcallForm = new RollcallForm(dto, this.service.settings);
         });
     }
 
@@ -74,13 +66,41 @@ export class RollcallFormEditorComponent implements OnInit {
         const result: ToggleResult = student.toggle(type);
         switch (result.op) {
             case 'insert':
-                this.service.create(this.week, this.day, this.section, student, result.type);
+                student.pending = true;
+                this.service.create(this.week, this.day, this.section, {
+                    week: this.week,
+                    taskScheduleId: student.taskScheduleId,
+                    studentId: student.id,
+                    type: result.type,
+                }).subscribe(res => {
+                    student.pending = false;
+                    student.rollcall = new Rollcall({id: res.id, studentId: student.id, type});
+                    student.attendances = res.attendances;
+                }, error => {
+                    student.pending = false;
+                });
                 break;
             case 'update':
-                this.service.update(this.week, this.day, this.section, student, result.type);
+                student.pending = true;
+                this.service.update(this.week, this.day, this.section, student.rollcall.id, {
+                    type: result.type,
+                }).subscribe(res => {
+                    student.pending = false;
+                    student.rollcall.type = type;
+                    student.attendances = res.attendances;
+                }, error => {
+                    student.pending = false;
+                });
                 break;
             case 'delete':
-                this.service.delete(this.week, this.day, this.section, student);
+                student.pending = true;
+                this.service.delete(this.week, this.day, this.section, student.rollcall.id).subscribe(res => {
+                    student.pending = false;
+                    student.rollcall = null;
+                    student.attendances = res.attendances;
+                }, error => {
+                    student.pending = false;
+                });
                 break;
         }
     }

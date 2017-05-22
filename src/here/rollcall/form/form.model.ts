@@ -163,8 +163,8 @@ export interface RollcallFormDto {
     leaves: StudentLeaveDto[];
     freeListens: FreeListenDto[];
     cancelExams: CancelExamDto[];
-    randomFactors: {[key: string]: number};
     locked: boolean;
+    attendances: {[key: string]: number[]};
 }
 
 export interface ToggleResult {
@@ -218,7 +218,6 @@ export class RollcallForm {
     settings: RollcallSettings;
     locked: boolean;
     visibleStudents: Student[] = [];
-    randomFactors: {[key: string]: number};
 
     summaryCounter = {
         total: 0,
@@ -235,7 +234,6 @@ export class RollcallForm {
     constructor(dto: RollcallFormDto, settings: RollcallSettings) {
         this.settings = settings;
         this.locked = dto.locked;
-        this.randomFactors = dto.randomFactors;
 
         dto.students.forEach((s, index) => {
             const student = new Student(index + 1, s);
@@ -277,11 +275,9 @@ export class RollcallForm {
             student.absence = new CancelExam(it);
         });
         this.summaryCounter.cancel = dto.cancelExams.length;
-    }
 
-    setAttendanceStats(attendances: {[key: string]: number[]}) {
-        Object.keys(attendances).forEach(studentId => {
-            this.studentsMap[studentId].attendances = attendances[studentId];
+        Object.keys(dto.attendances).forEach(studentId => {
+            this.studentsMap[studentId].attendances = dto.attendances[studentId];
         });
     }
 
@@ -348,10 +344,6 @@ export class RollcallForm {
         const random = this.settings.random;
         const normalStudents = this.students.filter(student => !student.absence);
 
-        if (!this.randomFactors) {
-            return;
-        }
-
         if (random < 10 || random > 90) {
             normalStudents.forEach(student => student.visible = true);
             return;
@@ -360,10 +352,10 @@ export class RollcallForm {
         // 统计迟到旷课早退次数,清除之前的随机
         const randomFactors: number[] = [];
         normalStudents.forEach((student, index) => {
-            if (this.randomFactors[student.id]) {
-                randomFactors[index] = this.randomFactors[student.id];
-            }  else {
-                randomFactors[index] = 0;
+            if (student.rollcall) {
+                randomFactors[index] = Number.MAX_VALUE;
+            } else {
+                randomFactors[index] = student.attendances[0] + student.attendances[1] + student.attendances[2];
             }
             student.visible = true;
         });

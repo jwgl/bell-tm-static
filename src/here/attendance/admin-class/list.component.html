@@ -1,0 +1,68 @@
+<ng-container *ngIf="students">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">导出</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" download href="{{statisUrl}}">统计数据</a>
+                <a class="dropdown-item" download href="{{detailUrl}}">明细数据</a>
+            </div>
+        </div>
+    </div>
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>班级</th>
+                <th>旷课</th>
+                <th>迟到</th>
+                <th>早退</th>
+                <th>折合</th>
+                <th>请假</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let student of students; let i = index">
+                <tr [ngClass]="e.expended ? 'table-active' : ''" (dblclick)="e.click()">
+                    <td><expend #e (toggle)="toggle($event, student)" [enabled]="true"></expend></td>
+                    <td>{{i + 1}}</td>
+                    <td>{{student.id}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.adminClass}}</td>
+                    <td>{{student.absent}}</td>
+                    <td>{{student.late}}</td>
+                    <td>{{student.early}}</td>
+                    <td>{{student.total}}</td>
+                    <td>{{student.leave}}</td>
+                </tr>
+                <tr *ngIf="e.expended" class="table-info">
+                    <td colspan="2"></td>
+                    <td colspan="9">
+                        <section *ngIf="student.rollcalls && student.rollcalls.length > 0">
+                            <h6>考勤情况</h6>
+                            <ul class="list-unstyled mb-2">
+                                <li *ngFor="let item of student.rollcalls">
+                                    <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
+                                    <span [class.invalid]="item.freeListen || item.studentLeave">{{item}}</span>
+                                    <span *ngIf="item.freeListen">免听</span>
+                                </li>
+                            </ul>
+                        </section>
+                        <section *ngIf="student.leaves && student.leaves.length > 0">
+                            <h6>请假情况</h6>
+                            <ul class="list-unstyled mb-2">
+                                <li *ngFor="let item of student.leaves">
+                                    <a class="badge badge-default" href="leaves/{{item.studentLeave}}" target="_blank">{{item.label}}</a>
+                                    <span [class.invalid]="item.freeListen">{{item}}</span>
+                                    <span *ngIf="item.freeListen">免听</span>
+                                </li>
+                            </ul>
+                        </section>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

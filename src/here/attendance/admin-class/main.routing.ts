@@ -1,16 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {AttendanceListComponent} from './list.component';
+import {AdminClassListComponent} from './list.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: AttendanceListComponent,
-    },
-    {
-        path: 'adminClasses/:adminClassId',
-        component: AttendanceListComponent,
+        children: [
+            {path: '', redirectTo: 'all', pathMatch: 'full'},
+            {path: ':id', component: AdminClassListComponent},
+        ],
     },
 ];
 
@@ -22,4 +21,4 @@ const routes: Routes = [
         RouterModule,
     ],
 })
-export class AttendanceListMainRoutingModule {}
+export class AdminClassListMainRoutingModule {}

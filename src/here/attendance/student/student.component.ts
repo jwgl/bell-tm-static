@@ -3,6 +3,7 @@ import {Component, ElementRef} from '@angular/core';
 import {Label} from 'core/models';
 
 import {RollcallLabels, RollcallType} from '../../rollcall/form/form.model';
+import {RollcallDetail, Student, StudentLeaveDetail} from '../shared/attendance.model';
 import {AttendanceStudentMainService} from './main.service';
 
 @Component({
@@ -11,15 +12,13 @@ import {AttendanceStudentMainService} from './main.service';
     templateUrl: 'student.component.html',
 })
 export class AttendanceStudentComponent {
-    rollcalls: any[];
-    leaves: any[];
-    student: any;
-    loaded = false;
+    student: Student;
+
     constructor(private service: AttendanceStudentMainService) {
         this.service.loadList().subscribe(dto => {
-            this.loaded = true;
-            this.rollcalls = dto.list.filter((it: any) => it.type !== 4);
-            this.leaves = dto.list.filter((it: any) => it.type === 4);
+            this.student = new Student({});
+            this.student.rollcalls = dto.rollcalls.map((a: any) => new RollcallDetail(a));
+            this.student.leaves = dto.studentLeaves.map((a: any) => new StudentLeaveDetail(a));
         }, (error) => {
             if (error.status === 403) {
                 alert('无权访问。');
