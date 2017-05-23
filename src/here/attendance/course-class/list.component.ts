@@ -35,7 +35,7 @@ export class CourseClassListComponent {
         } else {
             this.service.getStudentAttendances(this.courseClass.id, student.id).subscribe(dto => {
                 student.rollcalls = dto.rollcalls.map((a: any) => new RollcallDetail(a));
-                student.leaves = dto.studentLeaves.map((a: any) => new StudentLeaveDetail(a));
+                student.leaves = dto.leaves.map((a: any) => new StudentLeaveDetail(a));
                 subject.next();
             });
         }

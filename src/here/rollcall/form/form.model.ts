@@ -157,14 +157,22 @@ class CancelExam extends Absence {
     }
 }
 
+export interface AttendanceDto {
+    id: string;
+    absent: number;
+    late: number;
+    early: number;
+    leave: number;
+}
+
 export interface RollcallFormDto {
     students: any[];
     rollcalls: RollcallDto[];
     leaves: StudentLeaveDto[];
     freeListens: FreeListenDto[];
     cancelExams: CancelExamDto[];
+    attendances: AttendanceDto[];
     locked: boolean;
-    attendances: {[key: string]: number[]};
 }
 
 export interface ToggleResult {
@@ -208,6 +216,15 @@ export class Student {
         return this.rollcall ? this.rollcall.toggle(type) : { op: 'insert', type};
     }
 
+    updateAttendances(dto: AttendanceDto) {
+        if (this.id === dto.id) {
+            this.attendances[0] = dto.absent;
+            this.attendances[1] = dto.late;
+            this.attendances[2] = dto.early;
+            this.attendances[3] = dto.leave;
+        }
+    }
+
     get rollcallType(): RollcallType {
         return this.rollcall ? this.rollcall.type : RollcallType.None;
     }
@@ -240,18 +257,7 @@ export class RollcallForm {
             this.studentsMap[student.id] = student;
             this.students.push(student);
         });
-
         this.summaryCounter.total = this.students.length;
-
-        this.update(dto);
-        this.applySettings();
-    }
-
-    update(dto: RollcallFormDto) {
-        this.students.forEach(it => {
-            it.rollcall = null;
-            it.absence = null;
-        });
 
         dto.rollcalls.forEach(it => {
             const student = this.studentsMap[it.studentId];
@@ -276,9 +282,9 @@ export class RollcallForm {
         });
         this.summaryCounter.cancel = dto.cancelExams.length;
 
-        Object.keys(dto.attendances).forEach(studentId => {
-            this.studentsMap[studentId].attendances = dto.attendances[studentId];
-        });
+        dto.attendances.forEach(it => this.studentsMap[it.id].updateAttendances(it));
+
+        this.applySettings();
     }
 
     activateNext(step = 1): void {

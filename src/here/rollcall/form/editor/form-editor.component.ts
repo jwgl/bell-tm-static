@@ -74,8 +74,8 @@ export class RollcallFormEditorComponent implements OnInit {
                     type: result.type,
                 }).subscribe(res => {
                     student.pending = false;
-                    student.rollcall = new Rollcall({id: res.id, studentId: student.id, type});
-                    student.attendances = res.attendances;
+                    student.rollcall = new Rollcall({id: res.id, studentId: student.id, type: result.type});
+                    student.updateAttendances(res.attendances);
                 }, error => {
                     student.pending = false;
                 });
@@ -86,8 +86,8 @@ export class RollcallFormEditorComponent implements OnInit {
                     type: result.type,
                 }).subscribe(res => {
                     student.pending = false;
-                    student.rollcall.type = type;
-                    student.attendances = res.attendances;
+                    student.rollcall.type = result.type;
+                    student.updateAttendances(res.attendances);
                 }, error => {
                     student.pending = false;
                 });
@@ -97,7 +97,7 @@ export class RollcallFormEditorComponent implements OnInit {
                 this.service.delete(this.week, this.day, this.section, student.rollcall.id).subscribe(res => {
                     student.pending = false;
                     student.rollcall = null;
-                    student.attendances = res.attendances;
+                    student.updateAttendances(res.attendances);
                 }, error => {
                     student.pending = false;
                 });

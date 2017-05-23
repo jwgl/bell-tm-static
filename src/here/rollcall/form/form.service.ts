@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {ApiUrl, Rest} from 'core/rest';
 
 import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model';
-import {Rollcall, RollcallSettings, RollcallType, Student} from './form.model';
+import {AttendanceDto, Rollcall, RollcallSettings, RollcallType, Student} from './form.model';
 
 @Injectable()
 export class RollcallFormService {
@@ -23,15 +23,15 @@ export class RollcallFormService {
         return this.rest.get(this.getRollcallApi(week, day, section));
     }
 
-    create(week: number, day: number, section: number, data: object): Observable<{id: number, attendances: number[]}> {
+    create(week: number, day: number, section: number, data: object): Observable<{id: number, attendances: AttendanceDto}> {
         return this.rest.post(this.getRollcallApi(week, day, section), data);
     }
 
-    update(week: number, day: number, section: number, id: number, data: object): Observable<{attendances: number[]}> {
+    update(week: number, day: number, section: number, id: number, data: object): Observable<{attendances: AttendanceDto}> {
         return this.rest.put(`${this.getRollcallApi(week, day, section)}/${id}`, data);
     }
 
-    delete(week: number, day: number, section: number, id: number): Observable<{attendances: number[]}> {
+    delete(week: number, day: number, section: number, id: number): Observable<{attendances: AttendanceDto}> {
         return this.rest.delete(`${this.getRollcallApi(week, day, section)}/${id}`);
     }
 

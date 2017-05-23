@@ -6,6 +6,7 @@ import {RollcallLabels, RollcallType} from '../../rollcall/form/form.model';
 
 /* tslint:disable:max-classes-per-file */
 abstract class AttendanceDetail {
+    id: number;
     week: number;
     dayOfWeek: number;
     course: string;
@@ -14,10 +15,11 @@ abstract class AttendanceDetail {
     startSection: number;
     totalSection: number;
     valid: boolean;
-    studentLeave: number;
-    freeListen: number;
+    studentLeaveFormId: number;
+    freeListenFormId: number;
 
     constructor(dto: any) {
+        this.id = dto.id;
         this.week = dto.week;
         this.dayOfWeek = dto.dayOfWeek;
         this.course = dto.course;
@@ -26,9 +28,11 @@ abstract class AttendanceDetail {
         this.startSection = dto.startSection;
         this.totalSection = dto.totalSection;
         this.valid = dto.valid;
-        this.studentLeave = dto.studentLeave;
-        this.freeListen = dto.freeListen;
+        this.studentLeaveFormId = dto.studentLeaveFormId;
+        this.freeListenFormId = dto.freeListenFormId;
     }
+
+    abstract get invalid(): boolean;
 
     toString(): string {
         return `第${this.week}周 星期${dayOfWeekText(this.dayOfWeek)} ${sectionRangeText(this)} / ${this.course}` +
@@ -49,6 +53,9 @@ export class RollcallDetail extends AttendanceDetail {
         return RollcallLabels[this.type];
     }
 
+    get invalid(): boolean {
+        return !!this.freeListenFormId || !!this.studentLeaveFormId;
+    }
 }
 
 export class StudentLeaveDetail extends AttendanceDetail {
@@ -61,6 +68,10 @@ export class StudentLeaveDetail extends AttendanceDetail {
 
     get label(): string {
         return LeaveTypeNames[this.type];
+    }
+
+    get invalid(): boolean {
+        return !!this.freeListenFormId;
     }
 }
 

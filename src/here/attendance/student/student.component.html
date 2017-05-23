@@ -4,9 +4,9 @@
         <ul class="list-unstyled" *ngIf="student.rollcalls.length > 0; else emptyRollcall">
             <li *ngFor="let item of student.rollcalls">
                 <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
-                <span [class.invalid]="item.freeListen || item.studentLeave">{{item}}</span>
-                <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListen}}" target="_blank">免听</a>
-                <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeave}}" target="_blank">请假</a>
+                <span [class.invalid]="item.invalid">{{item}}</span>
+                <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListenFormId}}" target="_blank">免听</a>
+                <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeaveFormId}}" target="_blank">请假</a>
             </li>
         </ul>
         <ng-template #emptyRollcall>
@@ -19,8 +19,8 @@
             <li *ngFor="let item of student.leaves">
                 <label class="badge badge-default">{{item.label}}</label>
                 <span [class.invalid]="item.freeListen">{{item}}</span>
-                <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListen}}" target="_blank">免听</a>
-                <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeave}}" target="_blank">请假</a>
+                <a *ngIf="item.freeListen" href="./freeListens/#{{item.freeListenFormId}}" target="_blank">免听</a>
+                <a *ngIf="item.studentLeave" href="./leaves/#{{item.studentLeaveFormId}}" target="_blank">请假</a>
             </li>
         </ul>
         <ng-template #emptyLeave>

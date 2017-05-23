@@ -68,8 +68,8 @@
                             <ul class="list-unstyled mb-2">
                                 <li *ngFor="let item of student.rollcalls">
                                     <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
-                                    <span [class.invalid]="item.freeListen || item.studentLeave">{{item}}</span>
-                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                                    <span [class.invalid]="item.invalid">{{item}}</span>
+                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListenFormId}}" target="_blank">免听</a>
                                 </li>
                             </ul>
                         </section>
@@ -77,9 +77,9 @@
                             <h6>请假情况</h6>
                             <ul class="list-unstyled mb-2">
                                 <li *ngFor="let item of student.leaves">
-                                    <a class="badge badge-default" href="../../leaves/{{item.studentLeave}}" target="_blank">{{item.label}}</a>
+                                    <a class="badge badge-default" href="../../leaves/{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
                                     <span [class.invalid]="item.freeListen">{{item}}</span>
-                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListen}}" target="_blank">免听</a>
+                                    <a *ngIf="item.freeListen" href="../../freeListens/{{item.freeListenFormId}}" target="_blank">免听</a>
                                 </li>
                             </ul>
                         </section>

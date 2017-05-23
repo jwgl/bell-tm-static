@@ -18,7 +18,7 @@ export class AttendanceStudentComponent {
         this.service.loadList().subscribe(dto => {
             this.student = new Student({});
             this.student.rollcalls = dto.rollcalls.map((a: any) => new RollcallDetail(a));
-            this.student.leaves = dto.studentLeaves.map((a: any) => new StudentLeaveDetail(a));
+            this.student.leaves = dto.leaves.map((a: any) => new StudentLeaveDetail(a));
         }, (error) => {
             if (error.status === 403) {
                 alert('无权访问。');
