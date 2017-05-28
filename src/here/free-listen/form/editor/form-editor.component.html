@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label>免听项目</label>
-                        <simple-schedule [schedules]="schedules">
+            <simple-schedule [schedules]="schedules">
                 <ng-template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
                     <button class="btn w-100"
                             [ngClass]="scheduleClass(schedule)"

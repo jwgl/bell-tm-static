@@ -1,7 +1,7 @@
 <tabed-schedule *ngIf="schedules" [term]="term" [schedules]="schedules">
-    <ng-template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section">
+    <ng-template #scheduleTpl let-schedule="schedule" let-week="week", let-day="day" let-section="section" let-count="count">
         <button class="btn btn-secondary w-100"
-                [style.height]="count > 1 ? 'inherit' : '100%'"
+                [style.height]="count > 1 ? null : '100%'"
                 [routerLink]="['/week', week, 'day',  day, 'section', section, service.viewType]">
             {{schedule.course}}<ng-container *ngIf="schedule.courseItem"> 【{{schedule.courseItem}}】</ng-container><br>
             {{schedule.startWeek}}-{{schedule.endWeek}}{{schedule.oddEven | oddEven}}周<br>
