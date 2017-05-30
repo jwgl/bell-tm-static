@@ -65,7 +65,7 @@
                     <td>
                         <button *ngIf="student.showDisqual"
                                 class="btn btn-sm"
-                                [ngClass]="student.getDisqualButtonClass()"
+                                [ngClass]="student.disqualifyButtonClass"
                                 (click)="disqualify(student)">
                                 {{student.disqualified ? '恢复' : '取消'}}
                         </button>
