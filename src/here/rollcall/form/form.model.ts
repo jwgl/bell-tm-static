@@ -140,23 +140,6 @@ class FreeListen extends Absence {
     }
 }
 
-interface CancelExamDto extends AbsenceDto {}
-
-class CancelExam extends Absence {
-    id: number;
-    constructor(dto: CancelExamDto) {
-        super(dto.id);
-    }
-
-    get label(): string {
-        return '取消考试';
-    }
-
-    get url(): string {
-        return 'cancelExams';
-    }
-}
-
 export interface AttendanceDto {
     id: string;
     absent: number;
@@ -170,7 +153,6 @@ export interface RollcallFormDto {
     rollcalls: RollcallDto[];
     leaves: StudentLeaveDto[];
     freeListens: FreeListenDto[];
-    cancelExams: CancelExamDto[];
     attendances: AttendanceDto[];
     locked: boolean;
 }
@@ -187,6 +169,7 @@ export class Student {
     taskScheduleId: string;
     adminClass: string;
     subject: string;
+    disqualified: boolean;
     attendances: number[];
     rollcall: Rollcall;
     absence: Absence;
@@ -200,6 +183,7 @@ export class Student {
         this.taskScheduleId = dto.taskScheduleId;
         this.adminClass = dto.adminClass;
         this.subject = dto.subject;
+        this.disqualified = dto.disqualified;
         this.attendances = [0, 0, 0, 0];
     }
 
@@ -252,8 +236,12 @@ export class RollcallForm {
         this.settings = settings;
         this.locked = dto.locked;
 
+        this.summaryCounter.cancel = 0;
         dto.students.forEach((s, index) => {
             const student = new Student(index + 1, s);
+            if (student.disqualified) {
+                this.summaryCounter.cancel++;
+            }
             this.studentsMap[student.id] = student;
             this.students.push(student);
         });
@@ -275,12 +263,6 @@ export class RollcallForm {
             student.absence = new FreeListen(it);
         });
         this.summaryCounter.free = dto.freeListens.length;
-
-        dto.cancelExams.forEach(it => {
-            const student = this.studentsMap[it.studentId];
-            student.absence = new CancelExam(it);
-        });
-        this.summaryCounter.cancel = dto.cancelExams.length;
 
         dto.attendances.forEach(it => this.studentsMap[it.id].updateAttendances(it));
 
@@ -331,7 +313,7 @@ export class RollcallForm {
 
     applySettings(): void {
         this.students.forEach(student => {
-            if (student.absence instanceof CancelExam) {
+            if (student.disqualified) {
                 student.visible = !this.settings.hideCancel;
             } else if (student.absence instanceof FreeListen) {
                 student.visible = !this.settings.hideFree;

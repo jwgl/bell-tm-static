@@ -28,3 +28,18 @@ td {
         text-align: right;
     }
 }
+
+td, th {
+    &:nth-child(12) {
+        width: 3rem;
+        text-align: center;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        vertical-align: middle;
+    }
+
+    .btn-sm {
+        vertical-align: inherit;
+        line-height: 1rem;
+    }
+}

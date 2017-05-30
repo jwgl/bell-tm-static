@@ -22,9 +22,6 @@ export class CourseClassListComponent {
         this.route.params.subscribe(params => {
             this.service.loadItem(params['id']).subscribe(dto => {
                 this.courseClass = new CourseClass(dto);
-                this.service.getCourseClassStats(this.courseClass.id).subscribe(stats => {
-                    this.courseClass.setStats(stats);
-                });
             });
         });
     }
@@ -39,6 +36,12 @@ export class CourseClassListComponent {
                 subject.next();
             });
         }
+    }
+
+    disqualify(student: Student): void {
+        this.service.disqualify(this.courseClass.id, student.id, student.disqualified).subscribe(dto => {
+            student.disqualified = !student.disqualified;
+        });
     }
 
     get webUrl() {

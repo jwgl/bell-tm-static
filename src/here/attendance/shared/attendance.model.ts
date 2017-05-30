@@ -78,39 +78,24 @@ export class StudentLeaveDetail extends AttendanceDetail {
 export class Student {
     id: string;
     name: string;
-    subject: string;
     adminClass: string;
     rollcalls: RollcallDetail[];
     leaves: StudentLeaveDetail[];
-    absent = 0;
-    late = 0;
-    early = 0;
-    total = 0;
-    leave = 0;
+    absent: number;
+    late: number;
+    early: number;
+    total: number;
+    leave: number;
 
     constructor(dto: any) {
         this.id = dto.id;
         this.name = dto.name;
         this.subject = dto.subject;
         this.adminClass = dto.adminClass;
-        if (dto.absent) {
-            this.absent = dto.absent;
-        }
-        if (dto.late) {
-            this.late = dto.late;
-        }
-        if (dto.early) {
-            this.early = dto.early;
-        }
-        if (dto.total) {
-            this.total = dto.total;
-        }
-        if (dto.leave) {
-            this.leave = dto.leave;
-        }
-    }
-
-    get hasDetails(): boolean {
-        return this.total !== 0 || this.leave !== 0;
+        this.absent = dto.absent ? dto.absent : 0;
+        this.late = dto.late ? dto.late : 0;
+        this.early = dto.early ? dto.early : 0;
+        this.total = dto.total ? dto.total : 0;
+        this.leave = dto.leave ? dto.leave : 0;
     }
 }

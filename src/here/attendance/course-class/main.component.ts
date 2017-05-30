@@ -16,7 +16,9 @@ export class CourseClassListMainComponent {
     ) {
         this.service.loadList().subscribe(dto => {
             this.courseClasses = dto;
-            this.router.navigate([this.courseClasses[0].id]);
+            if (this.router.url === '/') {
+                this.router.navigate([this.courseClasses[0].id]);
+            }
         });
     }
 }

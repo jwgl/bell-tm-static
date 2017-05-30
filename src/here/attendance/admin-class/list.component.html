@@ -46,7 +46,7 @@
                                 <li *ngFor="let item of student.rollcalls">
                                     <label *ngFor="let label of item.labels" class="badge badge-{{label.class}}">{{label.text}}</label>
                                     <span [class.invalid]="item.invalid">{{item}}</span>
-                                    <span *ngIf="item.freeListen">免听</span>
+                                    <label *ngIf="item.freeListenFormId" class="badge badge-success">免听</label>
                                 </li>
                             </ul>
                         </section>
@@ -55,8 +55,8 @@
                             <ul class="list-unstyled mb-2">
                                 <li *ngFor="let item of student.leaves">
                                     <a class="badge badge-default" href="leaves/{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
-                                    <span [class.invalid]="item.freeListen">{{item}}</span>
-                                    <span *ngIf="item.freeListen">免听</span>
+                                    <span [class.invalid]="item.invalid">{{item}}</span>
+                                    <label *ngIf="item.freeListenFormId" class="badge badge-success">免听</label>
                                 </li>
                             </ul>
                         </section>
