@@ -40,7 +40,11 @@ export class CourseClassListComponent {
 
     disqualify(student: Student): void {
         this.service.disqualify(this.courseClass.id, student.id, student.disqualified).subscribe(dto => {
-            student.disqualified = !student.disqualified;
+            if (dto.result) {
+                student.disqualified = !student.disqualified;
+            } else {
+                alert('无法处理，请与学院教务秘书联系。');
+            }
         });
     }
 
