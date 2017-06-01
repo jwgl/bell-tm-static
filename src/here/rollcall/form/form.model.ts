@@ -175,6 +175,7 @@ export class Student {
     absence: Absence;
     visible = true;
     pending = false;
+    randomFactor: number;
 
     constructor(index: number, dto: any) {
         this.index = index;
@@ -224,7 +225,6 @@ export class RollcallForm {
         total: 0,
         free: 0,
         leave: 0,
-        cancel: 0,
         visible: 0,
     };
 
@@ -236,12 +236,8 @@ export class RollcallForm {
         this.settings = settings;
         this.locked = dto.locked;
 
-        this.summaryCounter.cancel = 0;
         dto.students.forEach((s, index) => {
             const student = new Student(index + 1, s);
-            if (student.disqualified) {
-                this.summaryCounter.cancel++;
-            }
             this.studentsMap[student.id] = student;
             this.students.push(student);
         });
@@ -313,6 +309,7 @@ export class RollcallForm {
 
     applySettings(): void {
         this.students.forEach(student => {
+            student.visible = true;
             if (student.disqualified) {
                 student.visible = !this.settings.hideCancel;
             } else if (student.absence instanceof FreeListen) {
@@ -330,34 +327,36 @@ export class RollcallForm {
 
     private hideRandom() {
         const random = this.settings.random;
-        const normalStudents = this.students.filter(student => !student.absence);
-
         if (random < 10 || random > 90) {
-            normalStudents.forEach(student => student.visible = true);
             return;
         }
 
-        // 统计迟到旷课早退次数,清除之前的随机
-        const randomFactors: number[] = [];
-        normalStudents.forEach((student, index) => {
-            if (student.rollcall) {
-                randomFactors[index] = Number.MAX_VALUE;
-            } else {
-                randomFactors[index] = student.attendances[0] + student.attendances[1] + student.attendances[2];
+        const visibleStudents = this.students.filter(s => s.visible);
+        // 本次有考勤的学生全部显示
+        let minimumCount = 0;
+        for (let i = visibleStudents.length - 1; i >= 0; i--) {
+            if (visibleStudents[i].rollcall) {
+                visibleStudents.splice(i, 1);
+                minimumCount++;
             }
-            student.visible = true;
+        }
+
+        // 统计迟到旷课早退次数,清除之前的随机
+        visibleStudents.forEach(student => {
+            student.randomFactor = student.attendances[0] + student.attendances[1] + student.attendances[2];
         });
 
         // 随机选择，统计减1，达到-1则隐藏
-        const total = normalStudents.length;
-        let numberToHide = (100 - random) / 100 * total;
-        while (numberToHide > 0) {
-            const index = Math.floor(Math.random() * total);
-            if (randomFactors[index] > -1) {
-                randomFactors[index]--;
-                if (randomFactors[index] === -1) {
-                    normalStudents[index].visible = false;
-                    numberToHide--;
+        const randomCount = random / 100 * this.students.length - minimumCount;
+        const visibleCount = randomCount >= 0 ? randomCount : 0;
+        while (visibleStudents.length > visibleCount) {
+            const index = Math.floor(Math.random() * visibleStudents.length);
+            const randomStudent = visibleStudents[index];
+            if (randomStudent.randomFactor > -1) {
+                randomStudent.randomFactor--;
+                if (randomStudent.randomFactor === -1) {
+                    randomStudent.visible = false;
+                    visibleStudents.splice(index, 1);
                 }
             }
         }

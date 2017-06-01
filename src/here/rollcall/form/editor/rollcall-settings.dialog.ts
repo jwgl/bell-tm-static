@@ -44,9 +44,8 @@ export class RollcallSettingsDialog extends BaseDialog {
             if (this.options.random !== undefined) {
                 this.random = this.options.random;
             }
-            if (this.random === 100) {
-                this._randomEnabled = false;
-            }
+
+            this._randomEnabled = this.random >= 10 && this.random <= 90;
         }
         return null;
     }
