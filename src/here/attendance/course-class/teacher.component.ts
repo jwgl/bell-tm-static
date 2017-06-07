@@ -1,21 +1,21 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {CourseClassListMainService} from './main.service';
+import {CourseClassAttendanceService} from './course-class.service';
 
 @Component({
     selector: 'course-class-list-container',
-    templateUrl: 'main.component.html',
+    templateUrl: 'teacher.component.html',
 })
-export class CourseClassListMainComponent {
+export class TeacherCourseClassComponent {
     courseClasses: any;
 
     constructor(
         private router: Router,
-        private service: CourseClassListMainService,
+        private service: CourseClassAttendanceService,
     ) {
-        this.service.loadList().subscribe(dto => {
-            this.courseClasses = dto;
+        this.service.loadCourseClasses().subscribe(courseClasses => {
+            this.courseClasses = courseClasses;
             if (this.router.url === '/') {
                 this.router.navigate([this.courseClasses[0].id]);
             }

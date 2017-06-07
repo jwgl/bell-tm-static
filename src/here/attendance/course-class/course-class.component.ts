@@ -4,23 +4,28 @@ import {ActivatedRoute, Router, RouterState} from '@angular/router';
 import {Subject} from 'rxjs/Subject';
 
 import {RollcallDetail, Student, StudentLeaveDetail} from '../shared/attendance.model';
-import {CourseClass} from './list.model';
-import {CourseClassListMainService} from './main.service';
+import {CourseClass} from './course-class.model';
+import {CourseClassAttendanceService} from './course-class.service';
 
 @Component({
-    styleUrls: ['list.component.scss'],
-    templateUrl: 'list.component.html',
+    styleUrls: ['course-class.component.scss'],
+    templateUrl: 'course-class.component.html',
 })
-export class CourseClassListComponent {
+export class CourseClassAttendanceComponent {
     courseClass: CourseClass;
+    isAdmin = false;
 
     constructor(
-        private service: CourseClassListMainService,
+        private service: CourseClassAttendanceService,
         private router: Router,
         private route: ActivatedRoute,
     ) {
         this.route.params.subscribe(params => {
-            this.service.loadItem(params['id']).subscribe(dto => {
+            if (params['teacherId']) {
+                this.service.teacherId = params['teacherId'];
+                this.isAdmin = true;
+            }
+            this.service.loadCourseClass(params['id']).subscribe(dto => {
                 this.courseClass = new CourseClass(dto);
             });
         });
@@ -42,7 +47,11 @@ export class CourseClassListComponent {
         this.service.disqualify(this.courseClass.id, student.id, student.disqualified).subscribe(dto => {
             student.disqualified = !student.disqualified;
         }, error => {
-            alert(`${error.json().message}，请与学院教务秘书联系。`);
+            if (this.isAdmin) {
+                alert(`${error.json().message}。`);
+            } else {
+                alert(`${error.json().message}，请与学院教务秘书联系。`);
+            }
         });
     }
 

@@ -50,7 +50,7 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let student of courseClass.students; let i = index">
-                <tr [ngClass]="e.expended ? 'table-active' : ''" (dblclick)="e.click()">
+                <tr [ngClass]="student.disqualified ? 'table-danger' : e.expended ? 'table-active' : ''" (dblclick)="e.click()">
                     <td><expend #e (toggle)="toggle($event, student)" [enabled]="student.showDetails"></expend></td>
                     <td>{{i + 1}}</td>
                     <td>{{student.id}}</td>
@@ -63,7 +63,7 @@
                     <td>{{student.total}}</td>
                     <td>{{student.leave}}</td>
                     <td>
-                        <button *ngIf="student.showDisqual"
+                        <button *ngIf="isAdmin || student.showDisqual"
                                 class="btn btn-sm"
                                 [ngClass]="student.disqualifyButtonClass"
                                 (click)="disqualify(student)">
@@ -99,13 +99,13 @@
                             <p *ngIf="student.rollcallOverflow || student.leaveOverflow; else qualify">
                                 <span *ngIf="student.rollcallOverflow">旷课节数超过总学时的1/{{courseClass.rollcallDisqualRatio}}，</span>
                                 <span *ngIf="student.leaveOverflow">请假节数超过总学时的1/{{courseClass.leaveDisqualRatio}}，</span>
-                                考试资格{{student.disqualified ? '已' : '未'}}取消。
+                                {{student.disqualified ? '已' : '可'}}考试资格取消。
                             </p>
                             <ng-template #qualify>
                                 <p>
                                   旷课节数未超过总学时的1/{{courseClass.rollcallDisqualRatio}}，
                                   请假节数未超过总学时的1/{{courseClass.leaveDisqualRatio}}，
-                                  可恢复考试资格。
+                                  {{student.disqualified ? '可' : '未'}}恢复考试资格。
                                 </p>
                             </ng-template>
                         </section>

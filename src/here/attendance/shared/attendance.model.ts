@@ -90,7 +90,6 @@ export class Student {
     constructor(dto: any) {
         this.id = dto.id;
         this.name = dto.name;
-        this.subject = dto.subject;
         this.adminClass = dto.adminClass;
         this.absent = dto.absent ? dto.absent : 0;
         this.late = dto.late ? dto.late : 0;

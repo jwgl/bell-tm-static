@@ -327,7 +327,7 @@ export class RollcallForm {
 
     private hideRandom() {
         const random = this.settings.random;
-        if (random < 10 || random > 90) {
+        if (!random || random < 10 || random > 90) {
             return;
         }
 

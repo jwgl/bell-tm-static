@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="btn-toolbar">
+            <select class="form-control" [ngModel]="teacherId" (ngModelChange)="teacherChanged($event)">
+                <option *ngFor="let teacher of this.teachers" [ngValue]="teacher.id">{{teacher.name}}</option>
+            </select>
+        </div>
+        <div class="list-group" *ngIf="courseClasses">
+            <a class="list-group-item list-group-item-action flex-column align-items-start"
+            *ngFor="let courseClass of courseClasses"
+            [routerLink]="[teacherId, courseClass.id]"
+            routerLinkActive="active">
+            <div class="d-flex w-100 justify-content-between">
+                <p class="mb-0">{{courseClass.course}}</p>
+                <label class="badge badge-pill badge-default">{{courseClass.count}}</label>
+            </div>
+            <small class="mb-0" *ngIf="courseClass.name">{{courseClass.name}}</small>
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <router-outlet></router-outlet>
+    </div>
+</div>

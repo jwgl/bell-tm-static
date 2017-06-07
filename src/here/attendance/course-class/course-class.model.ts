@@ -25,15 +25,17 @@ Object.defineProperty(Student.prototype, 'showDisqual', {
 Object.defineProperty(Student.prototype, 'disqualifyButtonClass', {
     /* tslint:disable:object-literal-shorthand*/
     get: function(this: Student) {
-        if (this.showDetails) {
-            if (this.disqualified) {
-                if (this.rollcallOverflow || this.leaveOverflow) {
-                    return 'btn-secondary';
-                } else {
-                    return 'btn-success';
-                }
-            } else {
+        if (this.disqualified) {
+            if (this.rollcallOverflow || this.leaveOverflow) {
                 return 'btn-danger';
+            } else {
+                return 'btn-success';
+            }
+        } else {
+            if (this.rollcallOverflow || this.leaveOverflow) {
+                return 'btn-warning';
+            } else {
+                return 'btn-secondary';
             }
         }
     },
