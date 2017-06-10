@@ -20,6 +20,7 @@ module.exports = {
     'plan/scheme/approval':                    './src/plan/scheme/approval/main.ts',
     'plan/scheme/review':                      './src/plan/scheme/review/main.ts',
     'plan/scheme/department':                  './src/plan/scheme/department/main.ts',
+    'plan/scheme/admin':                       './src/plan/scheme/admin/main.ts',
     'card/reissue/approval':                   './src/card/reissue/approval/main.ts',
     'card/reissue/form':                       './src/card/reissue/form/main.ts',
     'card/reissue/item':                       './src/card/reissue/item/main.ts',

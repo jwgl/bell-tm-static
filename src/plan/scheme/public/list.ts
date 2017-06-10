@@ -12,7 +12,7 @@ import {SchemePublicService} from './public.service';
     bootstrap: [SchemePublicListComponent],
     imports: [
         BrowserModule,
-        RestModule.for('/api/plan/public/schemes'),
+        RestModule.for('/api/plan/schemes'),
         SchemePublicListModule,
     ],
     providers: [

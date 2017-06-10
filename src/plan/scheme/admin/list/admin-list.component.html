@@ -1,3 +1,13 @@
+<div class="btn-toolbar form-inline" *ngIf="departments && grades">
+    <select class="form-control mr-2" [(ngModel)]="departmentId" (ngModelChange)="onDepartmentChange($event)">
+        <option *ngFor="let department of departments" [ngValue]="department.id">{{department.name}}</option>
+    </select>
+    <select class="form-control mr-2" [(ngModel)]="grade">
+        <option [ngValue]="0">所有年级</option>
+        <option *ngFor="let grade of grades" [ngValue]="grade">{{grade}}级</option>
+    </select>
+    <button class="form-control" (click)="search()" [disabled]="!departmentId">查询</button>
+</div>
 <table class="table" *ngIf="programs">
     <thead>
         <tr>

@@ -2,18 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {Scheme} from '../../shared/scheme.model';
-import {SchemeDepartmentService} from '../main.service';
+import {SchemeAdminService} from '../main.service';
 
 @Component({
-    templateUrl: 'department-item.component.html',
+    templateUrl: 'admin-item.component.html',
 })
-export class SchemeDepartmentItemComponent implements OnInit {
+export class SchemeAdminItemComponent implements OnInit {
     vm: Scheme;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private service: SchemeDepartmentService,
+        private service: SchemeAdminService,
     ) {}
 
     ngOnInit(): void {

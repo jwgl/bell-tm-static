@@ -6,6 +6,7 @@ import {SchemeSharedModule} from '../../shared/scheme.module';
 import {SchemeCourseComponent} from './scheme-course.component';
 import {SchemeGroupComponent} from './scheme-group.component';
 import {SchemePropertyComponent} from './scheme-property.component';
+import {SchemeShowDiffButton} from './scheme-show-diff.button';
 import {SchemeSummaryComponent} from './scheme-summary.component';
 import {SchemeTableComponent} from './scheme-table.component';
 import {SchemeViewerComponent} from './scheme-viewer.component';
@@ -23,9 +24,11 @@ import {SchemeViewerComponent} from './scheme-viewer.component';
         SchemeSummaryComponent,
         SchemeTableComponent,
         SchemeViewerComponent,
+        SchemeShowDiffButton,
     ],
     exports: [
         SchemeViewerComponent,
+        SchemeShowDiffButton,
     ],
 })
 export class SchemeInternalViewerModule {}

@@ -9,9 +9,6 @@
         <div class="btn-group ml-2">
             <button [scheme-show-diff]="vm.previousId" #b="showDiff">显示变更</button>
         </div>
-        <div class="btn-group ml-2" *ngIf="vm.latest && vm.exportable">
-            <button class="btn btn-secondary" routerLink="./toes">导入教务系统</button>
-        </div>
     </div>
     <scheme-viewer [scheme]="vm" [showDiff]="b.showDiff"></scheme-viewer>
 </div>

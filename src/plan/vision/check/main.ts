@@ -30,7 +30,7 @@ import {VisionCheckListComponent} from './check-list.component';
         VisionCheckItemComponent,
     ],
     providers: [
-        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/public/schemes'},
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/schemes'},
     ],
     bootstrap: [VisionCheckComponent],
 })

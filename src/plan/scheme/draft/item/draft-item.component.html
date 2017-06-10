@@ -6,8 +6,8 @@
         <div class="btn-group ml-2">
             <button [workflow-workitems]="vm.workflowInstanceId">流程</button>
         </div>
-        <div class="btn-group ml-2" *ngIf="vm.previousId">
-            <button class="btn btn-secondary" data-toggle="button" (click)="toggleShowDiff()">{{showDiffLabel}}</button>
+        <div class="btn-group ml-2">
+            <button [scheme-show-diff]="vm.previousId" #b="showDiff">显示变更</button>
         </div>
         <div class="btn-group ml-2" *ngIf="vm.editable">
             <button class="btn btn-secondary" routerLink="edit">编辑</button>
@@ -18,5 +18,5 @@
             <button class="btn btn-primary" routerLink="revise">修订</button>
         </div>
     </div>
-    <scheme-viewer [scheme]="vm" [showDiff]="showDiff"></scheme-viewer>
+    <scheme-viewer [scheme]="vm" [showDiff]="b.showDiff"></scheme-viewer>
 </div>

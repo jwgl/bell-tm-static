@@ -1,20 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 
-import {SchemeDepartmentService} from '../department.service';
+import {SchemeDepartmentService} from '../main.service';
 
-/**
- * 部门教学计划列表。
- */
 @Component({
-    selector: 'scheme-department-list',
+    styleUrls: ['department-list.component.scss'],
     templateUrl: 'department-list.component.html',
 })
 export class SchemeDepartmentListComponent implements OnInit {
-    private schemes: any[];
+    programs: any[];
 
     constructor(private service: SchemeDepartmentService) {}
 
     ngOnInit(): void {
-        this.service.loadList().subscribe(data => this.schemes = data);
+        this.service.loadList().subscribe(programs => this.programs = programs);
     }
 }

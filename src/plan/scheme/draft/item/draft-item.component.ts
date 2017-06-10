@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
@@ -17,25 +17,23 @@ import './draft-item.model';
 @Component({
     templateUrl: 'draft-item.component.html',
 })
-export class SchemeDraftItemComponent {
+export class SchemeDraftItemComponent implements OnInit {
     vm: Scheme;
-    showDiff = false;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
         private dialog: CommonDialog,
-        private service: SchemeDraftService) {
-        this.route.params.subscribe(params => {
-            this.loadData(params['id']);
-        });
-    }
+        private service: SchemeDraftService,
+    ) {}
 
-    loadData(id: string) {
-        this.service.loadItem(id).subscribe(dto => {
-            this.vm = new Scheme(dto);
-            this.vm.editable = dto.editable;
-            this.vm.revisable = dto.revisable;
+    ngOnInit() {
+        this.route.params.subscribe(params => {
+            this.service.loadItem(params['id']).subscribe(dto => {
+                this.vm = new Scheme(dto);
+                this.vm.editable = dto.editable;
+                this.vm.revisable = dto.revisable;
+            });
         });
     }
 
@@ -49,14 +47,6 @@ export class SchemeDraftItemComponent {
 
     get title(): string {
         return `${this.vm.title}（${toVersionString(this.vm.versionNumber)}）`;
-    }
-
-    toggleShowDiff(): void {
-        this.showDiff = !this.showDiff;
-    }
-
-    get showDiffLabel(): string {
-        return this.showDiff ? '隐藏变更' : '显示变更';
     }
 
     get submitOptions(): SubmitOptions {

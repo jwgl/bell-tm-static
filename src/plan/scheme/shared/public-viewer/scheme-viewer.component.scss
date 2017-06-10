@@ -39,6 +39,9 @@
         tr {
             &.group {
                 background-color: #fafafa;
+                .summary {
+                    white-space: normal;
+                }
             }
         }
     }

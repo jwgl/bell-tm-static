@@ -7,7 +7,7 @@ import {WorkflowModule} from 'core/workflow';
 
 import {PlanSharedModule} from '../../../shared/module';
 import {SchemeInternalViewerModule} from '../../shared/internal-viewer/scheme-viewer.module';
-import {SchemeDepartmentItemComponent} from './department-item.component';
+import {SchemeAdminItemComponent} from './admin-item.component';
 
 @NgModule({
     imports: [
@@ -19,10 +19,10 @@ import {SchemeDepartmentItemComponent} from './department-item.component';
         SchemeInternalViewerModule,
     ],
     declarations: [
-        SchemeDepartmentItemComponent,
+        SchemeAdminItemComponent,
     ],
     exports: [
-        SchemeDepartmentItemComponent,
+        SchemeAdminItemComponent,
     ],
 })
-export class SchemeDepartmentItemModule {}
+export class SchemeAdminItemModule {}

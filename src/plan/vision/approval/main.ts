@@ -32,7 +32,7 @@ import {VisionApprovalListComponent} from './approval-list.component';
         VisionApprovalItemComponent,
     ],
     providers: [
-        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/public/schemes'},
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/schemes'},
     ],
     bootstrap: [VisionApprovalComponent],
 })

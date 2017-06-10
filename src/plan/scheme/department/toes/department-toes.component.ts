@@ -5,12 +5,11 @@ import {CommonDialog} from 'core/common-dialogs';
 import {Dialog} from 'core/dialogs';
 
 import {Scheme, SchemeCourse} from '../../shared/scheme.model';
-import {SchemeDepartmentService} from '../department.service';
+import {SchemeDepartmentService} from '../main.service';
 import './department-toes.model';
 import {SchemeCourseDialog} from './scheme-course.dialog';
 
 @Component({
-    selector: 'scheme-department-toes',
     styleUrls: ['department-toes.component.scss'],
     templateUrl: 'department-toes.component.html',
 })

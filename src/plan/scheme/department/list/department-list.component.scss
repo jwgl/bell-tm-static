@@ -1,0 +1,7 @@
+td, th {
+    white-space: nowrap;
+
+    &:nth-child(2) {
+        width: 100%;
+    }
+}

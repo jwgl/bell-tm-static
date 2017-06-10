@@ -22,7 +22,7 @@ import {VisionReviewComponent} from './review.component';
         VisionReviewComponent,
     ],
     providers: [
-        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/public/schemes'},
+        {provide: 'PUBLIC_SCHEMES_WEB_URL', useValue: '/web/plan/schemes'},
     ],
 })
 class MainModule {}

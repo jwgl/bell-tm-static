@@ -28,7 +28,7 @@ import {SchemeDraftListModule} from './list/draft-list.module';
         SchemeDraftService,
         {provide: 'DEPARTMENT_SCHEMES_API_URL', useValue: '/api/plan/departments/${departmentId}/schemes/latest'},
         {provide: 'DEPARTMENT_DIRECTIONS_API_URL', useValue: '/api/plan/departments/${departmentId}/schemes/directions'},
-        {provide: 'SCHEME_IMPORT_API_URL', useValue: '/api/plan/public/schemes'},
+        {provide: 'SCHEME_IMPORT_API_URL', useValue: '/api/plan/schemes'},
     ],
 })
 class MainModule {}
