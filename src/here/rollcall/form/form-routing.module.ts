@@ -7,9 +7,9 @@ import {RollcallFormResolve} from './form-resolve.service';
 import {RollcallScheduleComponent} from './schedule/schedule.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'schedules', pathMatch: 'full'},
+    {path: '', redirectTo: 'timetable', pathMatch: 'full'},
     {
-        path: 'schedules',
+        path: 'timetable',
         component: RollcallScheduleComponent,
         resolve: {
             list: RollcallFormResolve,

@@ -14,7 +14,7 @@ import {RollcallTileViewComponent} from './tile-view.component';
 
 const routes: Routes = [
     {
-        path: 'week/:week/day/:day/section/:section',
+        path: 'timeslots/:timeslotId/weeks/:week',
         component: RollcallFormEditorComponent,
         resolve: {
             list: RollcallFormResolve,

@@ -4,7 +4,6 @@ import {RouterModule} from '@angular/router';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
-import {HereScheduleModule} from '../../../shared/schedule/schedule.module';
 import {RollcallScheduleComponent} from './schedule.component';
 
 @NgModule({
@@ -12,7 +11,6 @@ import {RollcallScheduleComponent} from './schedule.component';
         CommonModule,
         RouterModule,
         CommonDirectivesModule,
-        HereScheduleModule,
     ],
     declarations: [
         RollcallScheduleComponent,

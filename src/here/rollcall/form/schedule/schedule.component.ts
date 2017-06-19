@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Schedule, Term} from '../../../shared/schedule/schedule.model';
+import {Timetable} from 'core/models';
+
 import {RollcallFormService} from '../form.service';
 
 @Component({
@@ -8,16 +9,10 @@ import {RollcallFormService} from '../form.service';
     styleUrls: ['schedule.component.scss'],
     templateUrl: 'schedule.component.html',
 })
-export class RollcallScheduleComponent implements OnInit {
-    term: Term;
-    schedules: Schedule[];
+export class RollcallScheduleComponent {
+    constructor(private service: RollcallFormService) {}
 
-    constructor(
-        private service: RollcallFormService,
-    ) {}
-
-    ngOnInit() {
-        this.term = this.service.term;
-        this.schedules = this.service.schedules;
+    get timetable(): Timetable {
+        return this.service.timetable;
     }
 }

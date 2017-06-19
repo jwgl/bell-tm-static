@@ -1,0 +1,62 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss';
+
+.table {
+    border-bottom: solid $table-border-width $table-border-color;
+    table-layout: fixed;
+
+    tr.seperator {
+        border-top: solid (2 * $table-border-width) $table-border-color;
+    }
+
+    th, td {
+        vertical-align: middle;
+        text-align: center;
+        height: 2rem;
+        font-weight: normal;
+        padding: 2px 3px 2px 2px;
+    }
+
+    th {
+        border-top-width: 0;
+    }
+
+    td {
+        &.c1, &.c2 {
+            border-right: solid $table-border-width $table-border-color;
+        }
+    }
+
+    col {
+        &.c1, &.c2 {
+            width: 30px;
+        }
+    }
+}
+
+@mixin timetable-column-width($column-width) {
+   .table {
+        col {
+            &.nth1 {width: ($column-width / 1)};
+            &.nth2 {width: ($column-width / 2)};
+            &.nth3 {width: ($column-width / 3)};
+            &.nth6 {width: ($column-width / 6)};
+        }
+    }
+}
+
+@include media-breakpoint-down(xl) {
+    @include timetable-column-width(150px); // total 1110px
+}
+
+@include media-breakpoint-down(lg) {
+    @include timetable-column-width(124px); // total 930px
+}
+
+@include media-breakpoint-down(md) {
+    @include timetable-column-width(90px); // total 690px
+}
+
+:host-context([size=sm]) {
+    font-size: 0.75rem;
+}

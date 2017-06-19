@@ -14,7 +14,7 @@ export function weekRangeText(weekRange: WeekRange): string {
         if (weekRange.oddEven === 0) {
             return `${weekRange.startWeek}-${weekRange.endWeek}周`;
         } else {
-            return `${weekRange.startWeek}-${weekRange.endWeek}周（${oddEvenText(weekRange.oddEven)}）`;
+            return `${weekRange.startWeek}-${weekRange.endWeek}${oddEvenText(weekRange.oddEven)}周`;
         }
     }
 }

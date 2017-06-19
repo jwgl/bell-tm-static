@@ -1,14 +1,14 @@
-<schedule-timetable *ngIf="timetable" [timetable]="timetable">
+<schedule-timetable *ngIf="timetable" [timetable]="timetable" tabEnabled='true'>
     <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
-        <a class="btn btn-secondary w-100 timeslot d-flex flex-column justify-content-center"
-                [routerLink]="['/timeslots', timeslot.id, 'weeks', week, service.viewType]">
+        <div class="timeslot d-flex flex-column justify-content-center">
             <div class="slotitem" *ngFor="let item of timeslot.items">
                 <div class="course" title="{{item.course}}">
                     <span class="course-name">{{item.course}}</span> <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
                 </div>
                 <div class="weeks">{{item.weeksText}}{{item.sectionsText}}</div>
                 <div class="place">{{item.place}}</div>
+                <div class="teachers">{{item.teachers}}</div>
             </div>
-        </a>
+        </div>
     </ng-template>
 </schedule-timetable>

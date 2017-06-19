@@ -4,6 +4,7 @@ module.exports = {
     'navbar':                                  './src/navbar/main.ts',
     'todo':                                    './src/todo/main.ts',
     'user/profile':                            './src/user/profile/main.ts',
+    'user/student/timetable':                  './src/user/student-timetable/main.ts',
     'plan/settings/subject':                   './src/plan/settings/subject/main.ts',
     'plan/settings/program':                   './src/plan/settings/program/main.ts',
     'plan/vision/list':                        './src/plan/vision/public/list.ts',

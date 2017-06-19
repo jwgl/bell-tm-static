@@ -108,7 +108,7 @@ export class Schedule {
              || this.endWeek - other.endWeek
              || this.oddEven - other.oddEven
              || this.course.localeCompare(other.course)
-             || this.course.localeCompare(other.courseItem)
+             || this.courseItem.localeCompare(other.courseItem)
              || this.place.localeCompare(other.place);
     }
 }

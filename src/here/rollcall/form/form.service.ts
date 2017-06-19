@@ -1,15 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
+import {Timetable} from 'core/models';
 import {ApiUrl, Rest} from 'core/rest';
 
-import {Schedule, ScheduleDto, Term} from '../../shared/schedule/schedule.model';
 import {AttendanceDto, Rollcall, RollcallSettings, RollcallType, Student} from './form.model';
 
 @Injectable()
 export class RollcallFormService {
-    term: Term;
-    schedules: Schedule[];
+    timetable: Timetable;
     settings: RollcallSettings;
     viewType: string;
 
@@ -19,20 +18,20 @@ export class RollcallFormService {
         return this.rest.get(this.api.list());
     }
 
-    loadRollcalls(week: number, day: number, section: number): Observable<any> {
-        return this.rest.get(this.getRollcallApi(week, day, section));
+    loadRollcalls(timeslotId: number, week: number): Observable<any> {
+        return this.rest.get(this.getRollcallApi(timeslotId, week));
     }
 
-    create(week: number, day: number, section: number, data: object): Observable<{id: number, attendances: AttendanceDto}> {
-        return this.rest.post(this.getRollcallApi(week, day, section), data);
+    create(timeslotId: number, week: number, data: object): Observable<{id: number, attendances: AttendanceDto}> {
+        return this.rest.post(this.getRollcallApi(timeslotId, week), data);
     }
 
-    update(week: number, day: number, section: number, id: number, data: object): Observable<{attendances: AttendanceDto}> {
-        return this.rest.put(`${this.getRollcallApi(week, day, section)}/${id}`, data);
+    update(timeslotId: number, week: number, id: number, data: object): Observable<{attendances: AttendanceDto}> {
+        return this.rest.put(`${this.getRollcallApi(timeslotId, week)}/${id}`, data);
     }
 
-    delete(week: number, day: number, section: number, id: number): Observable<{attendances: AttendanceDto}> {
-        return this.rest.delete(`${this.getRollcallApi(week, day, section)}/${id}`);
+    delete(timeslotId: number, week: number, id: number): Observable<{attendances: AttendanceDto}> {
+        return this.rest.delete(`${this.getRollcallApi(timeslotId, week)}/${id}`);
     }
 
     updateSettings(settings: RollcallSettings): Observable<void> {
@@ -50,8 +49,8 @@ export class RollcallFormService {
         });
     }
 
-    private getRollcallApi(week: number, day: number, section: number): string {
-        return `${this.api.item(day * 100 + section)}/weeks/${week}/rollcalls`;
+    private getRollcallApi(timeslotId: number, week: number): string {
+        return `${this.api.item(timeslotId)}/weeks/${week}/rollcalls`;
     }
 
     private getSettingApi(): string {

@@ -1,26 +1,24 @@
-<div class="btn-toolbar">
-    <div class="btn-group pt-2">
+<div class="btn-toolbar align-items-center mb-2" style="height: 38px">
+    <div class="btn-group" *ngIf="timeslot">
         <span>
-            <a routerLink="/schedules">课表</a>
+            <a routerLink="/">课表</a>
         </span>
         <span class="dropdown ml-2 hidden-xs-down">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">第{{week}}周</a>
             <div class="dropdown-menu">
-                <a *ngFor="let w of weeks" class="dropdown-item" [routerLink]="['/week', w, 'day', activeSchedule.dayOfWeek, 'section', activeSchedule.startSection, service.viewType]">第{{w}}周</a>
+                <a *ngFor="let w of weeks" class="dropdown-item" [routerLink]="['/timeslots', timeslot.id, 'weeks', w, service.viewType]">第{{w}}周</a>
             </div>
         </span>
         <span class="dropdown ml-2 hidden-sm-down">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{activeSchedule?.label}}</a>
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{timeslot.label}}</a>
             <div class="dropdown-menu">
-                <a *ngFor="let s of weekSchedules" class="dropdown-item" [routerLink]="['/week', week, 'day', s.dayOfWeek, 'section', s.startSection, service.viewType]">{{s.label}}</a>
+                <a *ngFor="let t of timeslots" class="dropdown-item" [routerLink]="['/timeslots', t.id, 'weeks', week, service.viewType]">{{t.label}}</a>
             </div>
         </span>
-        <span class="ml-2 hidden-md-down" *ngIf="rollcallForm">
-            <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
-        </span>
+        <br>
     </div>
-    <div class="btn-group ml-auto" *ngIf="rollcallForm">
-        <ng-container  *ngIf="!rollcallForm.locked; else locked">
+    <div class="btn-group ml-auto">
+        <ng-container  *ngIf="!rollcallForm || !rollcallForm.locked; else locked">
             <button class="btn btn-secondary" routerLink="detail" routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'detail')"><i class="fa fa-table"></i></button>
             <button class="btn btn-secondary" routerLink="list"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'list')"><i class="fa fa-list"></i></button>
             <button class="btn btn-secondary" routerLink="tile"   routerLinkActive="active" tabindex="-1" (click)="onSwitchView($event, 'tile')"><i class="fa fa-th"></i></button>
@@ -29,8 +27,11 @@
             <span class="ml-auto" title="已锁定"><i class="fa fa-lock"></i></span>
         </ng-template>
     </div>
-    <div class="btn-group ml-2" *ngIf="rollcallForm && !rollcallForm.locked">
+    <div class="btn-group ml-2" *ngIf="!rollcallForm || !rollcallForm.locked">
         <button class="btn btn-secondary" (click)="showSettingsDialog()"><i class="fa fa-cog"></i></button>
     </div>
+</div>
+<div *ngIf="rollcallForm" class="mb-2 text-center">
+    <rollcall-summary [summary]="rollcallForm.summary"></rollcall-summary>
 </div>
 <router-outlet></router-outlet>

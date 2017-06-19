@@ -1,5 +1,5 @@
 <div class="row" tabindex="-1" *ngIf="rollcallForm">
-    <div class="tips-pane col-md-3 hidden-sm-down">
+    <div class="tips-pane col-md-3 hidden-md-down">
         <ul class="list-unstyled">
             <li>回车键：旷课 / 取消 / 查看假条</li>
             <li>方向键：选择</li>
@@ -9,7 +9,7 @@
             <li>数字4：调课</li>
         </ul>
     </div>
-    <div class="list-pane col-md-6" tabindex="-1" (keydown)="onKeydown($event)" focus (focus)="scrollItem()">
+    <div class="list-pane col-md-8 col-lg-6 mb-3" tabindex="-1" (keydown)="onKeydown($event)" focus (focus)="scrollItem()">
         <ul #list>
             <li *ngFor="let student of rollcallForm.visibleStudents"
                 [class.active]="student == rollcallForm.activeStudent"
@@ -23,7 +23,7 @@
             </li>
         </ul>
     </div>
-    <div class="detail-pane col-md-3">
+    <div class="detail-pane col-md-4 col-lg-3">
         <ul class="list-unstyled" *ngIf="rollcallForm.activeStudent">
             <li>序号：{{rollcallForm.activeStudent.index}}</li>
             <li>学号：{{rollcallForm.activeStudent.id}}</li>
