@@ -1,8 +1,8 @@
 <schedule-timetable *ngIf="timetable" [timetable]="timetable">
     <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
-        <a *ngIf="week; else all"
-            class="btn btn-secondary timeslot d-flex flex-column justify-content-center"
-            [routerLink]="['/timeslots', timeslot.id, 'weeks', week, service.viewType]">
+        <a class="btn btn-secondary d-block timeslot d-flex flex-column justify-content-center"
+           [routerLink]="week ? ['/timeslots', timeslot.id, 'weeks', week, service.viewType] : []"
+           [class.disabled]="!week">
             <div class="slotitem" *ngFor="let item of timeslot.items">
                 <div class="course" title="{{item.course}}">
                     <span class="course-name">{{item.course}}</span> <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
@@ -11,16 +11,5 @@
                 <div class="place">{{item.place}}</div>
             </div>
         </a>
-        <ng-template #all>
-            <div class="timeslot d-flex flex-column justify-content-center">
-                <div class="slotitem" *ngFor="let item of timeslot.items">
-                    <div class="course" title="{{item.course}}">
-                        <span class="course-name">{{item.course}}</span> <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
-                    </div>
-                    <div class="weeks">{{item.weeksText}}{{item.sectionsText}}</div>
-                    <div class="place">{{item.place}}</div>
-                </div>
-            </div>
-        </ng-template>
     </ng-template>
 </schedule-timetable>

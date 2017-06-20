@@ -31,7 +31,7 @@
             <td>{{student.attendances.join(' / ')}}</td>
             <td>{{student.adminClass}}</td>
             <td>{{student.subject}}</td>
-            <td>{{student.disqualified ? '取消考试资格' : ''}}</td>
+            <td><label *ngIf="student.disqualified" class="badge badge-default">取消考试资格</label></td>
         </tr>
     </tbody>
 </table>
