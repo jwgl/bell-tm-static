@@ -33,7 +33,7 @@ export class RollcallFormEditorComponent implements OnInit {
             this.timeslots = this.service.timetable.getTimeslots(this.week);
             const timeslotId = parseInt(params['timeslotId'], 10);
             this.timeslot = this.timeslots.find(it => it.id === timeslotId);
-            this.weeks = this.timeslot.weeks;
+            this.weeks = this.service.timetable.getTimeslotWeeks(this.timeslot);
             this.loadData();
         });
     }

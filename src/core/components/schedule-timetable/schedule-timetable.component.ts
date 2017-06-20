@@ -10,7 +10,6 @@ import {Timetable} from './schedule-timetable.model';
 export class ScheduleTimetableComponent {
     @Input() timetable: Timetable;
     @Input() size: string;
-    @Input() tabEnabled: boolean;
 
     @ContentChild('timeslotTpl') timeslotTemplate: TemplateRef<any>;
     @ContentChild('dayOfWeekTpl') dayOfWeekTemplate: TemplateRef<any>;

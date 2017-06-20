@@ -150,13 +150,13 @@ export class Timetable {
     private _week = 0;
     private _weeks: number[];
     private _dayColumns: {[key: number]: DayColumn};
-    private _showWeek: boolean;
+    private _showWeeks: boolean;
 
-    constructor(schedules: Schedule[], term: Term, showWeek: boolean) {
+    constructor(schedules: Schedule[], term: Term, showWeeks: boolean) {
         this._schedules = schedules;
         this._term = term;
-        this._showWeek = showWeek;
-        this._week = showWeek ? term.currentWeek : 0;
+        this._showWeeks = showWeeks;
+        this._week = showWeeks ? term.currentWeek : 0;
         this._weeks = _.range(term.startWeek, term.endWeek + 1);
         this.buildTimeslots();
     }
@@ -165,7 +165,7 @@ export class Timetable {
      * 是否显示week tab
      */
     get tabEnabled(): boolean {
-        return this._showWeek;
+        return this._showWeeks;
     }
 
     /**
@@ -176,18 +176,25 @@ export class Timetable {
     }
 
     /**
-     * 获取当前周
+     * 获取当前选择周
      */
     get week(): number {
         return this._week;
     }
 
     /**
-     * 设置当前周
+     * 设置当前选择周
      */
     set week(value: number) {
         this._week = value;
         this.buildTimeslots();
+    }
+
+    /**
+     * 获取实际当前周
+     */
+    get currentWeek(): number {
+        return this._term.currentWeek;
     }
 
     /**
@@ -257,12 +264,29 @@ export class Timetable {
         return !!this._dayColumns[day] && this._dayColumns[day].isHidden(start, column);
     }
 
+    /**
+     * 获取指定周的所有timeslot
+     */
     getTimeslots(week: number): Timeslot[] {
         if (this._week !== week) {
             this._week = week;
             this.buildTimeslots();
         }
         return _.chain(this._dayColumns).values().flatMap((it: DayColumn) => _.values(it.timeslots)).value();
+    }
+
+    /**
+     * 获取指定包含timeslot的周次。由于当前可能已过week进行了过滤，
+     * 所以不能从_dayColumns直接获取，而是从原始__schedules获取。
+     */
+    getTimeslotWeeks(timeslot: Timeslot): number[] {
+        return _.chain(this._schedules).filter(it => {
+            return it.dayOfWeek === timeslot.dayOfWeek
+                && it.startSection === timeslot.startSection
+                && it.totalSection === timeslot.totalSection;
+        }).flatMap(it => {
+            return _.range(it.startWeek, it.endWeek + 1).filter(w => matchOddEven(it.oddEven, w));
+        }).uniq().sort(_.subtract).value();
     }
 
     /**
@@ -518,40 +542,13 @@ export class Timeslot {
     }
 
     /**
-     * timeslot所包含schedule的最小开始周
-     */
-    get startWeek(): number {
-        return _.min(_.chain(this.items).flatMap(it => it.schedules).map(it => it.startWeek).value());
-    }
-
-    /**
-     * timeslot所包含schedule的最大结束周
-     */
-    get endWeek(): number {
-        return _.max(_.chain(this.items).flatMap(it => it.schedules).map(it => it.endWeek).value());
-    }
-
-    /**
-     * timeslot所包含schedule的单双周，如果所有schedule的单双周一致，则取一致的单双周，否则取0
-     */
-    get oddEven(): number {
-        const oddEvens = _.chain(this.items).flatMap(it => it.schedules).map(it => it.oddEven).uniq().value();
-        return oddEvens.length === 1 ? oddEvens[0] : 0;
-    }
-
-    /**
      * timeslot的文本表示
      */
     get label(): string {
-        const courses = _.chain(this.items).map(it => `${it.course}${it.courseItem}`).uniq().value().join(', ');
+        const courses = _.chain(this.items).map(it => {
+            return it.courseItem ? `${it.course}-${it.courseItem}` : `${it.course}`;
+        }).uniq().value().join(', ');
         return `周${dayOfWeekText(this.dayOfWeek)} ${sectionRangeText(this)} ${courses}`;
-    }
-
-    /**
-     * timeslot所包含的周
-     */
-    get weeks(): number[] {
-        return _.range(this.startWeek, this.endWeek + 1).filter(w => matchOddEven(this.oddEven, w));
     }
 }
 
@@ -610,11 +607,11 @@ export class TimeslotItem {
                 ? `第${it.startWeek}周`
                 : `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}周`;
         } else {
-            const weeks = this.schedules.map(it => {
+            const weeks = _.chain(this.schedules).map(it => {
                 return it.startWeek === it.endWeek
                      ? `${it.startWeek}`
                      : `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}`;
-            }).join(',');
+            }).uniq().sort().join(',');
             return `${weeks}周`;
         }
     }
