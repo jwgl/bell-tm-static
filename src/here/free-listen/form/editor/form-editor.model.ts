@@ -1,9 +1,16 @@
 import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
-import '../../shared/student-schedule.model';
 
 declare module '../../../shared/schedule/schedule.model' {
     interface ScheduleDto {
+        courseTeacherId: string;
+        courseTeacherName: string;
+        repeatType: number;
+    }
+
+    interface Schedule {
+        courseTeacherId: string;
+        courseTeacherName: string;
         repeatType: number;
     }
 }

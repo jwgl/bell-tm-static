@@ -7,7 +7,6 @@ import {EditMode} from 'core/constants';
 
 import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
-import '../../shared/student-schedule.model';
 import {FreeListenFormService} from '../form.service';
 import './form-editor.model';
 
@@ -48,6 +47,8 @@ export class FreeFormEditorComponent {
     onLoadData(dto: any) {
         this.schedules = dto.schedules.map((scheduleDto: ScheduleDto) => {
             const schedule: Schedule = new Schedule(scheduleDto);
+            schedule.courseTeacherId = dto.courseTeacherId;
+            schedule.courseTeacherName = dto.courseTeacherName;
             schedule.repeatType = scheduleDto.repeatType;
             return schedule;
         });

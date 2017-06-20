@@ -61,8 +61,6 @@ export interface ScheduleDto {
     taskId: string;
     courseClassId: string;
     courseClassName: string;
-    courseTeacherId: string;
-    courseTeacherName: string;
     teacherId: string;
     teacherName: string;
     startWeek: number;
@@ -109,8 +107,6 @@ export class Schedule implements SlotRange {
         this.taskId = dto.taskId;
         this.courseClassId = dto.courseClassId;
         this.courseClassName = dto.courseClassName;
-        this.courseTeacherId = dto.courseTeacherId;
-        this.courseTeacherName = dto.courseTeacherName;
         this.teacherId = dto.teacherId;
         this.teacherName = dto.teacherName;
         this.startWeek = dto.startWeek;
