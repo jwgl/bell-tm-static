@@ -1,6 +1,10 @@
 @import 'node_modules/bootstrap/scss/_variables.scss';
 @import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss';
 
+:host-context([size=sm]) {
+    font-size: 0.75rem;
+}
+
 .table {
     border-bottom: solid $table-border-width $table-border-color;
     table-layout: fixed;
@@ -55,8 +59,4 @@
 
 @include media-breakpoint-down(md) {
     @include timetable-column-width(90px); // total 690px
-}
-
-:host-context([size=sm]) {
-    font-size: 0.75rem;
 }

@@ -34,15 +34,22 @@
     </div>
     <div class="form-group">
         <label>免听明细</label>
-        <simple-schedule [schedules]="schedules">
-            <ng-template #scheduleTpl let-schedule="schedule" let-day="day" let-section="section" let-count="count">
-                <div class="schedule"
-                    [ngClass]="getScheduleClass(schedule)"
-                    [style.height]="count > 1 ? null : '100%'">
-                    <span>{{schedule.courseLabel}}<br>{{schedule.weeksLabel}}<br>{{schedule.teacherName}}<br>{{schedule.courseClassName}}</span>
+        <schedule-timetable [timetable]="timetable">
+            <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
+                <div class="slotitem" *ngFor="let item of timeslot.items"
+                     [ngClass]="getTimeslotItemClass(item)"
+                     [style.height]="timeslot.items.length > 1 ? null : '100%'">
+                    <div class="course">
+                        <span class="course-name">{{item.course}}</span>
+                        <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                    </div>
+                    <div class="weeks">{{item.weeksText}}{{item.sectionsText}}</div>
+                    <div class="place">{{item.place}}</div>
+                    <div class="teachers">{{item.teachers}}</div>
+                    <div class="course-class-names">{{item.courseClassNames}}</div>
                 </div>
             </ng-template>
-        </simple-schedule>
+        </schedule-timetable>
         <div>
             图例：
             <span class="btn btn-sm btn-secondary">学生课表</span>

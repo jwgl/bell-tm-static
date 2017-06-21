@@ -1,20 +1,17 @@
 import {Component, ElementRef} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import * as _ from 'lodash';
 
+import {Schedule, ScheduleDto, Timetable} from 'core/models';
 import {ReviewOptions} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 import {FreeListenForm} from '../shared/form.model';
-
-import '../shared/form-viewer.model';
 
 @Component({
     templateUrl: 'check-item.component.html',
 })
 export class FreeListenCheckItemComponent {
-    schedules: Schedule[];
     form: FreeListenForm;
+    timetable: Timetable;
 
     private wi: string;
     private prevId: number;
@@ -26,16 +23,13 @@ export class FreeListenCheckItemComponent {
 
     onItemLoaded(dto: any) {
         const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
-        const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s));
-
+        const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s, 'department'));
         this.form = new FreeListenForm(dto.form, studentSchedules);
+        this.timetable = new Timetable(studentSchedules.concat(departmentSchedules));
+
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
         this.nextId = dto.nextId;
-
-        studentSchedules.forEach(it => it.belongsTo = 'student');
-        departmentSchedules.forEach(it => it.belongsTo = 'department');
-        this.schedules = _.concat(studentSchedules, departmentSchedules);
     }
 
     get reviewable(): boolean {

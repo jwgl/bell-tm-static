@@ -1,16 +1,3 @@
-<ul class="nav nav-tabs flex-wrap week-tabs" *ngIf="timetable && timetable.showWeeks">
-    <li class="nav-item" *ngIf="showTermTab">
-        <a class="nav-link" [ngClass]="{active: timetable.week == 0}" href="#" data-toggle="tab" (click)="timetable.week = 0">A</a>
-    </li>
-	<li *ngFor="let week of timetable.weeks" class="nav-item">
-        <a class="nav-link" [ngClass]="{active: timetable.week == week}" href="#" data-toggle="tab" (click)="timetable.week = week">
-            <ng-container *ngIf="weekTabTemplate; else defaultWeekTab">
-                <ng-template [ngTemplateOutlet]="weekTabTemplate" [ngTemplateOutletContext]="{week: week}"></ng-template>
-            </ng-container>
-            <ng-template #defaultWeekTab>{{week}}</ng-template>
-        </a>
-    </li>
-</ul>
 <table class="table table-sm" *ngIf="timetable">
     <colgroup>
         <col class="c1"/>
@@ -23,13 +10,13 @@
         <tr>
             <th colspan="2">
                 <ng-container *ngIf="weekTemplate; else defaultWeek">
-                    <ng-template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: timetable.week}"></ng-template>
+                    <ng-template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: week}"></ng-template>
                 </ng-container>
                 <ng-template #defaultWeek>{{timetable.weekText}}</ng-template>
             </th>
             <th *ngFor="let day of timetable.days" [colSpan]="timetable.getDayColumnCount(day)">
                 <ng-container *ngIf="dayOfWeekTemplate; else defaultDay">
-                    <ng-template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: timetable.week, day: day}"></ng-template>
+                    <ng-template [ngTemplateOutlet]="dayOfWeekTemplate" [ngTemplateOutletContext]="{week: week, day: day}"></ng-template>
                 </ng-container>
                 <ng-template #defaultDay>{{day | dayOfWeek}}</ng-template>
             </th>
@@ -43,7 +30,7 @@
                 <ng-container *ngFor="let column of timetable.getDayColumns(day)">
                     <ng-container *ngIf="timetable.getTimeslot(day, section, column) as timeslot; else noslot">
                         <td class="active" [rowSpan]="timeslot.totalSection" [colSpan]="timeslot.colSpan">
-                            <ng-template [ngTemplateOutlet]="timeslotTemplate" [ngTemplateOutletContext]="{timeslot: timeslot, week: timetable.week}"></ng-template>
+                            <ng-template [ngTemplateOutlet]="timeslotTemplate" [ngTemplateOutletContext]="{timeslot: timeslot, week: week}"></ng-template>
                         </td>
                     </ng-container>
                     <ng-template #noslot>

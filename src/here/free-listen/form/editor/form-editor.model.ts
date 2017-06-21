@@ -1,7 +1,7 @@
-import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
+import {Schedule, ScheduleDto} from 'core/components/schedule-timetable/schedule-timetable.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 
-declare module '../../../shared/schedule/schedule.model' {
+declare module 'core/components/schedule-timetable/schedule-timetable.model' {
     interface ScheduleDto {
         courseTeacherId: string;
         courseTeacherName: string;

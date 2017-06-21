@@ -1,0 +1,29 @@
+.timeslot {
+    height: 100%;
+    border: solid 1px #888;
+    border-radius: 4px;
+    padding: 2px;
+}
+
+.slotitem + .slotitem {
+    border-top: dashed 1px #aaa;
+}
+
+.course {
+    white-space: normal;
+}
+
+.course-name {
+    font-size: 1rem;
+}
+
+.course-item {
+    white-space: nowrap;
+    font-size: 0.75rem;
+}
+
+.weeks,
+.teachers,
+.place {
+    font-size: 0.75rem;
+}

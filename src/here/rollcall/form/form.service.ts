@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
-import {Timetable} from 'core/models';
+import {Term, Timetable} from 'core/models';
 import {ApiUrl, Rest} from 'core/rest';
 
 import {AttendanceDto, Rollcall, RollcallSettings, RollcallType, Student} from './form.model';
 
 @Injectable()
 export class RollcallFormService {
+    term: Term;
     timetable: Timetable;
     settings: RollcallSettings;
     viewType: string;

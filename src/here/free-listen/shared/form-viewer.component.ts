@@ -1,9 +1,7 @@
 import {Component, Input} from '@angular/core';
 
-import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
+import {TimeslotItem, Timetable} from 'core/models';
 import {FreeListenForm} from './form.model';
-
-import './form-viewer.model';
 
 @Component({
     selector: 'free-listen-form-viewer',
@@ -12,18 +10,18 @@ import './form-viewer.model';
 })
 export class FreeFormViewerComponent {
     @Input() form: FreeListenForm;
-    @Input() schedules: any;
+    @Input() timetable: Timetable;
 
-    getScheduleClass(schedule: Schedule) {
-        switch (schedule.belongsTo) {
+    getTimeslotItemClass(item: TimeslotItem) {
+        switch (item.schedules[0].owner) {
             case 'department':
                 return ['bg-warning', 'text-white'];
-            case 'student':
-                return this.form.scheduleSelected(schedule)
+            case 'self':
+                return this.form.scheduleSelected(item.schedules[0])
                      ? ['bg-danger', 'text-white']
-                     : this.form.scheduleApproved(schedule)
+                     : this.form.scheduleApproved(item.schedules[0])
                      ? ['bg-success', 'text-white']
-                     : this.form.scheduleExisted(schedule)
+                     : this.form.scheduleExisted(item.schedules[0])
                      ? ['bg-info', 'text-white']
                      : [];
         }

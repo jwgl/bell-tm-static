@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs flex-wrap week-tabs" *ngIf="term">
+    <li class="nav-item" *ngIf="showTermTab">
+        <a class="nav-link" [ngClass]="{active: selectedWeek == 0}" href="#" data-toggle="tab" (click)="selectedWeek = 0">A</a>
+    </li>
+	<li *ngFor="let week of weeks" class="nav-item">
+        <a class="nav-link" [ngClass]="{active: selectedWeek == week}" href="#" data-toggle="tab" (click)="selectedWeek = week">
+            <ng-container *ngIf="weekTabTemplate; else defaultWeekTab">
+                <ng-template [ngTemplateOutlet]="weekTabTemplate" [ngTemplateOutletContext]="{week: week}"></ng-template>
+            </ng-container>
+            <ng-template #defaultWeekTab>{{week}}</ng-template>
+        </a>
+    </li>
+</ul>

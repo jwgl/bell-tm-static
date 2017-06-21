@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Timetable} from 'core/models';
+import {Term, Timetable} from 'core/models';
 
 import {RollcallFormService} from '../form.service';
 
@@ -11,6 +11,10 @@ import {RollcallFormService} from '../form.service';
 })
 export class RollcallScheduleComponent {
     constructor(private service: RollcallFormService) {}
+
+    get term(): Term {
+        return this.service.term;
+    }
 
     get timetable(): Timetable {
         return this.service.timetable;

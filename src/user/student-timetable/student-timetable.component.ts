@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Schedule, ScheduleDto, Timetable} from 'core/models';
+import {Schedule, ScheduleDto, Term, Timetable} from 'core/models';
 
 import {StudentTimetableService} from './main.service';
 
@@ -10,14 +10,15 @@ import {StudentTimetableService} from './main.service';
     templateUrl: 'student-timetable.component.html',
 })
 export class StudentTimetableComponent implements OnInit {
+    term: Term;
     timetable: Timetable;
+
     constructor(private service: StudentTimetableService) {}
 
     ngOnInit(): void {
         this.service.loadList().subscribe(dto => {
-            const term = dto.term;
-            const schedules = dto.schedules.map((it: ScheduleDto) => new Schedule(it));
-            this.timetable = new Timetable(schedules, term, true);
+            this.term = dto.term;
+            this.timetable = new Timetable(dto.schedules.map((it: ScheduleDto) => new Schedule(it)), true);
         });
     }
 }

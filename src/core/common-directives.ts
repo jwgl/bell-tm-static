@@ -38,6 +38,7 @@ import {OddEvenPipe} from './pipes/odd-even';
 import {ZeroPadPipe} from './pipes/zero-pad';
 
 import {ScheduleTimetableComponent} from './components/schedule-timetable/schedule-timetable.component';
+import {ScheduleWeektabComponent} from './components/schedule-timetable/schedule-weektab.component';
 
 export {
     CheckboxSelectorComponent,
@@ -53,6 +54,7 @@ const CORE_DIRECTIVES: any[] = [
     PagerComponent,
     RemoveItemComponent,
     ScheduleTimetableComponent,
+    ScheduleWeektabComponent,
     // bootstrap form directives
     FormDirective,
     FormControlDirective,

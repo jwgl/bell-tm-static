@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as _ from 'lodash';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
+import {Schedule, ScheduleDto, Term, Timetable} from 'core/models';
 
-import {Schedule, ScheduleDto, Term} from '../../../shared/schedule/schedule.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
 import './form-editor.model';
@@ -23,8 +22,7 @@ export class FreeFormEditorComponent {
     private editMode: EditMode;
     private form: FreeListenForm;
     private saving = false;
-    private schedules: Schedule[];
-    private term: Term;
+    private timetable: Timetable;
 
     constructor(
         private router: Router,
@@ -45,16 +43,16 @@ export class FreeFormEditorComponent {
     }
 
     onLoadData(dto: any) {
-        this.schedules = dto.schedules.map((scheduleDto: ScheduleDto) => {
+        const schedules = dto.schedules.map((scheduleDto: ScheduleDto) => {
             const schedule: Schedule = new Schedule(scheduleDto);
             schedule.courseTeacherId = dto.courseTeacherId;
             schedule.courseTeacherName = dto.courseTeacherName;
             schedule.repeatType = scheduleDto.repeatType;
             return schedule;
         });
-        this.form = new FreeListenForm(dto.form, this.schedules);
+        this.form = new FreeListenForm(dto.form, schedules);
         this.form.removedItems = [];
-        this.term = dto.term;
+        this.timetable = new Timetable(schedules);
     }
 
     cancel() {

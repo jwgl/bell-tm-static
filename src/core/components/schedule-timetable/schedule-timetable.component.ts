@@ -9,11 +9,19 @@ import {Timetable} from './schedule-timetable.model';
 })
 export class ScheduleTimetableComponent {
     @Input() timetable: Timetable;
-    @Input() size: string;
-    @Input() showTermTab = false;
 
     @ContentChild('timeslotTpl') timeslotTemplate: TemplateRef<any>;
     @ContentChild('dayOfWeekTpl') dayOfWeekTemplate: TemplateRef<any>;
     @ContentChild('weekTpl') weekTemplate: TemplateRef<any>;
-    @ContentChild('weekTabTpl') weekTabTemplate: TemplateRef<any>;
+
+    @Input()
+    get week(): number {
+        return this.timetable ? this.timetable.week : 0;
+    }
+
+    set week(value: number) {
+        if (this.timetable) {
+            this.timetable.week = value;
+        }
+    }
 }

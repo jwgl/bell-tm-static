@@ -1,4 +1,4 @@
-import {Schedule} from '../../shared/schedule/schedule.model';
+import {Schedule} from 'core/models';
 
 export class FreeListenForm {
     id: number;
@@ -84,9 +84,10 @@ export class FreeListenItem {
     }
 
     toString() {
-        return `${this.schedule.courseLabel} / `
-             + `${this.schedule.weeksLabel} ${this.schedule.dayOfWeekLabel} ${this.schedule.sectionsLabel} / `
-             + `${this.schedule.teacherName}`;
+        return '';
+        // return `${this.schedule.courseLabel} / `
+        //      + `${this.schedule.weeksLabel} ${this.schedule.dayOfWeekLabel} ${this.schedule.sectionsLabel} / `
+        //      + `${this.schedule.teacherName}`;
     }
 }
 

@@ -102,7 +102,14 @@ export class Schedule implements SlotRange {
     courseItem: string;
     place: string;
 
-    constructor(dto: ScheduleDto) {
+    /**
+     * 排课数据所有者，用于判断是否合并到同一timeslotItem。
+     * 缺省值为`self`，表示本人课表，可以为学生个人课表或教师个人课表。
+     * 免听时需要区分学生个人课程和学院其它排课课表；查询多人课表同时显示时，也需要区分。
+     */
+    owner: string;
+
+    constructor(dto: ScheduleDto, owner = 'self') {
         this.id = dto.id;
         this.taskId = dto.taskId;
         this.courseClassId = dto.courseClassId;
@@ -118,6 +125,7 @@ export class Schedule implements SlotRange {
         this.course = dto.course;
         this.courseItem = dto.courseItem;
         this.place = dto.place;
+        this.owner = owner;
     }
 
     get endSection(): number {
@@ -142,33 +150,14 @@ export class Schedule implements SlotRange {
 /* tslint:disable:max-classes-per-file */
 export class Timetable {
     private _schedules: Schedule[];
-    private _term: Term;
-    private _week = 0;
-    private _weeks: number[];
     private _dayColumns: {[key: number]: DayColumn};
-    private _showWeeks: boolean;
+    private _week = 0;
 
-    constructor(schedules: Schedule[], term: Term, showWeeks: boolean) {
+    constructor(schedules: Schedule[], differed = false) {
         this._schedules = schedules;
-        this._term = term;
-        this._showWeeks = showWeeks;
-        this._week = showWeeks ? term.currentWeek : 0;
-        this._weeks = _.range(term.startWeek, term.endWeek + 1);
-        this.buildTimeslots();
-    }
-
-    /**
-     * 是否显示week tab
-     */
-    get showWeeks(): boolean {
-        return this._showWeeks;
-    }
-
-    /**
-     * 周数组
-     */
-    get weeks(): number[] {
-        return this._weeks;
+        if (!differed) {
+            this.buildTimeslots();
+        }
     }
 
     /**
@@ -187,20 +176,13 @@ export class Timetable {
     }
 
     /**
-     * 获取实际当前周
-     */
-    get currentWeek(): number {
-        return this._term.currentWeek;
-    }
-
-    /**
      * 当前周字符串
      */
     get weekText(): string {
-        if (this.showWeeks && this.week) {
+        if (this.week) {
             return `第${this.week}周`;
         } else {
-            return `${this._term.startWeek}-${this._term.endWeek}周`;
+            return '时段';
         }
     }
 
@@ -563,12 +545,12 @@ export class TimeslotItem {
      */
     intersect(schedule: Schedule): boolean {
         const exists = this.schedules[0];
-        return exists.startSection === schedule.startSection
+        return exists.owner === exists.owner
+            && exists.dayOfWeek === schedule.dayOfWeek
+            && exists.startSection === schedule.startSection
             && exists.totalSection === schedule.totalSection
-            && exists.course.localeCompare(schedule.course) === 0
-            && (exists.courseItem === null && schedule.courseItem === null
-             || exists.courseItem !== null && schedule.courseItem !== null
-             && exists.courseItem.localeCompare(schedule.courseItem) === 0);
+            && exists.course === schedule.course
+            && exists.courseItem === schedule.courseItem;
     }
 
     /**
@@ -582,7 +564,8 @@ export class TimeslotItem {
      * 比较
      */
     compare(other: TimeslotItem): number {
-        return this.schedules[0].startWeek - other.schedules[0].startWeek
+        return this.schedules[0].owner.localeCompare(other.schedules[0].owner)
+            || this.schedules[0].startWeek - other.schedules[0].startWeek
             || this.schedules[0].oddEven - other.schedules[0].oddEven
             || this.course.localeCompare(other.course)
             || this.startSection - other.startSection
@@ -643,10 +626,8 @@ export class TimeslotItem {
     get teachers(): string {
         return _.uniq(this.schedules.map(it => it.teacherName)).join('/');
     }
-}
 
-export interface Term {
-    startWeek: number;
-    endWeek: number;
-    currentWeek: number;
+    get courseClassNames(): string {
+        return _.uniq(this.schedules.map(it => it.courseClassName)).join('/');
+    }
 }
