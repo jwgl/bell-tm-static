@@ -160,7 +160,7 @@ export class Timetable {
     /**
      * 是否显示week tab
      */
-    get tabEnabled(): boolean {
+    get showWeeks(): boolean {
         return this._showWeeks;
     }
 
@@ -197,7 +197,7 @@ export class Timetable {
      * 当前周字符串
      */
     get weekText(): string {
-        if (this.week) {
+        if (this.showWeeks && this.week) {
             return `第${this.week}周`;
         } else {
             return `${this._term.startWeek}-${this._term.endWeek}周`;

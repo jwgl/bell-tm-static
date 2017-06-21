@@ -1,4 +1,4 @@
-<ul class="nav nav-tabs flex-wrap week-tabs" *ngIf="timetable && timetable.tabEnabled">
+<ul class="nav nav-tabs flex-wrap week-tabs" *ngIf="timetable && timetable.showWeeks">
     <li class="nav-item" *ngIf="showTermTab">
         <a class="nav-link" [ngClass]="{active: timetable.week == 0}" href="#" data-toggle="tab" (click)="timetable.week = 0">A</a>
     </li>
@@ -20,7 +20,7 @@
         </ng-container>
     </colgroup>
     <thead>
-        <tr *ngIf="timetable.tabEnabled; else simpleHead">
+        <tr>
             <th colspan="2">
                 <ng-container *ngIf="weekTemplate; else defaultWeek">
                     <ng-template [ngTemplateOutlet]="weekTemplate" [ngTemplateOutletContext]="{week: timetable.week}"></ng-template>
@@ -34,14 +34,6 @@
                 <ng-template #defaultDay>{{day | dayOfWeek}}</ng-template>
             </th>
         </tr>
-        <ng-template #simpleHead>
-            <tr>
-                <th>时段</th>
-                <th *ngFor="let day of timetable.days" [colSpan]="timetable.getDayColumnCount(day)">
-                    {{day | dayOfWeek}}
-                </th>
-            </tr>
-        </ng-template>
     </thead>
     <tbody>
         <tr *ngFor="let section of timetable.sections" [class.seperator]="timetable.isStartSection(section)">
