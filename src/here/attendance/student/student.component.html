@@ -17,7 +17,6 @@
         <ul class="list-unstyled" *ngIf="student.leaves.length > 0; else emptyLeave">
             <li *ngFor="let item of student.leaves">
                 <a class="badge badge-default" href="./leaves/#{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
-                <label class="badge badge-default">{{item.label}}</label>
                 <span [class.invalid]="item.invalid">{{item}}</span>
                 <a *ngIf="item.freeListenFormId" class="badge badge-success" href="./freeListens/#{{item.freeListenFormId}}" target="_blank">免听</a>
             </li>
