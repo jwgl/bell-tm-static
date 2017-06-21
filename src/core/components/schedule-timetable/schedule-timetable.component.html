@@ -1,5 +1,5 @@
 <ul class="nav nav-tabs flex-wrap week-tabs" *ngIf="timetable && timetable.tabEnabled">
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="showTermTab">
         <a class="nav-link" [ngClass]="{active: timetable.week == 0}" href="#" data-toggle="tab" (click)="timetable.week = 0">A</a>
     </li>
 	<li *ngFor="let week of timetable.weeks" class="nav-item">

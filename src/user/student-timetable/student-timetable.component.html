@@ -1,4 +1,4 @@
-<schedule-timetable *ngIf="timetable" [timetable]="timetable" tabEnabled='true'>
+<schedule-timetable *ngIf="timetable" [timetable]="timetable" [showTermTab]="true">
     <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
         <div class="timeslot d-flex flex-column justify-content-center">
             <div class="slotitem" *ngFor="let item of timeslot.items">
