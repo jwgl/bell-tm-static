@@ -1,4 +1,4 @@
-import {Schedule, ScheduleDto} from 'core/components/schedule-timetable/schedule-timetable.model';
+import {Schedule, ScheduleDto, TimeslotItem} from 'core/components/schedule-timetable/schedule-timetable.model';
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 
 declare module 'core/components/schedule-timetable/schedule-timetable.model' {
@@ -29,7 +29,6 @@ declare module '../../shared/form.model' {
         getAddedItems(): any[];
         isValid(): boolean;
     }
-
 }
 
 FreeListenForm.prototype.addItem = function(this: FreeListenForm, item: FreeListenItem): void {
@@ -61,7 +60,6 @@ FreeListenForm.prototype.scheduleDisabled = function(this: FreeListenForm, sched
 
 FreeListenForm.prototype.toggleSchedule = function(this: FreeListenForm, schedule: Schedule): void {
     const freeItem = this.items.find(it => it.schedule.id === schedule.id);
-
     if (freeItem) {
         this.removeItem(freeItem);
     } else {

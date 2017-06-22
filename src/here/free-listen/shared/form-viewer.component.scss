@@ -16,17 +16,15 @@ schedule-timetable /deep/ {
     }
 
     .slotitem {
+        width: 100%;
         border: solid 1px #888;
         border-radius: 4px;
         padding: 2px;
+        white-space: normal;
     }
 
     .slotitem + .slotitem {
         margin-top: 2px;
-    }
-
-    .course {
-        white-space: normal;
     }
 
     .course-name {

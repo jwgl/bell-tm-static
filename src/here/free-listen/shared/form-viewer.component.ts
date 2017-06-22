@@ -13,15 +13,16 @@ export class FreeFormViewerComponent {
     @Input() timetable: Timetable;
 
     getTimeslotItemClass(item: TimeslotItem) {
-        switch (item.schedules[0].owner) {
+        const schedule = item.getFreeListenSchedule();
+        switch (schedule.owner) {
             case 'department':
                 return ['bg-warning', 'text-white'];
             case 'self':
-                return this.form.scheduleSelected(item.schedules[0])
+                return this.form.scheduleSelected(schedule)
                      ? ['bg-danger', 'text-white']
-                     : this.form.scheduleApproved(item.schedules[0])
+                     : this.form.scheduleApproved(schedule)
                      ? ['bg-success', 'text-white']
-                     : this.form.scheduleExisted(item.schedules[0])
+                     : this.form.scheduleExisted(schedule)
                      ? ['bg-info', 'text-white']
                      : [];
         }

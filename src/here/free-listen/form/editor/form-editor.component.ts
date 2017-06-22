@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
-import {Schedule, ScheduleDto, Term, Timetable} from 'core/models';
+import {Schedule, ScheduleDto, Term, TimeslotItem, Timetable} from 'core/models';
 
 import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
@@ -45,11 +45,12 @@ export class FreeFormEditorComponent {
     onLoadData(dto: any) {
         const schedules = dto.schedules.map((scheduleDto: ScheduleDto) => {
             const schedule: Schedule = new Schedule(scheduleDto);
-            schedule.courseTeacherId = dto.courseTeacherId;
-            schedule.courseTeacherName = dto.courseTeacherName;
+            schedule.courseTeacherId = scheduleDto.courseTeacherId;
+            schedule.courseTeacherName = scheduleDto.courseTeacherName;
             schedule.repeatType = scheduleDto.repeatType;
             return schedule;
         });
+
         this.form = new FreeListenForm(dto.form, schedules);
         this.form.removedItems = [];
         this.timetable = new Timetable(schedules);
@@ -97,7 +98,8 @@ export class FreeFormEditorComponent {
         });
     }
 
-    scheduleClass(schedule: Schedule) {
+    getTimeslotItemClass(timeslotItem: TimeslotItem) {
+        const schedule = timeslotItem.getFreeListenSchedule();
         return this.form.scheduleSelected(schedule)
              ? 'btn-danger'
              : this.form.scheduleApproved(schedule)

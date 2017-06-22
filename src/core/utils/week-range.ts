@@ -19,6 +19,24 @@ export function weekRangeText(weekRange: WeekRange): string {
     }
 }
 
+export function multipleWeekRangesText(weekRanges: WeekRange[]): string {
+    if (weekRanges.length === 1) {
+        return weekRangeText(weekRanges[0]);
+    } else {
+        return weekRanges.map(it => {
+            if (it.startWeek === it.endWeek) {
+                return `${it.startWeek}`;
+            } else {
+                if (it.oddEven === 0) {
+                    return `${it.startWeek}-${it.endWeek}`;
+                } else {
+                    return `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}`;
+                }
+            }
+        }).join(',') + '周';
+    }
+}
+
 /**
  * 判断两个WeekRange是否冲突
  */

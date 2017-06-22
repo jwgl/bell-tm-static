@@ -1,4 +1,23 @@
-import {Schedule} from 'core/models';
+import * as _ from 'lodash';
+
+import {Schedule, TimeslotItem} from 'core/components/schedule-timetable/schedule-timetable.model';
+import {multipleWeekRangesText} from 'core/utils';
+
+declare module 'core/components/schedule-timetable/schedule-timetable.model' {
+    interface Schedule {
+        root: Schedule;
+        children: Schedule[];
+    }
+
+    interface TimeslotItem {
+        getFreeListenSchedule(): Schedule;
+    }
+}
+
+TimeslotItem.prototype.getFreeListenSchedule = function(this: TimeslotItem): Schedule {
+    const schedule = this.schedules[0];
+    return schedule.root ? schedule.root : schedule;
+};
 
 export class FreeListenForm {
     id: number;
@@ -24,6 +43,8 @@ export class FreeListenForm {
      */
     existedItems: Array<{taskScheduleId: string, status: string}>;
 
+    scheduleMap: {[key: string]: Schedule} = {};
+
     constructor(dto: any, schedules: Schedule[]) {
         this.id = dto.id;
         this.term = dto.term;
@@ -39,8 +60,28 @@ export class FreeListenForm {
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
 
+        schedules.forEach(schedule => {
+            this.scheduleMap[schedule.id] = schedule;
+        });
+
+        schedules.forEach(schedule => {
+            if (schedule.rootId) {
+                schedule.root = this.scheduleMap[schedule.rootId];
+                if (!schedule.root.children) {
+                    schedule.root.children = [];
+                }
+                schedule.root.children.push(schedule);
+            }
+        });
+
+        schedules.forEach(schedule => {
+            if (schedule.children) {
+                schedule.children.sort((a, b) => a.compare(b));
+            }
+        });
+
         for (const item of dto.items as Array<{id: number, scheduleId: string}>) {
-            const schedule = schedules.find(s => s.id === item.scheduleId);
+            const schedule = this.scheduleMap[item.scheduleId];
             if (schedule) {
                 this.items.push(new FreeListenItem(item, schedule));
             } else {
@@ -84,10 +125,23 @@ export class FreeListenItem {
     }
 
     toString() {
-        return '';
-        // return `${this.schedule.courseLabel} / `
-        //      + `${this.schedule.weeksLabel} ${this.schedule.dayOfWeekLabel} ${this.schedule.sectionsLabel} / `
-        //      + `${this.schedule.teacherName}`;
+        if (this.schedule.children) {
+            const childrenInfo = _.chain(this.schedule.children).groupBy(it => {
+                return it.dayOfWeek * 10000 + it.startSection * 100 + it.totalSection;
+            }).map((schedules: Schedule[]) => {
+                return `${multipleWeekRangesText(schedules)} ${schedules[0].dayOfWeekText} ${schedules[0].sectionsText} / `
+                     + `${_.uniq(schedules.map(it => it.teacherName)).join(',')}`;
+            }).value();
+            if (childrenInfo.length === 1) {
+                return `${this.schedule.courseText} / ${childrenInfo[0]}`;
+            } else {
+                return `${this.schedule.courseText} / [ ${childrenInfo.join(', ')} ]`;
+            }
+        } else {
+            return `${this.schedule.courseText} / `
+                 + `${this.schedule.weeksText} ${this.schedule.dayOfWeekText} ${this.schedule.sectionsText} / `
+                 + `${this.schedule.teacherName}`;
+        }
     }
 }
 

@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import {
     dayOfWeekText,
     matchOddEven,
+    multipleWeekRangesText,
     oddEvenText,
     sectionRangeText,
     weekRangeText,
@@ -72,6 +73,7 @@ export interface ScheduleDto {
     course: string;
     place: string;
     courseItem: string;
+    rootId: string;
 }
 
 interface SlotRange {
@@ -101,6 +103,7 @@ export class Schedule implements SlotRange {
     course: string;
     courseItem: string;
     place: string;
+    rootId: string;
 
     /**
      * 排课数据所有者，用于判断是否合并到同一timeslotItem。
@@ -125,6 +128,7 @@ export class Schedule implements SlotRange {
         this.course = dto.course;
         this.courseItem = dto.courseItem;
         this.place = dto.place;
+        this.rootId = dto.rootId;
         this.owner = owner;
     }
 
@@ -144,6 +148,22 @@ export class Schedule implements SlotRange {
         return this.startWeek - other.startWeek
             || this.endWeek - other.endWeek
             || this.oddEven - other.oddEven;
+    }
+
+    get courseText(): string {
+        return this.courseItem ? `${this.course}-${this.courseItem}` : `${this.course}`;
+    }
+
+    get weeksText(): string {
+        return weekRangeText(this);
+    }
+
+    get dayOfWeekText(): string {
+        return `周${dayOfWeekText(this.dayOfWeek)}`;
+    }
+
+    get sectionsText(): string {
+        return sectionRangeText(this);
     }
 }
 
@@ -255,7 +275,7 @@ export class Timetable {
 
     /**
      * 获取指定包含timeslot的周次。由于当前可能已过week进行了过滤，
-     * 所以不能从_dayColumns直接获取，而是从原始__schedules获取。
+     * 所以不能从_dayColumns直接获取，而是从原始_schedules获取。
      */
     getTimeslotWeeks(timeslot: Timeslot): number[] {
         return _.chain(this._schedules).filter(it => {
@@ -580,19 +600,7 @@ export class TimeslotItem {
     }
 
     get weeksText(): string {
-        if (this.schedules.length === 1) {
-            const it = this.schedules[0];
-            return it.startWeek === it.endWeek
-                ? `第${it.startWeek}周`
-                : `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}周`;
-        } else {
-            const weeks = _.chain(this.schedules).map(it => {
-                return it.startWeek === it.endWeek
-                     ? `${it.startWeek}`
-                     : `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}`;
-            }).uniq().sort().join(',');
-            return `${weeks}周`;
-        }
+        return multipleWeekRangesText(this.schedules);
     }
 
     get sectionsText(): string {
@@ -620,7 +628,7 @@ export class TimeslotItem {
     }
 
     get place(): string {
-        return _.uniq(this.schedules.map(it => it.place)).join('/');
+        return _.uniq(this.schedules.map(it => it.place ? it.place : '（无）')).join('/');
     }
 
     get teachers(): string {
