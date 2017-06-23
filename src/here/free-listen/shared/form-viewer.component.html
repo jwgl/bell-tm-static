@@ -36,27 +36,29 @@
         <label>免听明细</label>
         <schedule-timetable [timetable]="timetable">
             <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
-                <div class="slotitem" *ngFor="let item of timeslot.items"
-                     [ngClass]="getTimeslotItemClass(item)"
-                     [style.height]="timeslot.items.length > 1 ? null : '100%'">
-                    <div class="course">
-                        <span class="course-name">{{item.course}}</span>
-                        <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                <div class="timeslot">
+                    <div class="slotitem" *ngFor="let item of timeslot.items"
+                        [ngClass]="item.getFreeListenClass(form)"
+                        [style.zIndex]="timeslot.zIndex">
+                        <div>
+                            <span class="course-name">{{item.course}}</span>
+                            <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                        </div>
+                        <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                        <div>{{item.place}}</div>
+                        <div>{{item.teachers}}</div>
+                        <div>{{item.courseClassNames}}</div>
                     </div>
-                    <div class="weeks">{{item.weeksText}}{{item.sectionsText}}</div>
-                    <div class="place">{{item.place}}</div>
-                    <div class="teachers">{{item.teachers}}</div>
-                    <div class="course-class-names">{{item.courseClassNames}}</div>
                 </div>
             </ng-template>
         </schedule-timetable>
-        <div>
+        <div class="d-flex">
             图例：
-            <span class="btn btn-sm btn-secondary">学生课表</span>
-            <span class="btn btn-sm btn-danger">当前申请</span>
-            <span class="btn btn-sm btn-info">其它申请（未审批）</span>
-            <span class="btn btn-sm btn-success">其它申请（已审批）</span>
-            <span class="btn btn-sm btn-warning">其它教学班</span>
+            <div class="slotitem-sample slotitem-normal">学生课表</div>
+            <div class="slotitem-sample slotitem-current">当前申请</div>
+            <div class="slotitem-sample slotitem-exists">其它申请-未审批</div>
+            <div class="slotitem-sample slotitem-approved">其它申请-已审批</div>
+            <div class="slotitem-sample slotitem-other">其它教学班</div>
         </div>
         <ul>
             <li *ngFor="let item of form.items">{{item}}</li>

@@ -97,15 +97,4 @@ export class FreeFormEditorComponent {
             alert(error.json().message);
         });
     }
-
-    getTimeslotItemClass(timeslotItem: TimeslotItem) {
-        const schedule = timeslotItem.getFreeListenSchedule();
-        return this.form.scheduleSelected(schedule)
-             ? 'btn-danger'
-             : this.form.scheduleApproved(schedule)
-             ? 'btn-success'
-             : this.form.scheduleExisted(schedule)
-             ? 'btn-info'
-             : 'btn-secondary';
-    }
 }

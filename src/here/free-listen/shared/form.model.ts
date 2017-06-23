@@ -11,12 +11,29 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
 
     interface TimeslotItem {
         getFreeListenSchedule(): Schedule;
+        getFreeListenClass(form: FreeListenForm): string;
     }
 }
 
 TimeslotItem.prototype.getFreeListenSchedule = function(this: TimeslotItem): Schedule {
     const schedule = this.schedules[0];
     return schedule.root ? schedule.root : schedule;
+};
+
+TimeslotItem.prototype.getFreeListenClass = function(this: TimeslotItem, form: FreeListenForm): string {
+    const schedule = this.getFreeListenSchedule();
+    switch (schedule.owner) {
+        case 'department':
+            return 'slotitem-other';
+        case 'self':
+            return form.scheduleSelected(schedule)
+                 ? 'slotitem-current'
+                 : form.scheduleApproved(schedule)
+                 ? 'slotitem-approved'
+                 : form.scheduleExisted(schedule)
+                 ? 'slotitem-exists'
+                 : 'slotitem-normal';
+    }
 };
 
 export class FreeListenForm {

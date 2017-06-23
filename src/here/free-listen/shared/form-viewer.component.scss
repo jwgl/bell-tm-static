@@ -1,4 +1,5 @@
 @import 'node_modules/bootstrap/scss/_variables.scss';
+@import 'src/core/components/schedule-timetable/schedule-timetable.shared.scss';
 
 .form-control-static:not(.text-muted) {
     border-bottom: solid 1px rgba(0,0,0,.15);
@@ -8,42 +9,42 @@ label {
     font-weight: bold;
 }
 
-schedule-timetable /deep/ {
-    .table {
-        td {
-            border-right: solid 1px $table-border-color;
-        }
-    }
+ul {
+    padding: 0.5rem 0 0.5rem 0;
+}
 
-    .slotitem {
-        width: 100%;
-        border: solid 1px #888;
-        border-radius: 4px;
-        padding: 2px;
-        white-space: normal;
+*:not(button){
+    &.slotitem-normal {
+        @include schedule-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
     }
-
-    .slotitem + .slotitem {
-        margin-top: 2px;
+    &.slotitem-current {
+        @include schedule-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
     }
-
-    .course-name {
-        font-size: 1rem;
+    &.slotitem-exists {
+        @include schedule-variant($btn-info-color, $btn-info-bg, $btn-info-border);
     }
-
-    .course-item {
-        white-space: nowrap;
-        font-size: 0.75rem;
+    &.slotitem-approved {
+        @include schedule-variant($btn-success-color, $btn-success-bg, $btn-success-border);
     }
-
-    .weeks,
-    .teachers,
-    .place,
-    .course-class-names {
-        font-size: 0.75rem;
+    &.slotitem-other {
+        @include schedule-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
     }
 }
 
-ul {
-    padding: 0.5rem 0 0.5rem 0;
+button.slotitem {
+    &.slotitem-normal {
+        @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+    }
+    &.slotitem-current {
+        @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+    }
+    &.slotitem-exists {
+        @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+    }
+    &.slotitem-approved {
+        @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+    }
+    &.slotitem-other {
+        @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+    }
 }

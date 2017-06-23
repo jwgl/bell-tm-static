@@ -7,6 +7,9 @@ export interface WeekRange {
     oddEven: number;
 }
 
+/**
+ * 周区间字符串形式，如第1周、1-17周、1-17单周。
+ */
 export function weekRangeText(weekRange: WeekRange): string {
     if (weekRange.startWeek === weekRange.endWeek) {
         return `第${weekRange.startWeek}周`;
@@ -19,11 +22,15 @@ export function weekRangeText(weekRange: WeekRange): string {
     }
 }
 
+/**
+ * 多个周区间的字符串形式。如果weekRanges只包含一个区间，使用weekRangeText进行格式化；
+ * 如果weekRanges超过一个区间，采用如下形式：1-2,3,4-10单,10-17周。
+ */
 export function multipleWeekRangesText(weekRanges: WeekRange[]): string {
     if (weekRanges.length === 1) {
         return weekRangeText(weekRanges[0]);
     } else {
-        return weekRanges.map(it => {
+        return _.chain(weekRanges).map(it => {
             if (it.startWeek === it.endWeek) {
                 return `${it.startWeek}`;
             } else {
@@ -33,7 +40,7 @@ export function multipleWeekRangesText(weekRanges: WeekRange[]): string {
                     return `${it.startWeek}-${it.endWeek}${oddEvenText(it.oddEven)}`;
                 }
             }
-        }).join(',') + '周';
+        }).uniq().join(',') + '周';
     }
 }
 

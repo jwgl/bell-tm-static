@@ -1,16 +1,56 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import 'node_modules/bootstrap/scss/_mixins.scss';
+
+@mixin schedule-variant($color, $background, $border) {
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.2), 0 8px 16px -2px rgba(0, 0, 0, 0.2)
+}
+
 .timeslot {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    border: solid 1px #888;
-    border-radius: 4px;
+}
+
+.slotitem {
+    width: 100%;
     padding: 2px;
-}
-
-.slotitem + .slotitem {
-    border-top: dashed 1px #aaa;
-}
-
-.course {
     white-space: normal;
+    word-wrap: break-word;
+    flex-basis: auto;
+    flex-grow: 1;
+    font-size: 0.75rem;
+}
+
+.slotitem:not(button) {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-style: solid;
+    @include schedule-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+}
+
+.slotitem:not(button) + .slotitem:not(button) {
+    margin-top: -$input-btn-border-width;
+}
+
+.slotitem-sample {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    border-width: 1px;
+    border-style: solid;
 }
 
 .course-name {
@@ -19,11 +59,4 @@
 
 .course-item {
     white-space: nowrap;
-    font-size: 0.75rem;
-}
-
-.weeks,
-.teachers,
-.place {
-    font-size: 0.75rem;
 }

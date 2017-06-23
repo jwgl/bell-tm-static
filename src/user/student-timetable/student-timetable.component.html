@@ -1,15 +1,15 @@
 <schedule-weektab [term]="term" [showTermTab]="true" #weektab></schedule-weektab>
 <schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
     <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
-        <div class="timeslot d-flex flex-column justify-content-center">
-            <div class="slotitem" *ngFor="let item of timeslot.items">
+        <div class="timeslot">
+            <div class="slotitem" *ngFor="let item of timeslot.items" [style.zIndex]="timeslot.zIndex">
                 <div class="course">
                     <span class="course-name">{{item.course}}</span>
                     <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
                 </div>
-                <div class="weeks">{{item.weeksText}}{{item.sectionsText}}</div>
-                <div class="place">{{item.place}}</div>
-                <div class="teachers">{{item.teachers}}</div>
+                <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                <div>{{item.place}}</div>
+                <div>{{item.teachers}}</div>
             </div>
         </div>
     </ng-template>
