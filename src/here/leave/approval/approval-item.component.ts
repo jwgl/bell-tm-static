@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
+import {Schedule, ScheduleDto} from 'core/models';
 import {ReviewOptions} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 import {LeaveForm} from '../shared/form.model';
 
 @Component({

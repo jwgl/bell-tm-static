@@ -3,9 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
-import {Schedule, ScheduleDto, Term, TimeslotItem, Timetable} from 'core/models';
+import {Schedule, ScheduleDto, Timetable} from 'core/models';
 
-import {FreeListenForm, FreeListenItem} from '../../shared/form.model';
+import {FreeListenForm} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
 import './form-editor.model';
 
@@ -19,10 +19,11 @@ interface Teacher {
     templateUrl: 'form-editor.component.html',
 })
 export class FreeFormEditorComponent {
+    form: FreeListenForm;
+    timetable: Timetable;
+    saving = false;
+
     private editMode: EditMode;
-    private form: FreeListenForm;
-    private saving = false;
-    private timetable: Timetable;
 
     constructor(
         private router: Router,

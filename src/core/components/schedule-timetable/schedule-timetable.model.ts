@@ -540,13 +540,6 @@ export class Timeslot {
     }
 
     /**
-     * UI显示顺序
-     */
-    get zIndex(): number {
-        return this.dayOfWeek * 1000 + this.startSection * 10 + this.columnUnit * this.columnIndex;
-    }
-
-    /**
      * timeslot的文本表示
      */
     get label(): string {

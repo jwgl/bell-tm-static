@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 
-import {Schedule} from '../../../shared/schedule/schedule.model';
+import {Schedule} from 'core/models';
+
 import {LeaveForm, LeaveItem} from '../../shared/form.model';
 
 declare module '../../shared/form.model' {

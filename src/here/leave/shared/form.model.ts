@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
-import * as moment from 'moment';
-import {Schedule} from '../../shared/schedule/schedule.model';
+
+import {Schedule} from 'core/models';
+import {dayOfWeekText} from 'core/utils';
 
 export enum LeaveType {
     PrivateAffair = 1,
@@ -28,6 +29,8 @@ export class LeaveForm {
     workflowInstanceId: string;
     items: LeaveItem[];
 
+    scheduleMap: {[key: string]: Schedule} = {};
+
     constructor(dto: any, schedules: Schedule[]) {
         this.id = dto.id;
         this.term = dto.term;
@@ -38,13 +41,20 @@ export class LeaveForm {
         this.reason = dto.reason;
         this.status = dto.status;
         this.workflowInstanceId = dto.workflowInstanceId;
-        this.items = dto.items.map((item: any) => {
-            const leaveItem = new LeaveItem(this, item);
-            if (item.taskScheduleId) {
-                leaveItem.schedule = schedules.find(s => s.id === item.taskScheduleId);
-            }
-            return leaveItem;
+
+        schedules.forEach(schedule => {
+            this.scheduleMap[schedule.id] = schedule;
         });
+
+        this.items = dto.items.map((itemDto: any) => this.createItem(itemDto));
+    }
+
+    createItem(itemDto: any) {
+        const leaveItem = new LeaveItem(this, itemDto);
+        if (itemDto.taskScheduleId) {
+            leaveItem.schedule = this.scheduleMap[itemDto.taskScheduleId];
+        }
+        return leaveItem;
     }
 
     get title(): string {
@@ -103,9 +113,9 @@ export class LeaveItem {
 
     toString() {
         if (this.schedule) {
-            return `第${this.week}周 ${this.schedule.label}`;
+            return `第${this.week}周 ${this.schedule.dayOfWeekText} ${this.schedule.sectionsText} ${this.schedule.courseText}`;
         } else if (this.dayOfWeek) {
-            return `第${this.week}周 ${moment.weekdaysShort(this.dayOfWeek)}`;
+            return `第${this.week}周 周${dayOfWeekText(this.dayOfWeek)}`;
         } else {
             return `第${this.week}周`;
         }

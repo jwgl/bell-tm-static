@@ -1,8 +1,8 @@
 import {Component, ElementRef} from '@angular/core';
 
+import {Schedule, ScheduleDto} from 'core/models';
 import {Workflow} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../shared/schedule/schedule.model';
 import {LeaveForm} from '../shared/form.model';
 import {LeaveItemService} from './item.service';
 

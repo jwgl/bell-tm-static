@@ -2,7 +2,7 @@
 <schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
     <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
         <div class="timeslot">
-            <div class="slotitem" *ngFor="let item of timeslot.items" [style.zIndex]="timeslot.zIndex">
+            <div class="slotitem" *ngFor="let item of timeslot.items">
                 <div class="course">
                     <span class="course-name">{{item.course}}</span>
                     <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>

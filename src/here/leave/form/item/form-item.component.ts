@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
+import {Schedule, ScheduleDto} from 'core/models';
 import {SubmitOptions} from 'core/workflow';
 
-import {Schedule, ScheduleDto} from '../../../shared/schedule/schedule.model';
 import {LeaveForm} from '../../shared/form.model';
 import {LeaveFormService} from '../form.service';
 import './form-item.model';

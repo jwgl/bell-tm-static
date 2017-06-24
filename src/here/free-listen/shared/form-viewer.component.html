@@ -39,7 +39,6 @@
                 <div class="timeslot">
                     <div class="slotitem" *ngFor="let item of timeslot.items"
                         [ngClass]="item.getFreeListenClass(form)"
-                        [style.zIndex]="timeslot.zIndex">
                         <div>
                             <span class="course-name">{{item.course}}</span>
                             <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
