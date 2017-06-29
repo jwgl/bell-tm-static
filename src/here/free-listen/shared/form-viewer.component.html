@@ -38,7 +38,7 @@
             <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
                 <div class="timeslot">
                     <div class="slotitem" *ngFor="let item of timeslot.items"
-                        [ngClass]="item.getFreeListenClass(form)"
+                        [ngClass]="item.getFreeListenClass(form)">
                         <div>
                             <span class="course-name">{{item.course}}</span>
                             <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
