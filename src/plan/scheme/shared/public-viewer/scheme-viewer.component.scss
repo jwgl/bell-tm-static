@@ -19,6 +19,10 @@
     }
 
     table {
+        th.group-name {
+            width: 3rem;
+        }
+
         th, td {
             text-align: center;
             vertical-align: middle;
@@ -34,6 +38,12 @@
                 text-align: left;
                 white-space: normal;
             }
+
+            .vertical {
+                writing-mode: vertical-rl;
+                -webkit-writing-mode: vertical-rl;
+                -ms-writing-mode: tb-rl;
+            }
         }
 
         tr {
@@ -44,13 +54,16 @@
                 }
             }
         }
-    }
 
-    .vertical {
-        width: 1rem;
-        line-height: 1.125rem;
-        margin: auto;
-        white-space: normal;
+        thead {
+            tr.fix-print {
+                display: none;
+            }
+        }
+
+        tfoot.fix-print {
+            display: none;
+        }
     }
 
     scheme-table {
@@ -68,8 +81,29 @@
         table {
             font-family: '宋体';
 
-            th, th {
-                padding: 2px!important;
+            thead {
+                border-top: solid 2px #000;
+                tr.fix-print {
+                    display: table-row;
+                    th {
+                        padding: 0;
+                        border-bottom-width: 0;
+                    }
+                }
+            }
+
+            tfoot.fix-print {
+                display: table-footer-group;
+                td {
+                    padding: 0;
+                    border-bottom-width: 0;
+                }
+            }
+
+            tr:not(.fix-print) {
+                th {
+                    border-bottom-width: 1px !important;
+                }
             }
         }
     }

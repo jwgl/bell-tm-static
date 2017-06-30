@@ -1,7 +1,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th rowspan="2" colspan="2">课程<br>类别</th>
+            <th rowspan="2" colspan="2" class="group-name">课程<br>类别</th>
             <th rowspan="2">课程编码</th>
             <th rowspan="2">课程名称</th>
             <th rowspan="2">学分</th>
@@ -11,6 +11,16 @@
         </tr>
         <tr>
             <th *ngFor="let term of scheme.terms" [class.short-term]="term >= 17">{{term | termTitle}}</th>
+        </tr>
+        <tr class="fix-print">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th *ngFor="let term of scheme.terms" [class.short-term]="term >= 17"></th>
         </tr>
     </thead>
     <tbody>
@@ -32,4 +42,16 @@
         </ng-container>
         <tr [scheme-summary]="scheme"></tr>
     </tbody>
+    <tfoot class="fix-print">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td *ngFor="let term of scheme.terms" [class.short-term]="term >= 17"></td>
+        </tr>
+    </tfoot>
 </table>

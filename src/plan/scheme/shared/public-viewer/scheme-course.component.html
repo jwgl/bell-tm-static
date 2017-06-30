@@ -1,5 +1,5 @@
-<td *ngIf="first1 && first2" [attr.rowspan]="group2.rowspan"><div class="vertical">{{group2.name}}</div></td>
-<td *ngIf="first1" [attr.colspan]="group2 ? 1 : 2" [attr.rowspan]="group1.rowspan"><div class="vertical">{{group1.name}}</div></td>
+<td *ngIf="first1 && first2" [attr.rowspan]="group2.rowspan"><span class="vertical">{{group2.name}}</span></td>
+<td *ngIf="first1" [attr.colspan]="group2 ? 1 : 2" [attr.rowspan]="group1.rowspan"><span class="vertical">{{group1.name}}</span></td>
 <td>{{schemeCourse.courseId}}</td>
 <td class="course-name">{{schemeCourse.courseName}}</td>
 <td>{{schemeCourse.credit | zeroEmpty}}</td>
