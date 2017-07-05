@@ -1,0 +1,23 @@
+<div #dropdown class="dropdown input-group">
+    <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" (click)="clearPlace()" readonly [value]="result"
+        placeholder="点击选择">
+    <div class="dropdown-menu" style="width: 100%; padding: 5px;">
+        <div style="margin-bottom: 5px;">
+            <input type="text" #search class="form-control w-100">
+        </div>
+        <div class="table-wrapper" *ngIf="places?.length > 0; else prompt">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let place of places" (click)="placeSelected(place)" tabindex="1" style="background-color: #FFF">
+                        <td>{{place.name}}</td>
+                        <td>{{place.seat}}</td>
+                        <td>{{place.type}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #prompt>
+            <div class="help-block">输入教室名称进行查询</div>
+        </ng-template>
+    </div>
+</div>

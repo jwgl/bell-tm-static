@@ -1,0 +1,101 @@
+<ng-container *ngIf="vm !=undefined && vm.schedule">
+    <form-title>听课记录</form-title>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">课程</label>
+            <p>{{vm.schedule.course}}<span *ngIf="vm.schedule.courseClassName"> - {{vm.schedule.courseClassName}}</span></p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">开课单位</label>
+            <p>{{vm.schedule.department}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师姓名</label>
+            <p>{{vm.schedule.teacherName}}（{{vm.schedule.teacherId}}）</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师职称</label>
+            <p>{{vm.schedule.academicTitle}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">课程性质</label>
+            <p>{{vm.schedule.property}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课时间</label>
+            <p>{{vm.schedule.startWeek}}-{{vm.schedule.endWeek}}周 {{vm.schedule.oddEven | oddEven}} {{vm.schedule.dayOfWeek
+                | dayOfWeek}} {{vm.schedule.startSection}}-{{vm.schedule.startSection+vm.schedule.totalSection-1}}节</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课地点</label>
+            <p>{{vm.schedule.place}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">学分</label>
+            <p>{{vm.schedule.credit}}学分</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">教师出勤</label>
+            <p>{{vm.earlier?'提前：'+vm.earlier+'分钟':''}} {{vm.late?'迟到：'+vm.late+'分钟':''}} {{vm.leave?'早退：'+vm.leave+'分钟':''}}
+                {{ !vm.earlier && !vm.late && !vm.leave ?'正常':''}}
+            </p>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">学生出勤</label>
+            <p>应到人数：{{vm.dueStds}}人 {{vm.attendantStds?'实到：'+vm.attendantStds+'人':''}} {{vm.lateStds?'迟到：'+vm.lateStds+'人':''}}
+                {{vm.leaveStds?'早退：'+vm.leaveStds+'人':''}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="form-group col-md-3">
+            <label class="control-label">听课时间</label>
+            <p>第{{vm.observationWeek}}周  {{vm.supervisorDate}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">听课节数</label>
+            <p>{{vm.totalSection}}节</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教学形式</label>
+            <p>{{vm.teachingMethods}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">督导等级评价</label>
+            <p>{{vm.evaluateLevel}}  {{vm.observerName}}（{{vm.observerType | typeLabel}}）</p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>评价项目</th>
+                <th>主要观测点</th>
+                <th>评价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let evaluation of evaluationSystem; let i = index">
+                <ng-container *ngFor="let item of evaluation.value; let j = index">
+                    <tr>
+                        <td *ngIf="j == 0" [rowSpan]="evaluation.value.length">{{evaluation.key}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.value |evaluationTitle}}</td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <label>综合评价</label>
+        <p class="form-control-static">{{vm.evaluationText}}</p>
+    </div>
+    <div class="form-group">
+        <label>意见和建议</label>
+        <p class="form-control-static">{{vm.suggest}}</p>
+    </div>
+</ng-container>

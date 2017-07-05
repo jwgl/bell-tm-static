@@ -1,0 +1,76 @@
+<div class="form-group row">
+    <div class="col-md-4">
+        <label class="label-control">学年学期</label>
+        <select name="term" class="form-control" [(ngModel)]="termId">
+            <option *ngFor="let item of terms" [ngValue]="item">
+                {{ item | termLabel}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label class="label-control">督导类型</label>
+        <select name="types" class="form-control" [(ngModel)]="type">
+            <option *ngFor="let item of types" [ngValue]="item">
+                {{ item | typeLabel}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <label class="label-control">筛选条件</label>
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+                {{filterSelected.name}}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button" *ngFor="let filterItem of listFilter" (click)="onFilterSelected(filterItem)">{{filterItem.name}}</button>
+            </div>
+            <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
+            <button type="button" class="btn btn-secondary" (click)="doFilter()"><i class="fa fa-search" aria-hidden="true"></i></button>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="list && list.length>0; else empty">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>开课单位</th>
+                <th>听课时间</th>
+                <th class="text-center">评价等级</th>
+                <th>督导老师</th>
+                <th class="text-center">状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list| pager : pagerArgs" let-i="index">
+                <tr>
+                    <td><a [routerLink]="['/',item.id]">#{{item.id}}</a></td>
+                    <td class="teacher">{{item.teachername}}<span *ngIf="item.teachercode">({{item.teachercode}})</span></td>
+                    <td class="courseName">{{item.coursename}} <br>{{item.courseproperty}} {{item.classpostion}}</td>
+                    <td>{{item.collegename}} </td>
+                    <td>{{item.listentime}}</td>
+                    <td class="text-center">{{item.evaluategrade}}</td>
+                    <td>{{item.inpectorname}}({{item.inpectorcode}})<br>{{item.observerType | typeLabel}}</td>
+                    <td class="text-center">{{stateText(item.state)}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <div class="form-group row mt-1">
+                        <div class="col-md-2">总共：{{count}}条记录</div>
+                        <div class="offset-md-3 col-md-2">
+                            <pager [total]="count" [offset]="offset" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></pager>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

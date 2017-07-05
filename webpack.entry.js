@@ -44,4 +44,11 @@ module.exports = {
     'here/free-listen/check':                  './src/here/free-listen/check/main.ts',
     'here/free-listen/approval':               './src/here/free-listen/approval/main.ts',
     'here/free-listen/item':                   './src/here/free-listen/item/main.ts',
+    'steer/observation/admin/setting':         './src/steer/observation/settings/main.ts',
+    'steer/observation/dept-admin/setting':    './src/steer/observation/settings/department/main.ts',
+    'steer/observation/form':                  './src/steer/observation/form/main.ts',
+    'steer/observation/public':                './src/steer/observation/public/main.ts',
+    'steer/observation/approval':              './src/steer/observation/approval/main.ts',
+    'steer/observation/report':                './src/steer/observation/reports/main.ts',
+    'steer/observation/legacy':                './src/steer/observation/legacy/main.ts',
 };

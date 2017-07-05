@@ -1,0 +1,56 @@
+<modal-dialog [title]="title">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="第几周">
+                <select name="weekOfTerm" class="form-control" [(ngModel)]="queryOptions.weekOfTerm">
+                    <option value="" disabled>选择周</option>
+                    <option *ngFor="let item of vm.weekOfTerms" [ngValue]="item">
+                        第{{ item }}周
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="星期几">
+                <select name="dayOfWeek" class="form-control" [(ngModel)]="queryOptions.dayOfWeek">
+                    <option value="" ></option>
+                    <option *ngFor="let item of vm.dayOfWeeks"  [ngValue]="valueFn(item)">
+                        {{ labelFn(item) }}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="时间段">
+                <select name="section" class="form-control" [(ngModel)]="queryOptions.section">
+                    <option value="" disabled>选择时段</option>
+                    <option *ngFor="let item of vm.sections" [ngValue]="item">
+                        {{item.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="教学楼">
+                <select name="building" class="form-control" [(ngModel)]="queryOptions.building">
+                    <option value="" > </option>
+                    <option *ngFor="let item of vm.buildings" [ngValue]="item">
+                        {{ item }}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="教室">
+                <place-select (selectPlace)="onPlaceSelected($event)" [building]="queryOptions.building"></place-select>
+            </form-field>
+            <form-field label="学院">
+                <select name="department" class="form-control" [(ngModel)]="queryOptions.departmentId">
+                    <option value="" > </option>
+                    <option *ngFor="let item of vm.departments" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="教师">
+                <teacher-select (selectTeacher)="onTeacherSelected($event)"></teacher-select>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">查询</button>
+    </modal-footer>
+</modal-dialog>

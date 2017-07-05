@@ -1,0 +1,11 @@
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li *ngFor="let item of items" class="nav-item mr-1">
+            <a  class="nav-link" [routerLink]="['/list',item.type]"
+                [class.active]="item.active">
+                {{item.label}} <span class="badge badge-pill badge-count">{{item.count}}</span>
+            </a>
+        </li>
+        <ng-content></ng-content>
+    </ul>
+</div>

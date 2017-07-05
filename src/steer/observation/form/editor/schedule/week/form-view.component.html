@@ -1,0 +1,43 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <button type="button" class="btn" [class.btn-primary]="isTeacherMode" [class.btn-secondary]="!isTeacherMode" [routerLink]="['/teachers']">教师周课表</button>
+        <button type="button" class="btn" [class.btn-primary]="!isTeacherMode" [class.btn-secondary]="isTeacherMode" [routerLink]="['/places']">教室周课表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/schedules']">列表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/priorities']">优先听课名单</button>
+    </div>
+    <div class="btn-group ml-auto">
+        <ng-container *ngIf="isTeacherMode">
+            <teacher-select (selectTeacher)="onTeacherSelected($event)"></teacher-select>
+        </ng-container>
+        <ng-container *ngIf="!isTeacherMode">
+            <place-select (selectPlace)="onPlaceSelected($event)"></place-select>
+        </ng-container>
+        <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="(isTeacherMode && !teacher) ||(!isTeacherMode && !place)">查询</button>
+    </div>
+</div>
+<ng-container *ngIf="timetable">
+    <schedule-weektab [term]="term" #weektab></schedule-weektab>
+    <schedule-timetable [timetable]="timetable" [week]="weektab.selectedWeek">
+        <ng-template #timeslotTpl let-timeslot="timeslot" let-week="week">
+           <div class="timeslot">
+                <button class="btn btn-secondary slotitem" *ngFor="let item of timeslot.items"
+                    [ngClass]="timeslot.getObservationClass()"
+                    [routerLink]="['/teacher',timeslot.getTeacherId(),'week', week, 'timeslot',  timeslot.id]">
+                    <div>
+                        <span class="course-name">{{item.course}}</span>
+                        <span class="course-item" *ngIf="item.courseItem">{{item.courseItem}}</span>
+                    </div>
+                    <div>{{item.weeksText}}{{item.sectionsText}}</div>
+                    <div>{{item.place}}</div>
+                    <div class="teachers">{{item.teachers}} {{item.getAcademicTitle()}}</div>
+                    <div class="department">{{item.getDepartment()}}</div>
+                </button>
+            </div>
+        </ng-template>
+    </schedule-timetable>
+    <div class="d-flex">
+        图例：
+        <div class="slotitem-sample slotitem-other">老师被听课达2次</div>
+        <div class="slotitem-sample slotitem-current">老师被听课2次以上</div>
+    </div>
+</ng-container>

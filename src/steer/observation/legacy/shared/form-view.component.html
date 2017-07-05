@@ -1,0 +1,144 @@
+<ng-container *ngIf="vm">
+    <form-title>听课记录</form-title>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">课程</label>
+            <p>{{vm.coursename}}<span *ngIf="vm.teachobject"> - {{vm.teachobject}}</span></p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">开课单位</label>
+            <p>{{vm.collegename}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师姓名</label>
+            <p>{{vm.teachername}}（{{vm.teachercode}}）</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师职称</label>
+            <p>{{vm.teachpost}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">课程性质</label>
+            <p>{{vm.courseproperty}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课时间</label>
+            <p></p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课地点</label>
+            <p>{{vm.classpostion}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">学分</label>
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label class="control-label">教师出勤</label>
+            <p>
+                <span *ngIf="vm.pretime">提前{{vm.pretime}}分钟 </span>
+                <span *ngIf="vm.latetime">迟到{{vm.latetime}}分钟 </span>
+                <span *ngIf="vm.leavetime">早退{{vm.leavetime}}分钟 </span>
+                <span *ngIf="!vm.pretime && !vm.latetime && !vm.leavetime">正常</span>
+            </p>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">学生出勤</label>
+            <p>
+                <span *ngIf="vm.duecounter">应到{{vm.duecounter}}人 </span>
+                <span *ngIf="vm.solidcounter">实到{{vm.solidcounter}}人 </span>
+                <span *ngIf="vm.latecounter">迟到{{vm.latecounter}}人 </span>
+                <span *ngIf="vm.leavecounter">早退{{vm.leavecounter}}人 </span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">听课时间</label>
+            <p>{{vm.listentime}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">听课节数</label>
+            <p>{{vm.listencount}}节</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教学形式</label>
+            <p>{{vm.teachtype}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">督导等级评价</label>
+            <p>{{vm.evaluategrade}} / {{vm.inpectorname}}（{{vm.observerType | typeLabel}}）</p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>评价项目</th>
+                <th>主要观测点</th>
+                <th>评价</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td rowSpan="2">教学态度</td>
+                <td>备课充分</td>
+                <td>{{vm.a1}}</td>
+            </tr>
+            <tr>
+                <td>上课认真</td>
+                <td>{{vm.a2}}</td>
+            </tr>
+            <tr>
+                <td rowSpan="3">教学内容</td>
+                <td>课堂单元教学目的明确</td>
+                <td>{{vm.a4}}</td>
+            </tr>
+            <tr>
+                <td>重点突出，难易适度</td>
+                <td>{{vm.a5}}</td>
+            </tr>
+            <tr>
+                <td>内容充实、科学、系统，理论联系实际</td>
+                <td>{{vm.a6}}</td>
+            </tr>
+            <tr>
+                <td rowSpan="4">教学方法</td>
+                <td>教师语言表达清晰、准确，能清楚讲解教学内容，条理清楚</td>
+                <td>{{vm.a7}}</td>
+            </tr>
+            <tr>
+                <td>根据教学内容，采用适当的教学方法和手段</td>
+                <td>{{vm.a8}}</td>
+            </tr>
+            <tr>
+                <td>教学互动，善于激发学生学习兴趣，引导学生思考问题</td>
+                <td>{{vm.a9}}</td>
+            </tr>
+            <tr>
+                <td>严格管理课堂，执行考勤制度</td>
+                <td>{{vm.a10}}</td>
+            </tr>
+            <tr>
+                <td rowSpan="2">教学效果</td>
+                <td>课堂秩序良好，学生认真听讲</td>
+                <td>{{vm.a11}}</td>
+            </tr>
+            <tr>
+                <td>学生掌握本课堂单元基本内容，达到了教学目的</td>
+                <td>{{vm.a12}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <label>综合评价</label>
+        <p class="form-control-static">{{vm.evaluatemessage}}</p>
+    </div>
+    <div class="form-group">
+        <label>意见和建议</label>
+        <p class="form-control-static">{{vm.improvemessage}}</p>
+    </div>
+</ng-container>

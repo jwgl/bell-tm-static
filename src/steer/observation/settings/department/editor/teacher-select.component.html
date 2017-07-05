@@ -1,0 +1,22 @@
+<div #dropdown class="dropdown input-group">
+    <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" (click)="clearTeacher()" readonly [value]="result" placeholder="点击选择">
+    <div class="dropdown-menu" style="width: 100%; padding: 5px;">
+        <div class="mb-2">
+            <input type="text" #search class="form-control w-100">
+        </div>
+        <div class="table-wrapper" *ngIf="teachers?.length > 0; else prompt">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let teacher of teachers" (click)="teacherSelected(teacher)" tabindex="1" style="background-color: #FFF">
+                        <td>{{teacher.id}}</td>
+                        <td>{{teacher.name}}</td>
+                        <td>{{teacher.department}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <ng-template #prompt>
+            <div class="help-block">输入教师工号、姓名进行查询</div>
+        </ng-template>
+    </div>
+</div>

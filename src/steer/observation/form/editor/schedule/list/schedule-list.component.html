@@ -1,0 +1,46 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/teachers']">教师周课表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/places']">教室周课表</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/schedules']">列表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/priorities']">优先听课名单</button>
+    </div>
+    <div class="btn-group ml-auto">
+        <button type="button" class="btn btn-secondary" (click)="query()">高级查询</button>
+    </div>
+</div>
+<ng-container *ngIf="schedules">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>教师</th>
+                <th>课程名</th>
+                <th>职称</th>
+                <th>上课时间</th>
+                <th>地点</th>
+                <th>学分</th>
+                <th>开课单位</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-schedule [ngForOf]="schedules" let-i="index">
+                <tr>
+                    <td class="teacher"><a [class.btn]="schedule.superviseCount"
+                            [class.btn-warning]="schedule.superviseCount === 2"
+                            [class.btn-danger]="schedule.superviseCount > 2"
+                            [routerLink]="['/teacher',schedule.teacherId,'week', queryOptions.weekOfTerm, 'timeslot',  schedule.dayOfWeek * 10000 + schedule.startSection * 100]">{{schedule.teacherName}}</a>
+                    </td>
+                    <td class="courseName">{{schedule.course}}</td>
+                    <td>{{schedule.academicTitle}} </td>
+                    <td>{{schedule.startWeek}}-{{schedule.endWeek}}周<br>{{schedule.oddEven | oddEven}} {{schedule.dayOfWeek | dayOfWeek}}
+                        {{schedule.startSection}}-{{schedule.startSection+schedule.totalSection-1}}节
+                    </td>
+                    <td>{{schedule.place}}</td>
+                    <td>{{schedule.credit}}</td>
+                    <td>{{schedule.department}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <div>图例：<span class="btn btn-warning"></span>表示老师被听课达2次，<span class="btn btn-danger"></span>表示老师被听课2次以上。</div>
+</ng-container>

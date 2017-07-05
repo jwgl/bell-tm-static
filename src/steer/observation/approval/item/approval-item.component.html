@@ -1,0 +1,8 @@
+<div class="container" *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class="btn btn-secondary" routerLink="/">返回</button>
+        </div>
+    </div>
+    <observation-form-viewer [vm]="vm" [evaluationSystem]="evaluationSystem"></observation-form-viewer>
+</div>

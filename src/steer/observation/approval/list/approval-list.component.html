@@ -1,0 +1,55 @@
+<nav-tabs [options]="options">
+    <li class="nav-item ml-auto">
+        <select name="term" class="form-control" [(ngModel)]="termId">
+            <option *ngFor="let item of terms" [ngValue]="item.id">
+                {{ item.id | termLabel}}
+            </option>
+        </select>
+    </li>
+    <li class="nav-item ml-2">
+        <div class="input-group">
+            <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
+            <button type="button" class="input-group-addon btn-sm" (click)="doFilter()"><i class="fa fa-search"></i></button>
+        </div>
+    </li>
+</nav-tabs>
+<div class="container" *ngIf="list && list.length>0; else empty">
+    <table class="table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>开课单位</th>
+                <th>学年学期</th>
+                <th>听课时间</th>
+                <th>评价等级</th>
+                <th>督导老师</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+                <tr>
+                    <td>
+                        <checkbox-selector [data]="item"></checkbox-selector>
+                    </td>
+                    <td class="teacher"><a [routerLink]="['/',item.id]">{{item.teacherName}}({{item.teacherId}})</a> </td>
+                    <td>{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节
+                        {{item.place}}
+                    </td>
+                    <td>{{item.departmentName}} </td>
+                    <td class="term">{{item.termId | termLabel}}</td>
+                    <td>{{item.supervisorDate}}</td>
+                    <td>{{item.evaluateLevel}}</td>
+                    <td class="teacher">{{item.supervisorName}}({{item.supervisorId}})</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" class="btn btn-primary" *ngIf="canFeed" (click)="feedAll()">发布</button>
+    </div>
+</div>
+<ng-template #empty>
+    <div class="container alert alert-info">暂无数据</div>
+</ng-template>

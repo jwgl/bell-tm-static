@@ -1,0 +1,27 @@
+@import 'node_modules/bootstrap/scss/_variables.scss';
+@import 'src/core/components/schedule-timetable/schedule-timetable.shared.scss';
+
+label {
+    font-weight: bold;
+}
+
+*:not(button){
+    &.slotitem-current {
+        @include schedule-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+    }
+    &.slotitem-other {
+        @include schedule-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+    }
+}
+
+button.slotitem {
+    &.slotitem-normal {
+        @include button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+    }
+    &.slotitem-current {
+        @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+    }
+    &.slotitem-other {
+        @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+    }
+}

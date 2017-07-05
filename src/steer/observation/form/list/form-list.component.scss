@@ -1,0 +1,49 @@
+@import '../../shared/schedule.shared.scss';
+
+.observationDate {
+    width: 8em;
+}
+
+.courseName {
+    width: 15em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.teacher {
+    width: 10em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .courseName {
+        max-width: 10em;
+    }
+    .teacher {
+        width: 8em;
+    }
+}
+
+@media (max-width: 991px) {
+    .courseName {
+        max-width: 10em;
+    }
+    .teacher {
+        width: 5em;
+    }
+}
+
+.courseNameAdmin {
+    width: 15em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.totalLabel {
+    padding-top: .5rem;
+    margin-bottom: 0;
+    line-height: 1.25;
+    border: solid transparent;
+    border-width: 1px 0;
+}

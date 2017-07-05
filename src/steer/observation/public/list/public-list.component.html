@@ -1,0 +1,39 @@
+<div class="form-group mt-1 row">
+    <label class="lebel-control col-md-3"> <span *ngIf="list">总共：{{list.length}}条记录</span> </label>
+</div>
+<div class="container" *ngIf="list && list.length>0; else empty">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>开课单位</th>
+                <th>学年学期</th>
+                <th>听课时间</th>
+                <th>评价等级</th>
+                <th>督导类型</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+                <tr>
+                    <td>
+                        <a [routerLink]="['/',item.id]" *ngIf="!item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
+                        <a [routerLink]="['/',item.id,'legacy']" *ngIf="item.isLegacy">{{item.teacherName}}({{item.teacherId}})</a>
+                    </td>
+                    <td>
+                        {{item.course}}<br>{{item.courseOtherInfo}}
+                    </td>
+                    <td>{{item.departmentName}}</td>
+                    <td>{{item.termId | termLabel}}</td>
+                    <td>{{item.supervisorDate}}</td>
+                    <td>{{item.evaluateLevel}}</td>
+                    <td>{{item.observerType | typeLabel}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

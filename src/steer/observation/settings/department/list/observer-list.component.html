@@ -1,0 +1,37 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <select name="term" class="form-control" [(ngModel)]="termId">
+            <option *ngFor="let item of terms" [ngValue]="item">
+                {{ item | termLabel}}
+            </option>
+        </select>
+    </div>
+    <div class="btn-group ml-auto">
+        <button routerLink="/report" class="btn btn-secondary">督导听课报表</button>
+        <button (click)="create()" class="btn btn-primary">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>学院</th>
+            <th>姓名</th>
+            <th>工号</th>
+            <th class=text-center>职称</th>
+            <th class=text-center>学年学期</th>
+            <th class=text-center>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-supervisor [ngForOf]="supervisors" let-i="index">
+            <tr>
+                <td>{{supervisor.dName}}</td>
+                <td>{{supervisor.tName}} </td>
+                <td>{{supervisor.tId}} </td>
+                <td class=text-center>{{supervisor.academicTitle}}</td>
+                <td class=text-center>{{supervisor.termId | termLabel}}</td>
+               <td class=text-center><div class="btn btn-secondary btn-sm" (click)="remove(supervisor.id)"> <i class="fa fa-times" aria-hidden="true"></i></div></td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

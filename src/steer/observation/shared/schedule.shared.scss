@@ -1,0 +1,35 @@
+.table {
+    td {
+        white-space: nowrap;
+    }
+    th {
+        white-space: nowrap;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        vertical-align: middle;
+    }
+}
+
+.courseName {
+    width: 10em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.teacher {
+    width: 5em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .courseName {
+        max-width: 7em;
+    }
+}
+
+@media (max-width: 991px) {
+    .courseName {
+        max-width: 5em;
+    }
+}

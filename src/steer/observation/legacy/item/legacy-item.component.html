@@ -1,0 +1,9 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <a class="btn btn-secondary" download href="legacies/{{vm.id}}">导出</a>
+            <button class="btn btn-secondary" routerLink="/">返回</button>
+        </div>
+    </div>
+    <legacy-form-view [vm]="vm"></legacy-form-view>
+</ng-container>

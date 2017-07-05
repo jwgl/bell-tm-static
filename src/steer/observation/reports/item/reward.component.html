@@ -1,0 +1,45 @@
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">请选择查看月份</label>
+    <div class="col-sm-2">
+        <select name="month" class="form-control" [(ngModel)]="month">
+            <option *ngFor="let item of monthes" [ngValue]="item">
+                {{ item }}月份
+            </option>
+        </select>
+    </div>
+    <label class="col-sm-3 col-form-label"  *ngIf="list && list.length>0">共{{list.length}}条记录未计酬</label>
+    <a class="btn btn-secondary  ml-auto" download href="reports/reward?month={{month}}" *ngIf="list && list.length>0" (click)="done()">导出</a>
+</div>
+<div class="container" *ngIf="list && list.length>0; else empty">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>上课地点</th>
+                <th>开课单位</th>
+                <th>听课时间</th>
+                <th>节数</th>
+                <th>督导老师</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+                <tr>
+                    <td class="teacher">{{item.teacherName}}({{item.teacherId}})</td>
+                    <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节</td>
+                    <td>{{item.place}}</td>
+                    <td>{{item.departmentName}}</td>
+                    <td>{{item.supervisorDate}}</td>
+                    <td>{{item.observesCount}}</td>
+                    <td>{{item.supervisorName}}({{item.supervisorId}})</td>
+                    <td>{{item.status | statusName}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>

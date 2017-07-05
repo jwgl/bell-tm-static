@@ -1,0 +1,30 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="/">返回</button>
+    </div>
+</div>
+<div class="row">
+    <div class="offset-md-1 col-md-9" *ngIf="list && list.length>0; else empty">
+        <table class="table mt-1">
+            <thead>
+                <tr>
+                    <th>督导老师</th>
+                    <th>听课次数</th>
+                    <th>听课节数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-template ngFor let-item [ngForOf]="list" let-i="index">
+                    <tr>
+                        <td>{{item.observer}}</td>
+                        <td>{{item.observeTimes}} </td>
+                        <td>{{item.totalSection}} </td>
+                    </tr>
+                </ng-template>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #empty>
+        <div class="alert alert-info">暂无数据</div>
+    </ng-template>
+</div>

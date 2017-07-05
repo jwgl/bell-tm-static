@@ -1,0 +1,69 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <div style="width:250px">
+            <select name="term" class="form-control" [(ngModel)]="termId">
+                <option value="" > </option>
+                <option *ngFor="let item of terms"  [ngValue]="item">
+                    {{ item  | termLabel}}
+                </option>
+            </select>
+        </div>
+        <div class="ml-3" style="width:300px" *ngIf="isAdmin">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
+                    {{filterSelected.name}}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" type="button" *ngFor="let filterItem of listFilter" (click)="onFilterSelected(filterItem)">{{filterItem.name}}</button>
+                </div>
+                <input class="form-control" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
+                <button type="button" class="btn btn-secondary" (click)="doFilter()"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <p class="totalLabel"><span *ngIf="list">总共：{{count}}条记录</span><span class="btn btn-sm btn-warning ml-2" *ngIf="unsubmitCount">{{unsubmitCount}}条未提交</span></p>
+    </div>
+    <div class="btn-group ml-auto">
+        <a class="btn btn-secondary" download href="observations/{{termId}}" *ngIf="isAdmin">导出</a>
+        <button class="btn btn-primary" routerLink="/teachers">新建</button>
+    </div>
+</div>
+<div class="container" *ngIf="list && list.length>0; else empty">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>教师</th>
+                <th>课程信息</th>
+                <th>开课单位</th>
+                <th>听课时间</th>
+                <th>评价等级</th>
+                <th *ngIf="isAdmin">督导老师</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-item [ngForOf]="list| pager : pagerArgs" let-i="index">
+                <tr>
+                    <td><a [routerLink]="['/',item.id]">#{{item.id}}</a></td>
+                    <td class="teacher">{{item.teacherName}}({{item.teacherId}})</td>
+                    <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节<br *ngIf="isAdmin">{{item.place}}</td>
+                    <td>{{item.departmentName}} </td>
+                    <td class="observationDate">{{item.supervisorDate}}</td>
+                    <td>{{item.evaluateLevel}}</td>
+                    <td *ngIf="isAdmin">{{item.supervisorName}}({{item.supervisorId}})<br>{{item.observerType | typeLabel}}</td>
+                    <td [class.text-warning]="!item.status">{{item.status | statusName}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="8">
+                    <pager [total]="count" [offset]="offset" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></pager>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>
