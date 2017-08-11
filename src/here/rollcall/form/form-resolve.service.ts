@@ -9,10 +9,10 @@ import {Schedule, ScheduleDto, Term, Timetable} from 'core/models';
 import {RollcallFormService} from './form.service';
 
 @Injectable()
-export class RollcallFormResolve implements Resolve<true> {
+export class RollcallFormResolve implements Resolve<boolean> {
     constructor(private service: RollcallFormService, private router: Router) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<true> | true {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
         if (this.service.timetable) {
             return true;
         } else {
