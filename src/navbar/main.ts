@@ -5,8 +5,10 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {RestModule} from 'core/rest';
 
 import {LogoComponent} from './logo.component';
-import {DropdownMenu, NavbarComponent, NavitemComponent, SubmenuDirective} from './navbar.component';
-import {NavbarService} from './navbar.service';
+import {NavbarService} from './main.service';
+import {NavbarComponent} from './navbar.component';
+import {NavitemComponent} from './navitem.component';
+import {NavmenuComponent} from './navmenu.component';
 
 @NgModule({
     bootstrap: [NavbarComponent],
@@ -15,11 +17,10 @@ import {NavbarService} from './navbar.service';
         RestModule.for('/menus'),
     ],
     declarations: [
+        LogoComponent,
         NavbarComponent,
         NavitemComponent,
-        DropdownMenu,
-        SubmenuDirective,
-        LogoComponent,
+        NavmenuComponent,
     ],
     providers: [
         NavbarService,

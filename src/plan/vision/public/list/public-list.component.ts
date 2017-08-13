@@ -24,10 +24,6 @@ export class VisionPublicListComponent {
     }
 
     setSelectedGrade(grade: number) {
-        if (this.selectedGrade === grade) {
-            this.selectedGrade = 0;
-        } else {
-            this.selectedGrade = grade;
-        }
+        this.selectedGrade = this.selectedGrade === grade ? 0 : grade;
     }
 }

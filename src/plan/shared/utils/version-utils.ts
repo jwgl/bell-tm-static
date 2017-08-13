@@ -15,7 +15,7 @@ export function toVersionString(version: number): string {
 
     if (d !== 0) {
         return [a, b, c, d].join('.');
-    } else if ( c !== 0) {
+    } else if (c !== 0) {
         return [a, b, c].join('.');
     } else {
         return [a, b].join('.');

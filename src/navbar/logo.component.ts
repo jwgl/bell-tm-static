@@ -44,11 +44,8 @@ const COLORS = [
 
 @Component({
     selector: '.logo',
-    host: {
-        '[class.navbar-brand]': 'true',
-    },
-    styles: [require('./logo.scss')],
-    template: `<i *ngFor="let i of tm" [style.background-color]="i == 1 ? t : m"></i>`,
+    styleUrls: ['logo.component.scss'],
+    templateUrl: 'logo.component.html',
 })
 export class LogoComponent {
     next = true;

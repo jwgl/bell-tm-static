@@ -1,6 +1,7 @@
-@import 'node_modules/bootstrap/scss/_mixins.scss';
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import '../../shared/variables.scss';
+@import '/~bootstrap/scss/functions';
+@import '/~bootstrap/scss/mixins';
+@import '/~bootstrap/scss/variables';
+@import '../../shared/variables';
 
 $btn-late-bg:   $late-bg;
 $btn-absent-bg: $absent-bg;
@@ -15,8 +16,8 @@ $btn-attend-bg: $attend-bg;
 
     @include hover {
         color: #000;
-        background-color: darken($btn-secondary-bg, 10%);
-        border-color: darken($btn-secondary-border, 12%);
+        background-color: darken($white, 10%);
+        border-color: darken($white, 12%);
     }
 
     &.active {

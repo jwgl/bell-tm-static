@@ -1,5 +1,6 @@
-@import 'node_modules/bootstrap/scss/_mixins.scss';
-@import 'node_modules/bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
 
 $item-height: 80px;
 $item-font-size: 56px;
@@ -19,7 +20,7 @@ $list-border: 1px;
         list-style: none;
         padding: 0px;
         margin: 0px;
-        border: solid $list-border $gray-light;
+        border: solid $list-border $border-color;
         height: $item-height * $item-count + 2 * $list-border;
         position: relative;
 

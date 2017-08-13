@@ -7,32 +7,44 @@ $minus: '-';
     &.Deleted {
         display: none;
     }
-
-    .course-id {
-        &::before, &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            font-family: '宋体';
-        }
-    }
 }
 
 :host-context(.show-diff) {
     &.Created {
         background-color: $prevCreated;
-        .course-id::before {
-            content: $plus;
-        }
     }
     &.Deleted {
         background-color: $prevDeleted;
         display: table-row;
-        .course-id::before {
-            content: $minus;
-        }
     }
     &.highlight {
         color: red;
+    }
+}
+
+@media print {
+    :host() {
+        .course-id {
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                left: 0rem;
+                font-family: '宋体';
+            }
+        }
+    }
+
+    :host-context(.show-diff) {
+        &.Created {
+            .course-id::before {
+                content: $plus;
+            }
+        }
+        &.Deleted {
+            display: table-row;
+            .course-id::before {
+                content: $minus;
+            }
+        }
     }
 }

@@ -1,0 +1,12 @@
+<ng-container *ngFor="let menu of menus">
+    <div *ngIf="menu.items; else menuItem" class="dropdown-submenu">
+        <a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">{{menu.label}}</a>
+        <div class="dropdown-menu" [menus]="menu.items"></div>
+    </div>
+    <ng-template #menuItem>
+        <a *ngIf="menu.label != '---'; else divider" class="dropdown-item" href="{{menu.url}}">{{menu.label}}</a>
+    </ng-template>
+</ng-container>
+<ng-template #divider>
+    <div class="dropdown-divider"></div>
+</ng-template>

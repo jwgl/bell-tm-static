@@ -90,11 +90,7 @@ export class BookingItem {
         this.endWeek = dto.endWeek;
         this.oddEven = dto.oddEven;
         this.dayOfWeek = dto.dayOfWeek;
-        if (dto.sectionId) {
-            this.section = bookingSectionMap[dto.sectionId];
-        } else {
-            this.section = dto.section;
-        }
+        this.section = dto.sectionId ? bookingSectionMap[dto.sectionId] : dto.section;
         this.occupied = dto.occupied;
     }
 

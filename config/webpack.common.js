@@ -56,7 +56,7 @@ module.exports = function(options) {
                 { to: 'js/lib/moment.zh-cn.js', from: './node_modules/moment/locale/zh-cn.js' },
                 { to: 'js/lib',    from: './node_modules/markdown-it/dist/markdown-it.min.js' },
                 { to: 'js/lib',    from: './node_modules/jquery/dist/jquery.slim.min.js' },
-                { to: 'js/lib',    from: './node_modules/tether/dist/js/tether.min.js' },
+                { to: 'js/lib',    from: './node_modules/popper.js/dist/umd/popper.min.js' },
                 { to: 'js/lib',    from: './node_modules/bootstrap/dist/js/bootstrap.min.js' },
                 { to: 'css/lib',   from: './node_modules/bootstrap/dist/css/bootstrap.min.css' },
                 { to: 'js/lib',    from: './node_modules/bootstrap-submenu/dist/js/bootstrap-submenu.min.js' },

@@ -1,5 +1,6 @@
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import '../../shared/variables.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '../../shared/variables';
 
 :host {
     white-space: nowrap;
@@ -22,10 +23,13 @@
 }
 
 .visible {
-    color: $btn-success-bg;
+    color: theme_color("success");
 }
 
-.leave,
+.leave {
+    color: color("gray");
+}
+
 .free {
-    color: $gray;
+    color: color("gray");
 }

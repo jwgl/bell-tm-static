@@ -1,0 +1,7 @@
+<ng-container *ngIf="menu.items; else naviItem">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{menu.label}}</a>
+    <div class="dropdown-menu" [menus]="menu.items"></div>
+</ng-container>
+<ng-template #naviItem>
+    <a class="nav-link" href="{{menu.url}}">{{menu.label}}</a>
+</ng-template>

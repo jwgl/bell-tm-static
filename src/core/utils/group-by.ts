@@ -14,13 +14,7 @@ export function groupBy(data: any, conditions: any[]) {
         const groups: any = {};
         for (const row of data) {
             // groupBy 可以是属性名或映射函数
-            let groupValue: any;
-            if (typeof condition.groupBy === 'function') {
-                groupValue = condition.groupBy(row);
-            } else {
-                groupValue = row[condition.groupBy];
-            }
-
+            const groupValue = typeof condition.groupBy === 'function' ? condition.groupBy(row) : row[condition.groupBy];
             let obj = groups[groupValue];
             // 创建分组
             if (obj === undefined) {

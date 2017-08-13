@@ -1,7 +1,7 @@
 <ng-container *ngIf="student.absence; else normal">
-    <a class="badge badge-default" href="/web/here/{{student.absence.url}}/{{student.absence.id}}" target="_blank">{{student.absence.label}}</a>
+    <a class="badge badge-secondary" href="/web/here/{{student.absence.url}}/{{student.absence.id}}" target="_blank">{{student.absence.label}}</a>
 </ng-container>
 <ng-template #normal>
-    <label *ngIf="student.disqualified" class="badge badge-default">取消考试资格</label>
+    <label *ngIf="student.disqualified" class="badge badge-secondary">取消考试资格</label>
     <label *ngFor="let label of student.rollcall?.labels" class="badge" [ngClass]="'badge-' + label.class">{{label.text}}</label>
 </ng-template>

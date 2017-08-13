@@ -57,11 +57,9 @@ export class ObservationListComponent {
     }
 
     doFilter() {
-        if (!this.filterSelected.key) {
-            this.list = this.service.list;
-        } else {
-            this.list = this.service.list.filter((item: any) => this.match(item));
-        }
+        this.list = this.filterSelected.key
+                  ? this.service.list.filter((item: any) => this.match(item))
+                  : this.service.list;
         this.loadData(0);
         this.count = this.list.length;
     }

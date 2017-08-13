@@ -8,7 +8,6 @@ import {toVersionString} from '../../../shared/utils';
 import {Scheme} from '../../shared/scheme.model';
 import {SchemeDraftService} from '../draft.service';
 
-import '../../shared/scheme.model';
 import './draft-item.model';
 
 /**

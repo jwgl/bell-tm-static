@@ -1,6 +1,7 @@
-@import 'node_modules/bootstrap/scss/_mixins.scss';
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import '../../shared/rollcall-status.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+@import '../../shared/rollcall-status';
 
 :host {
     display: flex;

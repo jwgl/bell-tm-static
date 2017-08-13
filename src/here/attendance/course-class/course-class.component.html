@@ -88,7 +88,7 @@
                             <h6>请假情况</h6>
                             <ul class="list-unstyled">
                                 <li *ngFor="let item of student.leaves">
-                                    <a class="badge badge-default" href="../../leaves/{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
+                                    <a class="badge badge-secondary" href="../../leaves/{{item.studentLeaveFormId}}" target="_blank">{{item.label}}</a>
                                     <span [class.invalid]="item.invalid">{{item}}</span>
                                     <a *ngIf="item.freeListenFormId" class="badge badge-success" href="../../freeListens/{{item.freeListenFormId}}" target="_blank">免听</a>
                                 </li>

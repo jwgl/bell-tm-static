@@ -32,9 +32,9 @@ Timeslot.prototype.getTeacherId = function(this: Timeslot): string {
 
 Timeslot.prototype.getObservationClass = function(this: Timeslot): string {
     const superviseCount = this.items[0].schedules[0].superviseCount;
-    if ( superviseCount === 2) {
+    if (superviseCount === 2) {
         return 'slotitem-other';
-    } else if ( superviseCount > 2) {
+    } else if (superviseCount > 2) {
         return 'slotitem-current';
     } else {
         return 'slotitem-normal';

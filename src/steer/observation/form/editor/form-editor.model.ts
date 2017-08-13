@@ -4,7 +4,7 @@ import { EvaluationMap, ObservationForm, Term } from '../shared/form.model';
 
 declare module '../shared/form.model' {
     interface ObservationForm {
-        toServerDto(evaluationSystem: EvaluationMap[], term: Term ): any;
+        toServerDto(evaluationSystem: EvaluationMap[], term: Term): any;
         getObservationDate(term: Term): string;
     }
 }

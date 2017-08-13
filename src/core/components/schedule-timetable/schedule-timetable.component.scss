@@ -1,5 +1,6 @@
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
 
 :host-context([size=sm]) {
     font-size: 0.75rem;

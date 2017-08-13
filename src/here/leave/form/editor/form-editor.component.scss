@@ -1,4 +1,4 @@
-@import 'src/core/components/schedule-timetable/schedule-timetable.shared.scss';
+@import 'src/core/components/schedule-timetable/schedule-timetable.shared';
 
 .btn-head {
     width: 100%;
@@ -6,7 +6,7 @@
 }
 
 .btn-success + .btn-success {
-    border-top-color: darken($btn-success-border, 10%);
+    border-top-color: darken(theme_color("success"), 10%);
 }
 
 ul {

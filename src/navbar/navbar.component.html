@@ -1,0 +1,18 @@
+<div class="container">
+    <a class="navbar-brand logo" href="/"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bd-main-nav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="bd-main-nav" *ngIf="menus">
+        <ul class="nav navbar-nav mr-auto">
+            <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.main"></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li class="nav-item" [menu]="menu" *ngFor="let menu of menus.user"></li>
+            <li class="nav-item">
+                <form #logoutForm action="/logout" method="post"></form>
+                <a class="nav-link" href="#" (click)="logout($event)">退出</a>
+            </li>
+        </ul>
+    </div>
+</div>

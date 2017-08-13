@@ -2,7 +2,7 @@ import {AuditStatus} from '../constants/audit-status';
 import {Labels} from '../models';
 
 const statusLabels: Labels<AuditStatus> = new Labels(AuditStatus, {
-    [AuditStatus.CREATED]:   {class: 'badge-default', text: '未提交'},
+    [AuditStatus.CREATED]:   {class: 'badge-secondary', text: '未提交'},
     [AuditStatus.SUBMITTED]: {class: 'badge-info',    text: '待审核'},
     [AuditStatus.CHECKED]:   {class: 'badge-info',    text: '待审批'},
     [AuditStatus.REJECTED]:  {class: 'badge-warning', text: '退回'},

@@ -1,6 +1,7 @@
-@import 'node_modules/bootstrap/scss/_mixins.scss';
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import './variables.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+@import './variables';
 
 .badge {
     font-weight: normal;
@@ -10,20 +11,16 @@
 
 .badge-absent {
     @include badge-variant($absent-bg);
-    font-weight: normal;
 }
 
 .badge-late {
     @include badge-variant($late-bg);
-    font-weight: normal;
 }
 
 .badge-early {
     @include badge-variant($early-bg);
-    font-weight: normal;
 }
 
 .badge-attend {
-      @include badge-variant($attend-bg);
-    font-weight: normal;
+    @include badge-variant($attend-bg);
 }

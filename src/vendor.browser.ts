@@ -9,6 +9,7 @@ import '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
+// tslint:disable-next-line:no-duplicate-imports
 import {enableProdMode} from '@angular/core';
 
 if ('production' === ENV) {

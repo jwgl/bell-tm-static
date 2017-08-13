@@ -71,6 +71,7 @@ export class ObservePriorityListComponent {
 
     match(item: any) {
         let value = '';
+        // tslint:disable-next-line:prefer-conditional-expression
         if (this.filterSelected.key === 'isnew') {
             value = item.isnew ? '是' : '否';
         } else {

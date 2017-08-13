@@ -1,14 +1,19 @@
-@import 'node_modules/bootstrap/scss/_variables.scss';
-@import 'node_modules/bootstrap/scss/_mixins.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
 
-@mixin schedule-variant($color, $background, $border) {
-  $active-background: darken($background, 10%);
-  $active-border: darken($border, 12%);
+@mixin schedule-variant($background, $border: null) {
+    @if $border == null {
+        $border: $background;
+    }
 
-  color: $color;
-  background-color: $background;
-  border-color: $border;
-  box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.2), 0 8px 16px -2px rgba(0, 0, 0, 0.2)
+    $active-background: darken($background, 10%);
+    $active-border: darken($border, 12%);
+
+    @include color-yiq($background);
+    background-color: $background;
+    border-color: $border;
+    box-shadow: 0 4px 8px -1px rgba(0, 0, 0, 0.2), 0 8px 16px -2px rgba(0, 0, 0, 0.2)
 }
 
 .timeslot {
@@ -34,7 +39,7 @@
     align-items: center;
     border-width: 1px;
     border-style: solid;
-    @include schedule-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border);
+    @include schedule-variant(theme_color("light"));
 }
 
 .slotitem:not(button) + .slotitem:not(button) {

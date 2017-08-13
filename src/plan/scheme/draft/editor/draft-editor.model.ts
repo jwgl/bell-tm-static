@@ -96,11 +96,7 @@ AbstractGroup.prototype.remove = function(this: AbstractGroup, sc: SchemeCourse)
     if (index > -1) {
         this.courses.splice(index, 1);
         if (sc.ref) { // 修改 -> 删除, 还原引用
-            if (sc.ref.prevStatus === RecordStatus.None) {
-                sc.ref.currStatus = RecordStatus.None;
-            } else {
-                sc.ref.currStatus = RecordStatus.Reverted;
-            }
+            sc.ref.currStatus = sc.ref.prevStatus === RecordStatus.None ? RecordStatus.None : RecordStatus.Reverted;
         }
     }
 };
@@ -116,12 +112,7 @@ AbstractGroup.prototype.restore = function(this: AbstractGroup, sc: SchemeCourse
             break;
         }
     }
-
-    if (sc.prevStatus === RecordStatus.None) {
-        sc.currStatus = RecordStatus.None;
-    } else {
-        sc.currStatus = RecordStatus.Reverted;
-    }
+    sc.currStatus = sc.prevStatus === RecordStatus.None ? RecordStatus.None : RecordStatus.Reverted;
 };
 
 Property.prototype.getModifiedCourses = function(this: Property): SchemeCourse[] {

@@ -1,6 +1,7 @@
-@import 'node_modules/bootstrap/scss/_variables.scss';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
-$late-bg: $btn-warning-bg;
-$absent-bg: $btn-danger-bg;
-$early-bg: #bb1684 ;
-$attend-bg: $btn-info-bg;
+$late-bg: theme-color("warning");
+$absent-bg: theme-color("danger");
+$early-bg: $pink;
+$attend-bg: theme-color("info");
