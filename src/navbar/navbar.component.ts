@@ -1,15 +1,14 @@
-import {Component, Directive, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {NavbarService} from './main.service';
 
 @Component({
     selector: 'header',
+    styleUrls: ['navbar.component.scss'],
     templateUrl: 'navbar.component.html',
 })
 export class NavbarComponent {
     menus: {main: any[], user: any[]};
-
-    @ViewChild('logoutForm') logoutForm: ElementRef;
 
     constructor(private service: NavbarService) {
         if (sessionStorage && sessionStorage.getItem('menu')) {
@@ -20,13 +19,5 @@ export class NavbarComponent {
                 sessionStorage.setItem('menu', JSON.stringify(menus));
             });
         }
-    }
-
-    logout(event: Event) {
-        event.preventDefault();
-        this.service.logout().subscribe(() => {
-            sessionStorage.removeItem('menu');
-            this.logoutForm.nativeElement.submit();
-        });
     }
 }
