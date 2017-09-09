@@ -1,0 +1,40 @@
+<form class="form-inline mb-3">
+    <select class="form-control" (change)="buildingChanged($event.target.value, placeSelect)">
+        <option disabled selected hidden>选择教学楼</option>
+        <option *ngFor="let building of buildings" value="{{building}}">{{building}}</option>
+    </select>
+    <select #placeSelect class="form-control ml-2" (change)="placeChanged($event.target.value)" [disabled]="!places">
+        <option disabled selected hidden ngValue="null">选择教室</option>
+        <option *ngFor="let place of places" value="{{place.id}}">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
+    </select>
+</form>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">时间段</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+            <th>星期日</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of rows">
+            <td class="c1" *ngIf="spans[i]" [rowSpan]="spans[i].span" [colSpan]="i == 0 ? 2 : 1">{{spans[i].text}}</td>
+            <td class="c2" *ngIf="i">{{i}}</td>
+            <td *ngFor="let j of cols" class="timeslot">
+                <span *ngFor="let placeUsage of timespanPlaceUsages(i, j)"
+                    class="badge mr-1"
+                    [ngClass]="TYPES[placeUsage.type].class"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="<div>{{TYPES[placeUsage.type].label}} - {{placeUsage.department}}</div><div>{{placeUsage.description}}</div>">
+                    {{placeUsage.startWeek == placeUsage.endWeek ? placeUsage.startWeek : (placeUsage.startWeek + '-' + placeUsage.endWeek + ['', '单', '双'][placeUsage.oddEven])}}
+                </span>
+            </td>
+        </tr>
+    </tbody>
+</table>

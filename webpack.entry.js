@@ -32,6 +32,7 @@ module.exports = {
     'place/booking/report':                    './src/place/booking/report/main.ts',
     'place/booking/item':                      './src/place/booking/item/main.ts',
     'place/settings/booking-auth':             './src/place/settings/booking-auth/main.ts',
+    'place/usages':                            './src/place/usages/main.ts',
     'here/rollcall/form':                      './src/here/rollcall/form/main.ts',
     'here/attendance/course-class-teacher':    './src/here/attendance/course-class/teacher.main.ts',
     'here/attendance/course-class-department': './src/here/attendance/course-class/department.main.ts',

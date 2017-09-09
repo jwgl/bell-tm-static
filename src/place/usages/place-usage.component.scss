@@ -1,0 +1,23 @@
+.badge {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.table {
+    td, th {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    td {
+        &.c1 {
+            width: 20px;
+        }
+        &.c2 {
+            width: 20px;
+        }
+        &.timeslot {
+            width: 125px;
+        }
+    }
+}
