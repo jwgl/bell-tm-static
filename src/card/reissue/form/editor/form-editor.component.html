@@ -7,15 +7,16 @@
     </div>
     <form class="frame">
         <student-info [student]="student"></student-info>
-        <div class="form-group row" [class.has-danger]="!reason.valid">
+        <div class="form-group row">
             <label class="col-sm-3 col-form-label">补办理由</label>
             <div class="col-sm-9">
                 <textarea class="form-control" rows="8" name="reason"
+                    [class.is-invalid]="!reason.valid"
                     [(ngModel)]="form.reason"
                     maxlength="250"
                     minlength="10"
                     required #reason="ngModel"></textarea>
-                <p class="form-control-feedback" [hidden]="reason.valid">
+                <p class="invalid-feedback">
                     <span *ngIf="reason.errors?.required">补办理由不能为空。</span>
                     <span *ngIf="reason.errors?.minlength">补办理由最少{{reason.errors.minlength.requiredLength}}个字符。</span>
                     <span *ngIf="reason.errors?.maxlength">补办理由最多{{reason.errors.maxlength.requiredLength}}个字符。</span>
