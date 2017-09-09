@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 import {TimeslotItem, Timetable} from 'core/models';
-import {FreeListenForm} from './form.model';
+import {DateRange, FreeListenForm} from './form.model';
 
 @Component({
     selector: 'free-listen-form-viewer',
@@ -11,4 +11,5 @@ import {FreeListenForm} from './form.model';
 export class FreeFormViewerComponent {
     @Input() form: FreeListenForm;
     @Input() timetable: Timetable;
+    @Input() dateRange: DateRange;
 }

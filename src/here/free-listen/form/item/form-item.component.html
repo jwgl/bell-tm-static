@@ -9,7 +9,7 @@
         <div class="btn-group ml-2" *ngIf="form.editable" >
             <button class="btn btn-secondary" routerLink="edit">编辑</button>
             <button class="btn btn-secondary" (click)="remove()">删除</button>
-            <button [workflow-submit]="submitOptions" (submitted)="loadData(form.id)">提交</button>
+            <button [workflow-submit]="submitOptions" (submitted)="loadItem(form.id)">提交</button>
         </div>
     </div>
     <free-listen-form-viewer [form]="form" [timetable]="timetable"></free-listen-form-viewer>

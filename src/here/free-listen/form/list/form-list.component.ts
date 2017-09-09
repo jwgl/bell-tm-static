@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {FreeListenConfig} from '../../shared/form.model';
+import {DateRange} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
 
 @Component({
@@ -8,7 +8,7 @@ import {FreeListenFormService} from '../form.service';
     templateUrl: 'form-list.component.html',
 })
 export class FreeListenFormListComponent {
-    config: FreeListenConfig;
+    dateRange: DateRange;
     forms: any[];
     notice: string;
     count: number;
@@ -22,7 +22,7 @@ export class FreeListenFormListComponent {
         this.service.loadList({offset, max: this.max}).subscribe(data => {
             this.count = data.count;
             this.forms = data.forms;
-            this.config = new FreeListenConfig(data.config);
+            this.dateRange = new DateRange(data.dateRange);
             this.notice = data.notice;
         });
     }

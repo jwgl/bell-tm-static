@@ -2,6 +2,20 @@
 <form>
     <div class="row">
         <div class="form-group col-md-4">
+            <label>学期</label>
+            <p class="form-control-static">{{form.term | termName}}</p>
+        </div>
+        <div class="form-group col-md-4" *ngIf="dateRange">
+            <label>审核开始日期</label>
+            <p class="form-control-static">{{dateRange.start | date: 'y-MM-dd'}}</p>
+        </div>
+        <div class="form-group col-md-4">
+            <label>审核结束日期</label>
+            <p class="form-control-static">{{dateRange.end  | date: 'y-MM-dd'}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
             <label>学号</label>
             <p class="form-control-static">{{form.studentId}}</p>
         </div>

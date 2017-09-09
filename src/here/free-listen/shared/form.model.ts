@@ -162,18 +162,20 @@ export class FreeListenItem {
     }
 }
 
-export class FreeListenConfig {
-    startDate: Date;
-    endDate: Date;
+export class DateRange {
+    term: number;
+    start: Date;
+    end: Date;
     today: Date;
 
     constructor(dto: any) {
-        this.startDate = new Date(dto.startDate);
-        this.endDate = new Date(dto.endDate);
+        this.term = dto.term;
+        this.start = new Date(dto.start);
+        this.end = new Date(dto.end);
         this.today = new Date(dto.today);
     }
 
-    get isOpening(): boolean {
-        return this.today >= this.startDate && this.today <= this.endDate;
+    get isValid(): boolean {
+        return this.today >= this.start && this.today <= this.end;
     }
 }

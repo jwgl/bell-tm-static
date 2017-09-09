@@ -1,17 +1,18 @@
-<div class="btn-toolbar" *ngIf="config && config.isOpening">
+<div class="btn-toolbar" *ngIf="dateRange && dateRange.isValid">
     <div class="btn-group ml-auto">
         <button class="btn btn-primary" routerLink="/create">新建</button>
     </div>
 </div>
-<div class="alert alert-info" *ngIf="config">
-<div [markdown]="notice"></div>
-免听申请时间：{{config.startDate | date: 'y-MM-dd'}} 至 {{config.endDate | date: 'y-MM-dd'}}
+<div class="alert alert-info" *ngIf="dateRange">
+    <div [markdown]="notice"></div>
+    {{dateRange.term | termName}}免听申请时间：{{dateRange.start | date: 'y-MM-dd'}} 至 {{dateRange.end | date: 'y-MM-dd'}}
 </div>
 <table class="table" *ngIf="forms && forms.length > 0">
     <thead>
         <tr>
-            <th>查看</th>
-            <th>事由</th>
+            <th>申请单号</th>
+            <th>学期</th>
+            <th>免听事由</th>
             <th>创建时间</th>
             <th>状态</th>
         </tr>
@@ -19,6 +20,7 @@
     <tbody>
         <tr *ngFor="let form of forms">
             <td><a [routerLink]="['/', form.id]">#{{form.id}}</a></td>
+            <td>{{form.term | termName: 'short'}}</td>
             <td><div class="reason">{{form.reason}}</div></td>
             <td>{{form.dateCreated | date: 'y-MM-dd HH:mm'}}</td>
             <td><audit-status [status]="form.status"></audit-status></td>

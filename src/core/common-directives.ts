@@ -32,9 +32,9 @@ import {FilterByPipe} from './pipes/filter-by';
 import {GroupByPipe} from './pipes/group-by';
 import {MarkdownPipe} from './pipes/markdown';
 import {FromNowPipe} from './pipes/moment-pipes';
-import {SectionRangePipe} from './pipes/section-range';
-
 import {OddEvenPipe} from './pipes/odd-even';
+import {SectionRangePipe} from './pipes/section-range';
+import {TermNamePipe} from './pipes/term-name';
 import {ZeroPadPipe} from './pipes/zero-pad';
 
 import {ScheduleTimetableComponent} from './components/schedule-timetable/schedule-timetable.component';
@@ -82,6 +82,7 @@ const CORE_DIRECTIVES: any[] = [
     MarkdownPipe,
     OddEvenPipe,
     SectionRangePipe,
+    TermNamePipe,
     AuditStatusTextPipe,
 ];
 

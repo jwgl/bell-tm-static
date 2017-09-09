@@ -5,6 +5,7 @@ import {ReviewList} from 'core/models';
 
 const dateLabels: {[key: string]: string} = {
     todo: '申请时间',
+    expr: '申请时间',
     done: '审核时间',
 };
 

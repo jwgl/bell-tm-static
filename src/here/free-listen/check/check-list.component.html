@@ -2,7 +2,8 @@
     <table class="table" *ngIf="list.items.length > 0; else empty">
         <thead>
             <tr>
-                <th>单号</th>
+                <th>申请单号</th>
+                <th>学期</th>
                 <th>学号</th>
                 <th>姓名</th>
                 <th>专业</th>
@@ -14,6 +15,7 @@
         <tbody>
             <tr *ngFor="let form of list.items">
                 <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                <td>{{form.term | termName: 'short'}}</td>
                 <td>{{form.studentId}}</td>
                 <td>{{form.studentName}}</td>
                 <td>{{form.subject}}</td>
