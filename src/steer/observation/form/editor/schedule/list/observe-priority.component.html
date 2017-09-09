@@ -44,7 +44,7 @@
                 <td colspan="4">
                     <div class="form-group row mt-1">
                         <div class="col-md-3">总共：{{count}}条记录</div>
-                        <div class="offset-md-2 col-md-2">
+                        <div class="col-md-2">
                             <pager [total]="count" [offset]="offset" [max]="max" [length]="listLength" (prev)="loadData($event)" (next)="loadData($event)"></pager>
                         </div>
                     </div>
