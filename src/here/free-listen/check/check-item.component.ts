@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Schedule, ScheduleDto, Timetable} from 'core/models';
 import {ReviewOptions} from 'core/workflow';
 
-import {DateRange, FreeListenForm} from '../shared/form.model';
+import {FreeListenForm, FreeListenSettings} from '../shared/form.model';
 
 @Component({
     templateUrl: 'check-item.component.html',
@@ -12,11 +12,11 @@ import {DateRange, FreeListenForm} from '../shared/form.model';
 export class FreeListenCheckItemComponent {
     form: FreeListenForm;
     timetable: Timetable;
+    settings: FreeListenSettings;
 
     private wi: string;
     private prevId: number;
     private nextId: number;
-    private dateRange: DateRange;
 
     constructor(route: ActivatedRoute) {
         route.data.subscribe((data: {item: any}) => this.onItemLoaded(data.item));
@@ -27,7 +27,7 @@ export class FreeListenCheckItemComponent {
         const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s, 'department'));
         this.form = new FreeListenForm(dto.form, studentSchedules);
         this.timetable = new Timetable(studentSchedules.concat(departmentSchedules));
-        this.dateRange = new DateRange(dto.dateRange);
+        this.settings = new FreeListenSettings(dto.settings);
 
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;
@@ -35,7 +35,7 @@ export class FreeListenCheckItemComponent {
     }
 
     get reviewable(): boolean {
-        return this.wi && this.form.status === 'SUBMITTED' && this.dateRange.isValid;
+        return this.wi && this.form.status === 'SUBMITTED' && this.settings.isCheckDateValid;
     }
 
     get reviewOptions(): ReviewOptions {

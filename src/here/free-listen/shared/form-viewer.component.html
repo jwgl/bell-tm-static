@@ -1,50 +1,50 @@
 <form-title>{{form.title}}</form-title>
 <form>
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>学期</label>
-            <p class="form-control-static">{{form.term | termName}}</p>
+            <p class="form-control-plaintext">{{form.term | termName}}</p>
         </div>
-        <div class="form-group col-md-4" *ngIf="dateRange">
-            <label>审核开始日期</label>
-            <p class="form-control-static">{{dateRange.start | date: 'y-MM-dd'}}</p>
+        <div class="form-group col-md" *ngIf="settings">
+            <label>申请起止日期</label>
+            <p class="form-control-plaintext">{{settings.applyStartDate | date: 'y-MM-dd'}} 至 {{settings.applyEndDate | date: 'y-MM-dd'}}</p>
         </div>
-        <div class="form-group col-md-4">
-            <label>审核结束日期</label>
-            <p class="form-control-static">{{dateRange.end  | date: 'y-MM-dd'}}</p>
+        <div class="form-group col-md" *ngIf="settings">
+            <label>审核起止日期</label>
+            <p class="form-control-plaintext">{{settings.checkStartDate | date: 'y-MM-dd'}} 至 {{settings.checkEndDate | date: 'y-MM-dd'}}</p>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>学号</label>
-            <p class="form-control-static">{{form.studentId}}</p>
+            <p class="form-control-plaintext">{{form.studentId}}</p>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>姓名</label>
-            <p class="form-control-static">{{form.studentName}}</p>
+            <p class="form-control-plaintext">{{form.studentName}}</p>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>专业</label>
-            <p class="form-control-static">{{form.subject}}</p>
+            <p class="form-control-plaintext">{{form.subject}}</p>
         </div>
     </div>
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>年级</label>
-            <p class="form-control-static">{{form.grade}}</p>
+            <p class="form-control-plaintext">{{form.grade}}</p>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>班级</label>
-            <p class="form-control-static">{{form.adminClass}}</p>
+            <p class="form-control-plaintext">{{form.adminClass}}</p>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md">
             <label>主讲教师</label>
-            <p class="form-control-static">{{form.checkerName}}</p>
+            <p class="form-control-plaintext">{{form.checkerName}}</p>
         </div>
     </div>
     <div class="form-group">
         <label>免听事由</label>
-        <p class="form-control-static">{{form.reason}}</p>
+        <p class="form-control-plaintext">{{form.reason}}</p>
     </div>
     <div class="form-group">
         <label>免听明细</label>

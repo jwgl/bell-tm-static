@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Schedule, ScheduleDto, Timetable} from 'core/models';
 import {ReviewOptions} from 'core/workflow';
 
-import {FreeListenForm} from '../shared/form.model';
+import {FreeListenForm, FreeListenSettings} from '../shared/form.model';
 
 @Component({
     templateUrl: 'approval-item.component.html',
@@ -13,6 +13,7 @@ import {FreeListenForm} from '../shared/form.model';
 export class FreeListenApprovalItemComponent {
     form: FreeListenForm;
     timetable: Timetable;
+    settings: FreeListenSettings;
 
     private wi: string;
     private prevId: number;
@@ -27,6 +28,7 @@ export class FreeListenApprovalItemComponent {
         const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s, 'department'));
         this.form = new FreeListenForm(dto.form, studentSchedules);
         this.timetable = new Timetable(studentSchedules.concat(departmentSchedules));
+        this.settings = new FreeListenSettings(dto.settings);
 
         this.wi = dto.workitemId;
         this.prevId = dto.prevId;

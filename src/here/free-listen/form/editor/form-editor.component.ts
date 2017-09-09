@@ -5,7 +5,7 @@ import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
 import {Schedule, ScheduleDto, Timetable} from 'core/models';
 
-import {FreeListenForm} from '../../shared/form.model';
+import {FreeListenForm, FreeListenSettings} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
 import './form-editor.model';
 
@@ -20,6 +20,7 @@ interface Teacher {
 })
 export class FreeFormEditorComponent {
     form: FreeListenForm;
+    settings: FreeListenSettings;
     timetable: Timetable;
     saving = false;
 
@@ -54,6 +55,7 @@ export class FreeFormEditorComponent {
 
         this.form = new FreeListenForm(dto.form, schedules);
         this.form.removedItems = [];
+        this.settings = new FreeListenSettings(dto.settings);
         this.timetable = new Timetable(schedules);
     }
 

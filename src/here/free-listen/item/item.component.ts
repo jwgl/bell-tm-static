@@ -2,7 +2,7 @@ import {Component, ElementRef} from '@angular/core';
 
 import {Schedule, ScheduleDto, Timetable} from 'core/models';
 
-import {FreeListenForm} from '../shared/form.model';
+import {FreeListenForm, FreeListenSettings} from '../shared/form.model';
 import {FreeListenItemService} from './item.service';
 
 @Component({
@@ -11,6 +11,7 @@ import {FreeListenItemService} from './item.service';
 })
 export class FreeListenItemComponent {
     form: FreeListenForm;
+    settings: FreeListenSettings;
     timetable: Timetable;
 
     constructor(elementRef: ElementRef, private service: FreeListenItemService) {
@@ -22,6 +23,7 @@ export class FreeListenItemComponent {
             const studentSchedules: Schedule[] = dto.studentSchedules.map((s: ScheduleDto) => new Schedule(s));
             const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s, 'department'));
             this.form = new FreeListenForm(dto.form, studentSchedules);
+            this.settings = new FreeListenSettings(dto.settings);
             this.timetable = new Timetable(studentSchedules.concat(departmentSchedules));
         }, (error) => {
             if (error.status === 403) {

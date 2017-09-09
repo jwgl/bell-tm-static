@@ -5,7 +5,7 @@ import {CommonDialog} from 'core/common-dialogs';
 import {Schedule, ScheduleDto, Timetable} from 'core/models';
 import {SubmitOptions} from 'core/workflow';
 
-import {FreeListenForm} from '../../shared/form.model';
+import {FreeListenForm, FreeListenSettings} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
 import './form-item.model';
 
@@ -14,6 +14,7 @@ import './form-item.model';
 })
 export class FreeFormItemComponent {
     form: FreeListenForm;
+    settings: FreeListenSettings;
     timetable: Timetable;
 
     constructor(
@@ -30,6 +31,7 @@ export class FreeFormItemComponent {
             const departmentSchedules: Schedule[] = dto.departmentSchedules.map((s: ScheduleDto) => new Schedule(s, 'department'));
             this.form = new FreeListenForm(dto.form, studentSchedules);
             this.form.editable = dto.form.editable;
+            this.settings = new FreeListenSettings(dto.settings);
             this.timetable = new Timetable(studentSchedules.concat(departmentSchedules));
         });
     }

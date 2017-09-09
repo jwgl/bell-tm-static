@@ -162,20 +162,28 @@ export class FreeListenItem {
     }
 }
 
-export class DateRange {
+export class FreeListenSettings {
     term: number;
-    start: Date;
-    end: Date;
+    applyStartDate: Date;
+    applyEndDate: Date;
+    checkStartDate: Date;
+    checkEndDate: Date;
     today: Date;
 
     constructor(dto: any) {
         this.term = dto.term;
-        this.start = new Date(dto.start);
-        this.end = new Date(dto.end);
+        this.applyStartDate = new Date(dto.applyStartDate);
+        this.applyEndDate = new Date(dto.applyEndDate);
+        this.checkStartDate = new Date(dto.checkStartDate);
+        this.checkEndDate = new Date(dto.checkEndDate);
         this.today = new Date(dto.today);
     }
 
-    get isValid(): boolean {
-        return this.today >= this.start && this.today <= this.end;
+    get isApplyDateValid(): boolean {
+        return this.today >= this.applyStartDate && this.today <= this.applyEndDate;
+    }
+
+    get isCheckDateValid(): boolean {
+        return this.today >= this.checkStartDate && this.today <= this.checkEndDate;
     }
 }

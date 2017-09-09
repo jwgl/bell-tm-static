@@ -1,11 +1,15 @@
-<div class="btn-toolbar" *ngIf="dateRange && dateRange.isValid">
+<div class="btn-toolbar" *ngIf="settings && settings.isApplyDateValid">
     <div class="btn-group ml-auto">
         <button class="btn btn-primary" routerLink="/create">新建</button>
     </div>
 </div>
-<div class="alert alert-info" *ngIf="dateRange">
+<div class="alert alert-info" *ngIf="settings">
     <div [markdown]="notice"></div>
-    {{dateRange.term | termName}}免听申请时间：{{dateRange.start | date: 'y-MM-dd'}} 至 {{dateRange.end | date: 'y-MM-dd'}}
+    <h4>免听起止时间（{{settings.term | termName}}）</h4>
+    <ol>
+        <li>学生申请时间：{{settings.applyStartDate | date: 'y-MM-dd'}} 至 {{settings.applyEndDate | date: 'y-MM-dd'}}</li>
+        <li>教师审核时间：{{settings.checkStartDate | date: 'y-MM-dd'}} 至 {{settings.checkEndDate | date: 'y-MM-dd'}}</li>
+    </ol>
 </div>
 <table class="table" *ngIf="forms && forms.length > 0">
     <thead>

@@ -7,7 +7,7 @@ import {ApiUrl, Rest} from 'core/rest';
 export class FreeListenCheckService {
     constructor(private rest: Rest, private api: ApiUrl) {}
 
-    getDateRange(): Observable<any> {
-        return this.rest.get(`${this.api.list()}/dateRange`);
+    getSettings(): Observable<any> {
+        return this.rest.get(`${this.api.list()}/settings`);
     }
 }

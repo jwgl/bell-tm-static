@@ -2,15 +2,15 @@ import {Component} from '@angular/core';
 
 import {ListOption} from 'core/models';
 
-import {DateRange} from '../shared/form.model';
+import {FreeListenSettings} from '../shared/form.model';
 import {FreeListenCheckService} from './check.service';
 
 @Component({
     selector: 'free-listen-check-container',
     template: `
 <nav-tabs [options]="options">
-    <li class="nav-item ml-auto pt-2" *ngIf="dateRange">
-        审核时间：{{dateRange.start | date: 'y-MM-dd'}}至{{dateRange.end | date: 'y-MM-dd'}}
+    <li class="nav-item ml-auto pt-2" *ngIf="settings">
+        审核时间：{{settings.checkStartDate | date: 'y-MM-dd'}} 至 {{settings.checkEndDate | date: 'y-MM-dd'}}
     </li>
 </nav-tabs>
 <router-outlet></router-outlet>
@@ -23,9 +23,9 @@ export class FreeListenCheckComponent {
         {type: 'done', label: '已审核', class: 'badge-danger'},
     ];
 
-    dateRange: DateRange;
+    settings: FreeListenSettings;
 
     constructor(service: FreeListenCheckService) {
-        service.getDateRange().subscribe(data => this.dateRange = new DateRange(data));
+        service.getSettings().subscribe(data => this.settings = new FreeListenSettings(data));
     }
 }
