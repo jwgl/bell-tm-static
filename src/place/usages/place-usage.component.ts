@@ -19,7 +19,7 @@ export class PlaceUsageComponent implements OnInit {
 
     usageMap: {[key: number]: {[key: number]: PlaceUsage[]}};
 
-    rows = [1, 2, 3, 4, 0, 5, 6, 7, 8, 9, 10, 11, 12];
+    rows = [1, 2, 3, 4, 0, 5, 6, 7, 8, 9, 10, 11, 12, 13];
     cols = [1, 2, 3, 4, 5, 6, 7];
     spans = {
         1: {span: 4, text: '上午'},
@@ -38,12 +38,16 @@ export class PlaceUsageComponent implements OnInit {
         fsks: {label: '考试', class: 'badge-danger'},
     };
 
+    loading = false;
+
     constructor(private service: PlaceUsageService) {}
 
     ngOnInit() {
+        this.loading = true;
         this.service.loadList().subscribe(data => {
             this.buildings = data.buildings;
             this.term = data.term;
+            this.loading = false;
         });
     }
 
@@ -51,16 +55,19 @@ export class PlaceUsageComponent implements OnInit {
         placeSelect.selectedIndex = 0;
         placeSelect.disabled = true;
         this.selectedBuilding = building;
+        this.loading = true;
         this.service.loadPlaces(building).subscribe(places => {
             this.places = places;
             placeSelect.disabled = false;
             this.usageMap = {};
+            this.loading = false;
         });
     }
 
     placeChanged(placeId: string) {
+        this.usageMap = {};
+        this.loading = true;
         this.service.loadUsage(this.selectedBuilding, placeId).subscribe(placeUsages => {
-            this.usageMap = {};
             placeUsages.filter(placeUsage => placeUsage && !placeUsage.description.endsWith('【换教师】')).forEach(placeUsage => {
                 for (let section = placeUsage.startSection ; section < placeUsage.startSection + placeUsage.totalSection; section++) {
                     if (!this.usageMap[section]) {
@@ -83,6 +90,7 @@ export class PlaceUsageComponent implements OnInit {
             setTimeout(() => {
                 $('[data-toggle="tooltip"]').tooltip({html: true});
             }, 10);
+            this.loading = false;
         });
     }
 

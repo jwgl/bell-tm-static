@@ -7,6 +7,7 @@
         <option disabled selected hidden ngValue="null">选择教室</option>
         <option *ngFor="let place of places" value="{{place.id}}">{{place.name}} / {{place.seat}}座 / {{place.type}}</option>
     </select>
+    <i class="ml-2" [spinning]="loading"></i>
 </form>
 <table class="table table-bordered">
     <thead>
