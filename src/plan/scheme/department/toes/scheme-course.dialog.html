@@ -2,20 +2,20 @@
     <modal-body>
         <form class="form-horizontal" #f="ngForm">
             <form-field-2>
-                <p class="form-control-static form-field-left" label="课程代码">{{schemeCourse.courseId}}</p>
-                <p class="form-control-static form-field-right" label="课程名称">{{schemeCourse.courseName}}</p>
+                <p class="form-control-plaintext form-field-left" label="课程代码">{{schemeCourse.courseId}}</p>
+                <p class="form-control-plaintext form-field-right" label="课程名称">{{schemeCourse.courseName}}</p>
             </form-field-2>
             <form-field-2>
-                <p class="form-control-static form-field-left" label="学分">{{schemeCourse.credit}}<span *ngIf="schemeCourse.practiceCredit">/{{schemeCourse.practiceCredit}}</span></p>
-                <p class="form-control-static form-field-right" label="周学时">{{schemeCourse.weekPeriod}}</p>
+                <p class="form-control-plaintext form-field-left" label="学分">{{schemeCourse.credit}}<span *ngIf="schemeCourse.practiceCredit">/{{schemeCourse.practiceCredit}}</span></p>
+                <p class="form-control-plaintext form-field-right" label="周学时">{{schemeCourse.weekPeriod}}</p>
             </form-field-2>
             <form-field-2>
-                <p class="form-control-static form-field-left" label="推荐学期">{{schemeCourse.suggestedTerm}}</p>
-                <p class="form-control-static form-field-right" label="开课周数">{{schemeCourse._periodWeeks}}</p>
+                <p class="form-control-plaintext form-field-left" label="推荐学期">{{schemeCourse.suggestedTerm}}</p>
+                <p class="form-control-plaintext form-field-right" label="开课周数">{{schemeCourse._periodWeeks}}</p>
             </form-field-2>
             <form-field-2>
                 <div class="form-field-left" label="起始结束周">
-                    <p class="form-control-static" *ngIf="schemeCourse.isPracticeCourse; else weeks">+{{schemeCourse._periodWeeks}}</p>
+                    <p class="form-control-plaintext" *ngIf="schemeCourse.isPracticeCourse; else weeks">+{{schemeCourse._periodWeeks}}</p>
                     <ng-template #weeks>
                         <select class="form-control" name="startWeek" [(ngModel)]="startWeek">
                             <option *ngFor="let startWeek of startWeeks" [ngValue]="startWeek">{{startWeek | zeroPad}} - {{getEndWeek(startWeek, schemeCourse._periodWeeks) | zeroPad}}</option>

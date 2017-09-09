@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label>借用人</label>
-            <p class="form-control-static d-flex" label="借用人">
+            <p class="form-control-plaintext d-flex" label="借用人">
                 <ng-container *ngIf="form.extraInfo">{{form.extraInfo.join(' ')}} </ng-container>{{form.userName}}
                 &#9742; {{form.phoneNumber}}
                 <span class="ml-auto">{{form.dateSubmitted | date: 'y-MM-dd HH:mm'}}</span>
@@ -49,19 +49,19 @@
         <div class="row">
             <div class="form-group col-md-6" *ngIf="form.checker">
                 <label>审核人</label>
-                <p class="form-control-static d-flex">
+                <p class="form-control-plaintext d-flex">
                     {{form.checker}}<span class="ml-auto">{{form.dateChecked | date: 'y-MM-dd HH:mm'}}</span>
                 </p>
             </div>
             <div class="form-group col-md-6" *ngIf="form.approver">
                 <label>审批人</label>
-                <p class="form-control-static d-flex">
+                <p class="form-control-plaintext d-flex">
                     {{form.approver}}<span class="ml-auto">{{form.dateApproved | date: 'y-MM-dd HH:mm'}}</span>
                 </p>
             </div>
             <div class="form-group col-md-6" *ngIf="form.status">
                 <label>表单状态</label>
-                <p class="form-control-static">{{form.status | statusText}}</p>
+                <p class="form-control-plaintext">{{form.status | statusText}}</p>
             </div>
         </div>
         <div class="form-group">
@@ -70,7 +70,7 @@
                 <li *ngFor="let item of form.items">{{item}} <remove-item (click)="form.removeItem(item)"></remove-item></li>
             </ul>
             <ng-template #prompt>
-                 <p class="form-control-static text-muted">一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。</p>
+                 <p class="form-control-plaintext text-muted">一张借用单可借用不同时段的多个教室，请点击“选择教室”按钮添加教室。</p>
             </ng-template>
         </div>
     </form>

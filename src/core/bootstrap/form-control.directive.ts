@@ -1,7 +1,7 @@
 import {Attribute, Directive, ElementRef} from '@angular/core';
 
 @Directive({
-    selector: '.form-control,.form-control-static',
+    selector: '.form-control,.form-control-plaintext',
 })
 export class FormControlDirective {
     col: number;

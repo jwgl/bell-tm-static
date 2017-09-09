@@ -12,23 +12,23 @@
     <form class="form-inline mb-3">
         <div class="form-group">
             <label>报表编号</label>
-            <p class="form-control-static">{{vm.id}}</p>
+            <p class="form-control-plaintext">{{vm.id}}</p>
         </div>
         <div class="form-group">
             <label>创建人</label>
-            <p class="form-control-static">{{vm.creator}}</p>
+            <p class="form-control-plaintext">{{vm.creator}}</p>
         </div>
         <div class="form-group">
             <label>创建时间</label>
-            <p class="form-control-static">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
+            <p class="form-control-plaintext">{{vm.dateCreated | date: 'y-MM-dd HH:mm'}}</p>
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改人</label>
-            <p class="form-control-static">{{vm.modifier}}</p>
+            <p class="form-control-plaintext">{{vm.modifier}}</p>
         </div>
         <div class="form-group" *ngIf="vm.modifierName">
             <label>修改时间</label>
-            <p class="form-control-static">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
+            <p class="form-control-plaintext">{{vm.dateModified | date: 'y-MM-dd HH:mm'}}</p>
         </div>
     </form>
     <table class="table table-bordered table-sm">

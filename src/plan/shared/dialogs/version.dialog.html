@@ -1,8 +1,8 @@
 <modal-dialog title="设置版本号">
     <modal-body>
-        <p class="form-control-static">上一版本号：{{prev | versionNumber}}</p>
-        <p class="form-control-static">当前版本号：{{curr | versionNumber}}</p>
-        <p class="form-control-static">请输入新的版本号（a.b.c.d）：</p>
+        <p class="form-control-plaintext">上一版本号：{{prev | versionNumber}}</p>
+        <p class="form-control-plaintext">当前版本号：{{curr | versionNumber}}</p>
+        <p class="form-control-plaintext">请输入新的版本号（a.b.c.d）：</p>
         <form class="row" [formGroup]="versionForm" #f="ngForm">
             <div class="col-3">
                 <input name="a" class="form-control" type="number" min="0" max="255" formControlName="a" required>
@@ -19,7 +19,7 @@
         </form>
         <div *ngIf="f.errors" class="row">
             <div class="col-12">
-                <p class="form-control-static text-danger">新版本号必须大于上一版本号。</p>
+                <p class="form-control-plaintext text-danger">新版本号必须大于上一版本号。</p>
             </div>
         </div>
     </modal-body>

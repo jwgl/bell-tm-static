@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label for="department" class="col-sm-3 col-form-label">借用单位</label>
                 <div class="col-sm-9">
-                    <p class="form-control-static">{{department ? department.name : '无可选单位'}}</p>
+                    <p class="form-control-plaintext">{{department ? department.name : '无可选单位'}}</p>
                 </div>
             </div>
             <div class="form-group row">
@@ -17,7 +17,7 @@
                         <option *ngFor="let type of types" [ngValue]="type">{{type.name}}</option>
                     </select>
                     <ng-template #fixedType>
-                        <p class="form-control-static" id="type">{{type ? type.name : '无可选类型'}}</p>
+                        <p class="form-control-plaintext" id="type">{{type ? type.name : '无可选类型'}}</p>
                     </ng-template>
                 </div>
             </div>
