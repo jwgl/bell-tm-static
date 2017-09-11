@@ -13,7 +13,6 @@ import { TypeTextPipe } from '../shared/pipes/observer-type';
 import { TermTextPipe } from '../shared/pipes/term';
 
 import { AppRoutingModule } from './app-routing.module';
-import { ObserverEditorComponent } from './editor/observer-editor.component';
 import { ObserverListComponent } from './list/observer-list.component';
 import { ObserverSettingsComponent } from './observer-settings.component';
 import { ObserverService } from './observer.service';
@@ -34,14 +33,10 @@ import { ObserverService } from './observer.service';
     ],
     declarations: [
         ObserverSettingsComponent,
-        ObserverEditorComponent,
         ObserverListComponent,
         TeacherSelectComponent,
         TermTextPipe,
         TypeTextPipe,
-    ],
-    entryComponents: [
-        ObserverEditorComponent,
     ],
     bootstrap: [
         ObserverSettingsComponent,

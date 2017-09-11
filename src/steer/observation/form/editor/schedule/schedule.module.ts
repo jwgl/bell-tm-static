@@ -12,6 +12,7 @@ import { ObservationFormEditorComponent } from '../form-editor.component';
 
 import { PlaceSelectComponent } from '../../../common/place-select.component';
 import { TeacherSelectComponent } from '../../../common/teacher-select.component';
+import { ObserverGroupPipe } from '../../../shared/pipes/observer-group';
 import { TypeTextPipe } from '../../../shared/pipes/observer-type';
 import { PagerPipe } from '../../../shared/pipes/pager';
 
@@ -43,6 +44,7 @@ import { WeekScheduleComponent } from './week/form-view.component';
         TypeTextPipe,
         WeekScheduleComponent,
         PagerPipe,
+        ObserverGroupPipe,
     ],
     providers: [
         Dialog,
@@ -59,6 +61,7 @@ import { WeekScheduleComponent } from './week/form-view.component';
         TypeTextPipe,
         WeekScheduleComponent,
         PagerPipe,
+        ObserverGroupPipe,
     ],
 })
 export class ScheduleModule { }

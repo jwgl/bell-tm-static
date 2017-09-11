@@ -124,7 +124,7 @@
                 <label class="control-label">督导老师</label>
                 <select name="observers" class="form-control" [(ngModel)]="form.observerId">
                     <option value="" disabled>请选择</option>
-                    <option *ngFor="let item of observers" [ngValue]="item.teacherId">
+                    <option *ngFor="let item of observers | observerGroup: form.observerType" [ngValue]="item.teacherId">
                         {{ item.teacherName }} | {{ item.teacherId}}
                     </option>
                 </select>

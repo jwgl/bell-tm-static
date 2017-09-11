@@ -84,8 +84,8 @@ export class LegacyListComponent {
         this.doFilter();
     }
 
-    stateText(state: string) {
-        return state === 'yes' ? '已发布' : '未发布';
+    stateText(state: boolean) {
+        return state ? '已发布' : '未发布';
     }
 
     get listLength(): number {

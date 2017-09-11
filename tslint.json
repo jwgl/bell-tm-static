@@ -11,6 +11,7 @@
     "quotemark": [true, "single", "avoid-escape"],
     "switch-default": false,
     "variable-name": [true, "allow-leading-underscore", "allow-pascal-case", "ban-keywords", "check-format"],
-    "no-invalid-template-strings": false
+    "no-invalid-template-strings": false,
+    "no-submodule-imports": false
   }
 }
