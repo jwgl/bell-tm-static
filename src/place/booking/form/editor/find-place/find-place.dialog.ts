@@ -129,19 +129,17 @@ export class FindPlaceDialog extends BaseDialog {
     }
 
     get containsSwapToDate(): boolean {
-        if (this.queryOptions.startWeek === this.queryOptions.endWeek) {
-            const day = moment(this.term.startDate);
-            day.add(this.queryOptions.startWeek - this.term.startWeek, 'weeks');
-            day.add(this.queryOptions.dayOfWeek - 1, 'days');
+        for (let week = this.queryOptions.startWeek; week <= this.queryOptions.endWeek; week++) {
+            const day = moment(this.term.startDate)
+                            .add(week - this.term.startWeek, 'weeks')
+                            .add(this.queryOptions.dayOfWeek - 1, 'days');
             for (const date of this.term.swapToDates) {
                 if (date.isSame(day)) {
                     return true;
                 }
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     get startDate(): string {
