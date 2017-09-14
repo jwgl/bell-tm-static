@@ -10,7 +10,7 @@ import { EditMode } from 'core/constants';
 import { typeahead } from 'core/utils/typeahead';
 
 import { ObservationFormService } from '../form.service';
-import { EvaluationMap, GRADES, ObservationForm, Observers, Term, TOPGRADES } from '../shared/form.model';
+import { EvaluationMap, GradeMap, GRADES, ObservationForm, Observers, Term } from '../shared/form.model';
 import './form-editor.model';
 
 import { ScheduleService } from './schedule/schedule.service';
@@ -30,10 +30,10 @@ export class ObservationFormEditorComponent {
     weekOfTerms: any[];
     types: any[];
     grades = GRADES;
-    topGrades = TOPGRADES;
     evaluationSystem: EvaluationMap[];
     observers: Observers[];
     isAdmin: boolean;
+    mydto: any;
 
     constructor(
         private router: Router,
@@ -70,7 +70,7 @@ export class ObservationFormEditorComponent {
                 alert(this.form.schedule.hasError);
             }
         } else {
-            this.form = new ObservationForm(dto);
+            this.form = new ObservationForm(dto.form);
         }
         this.term = dto.term;
         this.types = dto.types;
@@ -96,7 +96,34 @@ export class ObservationFormEditorComponent {
         return day.format('YYYY-MM-DD');
     }
 
+    get evaluateLevel(): string {
+        let i = 0;
+        let sum = 0;
+        this.evaluationSystem.forEach(item => {
+            item.value.forEach(data => {
+                if (!_.isUndefined(data.value)) {
+                    i ++;
+                    sum += data.value;
+                }
+            });
+        });
+        if (i > 0) {
+            const avg = _.round(sum / i, 1);
+            let levelText = '';
+            if (avg >= 1.2) {
+                levelText = GradeMap[_.floor(avg + 0.8)];
+                levelText += ['+', '-', '', '+'][_.floor(((avg * 10) % 10 + 1) / 3)];
+            } else {
+                levelText = GradeMap[0];
+            }
+            return levelText;
+        } else {
+            return null;
+        }
+    }
+
     save() {
+        this.form.evaluateLevel = this.evaluateLevel;
         if (this.editMode === EditMode.Create) {
             this.create(this.form.toServerDto(this.evaluationSystem, this.term));
         } else if (this.editMode === EditMode.Edit) {

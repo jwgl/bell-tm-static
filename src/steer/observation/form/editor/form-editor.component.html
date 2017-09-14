@@ -135,8 +135,8 @@
                 <tr>
                     <th>评价项目</th>
                     <th>主要观测点</th>
-                    <th *ngFor="let grade of form.grades">
-                        {{grade}}
+                    <th *ngFor="let grade of grades">
+                        {{grade.name}}
                     </th>
                 </tr>
             </thead>
@@ -147,7 +147,7 @@
                             <td *ngIf="j == 0" [rowSpan]="evaluation.value.length">{{evaluation.key}}</td>
                             <td>{{item.name}}</td>
                             <td *ngFor="let grade of grades; let x = index" class="radio">
-                                <input type="radio" name="inlineRadioOptions{{i}}{{j}}" [value]="x" [(ngModel)]="item.value">
+                                <input type="radio" name="inlineRadioOptions{{i}}{{j}}" [value]="grade.value" [(ngModel)]="item.value">
                             </td>
                         </tr>
                     </ng-container>
@@ -155,16 +155,7 @@
             </tbody>
         </table>
         <div class="form-group">
-            <label>等级评价</label>
-            <select name="evaluateLevel" class="form-control col-md-3" [(ngModel)]="form.evaluateLevel">
-                <option value="" disabled>选择等级</option>
-                <option *ngFor="let item of topGrades" [ngValue]="item">
-                    {{ item }}
-                </option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>综合评价</label>
+            <label>综合评价</label><span class="ml-5" *ngIf="evaluateLevel">【{{evaluateLevel}}】</span>
             <textarea class="form-control" name="evaluationText" rows="4" [(ngModel)]="form.evaluationText" placeholder="请对此次课进行评价。"
                 #evaluationText></textarea>
                 <span *ngIf="evaluationText.errors?.required">综合评价不能为空。</span>

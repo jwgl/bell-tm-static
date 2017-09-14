@@ -31,8 +31,16 @@ export interface Observers {
     key: number;
     value: Observer[];
 }
-export const GRADES: string[] = ['优', '良', '中', '差'];
-export const TOPGRADES: string[] = ['优+', '优', '优-', '良+', '良', '良-', '中', '差'];
+
+export const GRADES: any[] = [
+    {name: '优', value: 5},
+    {name: '良', value: 4},
+    {name: '中', value: 3},
+    {name: '差', value: 2},
+    {name: '不合格', value: 0},
+];
+
+export const GradeMap: any = { 5: '优', 4: '良', 3: '中', 2: '差', 0: '不合格'};
 
 export const scheduleSectionMap: { [key: number]: ScheduleSection } = {};
 
