@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {CommonDialog} from 'core/common-dialogs';
 import {EditMode} from 'core/constants';
-import {Schedule, ScheduleDto, Timetable} from 'core/models';
+import {Schedule, ScheduleDto, TimeslotItem, Timetable} from 'core/models';
 
 import {FreeListenForm, FreeListenSettings} from '../../shared/form.model';
 import {FreeListenFormService} from '../form.service';
@@ -98,6 +98,20 @@ export class FreeFormEditorComponent {
         }, error => {
             this.saving = false;
             alert(error.json().message);
+        });
+    }
+
+    mouseover(item: TimeslotItem) {
+        this.timetable.getTimeslots(0).forEach(timeslot => {
+            timeslot.items.filter(it => it.schedules.some(schedule => {
+                return item.schedules.some(s => s.courseClassId === schedule.courseClassId);
+            })).forEach(it => it.highlight = true);
+        });
+    }
+
+    mouseout(item: TimeslotItem) {
+        this.timetable.getTimeslots(0).forEach(timeslot => {
+            timeslot.items.forEach(it => it.highlight = false);
         });
     }
 }

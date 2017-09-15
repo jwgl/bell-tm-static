@@ -43,7 +43,7 @@
 }
 
 .slotitem:not(button) + .slotitem:not(button) {
-    margin-top: -$input-btn-border-width;
+    border-top: dashed 1px rgba(0, 0, 0, 0.2)
 }
 
 .slotitem-sample {

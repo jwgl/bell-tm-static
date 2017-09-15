@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {CommonDirectivesModule} from 'core/common-directives';
 
 import {FreeFormViewerComponent} from './form-viewer.component';
+import {TimeslotLimitPipe} from './timeslot-limit.pipe';
 
 @NgModule({
     imports: [
@@ -12,6 +13,7 @@ import {FreeFormViewerComponent} from './form-viewer.component';
     ],
     declarations: [
         FreeFormViewerComponent,
+        TimeslotLimitPipe,
     ],
     exports: [
         FreeFormViewerComponent,

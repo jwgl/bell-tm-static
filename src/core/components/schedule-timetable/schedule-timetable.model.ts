@@ -569,7 +569,13 @@ export class TimeslotItem {
             && exists.dayOfWeek === schedule.dayOfWeek
             && exists.startSection === schedule.startSection
             && exists.totalSection === schedule.totalSection
-            && exists.course === schedule.course
+            && (exists.courseClassId === schedule.courseClassId || // 同一教学班的多次安排或调课
+                exists.course === schedule.course &&
+                exists.startWeek === schedule.startWeek &&
+                exists.endWeek === schedule.endWeek &&
+                exists.oddEven === schedule.oddEven &&
+                exists.place === schedule.place &&
+                exists.teacherId === schedule.teacherId) // 同一地点合班上课
             && exists.courseItem === schedule.courseItem;
     }
 

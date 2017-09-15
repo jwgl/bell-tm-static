@@ -50,6 +50,9 @@
                         <button class="btn slotitem" *ngFor="let item of timeslot.items"
                             [ngClass]="item.getFreeListenClass(form)"
                             [disabled]="form.scheduleDisabled(item.getFreeListenSchedule())"
+                            [class.highlight] = "item.highlight"
+                            (mouseover)="mouseover(item)"
+                            (mouseout)="mouseout(item)"
                             (click)="form.toggleSchedule(item.getFreeListenSchedule())">
                             <div class="course">
                                 <span class="course-name">{{item.course}}</span>

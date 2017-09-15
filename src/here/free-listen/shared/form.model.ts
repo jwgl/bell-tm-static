@@ -10,6 +10,7 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
     }
 
     interface TimeslotItem {
+        highlight: boolean;
         getFreeListenSchedule(): Schedule;
         getFreeListenClass(form: FreeListenForm): string;
     }
