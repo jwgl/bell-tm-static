@@ -183,7 +183,7 @@ export class FindPlaceDialog extends BaseDialog {
                 day = moment(this.term.startDate);
                 today = moment(this.term.startDate);
             } else {
-                day.add(1, 'day');
+                day.add(2, 'day');
             }
 
             if (day.isAfter(moment(this.term.startDate).add(this.term.maxWeek, 'weeks'))) {
