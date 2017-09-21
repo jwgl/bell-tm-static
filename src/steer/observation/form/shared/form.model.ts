@@ -33,14 +33,13 @@ export interface Observers {
 }
 
 export const GRADES: any[] = [
-    {name: '优', value: 5},
-    {name: '良', value: 4},
-    {name: '中', value: 3},
-    {name: '差', value: 2},
-    {name: '不合格', value: 0},
+    {name: '5', value: 5},
+    {name: '4', value: 4},
+    {name: '3', value: 3},
+    {name: '2', value: 2},
+    {name: '1', value: 1},
+    {name: '0', value: 0},
 ];
-
-export const GradeMap: any = { 5: '优', 4: '良', 3: '中', 2: '差', 0: '不合格'};
 
 export const scheduleSectionMap: { [key: number]: ScheduleSection } = {};
 
@@ -62,7 +61,7 @@ export class ObservationForm {
     attendantStds: number;
     lateStds: number;
     leaveStds: number;
-    evaluateLevel: string;
+    evaluateLevel: number;
     evaluations: any;
     evaluationText: string;
     suggest: string;
@@ -93,7 +92,7 @@ export class ObservationForm {
         this.evaluationText = dto.evaluationText;
         this.suggest = dto.suggest;
         this.status = dto.status;
-        this.observerId = dto.supervisorId;
+        this.observerId = dto.observerId;
         this.isActive = dto.isActive;
     }
 

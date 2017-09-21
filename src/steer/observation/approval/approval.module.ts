@@ -8,7 +8,6 @@ import { CommonDirectivesModule } from 'core/common-directives';
 import { RestModule } from 'core/rest';
 
 import { ObservationFormViewerComponent } from '../form/shared/form-viewer.component';
-import { EvaluationTextPipe } from '../shared/pipes/evaluation';
 import { TypeTextPipe } from '../shared/pipes/observer-type';
 import { StatusTextPipe } from '../shared/pipes/status';
 import { TermTextPipe } from '../shared/pipes/term';
@@ -33,7 +32,6 @@ import { ApprovalListComponent } from './list/approval-list.component';
         ApprovalListComponent,
         ApprovalComponent,
         TermTextPipe,
-        EvaluationTextPipe,
         StatusTextPipe,
         ObservationFormViewerComponent,
         ApprovalItemComponent,

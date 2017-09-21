@@ -6,7 +6,6 @@ import { CommonDialogsModule } from 'core/common-dialogs';
 import { CommonDirectivesModule } from 'core/common-directives';
 import { RestModule } from 'core/rest';
 
-import { EvaluationTextPipe } from '../shared/pipes/evaluation';
 import { StatusTextPipe } from '../shared/pipes/status';
 import { TermTextPipe } from '../shared/pipes/term';
 
@@ -34,7 +33,6 @@ import { ObservationFormViewerComponent } from './shared/form-viewer.component';
         ObservationItemComponent,
         ObservationFormViewerComponent,
         StatusTextPipe,
-        EvaluationTextPipe,
         TermTextPipe,
     ],
     providers: [

@@ -155,7 +155,7 @@
             </tbody>
         </table>
         <div class="form-group">
-            <label>综合评价</label><span class="ml-5" *ngIf="evaluateLevel">【{{evaluateLevel}}】</span>
+            <label>综合评价：{{evaluateLevel}}</label>
             <textarea class="form-control" name="evaluationText" rows="4" [(ngModel)]="form.evaluationText" placeholder="请对此次课进行评价。"
                 #evaluationText></textarea>
                 <span *ngIf="evaluationText.errors?.required">综合评价不能为空。</span>

@@ -6,6 +6,7 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
         academicTitle: string;
         department: string;
         credit: number;
+        property: string;
         uniqueCompare(other: Schedule): boolean;
     }
 }

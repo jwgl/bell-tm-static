@@ -8,7 +8,6 @@ import { RestModule } from 'core/rest';
 
 import { ObservationFormViewerComponent } from '../form/shared/form-viewer.component';
 import { FormViewComponent } from '../legacy/shared/form-view.component';
-import { EvaluationTextPipe } from '../shared/pipes/evaluation';
 import { TypeTextPipe } from '../shared/pipes/observer-type';
 import { TermTextPipe } from '../shared/pipes/term';
 
@@ -34,7 +33,6 @@ import { PublicService } from './public.service';
         PublicComponent,
         PublicItemComponent,
         TermTextPipe,
-        EvaluationTextPipe,
         ObservationFormViewerComponent,
         LegacyItemComponent,
         FormViewComponent,

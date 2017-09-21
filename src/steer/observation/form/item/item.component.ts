@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import * as _ from 'lodash';
+
 import { CommonDialog } from 'core/common-dialogs';
 
 import { ObservationFormService } from '../form.service';
-import { EvaluationMap, ObservationForm } from '../shared/form.model';
+import { EvaluationItem, EvaluationMap, ObservationForm } from '../shared/form.model';
 
 @Component({
     selector: 'observation-item',
@@ -31,6 +33,14 @@ export class ObservationItemComponent {
         });
     }
 
+    validate(option: any): boolean {
+        return _.isUndefined(option) || _.isNull(option);
+    }
+
+    get evaluateList(): any[] {
+        return _.chain(this.evaluationSystem).map(data => data.value).flatten().map((item: EvaluationItem) => item.value).value();
+    }
+
     remove(): void {
         this.dialog.confirm('删除', '确定要删除吗？').then(() => {
             this.service.delete(this.vm.id).subscribe(() => {
@@ -48,8 +58,16 @@ export class ObservationItemComponent {
     }
 
     submit(): void {
-        this.service.submit(this.vm.id).subscribe(() => {
-            this.router.navigate(['/']);
-        });
+        const validate: string[] = [];
+        if (_.some(this.evaluateList, this.validate)) {
+            validate.push('请对全部评分项目都给出评分后再提交');
+        }
+        if (validate.length) {
+            this.dialog.error(validate);
+        } else {
+            this.service.submit(this.vm.id).subscribe(() => {
+                this.router.navigate(['/']);
+            });
+        }
     }
 }

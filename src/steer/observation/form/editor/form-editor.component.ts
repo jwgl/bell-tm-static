@@ -6,11 +6,12 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import 'rxjs/add/operator/switchMap';
 
+import {CommonDialog} from 'core/common-dialogs';
 import { EditMode } from 'core/constants';
 import { typeahead } from 'core/utils/typeahead';
 
 import { ObservationFormService } from '../form.service';
-import { EvaluationMap, GradeMap, GRADES, ObservationForm, Observers, Term } from '../shared/form.model';
+import { EvaluationItem, EvaluationMap, GRADES, ObservationForm, Observers, Term } from '../shared/form.model';
 import './form-editor.model';
 
 import { ScheduleService } from './schedule/schedule.service';
@@ -41,6 +42,7 @@ export class ObservationFormEditorComponent {
         private service: ObservationFormService,
         private route: ActivatedRoute,
         private location: Location,
+        private dialogs: CommonDialog,
     ) {
         this.editMode = this.route.snapshot.data['mode'];
         const params = this.route.snapshot.params;
@@ -96,30 +98,17 @@ export class ObservationFormEditorComponent {
         return day.format('YYYY-MM-DD');
     }
 
-    get evaluateLevel(): string {
-        let i = 0;
-        let sum = 0;
-        this.evaluationSystem.forEach(item => {
-            item.value.forEach(data => {
-                if (!_.isUndefined(data.value)) {
-                    i ++;
-                    sum += data.value;
-                }
-            });
-        });
-        if (i > 0) {
-            const avg = _.round(sum / i, 1);
-            let levelText = '';
-            if (avg >= 1.2) {
-                levelText = GradeMap[_.floor(avg + 0.8)];
-                levelText += ['+', '-', '', '+'][_.floor(((avg * 10) % 10 + 1) / 3)];
-            } else {
-                levelText = GradeMap[0];
-            }
-            return levelText;
-        } else {
-            return null;
-        }
+    get evaluateList(): any[] {
+        return _.chain(this.evaluationSystem).map(data => data.value).flatten().map((item: EvaluationItem) => item.value).value();
+    }
+
+    get evaluateLevel(): number {
+        const avg = _.round(_.mean(this.evaluateList.filter(s => !this.validate(s))), 1);
+        return _.isNaN(avg) ? null : avg;
+    }
+
+    validate(option: any): boolean {
+        return _.isUndefined(option) || _.isNull(option);
     }
 
     save() {
@@ -156,7 +145,15 @@ export class ObservationFormEditorComponent {
     }
 
     commit() {
-        this.form.status = 1;
-        this.save();
+        const validate: string[] = [];
+        if (_.some(this.evaluateList, this.validate)) {
+            validate.push('请对全部评分项目都给出评分后再提交');
+        }
+        if (validate.length) {
+            this.dialogs.error(validate);
+        } else {
+            this.form.status = 1;
+            this.save();
+        }
     }
 }
