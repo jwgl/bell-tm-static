@@ -52,10 +52,10 @@ export class ObservationFormEditorComponent {
                     params['teacherId'],
                     params['week'],
                     params['timeslotId'],
-                ).subscribe(dto => this.onLoadData(dto));
+                ).subscribe(dto => this.onLoadData(dto, params['week']));
                 break;
             case EditMode.Edit:
-                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto));
+                this.service.loadItemForEdit(params['id']).subscribe(dto => this.onLoadData(dto, null));
                 break;
         }
     }
@@ -64,9 +64,12 @@ export class ObservationFormEditorComponent {
         this.location.back();
     }
 
-    onLoadData(dto: any) {
+    onLoadData(dto: any, week: string) {
         if (!dto.form && dto.timeslot) {
             this.form = new ObservationForm({timeslot: dto.timeslot, observerType: dto.types[0]});
+            this.form.observationWeek = _.toNumber(week);
+            // 默认最少听课1节
+            this.form.totalSection = 1;
             if (this.form.schedule && this.form.schedule.hasError) {
                 // 如果课表出现错误，应提示督导及时反馈
                 alert(this.form.schedule.hasError);

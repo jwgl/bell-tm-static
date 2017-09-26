@@ -59,36 +59,33 @@ export class WeekScheduleComponent {
         }
     }
 
+    loadSchedule(s: any) {
+        const schedules = s.map((dto: any) => {
+            const schedule = new Schedule(dto);
+            schedule.superviseCount = dto.superviseCount;
+            schedule.academicTitle = dto.academicTitle;
+            schedule.department = dto.department;
+            schedule.property = dto.property;
+            return schedule;
+        });
+        if (this.timetable) {
+            const week = this.timetable.week;
+            this.timetable = new Timetable(schedules, true);
+            this.timetable.week = week;
+        } else {
+            this.timetable = new Timetable(schedules, true);
+        }
+    }
+
     queryTeacher() {
         this.service.findTeacherSchedule(this.teacher.id).subscribe(result => {
-            const schedules = result.map((dto: any) => {
-                const schedule = new Schedule(dto);
-                schedule.superviseCount = dto.superviseCount;
-                schedule.academicTitle = dto.academicTitle;
-                schedule.department = dto.department;
-                schedule.property = dto.property;
-                return schedule;
-            });
-            if (this.timetable) {
-                const week = this.timetable.week;
-                this.timetable = new Timetable(schedules, true);
-                this.timetable.week = week;
-            } else {
-                this.timetable = new Timetable(schedules, true);
-            }
+            this.loadSchedule(result);
         });
     }
 
     queryPlace() {
         this.service.findPlaceSchedule(this.place ? this.place.id : null).subscribe(result => {
-            const schedules = result.map((dto: any) => {
-                const schedule = new Schedule(dto);
-                schedule.superviseCount = dto.superviseCount;
-                schedule.academicTitle = dto.academicTitle;
-                schedule.department = dto.department;
-                return schedule;
-            });
-            this.timetable = new Timetable(schedules, true);
+            this.loadSchedule(result);
         });
     }
 
