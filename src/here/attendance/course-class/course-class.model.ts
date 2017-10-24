@@ -53,6 +53,9 @@ export class CourseClass {
     endWeek: number;
     department: string;
     totalSection: number;
+    teacherId: string;
+    termId: number;
+    activeTerm: boolean;
     students: Student[];
 
     rollcallDisqualRatio: number;
@@ -67,6 +70,9 @@ export class CourseClass {
         this.endWeek = dto.endWeek;
         this.department = dto.department;
         this.totalSection = dto.totalSection;
+        this.teacherId = dto.teacherId;
+        this.termId = dto.termId;
+        this.activeTerm = dto.activeTerm;
 
         this.rollcallDisqualRatio = dto.rollcallDisqualRatio;
         this.leaveDisqualRatio = dto.leaveDisqualRatio;

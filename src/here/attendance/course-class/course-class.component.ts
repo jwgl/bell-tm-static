@@ -27,6 +27,7 @@ export class CourseClassAttendanceComponent {
             }
             this.service.loadCourseClass(params['id']).subscribe(dto => {
                 this.courseClass = new CourseClass(dto);
+                this.service.courseClassLoaded.next(this.courseClass);
             });
         });
     }

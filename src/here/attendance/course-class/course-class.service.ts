@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
+
 import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
 
 import {ApiUrl, Rest, ShowService} from 'core/rest';
+
+import {CourseClass} from './course-class.model';
 
 @Injectable()
 export abstract class CourseClassAttendanceService {
     teacherId: string;
+    courseClassLoaded = new Subject<CourseClass>();
 
     constructor(
         public rest: Rest,
@@ -13,7 +18,9 @@ export abstract class CourseClassAttendanceService {
         private courseClassApi: string,
     ) {}
 
-    abstract loadCourseClasses(): Observable<any>;
+    abstract loadTerms(): Observable<any>;
+
+    abstract loadCourseClasses(termId: number): Observable<any>;
 
     abstract loadCourseClass(courseClassId: string): Observable<any>;
 

@@ -45,7 +45,7 @@
                 <th>早退</th>
                 <th>合计</th>
                 <th>请假</th>
-                <th>考试</th>
+                <th *ngIf="courseClass.activeTerm">考试</th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +62,7 @@
                     <td>{{student.early}}</td>
                     <td>{{student.total}}</td>
                     <td>{{student.leave}}</td>
-                    <td>
+                    <td *ngIf="courseClass.activeTerm">
                         <button *ngIf="isAdmin || student.showDisqual"
                                 class="btn btn-sm"
                                 [ngClass]="student.disqualifyButtonClass"

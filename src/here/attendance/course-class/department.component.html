@@ -1,7 +1,12 @@
 <div class="row">
     <div class="col-md-3">
         <div class="btn-toolbar">
-            <select class="form-control" [ngModel]="teacherId" (ngModelChange)="teacherChanged($event)">
+            <select class="form-control" [(ngModel)]="selectedTerm" (change)="loadTeachers(true)">
+                <option *ngFor="let term of terms" [ngValue]="term">{{term | termName}}</option>
+            </select>
+        </div>
+        <div class="btn-toolbar">
+            <select class="form-control" [(ngModel)]="teacherId" (change)="loadCourseClasses($event, true)">
                 <option *ngFor="let teacher of this.teachers" [ngValue]="teacher.id">{{teacher.name}}</option>
             </select>
         </div>

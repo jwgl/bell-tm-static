@@ -15,8 +15,12 @@ export class TeacherCourseClassService extends CourseClassAttendanceService {
         super(rest, api, courseClassApi);
     }
 
-    loadCourseClasses(): Observable<any> {
-        return this.rest.get(this.api.list());
+    loadTerms(): Observable<any> {
+        return this.rest.get(`${this.api.list()}/terms`);
+    }
+
+    loadCourseClasses(termId: number): Observable<any> {
+        return this.rest.get(`${this.api.list()}?termId=${termId}`);
     }
 
     loadCourseClass(courseClassId: string): Observable<any> {

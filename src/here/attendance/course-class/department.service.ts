@@ -7,21 +7,28 @@ import {CourseClassAttendanceService} from './course-class.service';
 
 @Injectable()
 export class DepartmentCourseClassService extends CourseClassAttendanceService {
+    teacherId: string;
+
     constructor(
         rest: Rest,
         api: ApiUrl,
         @Inject('COURSE_CLASS_API_URL') courseClassApi: string,
         @Inject('TEACHER_COURSE_CLASS_API_URL') private teacherCourseClassApi: string,
+        @Inject('ATTENDANCE_TERMS') private attendanceTermsApi: string,
     ) {
         super(rest, api, courseClassApi);
     }
 
-    loadCourseClassTeachers(): Observable<any[]> {
-        return this.rest.get(this.api.list());
+    loadTerms(): Observable<any> {
+        return this.rest.get(this.attendanceTermsApi);
     }
 
-    loadCourseClasses(): Observable<any[]> {
-        return this.rest.get(this.getTeacherCourseApiUrl());
+    loadCourseClassTeachers(termId: number): Observable<any[]> {
+        return this.rest.get(`${this.api.list()}?termId=${termId}`);
+    }
+
+    loadCourseClasses(termId: number): Observable<any[]> {
+        return this.rest.get(`${this.getTeacherCourseApiUrl()}?termId=${termId}`);
     }
 
     loadCourseClass(courseClassId: string): Observable<any> {
