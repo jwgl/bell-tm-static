@@ -12,7 +12,8 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
 }
 
 Schedule.prototype.uniqueCompare = function(this: Schedule, other: Schedule): boolean {
-    return this.startWeek === other.startWeek &&
+    return this.teacherId === other.teacherId &&
+           this.startWeek === other.startWeek &&
            this.endWeek === other.endWeek &&
            this.oddEven === other.oddEven &&
            this.dayOfWeek === other.dayOfWeek &&
