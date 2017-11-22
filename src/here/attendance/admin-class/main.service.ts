@@ -9,6 +9,7 @@ import {RollcallDetail, Student, StudentLeaveDetail} from '../shared/attendance.
 @Injectable()
 export class AdminClassListMainService extends ShowService {
     termId: number;
+    isAdmin: boolean;
 
     constructor(
         rest: Rest,
@@ -19,7 +20,7 @@ export class AdminClassListMainService extends ShowService {
         super(rest, api);
     }
 
-    loadAdminClasses(): Observable<{termId: number, adminClasses: any[]}> {
+    loadAdminClasses(): Observable<{termId: number, isAdmin: boolean, adminClasses: any[]}> {
         return this.rest.get(`${this.api.list()}/adminClasses`);
     }
 

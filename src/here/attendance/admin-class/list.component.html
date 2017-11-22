@@ -3,8 +3,9 @@
         <div class="btn-group ml-auto">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">导出</button>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" download href="{{statisUrl}}">统计数据</a>
-                <a class="dropdown-item" download href="{{detailUrl}}">明细数据</a>
+                <a class="dropdown-item" download href="{{statisUrl}}">考勤统计数据</a>
+                <a class="dropdown-item" download href="{{detailUrl}}">考勤明细数据</a>
+                <a class="dropdown-item" download href="{{disqualUrl}}" *ngIf="service.isAdmin">取消考试资格情况</a>
             </div>
         </div>
     </div>

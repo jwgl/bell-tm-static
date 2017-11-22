@@ -4,8 +4,8 @@ declare module '../shared/attendance.model' {
     interface Student {
         subject: string;
         disqualified: boolean;
-        rollcallOverflow: boolean;
-        leaveOverflow: boolean;
+        absentOverflow: boolean;
+        attendOverflow: boolean;
         showDetails: boolean;
         showDisqual: boolean;
         disqualifyButtonClass: string;
@@ -15,7 +15,7 @@ declare module '../shared/attendance.model' {
 Object.defineProperty(Student.prototype, 'showDisqual', {
     /* tslint:disable:object-literal-shorthand*/
     get: function(this: Student) {
-        return this.disqualified || this.rollcallOverflow || this.leaveOverflow;
+        return this.disqualified || this.absentOverflow || this.attendOverflow;
     },
     /* tslint:enable:object-literal-shorthand*/
     enumerable: true,
@@ -26,13 +26,13 @@ Object.defineProperty(Student.prototype, 'disqualifyButtonClass', {
     /* tslint:disable:object-literal-shorthand*/
     get: function(this: Student) {
         if (this.disqualified) {
-            if (this.rollcallOverflow || this.leaveOverflow) {
+            if (this.absentOverflow || this.attendOverflow) {
                 return 'btn-danger';
             } else {
                 return 'btn-success';
             }
         } else {
-            if (this.rollcallOverflow || this.leaveOverflow) {
+            if (this.absentOverflow || this.attendOverflow) {
                 return 'btn-warning';
             } else {
                 return 'btn-secondary';
@@ -58,8 +58,8 @@ export class CourseClass {
     activeTerm: boolean;
     students: Student[];
 
-    rollcallDisqualRatio: number;
-    leaveDisqualRatio: number;
+    absentDisqualRatio: number;
+    attendDisqualRatio: number;
 
     constructor(dto: any) {
         this.id = dto.id;
@@ -74,16 +74,16 @@ export class CourseClass {
         this.termId = dto.termId;
         this.activeTerm = dto.activeTerm;
 
-        this.rollcallDisqualRatio = dto.rollcallDisqualRatio;
-        this.leaveDisqualRatio = dto.leaveDisqualRatio;
+        this.absentDisqualRatio = dto.absentDisqualRatio;
+        this.attendDisqualRatio = dto.attendDisqualRatio;
 
         const studentMap: {[key: string]: Student} = {};
         this.students = dto.students.map((s: any) => {
             const student = new Student(s);
             student.subject = s.subject;
             student.disqualified = s.disqualified;
-            student.rollcallOverflow = false;
-            student.leaveOverflow = false;
+            student.absentOverflow = false;
+            student.attendOverflow = false;
             student.showDetails = false;
             studentMap[student.id] = student;
             return student;
@@ -101,8 +101,8 @@ export class CourseClass {
             student.total = a.total;
             student.leave = a.leave;
 
-            student.rollcallOverflow = student.total > this.totalSection / this.rollcallDisqualRatio;
-            student.leaveOverflow = student.leave > this.totalSection / this.leaveDisqualRatio;
+            student.absentOverflow = student.total > this.totalSection * this.absentDisqualRatio;
+            student.attendOverflow = student.leave > this.totalSection * this.attendDisqualRatio;
             student.showDetails = true;
         });
     }

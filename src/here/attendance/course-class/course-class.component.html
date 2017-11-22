@@ -95,17 +95,15 @@
                             </ul>
                         </section>
                         <section *ngIf="student.showDisqual">
-                            <h6>取消考试资格</h6>
-                            <p *ngIf="student.rollcallOverflow || student.leaveOverflow; else qualify">
-                                <span *ngIf="student.rollcallOverflow">旷课节数超过总学时的1/{{courseClass.rollcallDisqualRatio}}，</span>
-                                <span *ngIf="student.leaveOverflow">请假节数超过总学时的1/{{courseClass.leaveDisqualRatio}}，</span>
+                            <h6>考试资格</h6>
+                            <p *ngIf="student.absentOverflow || student.attendOverflow; else qualify">
+                                <span *ngIf="student.absentOverflow">旷课节数达到取消考试资格条件，</span>
+                                <span *ngIf="student.attendOverflow">缺勤节数达到取消考试资格条件，</span>
                                 {{student.disqualified ? '已' : '可'}}考试资格取消。
                             </p>
                             <ng-template #qualify>
                                 <p>
-                                  旷课节数未超过总学时的1/{{courseClass.rollcallDisqualRatio}}，
-                                  请假节数未超过总学时的1/{{courseClass.leaveDisqualRatio}}，
-                                  {{student.disqualified ? '可' : '未'}}恢复考试资格。
+                                  旷课和缺勤节数未达到取消考试资格条件，{{student.disqualified ? '可' : '未'}}恢复考试资格。
                                 </p>
                             </ng-template>
                         </section>

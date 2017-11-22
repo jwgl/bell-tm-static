@@ -51,4 +51,8 @@ export class AdminClassListComponent {
     get detailUrl() {
         return `/web/here/attendances/detailReport?termId=${this.service.termId}`;
     }
+
+    get disqualUrl() {
+        return `/web/here/attendances/disqualReport?termId=${this.service.termId}`;
+    }
 }

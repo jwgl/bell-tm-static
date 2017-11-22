@@ -18,6 +18,7 @@ export class AdminClassListMainComponent {
     ) {
         this.service.loadAdminClasses().subscribe(dto => {
             this.service.termId = dto.termId;
+            this.service.isAdmin = dto.isAdmin;
             this.adminClasses = dto.adminClasses;
             this.totalCount = this.adminClasses.reduce((sum: number, item) => sum += item.count, 0);
         });
