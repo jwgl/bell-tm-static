@@ -1,4 +1,4 @@
-<td><input type="checkbox" [(ngModel)]="schemeCourse.selected" [disabled]="schemeCourse.exported"></td>
+<td><input type="checkbox" [(ngModel)]="schemeCourse.selected" [disabled]="schemeCourse.exported || !schemeCourse.exportable"></td>
 <td>{{schemeCourse.courseId}}</td>
 <td class='course-name'>{{schemeCourse.courseName}}</td>
 <td>{{directionName}}</td>

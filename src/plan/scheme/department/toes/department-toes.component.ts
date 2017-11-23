@@ -31,7 +31,7 @@ export class SchemeDepartmentToesComponent implements OnInit {
             this.id = params['id'];
             this.service.loadToes(this.id).subscribe(dto => {
                 this.vm = new Scheme(dto.scheme);
-                this.vm.init(dto.programCourses);
+                this.vm.init(dto.programCourses, dto.schemeTerm);
             });
         });
     }

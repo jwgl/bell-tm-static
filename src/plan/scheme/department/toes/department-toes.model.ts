@@ -9,7 +9,7 @@ import {
 
 declare module '../../shared/scheme.model' {
     interface Scheme {
-        init(programCourses: any[]): void;
+        init(programCourses: any[], schemeTerm: number): void;
         /**
          * 获取需要导出的课程
          */
@@ -24,16 +24,20 @@ declare module '../../shared/scheme.model' {
         readonly endWeek: number; // 结束周，用于显示
         selected: boolean;
         exported: boolean;
+        exportable: boolean;
+
+        init(scheme: Scheme, programCourses: any, schemeTerm: number): void;
         toToesDto(): any;
     }
 }
 
-Scheme.prototype.init = function(this: Scheme, programCourses: any[]) {
+Scheme.prototype.init = function(this: Scheme, programCourses: any[], schemeTerm: number) {
     this.properties.forEach(p => {
         if (p.directions) {
             p.directions.forEach(d => {
                 d.courses.forEach(sc => {
                     const programCourse = programCourses.find(it => it.courseId === sc._courseId && it.directionId === d.id);
+                    sc.init(this, programCourse, schemeTerm);
                     if (programCourse) {
                         sc.startWeek = programCourse.startWeek;
                         sc.departmentId = programCourse.departmentId;
@@ -50,17 +54,7 @@ Scheme.prototype.init = function(this: Scheme, programCourses: any[]) {
         }
         p.courses.forEach(sc => {
             const programCourse = programCourses.find(it => it.courseId === sc._courseId);
-            if (programCourse) {
-                sc.startWeek = programCourse.startWeek;
-                sc.departmentId = programCourse.departmentId;
-                sc.departmentName = programCourse.departmentName;
-                sc.exported = true;
-            } else {
-                sc.startWeek = 1;
-                sc.departmentId = this.departmentId;
-                sc.departmentName = this.departmentName;
-                sc.exported = false;
-            }
+            sc.init(this, programCourse, schemeTerm);
         });
     });
 };
@@ -113,6 +107,23 @@ Object.defineProperty(SchemeCourse.prototype, 'endWeek', {
     enumerable: true,
     configurable: true,
 });
+
+SchemeCourse.prototype.init = function(this: SchemeCourse, scheme: Scheme, programCourse: any, schemeTerm: number) {
+    if (programCourse) {
+        this.startWeek = programCourse.startWeek;
+        this.departmentId = programCourse.departmentId;
+        this.departmentName = programCourse.departmentName;
+        this.exported = true;
+    } else {
+        this.startWeek = 1;
+        this.departmentId = scheme.departmentId;
+        this.departmentName = scheme.departmentName;
+        this.exported = false;
+    }
+    /* tslint:disable:no-bitwise*/
+    this.exportable = this.suggestedTerm <= schemeTerm + 1 || (1 << (schemeTerm) & this.allowedTerm) !== 0;
+    /* tslint:enable:no-bitwise*/
+};
 
 SchemeCourse.prototype.toToesDto = function(this: SchemeCourse) {
     return {
