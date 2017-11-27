@@ -53,6 +53,10 @@ export class RollcallFormEditorComponent implements OnInit {
 
     toggle(student: Student, type: RollcallType) {
         const result: ToggleResult = student.toggle(type);
+        if (student.pending) {
+            return;
+        }
+
         switch (result.op) {
             case 'insert':
                 student.pending = true;
