@@ -27,4 +27,5 @@ export const ListFilter = [
     { key: 'departmentName', name: '开课单位' },
     { key: 'evaluateLevel', name: '评价等级' },
     { key: 'status', name: '状态' },
-    { key: 'observerType', name: '督导类型' }];
+    { key: 'observerType', name: '督导类型' },
+    { key: 'supervisorName', name: '督导姓名' }];
