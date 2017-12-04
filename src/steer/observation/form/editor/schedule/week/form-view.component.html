@@ -22,6 +22,7 @@
            <div class="timeslot">
                 <button class="btn btn-secondary slotitem" *ngFor="let item of timeslot.items"
                     [ngClass]="timeslot.getObservationClass()"
+                    [disabled]="item.getPermission()"
                     [routerLink]="['/teacher',timeslot.getTeacherId(),'week', week, 'timeslot',  timeslot.id]">
                     <div>
                         <span class="course-name">{{item.course}}</span>

@@ -15,31 +15,31 @@
             <tr>
                 <th>教师</th>
                 <th>课程名</th>
-                <th>职称</th>
-                <th>上课时间</th>
-                <th>地点</th>
+                <th>时间&地点</th>
                 <th>学分</th>
                 <th>开课单位</th>
                 <th>课程性质</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
             <ng-template ngFor let-schedule [ngForOf]="schedules" let-i="index">
                 <tr>
-                    <td class="teacher"><a [class.btn]="schedule.superviseCount"
-                            [class.btn-warning]="schedule.superviseCount === 2"
-                            [class.btn-danger]="schedule.superviseCount > 2"
-                            [routerLink]="['/teacher',schedule.teacherId,'week', queryOptions.weekOfTerm, 'timeslot',  schedule.dayOfWeek * 10000 + schedule.startSection * 100]">{{schedule.teacherName}}</a>
-                    </td>
+                    <td class="teacher">{{schedule.teacherName}}<br>({{schedule.academicTitle}})</td>
                     <td class="courseName">{{schedule.course}}</td>
-                    <td>{{schedule.academicTitle}} </td>
-                    <td>{{schedule.startWeek}}-{{schedule.endWeek}}周<br>{{schedule.oddEven | oddEven}} {{schedule.dayOfWeek | dayOfWeek}}
-                        {{schedule.startSection}}-{{schedule.startSection+schedule.totalSection-1}}节
+                    <td>{{schedule.startWeek}}-{{schedule.endWeek}}周{{schedule.oddEven | oddEven}} {{schedule.dayOfWeek | dayOfWeek}}
+                        {{schedule.startSection}}-{{schedule.startSection+schedule.totalSection-1}}节<br>{{schedule.place}}
                     </td>
-                    <td>{{schedule.place}}</td>
                     <td>{{schedule.credit}}</td>
                     <td>{{schedule.department}}</td>
                     <td>{{schedule.property}}</td>
+                    <td><button class="btn btn-default btn-sm" [class.btn]="schedule.superviseCount"
+                        [disabled]="schedule.cantObserver"
+                        [class.btn-warning]="schedule.superviseCount === 2"
+                        [class.btn-danger]="schedule.superviseCount > 2"
+                        [routerLink]="['/teacher',schedule.teacherId,'week', queryOptions.weekOfTerm, 'timeslot',  schedule.dayOfWeek * 10000 + schedule.startSection * 100]">
+                    录入
+                    </button></td>
                 </tr>
             </ng-template>
         </tbody>

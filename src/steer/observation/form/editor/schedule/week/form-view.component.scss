@@ -25,4 +25,7 @@ button.slotitem {
     &.slotitem-other {
         @include schedule-variant(theme_color("warning"));
     }
+    &.shadow-none {
+        box-shadow: none;
+    }
 }

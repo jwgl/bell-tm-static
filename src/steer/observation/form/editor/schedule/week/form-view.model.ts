@@ -8,12 +8,14 @@ declare module 'core/components/schedule-timetable/schedule-timetable.model' {
         academicTitle: string;
         department: string;
         property: string;
+        cantObserver: boolean;
     }
 
     interface TimeslotItem {
         getDepartment(): string;
         getAcademicTitle(): string;
         getProperty(): string;
+        getPermission(): boolean;
     }
 
     interface Timeslot {
@@ -34,6 +36,10 @@ TimeslotItem.prototype.getProperty = function(this: TimeslotItem): string {
     return _.chain(this.schedules).map(data => data.property).uniq().join(',').value();
 };
 
+TimeslotItem.prototype.getPermission = function(this: TimeslotItem): boolean {
+    return this.schedules[0].cantObserver;
+};
+
 Timeslot.prototype.getTeacherId = function(this: Timeslot): string {
     return this.items[0].schedules[0].teacherId;
 };
@@ -45,6 +51,6 @@ Timeslot.prototype.getObservationClass = function(this: Timeslot): string {
     } else if (superviseCount > 2) {
         return 'slotitem-current';
     } else {
-        return 'slotitem-normal';
+        return this.items[0].schedules[0].cantObserver ? 'slotitem-normal shadow-none' : 'slotitem-normal';
     }
 };

@@ -47,6 +47,7 @@ export class ScheduleListComponent {
                 schedule.department = dto.department;
                 schedule.credit = dto.credit;
                 schedule.property = dto.property;
+                schedule.cantObserver = dto.cantObserver;
                 return schedule;
             });
             this.schedules = _.uniqWith(this.schedules, (a: Schedule, b: Schedule) => a.uniqueCompare(b))

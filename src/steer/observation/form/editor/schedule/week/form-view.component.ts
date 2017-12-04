@@ -66,6 +66,7 @@ export class WeekScheduleComponent {
             schedule.academicTitle = dto.academicTitle;
             schedule.department = dto.department;
             schedule.property = dto.property;
+            schedule.cantObserver = dto.cantObserver;
             return schedule;
         });
         if (this.timetable) {

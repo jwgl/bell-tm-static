@@ -36,6 +36,7 @@
                 <th>课程信息</th>
                 <th>开课单位</th>
                 <th>听课时间</th>
+                <th>节</th>
                 <th>评价等级</th>
                 <th *ngIf="isAdmin">督导老师</th>
                 <th>状态</th>
@@ -49,6 +50,7 @@
                     <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节<br *ngIf="isAdmin">{{item.place}}</td>
                     <td>{{item.departmentName}} </td>
                     <td class="observationDate">{{item.supervisorDate}}</td>
+                    <td>{{item.totalSection}}</td>
                     <td>{{item.evaluateLevel}}</td>
                     <td *ngIf="isAdmin">{{item.supervisorName}}({{item.supervisorId}})<br>{{item.observerType | typeLabel}}</td>
                     <td [class.text-warning]="!item.status">{{item.status | statusName}}</td>
