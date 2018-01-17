@@ -1,5 +1,4 @@
 <div class="form-check form-check-inline dr-2" *ngFor="let term of terms; let i = index">
-    <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" [formControl]="controls.at(i)"> {{term | termTitle}}
-    </label>
+    <input class="form-check-input" type="checkbox" [formControl]="controls.at(i)" id="term-{{term}}">
+    <label class="form-check-label" for="term-{{term}}">{{term | termTitle}}</label>
 </div>

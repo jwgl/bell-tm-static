@@ -11,7 +11,7 @@ $btn-attend-bg: $attend-bg;
 @mixin rollcall-button-variant($color) {
     @include button-outline-variant($color);
     border-color: #ccc;
-    color: #333;
+    color: $gray-900;
     background-color: #fff;
 
     @include hover {
@@ -20,16 +20,20 @@ $btn-attend-bg: $attend-bg;
         border-color: darken($white, 12%);
     }
 
-    &.active {
+    &[disabled] {
+        color: #888;
+    }
+
+    &:focus,
+    &.focus,
+    &:not([disabled]):not(.disabled):active,
+    &:not([disabled]):not(.disabled).active {
+        box-shadow: none;
+        color: color-yiq($color);
         @include hover {
-            color: #fff;
             background-color: darken($color, 10%);
             border-color: darken($color, 12%);
         }
-    }
-
-    &[disabled] {
-        color: #888;
     }
 }
 

@@ -10,7 +10,9 @@ import {ListOption} from 'core/models';
     <li class="nav-item ml-auto">
         <div class="input-group">
             <input type="text" class="form-control form-control-sm" placeholder="查找" [(ngModel)]="query">
-            <button class="input-group-addon btn-sm" (click)="search()"><i class="fa fa-search"></i></button>
+            <div class="input-group-append">
+                <button class="btn btn-secondary py-0 h-100" (click)="search()"><i class="fa fa-search"></i></button>
+            </div>
         </div>
     </li>
 </nav-tabs>

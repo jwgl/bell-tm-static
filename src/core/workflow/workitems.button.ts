@@ -22,6 +22,8 @@ export class WorkflowWorkitemsButton {
     ngAfterViewInit() {
         if (!this.workflowInstanceId) {
             this.button.parentElement.classList.remove('ml-2');
+        } else {
+            this.button.parentElement.classList.add('ml-2');
         }
     }
 

@@ -46,9 +46,9 @@ module.exports = function(options) {
             new CommonsChunkPlugin({
                 name: ['polyfills', 'vendor'].reverse()
             }),
-            // See: https://github.com/angular/angular/issues/11580
+            // See: https://github.com/angular/angular/issues/20357#issuecomment-343683491
             new ContextReplacementPlugin(
-                /angular(\\|\/)core(\\|\/)@angular/,
+                /\@angular(\\|\/)core(\\|\/)esm5/,
                 helpers.root('src')
             ),
             new CopyWebpackPlugin([
@@ -59,8 +59,6 @@ module.exports = function(options) {
                 { to: 'js/lib',    from: './node_modules/popper.js/dist/umd/popper.min.js' },
                 { to: 'js/lib',    from: './node_modules/bootstrap/dist/js/bootstrap.min.js' },
                 { to: 'css/lib',   from: './node_modules/bootstrap/dist/css/bootstrap.min.css' },
-                { to: 'js/lib',    from: './node_modules/bootstrap-submenu/dist/js/bootstrap-submenu.min.js' },
-                { to: 'css/lib',   from: './node_modules/bootstrap-submenu/dist/css/bootstrap-submenu.min.css' },
                 { to: 'js/lib',    from: './node_modules/lodash/lodash.min.js' },
                 { to: 'css/lib',   from: './node_modules/font-awesome/css/font-awesome.min.css' },
                 { to: 'css/fonts', from: './node_modules/font-awesome/fonts' },

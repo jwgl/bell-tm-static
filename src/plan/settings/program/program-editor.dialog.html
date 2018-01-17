@@ -4,11 +4,8 @@
             <fieldset>
                 <legend>培养方案</legend>
                 <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"
-                            name="visionRevisible"
-                            [(ngModel)]= "programSetting.visionRevisible"> 能否修订
-                    </label>
+                    <input type="checkbox" class="form-check-input" name="visionRevisible" [(ngModel)]= "programSetting.visionRevisible" id="visionRevisible">
+                    <label class="form-check-label" for="visionRevisible">能否修订</label>
                 </div>
             </fieldset>
             <fieldset>
@@ -24,25 +21,16 @@
                            [(ngModel)]= "programSetting.practiceCreditRatio">
                 </form-field-2>
                 <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"
-                            name="templateLocked"
-                            [(ngModel)]= "programSetting.templateLocked"> 是否锁定模板
-                    </label>
+                    <input type="checkbox" class="form-check-input" name="templateLocked" [(ngModel)]= "programSetting.templateLocked" id="templateLocked">
+                    <label class="form-check-label" for="templateLocked">是否锁定模板</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"
-                            name="schemeRevisible"
-                            [(ngModel)]= "programSetting.schemeRevisible"> 能否修订计划
-                    </label>
+                    <input type="checkbox" class="form-check-input" name="schemeRevisible" [(ngModel)]= "programSetting.schemeRevisible" id="schemeRevisible">
+                    <label class="form-check-label" for="schemeRevisible">能否修订计划</label>
                 </div>
                 <div class="form-check">
-                    <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input"
-                            name="schemeExportable"
-                            [(ngModel)]= "programSetting.schemeExportable"> 能否导入教务系统
-                    </label>
+                    <input type="checkbox" class="form-check-input" name="schemeExportable" [(ngModel)]= "programSetting.schemeExportable" id="schemeExportable">
+                    <label class="form-check-label" for="schemeExportable">能否导入教务系统</label>
                 </div>
             </fieldset>
         </form>

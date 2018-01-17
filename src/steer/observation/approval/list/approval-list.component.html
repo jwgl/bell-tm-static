@@ -8,8 +8,10 @@
     </li>
     <li class="nav-item ml-2">
         <div class="input-group">
-            <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value" />
-            <button type="button" class="input-group-addon btn-sm" (click)="doFilter()"><i class="fa fa-search"></i></button>
+            <input class="form-control form-control-sm" name="filterValue" type="text" [(ngModel)]="filterSelected.value"/>
+            <div class="input-group-append">
+                <button class="btn btn-secondary py-0 h-100" (click)="doFilter()"><i class="fa fa-search"></i></button>
+            </div>
         </div>
     </li>
 </nav-tabs>

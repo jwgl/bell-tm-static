@@ -28,7 +28,7 @@ export class ActionNamePipe {
                 }
             }
         }
-        return ACTION_INFO[(AuditAction as any)[value as any]].label;
+        return ACTION_INFO[(AuditAction as any)[value as any] as keyof typeof ACTION_INFO].label;
     }
 }
 
@@ -36,6 +36,6 @@ export class ActionNamePipe {
 @Pipe({name: 'actionClass'})
 export class ActionClassPipe {
     transform(value: any, args: any[]) {
-        return ACTION_INFO[(AuditAction as any)[value as any]].class;
+        return ACTION_INFO[(AuditAction as any)[value as any] as keyof typeof ACTION_INFO].class;
     }
 }

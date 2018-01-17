@@ -11,10 +11,8 @@
             <label>请假类型</label>
             <div>
                 <div class="form-check form-check-inline" *ngFor="let leaveType of leaveTypes" >
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type">
-                        {{leaveType.label}}
-                    </label>
+                    <input class="form-check-input" type="radio" name="leaveType" [value]="leaveType.type" [(ngModel)]="form.type" id="type{{leaveType.type}}">
+                    <label class="form-check-label" for="type{{leaveType.type}}">{{leaveType.label}}</label>
                 </div>
             </div>
         </div>
