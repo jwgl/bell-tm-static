@@ -17,6 +17,7 @@ interface ObserverReport {
 })
 export class ObserverReportComponent {
     list: ObserverReport[];
+    termId: number;
 
     constructor(
         private service: ObserverService,
