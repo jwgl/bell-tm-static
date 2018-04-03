@@ -12,6 +12,15 @@ const statusLabels: Labels<AuditStatus> = new Labels(AuditStatus, {
     [AuditStatus.FINISHED]:  {class: 'badge-success', text: '完成'},
     [AuditStatus.CLOSED]:    {class: 'badge-danger',  text: '关闭'},
     [AuditStatus.DELETED]:   {class: 'badge-danger',  text: '删除'},
+    [AuditStatus.STEP1]:     {class: 'badge-info',    text: '步骤1'},
+    [AuditStatus.STEP2]:     {class: 'badge-info',    text: '步骤2'},
+    [AuditStatus.STEP3]:     {class: 'badge-info',    text: '步骤3'},
+    [AuditStatus.STEP4]:     {class: 'badge-info',    text: '步骤4'},
+    [AuditStatus.STEP5]:     {class: 'badge-info',    text: '步骤5'},
+    [AuditStatus.STEP6]:     {class: 'badge-info',    text: '步骤6'},
+    [AuditStatus.STEP7]:     {class: 'badge-info',    text: '步骤7'},
+    [AuditStatus.STEP8]:     {class: 'badge-info',    text: '步骤8'},
+    [AuditStatus.STEP9]:     {class: 'badge-info',    text: '步骤9'},
 });
 
 export function auditStatusText(status: AuditStatus) {

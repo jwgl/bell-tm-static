@@ -1,0 +1,17 @@
+.awardTitle {
+    width: 25em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .awardTitle {
+        max-width: 22em;
+    }
+}
+
+@media (max-width: 991px) {
+    .awardTitle {
+        max-width: 15em;
+    }
+}

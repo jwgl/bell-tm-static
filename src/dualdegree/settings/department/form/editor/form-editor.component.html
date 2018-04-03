@@ -1,0 +1,21 @@
+<modal-dialog title="添加2+2学院管理员">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="学院">
+                <select name="department" class="form-control" [(ngModel)]="form.departmentId">
+                    <option value="" disabled>选择学院</option>
+                    <option *ngFor="let item of departments" [ngValue]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="老师">
+                <teacher-select (selectTeacher)="onTeacherSelected($event)"></teacher-select>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

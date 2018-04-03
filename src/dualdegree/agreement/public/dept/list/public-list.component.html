@@ -1,0 +1,26 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>校内专业</th>
+            <th>项目</th>
+            <th>适用年级</th>
+            <th>合作大学</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let item of agreements; let i = index">
+            <ng-container *ngFor="let gr of item.regions; let j = index">
+                <ng-container *ngFor="let unv of gr.universities; let k = index">
+                    <ng-container *ngFor="let g of unv.grades; let n = index">
+                        <tr>
+                            <td *ngIf="j == 0 && k ==0 && n == 0" [rowSpan]="regionsLength(item.regions)" class="majorName">{{item.name}}</td>
+                            <td *ngIf="k ==0 && n == 0" [rowSpan]="universitiesLength(gr.universities)" class="regionName">{{gr.name}}</td>
+                            <td>{{g.grade}}</td>
+                            <td *ngIf="n == 0" [rowSpan]="unv.grades.length">{{unv.name}}</td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </tbody>
+</table>

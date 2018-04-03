@@ -1,0 +1,22 @@
+<modal-dialog title="导入出国学生名单">
+    <modal-body>
+        <div class="form-group">
+            <label class="control-label">参加项目</label>
+            <select name="regions" class="form-control" [(ngModel)]="form.regionId">
+                <option value="" disabled>选择项目</option>
+                <option *ngFor="let item of regions" [ngValue]="item.id">
+                    {{item.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label">学生列表</label>
+            <textarea class="form-control" name="students" rows="15" [(ngModel)]="form.studentIds" placeholder="请将学生学号粘帖在这里">
+            </textarea>
+        </div>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>关闭</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="validate">导入</button>
+    </modal-footer>
+</modal-dialog>

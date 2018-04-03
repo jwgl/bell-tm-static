@@ -1,0 +1,31 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" (click)="open()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>教师</th>
+            <th>Email</th>
+            <th>性别</th>
+            <th>职称</th>
+            <th>学位</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-mentor [ngForOf]="mentors" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td><a href="#" (click)="edit(mentor)" >{{mentor.teacherName}}({{mentor.teacherId}})</a></td>
+                <td>{{mentor.email}}</td>
+                <td>{{mentor.sex}}</td>
+                <td>{{mentor.academicTitle}}</td>
+                <td>{{mentor.academicDegree}}</td>
+                <td><remove-item (click)="remove(mentor)"></remove-item></td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

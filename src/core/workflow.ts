@@ -9,6 +9,8 @@ import {CommonDirectivesModule} from './common-directives';
 import {Dialog} from './dialogs';
 import {WorkflowAcceptButton} from './workflow/accept.button';
 import {WorkflowAcceptDialog} from './workflow/accept.dialog';
+import {WorkflowNextButton} from './workflow/next.button';
+import {WorkflowNextDialog} from './workflow/next.dialog';
 import {WorkflowRejectButton} from './workflow/reject.button';
 import {WorkflowRejectDialog} from './workflow/reject.dialog';
 import {WorkflowRevokeButton} from './workflow/revoke.button';
@@ -16,6 +18,7 @@ import {WorkflowRevokeDialog} from './workflow/revoke.dialog';
 import {WorkflowSubmitButton} from './workflow/submit.button';
 import {WorkflowSubmitDialog} from './workflow/submit.dialog';
 import {
+    NextOptions,
     ReviewOptions,
     RevokeOptions,
     SubmitOptions,
@@ -32,6 +35,7 @@ import {ListGroupComponent} from './workflow/list-group.component';
 import {NavTabsComponent} from './workflow/nav-tabs.component';
 
 export {
+    NextOptions,
     ReviewOptions,
     RevokeOptions,
     SubmitOptions,
@@ -43,6 +47,7 @@ export {
 const WORKFLOW_DIALOGS: any[] = [
     WorkflowSubmitDialog,
     WorkflowAcceptDialog,
+    WorkflowNextDialog,
     WorkflowRejectDialog,
     WorkflowRevokeDialog,
     WorkflowWorkitemsDialog,
@@ -50,6 +55,7 @@ const WORKFLOW_DIALOGS: any[] = [
 
 const WORKFLOW_BUTTONS: any[] = [
     WorkflowAcceptButton,
+    WorkflowNextButton,
     WorkflowRejectButton,
     WorkflowSubmitButton,
     WorkflowRevokeButton,

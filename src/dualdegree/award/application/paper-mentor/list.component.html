@@ -1,0 +1,46 @@
+<div class="container" *ngIf="list">
+        <div class="btn-group mt-2" *ngIf="mentorAble">
+            <button class="btn btn-primary" (click)="open()">设置导师</button>
+        </div>
+    <table class="table" *ngIf="list.items.length > 0; else empty">
+        <thead>
+            <tr>
+                <th><input type="checkbox" (change)="checkAll($event.target.checked)"></th>
+                <th>申请单号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>班级</th>
+                <th>导师</th>
+                <th>申请日期</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of list.items; let i = index">
+                <td>
+                    <checkbox-selector [data]="form"></checkbox-selector>{{i+1}}
+                </td>
+                <td><a [routerLink]="[form.id]">#{{form.id}}</a></td>
+                <td>{{form.studentId}}</td>
+                <td>{{form.studentName}}</td>
+                <td>{{form.sex}}</td>
+                <td>{{form.className}}</td>
+                <td>{{form.paperApprover}}</td>
+                <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
+                <td><audit-status [status]="form.status"></audit-status></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9" style="text-align: center">
+                    <div class="btn-group" *ngIf="list.pagerEnabled">
+                        <button class="btn btn-secondary" [routerLink]="[{offset: list.prevOffset}]" [disabled]="list.prevDisabled">上一页</button>
+                        <button class="btn btn-secondary" [routerLink]="[{offset: list.nextOffset}]" [disabled]="list.nextDisabled">下一页</button>
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
+</div>

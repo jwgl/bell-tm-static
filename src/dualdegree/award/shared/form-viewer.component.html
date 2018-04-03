@@ -1,0 +1,38 @@
+<ng-container *ngIf="vm">
+    <form-title>双学位审核通知{{vm.id}}</form-title>
+    <div class="row">
+        <div class="form-group col-9">
+            <label class="control-label">标题</label>
+            <div>{{vm.title}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">适用学院</label>
+            <div>{{vm.departmentName}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-3">
+            <label class="control-label">申请开始日期</label>
+            <div>{{vm.requestBegin}}</div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">申请截止日期</label>
+            <div><span class={{expireClass(vm.requestEnd)}}>{{vm.requestEnd}}</span></div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">论文提交截止日期</label>
+            <div><span class={{expireClass(vm.paperEnd)}}>{{vm.paperEnd}}</span></div>
+        </div>
+        <div class="form-group col-3">
+            <label class="control-label">审核结束日期</label>
+            <div><span class={{expireClass(vm.paperEnd)}}>{{vm.approvalEnd}}</span></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-12">
+            <label class="control-label">通知内容</label>
+            <div [markdown]="vm.content"></div>
+        </div>
+    </div>
+    <div>图例：<span class="btn btn-danger"></span>表示已过截止日期，禁止相应操作。</div>
+</ng-container>

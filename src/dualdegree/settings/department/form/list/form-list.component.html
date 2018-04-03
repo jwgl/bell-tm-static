@@ -1,0 +1,25 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-primary" (click)="open()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>教师</th>
+            <th>学院</th>
+            <th>删除</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-deptAdmin [ngForOf]="deptAdmins" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{deptAdmin.teacherName}}({{deptAdmin.teacherId}})</td>
+                <td>{{deptAdmin.departmentName}}</td>
+                <td><remove-item (click)="remove(deptAdmin)"></remove-item></td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

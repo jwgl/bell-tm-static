@@ -1,0 +1,51 @@
+<ng-container *ngIf="form">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-primary' (click)="save()">保存</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class='btn btn-secondary' (click)="goBack()">返回</button>
+        </div>
+    </div>
+    <form-title>双学位审核通知{{form.id}}</form-title>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label">标题</label>
+                <input class="form-control" name="title" type="text" [(ngModel)]="form.title" placeholder="本批次通知标题" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">申请开始日期</label>
+                <input class="form-control" name="requestBegin" type="text" [(ngModel)]="form.requestBegin" placeholder="YYYY-MM-DD" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">申请截止日期</label>
+                <input class="form-control" name="requestEnd" type="text" [(ngModel)]="form.requestEnd" placeholder="YYYY-MM-DD" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">论文提交截止日期</label>
+                <input class="form-control" name="paperEnd" type="text" [(ngModel)]="form.paperEnd" placeholder="YYYY-MM-DD" />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">审核结束日期</label>
+                <input class="form-control" name="approvalEnd" type="text" [(ngModel)]="form.approvalEnd" placeholder="YYYY-MM-DD" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">适用学院</label>
+                <select name="region" class="form-control" [(ngModel)]="form.departmentId">
+                    <option *ngFor="let item of departments" [ngValue]="item.id">
+                        {{ item.name }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-9">
+                <label class="control-label">通知内容</label>
+                <textarea class="form-control" name="content" rows="4" [(ngModel)]="form.content" placeholder="通知详细内容"></textarea>
+            </div>
+        </div>
+    </form>
+</ng-container>

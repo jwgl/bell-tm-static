@@ -1,0 +1,32 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" (click)="query()">查询</button>
+        <button class="btn btn-primary" (click)="open()">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>学号</th>
+            <th>性别</th>
+            <th>专业</th>
+            <th>班级</th>
+            <th>项目</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-student [ngForOf]="students" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td>{{student.studentName}}</td>
+                <td>{{student.studentId}}</td>
+                <td>{{student.sex}}</td>
+                <td>{{student.subjectName}}</td>
+                <td>{{student.adminClassName}}</td>
+                <td>{{student.regionName}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

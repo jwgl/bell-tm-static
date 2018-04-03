@@ -1,0 +1,40 @@
+<modal-dialog title="查询出国学生">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="专业">
+                <select name="subject" class="form-control" [(ngModel)]="options.subjectId">
+                    <option value="" disabled>选择专业</option>
+                    <option *ngFor="let item of subjects" [ngValue]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="年级">
+                <select name="grade" class="form-control" [(ngModel)]="options.grade">
+                    <option value="" disabled>选择年级</option>
+                    <option *ngFor="let grade of grades" [ngValue]="grade">
+                        {{grade}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="项目">
+                <select name="regions" class="form-control" [(ngModel)]="options.regionId">
+                    <option value="" disabled>选择项目</option>
+                    <option *ngFor="let item of regions" [ngValue]="item.id">
+                        {{item.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="学号">
+                <input type="text" name="studentId" class="form-control" [(ngModel)]="options.studentId" />
+            </form-field>
+            <form-field label="姓名">
+                <input type="text" name="studentName" class="form-control" [(ngModel)]="options.studentName" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="validate">确定</button>
+    </modal-footer>
+</modal-dialog>

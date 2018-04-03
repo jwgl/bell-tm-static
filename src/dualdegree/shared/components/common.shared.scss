@@ -1,0 +1,24 @@
+.table {
+    td {
+        padding: 2px 4px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        &.name {
+            width: 210px;
+            max-width: 210px;
+        }
+    }
+}
+
+.table-wrapper {
+    overflow-y: auto;
+    border: solid 1px #ddd;
+    max-height: 320px;
+}
+
+.dropdown-menu {
+    border-color: #ddd;
+    background-color: #eee;
+}

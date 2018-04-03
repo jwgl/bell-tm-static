@@ -1,0 +1,33 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>针对学院</th>
+            <th>申请开始</th>
+            <th>申请截止</th>
+            <th>论文截止</th>
+            <th>审核结束</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-award [ngForOf]="awardes" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="awardTitle"><a [routerLink]="['/awards', award.id]">{{award.title}}</a></td>
+                <td>{{award.departmentName}}</td>
+                <td>{{award.requestBegin}}</td>
+                <td><span class={{expireClass(!award.isApplyDateValid)}}>{{award.requestEnd}}</span></td>
+                <td><span class={{expireClass(!award.isPaperDateValid)}}>{{award.paperEnd}}</span></td>
+                <td><span class={{expireClass(!award.isCheckDateValid)}}>{{award.approvalEnd}}</span></td>
+                <td>
+                    <button class="btn btn-primary" *ngIf="award.isApplyDateValid && !award.status && !graduated"
+                        [routerLink]="['/create', award.id]">我要申请</button>
+                    <button class="btn btn-secondary" *ngIf="award.status"
+                        [routerLink]="['/', award.applicationId]">我的申请</button>
+                </td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

@@ -1,0 +1,12 @@
+<ng-container *ngIf="vm">
+    <div class="btn-toolbar">
+        <div>
+            <button class="btn btn-primary ml-auto" routerLink="applications">申请单汇总</button>
+        </div>
+        <div class="ml-auto">
+            <button class="btn btn-secondary ml-2" routerLink="/">返回</button>
+            <button class="btn btn-secondary ml-2" routerLink="edit">编辑</button>
+        </div>
+    </div>
+    <award-form-viewer [vm]="vm"></award-form-viewer>
+</ng-container>

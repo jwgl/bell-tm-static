@@ -1,0 +1,35 @@
+$purple: #5754A3;
+
+.upload-button {
+    display: inline-block;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: $purple;
+    width: 90%;
+}
+
+.progress {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 15px;
+    border: 1px solid $purple;
+    border-radius: 2px;
+}
+
+.bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    background: $purple;
+}
+
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "浏览";
+}
+
+Label {
+    font-weight: normal;
+}

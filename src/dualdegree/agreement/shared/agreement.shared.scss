@@ -1,0 +1,29 @@
+.majorName {
+    width: 20em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.regionName {
+    width: 8em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.agreementName {
+    width: 35em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+@media (max-width: 1199px) {
+    .agreementName {
+        max-width: 28em;
+    }
+}
+
+@media (max-width: 991px) {
+    .agreementName {
+        max-width: 18em;
+    }
+}

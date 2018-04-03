@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>名称</th>
+            <th>项目</th>
+            <th>外国大学（中）</th>
+            <th>外国大学（英）</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-agreement [ngForOf]="agreements" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="agreementName"><a [routerLink]="['/',agreement.id]">{{agreement.name}}</a></td>
+                <td class="regionName">{{agreement.regionName}}</td>
+                <td>{{agreement.universityCn}}</td>
+                <td>{{agreement.universityEn}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

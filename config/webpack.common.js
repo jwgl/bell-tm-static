@@ -60,6 +60,8 @@ module.exports = function(options) {
                 { to: 'js/lib',    from: './node_modules/bootstrap/dist/js/bootstrap.min.js' },
                 { to: 'css/lib',   from: './node_modules/bootstrap/dist/css/bootstrap.min.css' },
                 { to: 'js/lib',    from: './node_modules/lodash/lodash.min.js' },
+                { to: 'js/lib',    from: './node_modules/pdfjs-dist/build/pdf.min.js' },
+                { to: 'js/lib',    from: './node_modules/pdfjs-dist/build/pdf.worker.min.js' },
                 { to: 'css/lib',   from: './node_modules/font-awesome/css/font-awesome.min.css' },
                 { to: 'css/fonts', from: './node_modules/font-awesome/fonts' },
                 { to: 'css/app',   from: './src/main.css' },

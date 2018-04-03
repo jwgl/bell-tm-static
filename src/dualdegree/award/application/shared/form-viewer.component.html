@@ -1,0 +1,112 @@
+<ng-container *ngIf="vm">
+    <form-title>{{vm.studentName}} 学位申请单{{vm.id}}</form-title>
+    <div class="row">
+        <div class="col-9">
+            <div class="row">
+                <div class="form-group col-9">
+                    <label class="control-label">合作大学名称</label>
+                    <p class="form-control-plaintext">{{vm.universityCooperative}}</p>
+                </div>
+                <div class="form-group col-3">
+                    <label class="control-label">表单状态</label>
+                    <p class="form-control-plaintext">{{vm.status | statusText}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-3">
+                    <label class="control-label">主修专业</label>
+                    <p class="form-control-plaintext">{{vm.majorCooperative}}</p>
+                </div>
+                <div class="form-group col-3">
+                    <label class="control-label">Email</label>
+                    <p class="form-control-plaintext">{{vm.email}}</p>
+                </div>
+                <div class="form-group col-3">
+                    <label class="control-label">国内紧急联系人</label>
+                    <p class="form-control-plaintext">{{vm.linkman}}</p>
+                </div>
+                <div class="form-group col-3">
+                    <label class="control-label">国内紧急联系人电话</label>
+                    <p class="form-control-plaintext">{{vm.phone}}</p>
+                </div>
+            </div>
+            <ng-container *ngIf="paperForm">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="control-label">互认课程名称</label>
+                        <p class="form-control-plaintext">{{paperForm.name}}</p>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="control-label">互认课程类别</label>
+                        <p class="form-control-plaintext">{{paperForm.type | typeLabel}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label class="control-label">论文英文题目</label>
+                        <p>{{paperForm.englishTitle}}</p>
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="control-label">论文中文题目</label>
+                        <p>{{paperForm.chineseTitle}}</p>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-3 text-center">
+            <label class="control-label">证件照片</label>
+            <div class="card bg-info mb-3">
+                <img alt="照片" [src]="imgSrc(fileNames.photo)" width="auto" height="192" class="picture">
+            </div>
+            <div class="mentor" *ngIf="vm.paperApproverEmail">
+                <label class="control-label">论文导师</label>
+                <p>{{vm.paperApprover}}： {{vm.paperApproverEmail}}</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 text-center">
+            <div class="card bg-light mb-3">
+                <img alt="证书" [src]="imgSrc(fileNames.certi)" width="auto" height="192" class="picture" (click)="open(fileNames.certi)">
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="card bg-light mb-3">
+                <img alt="国外本科成绩" [src]="imgSrc(fileNames.trans1)" width="auto" height="192" class="picture" (click)="open(fileNames.trans1)">
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="card bg-light mb-3">
+                <img alt="国外硕士成绩" [src]="imgSrc(fileNames.trans2)" width="auto" height="192" class="picture" (click)="open(fileNames.trans2)">
+            </div>
+        </div>
+        <div class="col-3 text-center">
+            <div class="card bg-light mb-3">
+                <img alt="成绩3" [src]="imgSrc(fileNames.trans3)" width="auto" height="192" class="picture" (click)="open(fileNames.trans3)">
+            </div>
+        </div>
+    </div>
+    <div *ngIf="fileNames.paper">
+        <label>论文原文</label>
+        <div  class="row">
+            <div class="col-2"><a download [href]="download(fileNames.paper)">待审论文</a></div>
+            <ng-container *ngIf="fileNames.bak_paper">
+                <div class="col-2" *ngFor="let item of sortedBakPaper">
+                    <a download [href]="download(item)"> {{bakPaperLabel(item)}}</a>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="fileNames.review">
+        <label>导师批阅</label>
+        <div  class="row">
+            <div class="col-2"><a download [href]="download(fileNames.review)">最新批阅</a></div>
+            <ng-container *ngIf="fileNames.bak_review">
+                <div class="col-2" *ngFor="let item of sortedBakReview">
+                    <a download [href]="download(item)"> {{bakReviewLabel(item)}}</a>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

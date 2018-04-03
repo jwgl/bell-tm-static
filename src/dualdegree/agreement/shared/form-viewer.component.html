@@ -1,0 +1,53 @@
+<ng-container *ngIf="vm">
+    <form-title>合作协议{{vm.id}}</form-title>
+    <div class="row">
+        <div class="form-group col-md-9">
+            <label class="control-label">协议名称</label>
+            <p>{{vm.agreementName}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">项目类别</label>
+            <p>{{vm.regionName}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">外国大学（中）</label>
+            <p>{{vm.universityCn}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">外国大学（英）</label>
+            <p>{{vm.universityEn}}</p>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="control-label">备注</label>
+            <p>{{vm.memo}}</p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>学院</th>
+                <th>校内专业</th>
+                <th>适用年级</th>
+                <th>衔接国外专业</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let item of items; let i = index">
+                <ng-container *ngFor="let subject of item.subjects; let j = index">
+                    <ng-container *ngFor="let option of subject.options; let k = index">
+                        <ng-container *ngFor="let g of option.grades; let n = index">
+                            <tr>
+                                <td *ngIf="j == 0 && k ==0 && n == 0" [rowSpan]="subjectLength(item.subjects)" class="departmentName">{{item.name}}</td>
+                                <td *ngIf="k ==0 && n == 0" [rowSpan]="optionsLength(subject.options)" class="majorName">{{subject.name}}</td>
+                                <td>{{g.grade}}</td>
+                                <td *ngIf="n == 0" [rowSpan]="option.grades.length">{{option.name}}{{g.length}}</td>
+                            </tr>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+</ng-container>

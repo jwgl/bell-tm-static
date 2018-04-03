@@ -1,0 +1,18 @@
+<modal-dialog title="设置论文导师">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="老师">
+                <select name="teacherId" class="form-control" [(ngModel)]="teacherId">
+                    <option value="" disabled>选择导师</option>
+                    <option *ngFor="let mentor of mentors" [ngValue]="mentor.id">
+                        {{mentor.name}} : {{mentor.id}}
+                    </option>
+                </select>
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()">确定</button>
+    </modal-footer>
+</modal-dialog>

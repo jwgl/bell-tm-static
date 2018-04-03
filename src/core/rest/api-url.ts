@@ -70,6 +70,10 @@ export class ApiUrl {
         return `${this.item(id)}/approvers`;
     }
 
+    tousers(id: any): string {
+        return `${this.item(id)}/tousers`;
+    }
+
     workitem(id: any, wi: any) {
         return `${this.item(id)}/workitems/${wi}`;
     }
@@ -80,6 +84,10 @@ export class ApiUrl {
 
     reject(id: any, wi: any) {
         return `${this.workitem(id, wi)}?op=REJECT`;
+    }
+
+    next(id: any, wi: any) {
+        return `${this.workitem(id, wi)}?op=NEXT`;
     }
 
     buildQueryString(options: {[key: string]: string}): string {

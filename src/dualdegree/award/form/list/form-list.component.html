@@ -1,0 +1,31 @@
+<div class="btn-toolbar">
+    <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" routerLink="/editor">新建</button>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>针对学院</th>
+            <th>申请开始</th>
+            <th>申请截止</th>
+            <th>论文截止</th>
+            <th>审核结束</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-template ngFor let-award [ngForOf]="awardes" let-i="index">
+            <tr>
+                <td>{{i + 1}}</td>
+                <td class="awardTitle"><a [routerLink]="['/',award.id]">{{award.title}}</a></td>
+                <td>{{award.departmentName}}</td>
+                <td>{{award.requestBegin}}</td>
+                <td>{{award.requestEnd}}</td>
+                <td>{{award.paperEnd}}</td>
+                <td>{{award.approvalEnd}}</td>
+            </tr>
+        </ng-template>
+    </tbody>
+</table>

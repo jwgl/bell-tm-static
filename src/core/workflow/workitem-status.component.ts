@@ -13,6 +13,15 @@ const statusLabels: Labels<AuditStatus> = new Labels(AuditStatus, {
     [AuditStatus.FINISHED]:  {class: 'text-success', text: '处理完成'},
     [AuditStatus.CLOSED]:    {class: 'text-danger',  text: '关闭'},
     [AuditStatus.DELETED]:   {class: 'text-danger',  text: '删除'},
+    [AuditStatus.STEP1]:     {class: 'text-info',    text: '步骤1'},
+    [AuditStatus.STEP2]:     {class: 'text-info',    text: '步骤2'},
+    [AuditStatus.STEP3]:     {class: 'text-info',    text: '步骤3'},
+    [AuditStatus.STEP4]:     {class: 'text-info',    text: '步骤4'},
+    [AuditStatus.STEP5]:     {class: 'text-info',    text: '步骤5'},
+    [AuditStatus.STEP6]:     {class: 'text-info',    text: '步骤6'},
+    [AuditStatus.STEP7]:     {class: 'text-info',    text: '步骤7'},
+    [AuditStatus.STEP8]:     {class: 'text-info',    text: '步骤8'},
+    [AuditStatus.STEP9]:     {class: 'text-info',    text: '步骤9'},
 });
 
 @Component({
