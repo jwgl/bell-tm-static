@@ -14,6 +14,7 @@
             <th>专业</th>
             <th>班级</th>
             <th>项目</th>
+            <th>删除</th>
         </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
                 <td>{{student.subjectName}}</td>
                 <td>{{student.adminClassName}}</td>
                 <td>{{student.regionName}}</td>
+                <td><remove-item (click)="remove(student)"></remove-item></td>
             </tr>
         </ng-template>
     </tbody>

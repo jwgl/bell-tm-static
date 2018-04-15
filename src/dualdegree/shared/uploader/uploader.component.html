@@ -5,6 +5,7 @@
         <label class="custom-file-label" for="inputGroupFile01">{{getFileNames()}}</label>
     </div>
 </div>
+<p>上传文件大小不应超过5MB。</p>
 <ng-container *ngFor="let f of files; let i = index;">
     <div class="progress">
         <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'"></span>

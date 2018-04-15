@@ -14,6 +14,7 @@ import {QueryDialog} from './query-option.dialog';
 })
 export class StudentAdminListComponent {
     students: any[];
+    options: any;
 
     constructor(
         private service: StudentAdminFormService,
@@ -33,7 +34,20 @@ export class StudentAdminListComponent {
 
     query() {
         this.dialog.open(QueryDialog).then(form => {
-            this.service.loadList(form).subscribe((dto: any[]) => this.students = dto);
+            this.options = form;
+            this.loadData();
         });
+    }
+
+    remove(item: any) {
+        this.dialogs.confirm('警告', `确定要删除 ${item.studentName} (${item.studentId}) ？`).then(() => {
+            this.service.delete(item.id).subscribe(() => {
+                this.loadData();
+            });
+        });
+    }
+
+    loadData() {
+        this.service.loadList(this.options).subscribe((dto: any[]) => this.students = dto);
     }
 }
