@@ -1,0 +1,167 @@
+<ng-container *ngIf="form && form.schedule">
+    <div class="btn-toolbar">
+        <div class="btn-group ml-auto">
+            <button class='btn btn-secondary' (click)="commit()">提交</button>
+            <button class='btn btn-secondary' (click)="save()">保存</button>
+        </div>
+        <div class="btn-group ml-2">
+            <button class='btn btn-secondary' (click)="goBack()">返回</button>
+        </div>
+    </div>
+    <form-title>听课记录{{form.id}}</form-title>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label">课程</label>
+            <p>{{form.schedule.course}} {{form.schedule.credit}}学分<span *ngIf="form.schedule.courseClassName"> - {{form.schedule.courseClassName}}</span></p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">开课单位</label>
+            <p>{{form.schedule.department}}</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师姓名</label>
+            <p>{{form.schedule.teacherName}}（{{form.schedule.teacherId}}）</p>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">教师职称</label>
+            <p>{{form.schedule.academicTitle}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label class="control-label d-flex">听课周<span class="date ml-auto">{{startDate}}</span></label>
+            <select name="weekOfTerm" class="form-control" [(ngModel)]="form.observationWeek">
+                <option value="" disabled>选择周</option>
+                <option *ngFor="let item of weekOfTerms" [ngValue]="item">
+                    第{{ item }}周
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+                <label class="control-label">星期几</label>
+                <select name="dayOfWeek" class="form-control" [(ngModel)]="form.schedule.dayOfWeek">
+                    <option value="" disabled>选择时段</option>
+                    <option *ngFor="let item of dayOfWeeks"  [ngValue]="valueFn(item)">
+                        {{ labelFn(item) }}
+                    </option>
+                </select>
+            </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课时段</label>
+            <select name="section" class="form-control" [(ngModel)]="section">
+                <option value="" disabled>选择时段</option>
+                <option *ngFor="let item of sections" [ngValue]="item">
+                    {{item.name}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label class="control-label">上课地点</label>
+            <input class="form-control" type="text" name="place" [(ngModel)]="form.schedule.place" />
+        </div>
+    </div>
+    <form role="form">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label class="control-label">听课节数</label>
+                <select name="totalSection" class="form-control" [(ngModel)]="form.totalSection">
+                    <option value="1" selected>1节</option>
+                    <option value="2">2节</option>
+                    <option value="3">3节</option>
+                    <option value="4">4节</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">教学形式</label>
+                <input class="form-control" name="teachingMethods" type="text" [(ngModel)]="form.teachingMethods" placeholder="讲授、讨论等"
+                />
+            </div>
+            <div class="form-group col-md-3">
+                <label class="control-label">听课类型</label>
+                <select name="observerType" class="form-control" [(ngModel)]="form.observerType">
+                    <option value="" disabled>请选择</option>
+                    <option *ngFor="let item of types" [ngValue]="item">
+                        {{ item | typeLabel }}
+                    </option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label">教师出勤</label>
+                <div class="row">
+                    <div class="input-group col-4">
+                        <span class="my-addon">提前</span>
+                        <input class="form-control my-input" type="number" name="earlier" [(ngModel)]="form.earlier" />
+                        <span class="my-addon">分钟</span>
+                    </div>
+                    <div class="input-group col-4">
+                        <span class="my-addon">迟到</span>
+                        <input class="form-control my-input" type="number" name="late" [(ngModel)]="form.late" />
+                        <span class="my-addon">分钟</span>
+                    </div>
+                    <div class="input-group col-4">
+                        <span class="my-addon">早退</span>
+                        <input class="form-control my-input" type="number" name="leave" [(ngModel)]="form.leave" />
+                        <span class="my-addon">分钟</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label">学生出勤（应到 {{form.schedule?.studentCount}}人）</label>
+                <div class="row">
+                    <div class="input-group col-4">
+                        <span class="my-addon">实到</span>
+                        <input class="form-control my-input" type="number" name="attendantStds" [(ngModel)]="form.attendantStds" />
+                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                    </div>
+                    <div class="input-group col-4">
+                        <span class="my-addon">迟到</span>
+                        <input class="form-control my-input" type="number" name="lateStds" [(ngModel)]="form.lateStds" />
+                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                    </div>
+                    <div class="input-group col-4">
+                        <span class="my-addon">早退</span>
+                        <input class="form-control my-input" type="number" name="leaveStds" [(ngModel)]="form.leaveStds" />
+                        <span class="my-addon">人<span style="visibility: hidden">人</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>评价项目</th>
+                    <th>主要观测点</th>
+                    <th *ngFor="let grade of grades">
+                        {{grade.name}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let evaluation of evaluationSystem; let i = index">
+                    <ng-container *ngFor="let item of evaluation.value; let j = index">
+                        <tr>
+                            <td *ngIf="j == 0" [rowSpan]="evaluation.value.length">{{evaluation.key}}</td>
+                            <td>{{item.name}}</td>
+                            <td *ngFor="let grade of grades; let x = index" class="radio">
+                                <input type="radio" name="inlineRadioOptions{{i}}{{j}}" [value]="grade.value" [(ngModel)]="item.value">
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <label>综合评价：{{evaluateLevel}}</label>
+            <textarea class="form-control" name="evaluationText" rows="4" [(ngModel)]="form.evaluationText" placeholder="请对此次课进行评价。"
+                #evaluationText></textarea>
+                <span *ngIf="evaluationText.errors?.required">综合评价不能为空。</span>
+                <span *ngIf="evaluationText.errors?.minlength">综合评价最少{{evaluationText.errors.minlength.requiredLength}}个字符。</span>
+                <span *ngIf="evaluationText.errors?.maxlength">综合评价最多{{evaluationText.errors.maxlength.requiredLength}}个字符。</span>
+        </div>
+        <div class="form-group">
+            <label>意见和建议</label>
+            <textarea class="form-control" name="suggest" rows="4" [(ngModel)]="form.suggest" placeholder="请给上课老师提宝贵意见或建议。" #suggest></textarea>
+                <span *ngIf="suggest.errors?.maxlength">意见最多{{suggest.errors.maxlength.requiredLength}}个字符。</span>
+        </div>
+    </form>{{form | json}}
+</ng-container>

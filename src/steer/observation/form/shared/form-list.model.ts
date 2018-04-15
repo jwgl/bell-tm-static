@@ -15,6 +15,7 @@ export interface ObservationItem {
     dayOfWeek: number;
     startSection: number;
     totalSection: number;
+    formTotalSection: number;
     course: string;
     place: string;
     termId?: number;

@@ -50,7 +50,7 @@
                     <td class="courseName">{{item.course}} <br>{{item.dayOfWeek | dayOfWeek}} {{item.startSection}}-{{item.startSection+item.totalSection-1}}节<br *ngIf="isAdmin">{{item.place}}</td>
                     <td>{{item.departmentName}} </td>
                     <td class="observationDate">{{item.supervisorDate}}</td>
-                    <td>{{item.totalSection}}</td>
+                    <td>{{item.formTotalSection}}</td>
                     <td>{{item.evaluateLevel}}</td>
                     <td *ngIf="isAdmin">{{item.supervisorName}}({{item.supervisorId}})<br>{{item.observerType | typeLabel}}</td>
                     <td [class.text-warning]="!item.status">{{item.status | statusName}}</td>

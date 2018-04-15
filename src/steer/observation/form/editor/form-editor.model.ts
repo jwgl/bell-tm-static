@@ -50,5 +50,6 @@ ObservationForm.prototype.toServerDto = function(this: ObservationForm, evaluati
         observerId: this.observerId,
         dayOfWeek: this.schedule.dayOfWeek,
         startSection: this.schedule.startSection,
+        isScheduleTemp: this.isScheduleTemp,
     };
 };

@@ -10,10 +10,10 @@ import { Dialog } from 'core/dialogs';
 import { RestModule } from 'core/rest';
 
 import { TermTextPipe } from '../../shared/pipes/term';
+import { MyTeacherModule } from '../../shared/utils/my-teacher.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ObserverEditorComponent } from './editor/observer-editor.component';
-import { TeacherSelectComponent } from './editor/teacher-select.component';
 import { ObserverListComponent } from './list/observer-list.component';
 import { ObserverSettingsComponent } from './observer-settings.component';
 import { ObserverService } from './observer.service';
@@ -28,6 +28,7 @@ import { ObserverReportComponent } from './report/observer-report.component';
         RestModule.for('/api/steer/departments/${departmentId}/settings'),
         HttpModule,
         AppRoutingModule,
+        MyTeacherModule,
     ],
     providers: [
         Dialog,
@@ -37,7 +38,6 @@ import { ObserverReportComponent } from './report/observer-report.component';
         ObserverSettingsComponent,
         ObserverEditorComponent,
         ObserverListComponent,
-        TeacherSelectComponent,
         TermTextPipe,
         ObserverReportComponent,
     ],

@@ -9,10 +9,6 @@ export class ObserverService extends EditService {
         super(rest, api);
     }
 
-    findTeacher(value: string): Observable<any> {
-        return this.rest.get(`${this.api.list()}/teachers?q=${encodeURIComponent(value)}`);
-    }
-
     observerReport(): Observable<any> {
         return this.rest.get(`${this.api.list()}/countByObserver`);
     }

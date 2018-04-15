@@ -5,12 +5,11 @@ import 'rxjs/add/operator/switchMap';
 
 import { ApiUrl, Rest } from 'core/rest';
 import { typeahead } from 'core/utils/typeahead';
-import { ObserverService } from '../observer.service';
 
 @Component({
-    selector: 'teacher-select',
-    styleUrls: ['teacher-select.component.scss'],
-    templateUrl: 'teacher-select.component.html',
+    selector: 'my-teacher-select',
+    styleUrls: ['my-teacher-select.component.scss'],
+    templateUrl: 'my-teacher-select.component.html',
 })
 export class TeacherSelectComponent {
     @ViewChild('search') input: ElementRef;
@@ -20,7 +19,7 @@ export class TeacherSelectComponent {
     teachers: any[];
     teacher: any;
 
-    constructor(private rest: Rest, api: ApiUrl, private service: ObserverService) { }
+    constructor(private rest: Rest, api: ApiUrl) { }
 
     teacherSelected(teacher: any) {
         this.selectTeacher.emit(teacher);
@@ -32,7 +31,7 @@ export class TeacherSelectComponent {
             this.input.nativeElement.focus();
         });
         typeahead(this.input)
-            .switchMap(value => this.service.findTeacher(value))
+            .switchMap(value => this.rest.get(`/api/steer/teachers?q=${encodeURIComponent(value)}`))
             .subscribe(value => this.teachers = value);
     }
 

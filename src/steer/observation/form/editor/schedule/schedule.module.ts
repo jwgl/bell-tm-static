@@ -12,9 +12,7 @@ import { ObservationFormEditorComponent } from '../form-editor.component';
 
 import { PlaceSelectComponent } from '../../../common/place-select.component';
 import { TeacherSelectComponent } from '../../../common/teacher-select.component';
-import { ObserverGroupPipe } from '../../../shared/pipes/observer-group';
-import { TypeTextPipe } from '../../../shared/pipes/observer-type';
-import { PagerPipe } from '../../../shared/pipes/pager';
+import { PipesModule } from '../../../shared/pipes/observation-pipes.module';
 
 import { ObservePriorityListComponent } from './list/observe-priority.component';
 import { QueryOptionDialog } from './list/query-option.dialog';
@@ -32,6 +30,7 @@ import { WeekScheduleComponent } from './week/form-view.component';
         CommonDirectivesModule,
         RestModule.for('/api/steer/schedules'),
         ScheduleRoutingModule,
+        PipesModule,
     ],
     declarations: [
         ScheduleViewComponent,
@@ -41,10 +40,7 @@ import { WeekScheduleComponent } from './week/form-view.component';
         QueryOptionDialog,
         ScheduleListComponent,
         ObservationFormEditorComponent,
-        TypeTextPipe,
         WeekScheduleComponent,
-        PagerPipe,
-        ObserverGroupPipe,
     ],
     providers: [
         Dialog,
@@ -58,10 +54,7 @@ import { WeekScheduleComponent } from './week/form-view.component';
         ObservationFormEditorComponent,
         ScheduleListComponent,
         ScheduleViewComponent,
-        TypeTextPipe,
         WeekScheduleComponent,
-        PagerPipe,
-        ObserverGroupPipe,
     ],
 })
 export class ScheduleModule { }

@@ -68,9 +68,12 @@ export class ObservationForm {
     status: number;
     observerId: string;
     isActive: boolean;
+    isScheduleTemp: boolean;
 
     constructor(dto: any) {
-        this.schedule = this.concatSchedules(dto.timeslot);
+        if (dto.timeslot) {
+            this.schedule = this.concatSchedules(dto.timeslot);
+        }
         this.id = dto.id;
         this.teacherId = dto.teacherId;
         this.teacherName = dto.teacherName;
@@ -94,6 +97,7 @@ export class ObservationForm {
         this.status = dto.status;
         this.observerId = dto.observerId;
         this.isActive = dto.isActive;
+        this.isScheduleTemp = dto.isScheduleTemp;
     }
 
     concatSchedules(ss: any[]): any {

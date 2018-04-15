@@ -1,0 +1,45 @@
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <button type="button" class="btn btn-secondary" [routerLink]="['/teachers']">教师周课表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/places']">教室周课表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/schedules']">列表</button>
+        <button type="button" class="btn btn-secondary" [routerLink]="['/priorities']">优先听课名单</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/unschedules']">未排实践课</button>
+    </div>
+    <div class="btn-group ml-auto">
+        <my-teacher-select (selectTeacher)="onTeacherSelected($event)"></my-teacher-select>
+        <button type="button" class="btn btn-secondary" (click)="query()" [disabled]="!teacher">查询</button>
+    </div>
+</div>
+<ng-container *ngIf="tasks && tasks.length>0; else empty">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>课程编号</th>
+                <th>课程名称</th>
+                <th>上课教师</th>
+                <th>课程班</th>
+                <th>学分</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-template ngFor let-task [ngForOf]="tasks">
+                <tr>
+                    <td>{{task.code}}</td>
+                    <td>{{task.courseName}}</td>
+                    <td>{{task.teacherName}}</td>
+                    <td>{{task.className}}</td>
+                    <td>{{task.credit}}</td>
+                    <td><button class="btn btn-outline-dark btn-sm"
+                        [routerLink]="['/teacher',teacher.id,'task', task.id]">
+                        听课</button>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</ng-container>
+<ng-template #empty>
+    <div class="alert alert-info">暂无数据</div>
+</ng-template>
