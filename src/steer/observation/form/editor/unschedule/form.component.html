@@ -163,5 +163,5 @@
             <textarea class="form-control" name="suggest" rows="4" [(ngModel)]="form.suggest" placeholder="请给上课老师提宝贵意见或建议。" #suggest></textarea>
                 <span *ngIf="suggest.errors?.maxlength">意见最多{{suggest.errors.maxlength.requiredLength}}个字符。</span>
         </div>
-    </form>{{form | json}}
+    </form>
 </ng-container>

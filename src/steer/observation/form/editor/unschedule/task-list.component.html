@@ -29,7 +29,7 @@
                     <td>{{task.code}}</td>
                     <td>{{task.courseName}}</td>
                     <td>{{task.teacherName}}</td>
-                    <td>{{task.className}}</td>
+                    <td>{{task.className}} 共{{task.studentCount}}人</td>
                     <td>{{task.credit}}</td>
                     <td><button class="btn btn-outline-dark btn-sm"
                         [routerLink]="['/teacher',teacher.id,'task', task.id]">
