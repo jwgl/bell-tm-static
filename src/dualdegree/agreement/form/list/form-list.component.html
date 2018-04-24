@@ -1,5 +1,6 @@
 <div class="btn-toolbar">
     <div class="btn-group ml-auto">
+        <button class="btn btn-secondary" (click)="open()">查询</button>
         <button class="btn btn-primary" routerLink="/editor">新建</button>
     </div>
 </div>
@@ -7,10 +8,10 @@
     <thead>
         <tr>
             <th>序号</th>
-            <th>名称</th>
-            <th>项目</th>
-            <th>外国大学（中）</th>
-            <th>外国大学（英）</th>
+            <th (click)="orderBy('name')">名称</th>
+            <th (click)="orderBy('regionName')">项目</th>
+            <th (click)="orderBy('universityCn')">外国大学（中）</th>
+            <th (click)="orderBy('universityEn')">外国大学（英）</th>
         </tr>
     </thead>
     <tbody>

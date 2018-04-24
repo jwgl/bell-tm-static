@@ -17,6 +17,7 @@ import { AgreementRoutingModule } from './form-routing.module';
 import { AgreementViewComponent } from './form.component';
 import { AgreementFormService } from './form.service';
 import { AgreementItemComponent } from './item/item.component';
+import { AgreementFilterDialog } from './list/filter.dialog';
 import { AgreementListComponent } from './list/form-list.component';
 
 @NgModule({
@@ -36,6 +37,7 @@ import { AgreementListComponent } from './list/form-list.component';
         AgreementFormViewerComponent,
         MajorGroupPipe,
         MajorDialog,
+        AgreementFilterDialog,
     ],
     providers: [
         Dialog,
@@ -43,6 +45,7 @@ import { AgreementListComponent } from './list/form-list.component';
     ],
     entryComponents: [
         MajorDialog,
+        AgreementFilterDialog,
     ],
     bootstrap: [
         AgreementViewComponent,

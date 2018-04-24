@@ -7,6 +7,7 @@ import { ApiUrl, EditService, Rest } from 'core/rest';
 @Injectable()
 export class AgreementFormService extends EditService {
     list: any[];
+    filters: any;
 
     constructor(rest: Rest, api: ApiUrl) {
         super(rest, api);

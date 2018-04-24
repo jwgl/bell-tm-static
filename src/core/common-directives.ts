@@ -35,6 +35,7 @@ import {FromNowPipe} from './pipes/moment-pipes';
 import {OddEvenPipe} from './pipes/odd-even';
 import {SectionRangePipe} from './pipes/section-range';
 import {TermNamePipe} from './pipes/term-name';
+import {UniqueByPipe} from './pipes/unique-by';
 import {ZeroPadPipe} from './pipes/zero-pad';
 
 import {ScheduleTimetableComponent} from './components/schedule-timetable/schedule-timetable.component';
@@ -84,6 +85,7 @@ const CORE_DIRECTIVES: any[] = [
     SectionRangePipe,
     TermNamePipe,
     AuditStatusTextPipe,
+    UniqueByPipe,
 ];
 
 @NgModule({

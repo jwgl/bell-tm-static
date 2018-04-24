@@ -4,7 +4,7 @@
             <form-field label="学院">
                 <select name="department" class="form-control" [(ngModel)]="departmentName">
                     <option value="" disabled>选择学院</option>
-                    <option *ngFor="let item of departments" [ngValue]="item">
+                    <option *ngFor="let item of majors | uniqueBy: 'departmentName'" [ngValue]="item">
                         {{item}}
                     </option>
                 </select>
@@ -12,7 +12,7 @@
             <form-field label="年级">
                 <select name="grade" class="form-control" [(ngModel)]="grade">
                     <option value="" >选择年级</option>
-                    <option *ngFor="let item of grades"  [ngValue]="item">
+                    <option *ngFor="let item of majors | filterBy: filterByDepartment(departmentName) | uniqueBy: 'grade'"  [ngValue]="item">
                         {{item}}
                     </option>
                 </select>
@@ -20,7 +20,7 @@
             <form-field label="专业">
                 <select name="subjectName" class="form-control" [(ngModel)]="subjectName">
                     <option value="" disabled>选择专业</option>
-                    <option *ngFor="let item of subjects" [ngValue]="item">
+                    <option *ngFor="let item of majors | filterBy: filterByDepartment(departmentName) | filterBy: filterByGrade(grade) | uniqueBy: 'subjectName'" [ngValue]="item">
                         {{item}}
                     </option>
                 </select>

@@ -17,39 +17,16 @@ export class MajorDialog extends BaseDialog {
     grade: number;
     majorOptions: string;
 
-    uniq(list: any[], option: string): any[] {
-        if (!list) {
-            return null;
-        } else {
-            const values = _.chain(list)
-                .map(major => major[option])
-                .uniq()
-                .sort()
-                .value();
-            return values;
-        }
+    constructor() {
+        super();
     }
 
-    get departments(): string[] {
-        return this.uniq(this.majors, 'departmentName');
+    filterByGrade(grade: number) {
+        return (major: any) => major.grade === grade;
     }
 
-    get grades(): number[] {
-        if (!this.departmentName) {
-            return null;
-        } else {
-            const list = this.majors.filter(major => major.departmentName === this.departmentName);
-            return this.uniq(list, 'grade');
-        }
-    }
-
-    get subjects(): string[] {
-        if (!this.departmentName || !this.grade) {
-            return null;
-        } else {
-            const list = this.majors.filter(major => major.departmentName === this.departmentName && major.grade === this.grade);
-            return this.uniq(list, 'subjectName');
-        }
+    filterByDepartment(name: string) {
+        return (major: any) => major.departmentName === name;
     }
 
     protected onOpening(): Observable<any> {

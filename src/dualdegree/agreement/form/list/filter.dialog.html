@@ -1,0 +1,48 @@
+<modal-dialog title="筛选协议">
+    <modal-body>
+        <form class="form-horizontal">
+            <form-field label="协议名称">
+                <input type="text" name="name" class="form-control" [(ngModel)]="filters.name" placeholder="输入关键字" />
+            </form-field>
+            <form-field label="出国项目">
+                <select name="regionName" class="form-control" [(ngModel)]="filters.regionName">
+                    <option value="">选择项目</option>
+                    <option *ngFor="let region of regions" [ngValue]="region.name">
+                        {{region.name}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="适用年级">
+                <select name="grade" class="form-control" [(ngModel)]="filters.grade">
+                    <option value="">选择年级</option>
+                    <option *ngFor="let grade of majors | uniqueBy: 'grade'" [ngValue]="grade">
+                        {{grade}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="学院">
+                <select name="department" class="form-control" [(ngModel)]="filters.department">
+                    <option value="">选择学院</option>
+                    <option *ngFor="let item of majors | uniqueBy: 'departmentName'" [ngValue]="item">
+                        {{item}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="适用专业">
+                <select name="departmentId" class="form-control" [(ngModel)]="filters.subjectName">
+                    <option value="">选择专业</option>
+                    <option *ngFor="let item of majors | filterBy: filterByDepartment(filters.department) | uniqueBy: 'subjectName'" [ngValue]="item">
+                        {{item}}
+                    </option>
+                </select>
+            </form-field>
+            <form-field label="国外大学">
+                <input type="text" name="universityCn" class="form-control" [(ngModel)]="filters.universityCn" placeholder="输入关键字" />
+            </form-field>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button modalCancel>取消</button>
+        <button type="button" class="btn btn-secondary" (click)="ok()" [disabled]="validate">确定</button>
+    </modal-footer>
+</modal-dialog>

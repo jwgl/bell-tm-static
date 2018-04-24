@@ -43,7 +43,7 @@ export class AgreementFormEditorComponent {
         this.form = new AgreementForm(dto.form);
         this.form.removedItems = [];
         this.regions = dto.regions;
-        this.majors = dto.majors;
+        this.majors = dto.majors.filter((major: any) => major.enabled);
     }
 
     goBack(): void {
