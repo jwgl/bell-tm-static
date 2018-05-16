@@ -28,9 +28,7 @@ export class PaperFormDialog extends BaseDialog {
     }
 
     get disabled(): boolean {
-        return this.isEmpty(this.form.name) ||
-            this.isEmpty(this.form.chineseTitle) ||
-            this.isEmpty(this.form.englishTitle);
+        return this.isEmpty(this.form.chineseTitle) || this.isEmpty(this.form.englishTitle);
     }
 
     protected onOpening(): Observable<any> {

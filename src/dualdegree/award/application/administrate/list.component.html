@@ -5,12 +5,13 @@
                 导出
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=paper-approval-all">论文互认表</a>
-                <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=paper-list">互认表汇总Excel</a>
+                <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=paper-approval-all">论文评审表</a>
+                <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=paper-list">评审表汇总Excel</a>
                 <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=application-list">申请汇总Excel</a>
                 <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=paper-audit">审核结果Excel</a>
                 <a class="dropdown-item" download [href]="downloadUrl('paper')">论文</a>
                 <a class="dropdown-item" download [href]="downloadUrl('*')">所有附件</a>
+                <a class="dropdown-item" download href="/web/dualdegree/report?awardId={{awardId}}&type=pass-list">复学名单</a>
             </div>
         </div>
     </div>

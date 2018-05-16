@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="btn-toolbar">
+        <div class="input-group col-4">
+            <input type="text" name="query" class="form-control" [(ngModel)]="query" placeholder="输入学号、姓名、学院名称" />
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" (click)="find()">查询</button>
+            </div>
+        </div>
+    </div>
+    <table class="table" *ngIf="list?.length > 0; else empty">
+        <thead>
+            <tr>
+                <th>申请单号</th>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>班级</th>
+                <th>导师</th>
+                <th>申请日期</th>
+                <th>状态</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let form of list">
+                <td><a [routerLink]="['/',form.id]">#{{form.id}}</a></td>
+                <td>{{form.studentId}}</td>
+                <td>{{form.studentName}}</td>
+                <td>{{form.sex}}</td>
+                <td>{{form.className}}</td>
+                <td>{{form.paperApprover}}</td>
+                <td>{{form.date | date: 'y-MM-dd HH:mm'}}</td>
+                <td><audit-status [status]="form.status"></audit-status></td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #empty><div class="alert alert-info">暂无数据</div></ng-template>
+</div>

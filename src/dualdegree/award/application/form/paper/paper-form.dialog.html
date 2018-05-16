@@ -2,24 +2,12 @@
     <modal-body>
         <form role="form">
             <div class="form-group">
-                <label class="control-label">互认课程名称</label>
-                <input class="form-control" name="courseName" type="text" [(ngModel)]="form.name" placeholder="国外合作院校修读的，拟申请认定为我校毕业论文的课程名称" />
-            </div>
-            <div class="form-group">
                 <label class="control-label">论文英文题目</label>
                 <input class="form-control" name="englishTitle" type="text" [(ngModel)]="form.englishTitle" placeholder="输入论文英文题目" />
             </div>
             <div class="form-group">
                 <label class="control-label">论文中文题目</label>
                 <input class="form-control" name="chineseTitle" type="text" [(ngModel)]="form.chineseTitle" placeholder="输入论文中文题目" />
-            </div>
-            <div class="form-group">
-                <label class="control-label">互认课程类别</label>
-                <select name="type" class="form-control" [(ngModel)]="form.type">
-                    <option *ngFor="let type of types" [ngValue]="type.id">
-                        {{type.label}}
-                    </option>
-                </select>
             </div>
             <div class="form-group">
                 <label class="control-label">选择上传论文</label>

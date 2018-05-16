@@ -63,4 +63,5 @@ module.exports = {
     'dualdegree/application/approval':         './src/dualdegree/award/application/approval/main.ts',
     'dualdegree/application/paper-approval':   './src/dualdegree/award/application/paper-approval/main.ts',
     'dualdegree/application/paper-mentor':     './src/dualdegree/award/application/paper-mentor/main.ts',
+    'dualdegree/admin/finder':                 './src/dualdegree/award/application/finder/main.ts',
 };
