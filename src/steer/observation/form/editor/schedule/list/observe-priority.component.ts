@@ -12,6 +12,7 @@ interface TeacherItem {
     teacherName: string;
     departmentName: string;
     academicTitle: string;
+    courseName: string;
     isnew?: string;
     hasSupervisor?: string;
 }
@@ -20,6 +21,7 @@ const ListFilter = [
     { key: 'departmentName', name: '学院' },
     { key: 'teacherName', name: '姓名' },
     { key: 'isnew', name: '首次开课' },
+    { key: 'courseName', name: '开课信息' },
 ];
 
 @Component({

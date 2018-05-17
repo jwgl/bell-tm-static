@@ -28,6 +28,7 @@
                 <th>职称</th>
                 <th>所在学院</th>
                 <th>首次开课</th>
+                <th>开课信息</th>
             </tr>
         </thead>
         <tbody>
@@ -37,12 +38,13 @@
                     <td>{{item.academicTitle}}</td>
                     <td>{{item.departmentName}}</td>
                     <td>{{item.isnew ? '是' : '否'}}</td>
+                    <td>{{item.courseName}}</td>
                 </tr>
             </ng-container>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <div class="form-group row mt-1">
                         <div class="col-md-3">总共：{{count}}条记录</div>
                         <div class="col-md-2">
