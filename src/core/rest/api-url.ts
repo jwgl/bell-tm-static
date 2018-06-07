@@ -7,7 +7,8 @@ export const BASE_URL = new InjectionToken<string>('BASE_URL');
 export class ApiUrl {
     constructor(@Inject(API_URL) private apiUrl: string) {
         if (apiUrl.indexOf('${userId}') !== -1) {
-            const match = window.location.href.match(/\/(users|teachers|students|reviewers|checkers|approvers)\/([^\/]+)\//);
+            const match = window.location.href
+                    .match(/\/(users|teachers|students|reviewers|checkers|approvers|observers|mentors)\/([^\/]+)\//);
             if (match) {
                 this.apiUrl = this.apiUrl.replace('${userId}', match[2]);
             }

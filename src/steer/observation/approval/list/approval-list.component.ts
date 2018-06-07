@@ -61,12 +61,12 @@ export class ApprovalListComponent {
             this.counts = dto.counts;
             this.options = [
                 {
-                    type: 'done', label: '已发布', class: 'badge-danger', count: this.counts.done,
-                    active: !mode ? false : mode === 'done',
-                },
-                {
                     type: 'tobe', label: '未发布', class: 'badge-warning',
                     count: this.counts.todo, active: !mode ? true : mode === 'tobe',
+                },
+                {
+                    type: 'done', label: '已发布', class: 'badge-danger', count: this.counts.done,
+                    active: !mode ? false : mode === 'done',
                 },
             ];
         });
