@@ -22,7 +22,7 @@ import {DeptAdminListComponent} from './list/form-list.component';
     imports: [
         BrowserModule,
         FormsModule,
-        RestModule.for('/api/dualdegree/settings'),
+        RestModule.for('/api/dualdegree/settings/users'),
         CommonDialogsModule,
         CommonDirectivesModule,
         DeptAdminRoutingModule,

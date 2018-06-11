@@ -9,7 +9,7 @@ import { RestModule } from 'core/rest';
 
 import { MajorGroupPipe } from '../../shared/pipes/major-group';
 
-import { AgreementFormViewerComponent } from '../shared/form-viewer.component';
+import { AgreementSharedModule } from '../shared/agreement-shared.module';
 
 import { AgreementFormEditorComponent } from './editor/form-editor.component';
 import { MajorDialog } from './editor/major-item/major.dialog';
@@ -17,27 +17,25 @@ import { AgreementRoutingModule } from './form-routing.module';
 import { AgreementViewComponent } from './form.component';
 import { AgreementFormService } from './form.service';
 import { AgreementItemComponent } from './item/item.component';
-import { AgreementFilterDialog } from './list/filter.dialog';
 import { AgreementListComponent } from './list/form-list.component';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        RestModule.for('/api/dualdegree/agreements'),
+        RestModule.for('/api/dualdegree/users/${userId}/agreements'),
         CommonDialogsModule,
         CommonDirectivesModule,
         AgreementRoutingModule,
+        AgreementSharedModule,
     ],
     declarations: [
         AgreementFormEditorComponent,
         AgreementListComponent,
         AgreementViewComponent,
         AgreementItemComponent,
-        AgreementFormViewerComponent,
         MajorGroupPipe,
         MajorDialog,
-        AgreementFilterDialog,
     ],
     providers: [
         Dialog,
@@ -45,7 +43,6 @@ import { AgreementListComponent } from './list/form-list.component';
     ],
     entryComponents: [
         MajorDialog,
-        AgreementFilterDialog,
     ],
     bootstrap: [
         AgreementViewComponent,

@@ -25,8 +25,11 @@
                     </option>
                 </select>
             </form-field>
-            <form-field label="衔接">
-                <input class="form-control" name="majorOptions" type="text" [(ngModel)]="majorOptions" placeholder="外国大学可衔接专业" />
+            <form-field label="衔接(英)">
+                <input class="form-control" name="majorOptions" type="text" [(ngModel)]="majorOptions" placeholder="外国大学可衔接专业（英文）" />
+            </form-field>
+            <form-field label="衔接(中)">
+                <input class="form-control" name="majorOptionsCn" type="text" [(ngModel)]="majorOptionsCn" placeholder="外国大学可衔接专业（中文）" />
             </form-field>
         </form>
     </modal-body>

@@ -42,7 +42,9 @@
                                 <td *ngIf="j == 0 && k ==0 && n == 0" [rowSpan]="subjectLength(item.subjects)" class="departmentName">{{item.name}}</td>
                                 <td *ngIf="k ==0 && n == 0" [rowSpan]="optionsLength(subject.options)" class="majorName">{{subject.name}}</td>
                                 <td>{{g.grade}}</td>
-                                <td *ngIf="n == 0" [rowSpan]="option.grades.length">{{option.name}}{{g.length}}</td>
+                                <td *ngIf="n == 0" [rowSpan]="option.grades.length">
+                                    <a (click)="comment(option.grades[0])" style="cursor: pointer;">{{option.name}}</a>
+                                </td>
                             </tr>
                         </ng-container>
                     </ng-container>

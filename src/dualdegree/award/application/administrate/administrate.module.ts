@@ -6,6 +6,8 @@ import {RouterModule} from '@angular/router';
 import {CommonDirectivesModule} from 'core/common-directives';
 
 import {ApplicationSharedModule} from '../shared/application-shared.module';
+import {PipesModule} from '../shared/common-pipes';
+
 import {ApplicationsAdministrateService} from './administrate.service';
 import {ApplicationsAdministrateItemComponent} from './item.component';
 import {ApplicationListComponent} from './list.component';
@@ -17,6 +19,7 @@ import {ApplicationListComponent} from './list.component';
         CommonDirectivesModule,
         RouterModule,
         ApplicationSharedModule,
+        PipesModule,
     ],
     declarations: [
         ApplicationListComponent,

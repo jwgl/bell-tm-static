@@ -3,20 +3,23 @@ import {NgModule} from '@angular/core';
 
 import {CommonDirectivesModule} from 'core/common-directives';
 
+import {DualdegreeAuditStatusComponent} from './audit-status';
+import {PipesModule} from './common-pipes';
 import {ApplicationFormViewerComponent} from './form-viewer.component';
-import {TypeTextPipe} from './pipes/paper-type';
 
 @NgModule({
     imports: [
         CommonModule,
         CommonDirectivesModule,
+        PipesModule,
     ],
     declarations: [
         ApplicationFormViewerComponent,
-        TypeTextPipe,
+        DualdegreeAuditStatusComponent,
     ],
     exports: [
         ApplicationFormViewerComponent,
+        DualdegreeAuditStatusComponent,
     ],
 })
 export class ApplicationSharedModule {}

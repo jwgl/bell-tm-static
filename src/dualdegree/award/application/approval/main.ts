@@ -22,7 +22,7 @@ import {MentorSelectDialog} from './mentor/mentor-select.dialog';
         FormsModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/dualdegree/approvers/${userId}/applications'),
+        RestModule.for('/api/dualdegree/checkers/${userId}/applications'),
         ApplicationSharedModule,
         ApplicationApprovalRoutingModule,
     ],

@@ -11,6 +11,9 @@
             <button [workflow-reject]="reviewOptions" (rejected)="onItemLoaded($event)">退回</button>
             <button [workflow-next]="reviewOptions" (nexted)="onItemLoaded($event)">设置导师</button>
         </div>
+        <div class="btn-group ml-2" *ngIf="reviewable">
+            <button class="btn btn-success" (click)="finish()">通过</button>
+        </div>
     </div>
     <application-form-viewer [vm]="form" [fileNames]="fileNames" [paperForm]="paperForm"></application-form-viewer>
 </div>

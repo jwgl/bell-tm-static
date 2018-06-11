@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { BaseDialog } from 'core/dialogs';
 
-import { AgreementFormService } from '../form.service';
+import { AgreementViewService } from './filter.service';
 
 @Component({
     selector: 'agreement-filter-dialog',
@@ -15,7 +15,7 @@ export class AgreementFilterDialog extends BaseDialog {
     majors: any[];
     regions: any[];
 
-    constructor(private service: AgreementFormService) {
+    constructor(private service: AgreementViewService) {
         super();
         if (this.service.filters) {
             this.filters = this.service.filters;

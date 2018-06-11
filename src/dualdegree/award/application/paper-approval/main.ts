@@ -24,7 +24,7 @@ import {UploaderDialog} from './uploader.dialog';
         FormsModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/dualdegree/approvers/${userId}/papers'),
+        RestModule.for('/api/dualdegree/mentors/${userId}/papers'),
         ApplicationSharedModule,
         ApplicationApprovalRoutingModule,
         UploaderModule,

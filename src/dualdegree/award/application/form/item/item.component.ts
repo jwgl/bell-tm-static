@@ -45,7 +45,7 @@ export class ApplicationItemComponent {
     get submitOptions(): SubmitOptions {
         return {
             id: this.vm.id,
-            type: 'approve',
+            type: 'check',
             what: this.vm.title,
         };
     }

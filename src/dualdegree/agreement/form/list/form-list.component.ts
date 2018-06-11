@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 
 import { Dialog } from 'core/dialogs';
 
+import { AgreementFilterDialog } from '../../shared/filter.dialog';
+
 import { AgreementFormService } from '../form.service';
-import { AgreementFilterDialog } from './filter.dialog';
 
 @Component({
     selector: 'agreement-list',

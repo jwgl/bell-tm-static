@@ -16,6 +16,7 @@ export class MajorDialog extends BaseDialog {
     subjectName: string;
     grade: number;
     majorOptions: string;
+    majorOptionsCn: string;
 
     constructor() {
         super();
@@ -39,6 +40,7 @@ export class MajorDialog extends BaseDialog {
     protected onConfirmed(): any {
         const majorItem = this.majorSelected;
         majorItem.majorOptions = this.majorOptions;
+        majorItem.majorOptionsCn = this.majorOptionsCn;
         return majorItem;
     }
 

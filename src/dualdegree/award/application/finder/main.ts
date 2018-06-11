@@ -18,7 +18,7 @@ import {FinderListComponent} from './list.component';
         BrowserModule,
         FormsModule,
         CommonDirectivesModule,
-        RestModule.for('/api/dualdegree/finders'),
+        RestModule.for('/api/dualdegree/admin/applications'),
         BatchRoutingModule,
         ApplicationSharedModule,
     ],

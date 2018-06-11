@@ -44,7 +44,7 @@
                     <div class="form-check" *ngFor="let item of form.items">
                         <label class="form-check-label">
                             <span class="mr-3"><remove-item (click)="form.removeItem(item)"></remove-item></span>
-                            {{item.departmentName}} {{item.grade}} {{item.subjectName}} 衔接专业：{{item.majorOptions}}
+                            {{item.departmentName}} {{item.grade}} {{item.subjectName}} 衔接专业：{{item.majorOptions}} | {{item.majorOptionsCn}}
                         </label>
                     </div>
                 </div>

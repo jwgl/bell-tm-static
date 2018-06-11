@@ -23,7 +23,7 @@ import {PaperMentorService} from './paper-mentor.service';
         FormsModule,
         CommonDirectivesModule,
         WorkflowModule,
-        RestModule.for('/api/dualdegree/approvers/${userId}/papermentors'),
+        RestModule.for('/api/dualdegree/checkers/${userId}/papermentors'),
         ApplicationSharedModule,
         ApplicationApprovalRoutingModule,
     ],

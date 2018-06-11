@@ -29,6 +29,7 @@ export class AgreementItem {
     departmentId: string;
     departmentName: string;
     majorOptions: string;
+    majorOptionsCn: string;
 
     constructor(form: AgreementForm, dto: any) {
         this.form = form;
@@ -38,6 +39,7 @@ export class AgreementItem {
         this.departmentId = dto.departmentId;
         this.departmentName = dto.departmentName;
         this.majorOptions = dto.majorOptions;
+        this.majorOptionsCn = dto.majorOptionsCn;
     }
 
     equalsTo(other: AgreementItem): boolean {

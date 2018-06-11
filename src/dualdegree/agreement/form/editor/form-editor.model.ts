@@ -52,5 +52,6 @@ AgreementForm.prototype.getAddedItems = function(this: AgreementForm): any[] {
     return this.items.map(it => ({
         id: it.id,
         majorOptions: it.majorOptions,
+        majorOptionsCn: it.majorOptionsCn,
     }));
 };
