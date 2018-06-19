@@ -27,15 +27,17 @@ td {
         width: 2.5rem;
         text-align: right;
     }
+    &:nth-child(12) {
+        width: 3rem;
+        white-space: nowrap;
+    }
 }
 
 td, th {
-    &:nth-child(12) {
+    &:nth-child(13) {
         width: 3rem;
-        text-align: center;
-        padding-top: 2px;
-        padding-bottom: 2px;
-        vertical-align: middle;
+        padding-top: 3px;
+        padding-bottom: 3px;
     }
 
     .btn-sm {

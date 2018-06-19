@@ -33,20 +33,18 @@
     </div>
     <table class="table table-sm table-hover">
         <thead>
-            <tr>
-                <th></th>
-                <th>序号</th>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>班级</th>
-                <th>专业</th>
-                <th>旷课</th>
-                <th>迟到</th>
-                <th>早退</th>
-                <th>合计</th>
-                <th>请假</th>
-                <th *ngIf="courseClass.activeTerm">考试</th>
-            </tr>
+            <th></th>
+            <th>序号</th>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>班级</th>
+            <th>专业</th>
+            <th>旷课</th>
+            <th>迟到</th>
+            <th>早退</th>
+            <th>合计</th>
+            <th>请假</th>
+            <th [colSpan]="courseClass.activeTerm ? 2 : 1">考试资格</th>
         </thead>
         <tbody>
             <ng-container *ngFor="let student of courseClass.students; let i = index">
@@ -62,18 +60,20 @@
                     <td>{{student.early}}</td>
                     <td>{{student.total}}</td>
                     <td>{{student.leave}}</td>
+                    <td>{{student.disqualStatus}}</td>
                     <td *ngIf="courseClass.activeTerm">
                         <button *ngIf="isAdmin || student.showDisqual"
                                 class="btn btn-sm"
                                 [ngClass]="student.disqualifyButtonClass"
-                                (click)="disqualify(student)">
+                                (click)="disqualify(student)"
+                                [title]="student.disqualified ? '恢复考试资格' : '取消考试资格'">
                                 {{student.disqualified ? '恢复' : '取消'}}
                         </button>
                     </td>
                 </tr>
                 <tr *ngIf="e.expended" class="table-info">
                     <td colspan="2"></td>
-                    <td colspan="10" class="pt-3">
+                    <td colspan="11" class="pt-3">
                         <section *ngIf="student.rollcalls && student.rollcalls.length > 0">
                             <h6>考勤情况</h6>
                             <ul class="list-unstyled">
@@ -96,16 +96,12 @@
                         </section>
                         <section *ngIf="student.showDisqual">
                             <h6>考试资格</h6>
-                            <p *ngIf="student.absentOverflow || student.attendOverflow; else qualify">
+                            <p>
                                 <span *ngIf="student.absentOverflow">旷课节数达到取消考试资格条件，</span>
                                 <span *ngIf="student.attendOverflow">缺勤节数达到取消考试资格条件，</span>
-                                {{student.disqualified ? '已' : '可'}}考试资格取消。
+                                <span *ngIf="!student.absentOverflow && !student.attendOverflow">旷课和缺勤节数未达到取消考试资格条件，</span>
+                                {{student.disqualStatus}}考试资格。
                             </p>
-                            <ng-template #qualify>
-                                <p>
-                                  旷课和缺勤节数未达到取消考试资格条件，{{student.disqualified ? '可' : '未'}}恢复考试资格。
-                                </p>
-                            </ng-template>
                         </section>
                     </td>
                 </tr>

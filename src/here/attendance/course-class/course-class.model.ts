@@ -22,6 +22,20 @@ Object.defineProperty(Student.prototype, 'showDisqual', {
     configurable: true,
 });
 
+Object.defineProperty(Student.prototype, 'disqualStatus', {
+    /* tslint:disable:object-literal-shorthand*/
+    get: function(this: Student) {
+        if (this.absentOverflow || this.attendOverflow) {
+            return this.disqualified ? '已取消' : '可取消';
+        } else {
+            return this.disqualified ? '可恢复' : '';
+        }
+    },
+    /* tslint:enable:object-literal-shorthand*/
+    enumerable: true,
+    configurable: true,
+});
+
 Object.defineProperty(Student.prototype, 'disqualifyButtonClass', {
     /* tslint:disable:object-literal-shorthand*/
     get: function(this: Student) {
