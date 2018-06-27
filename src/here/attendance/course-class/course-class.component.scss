@@ -19,17 +19,28 @@ td {
         width: 5rem;
         white-space: nowrap;
     }
+    &:nth-child(5) {
+        max-width: 8rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    &:nth-child(6) {
+        max-width: 12rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     &:nth-child(7),
     &:nth-child(8),
     &:nth-child(9),
     &:nth-child(10),
     &:nth-child(11) {
-        width: 2.5rem;
+        width: 2rem;
         text-align: right;
     }
     &:nth-child(12) {
-        width: 3rem;
-        white-space: nowrap;
+        width: 1rem;
     }
 }
 

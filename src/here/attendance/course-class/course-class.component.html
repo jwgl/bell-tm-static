@@ -18,9 +18,9 @@
     </div>
     <div class="row">
         <div class="form-group col-md-6 my-0">
-            <label class="my-0">开始结束周 / 总学时</label>
+            <label class="my-0">开始结束周<ng-container *ngIf="courseClass.totalSection"> / 总学时</ng-container></label>
             <p class="form-control-plaintext my-0">
-                {{courseClass.startWeek}}-{{courseClass.endWeek}}周 / {{courseClass.totalSection}}节
+                {{courseClass.startWeek}}-{{courseClass.endWeek}}周<ng-container *ngIf="courseClass.totalSection"> / {{courseClass.totalSection}}节</ng-container>
             </p>
         </div>
         <div class="form-group col-md-6 my-0">
@@ -48,7 +48,7 @@
         </thead>
         <tbody>
             <ng-container *ngFor="let student of courseClass.students; let i = index">
-                <tr [ngClass]="student.disqualified ? 'table-danger' : e.expended ? 'table-active' : ''" (dblclick)="e.click()">
+                <tr [ngClass]="student.disqualified ? 'table-danger' : student.absentOverflow || student.attendOverflow ? 'table-warning' : e.expended ? 'table-active' : ''" (dblclick)="e.click()">
                     <td><expend #e (toggle)="toggle($event, student)" [enabled]="student.showDetails"></expend></td>
                     <td>{{i + 1}}</td>
                     <td>{{student.id}}</td>
@@ -60,7 +60,7 @@
                     <td>{{student.early}}</td>
                     <td>{{student.total}}</td>
                     <td>{{student.leave}}</td>
-                    <td>{{student.disqualStatus}}</td>
+                    <td>{{student.disqualified ? '无' : '有'}}</td>
                     <td *ngIf="courseClass.activeTerm">
                         <button *ngIf="isAdmin || student.showDisqual"
                                 class="btn btn-sm"
