@@ -67,7 +67,7 @@ export class CourseSelectComponent {
 
     search(query: string): Observable<{query: string, result: CourseSelectDto[]}> {
         const type = this.editMode === EditMode.Create ? 0 : (this.isTempCourse ? 2 : 1);
-        return this.service.findCourses(query, type).map(result => ({query, result}));
+        return this.service.findCourses(query, type, this.group.property.id).map(result => ({query, result}));
     }
 
     clearCourse() {

@@ -238,6 +238,7 @@ export abstract class AbstractGroup {
     abstract load(sc: SchemeCourseDto): SchemeCourse;
     abstract add(sc: SchemeCourseDto): SchemeCourse;
     abstract get scheme(): Scheme;
+    abstract get property(): Property;
 
     sort() {
         this.courses.sort(courseComparer);
@@ -412,6 +413,10 @@ export class Property extends AbstractGroup {
         if (this.hasDirections && scheme.directions.length > 0) {
             this.directions = scheme.directions.map(d => new Direction(this, d));
         }
+    }
+
+    get property(): Property {
+        return this;
     }
 
     /**
