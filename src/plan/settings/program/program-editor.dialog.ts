@@ -20,6 +20,8 @@ export class ProgramEditorDialog extends BaseDialog {
 
     protected onOpening(): Observable<any> {
         this.programSetting = {
+            minLengthOfSchooling: this.options.programSetting.minLengthOfSchooling,
+            maxLengthOfSchooling: this.options.programSetting.maxLengthOfSchooling,
             visionRevisible: this.options.programSetting.visionRevisible,
             practiceCreditRatio: this.options.programSetting.practiceCreditRatio,
             templateLocked: this.options.programSetting.templateLocked,
@@ -36,6 +38,8 @@ export class ProgramEditorDialog extends BaseDialog {
 
     protected onConfirmed() {
         return {
+            minLengthOfSchooling: this.programSetting.minLengthOfSchooling,
+            maxLengthOfSchooling: this.programSetting.maxLengthOfSchooling,
             visionRevisible: this.programSetting.visionRevisible,
             practiceCreditRatio: this.programSetting.practiceCreditRatio,
             templateLocked: this.programSetting.templateLocked,

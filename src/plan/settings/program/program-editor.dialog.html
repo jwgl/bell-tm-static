@@ -1,35 +1,44 @@
 <modal-dialog [title]="title">
     <modal-body>
-        <form class="form-horizontal" #f="ngForm">
+        <form #f="ngForm">
             <fieldset>
                 <legend>培养方案</legend>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="visionRevisible" [(ngModel)]= "programSetting.visionRevisible" id="visionRevisible">
+                <div class="form-group">
+                    <label for="minLengthOfSchooling">最小学习年限</label>
+                    <input class="form-control" id="minLengthOfSchooling" name="minLengthOfSchooling" type="number" min="1" max="10" step="1" [(ngModel)]="programSetting.minLengthOfSchooling">
+                </div>
+                <div class="form-group">
+                    <label for="maxLengthOfSchooling">最小学习年限</label>
+                    <input class="form-control" id="maxLengthOfSchooling" name="maxLengthOfSchooling" type="number" min="1" max="10" step="1" [(ngModel)]="programSetting.maxLengthOfSchooling">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="visionRevisible" [(ngModel)]="programSetting.visionRevisible">
                     <label class="form-check-label" for="visionRevisible">能否修订</label>
                 </div>
             </fieldset>
             <fieldset>
                 <legend>课程安排</legend>
-                <form-field-2>
-                    <select class="form-control form-field-left" label="计划模板" min="0"
-                            name="schemeTemplate"
-                            [(ngModel)]= "template">
+                <div class="form-group">
+                    <label for="schemeTemplate">计划模板</label>
+                    <select class="form-control" id="schemeTemplate" name="schemeTemplate" [(ngModel)]="template">
                         <option *ngFor="let template of options.data" [ngValue]="template">{{template.name}}</option>
                     </select>
-                    <input class="form-control form-field-right" label="实践比例" type="number" min="0" max="1" step="0.01"
-                           name="practiceCreditRatio"
-                           [(ngModel)]= "programSetting.practiceCreditRatio">
-                </form-field-2>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="templateLocked" [(ngModel)]= "programSetting.templateLocked" id="templateLocked">
+                </div>
+                <div class="form-group">
+                    <label for="">实践比例</label>
+                    <input class="form-control form-field-right" id="practiceCreditRatio" name="practiceCreditRatio" type="number" min="0" max="1"
+                        step="0.01" [(ngModel)]="programSetting.practiceCreditRatio">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="templateLocked" name="templateLocked" [(ngModel)]="programSetting.templateLocked">
                     <label class="form-check-label" for="templateLocked">是否锁定模板</label>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="schemeRevisible" [(ngModel)]= "programSetting.schemeRevisible" id="schemeRevisible">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="schemeRevisible" name="schemeRevisible" [(ngModel)]="programSetting.schemeRevisible">
                     <label class="form-check-label" for="schemeRevisible">能否修订计划</label>
                 </div>
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="schemeExportable" [(ngModel)]= "programSetting.schemeExportable" id="schemeExportable">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="schemeExportable" name="schemeExportable" [(ngModel)]="programSetting.schemeExportable">
                     <label class="form-check-label" for="schemeExportable">能否导入教务系统</label>
                 </div>
             </fieldset>

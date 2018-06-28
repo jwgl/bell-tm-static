@@ -12,6 +12,9 @@ export class Vision {
     objective: string;
     specification: string;
     schoolingLength: string;
+    minLengthOfSchooling: number;
+    maxLengthOfSchooling: number;
+    lengthOfSchooling: number;
     awardedDegree: string;
     degreeName: string;
     status: string;
@@ -34,6 +37,9 @@ export class Vision {
         this.degreeName = dto.degreeName;
         this.specification = dto.specification;
         this.schoolingLength = dto.schoolingLength;
+        this.minLengthOfSchooling = dto.minLengthOfSchooling;
+        this.maxLengthOfSchooling = dto.maxLengthOfSchooling;
+        this.lengthOfSchooling = dto.lengthOfSchooling;
         this.status = dto.status;
         this.versionNumber = dto.versionNumber;
         this.previousId = dto.previousId;

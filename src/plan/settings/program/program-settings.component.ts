@@ -56,6 +56,8 @@ export class ProgramSettingsComponent {
             url: this.schemeTemplatesUrl,
         }).then(result => {
             this.service.update(program.programId, result).subscribe(_ => {
+                program.minLengthOfSchooling = result.minLengthOfSchooling;
+                program.maxLengthOfSchooling = result.maxLengthOfSchooling;
                 program.visionRevisible = result.visionRevisible;
                 program.practiceCreditRatio = result.practiceCreditRatio;
                 program.templateLocked = result.templateLocked;

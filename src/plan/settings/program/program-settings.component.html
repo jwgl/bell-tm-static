@@ -11,16 +11,18 @@
             <th rowspan="2">学院</th>
             <th rowspan="2">执行计划</th>
             <th rowspan="2">学位</th>
-            <th rowspan="2">培养方案<br>能否修订</th>
+            <th colspan="2" class="center">培养方案<br></th>
             <th colspan="5" class="center">教学安排</th>
             <th rowspan="2" class="center">操作</th>
         </tr>
         <tr>
+            <th>修读<br>年限</th>
+            <th>能否<br>修订</th>
             <th>计划模板</th>
-            <th class="center">锁定模板</th>
-            <th class="center">能否修订</th>
-            <th class="center">能否导出</th>
-            <th class="center">实践比例</th>
+            <th class="center">锁定<br>模板</th>
+            <th class="center">能否<br>修订</th>
+            <th class="center">能否<br>导出</th>
+            <th class="center">实践<br>比例</th>
         </tr>
     </thead>
     <tbody>
@@ -30,6 +32,7 @@
                     <td *ngIf="j == 0" [rowSpan]="department.programs.length">{{department.name}}</td>
                     <td class="name">{{program.programId}} {{program.subjectName}}</td>
                     <td>{{program.degreeName}}</td>
+                    <td>{{program.minLengthOfSchooling}}-{{program.maxLengthOfSchooling}}年</td>
                     <td class="center">{{program.visionRevisible ? '是' : '否'}}</td>
                     <td>{{program.templateName}}</td>
                     <td class="center">{{program.templateLocked ? '是' : '否'}}</td>
