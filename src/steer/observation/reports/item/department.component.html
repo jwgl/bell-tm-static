@@ -4,6 +4,7 @@
             <thead>
                 <tr>
                     <th>开课学院</th>
+                    <th>未发布数</th>
                     <th>听课次数</th>
                     <th>听课节数</th>
                 </tr>
@@ -12,6 +13,7 @@
                 <ng-template ngFor let-item [ngForOf]="list" let-i="index">
                     <tr>
                         <td>{{item.departmentName}}</td>
+                        <td>{{item.unApproved}}</td>
                         <td>{{item.supervisorTimes}}</td>
                         <td>{{item.totalSection}}</td>
                     </tr>

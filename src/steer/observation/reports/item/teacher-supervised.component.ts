@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
-import * as _ from 'lodash';
+import { ActivatedRoute } from '@angular/router';
 
 import { ReportService } from '../report.service';
 
@@ -23,12 +21,11 @@ export class TeacherSupervisedComponent {
         private route: ActivatedRoute,
         private service: ReportService,
     ) {
-
-        const type: string = this.route.snapshot.params['observer-type'];
-        const countBy = (type === '1') ? 'TEACHER-U' : 'TEACHER-C';
-        this.service.loadList({ type: countBy }).subscribe(dto => {
-            this.list = dto;
-            this.list.sort((a, b) => b.supervisorTimes - a.supervisorTimes);
+        this.route.params.subscribe(params => {
+            this.service.loadList({ type: params['observer-type'] === '1' ? 'TEACHER-U' : 'TEACHER-C'}).subscribe(dto => {
+                this.list = dto;
+                this.list.sort((a, b) => b.supervisorTimes - a.supervisorTimes);
+            });
         });
     }
 

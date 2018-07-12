@@ -5,7 +5,6 @@ import { DepartmentReportComponent } from './item/department.component';
 import { ObservationReportComponent } from './item/observation-report.component';
 import { RewardListComponent } from './item/reward.component';
 import { TeacherSupervisedComponent } from './item/teacher-supervised.component';
-import { ReportComponent } from './report.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'levels/1/department', pathMatch: 'full' },

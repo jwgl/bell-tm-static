@@ -90,7 +90,7 @@ export class ApprovalListComponent {
             const list = this.selectors.filter(s => s.checked).map(s => s.data.id);
             if (list) {
                 this.service.update(0, { ids: list }).subscribe(() => {
-                    this.router.navigate(['/list/tobe']);
+                    this.router.navigate(['/list/done']);
                 });
             }
         });

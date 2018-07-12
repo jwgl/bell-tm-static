@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 
-import * as _ from 'lodash';
-
 import { ReportService } from '../report.service';
 
 interface ObservationReport {
@@ -24,11 +22,11 @@ export class ObservationReportComponent {
         private route: ActivatedRoute,
         private service: ReportService,
     ) {
-        const type: string = this.route.snapshot.params['observer-type'];
-        const countBy = type === '1' ? 'OBSERVER-U' : 'OBSERVER-C';
-        this.service.loadList({ type: countBy }).subscribe(dto => {
-            this.list = dto.list;
-            this.list.sort((a, b) => a.supervisorTimes - b.supervisorTimes);
+        this.route.params.subscribe(params => {
+            this.service.loadList({type: params['observer-type'] === '1' ? 'OBSERVER-U' : 'OBSERVER-C'}).subscribe(dto => {
+                this.list = dto.list;
+                this.list.sort((a, b) => a.supervisorTimes - b.supervisorTimes);
+            });
         });
     }
 }
